@@ -1,0 +1,1 @@
+const list_forms = $('#list_forms').DataTable();

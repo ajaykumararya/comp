@@ -1,0 +1,128 @@
+<?php
+if (!function_exists('alert')) {
+    function alert($message = '', $class = 'success')
+    {
+        return "<div class='alert alert-$class'>$message</div>";
+    }
+}
+function start_with($haystack, $needle)
+{
+    return substr($haystack, 0, strlen($needle)) === $needle;
+}
+if (!function_exists('get_first_letter')) {
+    function get_first_latter($string)
+    {
+        $string = trim($string);
+        return strtoupper(substr($string, 0, 1));
+    }
+}
+function get_status($status)
+{
+    if ($status)
+        return label('Active');
+    return label('In-Active', 'danger');
+}
+if (!function_exists('humnize_duration')) {
+    function humnize_duration($duration, $duration_type, $flag = true)
+    {
+        $duration_type = ($duration_type . ($flag ? ($duration > 1 ? 's' : '') : ''));
+        return ($duration . ' ' . ucfirst($duration_type));
+    }
+}
+if (!function_exists('isJson')) {
+    function isJson($string)
+    {
+        json_decode($string);
+        return (json_last_error() == JSON_ERROR_NONE);
+    }
+}
+if (!function_exists('humnize_duration_with_ordinal')) {
+    function humnize_duration_with_ordinal($duration, $duration_type)
+    {
+        $duration_type = ($duration_type);
+        return (ordinal_number($duration) . ' ' . ucfirst($duration_type));
+    }
+}
+if (!function_exists('print_string')) {
+    function print_string($string, $data = [])
+    {
+        $data['json'] = json_encode($data);
+        return get_instance()->parser->parse_string($string, $data, true);
+    }
+}
+if (!function_exists('theme_url')) {
+    function theme_url()
+    {
+        return base_url('themes/' . THEME . '/');
+    }
+}
+function ordinal_number($i)
+{
+    $suffixes = ['st', 'nd', 'rd'];
+    $suffix = ($i <= 3 && $i >= 1) ? $suffixes[$i - 1] : 'th';
+    return $i . $suffix;
+}
+if (!function_exists('starts_with')) {
+    function starts_with($haystack, $needle)
+    {
+        return substr($haystack, 0, strlen($needle)) === $needle;
+    }
+}
+if (!function_exists('recursiveArraySearch')) {
+    function recursiveArraySearch($needle, $haystack)
+    {
+        foreach ($haystack as $key => $value) {
+            if ($value === $needle) {
+                return true; // Value found in the array
+            } elseif (is_array($value) && recursiveArraySearch($needle, $value)) {
+                return true; // Value found in a sub-array
+            }
+        }
+        return false; // Value not found in the array
+    }
+
+}
+function label($msg, $class = 'info')
+{
+    return '<label class="badge badge-' . $class . '">' . $msg . '</label>';
+}
+
+function sidebar_toggle($true, $false = '')
+{
+    return isset($_COOKIE["sidebar_minimize_state"]) && $_COOKIE["sidebar_minimize_state"] === "on" ? $true : $false;
+}
+
+function OnlyForAdmin()
+{
+    $ci = &get_instance();
+    return $ci->session->userdata('admin_type') == 'admin';
+}
+function pre($array = [], $flg = false)
+{
+    echo '<pre>';
+    print_r($array);
+    echo '</pre>';
+    if ($flg)
+        exit;
+}
+
+
+function getRadomNumber($n = 10)
+{
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $randomString = '';
+
+    for ($i = 0; $i < $n; $i++) {
+        $index = rand(0, strlen($characters) - 1);
+        $randomString .= $characters[$index];
+    }
+
+    return $randomString;
+}
+
+function get_month($monthNumber, $dateIndex = 'F')
+{
+    return date($dateIndex, mktime(0, 0, 0, $monthNumber, 1));
+}
+
+?>

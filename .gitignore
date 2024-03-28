@@ -1,0 +1,11 @@
+config.php
+upload
+vendor
+upload
+composer.lock
+ci3hmvs_backup.sql
+engine/cache
+engine/config/config.php
+engine/config/project.php
+modules/document/views
+asstes/formats

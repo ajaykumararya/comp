@@ -1,0 +1,73 @@
+<?php
+// Heading russian language
+
+$lang['text_home_site'] = 'На сайт';
+$lang['text_home_admin'] = 'Главная';
+$lang['text_language'] = 'Язык';
+$lang['text_profile'] = 'Профиль';
+$lang['text_exit'] = 'Выход';
+$lang['text_pages'] = 'Страницы';
+$lang['text_pages_view'] = 'Все Страницы';
+$lang['text_pages_add'] = 'Добавить страницу';
+$lang['text_add'] = 'Добавить';
+$lang['text_files'] = 'Файлы';
+$lang['text_plugins'] = 'Плагины';
+$lang['text_add_plugins'] = 'Добавить Плагины';
+$lang['text_settings'] = 'Настройки';
+$lang['text_edit'] = 'Редактировать';
+$lang['text_delete'] = 'Удалить';
+$lang['text_icon'] = 'Иконки';
+$lang['text_users'] = 'Пользователи';
+$lang['text_profile'] = 'Профиль';
+$lang['text_themes'] = 'Темы';
+$lang['text_system'] = 'Система';
+$lang['text_layout_options'] = 'Параметры макета';
+$lang['text_fixsed_options'] = 'Фиксированный макет';
+$lang['text_fixsed_options_desk'] = 'Вы не можете использовать фиксированные и коробочный макеты вместе';
+$lang['text_boxed_layout'] = 'Коробочный Макет';
+$lang['text_boxed_layout_desk'] = 'Активируйте коробочный макет';
+$lang['text_toggle_sidebar'] = 'Переключение боковой панели.';  
+$lang['text_toggle_sidebar_desk'] = 'Переключение состояния левой боковой панели (открыть или свернуть)';
+$lang['text_sistem_language'] = 'Язык системы';
+$lang['text_sistem_language_desk'] = 'Определите язык системы (сохренение настроек в следующих версиях)';
+$lang['text_all_users_1'] = 'ПОЛЬЗОВАТЕЛИ';
+$lang['text_pagess'] = 'СТРАНИЦ';
+$lang['text_records'] = 'Записей в базе';
+$lang['text_pages_load'] = 'Загружена за ';
+$lang['text_load_time'] = 'секунд';
+$lang['text_chenge'] = 'редактируем';
+$lang['text_page_title'] = 'Имя страницы';
+$lang['text_page_content'] = 'Содержание';
+$lang['text_page_tegs'] = 'Теги';
+$lang['text_page_record'] = 'Записать';
+$lang['text_user_profile'] = 'Профиль пользователя';
+$lang['text_img'] = 'Изображения';
+$lang['text_Login'] = 'Логин';
+$lang['text_Email'] = 'Email';
+$lang['text_Surname'] = 'Фамилия';
+$lang['text_Name'] = 'Имя';
+$lang['text_About'] = 'О себе';
+$lang['text_Role'] = 'Роль';
+$lang['text_Skin_admins'] = 'Скин админки';
+$lang['text_Password'] = 'Пароль';
+$lang['text_Characters'] = 'Символов';
+$lang['text_Blue'] = 'Синий';
+$lang['text_Red'] = 'Крассный';
+$lang['text_Yellow'] = 'Желтый';
+$lang['text_Green'] = 'Зеленый';
+$lang['text_Purple'] = 'Фиолетовый';
+$lang['text_Russian'] = 'Русский';
+$lang['text_English'] = 'Английский';
+$lang['text_Ukrainian'] = 'Украинский';
+$lang['text_Demo'] = 'Демо';
+$lang['text_Administrator'] = 'Администратор';
+$lang['text_Update'] = 'Обновить';
+$lang['text_Add_User'] = 'Добавить пользователя';
+$lang['text_Login_Surename_Name'] = 'Логин, Фамилия, Имя';
+//pages
+$lang['text_Pages'] = 'Страницы';
+$lang['text_pagess'] = 'страницы';
+$lang['text_page'] = 'Страница';
+$lang['text_url'] = 'УРЛ';
+
+?>

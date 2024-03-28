@@ -1,0 +1,106 @@
+<?php
+class Student_model extends MY_Model
+{
+
+
+    function get_switch($case = 'all', $condition = [], $withCenter = true)
+    {
+        extract($condition);
+        $this->db->select('s.status as admission_status,s.image,s.dob,s.gender,s.admission_date,s.admission_type,s.roll_no,s.contact_number,s.name,s.email,c.course_name,s.id as student_id,c.duration,c.duration_type,ce.institute_name as center_name')
+            ->from('students as s')
+            ->join("course as c", "s.course_id = c.id ");
+
+        if ($this->isCenter() and $withCenter)
+            $this->db->join('centers as ce', 'ce.id = s.center_id AND s.center_id = ' . $this->loginId());
+        else
+            $this->db->join('centers as ce', 'ce.id = s.center_id', 'left');
+
+        switch ($case) {
+            case 'online_students':
+                $this->db->where('s.admission_type', 'online');
+                break;
+            case 'course':
+                $this->db->where('c.id', $course_id);
+                break;
+            case 'roll_no':
+                $this->db->where('s.roll_no', $roll_no);
+                break;
+
+        }
+
+        return $this->db->get();
+    }
+
+    function get_online_student()
+    {
+        return $this->get_switch('online_students')->result();
+        // $data = [];
+        // $this->db->select('s.admission_type,s.roll_no,s.contact_number,s.name,s.email,c.course_name,s.id as student_id,c.duration,c.duration_type')
+        //         ->from('students as s')
+        //         ->join("course as ce", "s.course_id = ce.id AND s.admission_type = 'online'");
+        // if ($this->isCenter())
+        //     $this->db->join('centers as ce', 'ce.id = s.center_id AND s.center_id = ' . $this->loginId());
+        // else {
+        //     $data = $this->db->select('s.admission_type,s.roll_no,s.contact_number,s.name,s.email,c.course_name,s.id as student_id,c.duration,c.duration_type')
+        //         ->from('students as s')
+        //         ->join("course as c", "s.course_id = c.id")
+        //         ->join('centers as ce', 'ce.id = s.center_id')
+        //         ->get()->result();
+        // }
+
+        // return $data;
+    }
+    function get_student_course_wise($course_id = 0)
+    {
+        return $this->get_switch('course', ['course_id' => $course_id]);
+        // $data = [];
+        // $this->db->select('s.admission_type,s.roll_no,s.contact_number,s.name,s.email,c.course_name,s.id as student_id,c.duration,c.duration_type')
+        //     ->from('students as s')
+        //     ->join("course as c", "s.course_id = c.id AND s.course_id = " . $course_id);
+        // if ($this->isCenter()) {
+        //     $this->db->join('centers as ce', 'ce.id = s.center_id AND s.center_id = ' . $this->loginId());
+        // } else {
+        //     $this->db->join('centers as ce', 'ce.id = s.center_id', 'left');
+        // }
+
+        // return $this->db->get();
+    }
+    function get_all_student()
+    {
+        return $this->get_switch('all')->result();
+        // $data = [];
+        // if ($this->isCenter()) {
+        //     $data = $this->db->select('s.admission_type,s.roll_no,s.contact_number,s.name,s.email,c.course_name,s.id as student_id,c.duration,c.duration_type')
+        //         ->from('students as s')
+        //         ->join("course as c", "s.course_id = c.id")
+        //         ->join('centers as ce', 'ce.id = s.center_id AND s.center_id = ' . $this->loginId())
+        //         ->get()->result();
+        // } else {
+        //     $data = $this->db->select('s.admission_type,s.roll_no,s.contact_number,s.name,s.email,c.course_name,s.id as student_id,c.duration,c.duration_type')
+        //         ->from('students as s')
+        //         ->join("course as c", "s.course_id = c.id")
+        //         ->join('centers as ce', 'ce.id = s.center_id', 'left')
+        //         ->get()->result();
+        // }
+
+        // return $data;
+    }
+
+    function get_student_via_roll_no($rollNo = 0)
+    {
+        return $this->get_switch('roll_no',['roll_no' => $rollNo]);
+        // $data = [];
+        // $data = $this->db->select('s.status as admission_status,s.image,s.dob,s.gender,s.admission_date,s.admission_type,s.roll_no,s.contact_number,s.name,s.email,c.course_name,s.id as student_id,c.duration,c.duration_type,ce.institute_name as center_name')
+        //     ->from('students as s')
+        //     ->join("course as c", "s.course_id = c.id AND s.roll_no = '$rollNo'");
+
+
+        // if ($this->isCenter()) {
+        //     $this->db->join('centers as ce', 'ce.id = s.center_id AND s.center_id = ' . $this->loginId());
+        // } else {
+        //     $this->db->join('centers as ce', 'ce.id = s.center_id', 'left');
+        // }
+
+        // return $data->get();
+    }
+}

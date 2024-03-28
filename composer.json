@@ -1,0 +1,25 @@
+{
+  "description": "The myopencart15511ru A short description of what your package does",
+  "name": "pomerla/ci3hmvs",
+  "type": "project",
+  "homepage": "http://moroz.rv.ua",
+  "license": "MIT",
+  "support": {
+    "forum": "http://moroz.rv.ua/",
+    "wiki": "http://moroz.rv.ua",
+    "source": "https://github.com/pomerla/ci3hmvs"
+  },
+  "require": {
+    "php": ">=5.3.7",
+    "bcit-ci/codeigniter": "^3.1",
+    "ahsankhatri/cryptolib-php": "^1.1",
+    "filp/whoops": "^2.15",
+    "mpdf/mpdf": "^8.2",
+    "chillerlan/php-qrcode": "^5.0"
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true
+    }
+  }
+}
