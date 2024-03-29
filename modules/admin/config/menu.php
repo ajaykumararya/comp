@@ -136,44 +136,6 @@ $config['menu'] = array(
             )
         ),
         array(
-            'label' => 'Fees Collection',
-            'type' => 'fees_collection',
-            'icon' => array('bill', 6),
-            'submenu' => array(
-                array(
-                    'label' => 'Collect Fee',
-                    'type' => 'collect_fee',
-                    'icon' => array('double-check-circle', 4),
-                    'url' => 'student/collect-fees',
-                ),
-                array(
-                    'label' => 'Search Fee Payment',
-                    'type' => 'search_fee_payment',
-                    'icon' => array('calendar-tick', 6),
-                    'url' => 'student/search-fees-payment',
-                )
-            )
-        ),
-        array(
-            'label' => 'Attendance',
-            'type' => 'attendance',
-            'icon' => array('double-check', 2),
-            'submenu' => array(
-                array(
-                    'label' => 'Student Attendance',
-                    'type' => 'student_attendance',
-                    'icon' => array('double-check-circle', 4),
-                    'url' => 'student/attendance',
-                ),
-                array(
-                    'label' => 'Attendance By Date',
-                    'type' => 'attendance_by_date',
-                    'icon' => array('calendar-tick', 6),
-                    'url' => 'student/attendance-report',
-                )
-            )
-        ),
-        array(
             'label' => 'Admit Card',
             'type' => 'stduent_admit_card',
             'icon' => array('notepad', 5),
@@ -248,77 +210,6 @@ $config['menu'] = array(
             'icon' => array('message-text', 3),
             'url' => 'student/manage-study-material'
         )
-    )
-);
-
-$config['exam_menu'] = array(
-    'title' => 'Online Exam Section',
-    'condition' => OnlyForAdmin(),
-    'menu' => array(
-        array(
-            'label' => 'Exam(S)',
-            'type' => 'exams',
-            'icon' => array('note-2',4),
-            'submenu' => array(
-                array(
-                    'url' => 'exam/add',
-                    'label' => 'Create',
-                    'icon' => array('plus',2)
-                ),
-                array(
-                    'url' => 'exam/list',
-                    'label' => 'List',
-                    'icon' => array('tablet-text-up',2)
-                )
-            )
-        ),
-        array(
-            'label' => 'Assign Exam',
-            'type' => 'assign_exam',
-            'icon' => array('plus-circle',2),
-            // 'url' => 'exam/assign',
-            'submenu' => array(
-                array(
-                    'url' => 'exam/assign-to-center',
-                    'label' => 'To Center',
-                    'icon' => array('cheque',7)
-                ),
-                array(
-                    'url' => 'exam/assign-to-student',
-                    'label' => 'To Student',
-                    'icon' => array('cheque',7)
-                )
-            )
-        ),
-        array(
-            'label' => 'Student Exam(S)',
-            'type' => 'student_exams',
-            'icon' => array('note-2',4),
-            'url' => 'exam/student-exams'
-        )
-    )
-);
-$config['center_exam_menu'] = array(
-    'title' => 'Online Exam Area',
-    'condition' => !OnlyForAdmin(),
-    'menu' => array(
-        array(
-            'label' => 'Exam(S)',
-            'type' => 'exams',
-            'icon' => array('note-2',4),
-            'submenu' => array(
-                array(
-                    'url' => 'exam/request',
-                    'label' => 'Request',
-                    'icon' => array('plus',2)
-                ),
-                array(
-                    'url' => 'exam/approved-list',
-                    'label' => 'List',
-                    'icon' => array('tablet-text-up',2)
-                )
-            )
-        ),
     )
 );
 
