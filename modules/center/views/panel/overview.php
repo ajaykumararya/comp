@@ -30,9 +30,9 @@
         
         <tr>
             <th>City</th>
-            <td>{DISTRICT_NAME}</td>
+            <td><?=$this->SiteModel->get_city(['DISTRICT_ID' => $city_id])->row('DISTRICT_NAME')?></td>
             <th>State</th>
-            <td>{STATE_NAME}</td>
+            <td><?=$this->SiteModel->get_state(['STATE_ID' => $state_id])->row('STATE_NAME')?></td>
         </tr>
         <tr>
             <th>Address</th>

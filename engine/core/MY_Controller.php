@@ -38,7 +38,7 @@ class MY_Controller extends MX_Controller
             $getCentre = $this->center_model->get_center($this->center_model->loginId(), $this->center_model->login_type());
             $centreRow = $getCentre->row();
             $this->public_data['center_data'] = $getCentre->row_array();
-            $this->set_data('profile_image', (file_exists($centreRow->image) ? base_url('upload/' . $centreRow->image) : base_url('assets/media/avatars/300-3.jpg')));
+            $this->set_data('profile_image', (file_exists('upload/'.$centreRow->image) ? base_url('upload/' . $centreRow->image) : base_url('assets/media/avatars/300-3.jpg')));
             $this->set_data([
                 'owner_name' => $centreRow->name,
                 'owner_email' => $centreRow->email,

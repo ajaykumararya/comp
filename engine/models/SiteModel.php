@@ -19,6 +19,10 @@ class SiteModel extends MY_Model
         $this->db->where($where);
         return $this->db->get('district');
     }
+    function get_state($where){
+        $this->db->where($where);
+        return $this->db->get('state');
+    }
     function list_page()
     {
         return $this->db->get('his_pages');

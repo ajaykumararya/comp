@@ -13,19 +13,22 @@ class Center_model extends MY_Model
     }
     function get_center($id = 0, $type = 'center')
     {
-        // if ($id)
-        //     $this->db->where('id', $id);    
-        // $this->db->where('type', $type);
-        // return $this->db->get('centers');
+        if ($id)
+            $this->db->where('id', $id);    
+        $this->db->where('type', $type);
+        return $this->db->get('centers');
+        /*
         $this->db->select('c.*,s.STATE_NAME,d.DISTRICT_NAME')
             ->from('centers as c')
-            ->join('district as d', 'd.DISTRICT_ID = c.city_id','left')
-            ->join('state as s', 'd.STATE_ID = c.state_id','left');
+            ->join('district as d', 'd.DISTRICT_ID = c.city_id')
+            ->join('state as s', 'd.STATE_ID = c.state_id');
         if ($id)
             $this->db->where('c.id', $id);
         $this->db->where('c.type', $type);
-
-        return $this->db->get();
+        $this->db->get();
+        echo $this->db->last_query();
+        exit;
+        return $this->db->get();*/
     }
     function get_verified($where = 0)
     {
