@@ -135,6 +135,26 @@ $config['menu'] = array(
                 // )
             )
         ),
+        
+        array(
+            'label' => 'Attendance',
+            'type' => 'attendance',
+            'icon' => array('double-check', 2),
+            'submenu' => array(
+                array(
+                    'label' => 'Student Attendance',
+                    'type' => 'student_attendance',
+                    'icon' => array('double-check-circle', 4),
+                    'url' => 'student/attendance',
+                ),
+                array(
+                    'label' => 'Attendance By Date',
+                    'type' => 'attendance_by_date',
+                    'icon' => array('calendar-tick', 6),
+                    'url' => 'student/attendance-report',
+                )
+            )
+        ),
         array(
             'label' => 'Admit Card',
             'type' => 'stduent_admit_card',
