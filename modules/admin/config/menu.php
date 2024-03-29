@@ -139,6 +139,7 @@ $config['menu'] = array(
             'label' => 'Fees Collection',
             'type' => 'fees_collection',
             'icon' => array('bill', 6),
+            'condition' => OnlyForAdmin(),
             'submenu' => array(
                 array(
                     'label' => 'Collect Fee',
