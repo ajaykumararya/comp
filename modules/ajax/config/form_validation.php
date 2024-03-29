@@ -318,7 +318,7 @@ $config = array(
             'label' => 'Password',
             'rules' => 'required'
         )
-    ),
+    ), 
     'change_password' => array(
         array(
             'field' => 'password',
