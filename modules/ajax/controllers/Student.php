@@ -61,17 +61,17 @@ class Student extends Ajax_Controller
     {
         $data = $this->post();
         $data['status'] = 0;
-        $data['added_by'] = isset ($data['added_by']) ? $data['added_by'] : 'admin';
-        $data['admission_type'] = isset ($data['admission_type']) ? $data['admission_type'] : 'offline';
+        $data['added_by'] = isset($data['added_by']) ? $data['added_by'] : 'admin';
+        $data['admission_type'] = isset($data['admission_type']) ? $data['admission_type'] : 'offline';
         // $data['type'] = 'center';
         $email = $data['email_id'];
         unset($data['email_id'], $data['upload_docs']);
         $data['email'] = $email;
         $upload_docs_data = [];
         $upload_docs = $this->post('upload_docs');
-        if (isset ($upload_docs['title'])) {
+        if (isset($upload_docs['title'])) {
             foreach ($upload_docs['title'] as $index => $file_index_name) {
-                if (!empty ($_FILES['upload_docs']['name']['file'][$index])) {
+                if (!empty($_FILES['upload_docs']['name']['file'][$index])) {
                     $file = $_FILES['upload_docs']; //['file'][$index];
                     if ($file['error']['file'][$index] == UPLOAD_ERR_OK) {
                         $encryptedFileName = substr(hash('sha256', uniqid(mt_rand(), true)), 0, 10) . '_' . basename($file['name']['file'][$index]);
@@ -361,7 +361,7 @@ class Student extends Ajax_Controller
     {
         // $this->response($this->post());
         $post = $this->post();
-        if (isset ($post['marks'])) {
+        if (isset($post['marks'])) {
             $data = [
                 'admit_card_id' => $post['admit_card_id'],
                 'center_id' => $post['center_id'],
@@ -377,9 +377,9 @@ class Student extends Ajax_Controller
             $k = 0;
             foreach ($post['marks'] as $subject_id => $numbers) {
                 $ttl = 0;
-                $theory_marks = (isset ($numbers['theory_marks'])) ?
+                $theory_marks = (isset($numbers['theory_marks'])) ?
                     $numbers['theory_marks'] : 0;
-                $practical = (isset ($numbers['practical'])) ?
+                $practical = (isset($numbers['practical'])) ?
                     $numbers['practical'] : 0;
                 $num = [
                     'theory_marks' => $theory_marks,
@@ -440,7 +440,7 @@ class Student extends Ajax_Controller
     {
         // $this->response($this->post());
         $where = $this->post();
-        if (isset ($where['exam_conduct_date'])) {
+        if (isset($where['exam_conduct_date'])) {
             $exam_conduct_date = $where['exam_conduct_date'];
             unset($where['exam_conduct_date']);
         }
@@ -450,14 +450,21 @@ class Student extends Ajax_Controller
         unset($where['duration'], $where['duration_type']);
         $checkCertificate = $this->student_model->student_certificates($where);
         if (!$checkCertificate->num_rows()) {
-            if (isset ($where['exam_conduct_date'])) {
+            if (isset($where['exam_conduct_date'])) {
                 $where['exam_conduct_date'] = $exam_conduct_date;
             }
             $get = $this->student_model->marksheet($where);
-            $this->response('html', '<div class="alert alert-danger">The course <b>' . $course_name . '</b> is not completed yet</div>');
-            if ($get->num_rows()) {
+            if (CHECK_PERMISSION('GENERATE_CERTIFICATE_WITHOUT_MARKSHEET')) {
+                $this->response('html', '<div class="alert alert-success">' . (
+                    $get->num_rows() ? 'The course <b>' . $course_name . '</b> has been completed, you can generate the certificate.' : 'You can Generate Certificate But Marksheet Not Generated of This Student.') .
+                    '</div>');
                 $this->response('status', true);
-                $this->response('html', '<div class="alert alert-success">The course <b>' . $course_name . '</b> has been completed, you can generate the certificate.</div>');
+            } else {
+                $this->response('html', '<div class="alert alert-danger">The course <b>' . $course_name . '</b> is not completed yet</div>');
+                if ($get->num_rows()) {
+                    $this->response('status', true);
+                    $this->response('html', '<div class="alert alert-success">The course <b>' . $course_name . '</b> has been completed, you can generate the certificate.</div>');
+                }
             }
         } else
             $this->response('html', '<div class="alert alert-danger">The course <b>' . $course_name . '</b> Certificate Already Generated.</div>');
