@@ -16,7 +16,7 @@
                 $value = $this->SiteModel->get_setting($index.'_value',0);
                 preg_match_all('/\d+/', $value, $matches);
 
-                $numbers = $matches[0];
+                $numbers = $matches[0]; 
                 $counter = '';
                 $plus_sign = $value;
                 if ($numbers) {
