@@ -44,6 +44,30 @@ class Ki_theme
             if (!$this->plan_methods)
                 $this->get_plan_methods();
         }
+
+        $get = $this->CI->db->get('config');
+        if ($get->num_rows()) {
+            foreach ($get->result() as $val) {
+                define(strtoupper($val->type), $val->value);
+            }
+
+
+            if (defined('THEME') && defined('PATH')) {
+                define('DOCUMENT_PATH', 'assets/formats/' . PATH);
+                define('THEME_PATH', FCPATH . 'themes/' . THEME . '/');
+
+                if (!is_dir(THEME_PATH)) {
+                    show_error("Please Configure Your Theme.");
+                }
+
+                $this->CI->load->append_view_path([
+                    THEME_PATH . '/' => true,
+                    FCPATH . DOCUMENT_PATH . '/' => true
+                ]);
+            }
+
+        }
+
         $this->login_type = $this->CI->session->userdata('admin_type');
         $this->login_id = $this->CI->session->userdata('admin_id');
         $this->breadcrumb_data['controller'] = ucfirst($this->CI->router->fetch_class());
@@ -137,7 +161,7 @@ class Ki_theme
     function config($index = 0)
     {
         if ($index) {
-            if (isset ($this->config[$index]))
+            if (isset($this->config[$index]))
                 return $this->config[$index];
         } else
             return $this->config;
@@ -185,7 +209,7 @@ class Ki_theme
     function permission_limit($type = false, $t = true)
     {
         $type = $type ? $type : $this->current_method_type;
-        $limit = isset ($this->plan_methods[$type]['limit']) ? $this->plan_methods[$type]['limit'] : false;
+        $limit = isset($this->plan_methods[$type]['limit']) ? $this->plan_methods[$type]['limit'] : false;
         $limit = $limit ? $limit : 0;
         return $limit == 'unlimited' ? ($t ? 999999 : 'Unlimited') : $limit;
     }
@@ -269,7 +293,7 @@ class Ki_theme
         if ($this->num_pages()) {
             $pages = $this->list_pages();
             foreach ($pages as $row) {
-                if (!start_with($row['link'], 'http') and !empty ($row['link']))
+                if (!start_with($row['link'], 'http') and !empty($row['link']))
                     $modules[] = $row['link'];
             }
         }
@@ -303,7 +327,7 @@ class Ki_theme
     function set_page_link_button($target = '')
     {
         $this->set_drawer_page();
-        $target = empty ($target) ? '' : 'data-target="' . $target . '"';
+        $target = empty($target) ? '' : 'data-target="' . $target . '"';
         return '<button class="our-page-links btn btn-xs btn-sm btn-info mt-3" ' . $target . ' type="button">Set Our Page in this link</button>';
     }
     private function set_drawer_page()
@@ -321,7 +345,7 @@ class Ki_theme
     function schema_vals($index, $type = '')
     {
         $vals = $this->schema_vars();
-        if (isset ($vals[$index])) {
+        if (isset($vals[$index])) {
             return $vals[$index];
         }
         return $index;
@@ -399,7 +423,7 @@ class Ki_theme
     }
     function _attributes_to_string($attributes)
     {
-        if (empty ($attributes)) {
+        if (empty($attributes)) {
             return '';
         }
         if (is_object($attributes)) {
@@ -477,7 +501,7 @@ class Ki_theme
     function special_input($type = 'checkbox', $name = '', $value = '', $ParentClass = '', $labelClass = '')
     {
         $randId = 'demo' . mt_rand(00, 99);
-        if (isset ($this->attr['id'])) {
+        if (isset($this->attr['id'])) {
             $randId = $this->attr['id'];
             unset($this->attr['id']);
         }
@@ -490,7 +514,7 @@ class Ki_theme
         ]);
         $html = '<div class="form-check ' . $ParentClass . '">
                     <input  ' . _attributes_to_string($this->attr) . '/>
-                    <label class="form-check-label ' . $labelClass . '"  for="' . (isset ($this->attr['id']) ? $this->attr['id'] : $randId) . '">
+                    <label class="form-check-label ' . $labelClass . '"  for="' . (isset($this->attr['id']) ? $this->attr['id'] : $randId) . '">
                         ' . $this->tag_html . '
                     </label>
                 </div>';
@@ -517,14 +541,14 @@ class Ki_theme
         $this->set_title(humanize(str_replace('-', ' ', $this->segment(2, 'Dashboard'))));
         $chk = $this->segment(2, 'Dashboard');
         $chk = strtolower($chk) == 'v1' ? $this->segment(3) : $chk;
-        if (isset ($props['icon'])) {
+        if (isset($props['icon'])) {
             list($clss, $path) = $props['icon'];
 
             $this->breadcrummb_icon($clss, $path, $fs = 1, $type = 'solid');
         }
-        if (!isset ($props['page_name']))
+        if (!isset($props['page_name']))
             $this->breadcrumb_data['page_name'] = humanize($chk);
-        if (!isset ($props['actions_buttons'])) {
+        if (!isset($props['actions_buttons'])) {
             $this->breadcrumb_data['actions_buttons'] = '';
         }
         return $this;
@@ -543,7 +567,7 @@ class Ki_theme
         if ($this->forceUpdate)
             return $this;
 
-        if (!isset ($this->breadcrumb_data['title']))
+        if (!isset($this->breadcrumb_data['title']))
             $this->breadcrumb_data['title'] = $title;
         return $this;
     }
@@ -568,7 +592,7 @@ class Ki_theme
     }
     function get_session_flashdata($type = 0)
     {
-        if (!isset ($this->CI->session)) {
+        if (!isset($this->CI->session)) {
             $this->CI->load->library('session');
         }
         if ($type) {
@@ -601,7 +625,7 @@ class Ki_theme
                 $this->set_attribute($attr, $attrValue);
             }
         } else {
-            if (isset ($this->attr[$attrs])) {
+            if (isset($this->attr[$attrs])) {
                 $this->attr[$attrs] .= ' ' . $value;
             } else
                 $this->attr[$attrs] = $value;
@@ -692,7 +716,7 @@ class Ki_theme
     }
     function tag_html($text, $type = 'append')
     {
-        if (empty ($this->tag_html) || is_bool($type))
+        if (empty($this->tag_html) || is_bool($type))
             $this->tag_html = $text;
         else {
             if ($type == 'append')
@@ -704,7 +728,7 @@ class Ki_theme
     }
     function html($text = '')
     {
-        if (empty ($text))
+        if (empty($text))
             return $this->tag_html;
         return $this->tag_html($text);
     }
@@ -730,7 +754,7 @@ class Ki_theme
     }
     function get_attributes($index = 0)
     {
-        if (isset ($this->attr[$index]))
+        if (isset($this->attr[$index]))
             return $this->attr[$index];
         return $this->attr;
     }
@@ -775,7 +799,7 @@ class Ki_theme
         foreach ($menu as $m) {
             $html .= '<!--begin::Menu item-->
                     <div class="menu-item">';
-            if (isset ($m['content'])) {
+            if (isset($m['content'])) {
                 $html .= '<div class="menu-content">' . $m['content'] . '</div>';
             } else {
                 $html .= '<a href="#" class="menu-link">
@@ -853,7 +877,7 @@ class Ki_theme
     function limit()
     {
         // pre($this->per_method_type);
-        return isset ($this->plan_methods[$this->current_method_type]['limit']) ? $this->plan_methods[$this->current_method_type]['limit'] : false;
+        return isset($this->plan_methods[$this->current_method_type]['limit']) ? $this->plan_methods[$this->current_method_type]['limit'] : false;
     }
     function get_plan_methods()
     {
@@ -863,7 +887,7 @@ class Ki_theme
     {
         $title = '';
         if (sizeof($this->plan_details)) {
-            if (isset ($this->plan_details[$index]))
+            if (isset($this->plan_details[$index]))
                 $title = $this->plan_details[$index];
             else
                 $title = $this->plan_details;
@@ -888,8 +912,8 @@ class Ki_theme
     }
     function event_data($type, $data_type = 'limit')
     {
-        if (isset ($this->plan_methods[$type])) {
-            if (isset ($this->plan_methods[$type][$data_type]))
+        if (isset($this->plan_methods[$type])) {
+            if (isset($this->plan_methods[$type][$data_type]))
                 return $this->plan_methods[$type][$data_type];
         }
         return null;
@@ -904,7 +928,7 @@ class Ki_theme
         foreach ($adminMenu as $menuType => $menus) {
             // echo $menuType;
 
-            if (isset ($menus['condition'])) {
+            if (isset($menus['condition'])) {
                 if (!$menus['condition']) {
                     continue;
                 }
@@ -924,12 +948,12 @@ class Ki_theme
         foreach ($adminMenu as $menuType => $menus) {
             // echo $menuType;
 
-            if (isset ($menus['condition'])) {
+            if (isset($menus['condition'])) {
                 if (!$menus['condition']) {
                     continue;
                 }
             }
-            if (isset ($menus['title'])) {
+            if (isset($menus['title'])) {
                 $html .= '<!--begin:Menu item-->
                             <div  class="menu-item" >
                                 <!--begin:Menu content-->
@@ -967,27 +991,27 @@ class Ki_theme
     {
         $html = '';
         foreach ($menuItems as $menuItem) {
-            $activeMenu = isset ($menuItem['url']) ? $this->active_menu($menuItem['url']) : '';
+            $activeMenu = isset($menuItem['url']) ? $this->active_menu($menuItem['url']) : '';
             if ($activeMenu != '') {
                 $this->set_title($menuItem['label']);
             }
-            if (isset ($menuItem['condition'])) {
+            if (isset($menuItem['condition'])) {
                 if (!$menuItem['condition']) {
                     continue;
                 }
             }
-            $menuItemActive = (isset ($menuItem['submenu']) ? $this->recursiveArraySearch($this->uri_string(), $menuItem['submenu']) : false);
-            $html .= isset ($menuItem['submenu']) ? '<div data-kt-menu-trigger="click" class="menu-item menu-accordion ' . ($menuItemActive ? 'hover show' : '') . '">' : '<div class="menu-item me-2">';
-            $html .= '<' . (isset ($menuItem['submenu']) ? 'span' : 'a href="' . $this->gen_link(@$menuItem['url']) . '"') . ' class="menu-link ' . $activeMenu . '">';
-            if ($type == 'menu' or isset ($menuItem['icon'])) {
+            $menuItemActive = (isset($menuItem['submenu']) ? $this->recursiveArraySearch($this->uri_string(), $menuItem['submenu']) : false);
+            $html .= isset($menuItem['submenu']) ? '<div data-kt-menu-trigger="click" class="menu-item menu-accordion ' . ($menuItemActive ? 'hover show' : '') . '">' : '<div class="menu-item me-2">';
+            $html .= '<' . (isset($menuItem['submenu']) ? 'span' : 'a href="' . $this->gen_link(@$menuItem['url']) . '"') . ' class="menu-link ' . $activeMenu . '">';
+            if ($type == 'menu' or isset($menuItem['icon'])) {
                 $icon = '';
-                if (isset ($menuItem['icon']) and is_array($menuItem['icon'])) {
-                    list($icon, $path) = isset ($menuItem['icon']) ? $menuItem['icon'] : ['element-11', 4];
+                if (isset($menuItem['icon']) and is_array($menuItem['icon'])) {
+                    list($icon, $path) = isset($menuItem['icon']) ? $menuItem['icon'] : ['element-11', 4];
                     if ($activeMenu != '')
                         $this->breadcrummb_icon($icon, $path);
                     $icon = $this->keen_icon($icon, $path, 2);
                 } else {
-                    $icon = (isset ($menuItem['icon']) ? $menuItem['icon'] : 'element-11');
+                    $icon = (isset($menuItem['icon']) ? $menuItem['icon'] : 'element-11');
                     if ($activeMenu != '')
                         $this->breadcrummb_icon($icon);
                     $icon = $this->keen_icon($icon, false, 2, 'outline');
@@ -1001,11 +1025,11 @@ class Ki_theme
                 $html .= '</span>';
             }
             $html .= '<span class="menu-title">' . $menuItem['label'] . '</span>';
-            if (isset ($menuItem['submenu'])) {
+            if (isset($menuItem['submenu'])) {
                 $html .= '<span class="menu-arrow"></span>';
             }
-            $html .= '</' . (isset ($menuItem['submenu']) ? 'span' : 'a') . '>';
-            if (isset ($menuItem['submenu'])) {
+            $html .= '</' . (isset($menuItem['submenu']) ? 'span' : 'a') . '>';
+            if (isset($menuItem['submenu'])) {
                 $html .= '<div class="menu-sub menu-sub-accordion  ' . ($menuItemActive ? 'show' : '') . '">';
                 $html .= $this->generateMenu($menuItem['submenu'], 'submenu', $menuType);
                 $html .= '</div>';
@@ -1077,7 +1101,7 @@ class Ki_theme
     {
         $config = $this->CI->load->config('project', true);
         if ($index)
-            return isset ($config[$index]) ? $config[$index] : '';
+            return isset($config[$index]) ? $config[$index] : '';
         return $config;
     }
     function collectDataAtIndex($array, $index, &$result)
@@ -1114,7 +1138,7 @@ class Ki_theme
     }
     private function check_condition_for_url($value)
     {
-        if (isset ($value['condition'])) {
+        if (isset($value['condition'])) {
             return $value['condition'];
         }
         return true;
@@ -1126,10 +1150,10 @@ class Ki_theme
     function default_vars($index = 0)
     {
         $default_vars = $this->project_config('default_vars');
-        if (isset ($this->config['default_vars'][$index]))
+        if (isset($this->config['default_vars'][$index]))
             return $this->config['default_vars'][$index];
         if (is_array($default_vars)) {
-            if (isset ($default_vars[$index]))
+            if (isset($default_vars[$index]))
                 return $default_vars[$index];
             return $default_vars;
         }
@@ -1150,7 +1174,7 @@ class Ki_theme
     {
         $courseDurations = $this->project_config('duration_type');
         if (is_array($courseDurations)) {
-            if (isset ($courseDurations[$index])) {
+            if (isset($courseDurations[$index])) {
                 $string = $courseDurations[$index];
                 return $number > 1 ? plural($string) : singular($string);
             }

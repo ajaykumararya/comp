@@ -6,22 +6,14 @@ class MY_Loader extends MX_Loader
     public function __construct()
     {
         parent::__construct();
-        if (!defined('THEME')) {
-            $theme = $this->config('project', true);
-            if (isset($theme['theme']))
-                define('THEME', $theme['theme']);
-            if (isset($theme['theme_id']))
-                define('THEME_ID', $theme['theme_id']);
-            if(isset($theme['document_path'])){
-                define('DOCUMENT_PATH','assets/formats/' . $theme['document_path']);
-                define('PATH',$theme['document_path']);
-            }
-        }
-        define('THEME_PATH', FCPATH . 'themes/' . THEME . '/');
-        $this->_ci_view_paths = array(
-            FCPATH . 'themes/' . THEME . '/' => TRUE,
-            FCPATH .  DOCUMENT_PATH . '/' => true
-        );
+    }
+    function append_view_path($array){
+        $this->_ci_view_paths = array_merge($this->_ci_view_paths,$array);
+        return $this;
+    }
+
+    function get_view_paths(){
+        return $this->_ci_view_paths;
     }
     /** Load a module view **/
     public function view($view, $vars = array(), $return = FALSE)

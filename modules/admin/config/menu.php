@@ -139,7 +139,7 @@ $config['menu'] = array(
             'label' => 'Fees Collection',
             'type' => 'fees_collection',
             'icon' => array('bill', 6),
-            'condition' => OnlyForAdmin(),
+            'condition' => OnlyForAdmin() && CHECK_PERMISSION('FEES_COLLECTION'),
             'submenu' => array(
                 array(
                     'label' => 'Collect Fee',
@@ -159,6 +159,7 @@ $config['menu'] = array(
             'label' => 'Attendance',
             'type' => 'attendance',
             'icon' => array('double-check', 2),
+            'condition' => OnlyForAdmin() && CHECK_PERMISSION('ATTENDANCE'),
             'submenu' => array(
                 array(
                     'label' => 'Student Attendance',
@@ -254,7 +255,7 @@ $config['menu'] = array(
 
 $config['exam_menu'] = array(
     'title' => 'Online Exam Section',
-    'condition' => OnlyForAdmin(),
+    'condition' => OnlyForAdmin() && CHECK_PERMISSION('EXAM'),
     'menu' => array(
         array(
             'label' => 'Exam(S)',
@@ -301,7 +302,7 @@ $config['exam_menu'] = array(
 );
 $config['center_exam_menu'] = array(
     'title' => 'Online Exam Area',
-    'condition' => !OnlyForAdmin(),
+    'condition' => !OnlyForAdmin() && CHECK_PERMISSION("EXAM"),
     'menu' => array(
         array(
             'label' => 'Exam(S)',

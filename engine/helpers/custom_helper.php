@@ -107,6 +107,11 @@ function pre($array = [], $flg = false)
 }
 
 
+function CHECK_PERMISSION($type){
+    return defined($type) ? constant($type) == 'yes' : false;
+}
+
+
 function getRadomNumber($n = 10)
 {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
