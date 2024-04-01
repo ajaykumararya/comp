@@ -3,7 +3,7 @@
         color: black
     }
 </style>
-<section class="small_pt" data-aos="fade-up">
+<section class="small_pt gray-bg" data-aos="fade-up">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-6 col-lg-8">

@@ -1,4 +1,4 @@
-<section class="small_pt" data-aos="fade-left">
+<section class="small_pt gray-bg" data-aos="fade-left">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-6 col-lg-8">

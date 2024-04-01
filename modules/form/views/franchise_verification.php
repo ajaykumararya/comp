@@ -75,7 +75,7 @@
         margin-top: -1px;
     }
 </style>
-<section class="small_pt" data-aos="fade-right">
+<section class="small_pt gray-bg" data-aos="fade-right">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-6 col-lg-8">

@@ -1,0 +1,51 @@
+.box {
+    border: 1px solid #184b71;
+    border-radius: 0;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 45px;
+    margin: 15px 0;
+}
+.box .title {
+    color: #ffffff;
+    letter-spacing: 1px;
+    font-weight: 400;
+    padding: 5px;
+    text-transform: uppercase;
+    background: #184b71;
+    background: -webkit-linear-gradient(right, #0e7e89, #184b71);
+    background: -o-linear-gradient(right, #0e7e89, #184b71);
+    background: -moz-linear-gradient(right, #0e7e89, #184b71);
+    /*background: linear-gradient(to left, #0e7e89, #184b71);*/
+    background: linear-gradient(to left, #797979, #9c8b2c);
+}
+.box .boxInner {
+    padding: 15px 15px 15px 15px;
+    overflow: hidden;
+    overflow: hidden;
+    height: 270px;
+}
+.box .btn {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    min-width: 120px;
+}
+.btn-green {
+    color: #fff;
+    border-radius: 0;
+    background: #184b71;
+    background: -webkit-linear-gradient(right, #0e7e89, #184b71);
+    background: -o-linear-gradient(right, #0e7e89, #184b71);
+    background: -moz-linear-gradient(right, #0e7e89, #184b71);
+    background: linear-gradient(to left, #767676, #998829);
+}
+
+.galpic { display: block; position: relative; border: 1px solid rgb(19,72,125); padding: 5px;}
+.galpic img { border: 3px solid rgb(19,72,125);}
+.galpic .galpic-hover { transition: all ease .5s; opacity: 0; position: absolute; top: 0; left: 0; right: 0;
+    width: 100%; height: 0; background-color: rgb(19,72,125,.7); color: #fff; padding: 15px;
+}
+.galpic:hover .galpic-hover { opacity: 1; height: 100%; }
+.galpic .galpic-hover h3{ text-align: center; font-weight: 600; border-top: 1px solid #fff; border-bottom: 1px solid #fff; text-transform: uppercase; letter-spacing: 1px; }
+.galpic .galpic-hover .fa { font-size: 50px; }

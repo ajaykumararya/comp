@@ -1,4 +1,5 @@
 // const dateFormat = 'd-m-Y';
+// console.log(moment());
 const course_duration_url = 'course/fetch-duration';
 const driver = window.driver.js.driver;
 const enable_console = true;

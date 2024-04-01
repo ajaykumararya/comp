@@ -1,4 +1,4 @@
-<section class="small_pt"  data-aos="fade-right">
+<section class="small_pt gray-bg"  data-aos="fade-right">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-6 col-lg-8">
@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6 col-md-offset-3 mb-4 mt-4">
-                <form action="" class="student-admit-card-form animation animated fadeInLeft">
+                <form action="" class="gray-bg student-admit-card-form animation animated fadeInLeft">
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group">

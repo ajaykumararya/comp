@@ -1,5 +1,5 @@
-<br><br>
-<section class="" data-aos="fade-right">
+
+<section class="gray-bg" data-aos="fade-right">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-6 col-lg-8">
@@ -13,7 +13,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <form id="add_center_form" action="" method="POST" autocomplete="off">
+                <form id="add_center_form" action="" class="p-0" method="POST" autocomplete="off">
                     <div class="{card_class}">
                         <div id="kt_docs_card_collapsible" class="collapse show">
                             <div class="card-body">
