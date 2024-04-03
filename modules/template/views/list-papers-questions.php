@@ -38,7 +38,7 @@
                 }
             }
             ?>
-            <table class="w-100 table table-striped table-bordered border-primary bg-light-primary">
+            <table class="w-100 table table-striped table-bordered border-warning ">
                 <tbody>
                     <tr>
                         <th colspan="2" class="pe-4 fs-3">
@@ -60,9 +60,10 @@
                         $i = 1;
                         foreach ($data as $ans) {
                             echo '<tr><td>';
-                            echo isset($ans['first']) ? '<span class="fs-4 fw-bold">' . $this->ki_theme->html($ans['first'])->radio('answer'.$ques_id,0,'','text-dark') .' </span>' : '';
+                            
+                            echo isset($ans['first']) ? '<span class="fs-4 fw-bold">' . $this->ki_theme->set_attribute('id','ques_'.$i++.'_'.$ques_id)->html($ans['first'])->radio('answer',0,'','text-dark') .' </span>' : '';
                             echo '</td><td>';
-                            echo isset($ans['second']) ? '<span class="fs-4 fw-bold">' . $this->ki_theme->html($ans['second'])->radio('answer'.$ques_id,0,'','text-dark') .'</span>' : '';
+                            echo isset($ans['second']) ? '<span class="fs-4 fw-bold">' . $this->ki_theme->set_attribute('id','ques_'.$i++.'_'.$ques_id)->html($ans['second'])->radio('answer',0,'','text-dark') .'</span>' : '';
                             echo '</></tr>';
                         }
                     } else {

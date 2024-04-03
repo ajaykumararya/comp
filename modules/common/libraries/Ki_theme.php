@@ -500,7 +500,7 @@ class Ki_theme
     }
     function special_input($type = 'checkbox', $name = '', $value = '', $ParentClass = '', $labelClass = '')
     {
-        $randId = 'demo' . mt_rand(00, 99);
+        $randId = 'demo' . getRadomNumber(12);
         if (isset($this->attr['id'])) {
             $randId = $this->attr['id'];
             unset($this->attr['id']);
