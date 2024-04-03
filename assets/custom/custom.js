@@ -180,7 +180,7 @@ const template = (selectorId, Data = false) => {
         // $('.answer-area').append(formTemplate);
         deferred.resolve(data);
     }
-    else{
+    else {
         warn('Template Not Found');
         deferred.reject('Template Not Found');
     }
@@ -876,9 +876,9 @@ const ordinal_number = (i) => {
 }
 jQuery.ucfirst = function (str) {
     // return str.charAt(0).toUpperCase() + str.slice(1);
-    if(str != null)
+    if (str != null)
         return str.charAt(0).toUpperCase() + str.slice(1);
-        return;
+    return;
 };
 const course_duration_humnize = (duration, duration_type, flag = true) => {
     duration_type = (duration_type + (flag ? (duration > 1 ? 's' : '') : ''));
@@ -1218,6 +1218,12 @@ $(document).on('click', '.view-details-drawer-btn', function (e) {
 });
 // log(typeof KTDrawer);
 //then or catch
+var AryaAjaxXhr;
+const request_abort = () => {
+    AryaAjaxXhr && AryaAjaxXhr.abort();
+    log('Request Aborted!');
+};
+
 $.AryaAjax = function (options) {
     return new Promise(function (resolve, reject) {
         // log(options);
@@ -1256,7 +1262,7 @@ $.AryaAjax = function (options) {
             // console.log(settings);
             SwalShowloading(settings.loading_message);
             // Make the Ajax request using $.ajax
-            $.ajax({
+            AryaAjaxXhr = $.ajax({
                 type: settings.type,
                 url: ajax_url + settings.url,
                 data: settings.data,

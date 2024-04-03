@@ -308,14 +308,16 @@ class Website extends Ajax_Controller
             $this->response("status", true);
         }
     }
-    function edit_fee_record(){
-        $get = $this->db->where('id',$this->post('fee_id'))->get('student_fee_transactions');
+    function edit_fee_record()
+    {
+        $get = $this->db->where('id', $this->post('fee_id'))->get('student_fee_transactions');
         $data = $get->row_array();
-        $data['type'] = ucwords( str_replace('_',' ',$data['type']) );
+        $data['type'] = ucwords(str_replace('_', ' ', $data['type']));
         $this->set_data($data);
-        $this->response('html',$this->template('edit-fee-record'));
+        $this->response('html', $this->template('edit-fee-record'));
     }
-    function update_fee_record(){
+    function update_fee_record()
+    {
         $data = [
             'amount' => $this->post('amount'),
             'payable_amount' => $this->post('payable_amount'),
@@ -324,15 +326,28 @@ class Website extends Ajax_Controller
             'payment_date' => $this->post('payment_date'),
             'description' => $this->post('description')
         ];
-        $this->db->where('id',$this->post('id'))->update('student_fee_transactions',$data);
-        $this->response('status',true);
+        $this->db->where('id', $this->post('id'))->update('student_fee_transactions', $data);
+        $this->response('status', true);
     }
-    function print_fee_record(){
+    function print_fee_record()
+    {
         $this->init_setting();
         $record = $this->student_model->get_fee_transcations($this->post());
         $this->set_data($record->row_array());
-        $this->set_data('record',$record->result_array());
-        $this->response('html',$this->template('print-fee-record'));
+        $this->set_data('record', $record->result_array());
+        $this->response('html', $this->template('print-fee-record'));
+    }
+
+    function list_paper()
+    {
+        $data = $this->exam_model->student_exam($this->post());
+        $row = $data->row();
+        $this->set_data($data->row_array());
+        $this->set_data('questions', $this->exam_model->get_shuffled_questions($row->exam_id,$row->max_questions));
+        $this->response([
+            'title' => $row->exam_title,
+            'content' => $this->template('list-papers-questions')
+        ]);
     }
 }
 ?>

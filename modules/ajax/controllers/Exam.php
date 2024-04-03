@@ -160,4 +160,34 @@ class Exam extends Ajax_Controller
         // $this->center_model->list_requests();
         $this->response('data', $this->center_model->list_requests()->result_array());
     }
+
+
+    function list_assign_students(){
+        $students = $this->student_model->get_switch('assign_exam_student_list',[
+            'course_id' => $this->post("course_id"),
+            'exam_id' => $this->post('exam_id')
+        ]);
+        $this->set_data('students', $students->result_array());
+        $this->response('status',($students->num_rows() > 0));
+        $this->response('html', $this->template('list-assign-students'));
+    }
+    function assign_to_student()
+    {
+        $data = [
+            'center_id' => $this->post("center_id"),
+            'student_id' => $this->post("student_id"),
+            'exam_id' => $this->post("exam_id")
+        ];
+        // $this->response($this->post());
+        if($this->post('check_status') == 'true'){
+            $data['assign_time'] = time();
+            $data['added_by'] = $this->student_model->login_type();
+            $this->db->insert('exam_students', $data);  
+            $this->response("status",true);
+        }
+        else{
+            $this->db->delete('exam_students',$data);
+            $this->response("status",true);
+        }
+    }
 }

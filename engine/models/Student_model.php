@@ -62,6 +62,22 @@ class Student_model extends MY_Model
         else
             $this->db->join('centers as ce', 'ce.id = s.center_id', 'left');
         switch ($case) {
+            case 'assign_exam_student_list':
+                $this->db->select('es.id as assign_exam_id');
+                $this->db->join('exam_students as es', 'es.student_id = s.id and es.exam_id = "' . $condition['exam_id'] . '"', 'left');
+                $this->db->group_by('s.id');
+                unset($condition['exam_id']);
+                $this->myWhere('s', $condition);
+                break;
+            case 'student_exams':
+                $this->db->select('es.id as assign_exam_id,es.report_id');
+                $this->db->join('exam_students as es', 'es.student_id = s.id ');
+                $this->db->group_by('s.id');
+                $this->myWhere('s', $condition);
+                break;
+            case 'all':
+                $this->myWhere('s', $condition);
+                break;
             case 'student_result_verification':
                 $this->db->select('m.id as marksheet_id');
                 $this->db->where('s.roll_no', $roll_no);
@@ -251,8 +267,8 @@ class Student_model extends MY_Model
     function course_subject($where)
     {
         return $this->db->where($where)
-            ->order_by('seq','ASC')    
-        ->get('subjects');
+            ->order_by('seq', 'ASC')
+            ->get('subjects');
     }
     function check_admit_card($where)
     {
@@ -274,7 +290,7 @@ class Student_model extends MY_Model
             ->from('marks_table as mt')
             ->join('marksheets as m', 'mt.marksheet_id = m.id and m.id = ' . $result_id)
             ->join('subjects as s', "( s.id = mt.subject_id and s.isDeleted = 0 and m.id = '$result_id'")
-            ->order_by('s.seq','ASC');
+            ->order_by('s.seq', 'ASC');
         // ->where('mt.marksheet_id' , $result_id);
         return $this->db->get();
 
@@ -286,11 +302,11 @@ class Student_model extends MY_Model
             ->from('study_material as sm')
             ->join('course as c', 'c.id = sm.course_id')
             ->join('centers as ce', 'ce.id = sm.center_id', 'left');
-            
-        if ($this->isCenter())
-            $this->db->where('ce.id',$this->loginId());
 
-           
+        if ($this->isCenter())
+            $this->db->where('ce.id', $this->loginId());
+
+
         return $this->db->get();
 
     }
@@ -299,9 +315,10 @@ class Student_model extends MY_Model
 
 
 
-    function list_system_course(){
-        return $this->db->where('isDeleted',0)
-                        ->get('course');
+    function list_system_course()
+    {
+        return $this->db->where('isDeleted', 0)
+            ->get('course');
     }
 
     function system_subjects()

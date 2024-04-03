@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', function (r) {
     const exam_table = $('#list-exams');
     var count = 1;
     var rowData = [];
-    const type = exam_table.data('type') ?? 'center';
     exam_table.DataTable({
         dom: small_dom,
         ajax: {
@@ -65,57 +64,19 @@ document.addEventListener('DOMContentLoaded', function (r) {
                 render: function (data, type, row) {
                     return `
                         <div class="btn-group">
-                            <button class="btn btn-sm btn-info">
-                                <i class="ki-duotone fs-1 ki-user-tick ">
+                            <button class="assign-to-student btn btn-info">
+                                <i class="ki-duotone ki-user-tick ">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                     <span class="path3"></span>
                                 </i>
-                                Assign To ${type == 'student' ? 'Student' : 'Center'}
+                                Assign To Student
                             </button>
                         </div>
                     `;
                 }
             }
         ]
-    }).on('draw', function (e) {
-        exam_table.find('button').on('click', function () {
-            var rowData = exam_table.DataTable().row($(this).closest('tr')).data();
-            //    log(rowData);
-            $.AryaAjax({
-                url: 'exam/list-assign-students',
-                data: rowData
-            }).then((r) => {
-                if (r.status) {
-                    var drawer = mydrawer('Exam');
-                    drawer.find('.card-body').html(r.html).css({
-                        paddingTop: 0
-                    });
-                    drawer.find('.table').DataTable({
-                        paging: false,
-                        dom: small_dom
-                    });
-                    drawer.find('.form-check-input').on('change', function () {
-                        var checkStatus = $(this).is(':checked');
-                        $.AryaAjax({
-                            url: 'exam/assign-to-student',
-                            data: {
-                                student_id: $(this).val(),
-                                exam_id: rowData.exam_id,
-                                center_id: $(this).data('center_id'),
-                                check_status : checkStatus
-                            }
-                        }).then((e) => {
-                            toastr.clear();
-                            if(e.status)
-                                toastr.success(`Student ${checkStatus ? 'Added' : 'Removed'} Successfully..`);
-                            else
-                                toastr.error('Something Went Wrong!');
-                        });
-                    })
-                }
-            })
-        })
     });
 }
 );

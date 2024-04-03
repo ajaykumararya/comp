@@ -8,6 +8,9 @@ class Student extends MY_Controller
         redirect('student/profile');
 
     }
+    function my_exam(){
+        $this->student_view('my-exam');
+    }
     function dashboard()
     {
         redirect('student/profile');
