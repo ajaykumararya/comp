@@ -76,6 +76,8 @@ class Student_model extends MY_Model
                 $this->myWhere('s', $condition);
                 break;
             case 'all':
+                if(isset($condition['without_admission_status']))
+                unset($condition['without_admission_status']);
                 $this->myWhere('s', $condition);
                 break;
             case 'student_result_verification':
