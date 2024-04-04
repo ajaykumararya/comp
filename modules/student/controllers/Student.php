@@ -171,9 +171,11 @@ class Student extends MY_Controller
         // $this->ki_theme->set_default_vars('max_upload_size',10485760);
         // echo $this->ki_theme->default_vars('max_upload_size') / 1024;
         // echo $this->student_model->study_materials()->num_rows();
-        $where = ['course_id' => 11, 'isDeleted' => 0];
-        $subjects = $this->student_model->course_subject($where);
-        echo $subjects->num_rows();
+        // $where = ['course_id' => 11, 'isDeleted' => 0];
+        // $subjects = $this->student_model->course_subject($where);
+        // echo $subjects->num_rows();
+        $record = $this->exam_model->get_shuffled_questions(1, 10);
+        pre($record);
     }
 }
 ?>

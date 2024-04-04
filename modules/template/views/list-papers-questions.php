@@ -1,7 +1,8 @@
-<div class="row p-0">
-    <div class="col-md-8">
+<div class="row p-0" style="height : 100%">
+    <div class="col-md-8 " style="height: 100%;overflow-y:scroll">
         <?php
         $index = 1;
+   
         foreach ($questions as $ques) {
             $ques_id = $ques['id'];
             $list = $this->exam_model->list_question_answers($ques['id']);
@@ -51,7 +52,7 @@
                                     </b>
                                 </div>
                                 <div class="">
-                                    </div>
+                                </div>
                             </div>
                         </th>
                     </tr>
@@ -60,10 +61,10 @@
                         $i = 1;
                         foreach ($data as $ans) {
                             echo '<tr><td>';
-                            
-                            echo isset($ans['first']) ? '<span class="fs-4 fw-bold">' . $this->ki_theme->set_attribute('id','ques_'.$i++.'_'.$ques_id)->html($ans['first'])->radio('answer',0,'','text-dark') .' </span>' : '';
+
+                            echo isset($ans['first']) ? '<span class="fs-4 fw-bold">' . $this->ki_theme->set_attribute('id', 'ques_' . $i++ . '_' . $ques_id)->html($ans['first'])->radio('answer_' . $ques_id, 0, '', 'text-dark') . ' </span>' : '';
                             echo '</td><td>';
-                            echo isset($ans['second']) ? '<span class="fs-4 fw-bold">' . $this->ki_theme->set_attribute('id','ques_'.$i++.'_'.$ques_id)->html($ans['second'])->radio('answer',0,'','text-dark') .'</span>' : '';
+                            echo isset($ans['second']) ? '<span class="fs-4 fw-bold">' . $this->ki_theme->set_attribute('id', 'ques_' . $i++ . '_' . $ques_id)->html($ans['second'])->radio('answer_' . $ques_id, 0, '', 'text-dark') . '</span>' : '';
                             echo '</></tr>';
                         }
                     } else {
@@ -75,12 +76,12 @@
 
             <?php
         }
-
+        
         ?>
 
     </div>
     <div class="col-md-4">
-        <div class="{card_class}">
+        <div class="{card_class} card-flush" id="exam-instru">
             <div class="card-body">
                 <div class="d-flex fw-semibold align-items-center">
                     <div class="bullet w-8px h-3px rounded-2 bg-success me-3"></div>

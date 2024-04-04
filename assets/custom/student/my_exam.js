@@ -45,7 +45,9 @@ document.addEventListener('DOMContentLoaded', async function () {
             ki_modal.find('.modal-dialog').addClass('modal-fullscreen');
             ki_modal.find('.modal-footer').html('');
             ki_modal.find('.modal-header').find('.btn').hide();
-            myModel(e.title, e.content);
+            myModel(e.title, e.content).then( (d) => {
+                
+            });
             ki_modal.on('hidden.bs.modal', function () {
             ki_modal.find('.modal-header').find('.btn').show();
             ki_modal.find('form').off('submit');

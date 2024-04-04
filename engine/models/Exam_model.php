@@ -34,16 +34,21 @@ class Exam_model extends MY_Model
         return $this->db->get();
     }
 
-    public function get_shuffled_questions($exam_id,$limit = 0)
+    public function get_shuffled_questions($exam_id, $limit = 0)
     {
 
         $seed = rand();
 
-        $this->db->query('SET @seed := ' . $seed);
-        $query = $this->db->query("SELECT * FROM ".DB_DBPREFIX."exam_questions WHERE exam_id = '$exam_id' ORDER BY RAND(@seed) " . ($limit ? "LIMIT $limit" : ''));
+        // $this->db->query('SET @seed := ' . $seed);
+        // $query = $this->db->query("SELECT * FROM ".DB_DBPREFIX."exam_questions WHERE exam_id = '$exam_id' ORDER BY RAND(@seed) " . ($limit ? "LIMIT $limit" : ''));
+        $this->db->where('exam_id', $exam_id);
+        if ($limit)
+            $this->db->limit($limit);
 
+        $query = $this->db->get('exam_questions');
         if ($query->num_rows() > 0) {
             $questions = $query->result_array();
+            shuffle($questions);
             return $questions;
         } else {
             return array();
