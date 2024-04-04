@@ -191,4 +191,20 @@ class Exam extends Ajax_Controller
             $this->response("status",true);
         }
     }
+
+    function submit_exam(){
+
+        $data = [
+            'attempt_time' => time(),
+            'percentage' => $this->post('percentage'),
+            'data' => json_encode($this->post('submitList')),
+            'ttl_right_answers' => $this->post('ttl_right_answers')
+        ];
+
+        // $this->response($this->post());
+        $this->db->where('id',$this->post('student_exam_id'))
+                ->update('exam_students',$data);
+        $this->response('status','OK');
+        
+    }
 }

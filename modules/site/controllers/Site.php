@@ -65,4 +65,9 @@ class Site extends Site_Controller
     {
         $this->render('error_404');
     }
+    function page_view($content,$data = []){
+        $this->set_data($data);
+        $this->render($content,'content');
+    }
+
 }

@@ -1,6 +1,11 @@
 document.addEventListener('DOMContentLoaded', async function () {
     const ready = $('.ready');
     const done = $('.done');
+    done.on('click',function(e){
+        e.preventDefault();
+        var id = $(this).data('id');
+        window.open(`${base_url}exam/online-exam-result/${btoa(id)}`, '_blank');
+    })
     ready.on('click', function (e) {
         e.preventDefault();
         var doc = window.document;
@@ -45,18 +50,74 @@ document.addEventListener('DOMContentLoaded', async function () {
             ki_modal.find('.modal-dialog').addClass('modal-fullscreen');
             ki_modal.find('.modal-footer').html('');
             ki_modal.find('.modal-header').find('.btn').hide();
-            myModel(e.title, e.content).then( (d) => {
-                
+            myModel(e.title, `${e.content} <input type="hidden" class="student_exam_id" value="${id}">`).then((d) => {
+                d.form.submit(function (e) {
+                    e.preventDefault();
+                    submitExam(this);
+                })
             });
             ki_modal.on('hidden.bs.modal', function () {
-            ki_modal.find('.modal-header').find('.btn').show();
-            ki_modal.find('form').off('submit');
+                ki_modal.find('.modal-header').find('.btn').show();
+                ki_modal.find('form').off('submit');
                 ki_modal.find('.modal-dialog').removeClass('modal-fullscreen');
             });
         });
-
-
     })
+    function submitExam(form) {
+        let allQuestions = JSON.parse($(form).find('.questionList').val());
+        let ques_count = (Object.keys(allQuestions).length);
+        let answers = $(form).find('.answers:checked');
+        let rightQuestions = 0;
+        let exam_id = $(form).find('.exam_id').val();
+        let submitList = [];
+        let student_exam_id = $(form).find('.student_exam_id').val();
+        answers.each(function () {
+            let q_id = $(this).data('ques');
+            let ans_id = $(this).val();
+            if (allQuestions.hasOwnProperty(q_id)) {
+                if (ans_id == allQuestions[q_id])
+                    rightQuestions++;
+            }
+            submitList.push({
+                'question_id': q_id,
+                'answer_id': ans_id,
+                'right_answer_id': allQuestions[q_id],
+
+            });
+        });
+
+        let percentage = (rightQuestions / ques_count) * 100;
+
+        $.AryaAjax({
+            url: 'exam/submit-exam',
+            data: {
+                exam_id: exam_id,
+                submitList: submitList,
+                percentage: percentage,
+                ttl_right_answers: rightQuestions,
+                student_exam_id: student_exam_id
+            }
+        }).then((res) => {
+            
+            SwalSuccess(``,`You answered ${ques_count} questions, out of which ${rightQuestions} are correct, then your percentage is ${percentage}%.`,true,'Check Marksheet').then( (r) => {
+                if(r.isConfirmed){
+                    location.href = base_url + 'exam/online-exam-result/'+ btoa(student_exam_id);
+                }
+                else
+                    location.reload();
+            });
+        });
+    }
+    $(document).on('change', '.answers', function () {
+        var attemptQuestions = $('.answers:checked').length;
+        $('.ttl-attempts').text(attemptQuestions);
+        var maxQuestions = parseInt($('.ttl-max-questions').text()) ?? 0;
+        var submitButton = $('.save-button');
+        if (maxQuestions && maxQuestions == attemptQuestions) {
+            toastr.success('All Questions Attemped, Now Submit your Paper.');
+            submitButton.prop('disabled', false);
+        }
+    });
     $(document).keydown(function (event) {
         // Check if the Ctrl key is pressed
         if (event.ctrlKey) {

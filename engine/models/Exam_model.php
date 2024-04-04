@@ -16,6 +16,9 @@ class Exam_model extends MY_Model
     {
         return $this->db->where('exam_id', $exam_id)->get('exam_questions');
     }
+    function fetch_question($id){
+        return $this->db->where('id',$id)->get('exam_questions');
+    }
     function list_question_answers($ques_id)
     {
         return $this->db->select('*,eqa.id as answer_id')

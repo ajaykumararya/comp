@@ -8,10 +8,11 @@ $get = $this->student_model->get_switch(
 if ($get->num_rows()) {
     echo '<div class="row">';
     foreach ($get->result() as $row) {
+        $examDone = $row->percentage != null;
         ?>
         <div class="col-md-6">
             <a href="javascript:void(0)" 
-                class="card card-image border-hover-primary <?=$row->report_id ? 'done' : 'ready'?>" <?=$row->report_id ? 'data-report_id="'.$row->report_id.'"' : ''?> data-id="<?=$row->assign_exam_id?>">
+                class="card card-image border-hover-primary <?=$examDone ? 'done' : 'ready'?>" data-id="<?=$row->assign_exam_id?>">
                 <!--begin::Card header-->
                 <div class="card-header border-0 pt-9 ">
                     <!--begin::Card Title-->
@@ -26,7 +27,7 @@ if ($get->num_rows()) {
                     </div>
                     <!--end::Car Title-->
                     <?php
-                    if ($row->report_id) {
+                    if ($examDone) {
                         ?>
                         <!--begin::Card toolbar-->
                         <div class="card-toolbar">

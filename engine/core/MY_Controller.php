@@ -250,8 +250,10 @@ class Site_Controller extends MY_Controller
     }
     function render($view = '', $data = [], $return = false)
     {
-        $this->set_data($data);
-        $this->public_data['output'] = ($this->parse($view, $this->public_data, true));
+        if(is_array($data))
+            $this->set_data($data);
+        // pre($this->public_data,true);
+        $this->public_data['output'] = is_string($data) ? $view : ($this->parse($view, $this->public_data, true));
         $this->public_data['html'] = $this->parse('main', $this->public_data, true);
         return $this->parse('render', $this->public_data, $return);
     }

@@ -850,8 +850,8 @@ const mySwal = (title = '', message, type = 'success', cancelButton = false, con
         allowOutsideClick: false
     });
 }
-const SwalSuccess = (title = 'Success', message) => {
-    return mySwal(title, message);
+const SwalSuccess = (title = 'Success', message, cancelButton = false, confirmButtonText = 'OK') => {
+    return mySwal(title, message,'success',cancelButton,confirmButtonText);
 }
 const SwalWarning = (title = 'Notice', message, cancelButton = false, confirmButtonText = 'Ok') => {
     return mySwal(title, message, 'warning', cancelButton, confirmButtonText);
