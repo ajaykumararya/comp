@@ -33,7 +33,9 @@ class Exam_model extends MY_Model
         $this->myWhere('es', $where);
         return $this->db->get();
     }
-
+    function get_student_exam($where){
+        return $this->db->where($where)->get('exam_students');
+    }
     public function get_shuffled_questions($exam_id, $limit = 0)
     {
 

@@ -167,6 +167,7 @@ class Exam extends Ajax_Controller
             'course_id' => $this->post("course_id"),
             'exam_id' => $this->post('exam_id')
         ]);
+        $this->set_data('exam_id',$this->post('exam_id'));
         $this->set_data('students', $students->result_array());
         $this->response('status',($students->num_rows() > 0));
         $this->response('html', $this->template('list-assign-students'));
