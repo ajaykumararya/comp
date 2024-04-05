@@ -214,4 +214,6 @@ document.addEventListener('DOMContentLoaded', function (e) {
             }).then( (r) => list_acheivements.DataTable().ajax.reload());
         })
     }
+
+    
 });

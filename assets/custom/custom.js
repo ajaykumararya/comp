@@ -130,6 +130,12 @@ if (myeditor.length) {
     });
     */
 }
+if ($.isFunction($.fn.maxlength)) {
+    $('.maxlength_textarea').maxlength({
+        warningClass: "badge badge-primary",
+        limitReachedClass: "badge badge-success"
+    });
+}
 const timeConvert = (n) => {
     var num = n;
     var hours = (num / 60);
@@ -638,9 +644,10 @@ const loadSomeFuncation = () => {
 
         // });
         var inputValue = $(".selectRange-with-time").val();
-        var startDate = moment().startOf("hour");
-        var endDate = moment().startOf("hour").add(32, "hour");
+
         if (inputValue) {
+            var startDate = moment().startOf("hour");
+            var endDate = moment().startOf("hour").add(32, "hour");
             // Split the value into start and end date strings using the separator "-"
             var dateRangeArray = inputValue.split(' - ');
 
@@ -649,15 +656,16 @@ const loadSomeFuncation = () => {
             endDate = moment(dateRangeArray[1], "DD-MM-YYYY hh:mm A");
         }
 
-
-        $(".selectRange-with-time").daterangepicker({
-            timePicker: true,
-            startDate: startDate,
-            endDate: endDate,
-            locale: {
-                format: "DD-MM-YYYY hh:mm A"
-            }
-        });
+        if ($.isFunction($.fn.daterangepicker)) {
+            $(".selectRange-with-time").daterangepicker({
+                timePicker: true,
+                startDate: startDate,
+                endDate: endDate,
+                locale: {
+                    format: "DD-MM-YYYY hh:mm A"
+                }
+            });
+        }
         $('.select-date-month-year').flatpickr({
             dateFormat: 'M Y'
         })
@@ -851,7 +859,7 @@ const mySwal = (title = '', message, type = 'success', cancelButton = false, con
     });
 }
 const SwalSuccess = (title = 'Success', message, cancelButton = false, confirmButtonText = 'OK') => {
-    return mySwal(title, message,'success',cancelButton,confirmButtonText);
+    return mySwal(title, message, 'success', cancelButton, confirmButtonText);
 }
 const SwalWarning = (title = 'Notice', message, cancelButton = false, confirmButtonText = 'Ok') => {
     return mySwal(title, message, 'warning', cancelButton, confirmButtonText);
@@ -1537,7 +1545,7 @@ if (exta_setting_form) {
 }
 $(document).on('click', '.field-area a', function (d) {
     d.preventDefault();
-    SwalWarning('Confirmation','Are You sure you want to remove this link',true).then((r) => {
+    SwalWarning('Confirmation', 'Are You sure you want to remove this link', true).then((r) => {
         if (r.isConfirmed) {
             $(d.target).closest('div').remove();
             SwalSuccess('Now Save This Form');

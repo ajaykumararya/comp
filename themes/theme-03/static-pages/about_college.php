@@ -13,7 +13,7 @@
                     </div>
                     <div class="form-group">
                         <label for="description" class="form-label mt-4">Description</label>
-                        <textarea name="about_college_content" class="form-control" cols="10"
+                        <textarea name="about_college_content" class="form-control maxlength_textarea" maxlength="500" cols="10"
                             rows="8"><?= $this->SiteModel->get_setting('about_college_content') ?> </textarea>
                     </div>
                     <?php
@@ -57,7 +57,7 @@
                     </div>
                     <div class="form-group">
                         <label for="description" class="form-label mt-4">Description</label>
-                        <textarea name="principal_box_description" class="form-control" cols="30"
+                        <textarea name="principal_box_description" class="form-control maxlength_textarea" maxlength="140" cols="30"
                             rows="10"><?= $this->SiteModel->get_setting('principal_box_description') ?> </textarea>
                     </div>
 

@@ -26,8 +26,14 @@ $menu = array(
             'label' => 'About College with Principal Box',
             'type' => 'about_us_with_principal_box',
             'url' => 'cms/static-page/about_college',
-            'icon' => array('file', 4),
-
-        )
+            'icon' => array('file', 4)
+        ),
+        //Featured Events
+        array(
+            'label' => 'Featured Events',
+            'type' => 'featured_evenrs',
+            'url' => 'cms/static-page/featured_evenrs',
+            'icon' => array('file', 4)
+        ),
     )
 );

@@ -142,5 +142,10 @@ function answer_id_append($key, $ans_id, $data, $i, $newdata)
     }
     return $newdata;
 }
-
+function ES($type , $defaultTExt = null){
+    $ci = &get_instance();
+    if($defaultTExt != null)
+        return $ci->SiteModel->get_setting($type,$defaultTExt);
+    return $ci->SiteModel->get_setting($type);
+}
 ?>
