@@ -47,9 +47,11 @@ class Cms extends MY_Controller
     }
     function static_page(){
         $id = $this->uri->segment(3,0);       
-        $this->ki_theme->breadcrumb_action_html(
-            $this->ki_theme->drawer_button('page',$id,humanize($id))
-        );
+        if(THEME != 'theme=03' AND $id != 'our_certificate'){
+            $this->ki_theme->breadcrumb_action_html(
+                $this->ki_theme->drawer_button('page',$id,humanize($id))
+            );
+        }
         // echo $id;
         $this->view('static-pages/'.$id);
     }

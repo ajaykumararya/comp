@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
         columns : [
             {'data':null},
             {'data':'image'},
+            {'data':'title'},
             {'data' : null}
         ],
         columnDefs : [
@@ -23,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             },
             {
                 targets : 1,
-                render : function(data){
+                render : function(data,type,row){
                     return `
                                 <img
                                     src="${base_url}assets/media/misc/spinner.gif"
@@ -31,7 +32,14 @@ document.addEventListener('DOMContentLoaded', function (e) {
                                     class="lozad rounded w-100px h-100px"
                                     alt=""
                                 />
+                                ${row.title ?? ''}
                             `;
+                }
+            },
+            {
+                targets : 2,
+                render : function(d,type,row){
+                    return `${d || '<i class="text-danger">..EMPTY..</i>'} <a href="javascript:void()" class="edit-record"><i class="fa fa-pencil"></i></a>`;
                 }
             },
             {
@@ -53,6 +61,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             list.DataTable().ajax.reload() ;
             toastr.success('Image Deleted Successfully');
         });
+        list.EditForm('cms/update-gallery-image-title','Edit Image Title');
     });
     // set the dropzone container id
     const id = "#kt_dropzonejs_example_3";

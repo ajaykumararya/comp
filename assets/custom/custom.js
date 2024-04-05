@@ -1537,7 +1537,7 @@ if (exta_setting_form) {
 }
 $(document).on('click', '.field-area a', function (d) {
     d.preventDefault();
-    SwalWarning('Are You sure you want to remove this link').then((r) => {
+    SwalWarning('Confirmation','Are You sure you want to remove this link',true).then((r) => {
         if (r.isConfirmed) {
             $(d.target).closest('div').remove();
             SwalSuccess('Now Save This Form');

@@ -1,4 +1,3 @@
-
 <div class="row">
     <div class="col-md-4">
         <form action="" id="update-logo">
@@ -38,18 +37,19 @@
                     </div>
                     <div class="form-group mb-4">
                         <label for="email" class="form-label required">Enter Email</label>
-                        <input value="<?= $this->SiteModel->get_setting('email') ?>" type="email" required name="email" id="email" placeholder="Enter Email"
-                            class="form-control">
+                        <input value="<?= $this->SiteModel->get_setting('email') ?>" type="email" required name="email"
+                            id="email" placeholder="Enter Email" class="form-control">
                     </div>
                     <div class="form-group mb-4">
                         <label for="number" class="form-label required">Enter Mobile</label>
-                        <input value="<?= $this->SiteModel->get_setting('number') ?>" type="text" required name="number" id="number" placeholder="Enter Mobile"
-                            class="form-control">
+                        <input value="<?= $this->SiteModel->get_setting('number') ?>" type="text" required name="number"
+                            id="number" placeholder="Enter Mobile" class="form-control">
                     </div>
                     <div class="form-group mb-4">
                         <label for="wnumber" class="form-label required">Enter Whatsapp No.</label>
-                        <input value="<?= $this->SiteModel->get_setting('whatsapp_number') ?>" type="text" required name="whatsapp_number" id="wnumber"
-                            placeholder="Enter Whatsapp Number" class="form-control">
+                        <input value="<?= $this->SiteModel->get_setting('whatsapp_number') ?>" type="text" required
+                            name="whatsapp_number" id="wnumber" placeholder="Enter Whatsapp Number"
+                            class="form-control">
                     </div>
                     <div class="form-group mb-4">
                         <label for="address" class="form-label required">Enter Address</label>
@@ -152,6 +152,76 @@
     </div>
 </div>
 <?php
+if (THEME == 'theme-03') {
+    echo '<div class="row mb-4 mt-4">
+            <div class="col-md-12">
+                <div class="alert alert-success d-flex align-items-center p-5 mb-10">
+                    <i class="ki-duotone ki-shield-tick fs-2hx text-success me-4"><span class="path1"></span><span class="path2"></span></i>                    <div class="d-flex flex-column">
+                        <h4 class="mb-1 text-success">This is an Information</h4>
+                        <span>
+                        If you put <code>{newicon}</code> in the title, you will get a blinking image in the output.
+                        <code>Example:- <img src="'.base_url('themes/newicon.gif').'"></code>
+                        </span>
+                    </div>
+                </div>
+            </div>    
+        </div>';
+}
+
+
+$header_sections = $this->ki_theme->config('header_sections');
+if ($header_sections) {
+    ?>
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <h1 class="anchor fw-bold mb-5">Header Section</h1>
+        </div>
+        <?php
+        foreach ($header_sections as $index => $title) {
+            $data_index = $index . '_links';
+            ?>
+            <div class="col-md-4">
+                <form action="" class="extra-setting-form mb-4">
+                    <div class="{card_class}">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <input name="<?= $index ?>_text" class="custom_setting_input"
+                                    value="<?= $this->SiteModel->get_setting($index . '_text', $title) ?>">
+
+                            </h3>
+                        </div>
+                        <div class="card-body field-area p-3" data-index="<?= $data_index ?>">
+                            <?php
+                            $fields = $this->SiteModel->get_setting($data_index, '', true);
+                            if ($fields) {
+                                foreach ($fields as $value) {
+                                    $my_index = $value->title;
+                                    $value = $value->link;
+                                    echo '<div class="form-group position-relative mb-4">
+                                            <input type="text" name="title[]" placeholder="Enter Title" class="form-control border border-primary border-bottom-0 br-none p-2" value="' . $my_index . '">
+                                            <input type="text" name="value[]" placeholder="Enter Value" class="form-control border border-primary border-bottom-0 br-none p-2" autocomplete="off" value="' . $value . '">
+                                            <a href="javascript:;" class="btn border-1 border-danger border btn-light-danger h-25px lh-0 w-100 br-none p-2"><i class="ki-outline ki-trash"></i> Delete</a>
+                                        </div>';
+                                }
+                            }
+                            ?>
+                        </div>
+                        <div class="card-footer">
+                            {save_button}
+                            <button type="button" class="btn btn-light-primary add-new-field"><i class="ki-outline ki-plus"></i>
+                                Add new Link</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <?php
+        }
+        ?>
+    </div>
+    <?php
+}
+?>
+<?php
 $footer_sections = $this->ki_theme->config('footer_sections');
 if ($footer_sections) {
     ?>
@@ -170,7 +240,7 @@ if ($footer_sections) {
                             <h3 class="card-title">
                                 <input name="<?= $index ?>_text" class="custom_setting_input"
                                     value="<?= $this->SiteModel->get_setting($index . '_text', $title) ?>">
-                                
+
                             </h3>
                         </div>
                         <div class="card-body field-area p-3" data-index="<?= $data_index ?>">

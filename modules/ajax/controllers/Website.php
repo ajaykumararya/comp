@@ -350,15 +350,15 @@ class Website extends Ajax_Controller
         ]);
     }
     function submit_exam(){
-
+        $mydata = $this->post('submitList') ? $this->post('submitList') : [];
         $data = [
             'attempt_time' => time(),
             'percentage' => $this->post('percentage'),
-            'data' => json_encode($this->post('submitList')),
+            'data' =>  json_encode($mydata),
             'ttl_right_answers' => $this->post('ttl_right_answers')
         ];
 
-        // $this->response($this->post());
+        // $this->response($data);
         $this->db->where('id',$this->post('student_exam_id'))
                 ->update('exam_students',$data);
         $this->response('status','OK');

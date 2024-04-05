@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', async function () {
     const ready = $('.ready');
     const done = $('.done');
-    done.on('click',function(e){
+    var exam_in_running = false;
+    done.on('click', function (e) {
         e.preventDefault();
         var id = $(this).data('id');
         window.open(`${base_url}exam/online-exam-result/${btoa(id)}`, '_blank');
@@ -54,7 +55,30 @@ document.addEventListener('DOMContentLoaded', async function () {
                 d.form.submit(function (e) {
                     e.preventDefault();
                     submitExam(this);
-                })
+                });
+                var nexT = 0;
+                document.addEventListener("visibilitychange", function () {
+                    if (document.visibilityState === "hidden") {
+                        $('.nextTabs').val(++nexT);
+                    }
+                    else
+                        SwalWarning("Do not go out of this page, everything is under the supervision of the administrator. ");
+                    return false;
+                });
+                $("html,body").on("contextmenu", function (e) {
+                    e.preventDefault();
+                });
+                $(window).on("beforeunload", async function (event) {
+
+                    event.preventDefault();
+                    return 'Are you sure you want to leave this page?';
+
+                });
+
+                $(window).on("unload", function () {
+                    // This is optional and can be used for additional cleanup or actions before the page is unloaded
+                    console.log("Page is being unloaded");
+                });
             });
             ki_modal.on('hidden.bs.modal', function () {
                 ki_modal.find('.modal-header').find('.btn').show();
@@ -69,7 +93,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         let answers = $(form).find('.answers:checked');
         let rightQuestions = 0;
         let exam_id = $(form).find('.exam_id').val();
-        let submitList = [];
+        let submitList = new Array();
         let student_exam_id = $(form).find('.student_exam_id').val();
         answers.each(function () {
             let q_id = $(this).data('ques');
@@ -98,10 +122,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                 student_exam_id: student_exam_id
             }
         }).then((res) => {
-            
-            SwalSuccess(``,`You answered ${ques_count} questions, out of which ${rightQuestions} are correct, then your percentage is ${percentage}%.`,true,'Check Marksheet').then( (r) => {
-                if(r.isConfirmed){
-                    location.href = base_url + 'exam/online-exam-result/'+ btoa(student_exam_id);
+            window.removeEventListener('beforeunload', beforeUnloadHandler);
+            SwalSuccess(``, `You answered ${ques_count} questions, out of which ${rightQuestions} are correct, then your percentage is ${percentage}%.`, true, 'Check Marksheet').then((r) => {
+                if (r.isConfirmed) {
+                    location.href = base_url + 'exam/online-exam-result/' + btoa(student_exam_id);
                 }
                 else
                     location.reload();
@@ -152,4 +176,10 @@ document.addEventListener('DOMContentLoaded', async function () {
             console.log('Keyboard shortcuts are disabled.');
         }
     });
+
+    function beforeUnloadHandler(event) {
+        event.preventDefault();
+        event.returnValue = ''; // Required for some browsers
+    }
+
 })

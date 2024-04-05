@@ -2,7 +2,7 @@
 <section class="gray-bg" data-aos="fade-right">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-xl-6 col-lg-8">
+            <div class="col-md-12">
                 <div class="text-center animation animated fadeInUp" data-aos="fade-up" data-animation="fadeInUp"
                     data-animation-delay="0.01s" style="animation-delay: 0.01s; opacity: 1;">
                     <div class="heading_s1 text-center">

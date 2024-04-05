@@ -2,7 +2,6 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 class Site extends Site_Controller
 {
-    
     public function index()
     {
         if ($this->isOK) {
@@ -13,8 +12,9 @@ class Site extends Site_Controller
         } else
             $this->error_404();
     }
-    function email(){
-       echo $this->do_email('ajaykumararya963983@gmail.com','Your Login Code',mt_rand(100000,999999));
+    function email()
+    {
+        echo $this->do_email('ajaykumararya963983@gmail.com', 'Your Login Code', mt_rand(100000, 999999));
     }
     function container()
     {
@@ -24,33 +24,31 @@ class Site extends Site_Controller
         if ($pageSchema->num_rows()) {
             $html = '';
             foreach ($pageSchema->result() as $page) {
-                // pre($page);
                 switch ($page->event) {
                     case 'content':
                         $get = $this->SiteModel->page_content($page->page_id);
-                        if ($get->num_rows()){
-                            if(file_exists(THEME_PATH.'content.php'))
-                                $html .= $this->parse('content',['content' => $get->row('content')],true);
+                        if ($get->num_rows()) {
+                            if (file_exists(THEME_PATH . 'content.php'))
+                                $html .= $this->parse('content', ['content' => $get->row('content')], true);
                             else
                                 $html .= $get->row('content');
                         }
                         break;
-                    
-                    
                     case 'page':
                         if (file_exists(THEME_PATH . 'pages/' . $page->event_id . EXT))
                             $html .= $this->parse('pages/' . $page->event_id, [], true);
+                        else {
+                            if ($page->event_id == 'notice-board' && !$return['isPrimary']) { // this for theme3
+                                $this->set_data('notice_board', true);
+                            }
+                        }
                         break;
-                    
                     case 'image_gallery':
-                        if (file_exists(THEME_PATH . 'pages/' . $page->event . EXT)){
+                        if (file_exists(THEME_PATH . 'pages/' . $page->event . EXT)) {
                             $this->set_data('gallery', $this->db->get('gallery_images')->result_array());
                             $html .= $this->parse('pages/' . $page->event, [], true);
                         }
                         break;
-                    
-
-
                     case 'form':
                         $html .= $this->parse('form/' . $page->event_id, [], true);
                         break;
@@ -65,9 +63,9 @@ class Site extends Site_Controller
     {
         $this->render('error_404');
     }
-    function page_view($content,$data = []){
+    function page_view($content, $data = [])
+    {
         $this->set_data($data);
-        $this->render($content,'content');
+        $this->render($content, 'content');
     }
-
 }

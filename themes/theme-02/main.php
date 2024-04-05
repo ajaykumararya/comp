@@ -340,11 +340,7 @@
                             ||
                             <span><a href="privacy-policy.html" style="color:#ffffff;">Privacy Policy</a></span> -->
                         <p> Copyright @
-                            <script>document.write(new Date().getFullYear())</script> all right reserved designed by
-                            <img src="https://niedc.co.in/theme/second.gif" style="height:23px">
-                            <span><a style="color:#ffffff;" href="https://hyperprowebtech.com/" target="_blank"
-                                    rel="noopener noreferrer"> Hyper Pro
-                                    Webtech .</a></span>
+                            <script>document.write(new Date().getFullYear())</script> {copyright}
                         </p>
                         </p>
                     </div>

@@ -184,7 +184,6 @@ class Cms extends Ajax_Controller
                     $data[$index] = $file;
             }
         }
-
         if (sizeof($data)) {
             foreach ($data as $index => $value) {
                 $this->SiteModel->update_setting($index, $value);
@@ -192,7 +191,6 @@ class Cms extends Ajax_Controller
             }
         }
     }
-
     function add_course_for_content()
     {
         $data = $this->post();
@@ -252,9 +250,7 @@ class Cms extends Ajax_Controller
         $config['upload_path'] = './upload/';
         $config['allowed_types'] = 'gif|jpg|jpeg|png';
         $config['max_size'] = 2048; // 2 MB max file size
-
         $this->load->library('upload', $config);
-
         if ($this->upload->do_upload('file')) {
             // File uploaded successfully
             $this->db->insert('gallery_images', ['image' => $this->upload->data('file_name')]);
@@ -268,6 +264,12 @@ class Cms extends Ajax_Controller
             // Handle upload failure
             $this->response('error', $this->upload->display_errors('', ''));
         }
+    }
+    function update_gallery_image_title(){
+        $this->db->where('id',$this->post('id'))->update('gallery_images',[
+            'title' => $this->post("title")
+        ]);
+        $this->response('status',true);
     }
     function list_gallery_images()
     {

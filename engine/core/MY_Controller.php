@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') or exit ('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 class MY_Controller extends MX_Controller
 {
     public $public_data = [];
@@ -7,7 +7,7 @@ class MY_Controller extends MX_Controller
     function __construct()
     {
         parent::__construct();
-        
+
         $this->load->library('common/ki_theme');
         $this->load->config('form/forms');
         // exit(THEME_ID);
@@ -15,9 +15,15 @@ class MY_Controller extends MX_Controller
             // ob_start();
             define('theme_config', true);
             require THEME_PATH . 'config.php';
-            $this->ki_theme->set_config_item($config);
-            unset($config);
+            if (isset($config) && sizeof($config)) {
+                foreach ($config as $item => $value)
+                    $this->ki_theme->set_config_item($item, $value);
+                unset($config);
+            }
+            else
+                throw Exception('Your Theme Config File Is Empty.');
         }
+
         $this->public_data = [
             'base_url' => base_url(),
             'current_url' => $this->my_current_url(),
@@ -33,13 +39,14 @@ class MY_Controller extends MX_Controller
             'document_path' => base_url() . defined('DOCUMENT_PATH') ? DOCUMENT_PATH : 'assets',
             'admission_button' => $this->ki_theme->save_button('Admission Now', ' fa fa-plus'),
         ];
+        $this->ki_theme->set_config_item('newicon',img(base_url('themes/newicon.gif')));
         $this->set_data('basic_header_link', $this->parse('site/common-header', [], true));
         // pre($this->public_data,true);
         if ($this->center_model->isAdminOrCenter()) {
             $getCentre = $this->center_model->get_center($this->center_model->loginId(), $this->center_model->login_type());
             $centreRow = $getCentre->row();
             $this->public_data['center_data'] = $getCentre->row_array();
-            $this->set_data('profile_image', (file_exists('upload/'.$centreRow->image) ? base_url('upload/' . $centreRow->image) : base_url('assets/media/avatars/300-3.jpg')));
+            $this->set_data('profile_image', (file_exists('upload/' . $centreRow->image) ? base_url('upload/' . $centreRow->image) : base_url('assets/media/avatars/300-3.jpg')));
             $this->set_data([
                 'owner_name' => $centreRow->name,
                 'owner_email' => $centreRow->email,
@@ -65,7 +72,7 @@ class MY_Controller extends MX_Controller
     }
     function file_up($file)
     {
-        if (!empty ($_FILES[$file]['name'])) {
+        if (!empty($_FILES[$file]['name'])) {
             $filename = $_FILES[$file]['name'];
             $ext = pathinfo($filename, PATHINFO_EXTENSION);
             $x = getRadomNumber(10) . '.' . $ext;
@@ -157,16 +164,16 @@ class MY_Controller extends MX_Controller
     }
     function __common_view($view, $data = [])
     {
-        if (($this->ki_theme->isValidUrl() or $this->isValidUrl) or (isset ($data['isValid']) and $data['isValid'])) {
+        if (($this->ki_theme->isValidUrl() or $this->isValidUrl) or (isset($data['isValid']) and $data['isValid'])) {
             $module = $this->load->get_module();
             $file = strtolower($this->router->fetch_method());
             $jsFile = "assets/custom/{$module}/{$file}.js";
-            if (!isset ($this->public_data['js_file']))
+            if (!isset($this->public_data['js_file']))
                 $this->public_data['js_file'] = '';
             if (file_exists(FCPATH . $jsFile)) {
                 $this->public_data['js_file'] = '<script src="' . base_url($jsFile) . '"></script>';
             }
-            $output = (isset ($this->public_data['page_output']) ? $this->public_data['page_output'] : '') . "\n\n";
+            $output = (isset($this->public_data['page_output']) ? $this->public_data['page_output'] : '') . "\n\n";
             try {
                 $this->public_data['page_output'] = $output . ($this->parse($view, $this->public_data, true));
             } catch (Exception $r) {
@@ -235,6 +242,12 @@ class Site_Controller extends MY_Controller
     {
         parent::__construct();
         $this->set_data('link_css', $this->parse('_common/head', [], true));
+        $this->set_data('YEAR', date('Y'));
+        $this->set_data('copyright', ' All right reserved designed by
+        <img src="' . base_url('assets') . '/second.gif" style="height:23px">
+        <span><a style="color:#ffffff;" href="https://hyperprowebtech.com/" target="_blank"
+                rel="noopener noreferrer"> Hyper Pro
+                Webtech .</a></span>');
         $items = $this->SiteModel->print_menu_items([], true);
         $this->set_data('menus', $items['menus']);
         $index = uri_string() == '' ? base_url() : base_url(uri_string());
@@ -250,7 +263,7 @@ class Site_Controller extends MY_Controller
     }
     function render($view = '', $data = [], $return = false)
     {
-        if(is_array($data))
+        if (is_array($data))
             $this->set_data($data);
         // pre($this->public_data,true);
         $this->public_data['output'] = is_string($data) ? $view : ($this->parse($view, $this->public_data, true));

@@ -254,6 +254,11 @@ class Ki_theme
             $this->parse('permissions/default', $this->someData);
         }
     }
+    function parse_string($string, $data = [], $return = true)
+    {
+        $data = array_merge($data, $this->config());
+        return $this->CI->parser->parse_string($string, $data, $return);
+    }
     function parse($page, $data = [], $return = false)
     {
         $page = strpos($page, '.tpl') ? $page : $page . '.tpl';
@@ -521,6 +526,7 @@ class Ki_theme
         $this->reset_props();
         return $html;
     }
+    
     function segment($arg1, $arg2 = 0)
     {
         return $this->CI->uri->segment($arg1, $arg2);
@@ -883,17 +889,17 @@ class Ki_theme
     {
         return [];
     }
-    function get_plan($index = 'all')
-    {
-        $title = '';
-        if (sizeof($this->plan_details)) {
-            if (isset($this->plan_details[$index]))
-                $title = $this->plan_details[$index];
-            else
-                $title = $this->plan_details;
-        }
-        return $title . (isDemo ? '<small class="fs-4 text-primary"> ( Demo Plan )</small> ' : '');
-    }
+    // function get_plan($index = 'all')
+    // {
+    //     $title = '';
+    //     if (sizeof($this->plan_details)) {
+    //         if (isset($this->plan_details[$index]))
+    //             $title = $this->plan_details[$index];
+    //         else
+    //             $title = $this->plan_details;
+    //     }
+    //     return $title . (isDemo ? '<small class="fs-4 text-primary"> ( Demo Plan )</small> ' : '');
+    // }
     function check_perimssion($type)
     {
         // if(isset($this->plan_methods))
@@ -941,7 +947,7 @@ class Ki_theme
     function get_menu()
     {
         $adminMenu = $this->CI->load->config('admin/menu', true);
-
+        // pre($adminMenu,true);
         $this->adminMenu = $adminMenu;
         // $this->current_method = recursiveArraySearchReturnValue($this->uri_string(),$adminMenu['ui_setting']['menu'],'type');
         $html = '';
@@ -1136,7 +1142,7 @@ class Ki_theme
         // return true;
         return in_array($this->uri_string(), $re);
     }
-    private function check_condition_for_url($value)
+    function check_condition_for_url($value)
     {
         if (isset($value['condition'])) {
             return $value['condition'];
@@ -1193,6 +1199,18 @@ class Ki_theme
             'index' => $index,
             'value' => $value
         ]);
+    }
+
+    function extra_setting_button_input($type){
+        return '<div class="form-group">
+                    <label for="title" class="form-label mt-4">Button</label>
+                    <input type="text" placeholder="Enter Title" name="'.$type.'_text"
+                        value="'.$this->CI->SiteModel->get_setting($type.'_text').'" class="form-control"
+                        style="border-radius: 12px 12px 0 0;border-bottom: 0;">
+                    <input type="text" placeholder="Enter Link" name="'.$type.'_link"
+                        value="'.$this->CI->SiteModel->get_setting($type.'_link').'"
+                        class="form-control" style="border-radius: 0 0 12px 12px;">
+                </div>';
     }
 }
 ?>

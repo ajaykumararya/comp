@@ -107,7 +107,8 @@ function pre($array = [], $flg = false)
 }
 
 
-function CHECK_PERMISSION($type){
+function CHECK_PERMISSION($type)
+{
     return defined($type) ? constant($type) == 'yes' : false;
 }
 
@@ -129,16 +130,17 @@ function get_month($monthNumber, $dateIndex = 'F')
 {
     return date($dateIndex, mktime(0, 0, 0, $monthNumber, 1));
 }
-function answer_id_append($key,$ans_id,$data,$i,$newdata){
-                if(isset($data[$i])){
-                    if(isset($data[$i][$key]))
-                        $newdata = array_merge($newdata,[$key => $ans_id]);
-                    else
-                        $newdata[$key] = $ans_id;
-                }
-                else{
-                    $newdata[$key] = $ans_id;
-                }
-                return $newdata;
-            }
+function answer_id_append($key, $ans_id, $data, $i, $newdata)
+{
+    if (isset($data[$i])) {
+        if (isset($data[$i][$key]))
+            $newdata = array_merge($newdata, [$key => $ans_id]);
+        else
+            $newdata[$key] = $ans_id;
+    } else {
+        $newdata[$key] = $ans_id;
+    }
+    return $newdata;
+}
+
 ?>

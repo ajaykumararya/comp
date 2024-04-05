@@ -86,6 +86,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Image</th>
+                                <th>Title</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -98,3 +99,11 @@
         </div>
     </div>
 </div>
+
+<script id="formTemplate" type="text/x-handlebars-template">
+    <input type="hidden" name="id" value="{{id}}">
+    <div class="form-group">
+        <label class="form-label required">Enter Title</label>
+        <input type="text" name="title" value="{{title}}" class="form-control" placeholder="Enter Title">
+    </div>
+</script>

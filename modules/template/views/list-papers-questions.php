@@ -88,6 +88,7 @@
         ?>
         <input type="hidden" class="questionList" value='<?=json_encode($allQuestions)?>'>
         <input type="hidden" class="exam_id" value='{exam_id}'>
+        <input type="hidden" class="nextTabs" value="0">
     </div>
     <div class="col-md-4">
         <div class="{card_class} card-flush" id="exam-instru">
@@ -114,7 +115,7 @@
                 <?=$this->ki_theme->set_class('save-button')
                         ->outline_dashed_style('primary')
                         ->with_icon('save-2')
-                        ->disabled(true)
+                        // ->disabled(true)
                         ->with_pulse('primary')
                         ->button('Submit Exam','submit')
                 ?>
