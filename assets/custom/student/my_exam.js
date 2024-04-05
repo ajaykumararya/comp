@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         let percentage = (rightQuestions / ques_count) * 100;
 
         $.AryaAjax({
-            url: 'exam/submit-exam',
+            url: 'website/submit-exam',
             data: {
                 exam_id: exam_id,
                 submitList: submitList,

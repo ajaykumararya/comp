@@ -72,6 +72,7 @@ class Student_model extends MY_Model
             case 'student_exams':
                 $this->db->select('es.id as assign_exam_id,es.percentage');
                 $this->db->join('exam_students as es', 'es.student_id = s.id ');
+                $this->db->join('exams as e','e.id = es.exam_id','left');
                 // $this->db->group_by('s.id');
                 $this->myWhere('s', $condition);
                 break;

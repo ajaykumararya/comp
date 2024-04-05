@@ -524,4 +524,5 @@ class Student extends Ajax_Controller
     {
         $this->response('data', $this->student_model->study_materials()->resul_array());
     }
+   
 }
