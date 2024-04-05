@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', async function () {
     const ready = $('.ready');
     const done = $('.done');
-    var exam_in_running = false;
     done.on('click', function (e) {
         e.preventDefault();
         var id = $(this).data('id');
@@ -11,9 +10,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         e.preventDefault();
         var doc = window.document;
         var docEl = doc.documentElement;
-
         var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-
         if (requestFullScreen) {
             requestFullScreen.call(docEl);
         }
@@ -30,22 +27,16 @@ document.addEventListener('DOMContentLoaded', async function () {
                 </button>
             `);
         });
-
-
-
-
         return false;
     });
     $(document).on('click', '.ok-btn', function () {
         var id = $(this).data('id');
         // ki_modal.modal('hide');
-
         $.AryaAjax({
             url: 'website/list-paper',
             data: {
                 id
             }
-
         }).then((e) => {
             ki_modal.attr('data-bs-backdrop', "static");
             ki_modal.find('.modal-dialog').addClass('modal-fullscreen');
@@ -62,19 +53,14 @@ document.addEventListener('DOMContentLoaded', async function () {
                         $('.nextTabs').val(++nexT);
                     }
                     else
-                        SwalWarning("Do not go out of this page, everything is under the supervision of the administrator. ");
+                        if (nexT)
+                            SwalWarning("Do not go out of this page, everything is under the supervision of the administrator. ");
                     return false;
                 });
                 $("html,body").on("contextmenu", function (e) {
                     e.preventDefault();
                 });
-                $(window).on("beforeunload", async function (event) {
-
-                    event.preventDefault();
-                    return 'Are you sure you want to leave this page?';
-
-                });
-
+                window.addEventListener('beforeunload', beforeUnloadHandler);
                 $(window).on("unload", function () {
                     // This is optional and can be used for additional cleanup or actions before the page is unloaded
                     console.log("Page is being unloaded");
@@ -106,12 +92,11 @@ document.addEventListener('DOMContentLoaded', async function () {
                 'question_id': q_id,
                 'answer_id': ans_id,
                 'right_answer_id': allQuestions[q_id],
-
             });
         });
-
         let percentage = (rightQuestions / ques_count) * 100;
-
+        
+       
         $.AryaAjax({
             url: 'website/submit-exam',
             data: {
@@ -148,24 +133,20 @@ document.addEventListener('DOMContentLoaded', async function () {
             // Prevent the default behavior
             event.preventDefault();
         }
-
         if (event.key.startsWith('F')) {
             event.preventDefault();
             // Optionally, you can provide a message or perform another action
             console.log('Function key ' + event.key + ' is disabled.');
         }
     });
-
     $(document).on('contextmenu', function () {
         return false;
     });
-
     // Disable text selection
     $('#exam-content').on('selectstart dragstart', function (event) {
         event.preventDefault();
         return false;
     });
-
     // Disable keyboard shortcuts
     $(document).on('keydown', function (event) {
         // Check if the Ctrl key or Command key (for Mac) is pressed
@@ -176,10 +157,15 @@ document.addEventListener('DOMContentLoaded', async function () {
             console.log('Keyboard shortcuts are disabled.');
         }
     });
-
     function beforeUnloadHandler(event) {
-        event.preventDefault();
-        event.returnValue = ''; // Required for some browsers
+        // You can perform additional checks here if needed
+        // For example, ask the user to confirm before canceling the unload event
+        if (!confirm('Are you sure you want to leave this page?')) {
+            // If the user chooses to stay, return a message to display
+            event.returnValue = 'Stay on this page';
+        } else {
+            // If the user chooses to leave, return null or an empty string
+            event.returnValue = null; // or event.returnValue = '';
+        }
     }
-
 })

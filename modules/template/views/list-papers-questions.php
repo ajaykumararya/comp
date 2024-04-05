@@ -1,4 +1,5 @@
-<div class="row p-0" style="height : 100%">
+
+<div class="row p-0" style="height : 100%;user-select: none;">
     <div class="col-md-8 " style="height: 100%;overflow-y:scroll">
         <?php
         $index = 1;
