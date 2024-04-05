@@ -18,9 +18,11 @@
                     text-align: center;
                     margin-left: 10px;
                 }
+
                 .ans-icon.wrong {
                     background: red;
                 }
+
                 .ans-icon.right {
                     background: green
                 }
@@ -29,11 +31,28 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title mb-0">{student_name}</h3>
-                        <strong class="text-success">{course_name}</strong>
-                        <div class="toolbar">
-                            {roll_no}
+                    <div class="card-header ">
+                        <div class="row">
+
+
+                            <div class="col-md-10">
+                                <h3 class="card-title mb-0">{student_name}
+
+
+
+                                </h3>
+                                <strong class="text-success">{course_name}</strong>
+                                <div class="toolbar">
+                                    {roll_no}
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <?php
+                                if ($this->student_model->isStudent()) {
+                                    echo '<a href="' . base_url('student') . '" class="btn formSend_btn btn-sm btn-primary">Dashboard</a>';
+                                }
+                                ?>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">

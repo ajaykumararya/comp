@@ -16,7 +16,7 @@
             ]);
             if ($check->num_rows()) {
                 $this->ki_theme->checked(true);
-                if ($check->row('percentage'))
+                if ($check->row('percentage') != null)
                     $this->ki_theme->disabled(true);
             }
             echo '<tr>

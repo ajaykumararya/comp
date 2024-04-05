@@ -11,8 +11,8 @@ if ($get->num_rows()) {
         $examDone = $row->percentage != null;
         ?>
         <div class="col-md-6">
-            <a href="javascript:void(0)" 
-                class="card card-image border-hover-primary <?=$examDone ? 'done' : 'ready'?>" data-id="<?=$row->assign_exam_id?>">
+            <a href="javascript:void(0)" class="card card-image border-hover-primary <?= $examDone ? 'done' : 'ready' ?>"
+                data-id="<?= $row->assign_exam_id ?>">
                 <!--begin::Card header-->
                 <div class="card-header border-0 pt-9 ">
                     <!--begin::Card Title-->
@@ -22,7 +22,7 @@ if ($get->num_rows()) {
                             <img src="{base_url}upload/{image}" alt="image" class="p-3">
                         </div>
 
-                        <h1 class="">Exam</h1>
+                        <h1 class=""><?=$row->exam_title?></h1>
                         <!--end::Avatar-->
                     </div>
                     <!--end::Car Title-->
@@ -56,26 +56,13 @@ if ($get->num_rows()) {
                     <!--end::Name-->
                     <!--begin::Description-->
                     <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7">
-                    <?= $row->duration ?>
+                        <?= $row->duration ?>
                         <?= $row->duration_type ?>
                     </p>
                     <!--end::Description-->
                     <!--begin::Info-->
                     <div class="d-flex flex-wrap mb-5">
-                        <!--
-                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3">
-                            <div class="fs-6 text-gray-800 fw-bold">
-                         
-                            </div>
-                            <div class="fw-semibold text-gray-500">Issue Date</div>
-                        </div>
-                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3 me-7">
-                            <div class="fs-6 text-gray-800 fw-bold">
-                       
-                            </div>
-                            <div class="fw-semibold text-gray-500">Enrollment No</div>
-                        </div>
-                   -->
+
                         <!--begin::Budget-->
                         <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3 me-7">
                             <div class="fs-6 text-gray-800 fw-bold">
@@ -84,6 +71,28 @@ if ($get->num_rows()) {
                             <div class="fw-semibold text-gray-500">Roll No</div>
                         </div>
                         <!--end::Budget-->
+
+                        <?php
+                        if ($examDone) {
+                            ?>
+                            <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3">
+                                <div class="fs-6 text-gray-800 fw-bold">
+                                    <?=date('m-d-Y',$row->attempt_time)?>
+                                </div>
+                                <div class="fw-semibold text-gray-500">Attempt Date</div>
+                            </div>
+                            <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3 me-7">
+                                <div class="fs-6 text-gray-800 fw-bold">
+                                    <?=$row->percentage?> %
+                                </div>
+                                <div class="fw-semibold text-gray-500">Percentage</div>
+                            </div>
+                            <?php
+                        }
+
+                        ?>
+
+
                     </div>
                     <!--end::Info-->
                 </div>
