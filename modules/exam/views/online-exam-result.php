@@ -71,6 +71,9 @@
                                 <td>{percentage} %</td>
                             </tr>
                         </table>
+                        <?php
+                        /*
+                        ?>
                         <h3>Answer-Sheet of <b class="text-primary">{exam_title}</b></h3>
                         <?php
                         $index = 1;
@@ -128,7 +131,9 @@
                                 }
                             }
                         }
+                        */
                         ?>
+                        
                     </div>
                 </div>
             </div>
