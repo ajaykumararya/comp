@@ -143,6 +143,7 @@ class Student extends MY_Controller
                 $tab = $this->uri->segment(3, 'overview');
                 $stdId = $this->student_model->studentId();
                 $get = $this->student_model->get_student_via_id($stdId);
+                unset($tabs['setting']);
                 if ($get->num_rows()) {
                     $this->ki_theme->set_breadcrumb($tabs[$tab]);
                     $this->set_data($get->row_array());

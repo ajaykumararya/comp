@@ -4,15 +4,15 @@
             <div class="card-header">
                 <h3 class="card-title">Account Overview</h3>
                 <?php
-                if(isset($isStudent)){
-                    echo '<div class="card-toolbar">';
-                    echo $this->ki_theme
-                                ->with_icon('setting-2')
-                                ->with_pulse('primary')
-                                ->outline_dashed_style('primary')
-                                ->add_action('Setting','student/profile/setting');
-                    echo '</div>';
-                }
+                // if(isset($isStudent)){
+                //     echo '<div class="card-toolbar">';
+                //     echo $this->ki_theme
+                //                 ->with_icon('setting-2')
+                //                 ->with_pulse('primary')
+                //                 ->outline_dashed_style('primary')
+                //                 ->add_action('Setting','student/profile/setting');
+                //     echo '</div>';
+                // }
                 ?>
             </div>
             <div class="card-body p-0">

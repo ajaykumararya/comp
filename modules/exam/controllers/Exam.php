@@ -41,7 +41,9 @@ class Exam extends MY_Controller
     function online_exam_result()
     {
         $id = $this->uri->segment(3, 0);
+        // $this->ki_theme->set_title("Online Result",true);
         $this->load->module('site');
+        $this->site->set_data('page_name','Online Exam Result');
         if ($id) {
             $id  = base64_decode($id);
             $record = $this->exam_model->student_exam([

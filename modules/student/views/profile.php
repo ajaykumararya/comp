@@ -33,7 +33,9 @@
                     <!--begin::Image preview wrapper-->
                     <div class="image-input-wrapper w-125px h-125px"></div>
                     <!--end::Image preview wrapper-->
-                  
+                    <?php
+                    if($this->center_model->isAdminOrCenter()){
+                    ?>
                     <!--begin::Edit button-->
                     <label
                         class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
@@ -47,6 +49,7 @@
                         <!--end::Inputs-->
                     </label>
                     <!--end::Edit button-->
+
               
 
                     <!--begin::Cancel button-->
@@ -66,6 +69,9 @@
                         <i class="ki-outline ki-cross fs-3"></i>
                     </span>
                     <!--end::Remove button-->
+                    <?php
+                    }
+                    ?>
                 </div>
                 <!--end::Image input-->
             </div>

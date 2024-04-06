@@ -12,6 +12,7 @@ class Site extends Site_Controller
         } else
             $this->error_404();
     }
+    
     function email()
     {
         echo $this->do_email('ajaykumararya963983@gmail.com', 'Your Login Code', mt_rand(100000, 999999));
@@ -67,5 +68,6 @@ class Site extends Site_Controller
     {
         $this->set_data($data);
         $this->render($content, 'content');
+        // pre($this->public_data,true);
     }
 }

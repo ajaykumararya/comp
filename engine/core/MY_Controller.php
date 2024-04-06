@@ -23,7 +23,7 @@ class MY_Controller extends MX_Controller
             else
                 throw Exception('Your Theme Config File Is Empty.');
         }
-
+        
         $this->public_data = [
             'base_url' => base_url(),
             'current_url' => $this->my_current_url(),
@@ -265,6 +265,10 @@ class Site_Controller extends MY_Controller
     {
         if (is_array($data))
             $this->set_data($data);
+        if(isset($this->public_data['title'])){
+            $this->ki_theme->set_title($this->public_data['title'],true);
+            $this->set_data('head', $this->parse('head', [], true));
+        }
         // pre($this->public_data,true);
         $this->public_data['output'] = is_string($data) ? $view : ($this->parse($view, $this->public_data, true));
         $this->public_data['html'] = $this->parse('main', $this->public_data, true);
