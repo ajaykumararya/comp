@@ -1495,10 +1495,12 @@ if (target) {
         }, 3000)
     });
 }
-clipboard = new ClipboardJS('.copy-button').on('success', function (e) {
-    let message = $(e.trigger).data("message") ?? 'Copied!';
-    toastr.success(message);
-});
+if ($.isFunction($.fn.ClipboardJS)) {
+    new ClipboardJS('.copy-button').on('success', function (e) {
+        let message = $(e.trigger).data("message") ?? 'Copied!';
+        toastr.success(message);
+    });
+}
 const enquiry_data = $('#enquiry_data');
 if (enquiry_data.length) {
     enquiry_data.DataTable({
