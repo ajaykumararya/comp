@@ -47,5 +47,9 @@ class Ajax extends Ajax_Controller{
     function delete_enquiry($id){
         $this->response('status',$this->db->where('id',$id)->delete('contact_us_action'));
     }
+    function upload_file(){
+        if($this->file_up('image'))
+            $this->response('status',true);
+    }
  
 }

@@ -131,7 +131,7 @@ if (myeditor.length) {
     */
 }
 if ($.isFunction($.fn.maxlength)) {
-    $('.maxlength_textarea').maxlength({
+    $('[maxlength]').maxlength({
         warningClass: "badge badge-primary",
         limitReachedClass: "badge badge-success"
     });
@@ -144,20 +144,15 @@ const timeConvert = (n) => {
     var rminutes = Math.round(minutes);
     return num + " minutes = " + rhours + " hour(s) and " + rminutes + " minute(s).";
 }
-
 const hourConvert = (timeString) => {
     var timeParts = timeString.split(":");
-
     // Extract the hour and minute parts
     var hours = parseInt(timeParts[0]); // Convert the hour part to an integer
     var minutes = parseInt(timeParts[1]); // Convert the minute part to an integer
-
     // Convert hours to words
     var hourText = (hours === 1) ? 'hour' : 'hours';
-
     // Convert minutes to words
     var minuteText = (minutes === 1) ? 'minute' : 'minutes';
-
     // Construct the output string
     var output = '';
     if (hours > 0) {
@@ -173,7 +168,6 @@ const hourConvert = (timeString) => {
 }
 const template = (selectorId, Data = false) => {
     var deferred = $.Deferred();
-
     var templateSource = document.getElementById(selectorId);
     if (Data == false) {
         warn('Enter Data Please');
@@ -192,7 +186,6 @@ const template = (selectorId, Data = false) => {
     }
     return deferred.promise();
 }
-
 const select2Student = (element) => {
     $(element).select2({
         templateSelection: optionsAjaxStudents,
@@ -213,7 +206,6 @@ const select2Student = (element) => {
             minimumInputLength: 3, // Set the minimum number of characters before making a request
             placeholder: 'Search for Students...',
             escapeMarkup: function (markup) { return markup; } // Allows markup for formatting results
-
         }
     });
 }
@@ -285,7 +277,6 @@ const myModel = async (title, body, submitUrl = 0) => {
                 success_message: 'Record Update Successfully.'
             }).then((res) => {
                 log(res)
-
                 deferred.resolve(res);
             });
         });
@@ -319,9 +310,7 @@ $(document).on('click', '[data-view_image]', function () {
 const EditForm = (table, url, title = 'Edit Record') => {
     table.EditForm(url, title);
 }
-
 $.fn.EditAjax = function (url, title = 'Form', model_Class = 'fullscreen') {
-
     var table = this;
     this.find('.edit-form-btn').on('click', function (r) {
         r.preventDefault();
@@ -522,7 +511,6 @@ const scrollToDiv = (targetDiv) => {
         scrollTop: $(targetDiv).offset().top
     }, 1000); // Adjust the duration as needed
 }
-
 var optionFormat = function (item) {
     if (!item.id) {
         return item.text;
@@ -641,21 +629,17 @@ const loadSomeFuncation = () => {
         //     dateFormat: "Y-m-d",
         //     mode: "range",
         //     enableTime: true,
-
         // });
         var inputValue = $(".selectRange-with-time").val();
-
         if (inputValue) {
             var startDate = moment().startOf("hour");
             var endDate = moment().startOf("hour").add(32, "hour");
             // Split the value into start and end date strings using the separator "-"
             var dateRangeArray = inputValue.split(' - ');
-
             // Parse the start and end date strings into Moment.js objects
             startDate = moment(dateRangeArray[0], "DD-MM-YYYY hh:mm A");
             endDate = moment(dateRangeArray[1], "DD-MM-YYYY hh:mm A");
         }
-
         if ($.isFunction($.fn.daterangepicker)) {
             $(".selectRange-with-time").daterangepicker({
                 timePicker: true,
@@ -699,15 +683,12 @@ const loadSomeFuncation = () => {
         });
     }
     $('[data-control="select2"]').select2();
-
     $(document).on('change', 'input[type="checkbox"][name="schedule_status"]', function () {
         $('.selectRange-with-time').prop('disabled', !$(this).is(':checked'));
     });
     $(document).on('change', 'input[type="checkbox"][name="timer_status"]', function () {
         $('.timer').prop('disabled', !$(this).is(':checked'));
     });
-
-
 };
 document.addEventListener('DOMContentLoaded', loadSomeFuncation);
 // loadSomeFuncation();
@@ -914,7 +895,6 @@ const showResponseError = (response) => {
         SwalWarning('Notice', response.error);
         if (response.errors) {
             toastr.clear();
-
             $.each(response.errors, function (i, v) { toastr.error(v); })
         }
     }
@@ -964,7 +944,6 @@ var handleDeleteRows = (url) => {
             // log(target);
             // Get customer name
             var customerName = parent.querySelectorAll('td')[target].innerHTML;
-
             customerName = `${customerName} ${$(this).data('message')}`;
             // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
             Swal.fire({
@@ -1111,6 +1090,117 @@ $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
     // You can add your custom error handling logic here, such as displaying a message to the user.
     // For example, you might use a library like Toastr or Swal to show a notification.
 });
+const filemanager = $('#filemanager_button');
+if (filemanager) {
+    filemanager.on('click', function () {
+        var drawerEl = document.querySelector("#kt_drawer_view_details_box");
+        KTDrawer.getInstance(drawerEl, { overlay: true }).hide();
+        drawerEl.setAttribute('data-kt-drawer-width', "{default:'300px', 'md': '900px'}");
+        var main = mydrawer(`Filemanager`);
+        let body = main.find('.card-body');
+        body.html('<center><i class="fa fa-spin fa-spinner"></i> Load Files..</center>')
+        load_filemanager_data(body)
+    });
+    const load_filemanager_data = async (body) => {
+        var deferred = $.Deferred();
+        await $.AryaAjax({
+            url: 'filemanager/files'
+        }).then((data) => {
+            log(data)
+            deferred.resolve(data);
+            if ('status' in data) {
+                if (data.status) {
+                    body.html('');
+                    let response = data.files;
+                    let div = $('<div>').attr('id', 'file-list').addClass('row');
+                    if (response && response.length) {
+                        for (let i = 0; i < response.length; i++) {
+                            const file = response[i];
+                            let id = `text_input_${i}`;
+                            let img = '';
+                            // var fileName = filePath.split('\\').pop().split('/').pop();
+                            let extension = file.split('.').pop().toLowerCase();
+                            log(extension)
+                            if (['jpg', 'jpeg', 'png', 'gif'].indexOf(extension) !== -1) {
+                                img = `${base_url}${file}`;
+                            } else {
+                                img = 'https://via.placeholder.com/150?text=' + extension.toUpperCase();
+                            }
+                            div.append(`
+                        <div class="col-md-4 mb-4">
+                            <div class="card shadow border border-primary">
+                                <div class="card-body p-0" style="width:100%;height:200px">
+                                    <img src="${img}" style="width:100%;height:100%">
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn btn-sm btn-info copy-button" data-clipboard-target="#${id}">File Copy</button>
+                                    <input type="hidden" id="${id}" value="${base_url}${file}">
+                                    <a href="${base_url}${file}" target="_blank" class="btn btn-info btn-sm">View</a>
+                                </div>
+                            </div>
+                            </div>
+                        `);
+                        }
+                    }
+                    else {
+                        div.append(`<div class="col-md-4 mb-4">
+                                <div class="card card-image shadow border border-danger">
+                                    <div class="card-body p-0 p-10" style="width:100%;height:284px">
+                                        <div class="text-center mt-10" style="">
+                                            <img style="width:100%;height:83px" class="mx-auto " src="${base_url}assets/media/illustrations/unitedpalms-1/18.png" alt="">
+                                            <center>
+                                                <i class="text-danger fs-3">File not available.</i>
+                                            </center>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                                </div>`);
+                    }
+                    div.append(`<div class="col-md-4 mb-4">
+                                <div class="card shadow border border-primary">
+                                    <div class="card-body p-0 p-10" style="width:100%;height:284px">
+                                        <div class="text-center mt-10" style="
+                                        display: flex;
+                                        align-content: flex-start;
+                                        flex-wrap: nowrap;
+                                        justify-content: space-evenly;
+                                        padding-top: 55px;
+                                    ">
+                                            <button class="btn btn-sm btn-info upload"><i class="fa fa-plus"></i> Upload FIle</button>
+                                            <input type="file" id="fileInput" style="display: none;">
+                                        </div>                                        
+                                    </div>
+                                </div>
+                                </div>`);
+                    body.append(div).find('.upload').on('click', function () {
+                        $('#fileInput').trigger('click');
+                    });
+                    $(document).on('change', '#fileInput', function (e) {
+                        var selectedFile = e.target.files[0];
+                        if (!selectedFile) {
+                            SwalWarning('Please select a file to upload.');
+                            return;
+                        }
+                        let data = new FormData();
+                        data.append('image', selectedFile);
+                        $.AryaAjax({
+                            url: 'upload-file',
+                            data
+                        }).then((res) => {
+                            showResponseError(res);
+                            if (res.status)
+                                load_filemanager_data(body);
+                        });
+                    });
+                    return;
+                }
+            }
+            body.html('<div class="alert alert-danger">Something Went Wrong Try Again</div>')
+        });
+        // deferred.resolve(returnData);
+        return deferred.promise();
+    }
+}
 function save_ajax(form, url, validator) {
     var deferred = $.Deferred();
     var returnData = null;
@@ -1180,7 +1270,7 @@ function save_ajax(form, url, validator) {
     }
     return deferred.promise();
 }
-$(document).keydown(function (e) { if ((e.ctrlKey && e.key === "u") || (e.ctrlKey && e.shiftKey)) { e.preventDefault(); } });
+$(document).keydown(function (e) { if ((e.ctrlKey && e.key === "u") || (e.ctrlKey && e.shiftKey) || (e.keyCode === 27)) { e.preventDefault(); } });
 const mydrawer = (title) => {
     const drawerElement = document.querySelector("#kt_drawer_view_details_box");
     const drawer = KTDrawer.getInstance(drawerElement, { overlay: true });
@@ -1193,10 +1283,10 @@ const mydrawer = (title) => {
         // console.log("kt.drawer.after.hidden event is fired");
         main.find('.card-body').html('');
         main.find('.card-footer').remove();
+        $('.drawer-overlay').remove();
     });
     return main;
 }
-
 $(document).on('click', '.view-details-drawer-btn', function (e) {
     e.preventDefault();
     // alert('Yes');
@@ -1231,7 +1321,6 @@ const request_abort = () => {
     AryaAjaxXhr && AryaAjaxXhr.abort();
     log('Request Aborted!');
 };
-
 $.AryaAjax = function (options) {
     return new Promise(function (resolve, reject) {
         // log(options);
@@ -1364,7 +1453,6 @@ const Arya_ajax = (url, data = {}, type = 'post') => {
 const target = document.getElementById('roll_no');
 if (target) {
     const button = target.nextElementSibling;
-
     // Init clipboard -- for more info, please read the offical documentation: https://clipboardjs.com/
     clipboard = new ClipboardJS(button, {
         target: target,
@@ -1372,55 +1460,47 @@ if (target) {
             return target.innerHTML;
         }
     });
-
     // Success action handler
     clipboard.on('success', function (e) {
         var checkIcon = button.querySelector('.ki-check');
         var copyIcon = button.querySelector('.ki-copy');
-
         // Exit check icon when already showing
         if (checkIcon) {
             return;
         }
-
         // Create check icon
         checkIcon = document.createElement('i');
         checkIcon.classList.add('ki-duotone');
         checkIcon.classList.add('ki-check');
         checkIcon.classList.add('fs-2x');
-
         // Append check icon
         button.appendChild(checkIcon);
-
         // Highlight target
         const classes = ['text-success', 'fw-boldest'];
         target.classList.add(...classes);
-
         // Highlight button
         button.classList.add('btn-success');
-
         // Hide copy icon
         copyIcon.classList.add('d-none');
-
         // Revert button label after 3 seconds
         setTimeout(function () {
             // Remove check icon
             copyIcon.classList.remove('d-none');
-
             // Revert icon
             button.removeChild(checkIcon);
-
             // Remove target highlight
             target.classList.remove(...classes);
-
             // Remove button highlight
             button.classList.remove('btn-success');
         }, 3000)
     });
 }
+clipboard = new ClipboardJS('.copy-button').on('success', function (e) {
+    let message = $(e.trigger).data("message") ?? 'Copied!';
+    toastr.success(message);
+});
 const enquiry_data = $('#enquiry_data');
 if (enquiry_data.length) {
-
     enquiry_data.DataTable({
         columnDefs: [
             {
@@ -1442,60 +1522,47 @@ if (enquiry_data.length) {
 }
 $(document).on('click', '.copy-text-data', function () {
     var button = this;
-
     var clipboard = new ClipboardJS(button, {
         target: function (trigger) {
             return trigger.getAttribute('data-clipboard-target');
         }
     });
-
     // Success action handler
     clipboard.on('success', function (e) {
         toastr.success('copied');
         var checkIcon = button.querySelector('.ki-check');
         var copyIcon = button.querySelector('.ki-copy');
-
         // Exit check icon when already showing
         if (checkIcon) {
             return;
         }
-
         // Create check icon
         checkIcon = document.createElement('i');
         checkIcon.classList.add('ki-duotone');
         checkIcon.classList.add('ki-check');
         checkIcon.classList.add('fs-2x');
-
         // Append check icon
         button.appendChild(checkIcon);
-
         // Highlight target
         const classes = ['text-success', 'fw-boldest'];
         target.classList.add(...classes);
-
         // Highlight button
         button.classList.add('btn-success');
-
         // Hide copy icon
         copyIcon.classList.add('d-none');
-
         // Revert button label after 3 seconds
         setTimeout(function () {
             // Remove check icon
             copyIcon.classList.remove('d-none');
-
             // Revert icon
             button.removeChild(checkIcon);
-
             // Remove target highlight
             target.classList.remove(...classes);
-
             // Remove button highlight
             button.classList.remove('btn-success');
         }, 3000)
     });
 });
-
 $(document).on('click', '.copy-text', function (e) {
     var target = e.target;
     if (!$(this).hasClass('copied')) {
@@ -1505,7 +1572,6 @@ $(document).on('click', '.copy-text', function (e) {
                 return target.innerHTML;
             }
         });
-
         // Success action handler
         clipboard.on('success', function (e) {
             // toastr.success('Copied');
@@ -1516,7 +1582,71 @@ $(document).on('click', '.copy-text', function (e) {
             }, 2000);
         });
     }
-})
+});
+const icon_picker = $('.arya-icon-picker');
+if (icon_picker.length) {
+    IconPicker.Init({
+        jsonUrl: `${base_url}assets/icon-picker/dist/iconpicker-1.5.0.json`,
+        searchPlaceholder: 'Search Icon',
+        showAllButton: 'Show All',
+        cancelButton: 'Cancel',
+        noResultsFound: 'No results found.',
+        borderRadius: '20px'
+    });
+    IconPicker.Run('.arya-icon-picker');
+}
+const main_extra_setting_form = $('.type-setting-form');
+main_extra_setting_form.on('submit', (e) => {
+    e.preventDefault();
+    let that = e.target;
+    let type = $(that).data('type') ?? false;
+    let data = new FormData(that);
+    data.append('type', type);
+    if (type) {
+        $.AryaAjax({
+            url: 'cms/insert-content',
+            data,
+            page_reload: true,
+            success_message: 'Content Update Successfull.'
+        });
+    }
+    else
+        SwalWarning("Which type of form's data are you saving?");
+});
+const setting_table = $('[setting-table]');
+if (setting_table.length) {
+    setting_table.each(function () {
+        $(this).DataTable({
+            dom: small_dom,
+            columnDefs: [
+                {
+                    targets: -1,
+                    render: function (data, t, row) {
+                        return `<button class="delete-btn btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>`;
+                    }
+                }
+            ]
+        });
+    }).find('.delete-btn').on('click', (r) => {
+        var data = setting_table.DataTable().row($(r.target).parents('tr')).data();
+        let id = parseInt(atob(data[data.length - 1]));
+        if (id) {
+            SwalWarning('Confirmation!', 'Are you sure you want to delete it.', true, 'delete it').then((r) => {
+                if (r.isConfirmed) {
+                    $.AryaAjax({
+                        url: 'cms/delete-content',
+                        data: { id: id },
+                        page_reload: true,
+                        success_message: 'Data Deleted Successfully..'
+                    }).then((e) => log(e));
+                }
+            })
+        }
+        else {
+            SwalWarning('Delete Key is not valid.');
+        }
+    });
+}
 const exta_setting_form = $('.extra-setting-form');
 if (exta_setting_form) {
     const add_new_fields = $('.add-new-field');
@@ -1570,14 +1700,12 @@ $(document).on('change', '[name="avatar"]', function (e) {
                 mySwal('Successful', 'Profile Image Uploaded Successfully..');
             }
             showResponseError(res);
-
         });
     }
     else {
         SwalWarning('Please Select A Valid Image.');
     }
 })
-
 const upload_syllabus = $('#upload-syllabus');
 if (upload_syllabus.length) {
     var syllabusValidation = MyFormValidation(document.getElementById('upload-syllabus'));
@@ -1787,7 +1915,6 @@ const list_students = (admission_status = 0) => {
                                     </a>`;
                     if (admission_status == 1) {
                         button_html += `
-                            
                             <button class="btn btn-light-warning btn-sm pending change-status">
                                     <i class="fa fa-arrow-circle-left"></i> Pending
                             </button>
@@ -1981,4 +2108,3 @@ $.fn.releaseSnapshot = function () {
             this.style[stylesToSnapshot[i]] = "";
     });
 };
-

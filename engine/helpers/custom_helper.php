@@ -142,10 +142,47 @@ function answer_id_append($key, $ans_id, $data, $i, $newdata)
     }
     return $newdata;
 }
-function ES($type , $defaultTExt = null){
+function ES($type, $defaultTExt = null)
+{
     $ci = &get_instance();
-    if($defaultTExt != null)
-        return $ci->SiteModel->get_setting($type,$defaultTExt);
+    if ($defaultTExt != null)
+        return $ci->SiteModel->get_setting($type, $defaultTExt);
     return $ci->SiteModel->get_setting($type);
+}
+
+function cms_content_form($type)
+{
+    return form_open_multipart('', [
+        'class' => 'type-setting-form',
+        'data-type' => $type
+    ]);
+}
+function content($type)
+{
+    $ci = &get_instance();
+    return $ci->SiteModel->get_contents($type);
+}
+function symbol($image, $class = '50px', $attr = [])
+{
+    $attr['src'] = UPLOAD . $image;
+    return '<div class="symbol symbol-' . $class . '">
+                ' . img($attr) . '
+            </div>';
+}
+function notice_board()
+{
+    $ci = &get_instance();
+
+    return $ci->parser->parse('pages/notice-board-page', [], true);
+}
+function inconPickerInput($inputName = '')
+{
+    return '
+                
+                <div class="symbol symbol-50px border border-primary">
+                    <div class="symbol-label fs-2 fw-semibold text-success"><i style="font-size:30px" id="IconPreview"></i></div>
+                </div>
+                <button type="button" class="arya-icon-picker btn btn-primary btn-rounded btn-sm" id="GetIconPicker" data-iconpicker-input="input#IconInput" data-iconpicker-preview="i#IconPreview">Select Icon</button>
+            <input id="IconInput" name="'.$inputName.'" type="hidden">';
 }
 ?>

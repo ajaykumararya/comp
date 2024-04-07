@@ -201,4 +201,8 @@ class SiteModel extends MY_Model
             ->order_by('id', 'DESC');
         return $this->db->get('contact_us_action');
     }
+
+    function get_contents($type){
+        return $this->db->where('type',$type)->get('content');
+    }
 }

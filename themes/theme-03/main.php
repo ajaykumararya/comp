@@ -71,13 +71,13 @@
                                 <i class="fa fa-phone mr-xl-2"></i>
                                 <span class="d-none d-xl-inline-block"> {number}</span>
                             </a>
-                            <a href="mailto:{email}" class="mr-xl-3"><i class="fa fa-envelope-o mr-xl-2"></i> <span
+                            <a href="mailto:{email}" class="mr-xl-3"><i class="fa fa-envelope mr-xl-2"></i> <span
                                     class="d-none d-xl-inline-block">{email}</span></a>
-                            <a href="{facebook}" class="" target="_blank"><i class="fa fa-facebook"></i></a>
-                            <a href="{twitter}" class="" target="_blank"><i class="fa fa-twitter"></i></a>
-                            <a href="{youtube}" class=""><i class="fa fa-youtube"></i></a>
-                            <a href="{instagram}" class=""><i class="fa fa-instagram"></i></a>
-                            <a href="{linkedin}" class=""><i class="fa fa-linkedin"></i></a>
+                            <a href="{facebook}" class="" target="_blank"><i class="fa fab fa-facebook"></i></a>
+                            <a href="{twitter}" class="" target="_blank"><i class="fa fab fa-twitter"></i></a>
+                            <a href="{youtube}" class=""><i class="fa fab fa-youtube"></i></a>
+                            <a href="{instagram}" class=""><i class="fa fab fa-instagram"></i></a>
+                            <a href="{linkedin}" class=""><i class="fa fab fa-linkedin"></i></a>
                         </div>
                     </div>
                 </div>

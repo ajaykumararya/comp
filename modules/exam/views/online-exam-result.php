@@ -72,68 +72,68 @@
                             </tr>
                         </table>
                         <?php
-                        /*
-                        ?>
-                        <h3>Answer-Sheet of <b class="text-primary">{exam_title}</b></h3>
-                        <?php
-                        $index = 1;
-                        if ($attempt_questions) {
-                            foreach ($exam_questions as $myRow) {
-                                $ques_id = $myRow['question_id'];
-                                $question = $this->exam_model->fetch_question($ques_id);
-                                $list = $this->exam_model->list_question_answers($ques_id);
-                                if ($list->num_rows() && $question->num_rows()) {
-                                    $ques = $question->row();
-                                    $list = $list->result();
-                                    shuffle($list);
-                                    ?>
-                                    <table class="w-100 table table-striped table-bordered border-warning " data-question="">
-                                        <tbody>
-                                            <tr>
-                                                <th colspan="2" class="pe-4 fs-3">
-                                                    <div class="d-flex flex-stack">
-                                                        <div class=""><i class="fs-4 text-warning">QUE
-                                                                <?= $index++ ?>.
-                                                            </i>
-                                                            <b class="text-dark">
-                                                                <?= $ques->question ?>
-                                                            </b>
+                        if (!$this->student_model->isStudent()) {
+                            ?>
+                            <h3>Answer-Sheet of <b class="text-primary">{exam_title}</b></h3>
+                            <?php
+                            $index = 1;
+                            if ($attempt_questions) {
+                                foreach ($exam_questions as $myRow) {
+                                    $ques_id = $myRow['question_id'];
+                                    $question = $this->exam_model->fetch_question($ques_id);
+                                    $list = $this->exam_model->list_question_answers($ques_id);
+                                    if ($list->num_rows() && $question->num_rows()) {
+                                        $ques = $question->row();
+                                        $list = $list->result();
+                                        shuffle($list);
+                                        ?>
+                                        <table class="w-100 table table-striped table-bordered border-warning " data-question="">
+                                            <tbody>
+                                                <tr>
+                                                    <th colspan="2" class="pe-4 fs-3">
+                                                        <div class="d-flex flex-stack">
+                                                            <div class=""><i class="fs-4 text-warning">QUE
+                                                                    <?= $index++ ?>.
+                                                                </i>
+                                                                <b class="text-dark">
+                                                                    <?= $ques->question ?>
+                                                                </b>
+                                                            </div>
+                                                            <div class="">
+                                                            </div>
                                                         </div>
-                                                        <div class="">
-                                                        </div>
-                                                    </div>
-                                                </th>
-                                            </tr>
-                                            <?php
-                                            if (count($list)) {
-                                                $i = 0;
-                                                echo '<tr>';
-                                                foreach ($list as $ans) {                                                    // pre($ans);
-                                                    $icon = '';
-                                                    if ($myRow['answer_id'] == $ans->answer_id) {
-                                                        $icon = '<i class="fa fa-times ans-icon wrong"></i>';
+                                                    </th>
+                                                </tr>
+                                                <?php
+                                                if (count($list)) {
+                                                    $i = 0;
+                                                    echo '<tr>';
+                                                    foreach ($list as $ans) {                                                    // pre($ans);
+                                                        $icon = '';
+                                                        if ($myRow['answer_id'] == $ans->answer_id) {
+                                                            $icon = '<i class="fa fa-times ans-icon wrong"></i>';
+                                                        }
+                                                        if ($ans->is_right) {
+                                                            $icon = '<i class="fa fa-check ans-icon right"></i>';
+                                                        }
+                                                        echo '<td>' . ($i++ + 1) . '. ' . $ans->answer . ' ' . $icon . ' </td>';
+                                                        if ($i % 2 == 0)
+                                                            echo '</tr><tr>';
                                                     }
-                                                    if ($ans->is_right) {
-                                                        $icon = '<i class="fa fa-check ans-icon right"></i>';
-                                                    }
-                                                    echo '<td>' . ($i++ + 1) . '. ' . $ans->answer . ' ' . $icon . ' </td>';
-                                                    if ($i % 2 == 0)
-                                                        echo '</tr><tr>';
+                                                    echo '</tr>';
+                                                } else {
+                                                    echo '<tr><td colspan="2">' . alert('No Answers found.', 'danger') . '</td></tr>';
                                                 }
-                                                echo '</tr>';
-                                            } else {
-                                                echo '<tr><td colspan="2">' . alert('No Answers found.', 'danger') . '</td></tr>';
-                                            }
-                                            ?>
-                                        </tbody>
-                                    </table>
-                                    <?php
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                        <?php
+                                    }
                                 }
                             }
                         }
-                        */
                         ?>
-                        
+
                     </div>
                 </div>
             </div>

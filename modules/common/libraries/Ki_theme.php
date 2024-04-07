@@ -526,7 +526,7 @@ class Ki_theme
         $this->reset_props();
         return $html;
     }
-    
+
     function segment($arg1, $arg2 = 0)
     {
         return $this->CI->uri->segment($arg1, $arg2);
@@ -1201,14 +1201,22 @@ class Ki_theme
         ]);
     }
 
-    function extra_setting_button_input($type){
+    function extra_setting_button_input($type, $title = 'Button', $inputTextName = '', $inputLinkName = '')
+    {
+        $titleData = $linkData = '';
+        if (!is_bool($type)) {
+            $inputTextName = "{$type}_text";
+            $inputLinkName = "{$type}_link";
+            $titleData = $this->CI->SiteModel->get_setting($inputTextName);
+            $linkData = $this->CI->SiteModel->get_setting($inputLinkName);
+        }
         return '<div class="form-group">
-                    <label for="title" class="form-label mt-4">Button</label>
-                    <input type="text" placeholder="Enter Title" name="'.$type.'_text"
-                        value="'.$this->CI->SiteModel->get_setting($type.'_text').'" class="form-control"
+                    <label for="title" class="form-label mt-4">' . $title . '</label>
+                    <input type="text" placeholder="Enter Title" name="' . $inputTextName.'"
+                        value="' . $titleData . '" class="form-control"
                         style="border-radius: 12px 12px 0 0;border-bottom: 0;">
-                    <input type="text" placeholder="Enter Link" name="'.$type.'_link"
-                        value="'.$this->CI->SiteModel->get_setting($type.'_link').'"
+                    <input type="text" placeholder="Enter Link" name="' . $inputLinkName.'"
+                        value="' . $linkData . '"
                         class="form-control" style="border-radius: 0 0 12px 12px;">
                 </div>';
     }

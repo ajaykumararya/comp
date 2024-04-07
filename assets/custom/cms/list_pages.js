@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function (e) {
+document.addEventListener('DOMContentLoaded', async function (e) {
     const table = $('#list-pages');
     table.DataTable({
         columnDefs: [
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                     return `<div class="form-check form-check-custom form-check-solid">
                                 <input class="form-check-input clicktosetPrimary" type="radio" value="${myObj.id}" ${data ? 'checked' : ''} name="a" id="flexRadioDefault_${row[0]}"/>
                                 <label class="form-check-label text-${data ? 'info' : 'primary'}" for="flexRadioDefault_${row[0]}">
-                                    ${data ? '' : 'Set Is'}Primary
+                                    ${data ? '' : 'Set Is'} Primary
                                 </label>
                             </div>`;
                 }
@@ -47,6 +47,8 @@ document.addEventListener('DOMContentLoaded', function (e) {
             }
         ]
     });
+
+    $('.table-card').removeClass('fade');
     $(document).on('click','.delete-page', function() {
         var id  = $(this).data('id'),
             isPrimary = $(this).data('isprimary');

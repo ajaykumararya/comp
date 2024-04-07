@@ -10,7 +10,7 @@
             <div class="card-header">
                 <h1 class="card-title">List Pages</h1>
             </div>
-            <div class="card-body p-3">
+            <div class="card-body p-3 table-card fade">
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover" id="list-pages">
                         <thead>

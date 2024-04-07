@@ -37,7 +37,9 @@ class Site extends Site_Controller
                         break;
                     case 'page':
                         if (file_exists(THEME_PATH . 'pages/' . $page->event_id . EXT))
-                            $html .= $this->parse('pages/' . $page->event_id, [], true);
+                            $html .= $this->parse('pages/' . $page->event_id,[
+                                'type' => $page->event_id
+                            ], true);
                         else {
                             if ($page->event_id == 'notice-board' && !$return['isPrimary']) { // this for theme3
                                 $this->set_data('notice_board', true);

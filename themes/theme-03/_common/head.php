@@ -1,5 +1,5 @@
 <link rel="icon" type="image/x-icon" href="{theme_url}assets/images/logo2.png">
-	<link rel="stylesheet" type="text/css" href="{theme_url}assets/css/font-awesome.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="{theme_url}assets/css/font-awesome.min.css"> -->
 <link href="https://fonts.googleapis.com/css?family=Exo+2:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i"
     rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">

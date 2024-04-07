@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <!--begin::Head-->
+
 <head>
     <title>
         <?= $this->ki_theme->get_title() ?> - Admin Panel
@@ -37,32 +38,40 @@
     <link href="{base_url}assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.css" />
     <!--end::Global Stylesheets Bundle-->
+    <link rel="stylesheet" href="{base_url}assets/icon-picker/dist/iconpicker-1.5.0.css">
+    <script src="{base_url}assets/icon-picker/dist/iconpicker-1.5.0.js"></script>
     <link rel="stylesheet" href="{base_url}assets/custom/custom.css">
     <style>
         tr .eye-btn {
             display: none;
         }
-        .click-to-copy{
+
+        .click-to-copy {
             user-select: none;
             cursor: pointer;
         }
+
         tr:hover .eye-btn {
             display: inline-block;
         }
+
         .card-image {
             background-position: 100% 50%;
             background-repeat: no-repeat;
             background-image:url('{base_url}assets/media/stock/900x600/42.png')
         }
+
         .table-container {
             overflow: scroll;
         }
+
         .table-container table th,
         .table-container table td {
             white-space: nowrap;
             padding: 10px 20px;
             font-family: Arial;
         }
+
         .table-container table tr th:first-child,
         .table-container table td:first-child {
             position: sticky;
@@ -70,29 +79,48 @@
             left: 0;
             z-index: 10;
         }
+
         .table-container table tr th:first-child {
             z-index: 11;
         }
+
         .table-container table tr th {
             position: sticky;
             top: 0;
             z-index: 9;
         }
+
         .hide {
             display: none;
         }
+
         .custom_setting_input {
             font-size: 21px;
             background: transparent;
             border: 0;
             outline: 0;
         }
+
         .br-none {
             border-radius: 0px !important
         }
+
         [data-bs-theme=dark] #datatables_buttons_info {
             background-color: var(--bs-scrollbar-color)
         }
+
+        #IconPreview {
+            color: black !important;
+        }
+
+        [data-bs-theme=dark] #IconPreview {
+            color: white !important;
+        }
+        #file-list {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
     </style>
     <script>
         // Frame-busting to prevent site from being loaded within a frame without permission (click-jacking)
@@ -103,6 +131,7 @@
 </head>
 <!--end::Head-->
 <!--begin::Body-->
+
 <body id="kt_app_body" class="page-loading" data-kt-app-layout="dark-sidebar" data-kt-app-header-fixed="true"
     data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true"
     data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true"
@@ -189,6 +218,21 @@
                         <!--end::Menu wrapper-->
                         <!--begin::Navbar-->
                         <div class="app-navbar flex-shrink-0">
+                            <!--begin::Chat-->
+                            <div class="app-navbar-item ms-1 ms-md-4">
+                                <!--begin::Menu wrapper-->
+                                <button data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-trigger="hover"
+                                    data-bs-dismiss-="click" data-bs-original-title="Filemanager"
+                                    class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px position-relative"
+                                    id="filemanager_button">
+                                    <i class="ki-outline ki-folder fs-2"> </i>
+                                    <span
+                                        class="bullet bullet-dot bg-danger h-6px w-6px position-absolute translate-middle top-0 start-50 animation-blink">
+                                    </span>
+                                </button>
+                                <!--end::Menu wrapper-->
+                            </div>
+                            <!--end::Chat-->
                             <!--begin::Chat-->
                             <div class="app-navbar-item ms-1 ms-md-4">
                                 <!--begin::Menu wrapper-->
@@ -660,4 +704,5 @@
 <!--end::Custom Javascript-->
 <!--end::Javascript-->
 {js_file}
+
 </html>

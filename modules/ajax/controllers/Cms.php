@@ -169,10 +169,7 @@ class Cms extends Ajax_Controller
         $status = $this->SiteModel->update_schema($this->post());
         $this->response('status', true);
     }
-    function save_extra_setting()
-    {
-        $this->response($_POST);
-        $this->response($_FILES);
+    private function build_post_data(){
         $data = [];
         foreach ($_POST as $index => $value) {
             $data[$index] = is_array($value) ? json_encode($value) : $value;
@@ -184,12 +181,31 @@ class Cms extends Ajax_Controller
                     $data[$index] = $file;
             }
         }
+        return $data;
+    }
+    function save_extra_setting()
+    {
+        $this->response($_POST);
+        $this->response($_FILES);
+        $data = $this->build_post_data();
         if (sizeof($data)) {
             foreach ($data as $index => $value) {
                 $this->SiteModel->update_setting($index, $value);
                 $this->response('status', true);
             }
         }
+    }
+    function insert_content(){
+        $type = $this->post('type');
+        unset($_POST['type']);
+        $data = $this->build_post_data();
+        $data['type'] = $type;
+        $this->db->insert('content',$data);
+        $this->response('status',true);
+    }
+    function delete_content(){
+        $this->db->where($this->post())->delete('content');
+        $this->response('status',true);
     }
     function add_course_for_content()
     {

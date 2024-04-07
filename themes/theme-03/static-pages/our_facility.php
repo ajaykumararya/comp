@@ -3,10 +3,26 @@
         {form}
         <div class="{card_class}">
             <div class="card-header">
-                <h3 class="card-title">Add Notice</h3>
+                <h3 class="card-title">Add Facility</h3>
             </div>
             <div class="card-body">
-                
+                <?php
+                echo inconPickerInput('field1');
+                ?>
+                <div class="form-group mt-4">
+                    <label for="" class="form-label">Title</label>
+                    <input type="text" name="field2" id="field2" value="" class="form-control"
+                        placeholder="Enter Title">
+                </div>
+
+                <div class="form-group mt-4">
+                    <label for="" class="form-label">Description</label>
+                    <textarea name="field3" maxlength="250" value="" class="form-control"
+                        placeholder="Enter Description"></textarea>
+                </div>
+                <?php
+                echo $this->ki_theme->extra_setting_button_input(false, 'Button', 'field4', 'field5');
+                ?>
             </div>
             <div class="card-footer">
                 {save_button}
@@ -24,7 +40,7 @@
                     <div class="form-group">
                         <label for="title" class="form-label">Section Title</label>
                         <input type="text" name="<?= $type ?>_title" class="form-control"
-                            value="<?= ES("{$type}_title", 'Notice <span>Board</span></h1>') ?>" placeholder="Enter Title">
+                            value="<?= ES("{$type}_title", 'Our Facilities') ?>" placeholder="Enter Title">
                     </div>
                 </div>
                 <div class="card-footer">
@@ -39,7 +55,7 @@
     <div class="col-md-12 mt-5">
         <div class="{card_class}">
             <div class="card-header">
-                <h3 class="card-title">List Notice Board Data</h3>
+                <h3 class="card-title">List Notice Facilities Data</h3>
             </div>
             <div class="card-body">
                 <div class="table-responsive">

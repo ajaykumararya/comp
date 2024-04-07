@@ -32,8 +32,14 @@ $menu = array(
         array(
             'label' => 'Featured Events',
             'type' => 'featured_evenrs',
-            'url' => 'cms/static-page/featured_evenrs',
+            'url' => 'cms/static-page/featured_events',
             'icon' => array('file', 4)
         ),
+        array(
+            'label' => 'Our facility',
+            'type' => 'our_facility',
+            'url' => 'cms/static-page/our_facility',
+            'icon' => array('file',4)
+        )
     )
 );
