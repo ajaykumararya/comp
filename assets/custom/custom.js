@@ -1127,16 +1127,16 @@ if (filemanager) {
                                 img = 'https://via.placeholder.com/150?text=' + extension.toUpperCase();
                             }
                             div.append(`
-                        <div class="col-md-4 mb-4">
+                        <div class="col-md-3 mb-4">
                             <div class="card shadow border border-primary">
-                                <div class="card-body p-0" style="width:100%;height:200px">
-                                    <img src="${img}" style="width:100%;height:100%">
+                                <div class="card-body p-0" style="width:100%;height:150px">
+                                    <img src="${img}" style="width:100%;height:100%;border-radius: 8px 8px 0 0;">
                                 </div>
-                                <div class="card-footer p-2">
-                                    <button class="btn btn-sm btn-info copy-button ms-13" data-clipboard-target="#${id}"><i class="fa fa-copy"></i></button>
+                                <div class="card-footer btn-group p-0">
+                                    <button class="btn btn-sm btn-primary copy-button" style="border-radius:0 0 0 7px" data-clipboard-target="#${id}"><i class="fa fa-copy"></i></button>
                                     <input type="hidden" id="${id}" value="${base_url}${file}">
                                     <a href="${base_url}${file}" target="_blank" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a>
-                                    <button class="btn btn-sm btn-danger delete-file-button" data-file="${file}"><i class="fa fa-trash"></i></button>
+                                    <button style="border-radius:0  0 7px 0" class="btn btn-sm btn-danger delete-file-button" data-file="${file}"><i class="fa fa-trash"></i></button>
                                 </div>
                             </div>
                             </div>
@@ -1144,9 +1144,9 @@ if (filemanager) {
                         }
                     }
                     else {
-                        div.append(`<div class="col-md-4 mb-4">
+                        div.append(`<div class="col-md-3 mb-4">
                                 <div class="card card-image shadow border border-danger">
-                                    <div class="card-body p-0 p-10" style="width:100%;height:284px">
+                                    <div class="card-body p-0 p-10" style="width:100%;height:198px">
                                         <div class="text-center mt-10" style="">
                                             <img style="width:100%;height:83px" class="mx-auto " src="${base_url}assets/media/illustrations/unitedpalms-1/18.png" alt="">
                                             <center>
@@ -1157,9 +1157,9 @@ if (filemanager) {
                                 </div>
                                 </div>`);
                     }
-                    div.append(`<div class="col-md-4 mb-4">
+                    div.append(`<div class="col-md-3 mb-4">
                                 <div class="card shadow border border-primary">
-                                    <div class="card-body p-0 p-10" style="width:100%;height:284px">
+                                    <div class="card-body p-0 p-10" style="width:100%;height:198px">
                                         <div class="text-center mt-10" style="
                                         display: flex;
                                         align-content: flex-start;

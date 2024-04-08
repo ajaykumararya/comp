@@ -21,10 +21,12 @@
                 <!--begin::Section-->
                 <div class="d-flex flex-column my-7">
                     <!--begin::Number-->
-                    <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">
-                        <?= $this->student_model->get_switch('all',[
+                    <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2"
+                    data-kt-countup="true" data-kt-countup-value="<?= $this->student_model->get_switch('all',[
                             'without_admission_status' => true
-                        ])->num_rows() ?>
+                        ])->num_rows() ?>"
+                    >
+                        0
                     </span>
                     <!--end::Number-->
 
@@ -70,8 +72,10 @@
                     <!--begin::Section-->
                     <div class="d-flex flex-column my-7">
                         <!--begin::Number-->
-                        <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">
-                            <?= $this->center_model->get_center()->num_rows() ?>
+                        <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2"
+                        data-kt-countup="true" data-kt-countup-value="<?= $this->center_model->get_center()->num_rows() ?>"
+                        >
+                            0
                         </span>
                         <!--end::Number-->
 
@@ -118,8 +122,10 @@
         <!--begin::Section-->
         <div class="d-flex flex-column my-7">
             <!--begin::Number-->
-            <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">
-                <?= $this->SiteModel->ttl_courses() ?>
+            <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2"
+            data-kt-countup="true" data-kt-countup-value="<?= $this->SiteModel->ttl_courses() ?>"
+            >
+                0
             </span>
             <!--end::Number-->
 

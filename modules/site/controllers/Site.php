@@ -12,7 +12,7 @@ class Site extends Site_Controller
         } else
             $this->error_404();
     }
-    
+
     function email()
     {
         echo $this->do_email('ajaykumararya963983@gmail.com', 'Your Login Code', mt_rand(100000, 999999));
@@ -37,7 +37,7 @@ class Site extends Site_Controller
                         break;
                     case 'page':
                         if (file_exists(THEME_PATH . 'pages/' . $page->event_id . EXT))
-                            $html .= $this->parse('pages/' . $page->event_id,[
+                            $html .= $this->parse('pages/' . $page->event_id, [
                                 'type' => $page->event_id
                             ], true);
                         else {
@@ -64,7 +64,10 @@ class Site extends Site_Controller
     }
     function error_404()
     {
-        $this->render('error_404');
+        $error_file = 'error_404';
+        $file = (file_exists(THEME_PATH . $error_file . EXT)) ? '' : 'default_'; //error_404';
+
+        $this->render("{$file}{$error_file}");
     }
     function page_view($content, $data = [])
     {
