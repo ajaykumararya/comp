@@ -6,7 +6,7 @@
                 <div class="text-center animation animated fadeInUp" data-aos="fade-up" data-animation="fadeInUp"
                     data-animation-delay="0.01s" style="animation-delay: 0.01s; opacity: 1;">
                     <div class="heading_s1 text-center">
-                        <h2 class="main-heading center-heading"><i class="fa fa-wpforms"></i> Franchise Apply Form</h2>
+                        <h2 class="main-heading center-heading"><i class="fab fa-wpforms"></i> Franchise Apply Form</h2>
                     </div>
                 </div>
             </div>
