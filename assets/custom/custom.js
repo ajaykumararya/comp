@@ -1120,7 +1120,7 @@ if (filemanager) {
                             let img = '';
                             // var fileName = filePath.split('\\').pop().split('/').pop();
                             let extension = file.split('.').pop().toLowerCase();
-                            log(extension)
+                            // log(extension)
                             if (['jpg', 'jpeg', 'png', 'gif'].indexOf(extension) !== -1) {
                                 img = `${base_url}${file}`;
                             } else {
@@ -1132,10 +1132,11 @@ if (filemanager) {
                                 <div class="card-body p-0" style="width:100%;height:200px">
                                     <img src="${img}" style="width:100%;height:100%">
                                 </div>
-                                <div class="card-footer">
-                                    <button class="btn btn-sm btn-info copy-button" data-clipboard-target="#${id}">File Copy</button>
+                                <div class="card-footer p-2">
+                                    <button class="btn btn-sm btn-info copy-button ms-13" data-clipboard-target="#${id}"><i class="fa fa-copy"></i></button>
                                     <input type="hidden" id="${id}" value="${base_url}${file}">
-                                    <a href="${base_url}${file}" target="_blank" class="btn btn-info btn-sm">View</a>
+                                    <a href="${base_url}${file}" target="_blank" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a>
+                                    <button class="btn btn-sm btn-danger delete-file-button" data-file="${file}"><i class="fa fa-trash"></i></button>
                                 </div>
                             </div>
                             </div>
@@ -1175,6 +1176,27 @@ if (filemanager) {
                     body.append(div).find('.upload').on('click', function () {
                         $('#fileInput').trigger('click');
                     });
+                    body.find('.delete-file-button').on('click', function () {
+                        // alert('yes');
+                        let file = $(this).data('file');
+                        SwalWarning('Confirmation!', 'Are you sure you want to delete this file from Server.', true, 'Yes Delete').then((res) => {
+                            if (res.isConfirmed) {
+                                $.AryaAjax({
+                                    url: 'filemanager/remove-file',
+                                    data: { file },
+                                }).then((result) => {
+                                    showResponseError(result);
+                                    if (result.status) {
+                                        SwalSuccess('Success', 'File Removed Successfully..').then((r) => {
+                                            if (r.isConfirmed)
+                                                load_filemanager_data(body)
+                                        }
+                                        );
+                                    }
+                                });
+                            }
+                        })
+                    })
                     $(document).on('change', '#fileInput', function (e) {
                         var selectedFile = e.target.files[0];
                         if (!selectedFile) {
@@ -1495,9 +1517,11 @@ if (target) {
         }, 3000)
     });
 }
-if ($.isFunction($.fn.ClipboardJS)) {
+// log(typeof ClipboardJS)
+// console.log(($.isFunction(ClipboardJS)));
+if (typeof ClipboardJS !== 'undefined') {
     new ClipboardJS('.copy-button').on('success', function (e) {
-        let message = $(e.trigger).data("message") ?? 'Copied!';
+        let message = $(e.trigger).data("message") ?? 'File Copied!';
         toastr.success(message);
     });
 }
