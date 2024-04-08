@@ -13,8 +13,8 @@ class Center extends Ajax_Controller
         $data['email'] = $email;
         $data['password'] = sha1($data['password']);
         ///upload docs
-        $data['adhar_front'] = $this->file_up('adhar_back');
-        $data['adhar_back'] = $this->file_up('adhar_back');
+        $data['adhar'] = $this->file_up('adhar');
+        // $data['adhar_back'] = $this->file_up('adhar_back');
         $data['image'] = $this->file_up('image');
         $data['agreement'] = $this->file_up('agreement');
         $data['address_proof'] = $this->file_up('address_proof');
