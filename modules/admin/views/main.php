@@ -351,7 +351,7 @@
                                     <!--end::Menu separator-->
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-5">
-                                        <a href="{base_url}account/overview.html" class="menu-link px-5">
+                                        <a href="{base_url}admin/profile" class="menu-link px-5">
                                             My Profile
                                         </a>
                                     </div>

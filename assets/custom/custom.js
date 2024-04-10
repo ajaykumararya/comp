@@ -1167,15 +1167,14 @@ if (filemanager) {
                                         justify-content: space-evenly;
                                         padding-top: 55px;
                                     ">
-                                            <button class="btn btn-sm btn-info upload"><i class="fa fa-plus"></i> Upload FIle</button>
-                                            <input type="file" id="fileInput" style="display: none;">
+                                            <label for="fileInput" class="btn btn-sm btn-info upload"><i class="fa fa-plus"></i> Upload FIle
+                                                <input type="file" id="fileInput" style="display: none;">
+                                            </label>
                                         </div>                                        
                                     </div>
                                 </div>
                                 </div>`);
-                    body.append(div).find('.upload').on('click', function () {
-                        $('#fileInput').trigger('click');
-                    });
+                    body.append(div);
                     body.find('.delete-file-button').on('click', function () {
                         // alert('yes');
                         let file = $(this).data('file');
@@ -1197,7 +1196,7 @@ if (filemanager) {
                             }
                         })
                     })
-                    $(document).on('change', '#fileInput', function (e) {
+                    $(document).off('change','#fileInput').on('change', '#fileInput', function (e) {
                         var selectedFile = e.target.files[0];
                         if (!selectedFile) {
                             SwalWarning('Please select a file to upload.');
@@ -1306,6 +1305,7 @@ const mydrawer = (title) => {
         main.find('.card-body').html('');
         main.find('.card-footer').remove();
         $('.drawer-overlay').remove();
+        $('#fileInput').off('change');
     });
     return main;
 }

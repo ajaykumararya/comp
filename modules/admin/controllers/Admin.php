@@ -6,13 +6,19 @@ class Admin extends MY_Controller
     {
         $this->view('index');
     }
-    function change_password(){
-        $this->view('change-password',['isValid' => true]);
+    function change_password()
+    {
+        $this->view('change-password', ['isValid' => true]);
     }
-    function sign_out(){
+    function sign_out()
+    {
         // $this->view('change-password',['isValid' => true]);
         $this->session->sess_destroy();
         redirect('admin');
     }
-    
+    function profile()
+    {
+        $this->view('profile',['isValid' => true]);
+    }
+
 }
