@@ -197,6 +197,20 @@ document.addEventListener('DOMContentLoaded', function (d) {
                 }
             });
         });
+    });
+    $(document).on('click', '.delete-fee-record', function () {
+        var fee_id = $(this).data('fee_id');
+        SwalWarning('Confirmation!', 'Are you sure for delete fee record', true, 'Yes').then((e) => {
+
+            if (e.isConfirmed) {
+                $.AryaAjax({
+                    url: 'website/delete-fee-record',
+                    data: { fee_id },
+                    page_reload: true,
+                    success_message: 'Fee Record Deleted Successfully..'
+                })
+            }
+        })
     })
     $(document).on('click', '.print-receipt', function () {
         var payment_id = $(this).data('fee_id');
@@ -220,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function (d) {
                 var content = $(this).closest('.card-body').clone();
                 content.find('button').remove();
                 content = content.html();
-            
+
                 var newWindow = window.open('', '_blank');
                 newWindow.document.open();
                 await newWindow.document.write(`<html><head><title>Print Receipt</title>`);
@@ -228,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function (d) {
                 // await newWindow.document.write(`<link href="${base_url}assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css">`);
                 // await newWindow.document.write(`<link href="${base_url}assets/css/style.bundle.css" rel="stylesheet" type="text/css">`);
                 await newWindow.document.write(`</head><body>${content}</body></html>`);
-               
+
                 newWindow.document.close();
                 await newWindow.print();
                 newWindow.close();

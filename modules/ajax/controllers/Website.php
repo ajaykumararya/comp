@@ -316,6 +316,9 @@ class Website extends Ajax_Controller
         $this->set_data($data);
         $this->response('html', $this->template('edit-fee-record'));
     }
+    function delete_fee_record(){
+        $this->response('status', $this->db->where('id',$this->post('fee_id'))->delete('student_fee_transactions'));
+    }
     function update_fee_record()
     {
         $data = [
