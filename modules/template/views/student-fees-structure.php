@@ -1,10 +1,15 @@
 <?php
+// echo $admission_date;
+
 $where = ['course_id' => $course_id, 'student_id' => $student_id, 'roll_no' => $roll_no];
 $center_course = $this->center_model->get_assign_courses($institute_id, ['course_id' => $course_id]);
 $course_fees = 0;
 if ($center_course->num_rows()) {
     $course_fees = $center_course->row('course_fee');
 }
+// $calTotalFee = $this->student_model->total_course_fee($institute_id,$course_id);
+// echo $calTotalFee;
+$monthNum = get_month_number($admission_date);
 ?>
 <style>
     input.form-control.form-control-sm:read-only {
@@ -15,11 +20,13 @@ if ($center_course->num_rows()) {
     .form-check-input[disabled]~.form-check-label {
         opacity: 1;
     }
+
     tr th label.form-check-label {
         color: black
     }
-    [data-bs-theme=dark] tr th label.form-check-label{
-        color:white
+
+    [data-bs-theme=dark] tr th label.form-check-label {
+        color: white
     }
 
     tr.pending {
@@ -31,7 +38,7 @@ if ($center_course->num_rows()) {
         background-color: #032c12;
         color: white
     }
-    
+
     tr.pending th,
     tr.pending td,
     tr.pending label.form-check-label,
@@ -106,15 +113,22 @@ if ($this->student_model->get_fee_transcations(['type' => 'admission_fee'] + $wh
                     $year = date('Y', strtotime($admission_date));
                     $loop = $duration;
                     if ($course_fees):
+
                         if ($duration_type == 'month') {
-                            $perMonthfee = round($course_fees / ($duration));
+                            $perMonthfee = floor($course_fees / ($duration));
                             echo '<tr>
                                     <th colspan="4" class="text-center">' . $duration . ' ' . $duration_type . ' Fee</th>   
                                  </tr>';
+                            $index = 0;
                             for ($i = 1; $i <= $duration; $i++) {
                                 $type = $duration . "_" . $duration_type;
-                                $month = get_month($i);
+                                $month = get_month($monthNum + ($i - 1));
                                 $monthFee = $perMonthfee;
+                                $margin = 0;
+                                if($i == $duration){
+                                    $margin = $course_fees % $duration;
+                                    $monthFee += $margin;
+                                }
                                 $theme = 1;
                                 $getTrans = $this->student_model->get_fee_transcations(['type' => $type, 'duration' => $i] + $where);
                                 if ($getTrans->num_rows()) {
@@ -146,23 +160,49 @@ if ($this->student_model->get_fee_transcations(['type' => 'admission_fee'] + $wh
                                         'input' => $input,
                                         'year' => $year,
                                         'id' => $trId,
-                                        'class' => $perMonthfee == $feeAmount ? '' : 'pending',
-                                        'bill' => $perMonthfee == $feeAmount ? '<i class="badge badge-danger">Unpaid</i>' : '<i class="badge badge-warning text-black">Waiting</i>'
+                                        'class' => ( $perMonthfee + $margin) == $feeAmount ? '' : 'pending',
+                                        'bill' => ( $perMonthfee + $margin) == $feeAmount ? '<i class="badge badge-danger">Unpaid</i>' : '<i class="badge badge-warning text-black">Waiting</i>'
                                     ];
                                     echo $this->parser->parse_string($trTemplate, $passArray, true);
                                 }
                             }
+                            /*
+                            $trId = '';
+                            ?>
+                            <tr data-index="<?= $duration ?> <?= $duration_type ?>" id="<?= $trId ?>"
+                                class="<?= empty($trId) ? 'success' : '' ?>" data-type="exam_fee">
+                                <th colspan="2">
+                                    <?php
+
+                                    echo $this->ki_theme->tag_html('Exam Fees')->checkbox('exam_fee', $exam_fee, 'set-fee', '');
+                                    ?>
+                                </th>
+                                <td>{exam_fee} {inr}</td>
+                                <td></td>
+                            </tr>
+                            <?php
+                            
+                            */
                         } else {
-                            $perMonthfee = round($course_fees / (12 * $duration));
+
+                            $perMonthfee = floor($course_fees / (12 * $duration));
                             $monthNmber = 1;
                             for ($i = 1; $i <= $duration; $i++) {
+
                                 echo '<tr>
                                         <th colspan="4" class="text-center bg-info text-capitalize">' . $i . ' ' . $duration_type . ' Fee</th>   
                                     </tr>';
                                 for ($k = 1; $k <= 12; $k++) {
                                     $type = $i . '_' . $duration_type;
-                                    $month = get_month($k);
+                                    $month = get_month($monthNum + ($k - 1));
+                                    
                                     $monthFee = $perMonthfee;
+                                    $margin = 0;
+                                    if($k == 12){
+                                        $tempCourseFee = $course_fees / 2;
+                                        $margin = $tempCourseFee % 12;
+                                        $monthFee += $margin;
+                                    }
                                     $theme = 1;
                                     $getTrans = $this->student_model->get_fee_transcations(['type' => $type, 'duration' => $k] + $where);
                                     if ($getTrans->num_rows()) {
@@ -194,16 +234,38 @@ if ($this->student_model->get_fee_transcations(['type' => 'admission_fee'] + $wh
                                             'input' => $input,
                                             'year' => $year,
                                             'id' => $trId,
-                                            'class' => $perMonthfee == $feeAmount ? '' : 'pending',
-                                            'bill' => $perMonthfee == $feeAmount ? '<i class="badge badge-danger">Unpaid</i>' : '<i class="badge badge-warning text-black">Waiting</i>'
+                                            'class' => ( $perMonthfee + $margin) == $feeAmount ? '' : 'pending',
+                                            'bill' => ( $perMonthfee + $margin) == $feeAmount ? '<i class="badge badge-danger">Unpaid</i>' : '<i class="badge badge-warning text-black">Waiting</i>'
                                         ];
+                                        
                                         echo $this->parser->parse_string($trTemplate, $passArray, true);
                                     }
                                     $monthNmber++;
                                 }
+
+/*
+                                $trId = '';
+                                ?>
+                                <tr data-index="<?= ordinal_number($i) ?> <?= $duration_type ?>" id="<?= $trId ?>"
+                                    class="<?= empty($trId) ? 'success' : '' ?>" data-type="exam_fee">
+                                    <th colspan="2">
+                                        <?php
+
+                                        echo $this->ki_theme->tag_html('Exam Fees')->checkbox('exam_fee', $exam_fee, 'set-fee', '');
+                                        ?>
+                                    </th>
+                                    <td>{exam_fee} {inr}</td>
+                                    <td></td>
+                                </tr>
+                                <?php
+                                
+                                */
+
                                 $year++;
                             }
                         }
+
+
                         echo '<input type="hidden" class="per-month-fee" value="' . $perMonthfee . '">';
 
                     endif;
@@ -228,7 +290,7 @@ if ($this->student_model->get_fee_transcations(['type' => 'admission_fee'] + $wh
                 <div class="card-header bg-danger">
                     <h3 class="card-title ">Select Student Fee</h3>
                     <div class="card-toolbar">
-
+                        
                     </div>
                 </div>
                 <div class="card-body">
@@ -270,7 +332,8 @@ if ($this->student_model->get_fee_transcations(['type' => 'admission_fee'] + $wh
                             <tr>
                                 <th colspan="2">Payment Description</th>
                                 <td colspan="2">
-                                    <textarea name="description" rows="3" class="form-control" placeholder="Description"></textarea>
+                                    <textarea name="description" rows="3" class="form-control"
+                                        placeholder="Description"></textarea>
                                 </td>
                             </tr>
                             <tr class="bg-warning p-1 fs-1 fw-bold">
@@ -287,7 +350,8 @@ if ($this->student_model->get_fee_transcations(['type' => 'admission_fee'] + $wh
                                     <?= $submissionfees['ttl_fee'] ?> {inr}
                                 </td>
                                 <td class="w-50px" rowspan="2">
-                                    <a href="{base_url}student/profile/{student_id}/fee-record" class="btn btn-info btn-sm">
+                                    <a href="{base_url}student/profile/{student_id}/fee-record"
+                                        class="btn btn-info btn-sm">
                                         <i class="fa fa-eye"></i> Records
                                     </a>
                                 </td>

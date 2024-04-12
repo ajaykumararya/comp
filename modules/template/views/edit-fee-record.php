@@ -1,6 +1,6 @@
 <div class="row">
     <input type="hidden" name="id" value="{id}">
-  
+
     <div class="form-group col-md-6">
         <label for="" class="form-label">Transaction ID</label>
         <input type="text" class="form-control" readonly value="{payment_id}">

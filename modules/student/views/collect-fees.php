@@ -11,7 +11,6 @@
                 </div>
                 <div id="kt_docs_card_collapsible" class="collapse show">
                     <div class="card-body">
-
                         <div class="row">
                             <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-2x mb-5 fs-6">
                                 <li class="nav-item">
@@ -25,7 +24,6 @@
                                         Details</a>
                                 </li>
                             </ul>
-
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="kt_tab_pane_4" role="tabpanel">
                                     <div class="col-md-5">
@@ -36,20 +34,6 @@
                                                 data-placeholder="Select Student" class="form-select first"
                                                 data-allow-clear="true">
                                                 <option></option>
-                                                <?php
-                                                // $listSudents = $this->student_model->get_switch();
-                                                // if ($listSudents->num_rows()) {
-                                                //     foreach ($listSudents->result() as $std) {
-                                                //         echo $this->parser->parse_string('<option value="{student_id}"
-                                                
-                                                //                             data-kt-rich-content-subcontent="{roll_no}" 
-                                                //                             data-kt-rich-content-icon="{image}" 
-                                                //                 >
-                                                //                     {student_name}
-                                                //                 </option>', $std);
-                                                //     }
-                                                // }
-                                                ?>
                                             </select>
                                         </div>
                                     </div>
@@ -87,11 +71,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
                         <div class="row mt-10 view-structure">
                         </div>
                     </div>

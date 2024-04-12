@@ -196,6 +196,8 @@ document.addEventListener('DOMContentLoaded', function (e) {
             tr = $(this).closest('tr'),
             td = $(tr).find('td'),
             th = $($(tr).find('th')[0]).clone();
+
+
         get_month = th.text(),
             get_month_year = $(td[0]).html(),
             fee = $(td[1]).html(),
@@ -206,12 +208,19 @@ document.addEventListener('DOMContentLoaded', function (e) {
             cal_fee = $(this).val();
 
         cal_fee = Number(cal_fee);
+        log(type);
         var readonly = '';
-        if (name == 'admission_fee') {
+        if (name == 'admission_fee' || type == 'exam_fee') {
             fee = get_month_year;
             get_month_year = 'One Time';
             readonly = 'readonly';
         }
+
+        if(type == 'exam_fee'){
+            get_month_year = `${tr.data('index')} Exam Fee`;
+        }
+
+
 
         if ($(this).is(':checked')) {
             if(TempBox.find('tr').length == 0){

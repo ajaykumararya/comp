@@ -1,4 +1,7 @@
 <div class="d-flex flex-column flex-xl-row">
+    <link href="{base_url}assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css">
+    <link href="{base_url}assets/css/style.bundle.css" rel="stylesheet" type="text/css">
+
     <!--begin::Content-->
     <div class="flex-lg-row-fluid me-xl-18 mb-10 mb-xl-0">
         <!--begin::Invoice 2 content-->
@@ -147,11 +150,30 @@
                     <!--begin::Container-->
                     <div class="d-flex justify-content-end">
                         <!--begin::Section-->
-                        <div class="mw-300px">
+                        <div class="mw-600px">
+
                             <!--begin::Item-->
                             <div class="d-flex flex-stack mb-3">
                                 <!--begin::Accountname-->
-                                <div class="fw-semibold pe-10 text-gray-600 fs-7">Total Fees Amount:</div>
+                                <div class="fw-semibold pe-10 text-gray-600 fs-7">Outstanding Amount</div>
+                                <!--end::Accountname-->
+
+                                <!--begin::Label-->
+                                <div class="text-end fw-bold fs-6 text-gray-800">{inr}
+                                    <?php
+                                   
+                                    $ttlOutStandingAmount = $this->student_model->total_course_fee($institute_id,$course_id);
+                                    echo $ttlOutStandingAmount ;
+                                    ?>
+                                </div>
+                                <!--end::Label-->
+                            </div>
+                            <!--end::Item-->
+
+                            <!--begin::Item-->
+                            <div class="d-flex flex-stack">
+                                <!--begin::Accountname-->
+                                <div class="fw-semibold pe-10 text-gray-600 fs-7">Total Payable Amount:</div>
                                 <!--end::Accountname-->
 
                                 <!--begin::Label-->
@@ -165,7 +187,7 @@
                             if ($discount):
                                 ?>
                                 <!--begin::Item-->
-                                <div class="d-flex flex-stack mb-3">
+                                <div class="d-flex flex-stack">
                                     <!--begin::Accountname-->
                                     <div class="fw-semibold pe-10 text-gray-600 fs-7">Discount Amount:</div>
                                     <!--end::Accountname-->
@@ -179,7 +201,7 @@
                                 <!--end::Item-->
 
                                 <!--begin::Item-->
-                                <div class="d-flex flex-stack mb-3">
+                                <div class="d-flex flex-stack">
                                     <!--begin::Accountnumber-->
                                     <div class="fw-semibold pe-10 text-gray-600 fs-7">Total Fess - Less Dis:</div>
                                     <!--end::Accountnumber-->
@@ -195,14 +217,36 @@
                             endif;
                             ?>
                             <!--begin::Item-->
-                            <div class="d-flex flex-stack">
+                            <div class="d-flex flex-stack mb-3">
                                 <!--begin::Code-->
-                                <div class="fw-semibold pe-10 text-gray-600 fs-7">Total Fees Amount:</div>
+                                <div class="fw-semibold pe-10 text-gray-600 fs-7">Total Paid Amount:</div>
                                 <!--end::Code-->
 
                                 <!--begin::Label-->
                                 <div class="text-end fw-bold fs-6 text-gray-800">{inr}
                                     <?= ($subttl + $discount) ?>
+                                </div>
+                                <!--end::Label-->
+                            </div>
+                            <!--end::Item-->
+
+                            <!--begin::Item-->
+                            <div class="d-flex flex-stack mb-3">
+                                <!--begin::Accountname-->
+                                <div class="fw-semibold pe-10 text-gray-600 fs-7">Remaining Amount</div>
+                                <!--end::Accountname-->
+
+                                <!--begin::Label-->
+                                <div class="text-end fw-bold fs-6 text-gray-800">{inr}
+                                    <?php
+                                    $dataAmount = $this->student_model->get_fee_transcations_ttl([
+                                        'student_id' => $student_id,
+                                        'course_id' => $course_id
+                                    ]);
+                                    
+                                    $ttlOutStandingAmount = $ttlOutStandingAmount - ($dataAmount['ttl_fee'] + $dataAmount['ttl_discount']);
+                                    echo $ttlOutStandingAmount;
+                                    ?>
                                 </div>
                                 <!--end::Label-->
                             </div>

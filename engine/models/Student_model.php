@@ -332,4 +332,19 @@ class Student_model extends MY_Model
             ->where('s.isDeleted', 0)
             ->get();
     }
+    function total_course_fee($institute_id, $course_id = 0){
+        $center_course = $this->center_model->get_assign_courses($institute_id, ['course_id' => $course_id]);
+        $course_fees = 0;
+        if ($center_course->num_rows()) {
+            $course_fees = $center_course->row('course_fee');
+            $admissionFee = $this->fix_payment_settings(1)->row('amount') ?? 0;
+            $exam_fee = $this->fix_payment_settings(2)->row('amount') ?? 0;
+            if($center_course->row('duration_type') != 'month')
+            {
+                $exam_fee = $exam_fee * $center_course->row('duration');
+            }
+            $course_fees = $course_fees + $admissionFee + $exam_fee;
+        }
+        return $course_fees;
+    }
 }

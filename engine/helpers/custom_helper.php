@@ -185,4 +185,7 @@ function inconPickerInput($inputName = '')
                 <button type="button" class="arya-icon-picker btn btn-primary btn-rounded btn-sm" id="GetIconPicker" data-iconpicker-input="input#IconInput" data-iconpicker-preview="i#IconPreview">Select Icon</button>
             <input id="IconInput" name="'.$inputName.'" type="hidden">';
 }
+function get_month_number($date){
+    return date('n', strtotime($date));
+}
 ?>
