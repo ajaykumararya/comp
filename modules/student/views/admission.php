@@ -12,7 +12,7 @@
                 <div id="kt_docs_card_collapsible" class="collapse show">
                     <div class="card-body">
                         <?php
-                        if (defined('REFERRAL_ADMISSION') && $this->center_model->isAdmin()) {
+                        if (CHECK_PERMISSION('REFERRAL_ADMISSION') && $this->center_model->isAdmin()) {
                             ?>
                             <div class="row">
                                 <div class="col-md-6 mb-5">

@@ -92,7 +92,7 @@ class Student extends Ajax_Controller
         if ($this->form_validation->run()) {
             $this->db->insert('students', $data);
             $student_id = $this->db->insert_id();
-            if(defined('REFERRAL_ADMISSION') && $this->center_model->isAdmin() && isset($_POST['referral_id'])){
+            if(CHECK_PERMISSION('REFERRAL_ADMISSION') && $this->center_model->isAdmin() && isset($_POST['referral_id'])){
                 $this->db->insert('referral_coupons',[
                     'student_id' => $student_id,
                     'coupon_code' => generateCouponCode(),
