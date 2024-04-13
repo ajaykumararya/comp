@@ -33,17 +33,21 @@ class Center_model extends MY_Model
     function get_verified($where = 0)
     {
         $this->myWhere('c', $where);
-        return $this->db
+        $get =  $this->db
             ->from('centers as c')
-            ->join('state as s', 's.STATE_ID = c.state_id')
-            ->join('district as d', 'd.DISTRICT_ID = c.city_id')
+            ->join('state as s', 's.STATE_ID = c.state_id','left')
+            ->join('district as d', 'd.DISTRICT_ID = c.city_id','left')
             ->get();
+        // echo $this->db->last_query();
+        return $get;
         // if ($where)
         //     $this->db->where($where);
         // $this->db->where('type', 'center');
         // return $this->db->get('centers');
     }
+    function get_details(){
 
+    }
     function list_requests()
     {
         $this->db->select('er.*,co.course_name,c.institute_name as center_name')
@@ -53,6 +57,9 @@ class Center_model extends MY_Model
         if ($this->isCenter())
             $this->db->where('c.id', $this->loginId());
         return $this->db->get();
+    }
+    function update_wallet($centre_id , $wallet){
+        return $this->db->where('id',$centre_id)->update('centers',['wallet' => $wallet]);
     }
 }
 ?>

@@ -29,6 +29,8 @@ class Student_model extends MY_Model
                 s.alternative_mobile,
                 s.family_id,
                 s.password,
+                s.adhar_front as student_aadhar,
+                s.upload_docs as student_docs,
 
                 c.course_name,
                 c.fees as course_fees,

@@ -5,8 +5,9 @@ document.addEventListener('DOMContentLoaded', function (e) {
     const roll_no_box = $('input[name="roll_no"]');
     const course_box = $('select[name="course_id"]');
     // const input_center = $('input[name="center_id"]');
-
-   
+    const referral_id = $('[name="referral_id"]');
+    if(referral_id)
+        select2Student(referral_id);
     // console.log(institue_box);
     if (form) {
         // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/

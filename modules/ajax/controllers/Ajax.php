@@ -51,5 +51,24 @@ class Ajax extends Ajax_Controller{
         if($this->file_up('image'))
             $this->response('status',true);
     }
- 
+    
+    function centre_wallet_load(){
+        $post = $this->post();
+        $closing_balance = ($post['amount'] + $post['closing_balance']);
+        $data = [
+            'center_id' => $post['centre_id'],
+            'amount' => $post['amount'],
+            'o_balance' => $post['closing_balance'],
+            'c_balance' => $closing_balance,
+            'type' => 'wallet_load',
+            'description' => $post['description'],
+            'added_by' => 'admin',
+            'order_id' => strtolower(generateCouponCode(12)),
+            'status' => 1,
+            'wallet_status' => 'credit'
+        ];
+        $this->db->insert('wallet_transcations',$data);
+        $this->center_model->update_wallet($post['centre_id'],$closing_balance);
+        $this->response('status',true);
+    }
 }

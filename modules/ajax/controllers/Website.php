@@ -22,7 +22,7 @@ class Website extends Ajax_Controller
             $status = 1;
             $get = $this->student_model->student_verification([
                 'roll_no' => $roll_no,
-                'dob' => $dob,
+                'dob' => date('d-m-Y',strtotime($dob)),
                 'status' => $status
             ]);
             if ($get->num_rows()) {
@@ -81,7 +81,7 @@ class Website extends Ajax_Controller
             $status = 1;
             $get = $this->student_model->student_result_verification([
                 'roll_no' => $roll_no,
-                'dob' => $dob,
+                'dob' => date('d-m-Y',strtotime($dob)),,
                 'status' => $status
             ]);
             if ($get->num_rows()) {

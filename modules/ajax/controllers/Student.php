@@ -90,9 +90,19 @@ class Student extends Ajax_Controller
         $data['status'] = true;
         $data['admission_status'] = true;
         if ($this->form_validation->run()) {
+            $this->db->insert('students', $data);
+            $student_id = $this->db->insert_id();
+            if(defined('REFERRAL_ADMISSION') && $this->center_model->isAdmin() && isset($_POST['referral_id'])){
+                $this->db->insert('referral_coupons',[
+                    'student_id' => $student_id,
+                    'coupon_code' => generateCouponCode(),
+                    'coupon_by' => $_POST['referral_id'],
+                    'amount' => 500
+                ]);
+            }
             $this->response(
                 'status',
-                $this->db->insert('students', $data)
+                true
             );
         } else
             $this->response('html', $this->errors());

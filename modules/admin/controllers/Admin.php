@@ -18,7 +18,11 @@ class Admin extends MY_Controller
     }
     function profile()
     {
-        $this->view('profile',['isValid' => true]);
+        $row = $this->center_model->get_verified([
+            'id' => $this->center_model->loginId()
+        ])->row_array() ?? [];
+        $row['isValid'] = true;
+        $this->view('profile',$row);
     }
 
 }

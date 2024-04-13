@@ -118,7 +118,12 @@ class Student extends MY_Controller
             'overview' => ['title' => 'Account Overview', 'icon' => array('people', 2), 'url' => ''],
             'setting' => ['title' => 'Account Setting', 'icon' => array('setting-2', 2), 'url' => 'setting'],
             'fee-record' => ['title' => 'Account Fees Record', 'icon' => array('two-credit-cart', 3), 'url' => 'fee-record'],
-            'change-password' => ['title' => 'Account Change Password', 'icon' => array('key', 2), 'url' => 'change-password']
+            'change-password' => ['title' => 'Account Change Password', 'icon' => array('key', 2), 'url' => 'change-password'],
+            'documents' => [
+                'title' => 'Document(s)',
+                'icon' => array('tablet-book',5),
+                'url' =>  'documents'
+            ]
         ];
         
         if (is_numeric($stdId) and $stdId) {

@@ -116,11 +116,11 @@
         [data-bs-theme=dark] #IconPreview {
             color: white !important;
         }
+
         #file-list {
             display: flex;
             flex-wrap: wrap;
         }
-        
     </style>
     <script>
         // Frame-busting to prevent site from being loaded within a frame without permission (click-jacking)
@@ -218,6 +218,29 @@
                         <!--end::Menu wrapper-->
                         <!--begin::Navbar-->
                         <div class="app-navbar flex-shrink-0">
+
+                            <?php
+                            if ($this->center_model->isCenter()) {
+                                ?>
+                                <!--begin::Wallet-->
+                                <div class="app-navbar-item ms-1 ms-md-4 text-center ">
+                                    <!--begin::Menu wrapper-->
+                                    <label class="border border-primary border-dotted p-2 fs-2" style="border-radius:10px;min-width:200px">
+                                        <span data-kt-countup="true" data-kt-countup-value="<?=$center_data['wallet']?>" data-kt-countup-prefix='{inr}'>0</span>
+                                        
+                                        <button class="btn btn-primary p-1 btn-sm">&nbsp;<i class="fa fa-plus"></i></button>
+                                        
+                                        <small class="d-flex" style="font-size:12px;    justify-content: center;">My Wallet</small>
+                                    </label>
+                                    <!--end::Menu wrapper-->
+                                </div>
+                                <!--end::Wallet-->
+
+                                <?php
+                            }
+
+                            ?>
+
                             <!--begin::Chat-->
                             <div class="app-navbar-item ms-1 ms-md-4">
                                 <!--begin::Menu wrapper-->

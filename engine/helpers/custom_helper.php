@@ -183,9 +183,25 @@ function inconPickerInput($inputName = '')
                     <div class="symbol-label fs-2 fw-semibold text-success"><i style="font-size:30px" id="IconPreview"></i></div>
                 </div>
                 <button type="button" class="arya-icon-picker btn btn-primary btn-rounded btn-sm" id="GetIconPicker" data-iconpicker-input="input#IconInput" data-iconpicker-preview="i#IconPreview">Select Icon</button>
-            <input id="IconInput" name="'.$inputName.'" type="hidden">';
+            <input id="IconInput" name="' . $inputName . '" type="hidden">';
 }
-function get_month_number($date){
+function get_month_number($date)
+{
     return date('n', strtotime($date));
+}
+function generateCouponCode($length = 8)
+{
+    $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+    $charLength = strlen($characters);
+
+    $couponCode = '';
+
+    for ($i = 0; $i < $length; $i++) {
+        $randomChar = $characters[rand(0, $charLength - 1)];
+        $couponCode .= $randomChar;
+    }
+
+    return $couponCode;
 }
 ?>

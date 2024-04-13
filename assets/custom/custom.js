@@ -136,6 +136,9 @@ if ($.isFunction($.fn.maxlength)) {
         limitReachedClass: "badge badge-success"
     });
 }
+const numberFormat = (number) => {
+    return number.toLocaleString();
+}
 const timeConvert = (n) => {
     var num = n;
     var hours = (num / 60);
@@ -1658,7 +1661,7 @@ if (setting_table.length) {
         let id = parseInt(atob(data[data.length - 1]));
         if (id) {
             SwalWarning('Confirmation!', 'Are you sure you want to delete it.', true, 'delete it').then((r) => {
-                if (r.isConfirmed) {
+                if (r.isConfirmed) { 
                     $.AryaAjax({
                         url: 'cms/delete-content',
                         data: { id: id },

@@ -11,6 +11,23 @@
                 </div>
                 <div id="kt_docs_card_collapsible" class="collapse show">
                     <div class="card-body">
+                        <?php
+                        if (defined('REFERRAL_ADMISSION') && $this->center_model->isAdmin()) {
+                            ?>
+                            <div class="row">
+                                <div class="col-md-6 mb-5">
+                                    <label for="liststudent" class="form-label required">Referral
+                                        Student By</label>
+                                    <select name="referral_id" data-control="select2" data-placeholder="Select Student"
+                                        class="form-select first m-h-100px" data-allow-clear="true">
+                                        <option></option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                        ?>
                         <div class="row">
                             <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
                                 <label class="form-label required">Admission Date</label>
@@ -64,8 +81,7 @@
 
                             <div class="form-group mb-4 col-lg-2 col-xs-12 col-sm-12">
                                 <label class="form-label required">Roll No.</label>
-                                <input type="text" name="roll_no" class="form-control" placeholder="Enter Roll NO."
-                                    >
+                                <input type="text" name="roll_no" class="form-control" placeholder="Enter Roll NO.">
                             </div>
                             <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
                                 <label class="form-label required">Course</label>
@@ -97,7 +113,7 @@
                                 </select>
                             </div>
 
-                            
+
                             <div class="form-group mb-4 col-lg-6 col-xs-12 col-sm-12">
                                 <label class="form-label required">Whatsapp Number</label>
                                 <div class="input-group">
