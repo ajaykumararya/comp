@@ -151,7 +151,8 @@
                     <div class="d-flex justify-content-end">
                         <!--begin::Section-->
                         <div class="mw-600px">
-
+                            <?php
+                            /*
                             <!--begin::Item-->
                             <div class="d-flex flex-stack mb-3">
                                 <!--begin::Accountname-->
@@ -169,7 +170,8 @@
                                 <!--end::Label-->
                             </div>
                             <!--end::Item-->
-
+                            */
+                            ?>
                             <!--begin::Item-->
                             <div class="d-flex flex-stack">
                                 <!--begin::Accountname-->
@@ -229,7 +231,8 @@
                                 <!--end::Label-->
                             </div>
                             <!--end::Item-->
-
+                            <?php
+                            /*
                             <!--begin::Item-->
                             <div class="d-flex flex-stack mb-3">
                                 <!--begin::Accountname-->
@@ -251,6 +254,9 @@
                                 <!--end::Label-->
                             </div>
                             <!--end::Item-->
+                            <?php
+                            */
+                            ?>
                         </div>
                         <!--end::Section-->
                     </div>
