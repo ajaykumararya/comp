@@ -74,6 +74,25 @@ $config['academics'] = array(
         )
     )
 );
+
+$config['coupon_menu'] = array(
+    'title' => 'Coupons',
+    'condition' => CHECK_PERMISSION('REFERRAL_ADMISSION') && OnlyForAdmin(),
+    'menu' => array(
+        array(
+            'label' => 'Student Coupon(S)',
+            'type' => 'student_coupons',
+            'icon' => array('devices',5),
+            'url' => 'student/coupons'
+            // 'submenu' => array(
+            //     array(
+            //         'label' => ''
+            //     )
+            // )
+        )
+    )
+);
+
 $config['menu'] = array(
     'title' => 'Student Area',
     'menu' => array(
@@ -260,42 +279,42 @@ $config['exam_menu'] = array(
         array(
             'label' => 'Exam(S)',
             'type' => 'exams',
-            'icon' => array('note-2',4),
+            'icon' => array('note-2', 4),
             'submenu' => array(
                 array(
                     'url' => 'exam/add',
                     'label' => 'Create',
-                    'icon' => array('plus',2)
+                    'icon' => array('plus', 2)
                 ),
                 array(
                     'url' => 'exam/list',
                     'label' => 'List',
-                    'icon' => array('tablet-text-up',2)
+                    'icon' => array('tablet-text-up', 2)
                 )
             )
         ),
         array(
             'label' => 'Assign Exam',
             'type' => 'assign_exam',
-            'icon' => array('plus-circle',2),
+            'icon' => array('plus-circle', 2),
             // 'url' => 'exam/assign',
             'submenu' => array(
                 array(
                     'url' => 'exam/assign-to-center',
                     'label' => 'To Center',
-                    'icon' => array('cheque',7)
+                    'icon' => array('cheque', 7)
                 ),
                 array(
                     'url' => 'exam/assign-to-student',
                     'label' => 'To Student',
-                    'icon' => array('cheque',7)
+                    'icon' => array('cheque', 7)
                 )
             )
         ),
         array(
             'label' => 'Student Exam(S)',
             'type' => 'student_exams',
-            'icon' => array('note-2',4),
+            'icon' => array('note-2', 4),
             'url' => 'exam/student-exams'
         )
     )
@@ -307,17 +326,17 @@ $config['center_exam_menu'] = array(
         array(
             'label' => 'Exam(S)',
             'type' => 'exams',
-            'icon' => array('note-2',4),
+            'icon' => array('note-2', 4),
             'submenu' => array(
                 array(
                     'url' => 'exam/request',
                     'label' => 'Request',
-                    'icon' => array('plus',2)
+                    'icon' => array('plus', 2)
                 ),
                 array(
                     'url' => 'exam/approved-list',
                     'label' => 'List',
-                    'icon' => array('tablet-text-up',2)
+                    'icon' => array('tablet-text-up', 2)
                 )
             )
         ),

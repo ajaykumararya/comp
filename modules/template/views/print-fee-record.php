@@ -210,7 +210,7 @@
 
                                     <!--begin::Number-->
                                     <div class="text-end fw-bold fs-6 text-gray-800">{inr}
-                                        <?= ($subttl ) ?>
+                                        <?= ($subttl) ?>
                                     </div>
                                     <!--end::Number-->
                                 </div>
@@ -226,7 +226,7 @@
 
                                 <!--begin::Label-->
                                 <div class="text-end fw-bold fs-6 text-gray-800">{inr}
-                                    <?= ($subttl ) ?>
+                                    <?= ($subttl) ?>
                                 </div>
                                 <!--end::Label-->
                             </div>

@@ -183,5 +183,8 @@ class Student extends MY_Controller
         $record = $this->exam_model->get_shuffled_questions(1, 10);
         pre($record);
     }
+    function coupons(){
+        $this->view(__FUNCTION__);
+    }
 }
 ?>
