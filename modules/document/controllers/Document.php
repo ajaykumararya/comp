@@ -212,10 +212,14 @@ class Document extends MY_Controller
         $get = $this->center_model->get_center($this->id);
         if ($get->num_rows()) {
             $data = $get->row_array();
-            $data['state'] = $this->SiteModel->state($data['state_id']);
-            $data['city'] = $this->SiteModel->state($data['city_id']);
-            $output = $this->parse('frenchise_certificate', $data);
-            $this->pdf($output);
+            if($data['status'] && $data['isPending'] == 0 && $data['isDeleted'] == 0){
+                $data['state'] = $this->SiteModel->state($data['state_id']);
+                $data['city'] = $this->SiteModel->city($data['city_id']);
+                $output = $this->parse('frenchise_certificate', $data);
+                $this->pdf($output);
+            }
+            else
+                $this->not_found("Something went wrong..");
         }
         else
             $this->not_found("Certificate Not Found..");
