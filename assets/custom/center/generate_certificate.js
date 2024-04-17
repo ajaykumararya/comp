@@ -30,11 +30,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 targets: -1,
                 render: function (data, type, row) {
                     return `
-                    <a class="btn btn-sm btn-light-primary edit-record">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                    ${generate_link_btn(row.id, 'center_certificate')} 
-                    `;
+                    <div class="btn-group">
+                        <a class="btn btn-sm btn-light-info edit-record">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        ${generate_link_btn(row.id, 'center_certificate')} 
+                    </div>`;
                 }
             }
         ]
