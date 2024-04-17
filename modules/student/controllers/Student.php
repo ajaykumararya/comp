@@ -183,6 +183,7 @@ class Student extends MY_Controller
         $record = $this->exam_model->get_shuffled_questions(1, 10);
         pre($record);
     }
+    // this is only for referral code
     function coupons(){
         $this->view(__FUNCTION__);
     }

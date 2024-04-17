@@ -126,7 +126,7 @@ class Student_model extends MY_Model
                 $this->myWhere('sft', $condition);
                 break;
             case 'fetch_fee_transactions_group_by':
-                $this->db->select('sft.*,sft.payable_amount as ttl_amount')
+                $this->db->select('sft.*,SUM(sft.payable_amount) as ttl_amount,SUM(sft.discount) as ttl_discount')
                     ->join('student_fee_transactions as sft', "sft.student_id = s.id");
                 $this->db->group_by('sft.payment_id');
                 $this->myWhere('sft', $condition);

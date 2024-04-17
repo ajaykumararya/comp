@@ -40,8 +40,12 @@ $isCenterOrAdmin = $this->student_model->isAdminOrCenter();
                                     <td>' . $i++ . '</td>
                                     <td>' . $record->payment_date . '</td>
                                     <td>' . $record->payment_id . '</td>
-                                    <td class="fs-4 fw-bolder">' . $record->ttl_amount . '</td>
-                                    <td class="text-capitalize">' . $record->payment_type . '</td>
+                                    <td class="fs-4 fw-bolder">' . $record->ttl_amount .'
+                                    </td>
+                                    <td class="text-capitalize">' . $record->payment_type . (
+                                        $record->ttl_discount ? '
+                                        <small class="d-flex text-success">with Discount : &nbsp; {inr}'.$record->ttl_discount.'</small>' : ''
+                                    ).'</td>
                                     <td><div class="btn-group">
                                     ';
                                 if ($isCenterOrAdmin) {
@@ -108,17 +112,17 @@ if ($isCenterOrAdmin) {
     // 
     ?>
     <script id="formTemplate" type="text/x-handlebars-template">
-                    <input type="hidden" name="id" value="{{id}}">
+                        <input type="hidden" name="id" value="{{id}}">
     
-                    <div class="form-group mb-4">
-                        <label class="form-label">Date</label>
-                        <input type="text" name="date" class="form-control" placeholder="Enter Roll Number Prefix" value="{{date}}">
-                    </div>
-                    <div class="form-group mb-4">
-                        <label class="form-label">Date</label>
-                        <input type="text" name="date" class="form-control" placeholder="Enter Roll Number Prefix" value="{{date}}">
-                    </div>
-                </script>
+                        <div class="form-group mb-4">
+                            <label class="form-label">Date</label>
+                            <input type="text" name="date" class="form-control" placeholder="Enter Roll Number Prefix" value="{{date}}">
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="form-label">Date</label>
+                            <input type="text" name="date" class="form-control" placeholder="Enter Roll Number Prefix" value="{{date}}">
+                        </div>
+                    </script>
     <?php
 }
 
