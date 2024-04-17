@@ -72,7 +72,7 @@
         <img src="upload/{image}" style="width:94.7px;height:113px">
     </div> -->
     <div class="position-absolute" style="top:26%;left:39.5%;">{name}</div>
-    <div class="position-absolute" style="top:28%;left:39.5%;">{center_full_address}</div>
+    <div class="position-absolute" style="top:28%;left:39.5%;">{city}, &nbsp;{state}</div>
     <div class="position-absolute" style="top:29.7%;left:39.5%;">{institute_name}</div>
     <div class="position-absolute" style="top:31.6%;left:39.5%;">{certificate_issue_date}</div>
     <div class="position-absolute" style="top:33.4%;left:39.5%;">{valid_upto}</div>

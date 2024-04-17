@@ -211,7 +211,10 @@ class Document extends MY_Controller
     function franchise_certificate(){
         $get = $this->center_model->get_center($this->id);
         if ($get->num_rows()) {
-            $output = $this->parse('frenchise_certificate', $get->row_array());
+            $data = $get->row_array();
+            $data['state'] = $this->SiteModel->state($data['state_id']);
+            $data['city'] = $this->SiteModel->state($data['city_id']);
+            $output = $this->parse('frenchise_certificate', $data);
             $this->pdf($output);
         }
         else

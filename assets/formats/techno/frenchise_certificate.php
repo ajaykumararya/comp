@@ -76,7 +76,7 @@
 
         <div class="middle-div" style="">{center_number}</div>
 
-        <div class="middle-div" style="margin-top:0.3rem;">{center_full_address}</div>
+        <div class="middle-div" style="margin-top:0.3rem;">{city}, &nbsp;{state}</div>
         <div class="middle-div" style="margin-top:0.3rem">{name}</div>
         <div class="middle-div" style="margin-top:.55rem;">21-06-2025{certificate_issue_date}</div>
 

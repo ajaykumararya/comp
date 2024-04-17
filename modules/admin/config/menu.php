@@ -388,6 +388,8 @@ $config['center_area'] = array(
             'label' => 'Center Certificate',
             'type' => 'center_certificate',
             'icon' => array('notepad', 5),
+            'url' => 'center/generate-certificate',
+            /*
             'submenu' => array(
                 array(
                     'label' => 'Center Certificate',
@@ -401,7 +403,8 @@ $config['center_area'] = array(
                     'icon' => array('tablet-text-up', 3),
                     'url' => 'center/get-certificate',
                 )
-            )
+            )\
+            */
         ),
     )
 );

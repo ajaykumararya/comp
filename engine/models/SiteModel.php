@@ -23,6 +23,13 @@ class SiteModel extends MY_Model
         $this->db->where($where);
         return $this->db->get('state');
     }
+
+    function city($id){
+        return $this->db->where('DISTRICT_ID',$id)->get('district')->row('DISTRICT_NAME');
+    }
+    function state($id){
+        return $this->db->where('STATE_ID',$id)->get('state')->row('STATE_NAME');
+    }
     function list_page()
     {
         return $this->db->get('his_pages');
