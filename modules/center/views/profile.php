@@ -48,7 +48,8 @@
                                 <!--begin::Number-->
                                 <div class="d-flex align-items-center flex-wrap">
                                     <?= $this->ki_theme->keen_icon('people', 5, 1, 'outline text-success') ?>
-                                    <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="{ttl_student}">0</div>
+                                    <div class="fs-2 fw-bold" data-kt-countup="true"
+                                        data-kt-countup-value="{ttl_student}">0</div>
                                 </div>
                                 <!--end::Number-->
                                 <!--begin::Label-->
@@ -63,7 +64,8 @@
                                 <!--begin::Number-->
                                 <div class="d-flex align-items-center flex-wrap">
                                     <?= $this->ki_theme->keen_icon('book', 5, 1, 'outline text-success') ?>
-                                    <div class="fs-2 fw-bold me-5" data-kt-countup="true" data-kt-countup-value="{ttl_course}">0</div>
+                                    <div class="fs-2 fw-bold me-5" data-kt-countup="true"
+                                        data-kt-countup-value="{ttl_course}">0</div>
                                 </div>
                                 <!--end::Number-->
                                 <!--begin::Label-->
@@ -127,9 +129,9 @@
                 $active = $type == $tab ? 'active' : '';
                 $icon = '';
                 $link = $current_link;
-                if (isset ($data['url']) and $data['url'])
+                if (isset($data['url']) and $data['url'])
                     $link = "$current_link/{$data['url']}";
-                if (isset ($data['icon'])) {
+                if (isset($data['icon'])) {
                     list($class, $path) = $data['icon'];
                     $icon = $this->ki_theme->keen_icon($class, $path);
                 }

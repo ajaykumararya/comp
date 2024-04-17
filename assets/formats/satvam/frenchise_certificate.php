@@ -39,8 +39,8 @@
 
         #photo1 {
             z-index: 999;
-            top: 21.3rem;
-            right: 47px;
+            top: 30.3rem;
+            right: 12rem;
             width: 120px !important;
             ;
             height: 95px;
@@ -68,9 +68,9 @@
     <!-- <div class="position-absolute" id="photo">
         <img src="upload/images/student_certificate_{certiticate_id}.png">
     </div> -->
-    <!-- <div class="position-absolute" id="photo1">
-        <img src="upload/{image}" style="width:94.7px;height:113px">
-    </div> -->
+    <div class="position-absolute" id="photo1">
+        <img src="{document_path}/director_sign.png" style="width:94.7px;height:50px">
+    </div>
     <div class="position-absolute" style="top:26%;left:39.5%;">{name}</div>
     <div class="position-absolute" style="top:28%;left:39.5%;">{city}, &nbsp;{state}</div>
     <div class="position-absolute" style="top:29.7%;left:39.5%;">{institute_name}</div>

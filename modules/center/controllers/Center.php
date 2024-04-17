@@ -46,6 +46,11 @@ class Center extends MY_Controller
                 'icon' => array('eye', 3),
                 'url' => 'overview'
             ],
+            'documents' => [
+                'title' => 'Documents',
+                'icon' => array('file',5),
+                'url' => 'documents'
+            ],
             'change-password' => [
                 'title' => 'Change Password of Center',
                 'icon' => array('key', 4),

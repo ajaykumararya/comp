@@ -54,7 +54,7 @@
         }
 
         .middle-div {
-            margin-left: 13.2rem;
+            margin-left: 14rem;
         }
 
         .test {
@@ -64,23 +64,32 @@
 </head>
 
 <body class="position-relative">
-    <img id="back-image" class="position-relative" src="{document_path}/frenchise_certificate.png">
+    <img id="back-image" class="position-relative" src="{document_path}/franchise_certificate.png">
     <!-- <div class="position-absolute" id="photo">
         <img src="upload/images/student_certificate_{certiticate_id}.png">
     </div> -->
     <!-- <div class="position-absolute" id="photo1">
         <img src="upload/{image}" style="width:94.7px;height:113px">
     </div> -->
-    <div class="position-absolute" style="top:25%;left:17%;width:76%;text-align:center">{institute_name}</div>
-    <div class="position-absolute w-100" style="top:28%;padding-left:0px;z-index:9999">
+    <div class="position-absolute" style="top:25.2%;left:17%;width:76%;text-align:center">{institute_name}</div>
+
+    <div class="position-absolute" style="top:28.2%;left:29%;">{center_number}</div>
+    <div class="position-absolute" style="top:30.4%;left:29%;">{city}, &nbsp;{state}</div>
+    <div class="position-absolute" style="top:32.7%;left:29%;">{name}</div>
+    
+    <div class="position-absolute" style="top:35.1%;left: 27%">{certificate_issue_date}</div>
+    <div class="position-absolute" style="top:35.1%;left:69%">{valid_upto}</div>
+
+    <!-- <div class="position-absolute w-100" style="top:28.5%;padding-left:0px;z-index:9999">
 
         <div class="middle-div" style="">{center_number}</div>
 
-        <div class="middle-div" style="margin-top:0.3rem;">{city}, &nbsp;{state}</div>
+        <div class="middle-div" style="margin-top:0.5rem;">{city}, &nbsp;{state}</div>
         <div class="middle-div" style="margin-top:0.3rem">{name}</div>
-        <div class="middle-div" style="margin-top:.55rem;">21-06-2025{certificate_issue_date}</div>
+        <div class="middle-div" style="margin-top:.85rem;">{certificate_issue_date}</div>
+        <div class="middle-div" style="margin-top:-1rem;margin-left:69%">{valid_upto}</div>
 
-    </div>
+    </div> -->
 
 </body>
 
