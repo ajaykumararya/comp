@@ -435,7 +435,8 @@ $.fn.unDeleteEvent = function (table_name, title = '', id = 'id') {
 $.fn.EditForm = function (url, title = 'Edit Record') {
     var table = this;
     if (table) {
-        table.find('.edit-record').on('click', function () {
+        table.find('.edit-record').on('click', function (e) {
+            e.preventDefault();
             var rowData = table.DataTable().row($(this).closest('tr')).data();
             if (rowData) {
                 var templateSource = document.getElementById('formTemplate');
@@ -445,9 +446,11 @@ $.fn.EditForm = function (url, title = 'Edit Record') {
                     var formTemplate = template(rowData);
                     myModel(title, formTemplate, url).then((d) => {
                         // log(d);
+                      
                         if (d.status) {
                             table.DataTable().ajax.reload();
                             ki_modal.modal('hide');
+
                         }
                         else {
                             // alert('hi');
@@ -674,7 +677,9 @@ const loadSomeFuncation = () => {
             dateFormat: dateFormat
         });
         if ($('.selectdate').length) {
-            $('.selectdate').flatpickr();
+            $('.selectdate').flatpickr({
+                dateFormat: dateFormat
+            });
         }
         $(".single-year").flatpickr({
             enableTime: false, // Disable time selection

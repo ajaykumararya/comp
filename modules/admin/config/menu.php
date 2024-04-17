@@ -393,7 +393,7 @@ $config['center_area'] = array(
                     'label' => 'Center Certificate',
                     'type' => 'generate_center_certiificate',
                     'icon' => array('add-notepad', 4),
-                    'url' => 'center/generate-ceriticate',
+                    'url' => 'center/generate-certificate',
                 ),
                 array(
                     'label' => 'Get Certificate',

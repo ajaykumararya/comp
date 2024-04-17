@@ -61,5 +61,13 @@ class Center_model extends MY_Model
     function update_wallet($centre_id , $wallet){
         return $this->db->where('id',$centre_id)->update('centers',['wallet' => $wallet]);
     }
+    function verified_centers(){
+        $this->db->where('type','center');
+        $this->db->where('isPending',0);
+        $this->db->where('isDeleted',0);
+        $this->db->where('status',1);
+        $this->db->where('valid_upto !=','');
+        return $this->db->get('centers');
+    }
 }
 ?>

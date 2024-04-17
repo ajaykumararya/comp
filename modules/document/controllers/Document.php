@@ -207,6 +207,17 @@ class Document extends MY_Controller
             $this->not_found("Certificate Not Found..");
         }
     }
+
+    function franchise_certificate(){
+        $get = $this->center_model->get_center($this->id);
+        if ($get->num_rows()) {
+            $output = $this->parse('frenchise_certificate', $get->row_array());
+            $this->pdf($output);
+        }
+        else
+            $this->not_found("Certificate Not Found..");
+
+    }
     function pdf($pdfContent)
     {
         // $this->mypdf->load();

@@ -75,9 +75,9 @@ class Center extends Ajax_Controller
     function assign_course()
     {
         $where = $data = $this->post();
-        if (isset ($where['course_fee']))
+        if (isset($where['course_fee']))
             unset($where['course_fee']);
-        if (isset ($where['isDeleted']))
+        if (isset($where['isDeleted']))
             unset($where['isDeleted']);
         $get = $this->db->where($where)->get('center_courses');
         $data = $this->post();
@@ -125,6 +125,26 @@ class Center extends Ajax_Controller
                 'id' => $this->post('center_id')
             ]);
             $this->response('status', true);
+        }
+    }
+
+    function list_certificates()
+    {
+        $this->response(
+            'data',
+            $this->center_model->verified_centers()->result_array()
+        );
+    }
+    function update_dates()
+    {
+        if ($this->validation('check_center_dates')) {
+            $this->response(
+                'status',
+                $this->db->where('id', $this->post('id'))->update('centers', [
+                    'valid_upto' => $this->post('valid_upto'),
+                    'certificate_issue_date' => $this->post('certificate_issue_date')
+                ])
+            );
         }
     }
 }

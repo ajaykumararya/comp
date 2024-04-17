@@ -20,9 +20,9 @@ class Center extends MY_Controller
         $this->ki_theme->set_title('List Pedning Center(s)', true);
         $this->view('pending-list');
     }
-    function generate_ceriticate()
+    function generate_certificate()
     {
-        $this->view('generate-ceriticate');
+        $this->view('generate-certificate');
     }
     function get_certificate()
     {

@@ -318,7 +318,7 @@ $config = array(
             'label' => 'Password',
             'rules' => 'required'
         )
-    ), 
+    ),
     'change_password' => array(
         array(
             'field' => 'password',
@@ -366,6 +366,18 @@ $config = array(
             'errors' => array(
                 'required' => 'Please Choose %s'
             )
+        )
+    ),
+    'check_center_dates' => array(
+        array(
+            'field' => 'valid_upto',
+            'label' => 'Valid Upto',
+            'rules' => 'required'
+        ),
+        array(
+            'field' => 'certificate_issue_date',
+            'label' => 'Issue Date',
+            'rules' => 'required'
         )
     )
 );
