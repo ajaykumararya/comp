@@ -55,7 +55,7 @@
                                 <!-- <input type="text" name="batch_name" class="form-control" placeholder="Enter batch name"> -->
                             </div>
                             <?php
-                            if(PATH == 'zcc'):
+                            if(PATH == 'zcc' || CHECK_PERMISSION('CERTIFICATE_EXAM_CONDUCTED')):
                                 ?>
                             <div class="form-group col-md-4">
                                 <label for="" class="form-label">Examination Conducted Date</label>

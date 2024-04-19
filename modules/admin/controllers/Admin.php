@@ -25,4 +25,8 @@ class Admin extends MY_Controller
         $this->view('profile',$row);
     }
 
+    function test(){
+        echo $this->ki_theme->wallet_balance();
+    }
+
 }

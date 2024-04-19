@@ -258,6 +258,13 @@ document.addEventListener('DOMContentLoaded', function (e) {
             e.preventDefault();
             var submitButton = $(this).find('button');
 
+            if(!isValidWallet()){
+                low_balance_message();
+                return false;
+            }
+
+
+
             // Validate form before submit
             if (validator) {
                 // console.log(validator);

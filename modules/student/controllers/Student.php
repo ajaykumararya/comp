@@ -54,7 +54,8 @@ class Student extends MY_Controller
     }
     function admission()
     {
-        $this->view('admission');
+        $this->ki_theme->get_wallet_amount('student_admission_fees');
+        $this->view('admission');   
     }
     function online_admission()
     {

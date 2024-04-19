@@ -115,7 +115,7 @@
     <p class="position-absolute" style="top:32.6%;left:31.5%">{student_name}</p>
     <p class="position-absolute" style="top:34.6%;left:31.5%">{father_name}</p>
 
-    <p class="position-absolute " style="top:36.6%;left:31.5%">{father_name}</p>
+    <p class="position-absolute " style="top:36.6%;left:31.5%">{mother_name}</p>
     <p class="position-absolute " style="top:38.6%;left:31.5%">{roll_no}</p>
     <p class="position-absolute " style="top:40.6%;left:31.5%">{enrollment_no}</p>
     <p class="position-absolute " style="top:42.6%;left:31.5%">{course_name}</p>

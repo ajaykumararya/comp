@@ -49,8 +49,10 @@ document.addEventListener('DOMContentLoaded', function (e) {
             },
             {
                 targets: -2,
-                render: function (data) {
-                    return `<span class="fs-3 text-dark text-center fw-bold">${inr} ${numberFormat(data)} </span><button class="btn btn-sm btn-primary w-100 p-1 load-wallet">&nbsp;<i class="fa fa-plus"></i></button>`;
+                render: function (data, type, row) {
+                    if (wallet_system)
+                        return `<span class="fs-3 text-dark text-center fw-bold">${inr} ${numberFormat(data)} </span><button class="btn btn-sm btn-primary w-100 p-1 load-wallet">&nbsp;<i class="fa fa-plus"></i></button>`;
+                    return row.center_full_address;
                 }
             },
             {
@@ -91,12 +93,15 @@ document.addEventListener('DOMContentLoaded', function (e) {
         ]
     })
     table.on('draw', function () {
+
         $('#list_center').EditForm('center/edit-rollno_prefix', 'Update Roll Number Prefix')
             .DeleteEvent('centers', 'Center')
             .EditAjax('center/edit-form', 'Center');
-        table.on('click', '.load-wallet', function () {
-            let centre = $('#list_center').DataTable().row($(this).closest('tr')).data();
-            myModel(`Load Wallet of <b class="text-success">${centre.name}</b>`, `
+        if (wallet_system) {
+            $('#list_center thead th').eq(6).text('Wallet');
+            table.on('click', '.load-wallet', function () {
+                let centre = $('#list_center').DataTable().row($(this).closest('tr')).data();
+                myModel(`Load Wallet of <b class="text-success">${centre.name}</b>`, `
                         <!--begin::Input wrapper-->
                         <div class="d-flex flex-column mb-8 fv-row">
                             <!--begin::Label-->
@@ -127,50 +132,51 @@ document.addEventListener('DOMContentLoaded', function (e) {
 
             `).then((e) => {
 
-                const options = $(e.modal).find('[data-kt-docs-advanced-forms="interactive"]');
-                const inputEl = $(e.modal).find('[name="amount"]');
-                // log(inputEl)
-                options.on('click', e => {
-                    e.preventDefault();
-                    inputEl.val($(e.target).html());
-                });
+                    const options = $(e.modal).find('[data-kt-docs-advanced-forms="interactive"]');
+                    const inputEl = $(e.modal).find('[name="amount"]');
+                    // log(inputEl)
+                    options.on('click', e => {
+                        e.preventDefault();
+                        inputEl.val($(e.target).html());
+                    });
 
-                $(e.modal).find('form').submit(r => {
-                    r.preventDefault();
-                    let amount = inputEl.val();
-                    let description = $(e.modal).find('textarea').val();
-                    if (amount) {
-                        // amount min value 100
-                        if (amount >= 100) {
-                            $.AryaAjax({
-                                url: 'ajax/centre-wallet-load',
-                                data: {
-                                    name: centre.name,
-                                    centre_id: centre.id,
-                                    amount: amount,
-                                    description: description,
-                                    closing_balance: centre.wallet,
-                                }
-                            }).then(result => {
-                                SwalSuccess('Wallet Loaded Successfully..').then( ok => {
-                                    if(ok.isConfirmed){
-                                        $('#list_center').DataTable().ajax.reload();
-                                        ki_modal.modal('hide');
+                    $(e.modal).find('form').submit(r => {
+                        r.preventDefault();
+                        let amount = inputEl.val();
+                        let description = $(e.modal).find('textarea').val();
+                        if (amount) {
+                            // amount min value 100
+                            if (amount >= 100) {
+                                $.AryaAjax({
+                                    url: 'ajax/centre-wallet-load',
+                                    data: {
+                                        name: centre.name,
+                                        centre_id: centre.id,
+                                        amount: amount,
+                                        description: description,
+                                        closing_balance: centre.wallet,
                                     }
+                                }).then(result => {
+                                    SwalSuccess('Wallet Loaded Successfully..').then(ok => {
+                                        if (ok.isConfirmed) {
+                                            $('#list_center').DataTable().ajax.reload();
+                                            ki_modal.modal('hide');
+                                        }
+                                    });
                                 });
-                            });
+                            }
+                            else
+                                SwalWarning(`Please Enter amount minimum 100 ${inr}`);
                         }
-                        else
-                            SwalWarning(`Please Enter amount minimum 100 ${inr}`);
-                    }
-                    else {
-                        SwalWarning(`Please Enter Amount ${inr}`)
+                        else {
+                            SwalWarning(`Please Enter Amount ${inr}`)
 
-                    }
+                        }
+                    });
+
+
                 });
-
-
-            });
-        })
+            })
+        }
     });
 });

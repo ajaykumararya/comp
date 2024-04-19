@@ -130,6 +130,7 @@ if (myeditor.length) {
     });
     */
 }
+
 if ($.isFunction($.fn.maxlength)) {
     $('[maxlength]').maxlength({
         warningClass: "badge badge-primary",
@@ -446,7 +447,7 @@ $.fn.EditForm = function (url, title = 'Edit Record') {
                     var formTemplate = template(rowData);
                     myModel(title, formTemplate, url).then((d) => {
                         // log(d);
-                      
+
                         if (d.status) {
                             table.DataTable().ajax.reload();
                             ki_modal.modal('hide');
@@ -698,6 +699,18 @@ const loadSomeFuncation = () => {
         $('.timer').prop('disabled', !$(this).is(':checked'));
     });
 };
+const isWalletSystem = () => {
+    return login_type == 'center' && wallet_system;
+}
+const isValidWallet = () => {
+    if (isWalletSystem()) {
+        return wallet_balance >= 0;
+    }
+    return true;
+}
+const low_balance_message = () => {
+    SwalWarning('Uh oh!','Your wallet balance is running low.');
+}
 document.addEventListener('DOMContentLoaded', loadSomeFuncation);
 // loadSomeFuncation();
 const checkSound = () => {
@@ -1204,7 +1217,7 @@ if (filemanager) {
                             }
                         })
                     })
-                    $(document).off('change','#fileInput').on('change', '#fileInput', function (e) {
+                    $(document).off('change', '#fileInput').on('change', '#fileInput', function (e) {
                         var selectedFile = e.target.files[0];
                         if (!selectedFile) {
                             SwalWarning('Please select a file to upload.');
@@ -1666,7 +1679,7 @@ if (setting_table.length) {
         let id = parseInt(atob(data[data.length - 1]));
         if (id) {
             SwalWarning('Confirmation!', 'Are you sure you want to delete it.', true, 'delete it').then((r) => {
-                if (r.isConfirmed) { 
+                if (r.isConfirmed) {
                     $.AryaAjax({
                         url: 'cms/delete-content',
                         data: { id: id },

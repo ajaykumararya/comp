@@ -220,17 +220,20 @@
                         <div class="app-navbar flex-shrink-0">
 
                             <?php
-                            if ($this->center_model->isCenter()) {
+                            if ($this->center_model->isCenter() && CHECK_PERMISSION('WALLET_SYSTEM')) {
                                 ?>
                                 <!--begin::Wallet-->
                                 <div class="app-navbar-item ms-1 ms-md-4 text-center ">
                                     <!--begin::Menu wrapper-->
-                                    <label class="border border-primary border-dotted p-2 fs-2" style="border-radius:10px;min-width:200px">
-                                        <span data-kt-countup="true" data-kt-countup-value="<?=$center_data['wallet']?>" data-kt-countup-prefix='{inr}'>0</span>
-                                        
+                                    <label class="border border-primary border-dotted p-2 fs-2"
+                                        style="border-radius:10px;min-width:200px">
+                                        <span data-kt-countup="true" data-kt-countup-value="<?= $center_data['wallet'] ?>"
+                                            data-kt-countup-prefix='{inr}'>0</span>
+
                                         <button class="btn btn-primary p-1 btn-sm">&nbsp;<i class="fa fa-plus"></i></button>
-                                        
-                                        <small class="d-flex" style="font-size:12px;    justify-content: center;">My Wallet</small>
+
+                                        <small class="d-flex" style="font-size:12px;    justify-content: center;">My
+                                            Wallet</small>
                                     </label>
                                     <!--end::Menu wrapper-->
                                 </div>
@@ -532,6 +535,7 @@
                         <div id="kt_app_content" class="app-content  flex-column-fluid ">
                             <!--begin::Content container-->
                             <div id="kt_app_content_container" class="app-container  container-xxl ">
+                                {wallet_message}
                                 {page_output}
                             </div>
                             <!--end::Content container-->
@@ -673,13 +677,15 @@
         ajax_url = base_url + 'ajax/';
     const login_type = '<?= $this->center_model->login_type() ?>';
     const all_templates = '';
+    const wallet_system = <?= CHECK_PERMISSION('WALLET_SYSTEM') ?>;
+    const wallet_balance = <?= $this->ki_theme->wallet_balance() ?>;
     // console.log(content_css);
     // Default vars of this project
     <?php
     foreach ($this->ki_theme->default_vars() as $var => $var_value) {
-        ?>
-        const <?= $var ?> = `<?= $var_value ?>`;
-        <?php
+    ?>
+    const <?= $var ?> = `<?= $var_value ?>`;
+    <?php
     }
     ?>   </script>
 <!--begin::Global Javascript Bundle(mandatory for all pages)-->

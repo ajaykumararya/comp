@@ -261,10 +261,16 @@ class Student_model extends MY_Model
     {
         return $this->get_switch('batch', ['batch_id' => $batch_id]);
     }
-    function fix_payment_settings($id = 0, $isDeleted = 0)
+    function fix_payment_settings($type = 0,$status = 1, $isDeleted = 0)
     {
-        if ($id)
-            $this->db->where('id', $id);
+        if(is_array($type))
+            $this->db->where($type);
+        else if ($type)
+            $this->db->where('key', $type);
+        if(!is_bool($status)){
+            $this->db->where('status',$status);
+        }
+
         $this->db->where('isDeleted', $isDeleted);
         return $this->db->get('student_fix_payment');
     }

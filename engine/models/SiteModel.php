@@ -43,7 +43,7 @@ class SiteModel extends MY_Model
         $allPages = [];
         if (count($where))
             $this->db->where($where);
-        $this->db->where('isMenu', 1);
+        // $this->db->where('isMenu', 1);
         $query = $this->db->order_by('sort')
             ->get('his_pages');
         $ref = [];
@@ -58,10 +58,12 @@ class SiteModel extends MY_Model
             $thisRef['target'] = $data->redirection ? 'target="_blank"' : '';
             $thisRef['isActive'] = (!start_with($data->link, 'http')) ? (uri_string() === $data->link) : false;
             $allPages[$thisRef['link']] = $thisRef;
-            if ($data->parent_id == 0)
-                $items[$data->id] = &$thisRef;
-            else
-                $ref[$data->parent_id]['child'][$data->id] = &$thisRef;
+            if($data->isMenu){
+                if ($data->parent_id == 0)
+                    $items[$data->id] = &$thisRef;
+                else
+                    $ref[$data->parent_id]['child'][$data->id] = &$thisRef;
+            }
         }
         if ($withPagesArray)
             return ['menus' => $items, 'all_pages_link' => $allPages];
@@ -72,6 +74,8 @@ class SiteModel extends MY_Model
         $this->db->insert('his_pages', $data);
         return $this->db->insert_id();
     }
+
+
     function add_page_content($data)
     {
         $this->db->insert('his_page_content', $data);

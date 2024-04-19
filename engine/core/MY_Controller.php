@@ -50,14 +50,17 @@ class MY_Controller extends MX_Controller
             $this->set_data([
                 'owner_name' => $centreRow->name,
                 'owner_email' => $centreRow->email,
-                'type' => ucwords($this->center_model->login_type())
+                'type' => ucwords($this->center_model->login_type()),
+                'wallet' => $centreRow->wallet
             ]);
+            $this->ki_theme->set_wallet($centreRow->wallet);
         }
         $get = $this->db->select('active_page')->where('type', 'admin')->get('centers');
         if ($get->num_rows()) {
             defined('DefaultPage') or define('DefaultPage', $get->row("active_page"));
         }
     }
+    
     function encode($id = 0)
     {
         return $this->ki_theme->encrypt($id);
@@ -145,6 +148,11 @@ class MY_Controller extends MX_Controller
             $this->public_data[$data] = $value;
         return $this;
     }
+    function get_data($index = ''){
+        if(isset($this->public_data[$index]))
+            return $this->public_data[$index];
+        return;
+    }
     function parse($file, $data = [], $return = false)
     {
         $this->set_data($data);
@@ -162,12 +170,14 @@ class MY_Controller extends MX_Controller
         } else
             $this->parse('student/panel/login');
     }
+    
     function __common_view($view, $data = [])
     {
         if (($this->ki_theme->isValidUrl() or $this->isValidUrl) or (isset($data['isValid']) and $data['isValid'])) {
             $module = $this->load->get_module();
             $file = strtolower($this->router->fetch_method());
             $jsFile = "assets/custom/{$module}/{$file}.js";
+            $this->set_data('wallet_message',$this->ki_theme->wallet_message());
             if (!isset($this->public_data['js_file']))
                 $this->public_data['js_file'] = '';
             if (file_exists(FCPATH . $jsFile)) {

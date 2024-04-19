@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', function (e) {
     const table = $('#student-payment-setting');
     const form = document.getElementById('set-fees');
     const save_url = 'payment/save-student-payment-setting';
-    var index = 1;
     // table.DataTable();
     if (form) {
         var validator = MyFormValidation(form);
@@ -12,7 +11,8 @@ document.addEventListener('DOMContentLoaded', function (e) {
             searching: false,
             'ajax': {
                 'url': ajax_url + 'payment/student-payment-setting',
-                'type': 'GET',
+                'type': 'POST',
+                data : {type : 'student'},
                 success: function (d) {
                     console.log(d);
                     if (d.data && d.data.length) {
@@ -55,8 +55,8 @@ document.addEventListener('DOMContentLoaded', function (e) {
             'columnDefs': [
                 {
                     targets: 0,
-                    render: function (data, type, row) {
-                        return `${index++}.`;
+                    render: function (data, type, row,meta) {
+                        return `${meta.row + 1}.`;
                     }
                 },
                 {
