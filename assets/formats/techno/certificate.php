@@ -62,7 +62,7 @@
 </head>
 
 <body class="position-relative">
-    <div class="position-absolute" style="top:6%;left:80%">{certiticate_id}</div>
+    <div class="position-absolute" style="top:6%;left:80%">{serial_no}</div>
     <img id="back-image" class="position-relative" src="{document_path}/certificate.png">
     <div class="position-absolute" id="photo">
         <img src="upload/images/student_certificate_{certiticate_id}.png">
@@ -77,12 +77,13 @@
         
             <div class="middle-div" style="margin-top:1.2rem;margin-left:9.4rem">{father_name}</div>
             <div class="middle-div" style="margin-top:1.34rem">{roll_no}</div>
-            <div class="middle-div" style="margin-top:3.6rem">{course_name}</div>
+            
             <div class="middle-div" style="margin-top:1rem;margin-left:2rem">{duration} {duration_type}</div>
             
-            <div class="middle-div" style="margin-top:3.54rem">{center_name}</div>
 
     </div>
+    <div class="position-absolute w-100" style="top:48.3rem;left:16rem">{course_name}</div>
+    <div class="position-absolute w-100" style="top:55.54rem;left:13rem">{center_name}</div>
     <div class="position-absolute w-100" style="top:66.2%;left:70%">{obtain_total}</div>
     <div class="position-absolute w-100" style="top:69.7%;left:33%">{grade}</div>
     <div class="position-absolute" style="bottom:9%;left:18%">{createdOn}</div>

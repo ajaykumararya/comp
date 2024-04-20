@@ -73,4 +73,8 @@ class Site extends Site_Controller
         $this->render($content, 'content');
         // pre($this->public_data,true);
     }
+    function test(){
+        $year = '2024';
+        echo str_pad(9,3,'0',STR_PAD_LEFT);
+    }
 }

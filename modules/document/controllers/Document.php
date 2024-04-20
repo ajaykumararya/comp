@@ -101,6 +101,7 @@ class Document extends MY_Controller
             $certificate = ($get->row_array());
             $admissionTime = strtotime( $certificate['admission_date']);
             $this->set_data('from_date',date('M Y',$admissionTime));
+            $this->set_data('serial_no',date("Y",$admissionTime).str_pad($certificate['certiticate_id'],3,'0',STR_PAD_LEFT));
             $toDateString = strtotime( $certificate['createdOn']);
             $duration = $certificate['duration'];
             if($certificate['duration_type'] == 'month'){
