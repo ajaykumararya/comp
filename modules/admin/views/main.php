@@ -677,7 +677,7 @@
         ajax_url = base_url + 'ajax/';
     const login_type = '<?= $this->center_model->login_type() ?>';
     const all_templates = '';
-    const wallet_system = Boolean(`<?= CHECK_PERMISSION('WALLET_SYSTEM')?>`);
+    const wallet_system = Boolean(`<?=CHECK_PERMISSION('WALLET_SYSTEM')?>`);
     const wallet_balance = <?= $this->ki_theme->wallet_balance() ?? 0 ?>;
     // console.log(content_css);
     // Default vars of this project
