@@ -7,12 +7,12 @@
             <div class="me-7 mb-4 " align="center">
                 <input type="hidden" id="student_id" value="{student_id}">
                 <?php
-                $file_exists = file_exists('upload/'.$image);
+                $file_exists = file_exists('upload/' . $image);
                 ?>
                 <style>
                     .image-input-empty {
                         background-image: url('{base_url}assets/media/svg/avatars/blank.svg') !important;
-                        background-size:100% 100%!important
+                        background-size: 100% 100% !important
                     }
 
                     [data-bs-theme="dark"] .image-input-empty {
@@ -20,56 +20,55 @@
                     }
                 </style>
                 <!--begin::Image input-->
-                <div class="image-input image-input-<?=$file_exists ? 'placeholder' : 'empty'?>" data-kt-image-input="true"
-                style="
+                <div class="image-input image-input-<?= $file_exists ? 'placeholder' : 'empty' ?>"
+                    data-kt-image-input="true" style="
                 <?php
-                if($file_exists){
-                    echo 'background-image:url('.base_url('upload/'.$image).')!important;
+                if ($file_exists) {
+                    echo 'background-image:url(' . base_url('upload/' . $image) . ')!important;
                     background-size:100% 100%!important';
                 }
                 ?>
-                "
-                >
+                ">
                     <!--begin::Image preview wrapper-->
                     <div class="image-input-wrapper w-125px h-125px"></div>
                     <!--end::Image preview wrapper-->
                     <?php
-                    if($this->center_model->isAdminOrCenter()){
-                    ?>
-                    <!--begin::Edit button-->
-                    <label
-                        class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
-                        data-kt-image-input-action="change" data-bs-toggle="tooltip" data-bs-dismiss="click"
-                        title="Change avatar">
-                        <i class="ki-duotone ki-pencil fs-6"><span class="path1"></span><span class="path2"></span></i>
+                    if ($this->center_model->isAdminOrCenter()) {
+                        ?>
+                        <!--begin::Edit button-->
+                        <label
+                            class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                            data-kt-image-input-action="change" data-bs-toggle="tooltip" data-bs-dismiss="click"
+                            title="Change avatar">
+                            <i class="ki-duotone ki-pencil fs-6"><span class="path1"></span><span class="path2"></span></i>
 
-                        <!--begin::Inputs-->
-                        <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
-                        <input type="hidden" name="avatar_remove" />
-                        <!--end::Inputs-->
-                    </label>
-                    <!--end::Edit button-->
+                            <!--begin::Inputs-->
+                            <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                            <input type="hidden" name="avatar_remove" />
+                            <!--end::Inputs-->
+                        </label>
+                        <!--end::Edit button-->
 
-              
 
-                    <!--begin::Cancel button-->
-                    <span
-                        class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
-                        data-kt-image-input-action="cancel" data-bs-toggle="tooltip" data-bs-dismiss="click"
-                        title="Cancel avatar">
-                        <i class="ki-outline ki-cross fs-3"></i>
-                    </span>
-                    <!--end::Cancel button-->
 
-                    <!--begin::Remove button-->
-                    <span
-                        class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
-                        data-kt-image-input-action="remove" data-bs-toggle="tooltip" data-bs-dismiss="click"
-                        title="Remove avatar">
-                        <i class="ki-outline ki-cross fs-3"></i>
-                    </span>
-                    <!--end::Remove button-->
-                    <?php
+                        <!--begin::Cancel button-->
+                        <span
+                            class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                            data-kt-image-input-action="cancel" data-bs-toggle="tooltip" data-bs-dismiss="click"
+                            title="Cancel avatar">
+                            <i class="ki-outline ki-cross fs-3"></i>
+                        </span>
+                        <!--end::Cancel button-->
+
+                        <!--begin::Remove button-->
+                        <span
+                            class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                            data-kt-image-input-action="remove" data-bs-toggle="tooltip" data-bs-dismiss="click"
+                            title="Remove avatar">
+                            <i class="ki-outline ki-cross fs-3"></i>
+                        </span>
+                        <!--end::Remove button-->
+                        <?php
                     }
                     ?>
                 </div>
@@ -144,6 +143,7 @@
                                 <!--end::Label-->
                             </div>
                             <!--end::Stat-->
+
                             <!--begin::Stat-->
                             <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                 <!--begin::Number-->
@@ -156,6 +156,30 @@
                                 <!--end::Label-->
                             </div>
                             <!--end::Stat-->
+                            <?php
+                            if (CHECK_PERMISSION('REFERRAL_ADMISSION')) {
+                                ?>
+                                <!--begin::Stat-->
+                            <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                <!--begin::Number-->
+                                <div class="d-flex align-items-center flex-wrap">
+                                    <?= $this->ki_theme->keen_icon('people', 5, 1, 'outline text-success') ?>
+                                    <div class="fs-2 fw-bold me-5" data-kt-countup="true"
+                                        data-kt-countup-value="<?=$this->student_model->coupon_by($student_id)->num_rows()?>">0</div>
+                                </div>
+                                <!--end::Number-->
+                                <!--begin::Label-->
+                                <div class="fw-semibold fs-6 text-gray-500 align-items-center flex-wrap w-100">
+                                    Students Referred By
+                                </div>
+                                <!--end::Label-->
+                            </div>
+                            <!--end::Stat-->
+                                <?php
+                            }
+                            ?>
+
+
                         </div>
                         <!--end::Stats-->
                     </div>
@@ -210,6 +234,7 @@
 <!--end::Navbar-->
 <!--begin::details View-->
 <?php
+$this->ki_theme->check_it_referral_stduent($student_id);
 // echo $student_id;
 if (file_exists(__DIR__ . '/panel/' . $tab . EXT)) {
     echo $this->parser->parse('student/panel/' . $tab, $student_details, true);

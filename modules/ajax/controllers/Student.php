@@ -543,5 +543,18 @@ class Student extends Ajax_Controller
     function coupons(){
         $this->response('data' , $this->student_model->coupons()->result_array());
     }
+    function coupon_update(){
+        $this->response('status',
+        $this->db->where('id',$this->post('id'))->update('referral_coupons',[
+            'isUsed' => $this->post('isUsed')
+        ]));
+        $this->response('last_query',$this->db->last_query());
+    }
+    function coupon_update_form(){
+        $this->response('status',true);
+        $this->response('url','student/coupon-update');
+        $this->set_data($this->student_model->get_coupon_by_id($this->post('id'))->row_array());
+        $this->response('form',$this->template('update-coupon-status'));
+    }
 
 }

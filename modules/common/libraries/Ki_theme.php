@@ -102,18 +102,18 @@ class Ki_theme
                 return 'D';
         }
 
-        if(PATH == 'psdmt'){
-            if($score >= 90 && $score <= 100)
+        if (PATH == 'psdmt') {
+            if ($score >= 90 && $score <= 100)
                 return 'S';
-            else if($score >= 70 && $score <= 89)
+            else if ($score >= 70 && $score <= 89)
                 return 'A+';
-            else if($score >= 50 && $score <= 59)
+            else if ($score >= 50 && $score <= 59)
                 return 'A';
-            else if($score >= 30 && $score <= 49)
+            else if ($score >= 30 && $score <= 49)
                 return 'B';
             else
                 return 'C';
-            
+
         }
     }
     function generate_qr($id = 0, $type = '', $data = '')
@@ -1285,6 +1285,17 @@ class Ki_theme
                 </div>';
         }
         return '';
+    }
+
+    function check_it_referral_stduent($student_id)
+    {
+        if (CHECK_PERMISSION('REFERRAL_ADMISSION')) {
+            $check = $this->CI->student_model->check_is_referred($student_id);
+            if ($check->num_rows()) {
+                $coupon_student_name = $this->CI->db->where('id', $check->row('coupon_by'))->get('students')->row('name');
+                echo alert('This student is Referred via <a class="text-dark" href="' . base_url('student/profile/' . $check->row('coupon_by')) . '" target="_blank"><i class="fa fa-user text-dark fs-2"></i>' . $coupon_student_name . '</a>', 'danger fs-2');
+            }
+        }
     }
 }
 ?>

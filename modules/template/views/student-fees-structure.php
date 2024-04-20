@@ -10,6 +10,7 @@ if ($center_course->num_rows()) {
 // $calTotalFee = $this->student_model->total_course_fee($institute_id,$course_id);
 // echo $calTotalFee;
 $monthNum = get_month_number($admission_date);
+$this->ki_theme->check_it_referral_stduent($student_id);
 ?>
 <style>
     input.form-control.form-control-sm:read-only {

@@ -97,7 +97,8 @@ class Student_model extends MY_Model
                     $this->db->group_start()->like('s.name', $search);
                     $this->db->or_like('s.roll_no', $search);
                     $this->db->or_like('s.contact_number', $search);
-                    $this->db->or_like('s.alternative_mobile', $search)->group_end();
+                    $this->db->or_like('s.alternative_mobile', $search)
+                    ->group_end();
                 }
                 // $this->db->where('s.admission_status',1);
                 break;
@@ -363,5 +364,17 @@ class Student_model extends MY_Model
                 ->join('students as rs','rs.id = rc.coupon_by')
                 ->order_by('rc.id','DESC');
         return $this->db->get();
+    }
+    function get_coupon_by_id($id){
+        return $this->db->
+        
+            select('*,DATE_FORMAT(timestamp,"%d-%m-%Y") as create_time,DATE_FORMAT(update_time,"%d-%m-%Y") as update_time ')->
+            where('id',$id)->get('referral_coupons');
+    }
+    function coupon_by($student_id){
+        return $this->db->where('coupon_by',$student_id)->get('referral_coupons');
+    }
+    function check_is_referred($student_id){
+        return $this->db->where('student_id',$student_id)->get('referral_coupons');
     }
 }
