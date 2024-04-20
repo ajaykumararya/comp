@@ -109,7 +109,7 @@ function pre($array = [], $flg = false)
 
 function CHECK_PERMISSION($type)
 {
-    return defined($type) ? constant($type) == 'yes' : 'false';
+    return defined($type) ? constant($type) == 'yes' : false;
 }
 
 
