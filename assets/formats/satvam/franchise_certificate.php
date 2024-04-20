@@ -69,7 +69,7 @@
         <img src="upload/images/student_certificate_{certiticate_id}.png">
     </div> -->
     <div class="position-absolute" id="photo1">
-        <img src="{upload}/director_sign.png" style="width:94.7px;height:50px">
+        <img src="{document_path}/director_sign.png" style="width:94.7px;height:50px">
     </div>
     <div class="position-absolute" style="top:26%;left:39.5%;">{name}</div>
     <div class="position-absolute" style="top:28%;left:39.5%;">{city}, &nbsp;{state}</div>
