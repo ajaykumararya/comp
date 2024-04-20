@@ -51,9 +51,9 @@ class MY_Controller extends MX_Controller
                 'owner_name' => $centreRow->name,
                 'owner_email' => $centreRow->email,
                 'type' => ucwords($this->center_model->login_type()),
-                'wallet' => $centreRow->wallet
+                'wallet' => @$centreRow->wallet
             ]);
-            $this->ki_theme->set_wallet($centreRow->wallet);
+            $this->ki_theme->set_wallet(@$centreRow->wallet);
         }
         $get = $this->db->select('active_page')->where('type', 'admin')->get('centers');
         if ($get->num_rows()) {

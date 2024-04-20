@@ -8,7 +8,6 @@ class Document extends MY_Controller
         $this->load->library('common/mypdf');
         $this->id = $this->decode($this->uri->segment(2, '0'));
     }
-
     function admit_card()
     {
         $get = $this->student_model->admit_card(['id' => $this->id]);
@@ -40,7 +39,6 @@ class Document extends MY_Controller
         if ($get->num_rows()) {
             $result_id = $get->row('result_id');
             $this->ki_theme->generate_qr($result_id, 'marksheet', current_url());
-
             $get_subect_numers = $this->student_model->marksheet_marks($result_id);
             // echo $get->row('result_id');
             // pre($get_subect_numers->result_array());
@@ -51,7 +49,6 @@ class Document extends MY_Controller
                 $ttlpminm =
                 $ttlpmaxm = 0;
             if ($ttl_subject = $get_subect_numers->num_rows()) {
-
                 foreach ($get_subect_numers->result() as $mark) {
                     $tmm = $this->isMark($mark->theory_max_marks);
                     $pmm = $this->isMark($mark->practical_max_marks);
@@ -68,17 +65,14 @@ class Document extends MY_Controller
                         'theory_max_marks' => $tmm,
                         'practical_min_marks' => $pmim,
                         'practical_max_marks' => $pmm,
-
                         'theory_total' => $mark->theory_marks,
                         'practical_total' => $mark->practical,
-
                         'total' => $this->isMark($mark->ttl),
                     ];
                     $ob_ttl += $mark->ttl;
                     array_push($subject_marks, $marks);
                 }
                 $per = number_format((($ob_ttl / ( $ttltmaxm + $ttlpmaxm) ) * 100), 2);
-
             }
             $main = [
                 'total' => $ttl,
@@ -113,10 +107,8 @@ class Document extends MY_Controller
                 $toDateString = strtotime("+$duration months",$admissionTime);
             }
             else if($certificate['duration_type'] == 'year'){
-                
                 $toDateString = strtotime("+$duration years",$admissionTime);
             }
-            
             $toDateString = strtotime('-1 month',$toDateString);
             $this->set_data('to_date',date('M Y',$toDateString));
             $this->set_data('exam_conduct_date','');
@@ -135,16 +127,12 @@ class Document extends MY_Controller
                 $this->set_data('enrollment_no', $row->enrollment_no);
                 $subject_marks = [];
                 $get_subect_numers = $this->student_model->marksheet_marks($final_marksheet->row("result_id"));
-
                 $per = $ttl = $ob_ttl = 0;
-
-
                 $ttltminm =
                     $ttltmaxm =
                     $ttlpminm =
                     $ttlpmaxm = 0;
                 if ($ttl_subject = $get_subect_numers->num_rows()) {
-
                     foreach ($get_subect_numers->result() as $mark) {
                         $tmm = $this->isMark($mark->theory_max_marks);
                         $pmm = $this->isMark($mark->practical_max_marks);
@@ -161,17 +149,14 @@ class Document extends MY_Controller
                             'theory_max_marks' => $tmm,
                             'practical_min_marks' => $pmim,
                             'practical_max_marks' => $pmm,
-
                             'theory_total' => $mark->theory_marks,
                             'practical_total' => $mark->practical,
-
                             'total' => $this->isMark($mark->ttl),
                         ];
                         $ob_ttl += $mark->ttl;
                         array_push($subject_marks, $marks);
                     }
                     $per = number_format((($ob_ttl / ( $ttltmaxm + $ttlpmaxm)) * 100), 2);
-
                 }
                 $main = [
                     'total' => $ttl,
@@ -179,35 +164,28 @@ class Document extends MY_Controller
                     'marks' => $subject_marks,
                     'percentage' => $per,
                     'grade' => $this->calculateGrade($per),
-
                     'total_max_theory' => $ttltmaxm,
                     'total_min_theory' => $ttltminm,
                     'total_max_practical' => $ttlpmaxm,
                     'total_min_practical' => $ttlpminm
                 ];
-                
                 // pre($main,true);
                 $this->set_data($main);
             }
-
             // pre($certificate,true);
             $this->ki_theme->generate_qr($this->id, 'student_certificate', current_url());
             // $getLastExam = $this->student_model->last_marksheet($certificate['course_id']);
             $this->set_data($certificate);
-
             // $fullData = $this->student_model->marksheet([
             //     ''
             // ]);
             // pre($certificate,true);
             $output = $this->parse('certificate', $certificate);
             $this->pdf($output);
-
-
         } else {
             $this->not_found("Certificate Not Found..");
         }
     }
-
     function franchise_certificate(){
         $get = $this->center_model->get_center($this->id);
         if ($get->num_rows()) {
@@ -216,7 +194,7 @@ class Document extends MY_Controller
                 if($data['valid_upto'] && $data['certificate_issue_date']){
                     $data['state'] = $this->SiteModel->state($data['state_id']);
                     $data['city'] = $this->SiteModel->city($data['city_id']);
-                    $output = $this->parse('frenchise_certificate', $data);
+                    $output = $this->parse('franchise_certificate', $data);
                     $this->pdf($output);
                 }
                 else
@@ -227,7 +205,6 @@ class Document extends MY_Controller
         }
         else
             $this->not_found("Certificate Not Found..");
-
     }
     function pdf($pdfContent)
     {
@@ -237,19 +214,16 @@ class Document extends MY_Controller
         $pdfData = $this->mypdf->Output();
         // Get the PDF content as a string
         // $pdfData = $this->mypdf->OutputFile('asd.pdf'); // 'S' option for return as string
-
         // Set the appropriate headers
         // header('Content-Type: application/pdf');
         // header('Content-Disposition: inline; filename="filename.pdf"'); // 'inline' option to display in browser
         // header('Content-Length: ' . strlen($pdfData));
-
         // // Send PDF content to the browser
         // echo $pdfData;
         // // header('Content-Type: application/pdf');
         // header('Content-Type: application/pdf');
         // header('Content-Length: ' . strlen($pdfData));
         // header('Content-Disposition: inline; filename="filename.pdf"'); // 'inline' option to display in browser
-
         // echo $pdfData;
     }
     function not_found($message = '')

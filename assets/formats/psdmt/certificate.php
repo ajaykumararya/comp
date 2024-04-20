@@ -84,7 +84,7 @@
 
     <div class="position-absolute" style="top:60.83%;left:44%">{center_name}</div>
 
-    <div class="position-absolute" style="top:63.83%;left:54%"></div>
+    <div class="position-absolute" style="top:63.83%;left:54%;width:100%">{obtain_total}</div>
     <div class="position-absolute" style="top:63.83%;left:77%;width:100%">{grade}</div>
 
     <div class="position-absolute" style="top:66.73%;left:33%">{percentage}%</div>

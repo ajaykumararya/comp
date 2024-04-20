@@ -60,6 +60,11 @@ class Student extends Ajax_Controller
     function add()
     {
         $data = $this->post();
+        if (isset($data['referral_id'])) {
+            $referral_id = $data['referral_id'];
+            unset($data['referral_id']);
+        }
+
         $data['status'] = 0;
         $data['added_by'] = isset($data['added_by']) ? $data['added_by'] : 'admin';
         $data['admission_type'] = isset($data['admission_type']) ? $data['admission_type'] : 'offline';
@@ -92,11 +97,11 @@ class Student extends Ajax_Controller
         if ($this->form_validation->run()) {
             $this->db->insert('students', $data);
             $student_id = $this->db->insert_id();
-            if(CHECK_PERMISSION('REFERRAL_ADMISSION') && $this->center_model->isAdmin() && isset($_POST['referral_id'])){
-                $this->db->insert('referral_coupons',[
+            if (CHECK_PERMISSION('REFERRAL_ADMISSION') && $this->center_model->isAdmin() && isset($_POST['referral_id'])) {
+                $this->db->insert('referral_coupons', [
                     'student_id' => $student_id,
                     'coupon_code' => generateCouponCode(),
-                    'coupon_by' => $_POST['referral_id'],
+                    'coupon_by' => $referral_id,
                     'amount' => 500
                 ]);
             }
@@ -534,5 +539,9 @@ class Student extends Ajax_Controller
     {
         $this->response('data', $this->student_model->study_materials()->resul_array());
     }
-   
+
+    function coupons(){
+        $this->response('data' , $this->student_model->coupons()->result_array());
+    }
+
 }

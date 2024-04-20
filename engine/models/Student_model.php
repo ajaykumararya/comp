@@ -355,4 +355,13 @@ class Student_model extends MY_Model
         }
         return $course_fees;
     }
+
+    function coupons(){
+        $this->db->select('rc.*,s.name as student_name,rs.name as referral_student')
+                ->from('referral_coupons as rc')
+                ->join('students as s','s.id = rc.student_id')
+                ->join('students as rs','rs.id = rc.coupon_by')
+                ->order_by('rc.id','DESC');
+        return $this->db->get();
+    }
 }

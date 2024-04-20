@@ -39,10 +39,9 @@
 
         #photo1 {
             z-index: 999;
-            top: 30.3rem;
-            right: 12rem;
-            width: 120px !important;
-            ;
+            top: 10.25rem;
+            right: 1.28rem;
+            width: 120px !important;            
             height: 95px;
         }
 
@@ -64,18 +63,19 @@
 </head>
 
 <body class="position-relative">
-    <img id="back-image" class="position-relative" src="{document_path}/franshise-certificate.jpg">
+    <img id="back-image" class="position-relative" src="{document_path}/franchise-certificate.jpg">
     <!-- <div class="position-absolute" id="photo">
         <img src="upload/images/student_certificate_{certiticate_id}.png">
     </div> -->
     <div class="position-absolute" id="photo1">
-        <img src="{document_path}/director_sign.png" style="width:94.7px;height:50px">
+        <img src="upload/{image}" style="width:74.7px;height:90px">
     </div>
-    <div class="position-absolute" style="top:26%;left:39.5%;">{name}</div>
-    <div class="position-absolute" style="top:28%;left:39.5%;">{city}, &nbsp;{state}</div>
-    <div class="position-absolute" style="top:29.7%;left:39.5%;">{institute_name}</div>
-    <div class="position-absolute" style="top:31.6%;left:39.5%;">{certificate_issue_date}</div>
-    <div class="position-absolute" style="top:33.4%;left:39.5%;">{valid_upto}</div>
+    <div class="position-absolute" style="top:23.7%;left:25.5%;">{name}</div>
+    <div class="position-absolute" style="top:26.15%;left:25.5%;">{institute_name}</div>
+    <div class="position-absolute" style="top:28.6%;left:27.5%;">{city}, &nbsp;{state}</div>
+
+    <div class="position-absolute" style="top:32.75%;left:20.5%;font-size:12px">{certificate_issue_date}</div>
+    <div class="position-absolute" style="top:34.8%;left:20.5%;font-size:12px">{valid_upto}</div>
     
 
 </body>
