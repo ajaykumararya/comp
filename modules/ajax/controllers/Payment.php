@@ -51,7 +51,7 @@ class Payment extends Ajax_Controller
     {
         // sleep(4);
         // $this->set_data('student', $this->student_model->)
-        $admissionFee = $this->student_model->fix_payment_settings('admission_fee')->row('amount');
+        $admissionFee = $this->student_model->fix_payment_settings('admission_fees')->row('amount');
         $exam_fee = $this->student_model->fix_payment_settings('exam_fee')->row('amount');
         $this->set_data('admission_fee', $admissionFee);
         $this->set_data('exam_fee', $exam_fee);
