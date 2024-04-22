@@ -13,6 +13,8 @@ class Document extends MY_Controller
         $get = $this->student_model->admit_card(['id' => $this->id]);
         if ($get->num_rows()) {
             $this->set_data($get->row_array());
+            $this->set_data('date',date('d-m-Y',strtotime($get->row('exam_date'))));
+            $this->set_data('time',date('h:i A',strtotime($get->row('exam_date'))));
             $pdfContent = $this->parse('admit-card');
             $this->pdf($pdfContent);
         } else {
@@ -189,13 +191,14 @@ class Document extends MY_Controller
     }
     function franchise_certificate(){
         $get = $this->center_model->get_center($this->id);
+        $this->set_data('certificate_id',$this->id);
         if ($get->num_rows()) {
             $data = $get->row_array();
             if($data['status'] && $data['isPending'] == 0 && $data['isDeleted'] == 0){
                 if($data['valid_upto'] && $data['certificate_issue_date']){
                     $data['state'] = $this->SiteModel->state($data['state_id']);
                     $data['city'] = $this->SiteModel->city($data['city_id']);
-                    $output = $this->parse('franchise_certificate', $data);
+                    $output = $this->parse('franchise_certificate', $data);                    
                     $this->pdf($output);
                 }
                 else

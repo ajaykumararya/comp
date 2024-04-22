@@ -29,8 +29,6 @@ class Ki_theme
     $current_method_type = false,
     $config = [],
     $encryptionKey = 'ARYA8533';
-
-
     protected $login_type = '', $login_id = 0;
     function __construct($chk = false)
     {
@@ -45,30 +43,23 @@ class Ki_theme
             if (!$this->plan_methods)
                 $this->get_plan_methods();
         }
-
         $get = $this->CI->db->get('config');
         if ($get->num_rows()) {
             foreach ($get->result() as $val) {
                 define(strtoupper($val->type), $val->value);
             }
-
-
             if (defined('THEME') && defined('PATH')) {
                 define('DOCUMENT_PATH', 'assets/formats/' . PATH);
                 define('THEME_PATH', FCPATH . 'themes/' . THEME . '/');
-
                 if (!is_dir(THEME_PATH)) {
                     show_error("Please Configure Your Theme.");
                 }
-
                 $this->CI->load->append_view_path([
                     THEME_PATH . '/' => true,
                     FCPATH . DOCUMENT_PATH . '/' => true
                 ]);
             }
-
         }
-
         $this->login_type = $this->CI->session->userdata('admin_type');
         $this->login_id = $this->CI->session->userdata('admin_id');
         $this->breadcrumb_data['controller'] = ucfirst($this->CI->router->fetch_class());
@@ -76,32 +67,15 @@ class Ki_theme
     function grade($score)
     {
         if (PATH == 'zcc') {
-            if ($score >= 80 && $score <= 100) {
+            if ($score >= 80 && $score <= 100)
                 return 'A+';
-            } elseif ($score >= 60 && $score <= 79) {
+            elseif ($score >= 60 && $score <= 79)
                 return 'A';
-            } elseif ($score >= 50 && $score <= 59) {
+            elseif ($score >= 50 && $score <= 59)
                 return 'B';
-            }
-            // elseif ($score >= 60 && $score < 70) {
-            //     return 'D';
-            // } 
-            else {
-                return 'C';
-            }
-        }
-
-        if (PATH == 'techno' or PATH == 'satvam') {
-            if ($score >= 75 && $score <= 100)
-                return 'A';
-            else if ($score >= 60 && $score <= 74)
-                return 'B';
-            else if ($score >= 50 && $score <= 59)
-                return 'C';
             else
-                return 'D';
+                return 'C';
         }
-
         if (PATH == 'psdmt') {
             if ($score >= 90 && $score <= 100)
                 return 'S';
@@ -113,7 +87,16 @@ class Ki_theme
                 return 'B';
             else
                 return 'C';
-
+        }
+        if (in_array(PATH, ['techno', 'satvam', 'icetrc'])) {
+            if ($score >= 75 && $score <= 100)
+                return 'A';
+            else if ($score >= 60 && $score <= 74)
+                return 'B';
+            else if ($score >= 50 && $score <= 59)
+                return 'C';
+            else
+                return 'D';
         }
     }
     function generate_qr($id = 0, $type = '', $data = '')
@@ -134,13 +117,10 @@ class Ki_theme
         ]);
         // Create QR code
         $qrCode = new QRCode($options);
-
         $image = $qrCode->render($data);
-
         // Save the QR code image to a file
         file_put_contents($png, $image);
         return $png;
-
     }
     function encrypt($data)
     {
@@ -154,9 +134,7 @@ class Ki_theme
     }
     function decrypt($data)
     {
-
         $key = $this->encryptionKey;
-
         $data = base64_decode($data);
         $result = '';
         for ($i = 0; $i < strlen($data); $i++) {
@@ -172,7 +150,6 @@ class Ki_theme
         } else
             return $this->config[$index] = $value;
     }
-
     function config($index = 0)
     {
         if ($index) {
@@ -194,7 +171,6 @@ class Ki_theme
     {
         return $this->login_type == 'center';
     }
-
     function loginId()
     {
         return $this->login_id;
@@ -295,7 +271,6 @@ class Ki_theme
     }
     function list_menu()
     {
-
     }
     function list_pages()
     {
@@ -361,7 +336,6 @@ class Ki_theme
             $schemavars = array_merge($this->ThemeSchemaVars, $schemavars);
         return $index ? $schemavars[$index] : $schemavars;
     }
-
     function schema_vals($index, $type = '')
     {
         $vals = $this->schema_vars();
@@ -389,21 +363,16 @@ class Ki_theme
             $document->recover = true;
             $document->loadHTML($html);
             $links = $document->getElementsByTagName('link');
-
             //Array that will contain our extracted links.
             $extractedLinks = array();
-
             foreach ($links as $link) {
-
                 //Get the link in the href attribute.
                 $linkHref = $link->getAttribute('href');
-
                 //If the link is empty, skip it and don't
                 //add it to our $extractedLinks array
                 if (strlen(trim($linkHref)) == 0) {
                     continue;
                 }
-
                 //Skip if it is a hashtag / anchor link.
                 if ($linkHref[0] == '#') {
                     continue;
@@ -414,7 +383,6 @@ class Ki_theme
             return implode(',', $linkers);
         }
         return;
-
     }
     function drawer_init()
     {
@@ -541,7 +509,6 @@ class Ki_theme
         $this->reset_props();
         return $html;
     }
-
     function segment($arg1, $arg2 = 0)
     {
         return $this->CI->uri->segment($arg1, $arg2);
@@ -564,7 +531,6 @@ class Ki_theme
         $chk = strtolower($chk) == 'v1' ? $this->segment(3) : $chk;
         if (isset($props['icon'])) {
             list($clss, $path) = $props['icon'];
-
             $this->breadcrummb_icon($clss, $path, $fs = 1, $type = 'solid');
         }
         if (!isset($props['page_name']))
@@ -584,10 +550,8 @@ class Ki_theme
             $this->breadcrumb_data['title'] = $title;
             $this->forceUpdate = true;
         }
-
         if ($this->forceUpdate)
             return $this;
-
         if (!isset($this->breadcrumb_data['title']))
             $this->breadcrumb_data['title'] = $title;
         return $this;
@@ -599,7 +563,6 @@ class Ki_theme
                     <!--begin::Input-->
                     <div id="' . $id . '" class="me-5">This is a sample static text string to copy!</div>
                     <!--end::Input-->
-
                     <!--begin::Button-->
                     <button class="btn btn-icon my-clipboard btn-sm btn-light" data-clipboard-target="#' . $id . '">
                         <i class="ki-duotone ki-copy fs-2 text-muted"></i>
@@ -942,13 +905,11 @@ class Ki_theme
     function get_student_menu()
     {
         $adminMenu = $this->CI->load->config('student/menu', true);
-
         $this->adminMenu = $adminMenu;
         // $this->current_method = recursiveArraySearchReturnValue($this->uri_string(),$adminMenu['ui_setting']['menu'],'type');
         $html = '';
         foreach ($adminMenu as $menuType => $menus) {
             // echo $menuType;
-
             if (isset($menus['condition'])) {
                 if (!$menus['condition']) {
                     continue;
@@ -957,7 +918,6 @@ class Ki_theme
             $html .= $this->generateMenu($menus['menu'], 'menu', $menuType);
         }
         return $html; //count($adminMenu);//$this->parser->parse('common/admin-menu',[],true);
-
     }
     function get_menu()
     {
@@ -968,7 +928,6 @@ class Ki_theme
         $html = '';
         foreach ($adminMenu as $menuType => $menus) {
             // echo $menuType;
-
             if (isset($menus['condition'])) {
                 if (!$menus['condition']) {
                     continue;
@@ -990,7 +949,6 @@ class Ki_theme
     }
     function get_menu_details()
     {
-
     }
     private function gen_link($link)
     {
@@ -1070,7 +1028,6 @@ class Ki_theme
         }
         return false; // Value not found in the array
     }
-
     function findAndReturn(&$array, $searchValue, &$menu)
     {
         foreach ($array as $key => &$value) {
@@ -1189,7 +1146,6 @@ class Ki_theme
             $currentDate = strtotime($date);
         }
         return date($this->default_vars('dateFormat'), $currentDate);
-
     }
     function course_duration($index = 0, $number = 0)
     {
@@ -1215,7 +1171,6 @@ class Ki_theme
             'value' => $value
         ]);
     }
-
     function extra_setting_button_input($type, $title = 'Button', $inputTextName = '', $inputLinkName = '')
     {
         $titleData = $linkData = '';
@@ -1235,7 +1190,6 @@ class Ki_theme
                         class="form-control" style="border-radius: 0 0 12px 12px;">
                 </div>';
     }
-
     private $wallet_balance = 0;
     function set_wallet($balance)
     {
@@ -1267,12 +1221,10 @@ class Ki_theme
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="text-danger h-75px w-75px h-lg-100px w-lg-100px position-absolute opacity-5">
                                 <path fill="currentColor" d="M10.2,21.23,4.91,18.17a3.58,3.58,0,0,1-1.8-3.11V8.94a3.58,3.58,0,0,1,1.8-3.11L10.2,2.77a3.62,3.62,0,0,1,3.6,0l5.29,3.06a3.58,3.58,0,0,1,1.8,3.11v6.12a3.58,3.58,0,0,1-1.8,3.11L13.8,21.23A3.62,3.62,0,0,1,10.2,21.23Z"></path>
                             </svg>
-
                             <i class="ki-duotone ki-wallet fs-2x fs-lg-3x text-danger position-absolute"><span class="path1"></span>
                             <span class="path3"></span>
                             <span class="path4"></span></i>	   	</div>
                         <!--end::Icon-->
-
                         <!--begin::Description-->
                         <div class="ms-6">
                             <h3 class="text-danger">Your wallet balance is Low..</h3>
@@ -1286,7 +1238,6 @@ class Ki_theme
         }
         return '';
     }
-
     function check_it_referral_stduent($student_id)
     {
         if (CHECK_PERMISSION('REFERRAL_ADMISSION')) {

@@ -11,4 +11,4 @@ $menu = array(
             'url' => 'cms/static-page/contact_us',
         ),
     )
-)
+);

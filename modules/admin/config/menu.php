@@ -82,7 +82,7 @@ $config['coupon_menu'] = array(
         array(
             'label' => 'Student Coupon(S)',
             'type' => 'student_coupons',
-            'icon' => array('devices',5),
+            'icon' => array('devices', 5),
             'url' => 'student/coupons'
             // 'submenu' => array(
             //     array(
@@ -158,7 +158,7 @@ $config['menu'] = array(
             'label' => 'Fees Collection',
             'type' => 'fees_collection',
             'icon' => array('bill', 6),
-            'condition' => OnlyForAdmin() && CHECK_PERMISSION('FEES_COLLECTION'),
+            'condition' => (OnlyForAdmin() && CHECK_PERMISSION('FEES_COLLECTION')) or CHECK_PERMISSION('CENTRE_FEES_COLLECTION'),
             'submenu' => array(
                 array(
                     'label' => 'Collect Fee',
