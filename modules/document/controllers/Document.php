@@ -39,7 +39,7 @@ class Document extends MY_Controller
     {
         $get = $this->student_model->marksheet(['id' => $this->id]);
         if ($get->num_rows()) {
-            pre($get->row(),true);
+            // pre($get->row(),true);
             $result_id = $get->row('result_id');
             $this->ki_theme->generate_qr($result_id, 'marksheet', current_url());
             $get_subect_numers = $this->student_model->marksheet_marks($result_id);
