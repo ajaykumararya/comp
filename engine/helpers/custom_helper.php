@@ -150,6 +150,11 @@ function ES($type, $defaultTExt = null)
     return $ci->SiteModel->get_setting($type);
 }
 
+function logo(){
+    $ci = &get_instance();
+    return base_url('upload/'.$ci->SiteModel->get_setting('logo'));
+}
+
 function cms_content_form($type)
 {
     return form_open_multipart('', [

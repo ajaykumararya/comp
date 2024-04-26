@@ -85,15 +85,14 @@
                 <!--begin::Content-->
                 <div class="d-flex flex-column flex-center pb-0 pb-lg-10 p-10 w-100">
                     <!--begin::Image-->
-                    <img class="theme-light-show mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20"
-                        src="{base_url}/assets/media/auth/agency.png" alt="" />
-                    <img class="theme-dark-show mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20"
-                        src="{base_url}/assets/media/auth/agency-dark.png" alt="" />
+                    <img class="mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20" src="<?= logo() ?>" alt="" />
+                    <!-- <img class="theme-dark-show mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20"
+                        src="{base_url}/assets/media/auth/agency-dark.png" alt="" /> -->
                     <!--end::Image-->
 
                     <!--begin::Title-->
                     <h1 class="text-gray-800 fs-2qx fw-bold text-center mb-7">
-                        Fast, Efficient and Productive
+                        <?= ES('title') ?>
                     </h1>
                     <!--end::Title-->
 
@@ -106,7 +105,7 @@
                         <a href="#" class="opacity-75-hover text-primary me-1">the interviewee</a>
                         and their <br /> work following this is a transcript of the interview.
                     </div>
-                    <!--end::Text-->
+                    <!--- end::Text-->
                 </div>
                 <!--end::Content-->
             </div>

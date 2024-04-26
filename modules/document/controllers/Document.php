@@ -6,7 +6,7 @@ class Document extends MY_Controller
     {
         parent::__construct();
         $this->load->library('common/mypdf');
-        $this->id = $this->decode($this->uri->segment(2, '0'));
+        $this->id = $this->decode($this->uri->segment(2, '0'));        
     }
     function admit_card()
     {
@@ -39,6 +39,7 @@ class Document extends MY_Controller
     {
         $get = $this->student_model->marksheet(['id' => $this->id]);
         if ($get->num_rows()) {
+            pre($get->row(),true);
             $result_id = $get->row('result_id');
             $this->ki_theme->generate_qr($result_id, 'marksheet', current_url());
             $get_subect_numers = $this->student_model->marksheet_marks($result_id);
@@ -55,7 +56,7 @@ class Document extends MY_Controller
                     $tmm = $this->isMark($mark->theory_max_marks);
                     $pmm = $this->isMark($mark->practical_max_marks);
                     $tmim = $this->isMark($mark->theory_min_marks);
-                    $pmim = $this->isMark($mark->practical_max_marks);
+                    $pmim = $this->isMark($mark->practical_min_marks);
                     $ttl += $this->mark_total($tmm, $tmim) + $this->mark_total($pmm, $pmim);
                     $ttltminm += $tmim;
                     $ttltmaxm += $tmm;
@@ -140,7 +141,7 @@ class Document extends MY_Controller
                         $tmm = $this->isMark($mark->theory_max_marks);
                         $pmm = $this->isMark($mark->practical_max_marks);
                         $tmim = $this->isMark($mark->theory_min_marks);
-                        $pmim = $this->isMark($mark->practical_max_marks);
+                        $pmim = $this->isMark($mark->practical_min_marks);
                         $ttl += $this->mark_total($tmm, $tmim) + $this->mark_total($pmm, $pmim);
                         $ttltminm += $tmim;
                         $ttltmaxm += $tmm;
@@ -172,7 +173,6 @@ class Document extends MY_Controller
                     'total_max_practical' => $ttlpmaxm,
                     'total_min_practical' => $ttlpminm
                 ];
-                // pre($main,true);
                 $this->set_data($main);
             }
             // pre($certificate,true);

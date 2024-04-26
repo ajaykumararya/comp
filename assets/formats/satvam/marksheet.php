@@ -103,6 +103,14 @@
         .test {
             border: 1px solid red
         }
+        #photo1 {
+            z-index: 999;
+            top: 63.9rem;
+            right: 7rem;
+            width: 120px !important;
+            ;
+            height: 95px;
+        }
     </style>
 </head>
 
@@ -179,6 +187,10 @@
 
     <p class="position-absolute" style="bottom:17.8%;left:70%;font-size:15px">{percentage} %</p>
     <p class="position-absolute" style="bottom:7%;left:15%;font-size:12px">{issue_date}</p>
+    
+    <div class="position-absolute" id="photo1">
+        <img src="{document_path}/director_sign.png" style="width:94.7px;height:50px">
+    </div>
 
 </body>
 
