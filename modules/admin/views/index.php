@@ -23,7 +23,8 @@
                     <!--begin::Number-->
                     <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2"
                     data-kt-countup="true" data-kt-countup-value="<?= $this->student_model->get_switch('all',[
-                            'without_admission_status' => true
+                            'without_admission_status' => true,
+                            'admission_status' => 1
                         ])->num_rows() ?>"
                     >
                         0
@@ -33,7 +34,7 @@
                     <!--begin::Follower-->
                     <div class="m-0">
                         <span class="fw-semibold fs-6 text-gray-500">
-                            Student(s) </span>
+                            Active Student(s) </span>
 
                     </div>
                     <!--end::Follower-->
