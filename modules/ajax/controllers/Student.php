@@ -463,6 +463,7 @@ class Student extends Ajax_Controller
         unset($where['course_name']);
         $certificateWhere = $where;
         unset($where['duration'], $where['duration_type']);
+        $this->response('where',$where);
         $checkCertificate = $this->student_model->student_certificates($where);
         if (!$checkCertificate->num_rows()) {
             if (isset($where['exam_conduct_date'])) {

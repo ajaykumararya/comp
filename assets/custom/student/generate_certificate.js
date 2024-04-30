@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                             success_message: '<b>Certificate Generated Successfully..</b>',
                             page_reload: true
                         }).then((res) => {
-                            // log(res);
+                            log(res);
                             if (!res.status) {
                                 SwalWarning(res.html);
                             }
@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 const course_name = option.data('course_name');
                 course_duration_type.val(duration_type_val);
                 course_duration.val(duration_val);
-                // alert(duration_type_val);
+                
                 $.AryaAjax({
                     data: {
                         duration: duration_val,
