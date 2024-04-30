@@ -5,7 +5,7 @@
                 <strong class="position-relative text-capitalize    ">
 
                     {institute_name}
-                    <small class="text-success fs-2">Documents</small>
+                    <small class="text-success fs-2">Overview</small>
                     <span
                         class="d-inline-block position-absolute h-2px bottom-0 end-0 start-0 bg-success translate rounded"></span>
                 </strong>

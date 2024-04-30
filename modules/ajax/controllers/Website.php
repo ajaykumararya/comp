@@ -367,5 +367,14 @@ class Website extends Ajax_Controller
         $this->response('status','OK');
         
     }
+
+    function update_center_docs(){
+        $this->db->where('id',$this->post('center_id'))
+                ->update('centers',[
+                    $this->post('name') => $this->file_up('file')
+                ]);
+        $this->response('query',$this->db->last_query());
+        $this->response('status',true);
+    }
 }
 ?>

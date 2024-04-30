@@ -41,6 +41,7 @@ class Student_model extends MY_Model
                 ce.institute_name as center_name,
                 ce.id as institute_id,
                 ce.center_full_address,
+                ce.signature as center_signature,
 
 
                 state.*,
@@ -74,13 +75,13 @@ class Student_model extends MY_Model
             case 'student_exams':
                 $this->db->select('es.id as assign_exam_id,es.*,e.exam_title');
                 $this->db->join('exam_students as es', 'es.student_id = s.id ');
-                $this->db->join('exams as e','e.id = es.exam_id','left');
+                $this->db->join('exams as e', 'e.id = es.exam_id', 'left');
                 // $this->db->group_by('s.id');
                 $this->myWhere('s', $condition);
                 break;
             case 'all':
-                if(isset($condition['without_admission_status']))
-                unset($condition['without_admission_status']);
+                if (isset($condition['without_admission_status']))
+                    unset($condition['without_admission_status']);
                 $this->myWhere('s', $condition);
                 break;
             case 'student_result_verification':
@@ -98,7 +99,7 @@ class Student_model extends MY_Model
                     $this->db->or_like('s.roll_no', $search);
                     $this->db->or_like('s.contact_number', $search);
                     $this->db->or_like('s.alternative_mobile', $search)
-                    ->group_end();
+                        ->group_end();
                 }
                 // $this->db->where('s.admission_status',1);
                 break;
@@ -262,14 +263,14 @@ class Student_model extends MY_Model
     {
         return $this->get_switch('batch', ['batch_id' => $batch_id]);
     }
-    function fix_payment_settings($type = 0,$status = 1, $isDeleted = 0)
+    function fix_payment_settings($type = 0, $status = 1, $isDeleted = 0)
     {
-        if(is_array($type))
+        if (is_array($type))
             $this->db->where($type);
         else if ($type)
             $this->db->where('key', $type);
-        if(!is_bool($status)){
-            $this->db->where('status',$status);
+        if (!is_bool($status)) {
+            $this->db->where('status', $status);
         }
 
         $this->db->where('isDeleted', $isDeleted);
@@ -292,9 +293,11 @@ class Student_model extends MY_Model
     }
     function update_admission_status($student_id, $admission_status)
     {
-        return $this->db->where('id', $student_id)->update('students', [
-            'admission_status' => $admission_status
-        ]);
+        $this->db->where('id', $student_id);
+        if ($admission_status == 3) // 3 is for delete
+            return $this->db->delete('students');
+        else
+            return $this->db->update('students', ['admission_status' => $admission_status]);
     }
     function marksheet_marks($result_id)
     {
@@ -341,15 +344,15 @@ class Student_model extends MY_Model
             ->where('s.isDeleted', 0)
             ->get();
     }
-    function total_course_fee($institute_id, $course_id = 0){
+    function total_course_fee($institute_id, $course_id = 0)
+    {
         $center_course = $this->center_model->get_assign_courses($institute_id, ['course_id' => $course_id]);
         $course_fees = 0;
         if ($center_course->num_rows()) {
             $course_fees = $center_course->row('course_fee');
             $admissionFee = $this->fix_payment_settings(1)->row('amount') ?? 0;
             $exam_fee = $this->fix_payment_settings(2)->row('amount') ?? 0;
-            if($center_course->row('duration_type') != 'month')
-            {
+            if ($center_course->row('duration_type') != 'month') {
                 $exam_fee = $exam_fee * $center_course->row('duration');
             }
             $course_fees = $course_fees + $admissionFee + $exam_fee;
@@ -357,24 +360,28 @@ class Student_model extends MY_Model
         return $course_fees;
     }
 
-    function coupons(){
+    function coupons()
+    {
         $this->db->select('rc.*,s.name as student_name,rs.name as referral_student')
-                ->from('referral_coupons as rc')
-                ->join('students as s','s.id = rc.student_id')
-                ->join('students as rs','rs.id = rc.coupon_by')
-                ->order_by('rc.id','DESC');
+            ->from('referral_coupons as rc')
+            ->join('students as s', 's.id = rc.student_id')
+            ->join('students as rs', 'rs.id = rc.coupon_by')
+            ->order_by('rc.id', 'DESC');
         return $this->db->get();
     }
-    function get_coupon_by_id($id){
+    function get_coupon_by_id($id)
+    {
         return $this->db->
-        
+
             select('*,DATE_FORMAT(timestamp,"%d-%m-%Y") as create_time,DATE_FORMAT(update_time,"%d-%m-%Y") as update_time ')->
-            where('id',$id)->get('referral_coupons');
+            where('id', $id)->get('referral_coupons');
     }
-    function coupon_by($student_id){
-        return $this->db->where('coupon_by',$student_id)->get('referral_coupons');
+    function coupon_by($student_id)
+    {
+        return $this->db->where('coupon_by', $student_id)->get('referral_coupons');
     }
-    function check_is_referred($student_id){
-        return $this->db->where('student_id',$student_id)->get('referral_coupons');
+    function check_is_referred($student_id)
+    {
+        return $this->db->where('student_id', $student_id)->get('referral_coupons');
     }
 }

@@ -111,6 +111,14 @@
             ;
             height: 95px;
         }
+        #center_signature{
+            z-index: 999;
+            top: 63.9rem;
+            left: 7rem;
+            width: 120px !important;
+            ;
+            height: 95px;
+        }
     </style>
 </head>
 
@@ -191,6 +199,11 @@
     <div class="position-absolute" id="photo1">
         <img src="{document_path}/director_sign.png" style="width:94.7px;height:50px">
     </div>
+
+    <div class="position-absolute" id="center_signature">
+        <img src="upload/{center_signature}" style="width:94.7px;height:50px">
+    </div>
+
 
 </body>
 

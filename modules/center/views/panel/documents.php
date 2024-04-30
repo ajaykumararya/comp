@@ -1,5 +1,5 @@
 <div class="card">
-    <table class="table-striped table table-bordered">
+    <table class="table-striped table table-bordered" data-id="{id}">
         <tr>
             <th colspan="4" class="fs-2 fw-bold text-center ">
                 <strong class="position-relative text-capitalize    ">
@@ -16,28 +16,104 @@
             <td class="w-50">
                 <div class="btn-group">
                     <label class="btn btn-active-info btn-sm border-info border border-1" for="adhar">
-                        <input type="file" name="adhar" class="d-none" id="adhar">
+                        <input type="file" name="adhar" class="d-none upload-center-docs" accept="image/*,.pdf" id="adhar">
                         <i class="fa fa-cloud-upload"></i>
                         Change
                     </label>
-                    <a href="{base_url}{upload}/{adhar}" target="_blank" class="btn btn-sm btn-active-primary border-primary border border-1">
+                    <?php
+                    if(file_exists('upload/'.$adhar) && $adhar){
+                    ?>
+                    <a href="{base_url}upload/{adhar}" target="_blank"
+                        class="btn btn-sm btn-active-primary border-primary border border-1">
                         <i class="fa fa-eye"></i>
                         View
                     </a>
+                    <?php
+                    }
+                    else{
+                        echo badge('Adhar Not Found.','danger');
+                    }
+                    ?>
                 </div>
             </td>
         </tr>
         <tr>
             <th class="w-50">Signature</th>
-            <td class="w-50">{qualification_of_center_head}</td>
+            <td class="w-50">
+                <div class="btn-group">
+                    <label class="btn btn-active-info btn-sm border-info border border-1" for="signature">
+                        <input type="file" name="signature" class="d-none upload-center-docs" accept="image/*,.pdf" id="signature">
+                        <i class="fa fa-cloud-upload"></i>
+                        Change
+                    </label>
+                    <?php
+                    if(file_exists('upload/'.$signature) && $signature){
+                    ?>
+                    <a href="{base_url}upload/{signature}" target="_blank"
+                        class="btn btn-sm btn-active-primary border-primary border border-1">
+                        <i class="fa fa-eye"></i>
+                        View
+                    </a>
+                    <?php
+                    }
+                    else{
+                        echo badge('Signature Not Found.','danger');
+                    }
+                    ?>
+                </div>
+            </td>
         </tr>
         <tr>
             <th>Address Proof</th>
-            <td class="">{email}</td>
+            <td class="">
+                <div class="btn-group">
+                    <label class="btn btn-active-info btn-sm border-info border border-1" for="address_proof">
+                        <input type="file" name="address_proof" class="d-none upload-center-docs" accept="image/*,.pdf" id="address_proof">
+                        <i class="fa fa-cloud-upload"></i>
+                        Change
+                    </label>
+                    <?php
+                    if(file_exists('upload/'.$address_proof) && $address_proof){
+                    ?>
+                    <a href="{base_url}upload/{address_proof}" target="_blank"
+                        class="btn btn-sm btn-active-primary border-primary border border-1">
+                        <i class="fa fa-eye"></i>
+                        View
+                    </a>
+                    <?php
+                    }
+                    else{
+                        echo badge('Address Proof Not Found.','danger');
+                    }
+                    ?>
+                </div>
+            </td>
         </tr>
         <tr>
             <th>Agreement</th>
-            <td class="">{contact_number}</td>
+            <td class="">
+                <div class="btn-group">
+                    <label class="btn btn-active-info btn-sm border-info border border-1" for="agreement">
+                        <input type="file" name="agreement" class="d-none upload-center-docs" accept="image/*,.pdf" id="agreement">
+                        <i class="fa fa-cloud-upload"></i>
+                        Change
+                    </label>
+                    <?php
+                    if(file_exists('upload/'.$agreement) && $agreement){
+                    ?>
+                    <a href="{base_url}upload/{agreement}" target="_blank"
+                        class="btn btn-sm btn-active-primary border-primary border border-1">
+                        <i class="fa fa-eye"></i>
+                        View
+                    </a>
+                    <?php
+                    }
+                    else{
+                        echo badge('Agreement Not Found.','danger');
+                    }
+                    ?>
+                </div>
+            </td>
         </tr>
     </table>
 </div>

@@ -5,6 +5,9 @@ if (!function_exists('alert')) {
         return "<div class='alert alert-$class'>$message</div>";
     }
 }
+function badge($message = '',$class= 'success'){
+    return '<label class="badge badge-'.$class.'">'.$message.'</label>';
+}
 function start_with($haystack, $needle)
 {
     return substr($haystack, 0, strlen($needle)) === $needle;

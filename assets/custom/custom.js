@@ -1976,6 +1976,9 @@ const list_students = (admission_status = 0) => {
                                 </button>
                                 <button class="btn btn-light-warning btn-sm pending change-status">
                                     <i class="fa fa-arrow-circle-left"></i> Pending
+                                </button>                                
+                                <button class="btn btn-light-danger btn-sm delete change-status">
+                                    <i class="fa fa-trash"></i> Cancel
                                 </button>`;
                     }
                     else {
@@ -1998,6 +2001,7 @@ const list_students = (admission_status = 0) => {
     });
     $(document).on('click', '.change-status', function (r) {
         r.preventDefault();
+        var btnTitle = `Ok, Change it`;
         var student_id = $(this).closest('div').data('id');
         var type = '',
             title = '';
@@ -2009,13 +2013,18 @@ const list_students = (admission_status = 0) => {
             title = 'Pending';
             type = 0;
         }
+        else if ($(this).hasClass('delete')) {
+            title = '<b>Permanent Delete</b>';
+            type = 3;
+            btnTitle = `Ok, Delete it`;
+        }
         else {
             title = 'Cancel';
             type = 2;
         }
         SwalWarning('Confirmation!', `
             Do you want to ${title}, this student?
-        `, true, `Ok, Change it`).then((result) => {
+        `, true, btnTitle).then((result) => {
             if (result.isConfirmed) {
                 $.AryaAjax({
                     url: 'student/change-admission-status',
