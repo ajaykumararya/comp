@@ -52,6 +52,22 @@
             /* border:1px solid red; */
             font-weight: bold;
         }
+        #photo1 {
+            z-index: 999;
+            top: 65rem;
+            right: 7rem;
+            width: 120px !important;
+            ;
+            height: 95px;
+        }
+        #center_signature{
+            z-index: 999;
+            top: 65rem;
+            left: 19rem;
+            width: 120px !important;
+            ;
+            height: 95px;
+        }
     </style>
 </head>
 
@@ -76,6 +92,15 @@
 
     </div>
     <p class="position-absolute" style="bottom:7.3%;left:12%">{createdOn}</p>
+
+    <div class="position-absolute" id="photo1">
+        <img src="{document_path}/director_sign.png" style="width:94.7px;height:50px">
+    </div>
+
+    <div class="position-absolute" id="center_signature">
+        <img src="upload/{center_signature}" style="width:94.7px;height:50px">
+    </div>
+
 </body>
 
 </html>

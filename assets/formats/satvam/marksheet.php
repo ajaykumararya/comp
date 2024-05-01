@@ -114,7 +114,7 @@
         #center_signature{
             z-index: 999;
             top: 63.9rem;
-            left: 7rem;
+            left: 22rem;
             width: 120px !important;
             ;
             height: 95px;
