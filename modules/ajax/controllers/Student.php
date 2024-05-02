@@ -225,7 +225,7 @@ class Student extends Ajax_Controller
                 $html .= '<tr>
                             <th class="bg-light">' . $row->student_name . '</th>';
                 while ($startForAtt <= $endDate) {
-                    $date = date('Y-m-d', $startForAtt);
+                    $date = date('d-m-Y', $startForAtt);
                     $getAtt = $this->db->select('attendance_type_id')->where(['date' => $date, 'roll_no' => $row->roll_no, 'batch_id' => $this->post('batch_id')])->get('student_attendances');
                     $attID = 5;
                     if ($getAtt->num_rows()) {
