@@ -1,4 +1,5 @@
 <?php
+use chillerlan\QRCode\Data\Number;
 defined('BASEPATH') or exit('No direct script access allowed');
 class Site extends Site_Controller
 {
@@ -74,7 +75,6 @@ class Site extends Site_Controller
         // pre($this->public_data,true);
     }
     function test(){
-        $year = '2024';
-        echo str_pad(9,3,'0',STR_PAD_LEFT);
+       echo $this->gen_roll_no(5);
     }
 }

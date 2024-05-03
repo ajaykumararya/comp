@@ -29,7 +29,7 @@
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label for="attendance_date" class="form-label required">Attendance Date</label>
-                                    <input type="text" class="form-control attendance-date" value="<?= date('Y-m-d') ?>"
+                                    <input type="text" class="form-control attendance-date" value="<?=$this->ki_theme->date() ?>"
                                         id="attendance_date" name="attendance_date"
                                         placeholder="Select Attendance Date">
                                 </div>

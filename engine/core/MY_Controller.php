@@ -111,7 +111,7 @@ class MY_Controller extends MX_Controller
                         $lastNumber = $lastRollNO->row('roll_no');
                         $filterRoll = substr($lastNumber, strlen($preFixRoll));
                         if ($filterRoll)
-                            $start = ($filterRoll + 1);
+                            $start = (intval($filterRoll) + 1);
                     }
                     return $this->check_roll_exists_or_not($preFixRoll, $preFixRoll . $start);
                 }
