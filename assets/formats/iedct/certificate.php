@@ -79,8 +79,10 @@
         <img src="upload/{image}" style="width:64.3px;height:67px">
     </div>
 
+    <p class="position-absolute" style="top:19.6%;left:32%;width:300px;text-align:center">{course_name}</p>
 
     <p class="position-absolute" style="top:20.9%;left:12%;">{certiticate_id}</p>
+    
     <p class="position-absolute" style="top:21%;left:84%;">{dob}</p>
     <p class="position-absolute" style="top:23.5%;left:16%;">{createdOn}</p>
 

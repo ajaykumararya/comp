@@ -128,7 +128,8 @@
             display: inline-block;
             margin-right: 5px;
         }
-        sup{
+
+        sup {
             font-weight: bold;
         }
     </style>
@@ -141,7 +142,8 @@
     </div>
     <p class="position-absolute" style="top:22.7%;left:15%;">{result_id}</p>
     <p class="position-absolute" style="top:17.8%;left:14.5%;">{issue_date}</p>
-    <p class="position-absolute text-capitlize" style="top:17.8%;left:26.5%;width:410px;text-align:center">{course_name}</p>
+    <p class="position-absolute text-capitlize" style="top:17.8%;left:26.5%;width:410px;text-align:center">{course_name}
+    </p>
     <!-- <p class="position-absolute" style="top:17%;right:15%;font-size:12px">{enrollment_no}</p> -->
     <p class="position-absolute" style="top:20%;left:20.5%">{student_name}</p>
     <p class="position-absolute" style="top:20%;left:49.5%">{father_name}</p>
@@ -180,7 +182,7 @@
                 <?php
                 $totalP = $totalT = 0;
                 // $division = 'FAIL';
-                $divisions = ['A' => 'FIRST','B' => 'SECOND','C' => 'THIRD','D' => 'PASS','E' => 'FAIL'];
+                $divisions = ['A' => 'FIRST', 'B' => 'SECOND', 'C' => 'THIRD', 'D' => 'PASS', 'E' => 'FAIL'];
                 $division = isset($divisions[$grade]) ? $divisions[$grade] : 'FAIL';
                 if (isset($practicalSubjects) && isset($theorySubject)) {
                     $tCount = count($theorySubject);
