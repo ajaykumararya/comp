@@ -57,6 +57,7 @@ $route['admin'] = $route['Admin'] = 'admin/index';
 $route['admit-card/(:any)'] = 'document/admit_card';
 $route['marksheet/(:any)'] = 'document/marksheet';
 $route['certificate/(:any)'] = 'document/certificate';
+$route['id-card/(:any)'] = 'document/id_card';
 $route['franchise-certificate/(:any)'] = 'document/franchise_certificate';
 $route['(:any)'] = 'site/index';
 

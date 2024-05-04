@@ -5,8 +5,9 @@ if (!function_exists('alert')) {
         return "<div class='alert alert-$class'>$message</div>";
     }
 }
-function badge($message = '',$class= 'success'){
-    return '<label class="badge badge-'.$class.'">'.$message.'</label>';
+function badge($message = '', $class = 'success')
+{
+    return '<label class="badge badge-' . $class . '">' . $message . '</label>';
 }
 function start_with($haystack, $needle)
 {
@@ -153,9 +154,10 @@ function ES($type, $defaultTExt = null)
     return $ci->SiteModel->get_setting($type);
 }
 
-function logo(){
+function logo()
+{
     $ci = &get_instance();
-    return base_url('upload/'.$ci->SiteModel->get_setting('logo'));
+    return base_url('upload/' . $ci->SiteModel->get_setting('logo'));
 }
 
 function cms_content_form($type)
@@ -211,5 +213,21 @@ function generateCouponCode($length = 8)
     }
 
     return $couponCode;
+}
+function sup($i)
+{
+    $i = ($i == 1) ? 'st' :
+        (($i == 2) ? 'nd' :
+            (($i == 3) ? 'rd' : 'th'));
+    return '<sup>' . $i . '</sup>';
+}
+function convert_to_div($string)
+{
+    $html = '';
+    for ($i = 0; $i < strlen($string); $i++) {
+        // Output a <div> element for each character
+        $html .= "<div>" . $string[$i] . "</div>";
+    }
+    return $html;
 }
 ?>

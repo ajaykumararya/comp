@@ -7,6 +7,13 @@ $config['dashboard'] = array(
             'url' => 'student/profile'
         ),
         array(
+            'label' => 'ID Card',
+            'type' => 'id_card',
+            'url' => 'student/id-card',
+            'icon' => array('user-square', 3),
+            'condition' => CHECK_PERMISSION('STUDENT_ID_CARD')
+        ),
+        array(
             'label' => 'Admit Card',
             'type' => 'marksheet',
             'url' => 'student/admit-card',

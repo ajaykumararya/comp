@@ -98,6 +98,18 @@ class Ki_theme
             else
                 return 'D';
         }
+        if(PATH == 'iedct'){
+            if($score >= 60)
+                return 'A';
+            else if($score > 60 && $score <= 50)
+                return 'B';
+            else if($score > 50 && $score <= 40)
+                return 'C';
+            else if($score >40 && $score <= 33) 
+                return 'D';
+            else
+                return 'E';
+        }
     }
     function generate_qr($id = 0, $type = '', $data = '')
     {

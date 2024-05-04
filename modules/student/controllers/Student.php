@@ -163,6 +163,13 @@ class Student extends MY_Controller
                 $this->student_view('index');
         }
     }
+    function id_card(){
+        if($this->student_model->isStudent()){
+            redirect('id-card/'.$this->ki_theme->encrypt($this->student_model->studentId()));
+        }
+        else
+            show_404();
+    }
 
     function manage_study_material(){
         $this->view(__FUNCTION__);

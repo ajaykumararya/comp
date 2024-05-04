@@ -21,6 +21,14 @@ class Document extends MY_Controller
             $this->not_found("Admit Card Not Found..");
         }
     }
+    function id_card()
+    {
+        // echo $this->id;
+        $get = $this->student_model->id_card(['id' => $this->id]);
+        if ($get->num_rows()) {
+
+        }
+    }
     private function isMark($marks)
     {
         return $marks ? $marks : '00';
@@ -56,8 +64,11 @@ class Document extends MY_Controller
                 $ttltmaxm =
                 $ttlpminm =
                 $ttlpmaxm = 0;
+            $theorySubjects = $practicalSubjects = [];
+            $tIndedx = $pIndex = 0;
             if ($ttl_subject = $get_subect_numers->num_rows()) {
                 foreach ($get_subect_numers->result() as $mark) {
+                    // pre($mark,true);
                     $tmm = $this->isMark($mark->theory_max_marks);
                     $pmm = $this->isMark($mark->practical_max_marks);
                     $tmim = $this->isMark($mark->theory_min_marks);
@@ -67,6 +78,23 @@ class Document extends MY_Controller
                     $ttltmaxm += $tmm;
                     $ttlpminm += $pmim;
                     $ttlpmaxm += $pmm;
+                    if (PATH == 'iedct') {
+                        
+                        if (in_array($mark->subject_type, ['both', 'theory'])) {
+                            $theorySubjects[$tIndedx++] = [
+                                'subject_name' => $mark->subject_name,
+                                'theory_max_marks' => $tmm,
+                                'theory_total' => $mark->theory_marks
+                            ];
+                        }
+                        if (in_array($mark->subject_type, ['both', 'practical'])) {
+                            $practicalSubjects[$pIndex++] = [
+                                'subject_name' => $mark->subject_name,
+                                'practical_max_marks' => $pmm,
+                                'practical_total' => $mark->practical
+                            ];
+                        }
+                    }
                     $marks = [
                         'subject_name' => $mark->subject_name,
                         'theory_min_marks' => $tmim,
@@ -82,6 +110,10 @@ class Document extends MY_Controller
                 }
                 $per = number_format((($ob_ttl / ($ttltmaxm + $ttlpmaxm)) * 100), 2);
             }
+            if (PATH == 'iedct') {
+                $this->set_data('theorySubject', $theorySubjects);
+                $this->set_data('practicalSubjects', $practicalSubjects);
+            }
             $main = [
                 'total' => $ttl,
                 'obtain_total' => $ob_ttl,
@@ -93,14 +125,21 @@ class Document extends MY_Controller
                 'total_max_practical' => $ttlpmaxm,
                 'total_min_practical' => $ttlpminm,
                 'division' => $per < 40 ? 'Fail' : 'Pass'
-            ];
+            ];  
             // pre($main,true);
             $this->set_data($main);
             $pdfContent = $this->parse('marksheet', $get->row_array());
+            // echo $pdfContent;
             $this->pdf($pdfContent);
         } else {
             $this->not_found("Marksheet Not Found..");
         }
+    }
+    private function reverse_array($originalArray)
+    {
+        // $reversedArray = array_reverse($originalArray, true);
+        // $reversedKeysArray = array_reverse(array_keys($reversedArray));
+        // return array_combine($reversedKeysArray, $reversedArray);
     }
     function certificate()
     {
