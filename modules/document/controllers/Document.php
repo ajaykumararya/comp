@@ -6,15 +6,15 @@ class Document extends MY_Controller
     {
         parent::__construct();
         $this->load->library('common/mypdf');
-        $this->id = $this->decode($this->uri->segment(2, '0'));        
+        $this->id = $this->decode($this->uri->segment(2, '0'));
     }
     function admit_card()
     {
         $get = $this->student_model->admit_card(['id' => $this->id]);
         if ($get->num_rows()) {
             $this->set_data($get->row_array());
-            $this->set_data('date',date('d-m-Y',strtotime($get->row('exam_date'))));
-            $this->set_data('time',date('h:i A',strtotime($get->row('exam_date'))));
+            $this->set_data('date', date('d-m-Y', strtotime($get->row('exam_date'))));
+            $this->set_data('time', date('h:i A', strtotime($get->row('exam_date'))));
             $pdfContent = $this->parse('admit-card');
             $this->pdf($pdfContent);
         } else {
@@ -43,6 +43,11 @@ class Document extends MY_Controller
             $result_id = $get->row('result_id');
             $this->ki_theme->generate_qr($result_id, 'marksheet', current_url());
             $get_subect_numers = $this->student_model->marksheet_marks($result_id);
+            if (PATH == 'techno'):
+                $admissionTime = strtotime($get->row('admission_date'));
+                // $this->set_data('from_date', date('M Y', $admissionTime));
+                $this->set_data('serial_no', date("Y", $admissionTime) . str_pad($get->row('student_id'), 3, '0', STR_PAD_LEFT));
+            endif;
             // echo $get->row('result_id');
             // pre($get_subect_numers->result_array());
             $subject_marks = [];
@@ -75,7 +80,7 @@ class Document extends MY_Controller
                     $ob_ttl += $mark->ttl;
                     array_push($subject_marks, $marks);
                 }
-                $per = number_format((($ob_ttl / ( $ttltmaxm + $ttlpmaxm) ) * 100), 2);
+                $per = number_format((($ob_ttl / ($ttltmaxm + $ttlpmaxm)) * 100), 2);
             }
             $main = [
                 'total' => $ttl,
@@ -102,22 +107,21 @@ class Document extends MY_Controller
         $get = $this->student_model->student_certificates(['id' => $this->id]);
         if ($get->num_rows()) {
             $certificate = ($get->row_array());
-            $admissionTime = strtotime( $certificate['admission_date']);
-            $this->set_data('from_date',date('M Y',$admissionTime));
-            $this->set_data('serial_no',date("Y",$admissionTime).str_pad($certificate['certiticate_id'],3,'0',STR_PAD_LEFT));
-            $toDateString = strtotime( $certificate['createdOn']);
+            $admissionTime = strtotime($certificate['admission_date']);
+            $this->set_data('from_date', date('M Y', $admissionTime));
+            $this->set_data('serial_no', date("Y", $admissionTime) . str_pad($certificate['student_id'], 3, '0', STR_PAD_LEFT));
+            $toDateString = strtotime($certificate['createdOn']);
             $duration = $certificate['duration'];
-            if($certificate['duration_type'] == 'month'){
-                $toDateString = strtotime("+$duration months",$admissionTime);
+            if ($certificate['duration_type'] == 'month') {
+                $toDateString = strtotime("+$duration months", $admissionTime);
+            } else if ($certificate['duration_type'] == 'year') {
+                $toDateString = strtotime("+$duration years", $admissionTime);
             }
-            else if($certificate['duration_type'] == 'year'){
-                $toDateString = strtotime("+$duration years",$admissionTime);
-            }
-            $toDateString = strtotime('-1 month',$toDateString);
-            $this->set_data('to_date',date('M Y',$toDateString));
-            $this->set_data('exam_conduct_date','');
-            if(isset($certificate['exam_conduct_date']))
-                $this->set_data('exam_conduct_date',date('M Y',strtotime( $certificate['exam_conduct_date'])));
+            $toDateString = strtotime('-1 month', $toDateString);
+            $this->set_data('to_date', date('M Y', $toDateString));
+            $this->set_data('exam_conduct_date', '');
+            if (isset($certificate['exam_conduct_date']))
+                $this->set_data('exam_conduct_date', date('M Y', strtotime($certificate['exam_conduct_date'])));
             // pre($certificate,true);
             $final_marksheet = $this->student_model->marksheet([
                 'course_id' => $certificate['course_id'],
@@ -160,7 +164,7 @@ class Document extends MY_Controller
                         $ob_ttl += $mark->ttl;
                         array_push($subject_marks, $marks);
                     }
-                    $per = number_format((($ob_ttl / ( $ttltmaxm + $ttlpmaxm)) * 100), 2);
+                    $per = number_format((($ob_ttl / ($ttltmaxm + $ttlpmaxm)) * 100), 2);
                 }
                 $main = [
                     'total' => $ttl,
@@ -189,25 +193,23 @@ class Document extends MY_Controller
             $this->not_found("Certificate Not Found..");
         }
     }
-    function franchise_certificate(){
+    function franchise_certificate()
+    {
         $get = $this->center_model->get_center($this->id);
-        $this->set_data('certificate_id',$this->id);
+        $this->set_data('certificate_id', $this->id);
         if ($get->num_rows()) {
             $data = $get->row_array();
-            if($data['status'] && $data['isPending'] == 0 && $data['isDeleted'] == 0){
-                if($data['valid_upto'] && $data['certificate_issue_date']){
+            if ($data['status'] && $data['isPending'] == 0 && $data['isDeleted'] == 0) {
+                if ($data['valid_upto'] && $data['certificate_issue_date']) {
                     $data['state'] = $this->SiteModel->state($data['state_id']);
                     $data['city'] = $this->SiteModel->city($data['city_id']);
-                    $output = $this->parse('franchise_certificate', $data);                    
+                    $output = $this->parse('franchise_certificate', $data);
                     $this->pdf($output);
-                }
-                else
+                } else
                     $this->not_found('This Certificate is incomplete..');
-            }
-            else
+            } else
                 $this->not_found("This Accoutn is not Active..");
-        }
-        else
+        } else
             $this->not_found("Certificate Not Found..");
     }
     function pdf($pdfContent)

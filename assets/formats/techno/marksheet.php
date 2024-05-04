@@ -83,7 +83,7 @@
 </head>
 
 <body class="position-relative">
-    <div class="position-absolute" style="top:6.1%;left:78%;font-weight:bold">{result_id}</div>
+    <div class="position-absolute" style="top:6.1%;left:78%;font-weight:bold">{serial_no}</div>
     <img id="back-image" class="position-relative" src="{document_path}/marksheet.png">
     <p class="position-absolute" id="session">{session}</p>
     <div class="position-absolute" id="photo">
