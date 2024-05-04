@@ -78,13 +78,13 @@
             <div class="middle-div" style="margin-top:1.2rem;margin-left:9.4rem">{father_name}</div>
             <div class="middle-div" style="margin-top:1.34rem">{roll_no}</div>
             
-            <div class="middle-div" style="margin-top:1rem;margin-left:2rem">{duration} {duration_type}</div>
+            <div class="middle-div" style="margin-top:6rem;margin-left:2rem">{duration} {duration_type}</div>
             
 
     </div>
     <div class="position-absolute w-100" style="top:48.3rem;left:16rem">{course_name}</div>
     <div class="position-absolute w-100" style="top:55.54rem;left:13rem">{center_name}</div>
-    <div class="position-absolute w-100" style="top:66.2%;left:70%">{obtain_total}</div>
+    <div class="position-absolute w-100" style="top:66.2%;left:70%">{percentage}%</div>
     <div class="position-absolute w-100" style="top:69.7%;left:33%">{grade}</div>
     <div class="position-absolute" style="bottom:9%;left:18%">{createdOn}</div>
     
