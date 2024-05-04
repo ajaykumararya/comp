@@ -150,7 +150,9 @@
 </div>
 
 <div class="row mt-3">
-
+    <?php
+    if($this->center_model->isCenter()){
+    ?>
     <div class="col-md-6">
         <div class="card card-flush h-md-100 border-primary border-dashed border-3 shadow">
             <!--begin::Body-->
@@ -217,4 +219,7 @@
             <!--end::Body-->
         </div>
     </div>
+    <?php
+    }
+    ?>
 </div>
