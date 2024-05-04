@@ -116,6 +116,7 @@ if ($this->student_model->get_fee_transcations(['type' => 'admission_fee'] + $wh
                     if ($course_fees):
 
                         if ($duration_type == 'month') {
+
                             $perMonthfee = floor($course_fees / ($duration));
                             echo '<tr>
                                     <th colspan="4" class="text-center">' . $duration . ' ' . $duration_type . ' Fee</th>   
@@ -123,7 +124,9 @@ if ($this->student_model->get_fee_transcations(['type' => 'admission_fee'] + $wh
                             $index = 0;
                             for ($i = 1; $i <= $duration; $i++) {
                                 $type = $duration . "_" . $duration_type;
-                                $month = get_month($monthNum + ($i - 1));
+                                $calMonthNumber = $monthNum + ($i - 1);
+                               
+                                $month = get_month($calMonthNumber);
                                 $monthFee = $perMonthfee;
                                 $margin = 0;
                                 if($i == $duration){
@@ -166,6 +169,9 @@ if ($this->student_model->get_fee_transcations(['type' => 'admission_fee'] + $wh
                                     ];
                                     echo $this->parser->parse_string($trTemplate, $passArray, true);
                                 }
+
+                                if($calMonthNumber % 12 == 0)
+                                    $year++;
                             }
                             /*
                             $trId = '';
@@ -195,7 +201,9 @@ if ($this->student_model->get_fee_transcations(['type' => 'admission_fee'] + $wh
                                     </tr>';
                                 for ($k = 1; $k <= 12; $k++) {
                                     $type = $i . '_' . $duration_type;
-                                    $month = get_month($monthNum + ($k - 1));
+                                    
+                                    $calMonthNumber = $monthNum + ($k - 1);
+                                    $month = get_month($calMonthNumber);
                                     
                                     $monthFee = $perMonthfee;
                                     $margin = 0;
@@ -242,6 +250,8 @@ if ($this->student_model->get_fee_transcations(['type' => 'admission_fee'] + $wh
                                         echo $this->parser->parse_string($trTemplate, $passArray, true);
                                     }
                                     $monthNmber++;
+                                    if($calMonthNumber % 12 == 0)
+                                        $year++;
                                 }
 
 /*
@@ -261,8 +271,7 @@ if ($this->student_model->get_fee_transcations(['type' => 'admission_fee'] + $wh
                                 <?php
                                 
                                 */
-
-                                $year++;
+                                
                             }
                         }
 
