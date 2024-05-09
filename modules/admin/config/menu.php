@@ -178,7 +178,7 @@ $config['menu'] = array(
             'label' => 'Attendance',
             'type' => 'attendance',
             'icon' => array('double-check', 2),
-            'condition' => OnlyForAdmin() && CHECK_PERMISSION('ATTENDANCE'),
+            'condition' => (OnlyForAdmin() && CHECK_PERMISSION('ATTENDANCE')) or CHECK_PERMISSION('CENTRE_ATTENDATION_FUNCTION'), //centre_attendation_function
             'submenu' => array(
                 array(
                     'label' => 'Student Attendance',
