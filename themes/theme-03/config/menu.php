@@ -12,7 +12,7 @@ $menu = array(
         ),
         array(
             'label' => 'Notice Board',
-            'type' => 'notice_board',
+            'type' => 'notice-board',
             'icon' => array('file', 4),
             'url' => 'cms/static-page/notice-board',
         ),
@@ -31,7 +31,7 @@ $menu = array(
         //Featured Events
         array(
             'label' => 'Featured Events',
-            'type' => 'featured_evenrs',
+            'type' => 'featured_events',
             'url' => 'cms/static-page/featured_events',
             'icon' => array('file', 4)
         ),

@@ -12,7 +12,7 @@ $menu = array(
         ),
         array(
             'label' => 'APPRECIATED BY',
-            'type' => 'appreciated_by',
+            'type' => 'appreciated-by',
             'icon' => array('file',4),
             'url' => 'cms/static-page/appreciated-by'
         )

@@ -6,7 +6,7 @@ $menu = array(
     'submenu' => array(
         array(
             'label' => 'Usefull buttons',
-            'type' => 'usefull_buttons',
+            'type' => 'usefull-buttons',
             'icon' => array('file',4),
             'url' => 'cms/static-page/usefull-buttons'
         ),
@@ -49,13 +49,13 @@ $menu = array(
         ),
         array(
             'label' => 'Get-In-Touch',
-            'type' => 'get_in_touch',
+            'type' => 'get-in-touch',
             'icon' => array('file', 4),
             'url' => 'cms/static-page/get-in-touch',
         ),
         array(
             'label' => 'List All Course(S) ',
-            'type' => 'list_all_system_courses',
+            'type' => 'list-all-courses',
             'icon' => array('file', 4),
             'url' => 'cms/static-page/list-all-courses',
         ),
