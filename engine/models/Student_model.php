@@ -80,6 +80,7 @@ class Student_model extends MY_Model
                 $this->myWhere('s', $condition);
                 break;
             case 'limit':
+                $this->not_passout();
                 $this->db->order_by('s.id','DESC')->limit($limit);
                 break;
             case 'all':
@@ -116,6 +117,9 @@ class Student_model extends MY_Model
                 break;
             case 'passout':
                 $this->db->join('student_certificates as sce','sce.student_id = s.id AND sce.course_id = s.course_id');
+                if(isset($limit)){
+                    $this->db->limit($limit);
+                }
                 break;
             case 'course':
                 $this->db->where('c.id', $course_id);
@@ -194,6 +198,9 @@ class Student_model extends MY_Model
                 break;
         }
         return $this->db->get();
+    }
+    private function not_passout(){
+        $this->db->join('student_certificates as sce','sce.student_id != s.id');
     }
     function student_certificates($where = [])
     {
