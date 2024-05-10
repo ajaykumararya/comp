@@ -1,18 +1,30 @@
 <style>
     .parent {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
-}
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+    }
 
-.child {
-  background-color: #fff;
-}
+    .child {
+        background-color: #fff;
+    }
+
+    @media (max-width: 600px) {
+        .parent {
+            grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+            width: 100%;
+            padding: 10px
+        }
+
+        .child,.child a {
+            width: 100%;
+        }
+    }
 </style>
 <section class="sec_padd">
     <div class="container">
         <div class="row">
-            <div class="buttons-usefull parent">
+            <div class="buttons-usefull parent" align="center">
 
                 <?php
                 $our_counters = [
