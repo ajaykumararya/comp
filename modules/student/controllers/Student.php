@@ -195,5 +195,8 @@ class Student extends MY_Controller
     function coupons(){
         $this->view(__FUNCTION__);
     }
+    function passout_student_list(){
+        $this->view('passout-student-list');
+    }
 }
 ?>

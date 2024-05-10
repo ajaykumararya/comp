@@ -141,6 +141,9 @@ class Student extends Ajax_Controller
         //         ->get();
         $this->response('data', $this->student_model->get_online_student());
     }
+    function passout(){
+        $this->response('data', $this->student_model->get_passout_student());
+    }
     function list()
     {
         $list = $this->student_model->get_all_student($this->post());

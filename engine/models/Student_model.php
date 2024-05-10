@@ -114,6 +114,9 @@ class Student_model extends MY_Model
             case 'online_students':
                 $this->db->where('s.admission_type', 'online');
                 break;
+            case 'passout':
+                $this->db->join('student_certificates as sce','sce.student_id = s.id AND sce.course_id = s.course_id');
+                break;
             case 'course':
                 $this->db->where('c.id', $course_id);
                 break;
@@ -244,6 +247,9 @@ class Student_model extends MY_Model
     function get_online_student()
     {
         return $this->get_switch('online_students')->result();
+    }
+    function get_passout_student($where = []){
+        return $this->get_switch('passout',$where)->result();
     }
     function get_student_course_wise($course_id = 0)
     {

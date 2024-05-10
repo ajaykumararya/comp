@@ -113,12 +113,12 @@ $config['menu'] = array(
                     'icon' => array('plus', 3),
                     'url' => 'student/admission',
                 ),
-                // array(
-                //     'label' => 'Online Admission',
-                //     'type' => 'online_admission',
-                //     'icon' => array('bookmark-2', 3),
-                //     'url' => 'student/online-admission',
-                // ),
+                array(
+                    'label' => 'Passout Student',
+                    'type' => 'passout_students',
+                    'icon' => array('bookmark-2', 3),
+                    'url' => 'student/passout-student-list',
+                ),
                 array(
                     'label' => 'List Student(s)',
                     'type' => 'all_students',
