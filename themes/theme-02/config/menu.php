@@ -11,6 +11,12 @@ $menu = array(
             'url' => 'cms/static-page/usefull-buttons'
         ),
         array(
+            'label' => 'Scroll Section',
+            'type' => 'scroll_section_area',
+            'icon' => array('file',4),
+            'url' => 'cms/static-page/scroll_section_area'
+        ),
+        array(
             'label' => 'About Us',
             'type' => 'about_us',
             'icon' => array('file', 4),

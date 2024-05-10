@@ -79,6 +79,9 @@ class Student_model extends MY_Model
                 // $this->db->group_by('s.id');
                 $this->myWhere('s', $condition);
                 break;
+            case 'limit':
+                $this->db->order_by('s.id','DESC')->limit($limit);
+                break;
             case 'all':
                 if (isset($condition['without_admission_status']))
                     unset($condition['without_admission_status']);
