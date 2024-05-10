@@ -5,7 +5,7 @@
                 <div class="card border-danger radius_all_10 box_shadow1 animation animated fadeInUp"
                     data-animation="fadeInUp" data-animation-delay="0.02s" style="animation-delay: 0.02s; opacity: 1;">
                     <div class="card-header bg-danger pb-0">
-                        <h5 class="card-title text-white">Students</h5>
+                        <h5 class="card-title text-white"><i class="fa fa-users"></i> Students</h5>
                     </div>
                     <div class="card-body p-0">
                         <marquee behavior="scroll" direction="up" scrollamount="3" onmouseover="this.stop();"
@@ -56,7 +56,7 @@
                 <div class="card border-danger radius_all_10 box_shadow1 animation animated fadeInUp"
                     data-animation="fadeInUp" data-animation-delay="0.02s" style="animation-delay: 0.02s; opacity: 1;">
                     <div class="card-header bg-danger pb-0">
-                        <h5 class="card-title text-white">Franchise</h5>
+                        <h5 class="card-title text-white"><i class="fa fa-users"></i> Franchise</h5>
                     </div>
                     <div class="card-body p-0">
                         <marquee behavior="scroll" direction="up" scrollamount="3" onmouseover="this.stop();"
