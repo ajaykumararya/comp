@@ -1,83 +1,92 @@
 <?php
 if ($isPrimary) {
-    $sliders = $this->SiteModel->slider();
-    if ($sliders->num_rows()) {
-        ?>
-        <style>
-            .banner-bg {
-                display: block;
-            }
-            .banner-bg-mobile {
-                display: none;
-            }
-            @media only screen and (max-width: 767px) {
-                .banner-bg {
-                    display: none;
-                }
-                .banner-bg-mobile {
-                    display: block;
-                }
-                .banner_content_wrap .carousel-item {
-                    padding: 0px 0;
-                }
-            }
-        </style>
-        <section class="banner_section p-0 full_screen">
-            <div id="carouselExampleFade" class="banner_content_wrap carousel slide carousel-fade" data-ride="carousel">
-                <div class="carousel-inner">
-                    <?php
-                    $i = 1;
-                    foreach ($sliders->result() as $slider) {
-                      $active = $i == 1 ? 'active' : '';
-                        ?>
-                        <div class="carousel-item <?=$active?>  background_bg overlay_bg_40 background_bg_image<?= $i++ ?>">
-                            <span class="banner-bg"><img src="{base_url}upload/<?= $slider->image ?>" width="100%"></span>
-                            <span class="banner-bg-mobile"><img src="{base_url}upload/<?= $slider->image ?>" width="100%"></span>
-                        </div>
-                        <?php
-                    }
-                    ?>
-                    <div class="carousel-nav carousel_style1">
-                        <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
-                            <i class="ion-chevron-left"></i>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
-                            <i class="ion-chevron-right"></i>
-                        </a>
-                    </div>
-                </div>
-        </section>
-        <?php
-    }
-} else {
+  $sliders = $this->SiteModel->slider();
+  if ($sliders->num_rows()) {
     ?>
-    <section class="page-title-light breadcrumb_section parallax_bg overlay_bg_50"
-        data-parallax-bg-image="assets/images/about_bg.jpg"
-        style="position: relative; background: transparent; overflow: hidden; z-index: 1;">
-        <div class="parallax-inner"
-            style="position: absolute; background-image: url(&quot;assets/images/about_bg.jpg&quot;); background-position: center center; background-repeat: no-repeat; background-size: cover; width: 1423px; height: 347px; transform: translate3d(0px, -152px, 0px); transition: transform 100ms ease 0s; z-index: -1;">
-        </div>
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-sm-6">
-                    <div class="page-title">
-                        <h1>{page_name}</h1>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb justify-content-sm-end">
-                            <li class="breadcrumb-item"><a href="{base_url}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">
-                                {page_name}
-                            </li>
-                        </ol>
-                    </nav>
-                </div>
+    <style>
+      .banner-bg {
+        display: block;
+      }
+
+      .banner-bg-mobile {
+        display: none;
+      }
+
+      @media only screen and (max-width: 767px) {
+        .banner-bg {
+          display: none;
+        }
+
+        .banner-bg-mobile {
+          display: block;
+        }
+
+        .banner-bg-mobile img {
+          height: 300px;
+          width: 100%;
+        }
+
+        .banner_content_wrap .carousel-item {
+          padding: 0px 0;
+        }
+      }
+    </style>
+    <section class="banner_section p-0 full_screen">
+      <div id="carouselExampleFade" class="banner_content_wrap carousel slide carousel-fade" data-ride="carousel">
+        <div class="carousel-inner">
+          <?php
+          $i = 1;
+          foreach ($sliders->result() as $slider) {
+            $active = $i == 1 ? 'active' : '';
+            ?>
+            <div class="carousel-item <?= $active ?>  background_bg overlay_bg_40 background_bg_image<?= $i++ ?>">
+              <span class="banner-bg"><img src="{base_url}upload/<?= $slider->image ?>" width="100%"></span>
+              <span class="banner-bg-mobile"><img src="{base_url}upload/<?= $slider->image ?>" width="100%"></span>
             </div>
+            <?php
+          }
+          ?>
+          <div class="carousel-nav carousel_style1">
+            <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+              <i class="ion-chevron-left"></i>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+              <i class="ion-chevron-right"></i>
+            </a>
+          </div>
         </div>
     </section>
     <?php
+  }
+} else {
+  ?>
+  <section class="page-title-light breadcrumb_section parallax_bg overlay_bg_50"
+    data-parallax-bg-image="assets/images/about_bg.jpg"
+    style="position: relative; background: transparent; overflow: hidden; z-index: 1;">
+    <div class="parallax-inner"
+      style="position: absolute; background-image: url(&quot;assets/images/about_bg.jpg&quot;); background-position: center center; background-repeat: no-repeat; background-size: cover; width: 1423px; height: 347px; transform: translate3d(0px, -152px, 0px); transition: transform 100ms ease 0s; z-index: -1;">
+    </div>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-sm-6">
+          <div class="page-title">
+            <h1>{page_name}</h1>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb justify-content-sm-end">
+              <li class="breadcrumb-item"><a href="{base_url}">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">
+                {page_name}
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+  <?php
 }
 ?>
 {content}

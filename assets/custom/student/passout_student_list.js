@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             { 'data': 'contact_number' },
             { 'data': 'email' },
             { 'data': 'course_name' },
-            { 'data': null }
+            // { 'data': null }
             // Add more columns as needed
         ],
         'columnDefs': [
@@ -52,16 +52,16 @@ document.addEventListener('DOMContentLoaded', function (e) {
                             <label class="badge badge-${badgeClass}">${duration}</label>`;
                 }
             },
-            {
-                targets: -1,
-                data: null,
-                orderable: false,
-                className: 'text-end',
-                render: function (data, type, row) {
-                    // console.log(data);
-                    return ``;
-                }
-            }
+            // {
+            //     targets: -1,
+            //     data: null,
+            //     orderable: false,
+            //     className: 'text-end',
+            //     render: function (data, type, row) {
+            //         // console.log(data);
+            //         return ``;
+            //     }
+            // }
         ]
     });
 
