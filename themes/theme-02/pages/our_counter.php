@@ -12,7 +12,7 @@
             ];
             $i = 1;
             foreach($our_counters as $index => $counter){
-                $title = $this->SiteModel->get_setting($index.'_title',$counter);
+                $title = $this->SiteModel->get_setting($index.'_text',$counter);
                 $value = $this->SiteModel->get_setting($index.'_value',0);
                 preg_match_all('/\d+/', $value, $matches);
 

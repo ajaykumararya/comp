@@ -3,7 +3,7 @@
         <form action="" class="extra-setting">
             <div class="{card_class}">
                 <div class="card-header">
-                    <h3 class="card-title">Our Counter</h3>
+                    <h3 class="card-title">Our Usefull Button(s)</h3>
                     <div class="card-toolbar">
                         {save_button}
                     </div>
@@ -19,10 +19,11 @@
                         <tbody>
                             <?php
                             $our_counters = [
-                                'first_counter' => 'Certified Students',
-                                'secound_counter' => 'Courses',
-                                'third_counter' => 'Study Centers',
-                                'forth_counter' => 'Awarded Centers'
+                                'first_usefull_button' => 'First Button',
+                                'second_usefull_button' => 'Second Button',
+                                'third_usefull_button' => 'Third Button',
+                                'forth_usefull_button' => 'Forth Button',
+                                'fifth_usefull_button' => 'Fifth Button',
                             ];
                             foreach($our_counters as $index => $counter){
                                 $title = $this->SiteModel->get_setting($index.'_text',$counter);
@@ -36,7 +37,7 @@
                                         </td>
                                         <td>
                                         <input name='{$index}_value' class='custom_setting_input'
-                                        value='$value'>
+                                        value='$value' placeholder='Enter $title value'>
                                         </td>
                                     </tr>
                                 
