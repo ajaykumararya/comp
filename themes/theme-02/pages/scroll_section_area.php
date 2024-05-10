@@ -2,9 +2,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <div class="card border-danger radius_all_10 box_shadow1 animation animated fadeInUp"
+                <div class="card theme-border radius_all_10 box_shadow1 animation animated fadeInUp"
                     data-animation="fadeInUp" data-animation-delay="0.02s" style="animation-delay: 0.02s; opacity: 1;">
-                    <div class="card-header bg-danger pb-0">
+                    <div class="card-header theme-back pb-0">
                         <h5 class="card-title text-white"><i class="fa fa-users"></i> Students</h5>
                     </div>
                     <div class="card-body p-0">
@@ -44,7 +44,7 @@
             </div>
 
             <div class="col-md-6">
-                <div class="card border-danger radius_all_10 box_shadow1 animation animated fadeInUp"
+                <div class="card theme-border radius_all_10 box_shadow1 animation animated fadeInUp"
                     data-animation="fadeInUp" data-animation-delay="0.02s" style="animation-delay: 0.02s; opacity: 1;">
                     <div class="card-body">
                         <?= ES('scroll_middle_content') ?>
@@ -53,9 +53,9 @@
             </div>
 
             <div class="col-md-3">
-                <div class="card border-danger radius_all_10 box_shadow1 animation animated fadeInUp"
+                <div class="card theme-border radius_all_10 box_shadow1 animation animated fadeInUp"
                     data-animation="fadeInUp" data-animation-delay="0.02s" style="animation-delay: 0.02s; opacity: 1;">
-                    <div class="card-header bg-danger pb-0">
+                    <div class="card-header theme-back pb-0">
                         <h5 class="card-title text-white"><i class="fa fa-users"></i> Franchise</h5>
                     </div>
                     <div class="card-body p-0">

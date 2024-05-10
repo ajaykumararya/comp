@@ -9,6 +9,37 @@
     h1 span {
         color: #ffbc09 !important
     }
+    .theme-back{
+        background-color: #07294d !important;
+        color: white
+    }
+    .theme-btn:hover {
+        outline: medium none;
+        color: white
+    }
+
+    .theme-btn:hover::before {
+        -webkit-transform: skewX(-45deg) translateX(40em);
+        transform: skewX(-45deg) translateX(40em);
+    }
+
+    .theme-btn::before {
+        content: "";
+        background-color: rgba(255, 255, 255, 0.5);
+        height: 100%;
+        width: 2em;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: -4.5em;
+        -webkit-transform: skewX(-45deg) translateX(0);
+        transform: skewX(-45deg) translateX(0);
+        transition: all 0.8s ease-in-out;
+    }
+
+    .theme-border {
+        border: 1px solid #07294d !important;
+    }
 </style>
 
 <body>
@@ -458,7 +489,7 @@
                 $("#email").focus();
                 return false;
             }
-            else if(!emailRegex.test(email)){
+            else if (!emailRegex.test(email)) {
                 toastr.error("Invalid Email.");
                 return false;
             }
@@ -481,13 +512,13 @@
                 return false;
             }
             var data = {
-                name,email,mobile,course_name,message
+                name, email, mobile, course_name, message
             };
             $.AryaAjax({
                 url: 'website/contact-us-action',
                 data: data,
                 success_message: 'Thank you for contact with us.',
-                page_reload : true
+                page_reload: true
             }).then((e) => {
                 $("#name").val("");
                 $("#mobile").val("");
