@@ -67,20 +67,22 @@
                     <ul id="sortable1" class="items">
                         <?php
                         // pre($this->ki_theme->schema_vars());
-                        foreach($schema as $row){
+                        foreach ($schema as $row) {
                             $title = $event = $this->ki_theme->schema_vars($row['event']);
-                            switch($row['event']){
+                            switch ($row['event']) {
                                 case 'page':
                                     $page = $this->ki_theme->findMenu($row['event_id']);
-                                    $title = isset($page['label']) ? $page['label'] : '<label class="badge badge-danger">'.$row['event_id'].' Page is Not Found.</label>';
+                                    $title = isset($page['label']) ? $page['label'] : false;//'<label class="badge badge-danger">'.$row['event_id'].' Page is Not Found.</label>';
                                     break;
                                 case 'form':
                                     $title = $this->ki_theme->schema_vals($row['event_id']);
                                     break;
                             }
-                        ?>
-                        <li data-id="<?=$row['id']?>"><?=$title?> <span class="right"><?=$event?></span></li>
-                        <?php
+                            if ($title) {
+                                ?>
+                                <li data-id="<?= $row['id'] ?>"><?= $title ?> <span class="right"><?= $event ?></span></li>
+                                <?php
+                            }
                         }
                         ?>
                     </ul>
