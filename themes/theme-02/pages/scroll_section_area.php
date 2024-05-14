@@ -65,8 +65,9 @@
                             onmouseout="this.start();" style="height:400px;">
                             <ul class="lst">
                                 <?php
-                                $get = $this->student_model->get_switch('passout', [
-                                    'record_limit' => ES('scroll_passout_student_number', 10)
+                                $limit = ES('scroll_passout_student_number', 10);
+                                $get = $this->student_model->get_passout_student([
+                                    'record_limit' => $limit
                                 ]);
                                 if ($get->num_rows()) {
                                     foreach ($get->result() as $row) {
