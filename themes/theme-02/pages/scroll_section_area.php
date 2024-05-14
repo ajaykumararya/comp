@@ -69,8 +69,8 @@
                                 $get = $this->student_model->get_passout_student([
                                     'record_limit' => $limit
                                 ]);
-                                if ($get->num_rows()) {
-                                    foreach ($get->result() as $row) {
+                                if ($get) {
+                                    foreach ($get as $row) {
                                         $name = $row->student_name;
                                         // pre($row);
                                         ?>
