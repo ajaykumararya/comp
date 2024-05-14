@@ -4,39 +4,50 @@
     .form-control {
         background: #e8e8e8 url('{theme_url}assets/images/bg-acn.jpg') repeat 0 0 !important;
     }
+
     .card {
         box-shadow: 0 0 23px 0 gray;
     }
+
     .card .card {
         box-shadow: 0 0 0 0 transparent !important;
         background: transparent !important;
     }
+
     .dark-bg {
         background: #e8e8e8 url('{theme_url}assets/images/leafs_dark.png') repeat 0 0;
     }
+
     .liHead {
         background: #6c757dfa;
         padding: 5px;
     }
+
     .liHead>a {
         color: #fff !important;
     }
+
     ul li .liHead:hover>a {
         background: none !important;
     }
+
     ul li .liHead:hover {
         background: #6c757dfa !important;
     }
+
     .main-heading {
         margin-top: 45px !important
     }
+
     form {
         padding: 0 !important;
     }
-    body{
-        font-family: 'BarlowCondensed'!important;
+
+    body {
+        font-family: 'BarlowCondensed' !important;
     }
 </style>
+
 <body>
     <header id="header" class="header">
         <div class="clearfix topBar">
@@ -48,22 +59,22 @@
                     <div class="col-md-8 topBar-right">
                         <div class="clearfix">
                             <ul class="topLinks">
-                            <?php
-                            $header_sections = $this->ki_theme->config('header_sections');
-                            if ($header_sections) {
-                                foreach ($header_sections as $index => $title) {
-                                    // $myTitle = $this->SiteModel->get_setting($index . '_text', $title);
-                                    $fields = $this->SiteModel->get_setting($index . '_links', '', true);
-                                    if ($fields) {
-                                        foreach ($fields as $value) {
-                                            $my_index = $this->ki_theme->parse_string($value->title);
-                                            $value = $value->link;
-                                            echo "<li><a href='$value' target='_blank'><span>$my_index</span></a></li>";
+                                <?php
+                                $header_sections = $this->ki_theme->config('header_sections');
+                                if ($header_sections) {
+                                    foreach ($header_sections as $index => $title) {
+                                        // $myTitle = $this->SiteModel->get_setting($index . '_text', $title);
+                                        $fields = $this->SiteModel->get_setting($index . '_links', '', true);
+                                        if ($fields) {
+                                            foreach ($fields as $value) {
+                                                $my_index = $this->ki_theme->parse_string($value->title);
+                                                $value = $value->link;
+                                                echo "<li><a href='$value' target='_blank'><span>$my_index</span></a></li>";
+                                            }
                                         }
                                     }
                                 }
-                            }
-                            ?>
+                                ?>
                             </ul>
                         </div>
                         <div class="clearfix conInfo">
@@ -126,31 +137,31 @@
     <footer class="footer clearfix spacer">
         <div class="container">
             <div class="clearfix row">
-                
-                    <?php
-                    $footer_sections = $this->ki_theme->config('footer_sections');
-                    if ($footer_sections) {
-                        foreach ($footer_sections as $index => $title) {
-                            $myTitle = $this->SiteModel->get_setting($index . '_text', $title);
-                            echo '<div class="col-md-6 col-lg-4 col-xl-3">
+
+                <?php
+                $footer_sections = $this->ki_theme->config('footer_sections');
+                if ($footer_sections) {
+                    foreach ($footer_sections as $index => $title) {
+                        $myTitle = $this->SiteModel->get_setting($index . '_text', $title);
+                        echo '<div class="col-md-6 col-lg-4 col-xl-3">
                                     <div class="clearfix footCol">
-                                    <h4 class="title">'.$myTitle.'</h4>
+                                    <h4 class="title">' . $myTitle . '</h4>
                                     <div class=" txtBox useful-links">
                                     <ul>';
-                            $fields = $this->SiteModel->get_setting($index . '_links', '', true);
-                            if ($fields) {
-                                foreach ($fields as $value) {
-                                    $my_index = $this->ki_theme->parse_string($value->title);
-                                    $value = $value->link;
-                                    echo "<li><a href='$value'>$my_index</a></li>";
-                                }
+                        $fields = $this->SiteModel->get_setting($index . '_links', '', true);
+                        if ($fields) {
+                            foreach ($fields as $value) {
+                                $my_index = $this->ki_theme->parse_string($value->title);
+                                $value = $value->link;
+                                echo "<li><a href='$value'>$my_index</a></li>";
                             }
-                            echo '</ul></div></div>
-                            </div>';
                         }
+                        echo '</ul></div></div>
+                            </div>';
                     }
-                    ?>
-                        <!-- <h4 class="title">Sitemap</h4>
+                }
+                ?>
+                <!-- <h4 class="title">Sitemap</h4>
                         <div class="clearfix txtBox useful-links">
                             <ul class="">
                                 <li><a href="index.html">Home</a></li>
@@ -165,7 +176,7 @@
                                 <li><a href="#">RTI</a></li>
                             </ul>
                         </div> -->
-                    <!-- </div>
+                <!-- </div>
                 </div> -->
                 <div class="col-md-6 col-lg-4 col-xl-4">
                     <div class="clearfix footCol">
@@ -210,9 +221,8 @@
                             <p>{address} </p>
                             <p>{number} </p>
                             <p>{email} </p>
-                            <iframe
-                                src="<?=ES('google_map_url')?>"
-                                width="100%" height="150" frameborder="0" style="border:0" allowfullscreen></iframe>
+                            <iframe src="<?= ES('google_map_url') ?>" width="100%" height="150" frameborder="0"
+                                style="border:0" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
@@ -230,11 +240,136 @@
                 padding-bottom: 30px;
                 font-weight: 300;
             }
+
             .footer .useful-links ul li {
                 width: 50%;
                 background: url('{theme_url}assets/images/links-arrow-light.png') no-repeat 0 9px;
                 padding: 0 0 0 20px;
             }
+        </style>
+
+
+        <div class="float-sm">
+            <div class="fl-fl float-fb">
+                <i class="fab fa fa-facebook"></i>
+                <a href="{facebook}" target="_blank"> Like us!</a>
+            </div>
+            <div class="fl-fl float-tw">
+                <i class="fa fab fa-twitter"></i>
+                <a href="{twitter}" target="_blank">Follow us!</a>
+            </div>
+            <div class="fl-fl float-gp">
+                <i class="fa fab fa-youtube"></i>
+                <a href="{youtube}" target="_blank">Recommend us!</a>
+            </div>
+            <div class="fl-fl float-link">
+                <i class="fa fab fa-linkedin"></i>
+                <a href="{linkedin}" target="_blank">Follow us!</a>
+            </div>
+            <div class="fl-fl float-ig">
+                <i class="fa fab fa-instagram"></i>
+                <a href="{instagram}" target="_blank">Follow us!</a>
+            </div>
+            <!-- <div class="fl-fl float-pn">
+                <i class="fa fab  fa-pinterest"></i>
+                <a href="" target="_blank">Follow us!</a>
+            </div> -->
+        </div>
+        <!-- Floating Social Media bar Ends -->
+
+        <style>
+            .text {
+                margin: 0 60px;
+            }
+
+            .twitter {
+                font: normal normal 10px Arial;
+                text-align: center;
+                color: #998578;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+            }
+
+            .twitter {
+                color: #72898b;
+                text-decoration: none;
+                display: block;
+                padding: 14px;
+                -webkit-transition: all .25s ease;
+                -moz-transition: all .25s ease;
+                -ms-transition: all .25s ease;
+                -o-transition: all .25s ease;
+                transition: all .25s ease;
+            }
+
+            .twitter:hover {
+                color: #FF7D6D;
+                text-decoration: none;
+            }
+
+            /* Floating Social Media Bar Style Starts Here */
+
+            .fl-fl {
+                background: #000000;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                padding: 4px;
+                width: 190px;
+                position: fixed;
+                right: -150px;
+                z-index: 9900;
+                font: normal normal 10px Arial;
+                -webkit-transition: all .25s ease;
+                -moz-transition: all .25s ease;
+                -ms-transition: all .25s ease;
+                -o-transition: all .25s ease;
+                transition: all .25s ease;
+            }
+
+            .float-sm .fa {
+                font-size: 20px;
+                color: #fff;
+                padding: 10px 0;
+                width: 40px;
+                margin-left: 8px;
+            }
+
+            .fl-fl:hover {
+                right: 0;
+            }
+
+            .fl-fl a {
+                color: #fff !important;
+                text-decoration: none;
+                text-align: center;
+                line-height: 43px !important;
+                vertical-align: top !important;
+            }
+            .float-fb {
+                top: 160px;
+            }
+
+            .float-tw {
+                top: 215px;
+            }
+
+            .float-gp {
+                top: 270px;
+            }
+
+            .float-link {
+                top: 325px;
+            }
+
+            .float-ig {
+                top: 380px;
+            }
+
+            .float-pn {
+                top: 435px;
+            }
+
+            /* Floating Social Media Bar Style Ends Here */
         </style>
     </footer>
     <!-- <script src="{theme_url}assets/js/jquery.min.js"></script> -->
@@ -272,4 +407,5 @@
         });
     </script>
 </body>
+
 </html>

@@ -37,3 +37,44 @@
         </div>
     </div>
 </div>
+<?php
+// echo PATH;
+if (THEME == 'theme-03') {
+    $status = ES('latest_update_show','0');
+    ?>
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <form action="" class="extra-setting">
+                <div class="{card_class}">
+                    <div class="card-header">
+                        <h3 class="card-title">Latest Update(s)</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="title">Visibilty</label>
+                            <select class="form-control" name="latest_update_show" data-control="select2">
+                                <option value="1" <?= $status == '1' ? 'selected' : '' ?>>Show</option>
+                                <option value="0" <?= $status == '0' ? 'selected' : '' ?>>Hide</option>
+                            </select>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="title">Title</label>
+                            <input type="text" value="<?= ES('latest_update_title') ?>" name="latest_update_title" id="title"
+                                class="form-control" placeholder="Title">
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="d">Description</label>
+                            <textarea name="latest_update_desc" id="d" class="form-control"
+                                placeholder="Description"><?= ES('latest_update_desc') ?></textarea>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        {publish_button}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <?php
+}
+?>

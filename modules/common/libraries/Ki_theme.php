@@ -98,14 +98,14 @@ class Ki_theme
             else
                 return 'D';
         }
-        if(PATH == 'iedct'){
-            if($score >= 60)
+        if (PATH == 'iedct') {
+            if ($score >= 60)
                 return 'A';
-            else if($score > 60 && $score <= 50)
+            else if ($score > 60 && $score <= 50)
                 return 'B';
-            else if($score > 50 && $score <= 40)
+            else if ($score > 50 && $score <= 40)
                 return 'C';
-            else if($score >40 && $score <= 33) 
+            else if ($score > 40 && $score <= 33)
                 return 'D';
             else
                 return 'E';
@@ -143,6 +143,23 @@ class Ki_theme
             $result .= chr(ord($data[$i]) ^ ord($key[$i % strlen($key)]));
         }
         return base64_encode($result);
+    }
+
+    function center_fix_fees()
+    {
+        $array = [];
+        if ($this->CI->center_model->isCenter() && CHECK_PERMISSION('WALLET_SYSTEM')) {
+            if (CHECK_PERMISSION('CENTRE_WISE_WALLET_SYSTEM')) {
+                $get = $this->CI->center_model->center_fees();
+                if ($get->num_rows()) {
+                    $row = $get->row();
+                    foreach ($row as $index => $value) {
+                        $array[$index] = $value;
+                    }
+                }
+            }
+        }
+        return $array;
     }
     function decrypt($data)
     {

@@ -11,7 +11,11 @@ class MY_Loader extends MX_Loader
         $this->_ci_view_paths = array_merge($this->_ci_view_paths,$array);
         return $this;
     }
-
+    function remove_view_path($path){
+        if(in_array($path,$this->_ci_view_paths))
+            unset($this->_ci_view_paths[$path]);
+        return $this;
+    }
     function get_view_paths(){
         return $this->_ci_view_paths;
     }

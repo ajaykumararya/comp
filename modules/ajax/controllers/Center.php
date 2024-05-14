@@ -147,5 +147,26 @@ class Center extends Ajax_Controller
             );
         }
     }
+
+    function set_centre_wise_fees()
+    {
+        if (CHECK_PERMISSION('CENTRE_WISE_WALLET_SYSTEM')) {
+            $fields = $this->db->list_fields('center_fees');
+            // unset($fields['id'],$fields['center_id']);
+            $data = [];
+            foreach ($fields as $field) {
+                if (!in_array($field, ['id', 'center_id']))
+                    $data[$field] = (isset($_POST[$field])) ? $_POST[$field . "_amount"] : null;
+            }
+            $center_id = $this->post('center_id');
+            $get = $this->db->get_where('center_fees', ['center_id' => $center_id]);
+            if ($get->num_rows()) {
+                $this->db->where('id', $get->row('id'))->update('center_fees', $data);
+            } else
+                $this->db->insert('center_fees', $data + ['center_id' => $center_id]);
+            $this->response('status', true);
+        } else
+            $this->response('html', 'Permission Denied.');
+    }
 }
 ?>

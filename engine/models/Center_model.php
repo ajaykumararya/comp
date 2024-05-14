@@ -1,6 +1,11 @@
 <?php
 class Center_model extends MY_Model
 {
+    function center_fees($id = 0,$select = '*'){
+        $id = $id ? $id : $this->loginId();
+        $this->db->select($select);
+        return $this->db->where('center_id',$id)->get('center_fees');
+    }
     function get_assign_courses($id, $condition = false)
     {
         $this->db->select('c.*,co.course_name,co.id as course_id,co.fees,co.duration,co.duration_type,cc.course_fee,cc.status as course_status')

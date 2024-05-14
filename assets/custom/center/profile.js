@@ -68,4 +68,24 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+    const set_fees = $('#set-fees');
+    if(set_fees.length){
+
+        set_fees.on('submit',function(r) {
+            r.preventDefault();
+            $.AryaAjax({
+                url: 'center/set-centre-wise-fees',
+                data: $(this).serialize()
+            }).then((r) => {
+                if(r.status){
+                    SwalSuccess('Success','Fees Set Successfully');
+                }
+                showResponseError(r);
+            });
+        })
+        // alert(3);
+        set_fees.find('.select-amount').on('change',function(){
+            $(this).closest('.box').find('.amount-box').prop('disabled', !$(this).is(':checked')).focus().val('');
+        })
+    }
 })

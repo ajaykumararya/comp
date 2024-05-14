@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
     const course_box = $('select[name="course_id"]');
     // const input_center = $('input[name="center_id"]');
     const referral_id = $('[name="referral_id"]');
-    if(referral_id)
+    if (referral_id)
         select2Student(referral_id);
     // console.log(institue_box);
     if (form) {
@@ -257,8 +257,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             // Prevent default button action
             e.preventDefault();
             var submitButton = $(this).find('button');
-
-            if(!isValidWallet()){
+            if (!isValidWallet(STUDENT_ADMISSION_FEES)) {
                 low_balance_message();
                 return false;
             }
@@ -369,9 +368,9 @@ document.addEventListener('DOMContentLoaded', function (e) {
         });
 
 
-        if(login_type == 'center'){
+        if (login_type == 'center') {
             institue_box.trigger("change");
         }
-      
+
     }
 }); 

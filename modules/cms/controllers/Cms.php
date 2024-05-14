@@ -55,7 +55,14 @@ class Cms extends MY_Controller
             );
         }
         // echo $id;
-        $this->view('static-pages/'.$id);
+        // echo THEME_PATH;
+        if(file_exists(THEME_PATH.'static-pages/'.$id.EXT)){
+            $this->view('static-pages/'.$id);
+        }
+        else
+            $this->view('static/'.$id);
+        
+        // $this->view('static-pages/'.$id);
     }
     function gallery_images(){
         $this->ki_theme->breadcrumb_action_html(

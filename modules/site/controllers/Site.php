@@ -1,5 +1,6 @@
 <?php
 use chillerlan\QRCode\Data\Number;
+
 defined('BASEPATH') or exit('No direct script access allowed');
 class Site extends Site_Controller
 {
@@ -40,7 +41,9 @@ class Site extends Site_Controller
                             $html .= $this->parse('pages/' . $page->event_id, [
                                 'type' => $page->event_id
                             ], true);
-                        else {
+                        else if ($this->ki_theme->view_exists('cms', 'pages/' . $page->event_id)) {
+                            $html .= $this->parse('cms/pages/' . $page->event_id, [], true);
+                        } else {
                             if ($page->event_id == 'notice-board' && !$return['isPrimary']) { // this for theme3
                                 $this->set_data('notice_board', true);
                             }
@@ -74,7 +77,18 @@ class Site extends Site_Controller
         $this->render($content, 'content');
         // pre($this->public_data,true);
     }
-    function test(){
-       echo $this->gen_roll_no(5);
+    function test()
+    {
+        //    echo $this->gen_roll_no(5);
+        try {
+            $columns = $this->db->list_fields('center_fees');
+
+            // Display the column names
+            foreach ($columns as $column) {
+                echo $column . '<br>';
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
 }

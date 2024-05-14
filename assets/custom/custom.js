@@ -702,9 +702,9 @@ const loadSomeFuncation = () => {
 const isWalletSystem = () => {
     return login_type == 'center' && wallet_system;
 }
-const isValidWallet = () => {
+const isValidWallet = (balance = 0) => {
     if (isWalletSystem()) {
-        return wallet_balance >= 0;
+        return wallet_balance >= balance;
     }
     return true;
 }

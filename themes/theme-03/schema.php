@@ -3,6 +3,13 @@ if ($isPrimary) {
     $sliders = $this->SiteModel->slider();
     if ($sliders->num_rows()) {
         ?>
+        <style>
+            @media (min-width: 1024px) {
+                .carousel-item img {
+                    height: 477px !important;
+                }
+            }
+        </style>
         <section class="clearfix bannerWrap os-animation" data-os-animation="fadeIn" data-os-animation-delay=".5s">
             <div id="homeBanner" class="carousel slide carousel-fade" data-ride="carousel">
                 <?php
@@ -14,10 +21,6 @@ if ($isPrimary) {
                 }
                 echo '</ol>';
                 ?>
-
-
-
-
                 <div class="carousel-inner">
                     <?php
                     $i = 1;
@@ -26,8 +29,7 @@ if ($isPrimary) {
                         $i++;
                         ?>
                         <div class="carousel-item <?= $active ?>">
-                            <img class="d-block w-100" src="{base_url}upload/<?= $slider->image ?>" alt="First slide"
-                                style="width:1120px; height:477px;">
+                            <img class="d-block w-100" src="{base_url}upload/<?= $slider->image ?>" alt="First slide">
                         </div>
                         <?php
                     }
@@ -35,9 +37,10 @@ if ($isPrimary) {
                 </div>
         </section>
         <?php
+        if (ES('latest_update_show', '0') == '1')
+            echo $this->parser->parse('pages/latest_updates', [], true);
     }
 }
-
 $noticeBox = isset($notice_board);
 ?>
 <section class="clearfix spacer content-area gray-bg">

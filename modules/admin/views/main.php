@@ -687,7 +687,16 @@
     const <?= $var ?> = `<?= $var_value ?>`;
     <?php
     }
-    ?>   </script>
+    if($this->center_model->isCenter()){
+        $get = $this->db->get_where('student_fix_payment',['onlyFor'=>'center']);
+        if($get->num_rows()){
+            foreach($get->result() as $row){
+                echo 'const '.strtoupper($row->key).' = '.$row->amount.";\n\t";
+            }
+        }
+    }
+    ?>   
+    </script>
 <!--begin::Global Javascript Bundle(mandatory for all pages)-->
 <script src="{base_url}assets/plugins/global/plugins.bundle.js"></script>
 <script src="{base_url}assets/js/scripts.bundle.js"></script>

@@ -37,10 +37,10 @@
             data-thumbnail="<?=$img?>"
             class="galpic img-responsive" data-caption="excurtion">
             <img src="<?=$img?>" >
-            <div class="galpic-hover d-flex align-items-center justify-content-center">excurtion</div>
+            <div class="galpic-hover d-flex align-items-center justify-content-center"><?=$image->title?></div>
         </a>
         <div class="card text-center">
-            <div class="card-body">excurtion</div>
+            <div class="card-body"><?=$image->title?></div>
         </div>
     </div>
     <?php

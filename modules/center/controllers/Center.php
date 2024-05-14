@@ -57,6 +57,13 @@ class Center extends MY_Controller
                 'url' => 'change-password'
             ]
         ];
+        if(CHECK_PERMISSION('CENTRE_WISE_WALLET_SYSTEM') AND $this->center_model->isAdmin()){
+            $tabs['fee-system'] = [
+                'title' => 'Fee System',
+                'icon' => array('bill', 5),
+                'url' => 'fee-system'
+            ];
+        }
         if (isset ($tabs[$tab])) {
             // $this->ki_theme->set_title($tabs[$tab]['title']);
             $this->ki_theme->set_breadcrumb($tabs[$tab]);
