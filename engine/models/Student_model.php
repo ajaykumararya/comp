@@ -119,8 +119,8 @@ class Student_model extends MY_Model
             case 'passout':
                 $this->db->join('student_certificates as sce','sce.student_id = s.id AND sce.course_id = s.course_id');
                 $this->db->group_by('sce.student_id');
-                if(isset($limit)){
-                    $this->db->limit($limit);
+                if(isset($record_limit)){
+                    $this->db->limit($record_limit);
                 }
                 break;
             case 'course':

@@ -66,7 +66,7 @@
                             <ul class="lst">
                                 <?php
                                 $get = $this->student_model->get_switch('passout', [
-                                    'limit' => ES('scroll_passout_student_number', 10)
+                                    'record_limit' => ES('scroll_passout_student_number', 10)
                                 ]);
                                 if ($get->num_rows()) {
                                     foreach ($get->result() as $row) {
