@@ -80,7 +80,8 @@ class Student_model extends MY_Model
                 $this->myWhere('s', $condition);
                 break;
             case 'limit':
-                $this->not_passout();
+                // $this->not_passout();
+                $this->db->join('student_certificates as sce','sce.student_id != s.id');
                 $this->db->order_by('s.id','DESC')->limit($limit);
                 break;
             case 'all':
@@ -198,6 +199,7 @@ class Student_model extends MY_Model
 
                 break;
         }
+        
         return $this->db->get();
     }
     private function not_passout(){
