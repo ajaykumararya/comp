@@ -12,8 +12,9 @@
                             onmouseout="this.start();" style="height:400px;">
                             <ul class="lst">
                                 <?php
+                                $limit = ES('scroll_student_number', 10);
                                 $get = $this->student_model->get_switch('limit', [
-                                    'limit' => ES('scroll_student_number', 10)
+                                    'limit' => $limit
                                 ]);
                                 if ($get->num_rows()) {
                                     foreach ($get->result() as $row) {
@@ -65,12 +66,11 @@
                             onmouseout="this.start();" style="height:400px;">
                             <ul class="lst">
                                 <?php
-                                $limit = ES('scroll_passout_student_number', 10);
-                                $get = $this->student_model->get_passout_student([
-                                    'record_limit' => $limit
+                                $get = $this->student_model->get_switch('passout', [
+                                    'limit' => ES('scroll_passout_student_number', 10)
                                 ]);
-                                if ($get) {
-                                    foreach ($get as $row) {
+                                if ($get->num_rows()) {
+                                    foreach ($get->result() as $row) {
                                         $name = $row->student_name;
                                         // pre($row);
                                         ?>
