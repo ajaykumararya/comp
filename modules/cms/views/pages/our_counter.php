@@ -1,4 +1,4 @@
-<div class="container" style="padding-top:10px;padding-bottom:20px">
+<div class="container cms-counter" style="padding-top:10px;padding-bottom:20px">
     <div class="row">
         <?php
         $our_counters = [
@@ -30,7 +30,7 @@
     </div>
 </div>
 <style>
-    .counter {
+    .cms-counter .counter {
         color: #f27f21;
         font-family: 'Open Sans', sans-serif;
         text-align: center;
@@ -44,8 +44,8 @@
         z-index: 1;
     }
 
-    .counter:before,
-    .counter:after {
+    .cms-counter .counter:before,
+    .cms-counter .counter:after {
         content: "";
         background: #f3f3f3;
         border-radius: 20px;
@@ -58,7 +58,7 @@
         z-index: -1;
     }
 
-    .counter:after {
+    .cms-counter .counter:after {
         background: transparent;
         width: 100px;
         height: 100px;
@@ -73,18 +73,18 @@
         right: auto;
     }
 
-    .counter .counter-icon {
+    .cms-counter .counter .counter-icon {
         font-size: 35px;
         line-height: 35px;
         margin: 0 0 15px;
         transition: all 0.3s ease 0s;
     }
 
-    .counter:hover .counter-icon {
+    .cms-counter .counter:hover .counter-icon {
         transform: rotateY(360deg);
     }
 
-    .counter .counter-value {
+    .cms-counter .counter .counter-value {
         color: #555;
         font-size: 30px;
         font-weight: 600;
@@ -94,38 +94,38 @@
         transition: all 0.3s ease 0s;
     }
 
-    .counter:hover .counter-value {
+    .cms-counter .counter:hover .counter-value {
         text-shadow: 2px 2px 0 #d1d8e0;
     }
 
-    .counter h3 {
+    .cms-counter .counter h3 {
         font-size: 17px;
         font-weight: 700;
         text-transform: uppercase;
         margin: 0 0 15px;
     }
 
-    .counter.blue {
+    .cms-counter .counter.blue {
         color: #4accdb;
         border-color: #4accdb;
     }
 
-    .counter.blue:after {
+    .cms-counter .counter.blue:after {
         border-bottom-color: #4accdb;
         border-left-color: #4accdb;
     }
 
-    .counter.pink {
+    .cms-counter .counter.pink {
         color: #EE436D;
         border-color: #EE436D;
     }
 
-    .counter.pink:after {
+    .cms-counter .counter.pink:after {
         border-bottom-color: #EE436D;
         border-left-color: #EE436D;
     }
 
-    .counter.purple {
+    .cms-counter .counter.purple {
         color: #9C52A1;
         border-color: #9C52A1;
     }
@@ -136,7 +136,7 @@
     }
 
     @media screen and (max-width:990px) {
-        .counter {
+        .cms-counter .counter {
             margin-bottom: 40px;
         }
     }
@@ -144,7 +144,7 @@
 <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
 <script>
     $(document).ready(function () {
-        $('.counter-value').each(function () {
+        $('.cms-counter .counter-value').each(function () {
             $(this).prop('Counter', 0).animate({
                 Counter: $(this).text()
             }, {
