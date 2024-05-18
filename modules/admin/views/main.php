@@ -688,7 +688,7 @@
     const <?= $var ?> = `<?= $var_value ?>`;
         <?php
     }
-    if ($this->center_model->isCenter()) {
+    if ($this->center_model->isCenter() && CHECK_PERMISSION('WALLET_SYSTEM')) {
         $get = $this->ki_theme->center_fix_fees();
         foreach ($get as $key => $amount) {
             echo 'const ' . strtoupper($key) . ' = ' . $amount . ";\n\t";
