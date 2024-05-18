@@ -53,6 +53,7 @@ class MY_Controller extends MX_Controller
                 'type' => ucwords($this->center_model->login_type()),
                 'wallet' => @$centreRow->wallet
             ]);
+            // pre($centreRow,true);
             $this->ki_theme->set_wallet(@$centreRow->wallet);
         }
         $get = $this->db->select('active_page')->where('type', 'admin')->get('centers');

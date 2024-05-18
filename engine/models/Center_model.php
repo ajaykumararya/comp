@@ -74,5 +74,11 @@ class Center_model extends MY_Model
         $this->db->where('valid_upto !=','');
         return $this->db->get('centers');
     }
+    function wallet_history(){
+        $this->db->select('wt.*,DATE_FORMAT(wt.timestamp,"%d-%m-%Y") as date');
+        $this->db->from('wallet_transcations as wt');
+        $this->db->where('wt.center_id',$this->loginId());        
+        return $this->db->order_by('id','DESC')->get();
+    }
 }
 ?>

@@ -24,6 +24,9 @@ class Admin extends MY_Controller
         $row['isValid'] = true;
         $this->view('profile',$row);
     }
+    function wallet_history(){
+        $this->view('wallet-history',['isValid' => true]);
+    }
 
     function test(){
         echo $this->ki_theme->wallet_balance();

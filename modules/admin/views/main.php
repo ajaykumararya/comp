@@ -231,6 +231,7 @@
                                             data-kt-countup-prefix='{inr}'>0</span>
 
                                         <button class="btn btn-primary p-1 btn-sm">&nbsp;<i class="fa fa-plus"></i></button>
+                                        <a href="{base_url}admin/wallet-history" class="btn btn-warning p-1 btn-sm" title="History">&nbsp;<i class="fa fa-history"></i></a>
 
                                         <small class="d-flex" style="font-size:12px;    justify-content: center;">My
                                             Wallet</small>
@@ -677,22 +678,20 @@
         ajax_url = base_url + 'ajax/';
     const login_type = '<?= $this->center_model->login_type() ?>';
     const all_templates = '';
-    const wallet_system = Boolean(`<?=CHECK_PERMISSION('WALLET_SYSTEM')?>`);
+    const wallet_system = Boolean(`<?= CHECK_PERMISSION('WALLET_SYSTEM') ?>`);
     const wallet_balance = <?= $this->ki_theme->wallet_balance() ?? 0 ?>;
     // console.log(content_css);
     // Default vars of this project
     <?php
     foreach ($this->ki_theme->default_vars() as $var => $var_value) {
-    ?>
+        ?>
     const <?= $var ?> = `<?= $var_value ?>`;
-    <?php
+        <?php
     }
-    if($this->center_model->isCenter()){
-        $get = $this->db->get_where('student_fix_payment',['onlyFor'=>'center']);
-        if($get->num_rows()){
-            foreach($get->result() as $row){
-                echo 'const '.strtoupper($row->key).' = '.$row->amount.";\n\t";
-            }
+    if ($this->center_model->isCenter()) {
+        $get = $this->ki_theme->center_fix_fees();
+        foreach ($get as $key => $amount) {
+            echo 'const ' . strtoupper($key) . ' = ' . $amount . ";\n\t";
         }
     }
     ?>   

@@ -168,5 +168,55 @@ class Center extends Ajax_Controller
         } else
             $this->response('html', 'Permission Denied.');
     }
+    function wallet_history()
+    {
+        $data = [];
+        $list = $this->center_model->wallet_history();
+        if ($list->num_rows()) {
+            foreach ($list->result() as $row) {
+                $tempData = [
+                    'date' => $row->date,
+                    'amount' => $row->amount,
+                    'type' => $row->type,
+                    'description' => $row->description,
+                    'status' => $row->wallet_status,
+                    'url' => 0
+                ];
+                if ($row->type_id) {
+                    switch ($row->type) {
+                        case 'admission':
+                            $student = $this->student_model->get_all_student([
+                                'id' => $row->type_id
+                            ]);
+                            $tempData['student_name'] = @$student[0]->student_name . ' ' . label('Admission');
+                            $tempData['url'] = base_url('student/profile/'.$row->type_id);
+                            break;
+                        case 'marksheet':
+                            $marksheet = $this->student_model->marksheet(['id' => $row->type_id]);
+                            $student = '';
+                            if ($marksheet->num_rows()) {
+                                $drow = $marksheet->row();
+                                $tempData['url'] = base_url('marksheet/'.$this->encode($row->type_id));
+
+                                $student = $drow->student_name . ' ' . label(humnize_duration_with_ordinal($drow->marksheet_duration, $drow->duration_type) . ' Marksheet');
+                            }
+                            $tempData['student_name'] = $student;
+                            break;
+                        case 'certificate':
+                            $student_certificates = $this->student_model->student_certificates([
+                                'id' => $row->type_id
+                            ]);
+                            $tempData['url'] = base_url('certificate/'.$this->encode(($row->type_id)));
+                            $tempData['student_name'] = $student_certificates->row('student_name') . ' ' . label('Certificate');
+                            break;
+                    }
+                } else
+                    $tempData['student_name'] = label(ucfirst(str_replace('_', ' ', $row->type)));
+
+                $data[] = $tempData;
+            }
+        }
+        $this->response('data', $data);
+    }
 }
 ?>

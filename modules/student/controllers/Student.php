@@ -95,6 +95,8 @@ class Student extends MY_Controller
     }
     function generate_certificate()
     {
+        $this->ki_theme->get_wallet_amount('student_certificate_fees');
+
         $this->view('generate-ceriticate');
     }
     function get_certificate()
@@ -103,6 +105,8 @@ class Student extends MY_Controller
     }
     function create_marksheet()
     {
+        $this->ki_theme->get_wallet_amount('student_marksheet_fees');
+
         $this->view('create-marksheet');
     }
     function list_marksheet()

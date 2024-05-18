@@ -36,7 +36,7 @@ $menu = array(
         ),
         array(
             'label' => 'About College with Principal Box',
-            'type' => 'about_us_with_principal_box',
+            'type' => 'about_college',
             'url' => 'cms/static-page/about_college',
             'icon' => array('file', 4)
         ),
