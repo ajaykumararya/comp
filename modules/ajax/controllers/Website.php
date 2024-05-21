@@ -30,6 +30,8 @@ class Website extends Ajax_Controller
                 $this->response('status', true);
                 $data = $get->row_array();
                 $this->set_data($data);
+                $this->set_data('contact_number',maskMobileNumber($data['contact_number']));
+
                 $this->set_data('admission_status', $data['admission_status'] ? label($this->ki_theme->keen_icon('verify text-white') . ' Verified Student') : label('Un-verified Student', 'danger'));
                 $this->set_data('student_profile', $data['image'] ? base_url('upload/' . $data['image']) : base_url('assets/media/student.png'));
                 $this->response('html', $this->template('student-profile-card'));
@@ -62,11 +64,14 @@ class Website extends Ajax_Controller
 
                 $this->response('status', 'yes');
                 $this->response('center_number', $row->center_number);
-                ;
+                
                 $this->set_data('center_status', $data['status'] ? label($this->ki_theme->keen_icon('verify text-white') . ' Verified Center') : label('Un-verified Center', 'danger'));
                 $this->set_data('owner_profile', $data['image'] ? base_url('upload/' . $data['image']) : base_url('assets/media/student.png'));
                 // unset($data['status']);
                 $this->set_data($data);
+                $this->set_data('contact_number',maskMobileNumber($data['contact_number']));
+                $this->set_data('email',maskEmail($data['email']));
+
                 $this->response('html', $this->template('center-details'));
             } else
                 $this->response('status', 'no');

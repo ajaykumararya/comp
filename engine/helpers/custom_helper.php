@@ -230,4 +230,22 @@ function convert_to_div($string)
     }
     return $html;
 }
+
+function maskMobileNumber($number) {
+    // Ensure the mobile number is at least 12 characters long
+   
+    // Display the first 7 digits and replace the rest with 'xxxxx'
+    return substr($number, 0, 7) . 'XXXXX';
+}
+
+function maskEmail($email) {
+    $emailParts = explode('@', $email);
+    $username = $emailParts[0];
+    $domain = $emailParts[1];
+
+    // Mask the username part except the last 3 characters
+    $maskedUsername = str_repeat('x', max(strlen($username) - 4, 0)) . substr($username, -4);
+
+    return $maskedUsername . '@' . $domain;
+}
 ?>

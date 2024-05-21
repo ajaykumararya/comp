@@ -71,7 +71,7 @@
                                 <th>Institute ID</th><td>{center_number}</td>
                             </tr>
                             <tr>
-                                <th>Email</th><td class="text-capitalize">{email}</td>
+                                <th>Email</th><td>{email}</td>
                             </tr>
                             <tr>
                                 <th>Mobile</th><td>{contact_number}</td>
