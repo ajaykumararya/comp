@@ -257,9 +257,11 @@ document.addEventListener('DOMContentLoaded', function (e) {
             // Prevent default button action
             e.preventDefault();
             var submitButton = $(this).find('button');
-            if (!isValidWallet(STUDENT_ADMISSION_FEES)) {
-                low_balance_message();
-                return false;
+            if (typeof STUDENT_ADMISSION_FEES !== 'undefined') {
+                if (!isValidWallet(STUDENT_ADMISSION_FEES)) {
+                    low_balance_message();
+                    return false;
+                }
             }
 
 
