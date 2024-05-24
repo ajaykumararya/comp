@@ -51,7 +51,7 @@
     <p class="position-absolute " style="top:42.1rem;left:38.5%">{admission_date}</p>
     <p class="position-absolute " style="top:44.8rem;left:23.5%">{contact_number}</p>
     <p class="position-absolute " style="top:47.6rem;left:20.5%">{address}</p>
-    <p class="position-absolute " style="top:55.9rem;left:10.5%;font-size:20px">{center_name}</p>
+    <p class="position-absolute " style="top:55.9rem;left:10.5%;font-size:20px;width:100%">{center_name}</p>
     
 </body>
 </html>
