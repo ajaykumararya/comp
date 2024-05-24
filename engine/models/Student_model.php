@@ -6,7 +6,6 @@ class Student_model extends MY_Model
         extract($condition);
         $this->db->select('        
                 b.batch_name,
-                
                 s.status as admission_status,
                 s.image,
                 s.dob,
@@ -31,35 +30,26 @@ class Student_model extends MY_Model
                 s.password,
                 s.adhar_front as student_aadhar,
                 s.upload_docs as student_docs,
-
                 c.course_name,
                 c.fees as course_fees,
                 c.id as course_id,
                 c.duration,
                 c.duration_type,
-
                 ce.institute_name as center_name,
                 ce.id as institute_id,
                 ce.center_full_address,
                 ce.signature as center_signature,
-
-
                 state.*,
                 district.*'
-
-
         )
             ->from('students as s')
             // ->where('s.status',1)
-
             ->join("course as c", "s.course_id = c.id ", 'left')
             ->join('state', 'state.STATE_ID = s.state_id')
             ->join('district', 'district.DISTRICT_ID = s.city_id and district.STATE_ID = state.STATE_ID')
             ->join('batch as b', "b.id = s.batch_id", 'left');
-
         if (!isset($without_admission_status))
             $this->db->where('s.admission_status', isset($admission_status) ? $admission_status : 1);
-
         if (($this->isCenter() and $withCenter) or ($case == 'center' and isset($center_id)))
             $this->db->join('centers as ce', 'ce.id = s.center_id AND s.center_id = ' . (isset($center_id) ? $center_id : $this->loginId()));
         else
@@ -150,7 +140,6 @@ class Student_model extends MY_Model
             case 'fetch_fee_transactions_ttl':
                 $this->db->select('sft.*,SUM(sft.payable_amount) as ttl_fee,SUM(sft.discount) as ttl_discount')->join('student_fee_transactions as sft', "sft.student_id = s.id");
                 $this->db->group_by('sft.student_id', $student_id)->limit(1);
-
                 $this->myWhere('sft', $condition);
                 break;
             case 'get_admit_card':
@@ -168,7 +157,6 @@ class Student_model extends MY_Model
                     unset($condition['roll_no']);
                     $this->myWhere('s', ['roll_no' => $roll_no]);
                 }
-
                 $this->myWhere('ac', $condition);
                 break;
             case 'get_marksheet':
@@ -193,15 +181,12 @@ class Student_model extends MY_Model
                     unset($condition['roll_no']);
                     $this->myWhere('s', ['roll_no' => $roll_no]);
                 }
-
                 if (isset($condition['id'])) {
                     $this->db->where('sc.id', $condition['id']);
                 } else
                     $this->myWhere('sc', $condition);
-
                 break;
         }
-        
         return $this->db->get();
     }
     private function not_passout(){
@@ -239,7 +224,6 @@ class Student_model extends MY_Model
     {
         return $this->get_switch('center', ['center_id' => $id]);
     }
-
     function get_fee_transcations_ttl($where)
     {
         $ttlrow = $this->get_switch('fetch_fee_transactions_ttl', $where);
@@ -267,7 +251,6 @@ class Student_model extends MY_Model
     {
         return $this->get_switch('course', ['course_id' => $course_id]);
     }
-
     function get_all_student($where = [])
     {
         return $this->get_switch('all', $where)->result();
@@ -279,6 +262,9 @@ class Student_model extends MY_Model
     function get_student_via_id($id = 0)
     {
         return $this->get_switch('student_id', ['id' => $id]);
+    }
+    function id_card($id){
+        return $this->get_student_via_id($id);
     }
     function get_student_via_batch($batch_id = 0)
     {
@@ -293,11 +279,9 @@ class Student_model extends MY_Model
         if (!is_bool($status)) {
             $this->db->where('status', $status);
         }
-
         $this->db->where('isDeleted', $isDeleted);
         return $this->db->get('student_fix_payment');
     }
-
     function course_subject($where)
     {
         return $this->db->where($where)
@@ -329,34 +313,22 @@ class Student_model extends MY_Model
             ->order_by('s.seq', 'ASC');
         // ->where('mt.marksheet_id' , $result_id);
         return $this->db->get();
-
     }
-
     function study_materials()
     {
         $this->db
             ->from('study_material as sm')
             ->join('course as c', 'c.id = sm.course_id')
             ->join('centers as ce', 'ce.id = sm.center_id', 'left');
-
         if ($this->isCenter())
             $this->db->where('ce.id', $this->loginId());
-
-
         return $this->db->get();
-
     }
-
-
-
-
-
     function list_system_course()
     {
         return $this->db->where('isDeleted', 0)
             ->get('course');
     }
-
     function system_subjects()
     {
         return $this->db->select('*,s.id as subject_id,s.duration as subject_duration')
@@ -380,7 +352,6 @@ class Student_model extends MY_Model
         }
         return $course_fees;
     }
-
     function coupons()
     {
         $this->db->select('rc.*,s.name as student_name,rs.name as referral_student')
@@ -393,7 +364,6 @@ class Student_model extends MY_Model
     function get_coupon_by_id($id)
     {
         return $this->db->
-
             select('*,DATE_FORMAT(timestamp,"%d-%m-%Y") as create_time,DATE_FORMAT(update_time,"%d-%m-%Y") as update_time ')->
             where('id', $id)->get('referral_coupons');
     }

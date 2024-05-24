@@ -24,9 +24,16 @@ class Document extends MY_Controller
     function id_card()
     {
         // echo $this->id;
-        $get = $this->student_model->id_card(['id' => $this->id]);
+        $get = $this->student_model->id_card($this->id);
         if ($get->num_rows()) {
-
+            // pre($get->row());
+            $this->set_data($get->row_array());
+            $this->ki_theme->generate_qr($get->row('student_id'), 'id_card', current_url());
+            $pdfContent = $this->parse('id-card');
+            $this->pdf($pdfContent);
+        }
+        else {
+            $this->not_found("ID Card Not Found..");
         }
     }
     private function isMark($marks)
