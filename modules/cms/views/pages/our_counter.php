@@ -32,7 +32,6 @@
 <style>
     .cms-counter .counter {
         color: #f27f21;
-        font-family: 'Open Sans', sans-serif;
         text-align: center;
         height: 190px;
         width: 190px;
