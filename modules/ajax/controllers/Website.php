@@ -381,5 +381,8 @@ class Website extends Ajax_Controller
         $this->response('query',$this->db->last_query());
         $this->response('status',true);
     }
+    function list_syllabus(){
+        $this->response('data',$this->db->order_by('id','DESC')->get('syllabus')->result_array());
+    }
 }
 ?>

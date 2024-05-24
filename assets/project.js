@@ -193,7 +193,7 @@ $(document).on('ready', function () {
         syllabusTable.DataTable({
             dom: small_dom,
             ajax: {
-                url: ajax_url + 'cms/list-syllabus'
+                url: ajax_url + 'website/list-syllabus'
             },
             columns: [
                 { 'data': null },
