@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{student_name} Marksheet</title>
+    <title>{student_name} Id Card</title>
     {basic_header_link}
     <style>
         body {

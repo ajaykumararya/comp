@@ -26,13 +26,24 @@ class Document extends MY_Controller
         // echo $this->id;
         $get = $this->student_model->id_card($this->id);
         if ($get->num_rows()) {
-            // pre($get->row());
+            // pre($get->row(), true);
             $this->set_data($get->row_array());
+            if (PATH == 'techno') {
+                $row = $get->row();
+                $admissionTime = strtotime($row->admission_date);
+                $duration = $row->duration;
+                if ($row->duration_type == 'month') {
+                    $toDateString = strtotime("+$duration months", $admissionTime);
+                } else if ($row->duration_type == 'year') {
+                    $toDateString = strtotime("+$duration years", $admissionTime);
+                }
+                $toDateString = strtotime('-1 month', $toDateString);
+                $this->set_data('session', date('Y',$admissionTime).'-'.date('Y', $toDateString));
+            }
             $this->ki_theme->generate_qr($get->row('student_id'), 'id_card', current_url());
             $pdfContent = $this->parse('id-card');
             $this->pdf($pdfContent);
-        }
-        else {
+        } else {
             $this->not_found("ID Card Not Found..");
         }
     }
@@ -86,7 +97,7 @@ class Document extends MY_Controller
                     $ttlpminm += $pmim;
                     $ttlpmaxm += $pmm;
                     if (PATH == 'iedct') {
-                        
+
                         if (in_array($mark->subject_type, ['both', 'theory'])) {
                             $theorySubjects[$tIndedx++] = [
                                 'subject_name' => $mark->subject_name,
@@ -132,7 +143,7 @@ class Document extends MY_Controller
                 'total_max_practical' => $ttlpmaxm,
                 'total_min_practical' => $ttlpminm,
                 'division' => $per < 40 ? 'Fail' : 'Pass'
-            ];  
+            ];
             // pre($main,true);
             $this->set_data($main);
             $pdfContent = $this->parse('marksheet', $get->row_array());
