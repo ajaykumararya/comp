@@ -6,6 +6,21 @@ class Admin extends MY_Controller
     {
         $this->view('index');
     }
+    function switch_back(){
+        if($this->session->has_userdata('admin_login')){
+            $this->session->unset_userdata('main_id');
+            $this->session->unset_userdata('temp_login');
+            $newData = [
+                'admin_id' => $this->session->userdata('main_id'),
+                'admin_type' => 'admin'
+            ];
+            $this->session->set_userdata($newData);
+            redirect('admin');
+        }
+        else{
+            redirect('admin');
+        }
+    }
     function change_password()
     {
         $this->view('change-password', ['isValid' => true]);

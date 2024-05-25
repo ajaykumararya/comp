@@ -231,7 +231,8 @@
                                             data-kt-countup-prefix='{inr}'>0</span>
 
                                         <button class="btn btn-primary p-1 btn-sm">&nbsp;<i class="fa fa-plus"></i></button>
-                                        <a href="{base_url}admin/wallet-history" class="btn btn-warning p-1 btn-sm" title="History">&nbsp;<i class="fa fa-history"></i></a>
+                                        <a href="{base_url}admin/wallet-history" class="btn btn-warning p-1 btn-sm"
+                                            title="History">&nbsp;<i class="fa fa-history"></i></a>
 
                                         <small class="d-flex" style="font-size:12px;    justify-content: center;">My
                                             Wallet</small>
@@ -511,165 +512,216 @@
                     <!--end::sidebar menu-->
                     <!--begin::Footer-->
                     <div class="app-sidebar-footer flex-column-auto pt-2 pb-6 px-6" id="kt_app_sidebar_footer">
-                        <a href="<?= base_url() ?>" target="_blank"
-                            class="btn btn-flex flex-center btn-custom btn-primary overflow-hidden text-nowrap px-0 h-40px w-100"
-                            data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click"
-                            title="Click for view Website.">
-                            <span class="btn-label">
-                                <?= $this->ki_theme->with_icon('screen', 4)->html() ?> <span class="fs-2">View
-                                    Website</span>
-                            </span>
-                            <i class="ki-duotone ki-document btn-icon fs-2 m-0"><span class="path1"></span><span
-                                    class="path2"></span></i> </a>
-                    </div>
-                    <!--end::Footer-->
-                </div>
-                <!--end::Sidebar-->
-                <!--begin::Main-->
-                <div class="app-main flex-column flex-row-fluid " id="kt_app_main">
-                    <!--begin::Content wrapper-->
-                    <div class="d-flex flex-column flex-column-fluid">
+
                         <?php
-                        echo $this->ki_theme->get_breadcrumb();
+                        if ($this->center_model->isAdmin() or $this->session->userdata('temp_login')) {
+
+                            ?>
+                            <div class="d-flex flex-column flex-center flex-column-fluid">
+                                <?php
+                                if ($this->session->userdata('temp_login')) {
+                                    echo '<a href="' . base_url('admin/switch-back') . '" class="btn btn-sm btn-light btn-active-light-primary me-2"><i class="fa fa-arrow-left"></i> Switch Back</a>';
+                                } else {
+                                    ?>
+                                    <form action="" method="POST">
+                                        <input type="hidden" name="status" value="temp_login">
+                                        <lable class="form-label">Login As Centre</lable>
+                                        <div class="input-group d-flex">
+                                            <div class="input-group-text p-0" style="width:174px">
+
+                                                <select data-control="select2" required data-placeholder="Select Centre" name="center_id" class="form-control" autocomplete="off">
+                                                    <option></option>
+                                                    <?php
+                                                    $centers = $this->center_model->get_center();
+                                                    if($centers->num_rows()){
+                                                        foreach($centers->result() as $rowc){
+                                                            echo '<option value="'.$rowc->id.'">'.$rowc->institute_name.'</option>';
+                                                        }
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <button class="input-group-text btn-success btn btn-xs btn-sm" id="basic-addon2">
+                                                <i class="fa fa-sign-in"></i>
+                                            </button>
+                                        </div>
+
+                                    </form>
+
+                                    <?php
+                                }
+                                echo '  </div>';
+                        } else {
+                            ?>
+                                <a href="<?= base_url() ?>" target="_blank"
+                                    class="btn btn-flex flex-center btn-custom btn-primary overflow-hidden text-nowrap px-0 h-40px w-100"
+                                    data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click"
+                                    title="Click for view Website.">
+                                    <span class="btn-label">
+                                        <?= $this->ki_theme->with_icon('screen', 4)->html() ?> <span class="fs-2">View
+                                            Website</span>
+                                    </span>
+                                    <i class="ki-duotone ki-document btn-icon fs-2 m-0"><span class="path1"></span><span
+                                            class="path2"></span></i> </a>
+
+                                <?php
+                        }
                         ?>
-                        <!--begin::Content-->
-                        <div id="kt_app_content" class="app-content  flex-column-fluid ">
-                            <!--begin::Content container-->
-                            <div id="kt_app_content_container" class="app-container  container-xxl ">
-                                {wallet_message}
-                                {page_output}
-                            </div>
-                            <!--end::Content container-->
+
                         </div>
-                        <!--end::Content-->
+                        <!--end::Footer-->
                     </div>
-                    <!--end::Content wrapper-->
-                    <!--begin::Footer-->
-                    <div id="kt_app_footer" class="app-footer ">
-                        <!--begin::Footer container-->
-                        <div
-                            class="app-container  container-fluid d-flex flex-column flex-md-row flex-center flex-md-stack py-3 ">
-                            <!--begin::Copyright-->
-                            <div class="text-dark order-2 order-md-1">
-                                <span class="text-muted fw-semibold me-1">2024&copy;</span>
-                                <a href="" target="_blank" class="text-gray-800 text-hover-primary">Arya</a>
+                    <!--end::Sidebar-->
+                    <!--begin::Main-->
+                    <div class="app-main flex-column flex-row-fluid " id="kt_app_main">
+                        <!--begin::Content wrapper-->
+                        <div class="d-flex flex-column flex-column-fluid">
+                            <?php
+                            echo $this->ki_theme->get_breadcrumb();
+                            ?>
+                            <!--begin::Content-->
+                            <div id="kt_app_content" class="app-content  flex-column-fluid ">
+                                <!--begin::Content container-->
+                                <div id="kt_app_content_container" class="app-container  container-xxl ">
+                                    {wallet_message}
+                                    {page_output}
+                                </div>
+                                <!--end::Content container-->
                             </div>
-                            <!--end::Copyright-->
+                            <!--end::Content-->
                         </div>
-                        <!--end::Footer container-->
+                        <!--end::Content wrapper-->
+                        <!--begin::Footer-->
+                        <div id="kt_app_footer" class="app-footer ">
+                            <!--begin::Footer container-->
+                            <div
+                                class="app-container  container-fluid d-flex flex-column flex-md-row flex-center flex-md-stack py-3 ">
+                                <!--begin::Copyright-->
+                                <div class="text-dark order-2 order-md-1">
+                                    <span class="text-muted fw-semibold me-1">2024&copy;</span>
+                                    <a href="" target="_blank" class="text-gray-800 text-hover-primary">Arya</a>
+                                </div>
+                                <!--end::Copyright-->
+                            </div>
+                            <!--end::Footer container-->
+                        </div>
+                        <!--end::Footer-->
                     </div>
-                    <!--end::Footer-->
+                    <!--end:::Main-->
                 </div>
-                <!--end:::Main-->
+                <!--end::Wrapper-->
             </div>
-            <!--end::Wrapper-->
+            <!--end::Page-->
         </div>
-        <!--end::Page-->
-    </div>
-    <!--end::App-->
-    <!--begin::Scrolltop-->
-    <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
-        <i class="ki-duotone ki-arrow-up"><span class="path1"></span><span class="path2"></span></i>
-    </div>
-    <!--end::Scrolltop-->
-    <!--begin::View component-->
-    <div id="kt_drawer_view_details_box" data-kt-drawer="true" data-kt-drawer-activate="true"
-        data-kt-drawer-toggle="#kt_drawer_example_advanced_button"
-        data-kt-drawer-close="#kt_drawer_example_advanced_close" data-kt-drawer-name="docs"
-        data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'300px', 'md': '500px'}"
-        data-kt-drawer-direction="start">
-        <div class="card rounded-0 w-100">
-            <!--begin::Card header-->
-            <div class="card-header pe-5">
-                <!--begin::Title-->
-                <div class="card-title">
-                    <!--begin::User-->
-                    <div class="d-flex justify-content-center flex-column me-3">
-                        <strong class="fs-4 fw-bold text-gray-900 text-hover-primary me-1 lh-1 title">Example
-                            Advanced</strong>
-                    </div>
-                    <!--end::User-->
-                </div>
-                <!--end::Title-->
-                <!--begin::Card toolbar-->
-                <div class="card-toolbar">
-                    <!--begin::Close-->
-                    <div class="btn btn-sm btn-icon btn-active-light-primary" id="kt_drawer_example_advanced_close">
-                        <i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span class="path2"></span></i>
-                    </div>
-                    <!--end::Close-->
-                </div>
-                <!--end::Card toolbar-->
-            </div>
-            <!--end::Card header-->
-            <!--begin::Card body-->
-            <div class="card-body hover-scroll-overlay-y">
-            </div>
-            <!--end::Card body-->
+        <!--end::App-->
+        <!--begin::Scrolltop-->
+        <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+            <i class="ki-duotone ki-arrow-up"><span class="path1"></span><span class="path2"></span></i>
         </div>
-    </div>
-    <div class="modal fade" tabindex="-1" id="mymodal">
-        <form class="modal-dialog  modal-dialog-centered  modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title title">Modal title</h3>
-                    <!--begin::Close-->
-                    <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
-                        aria-label="Close">
-                        <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
+        <!--end::Scrolltop-->
+        <!--begin::View component-->
+        <div id="kt_drawer_view_details_box" data-kt-drawer="true" data-kt-drawer-activate="true"
+            data-kt-drawer-toggle="#kt_drawer_example_advanced_button"
+            data-kt-drawer-close="#kt_drawer_example_advanced_close" data-kt-drawer-name="docs"
+            data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'300px', 'md': '500px'}"
+            data-kt-drawer-direction="start">
+            <div class="card rounded-0 w-100">
+                <!--begin::Card header-->
+                <div class="card-header pe-5">
+                    <!--begin::Title-->
+                    <div class="card-title">
+                        <!--begin::User-->
+                        <div class="d-flex justify-content-center flex-column me-3">
+                            <strong class="fs-4 fw-bold text-gray-900 text-hover-primary me-1 lh-1 title">Example
+                                Advanced</strong>
+                        </div>
+                        <!--end::User-->
                     </div>
-                    <!--end::Close-->
-                </div>
-                <div class="modal-body body">
-                    <p>Modal body text goes here.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline hover-rotate-end btn-outline-dashed btn-outline-danger"
-                        data-bs-dismiss="modal">Close</button>
-                    {update_button}
-                </div>
-            </div>
-        </form>
-    </div>
-    <!--begin::Drawer-->
-    <div id="kt_drawer_example_advanced" class="bg-white" data-kt-drawer="true" data-kt-drawer-activate="true"
-        data-kt-drawer-permanent="true" data-kt-drawer-toggle="#kt_drawer_example_advanced_button"
-        data-kt-drawer-close="#kt_drawer_example_advanced_close" data-kt-drawer-name="set_in_page"
-        data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'300px', 'md': '500px'}"
-        data-kt-drawer-direction="end" <?= $this->ki_theme->drawer_main_div_attr() ?>>
-        <!--begin::Card-->
-        <div class="card rounded-0 w-100">
-            <!--begin::Card header-->
-            <div class="card-header pe-5">
-                <!--begin::Title-->
-                <div class="card-title">
-                    <!--begin::User-->
-                    <div class="d-flex justify-content-center flex-column me-3">
-                        <a href="#" class="fs-4 fw-bold text-gray-900 text-hover-primary me-1 lh-1">Example Advanced</a>
+                    <!--end::Title-->
+                    <!--begin::Card toolbar-->
+                    <div class="card-toolbar">
+                        <!--begin::Close-->
+                        <div class="btn btn-sm btn-icon btn-active-light-primary" id="kt_drawer_example_advanced_close">
+                            <i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span
+                                    class="path2"></span></i>
+                        </div>
+                        <!--end::Close-->
                     </div>
-                    <!--end::User-->
+                    <!--end::Card toolbar-->
                 </div>
-                <!--end::Title-->
-                <!--begin::Card toolbar-->
-                <div class="card-toolbar">
-                    <!--begin::Close-->
-                    <div class="btn btn-sm btn-icon btn-light-danger" id="kt_drawer_example_advanced_close">
-                        <i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span class="path2"></span></i>
-                    </div>
-                    <!--end::Close-->
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body hover-scroll-overlay-y">
                 </div>
-                <!--end::Card toolbar-->
+                <!--end::Card body-->
             </div>
-            <!--end::Card header-->
-            <!--begin::Card body-->
-            <div class="card-body hover-scroll-overlay-y">
-            </div>
-            <!--end::Card body-->
         </div>
-        <!--end::Card-->
-    </div>
-    <!--end::Drawer-->
-    <!--end::View component-->
+        <div class="modal fade" tabindex="-1" id="mymodal">
+            <form class="modal-dialog  modal-dialog-centered  modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title title">Modal title</h3>
+                        <!--begin::Close-->
+                        <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
+                            aria-label="Close">
+                            <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span
+                                    class="path2"></span></i>
+                        </div>
+                        <!--end::Close-->
+                    </div>
+                    <div class="modal-body body">
+                        <p>Modal body text goes here.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"
+                            class="btn btn-outline hover-rotate-end btn-outline-dashed btn-outline-danger"
+                            data-bs-dismiss="modal">Close</button>
+                        {update_button}
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--begin::Drawer-->
+        <div id="kt_drawer_example_advanced" class="bg-white" data-kt-drawer="true" data-kt-drawer-activate="true"
+            data-kt-drawer-permanent="true" data-kt-drawer-toggle="#kt_drawer_example_advanced_button"
+            data-kt-drawer-close="#kt_drawer_example_advanced_close" data-kt-drawer-name="set_in_page"
+            data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'300px', 'md': '500px'}"
+            data-kt-drawer-direction="end" <?= $this->ki_theme->drawer_main_div_attr() ?>>
+            <!--begin::Card-->
+            <div class="card rounded-0 w-100">
+                <!--begin::Card header-->
+                <div class="card-header pe-5">
+                    <!--begin::Title-->
+                    <div class="card-title">
+                        <!--begin::User-->
+                        <div class="d-flex justify-content-center flex-column me-3">
+                            <a href="#" class="fs-4 fw-bold text-gray-900 text-hover-primary me-1 lh-1">Example
+                                Advanced</a>
+                        </div>
+                        <!--end::User-->
+                    </div>
+                    <!--end::Title-->
+                    <!--begin::Card toolbar-->
+                    <div class="card-toolbar">
+                        <!--begin::Close-->
+                        <div class="btn btn-sm btn-icon btn-light-danger" id="kt_drawer_example_advanced_close">
+                            <i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span
+                                    class="path2"></span></i>
+                        </div>
+                        <!--end::Close-->
+                    </div>
+                    <!--end::Card toolbar-->
+                </div>
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body hover-scroll-overlay-y">
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Drawer-->
+        <!--end::View component-->
 </body>
 <!--end::Body-->
 <!--begin::Javascript-->
@@ -684,9 +736,8 @@
     // Default vars of this project
     <?php
     foreach ($this->ki_theme->default_vars() as $var => $var_value) {
-        ?>
-    const <?= $var ?> = `<?= $var_value ?>`;
-        <?php
+        ?>const <?= $var ?> = `<?= $var_value ?>`;
+                            <?php
     }
     if ($this->center_model->isCenter() && CHECK_PERMISSION('WALLET_SYSTEM')) {
         $get = $this->ki_theme->center_fix_fees();

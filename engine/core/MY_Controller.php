@@ -7,7 +7,20 @@ class MY_Controller extends MX_Controller
     function __construct()
     {
         parent::__construct();
-
+        if($post = $this->input->post()){
+            if(isset($post['status']) && $post['status'] == 'temp_login'){
+                // pre($this->session);
+                $newData = [
+                    'admin_id' => $post['center_id'],
+                    'admin_type' => 'center',
+                    'main_id' => $this->session->userdata('admin_id'),
+                    'temp_login' => true
+                ];
+                $this->session->set_userdata($newData);
+                redirect('admin');
+                exit;
+            }
+        }
         $this->load->library('common/ki_theme');
         $this->load->config('form/forms');
         // exit(THEME_ID);
