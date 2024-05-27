@@ -16,6 +16,9 @@ class Document extends MY_Controller
             $this->set_data('date', date('d-m-Y', strtotime($get->row('exam_date'))));
             $this->set_data('time', date('h:i A', strtotime($get->row('exam_date'))));
             $pdfContent = $this->parse('admit-card');
+            // $this->mypdf->setTitle('Hii');
+            if($this->ki_theme->config('admit_card_full'))
+                $this->mypdf->addPage('L');
             $this->pdf($pdfContent);
         } else {
             $this->not_found("Admit Card Not Found..");
@@ -269,12 +272,13 @@ class Document extends MY_Controller
         } else
             $this->not_found("Certificate Not Found..");
     }
-    function pdf($pdfContent)
+    function pdf($pdfContent,$filename = 'my-pdf.pdf')
     {
         // $this->mypdf->load();
         // $this->mypdf->setPaper('A4', 'portrait');
         $this->mypdf->WriteHTML($pdfContent);
-        $pdfData = $this->mypdf->Output();
+        $filename = str_replace('.pdf','',$filename);
+        $pdfData = $this->mypdf->Output("{$filename}.pdf",'I');
         // Get the PDF content as a string
         // $pdfData = $this->mypdf->OutputFile('asd.pdf'); // 'S' option for return as string
         // Set the appropriate headers

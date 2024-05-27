@@ -15,6 +15,10 @@ class Mypdf extends Mpdf
             'margin_footer' => 0,
         ]);
     }
+    public function setFormatAndOrientation($format, $orientation)
+    {
+        $this->SetPageFormat($format, $orientation);
+    }
     function loadHtml($html)
     {
         $this->WriteHTML($html);
