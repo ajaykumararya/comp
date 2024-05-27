@@ -39,6 +39,9 @@
             width: 120px !important;;
             height: 95px;
         }
+        .test{
+            border:1px solid red
+        }
     </style>
 </head>
 
@@ -53,7 +56,7 @@
     <p class="position-absolute" style="top:32.8%;left:14%">{student_name}</p>
     <p class="position-absolute" style="top:36.8%;left:16%">{father_name}</p>
     <p class="position-absolute" style="top:40.6%;left:20%">{enrollment_no}</p>
-    <p class="position-absolute" style="top:40.6%;left:56%;width:100px">{roll_no}</p>
+    <p class="position-absolute" style="top:40.6%;left:53%;width:190px">{roll_no}</p>
     <p class="position-absolute" style="top:44.5%;left:12%">{dob}</p>
     <p class="position-absolute" style="top:53.7%;left:14%">{course_name}</p>
     <p class="position-absolute" style="top:57.5%;left:14%">{date}</p>
