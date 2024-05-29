@@ -191,14 +191,14 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 const course_name = option.data('course_name');
                 course_duration_type.val(duration_type_val);
                 course_duration.val(duration_val);
-                
+                alert( $('select[name="center_id"] option:selected').val());
                 $.AryaAjax({
                     data: {
                         duration: duration_val,
                         duration_type: duration_type_val,
                         course_id: course_id_val,
                         student_id: student_id,
-                        center_id: $('select[name="center_id"]').find('option:selected').val(),
+                        center_id: $('select[name="center_id"] option:selected').val(),
                         course_name: course_name
                     },
                     url: 'student/genrate-certificate'
