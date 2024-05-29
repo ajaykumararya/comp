@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                         duration_type: duration_type_val,
                         course_id: course_id_val,
                         student_id: student_id,
-                        center_id: institue_box.val(),
+                        center_id: $('select[name="center_id"]').find('option:selected').val(),
                         course_name: course_name
                     },
                     url: 'student/genrate-certificate'
