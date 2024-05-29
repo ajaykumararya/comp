@@ -535,11 +535,12 @@ class Student extends Ajax_Controller
                     '</div>');
                 $this->response('status', true);
             } else {
-                $this->response('html', '<div class="alert alert-danger">The course <b>' . $course_name . '</b> is not completed yet</div>');
                 if ($get->num_rows()) {
                     $this->response('status', true);
                     $this->response('html', '<div class="alert alert-success">The course <b>' . $course_name . '</b> has been completed, you can generate the certificate.</div>');
                 }
+                else
+                $this->response('html', '<div class="alert alert-danger">The course <b>' . $course_name . '</b> is not completed yet</div>');
             }
         } else
             $this->response('html', '<div class="alert alert-danger">The course <b>' . $course_name . '</b> Certificate Already Generated.</div>');
