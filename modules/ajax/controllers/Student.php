@@ -355,7 +355,7 @@ class Student extends Ajax_Controller
                 break;
             } else {
                 $admitCardExam = $this->student_model->get_marksheet_using_admit_card($chk->row('id'));
-                $examDone = $admitCardExam->num_rows() == 0;
+                $examDone = $admitCardExam->num_rows() == 1;
             }
         }
         $this->response('options', $options);
