@@ -21,7 +21,7 @@
         .position-absolute {
             position: absolute;
             font-weight: bold;
-            font-size: 12px;
+            font-size: 14px;
         }
 
         .w-100 {
@@ -38,17 +38,18 @@
 
         #photo {
             z-index: 999;
-            top: 40.7%;
-            left: 32.7%;
+            bottom: 10%;
+            left: 32.3%;
         }
         #photo1
         {
-            top: 13.24%;
-            left: 82.48%;
+            top: 26.4%;
+            left: 82.1%;
         }
        
         p{
-            font-weight: bold;
+            font-weight: 700;
+            font-size: 14px!important;
         }
         .middle-div {
             width: 60%;
@@ -72,32 +73,32 @@
 <body class="position-relative">
     <img id="back-image" class="position-relative" src="{document_path}/certificate.png">
     <div class="position-absolute" id="photo">
-        <img src="upload/images/student_certificate_{certiticate_id}.png" style="width: 50px;
-            height: 50px;">
+        <img src="upload/images/student_certificate_{certiticate_id}.png" style="width: 73px;
+          ">
     </div>
     <div class="position-absolute" id="photo1">
-        <img src="upload/{image}" style="width:64.3px;height:67px">
+        <img src="upload/{image}" style="width:90px;height:94px">
     </div>
 
-    <p class="position-absolute" style="top:19.6%;left:32%;width:300px;text-align:center">{course_name}</p>
+    <p class="position-absolute" style="top:40.3%;left:32%;width:300px;text-align:center">{course_name}</p>
 
-    <p class="position-absolute" style="top:20.9%;left:12%;">{certiticate_id}</p>
+    <p class="position-absolute" style="top:43%;left:12%;">{serial_no}</p>
     
-    <p class="position-absolute" style="top:21%;left:84%;">{dob}</p>
-    <p class="position-absolute" style="top:23.5%;left:16%;">{createdOn}</p>
+    <p class="position-absolute" style="top:43%;left:84%;">{dob}</p>
+    <p class="position-absolute" style="top:48%;left:16%;">{createdOn}</p>
 
-    <div class="position-absolute text-center" style="width:350px;left:15%;top:27.5%;">{student_name}</div>
-    <div class="position-absolute text-center" style="width:250px;top:27.5%;left:65%">{father_name}</div>
+    <div class="position-absolute text-center" style="width:350px;left:15%;top:55%;">{student_name}</div>
+    <div class="position-absolute text-center" style="width:250px;top:55%;left:65%">{father_name}</div>
     
-    <div class="position-absolute text-center" style="width:370px;left:15%;top:30.5%;">{enrollment_no}</div>
-    <div class="position-absolute text-center" style="width:320px;left:5%;top:33.6%;">{course_name}</div>
+    <div class="position-absolute text-center" style="width:370px;left:15%;top:61%;">{enrollment_no}</div>
+    <div class="position-absolute text-center" style="width:320px;left:5%;top:67.1%;">{course_name}</div>
     
-    <div class="position-absolute text-center" style="left:50%;top:33.6%;">{grade} / {percentage}%</div>
-    <div class="position-absolute text-center" style="left:76%;top:33.6%;">{from_date}</div>
-    <div class="position-absolute text-center" style="left:86%;top:33.6%;">{to_date}</div>
+    <div class="position-absolute text-center" style="left:50%;top:67.1%;">{grade} / {percentage}%</div>
+    <div class="position-absolute text-center" style="left:76%;top:67.1%;">{from_date}</div>
+    <div class="position-absolute text-center" style="left:86%;top:67.1%;">{to_date}</div>
     
     <!-- <div class="position-absolute text-center" style="left:40%;top:69.5%;width:150px">{obtain_total}</div> -->
-    <div class="position-absolute text-center" style="width:550px;left:26%;top:36.5%;">{center_name}</div>
+    <div class="position-absolute text-center" style="width:550px;left:26%;top:73%;">{center_name}</div>
 
     
 </body>

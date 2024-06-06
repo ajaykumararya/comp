@@ -91,13 +91,13 @@
         table tr td,
         table tfoot tr th {
             line-height: 0;
-            font-size: 9px;
+            font-size: 11px;
             font-weight: bold;
             color: black
         }
 
         table tfoot tr th {
-            font-size: 10px;
+            font-size: 12px;
         }
 
         table {
@@ -109,7 +109,7 @@
         }
 
         .f-s-8 {
-            font-size: 10px !important;
+            font-size: 11px !important;
         }
 
         .p-l-r {

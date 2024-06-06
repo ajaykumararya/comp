@@ -249,6 +249,8 @@ class Document extends MY_Controller
             // ]);
             // pre($certificate,true);
             $output = $this->parse('certificate', $certificate);
+            if(in_array(PATH,['iedct']))
+                $this->mypdf->addPage('L');
             $this->pdf($output);
         } else {
             $this->not_found("Certificate Not Found..");
