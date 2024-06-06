@@ -31,15 +31,15 @@
         p {
             font-weight: bold;
             color: black;
-            font-size: 12px;
+            font-size: 14px;
             display: inline-block;
             /* word-spacing: 1px; */
         }
 
         #photo {
             z-index: 999;
-            top: 13.75%;
-            right: 71.5px;
+            top: 27.4%;
+            right: 107px;
         }
 
         /* table#first {
@@ -138,26 +138,26 @@
 <body class="position-relative">
     <img id="back-image" class="position-relative" src="{document_path}/marksheet.png">
     <div class="position-absolute" id="photo">
-        <img src="upload/{image}" style="width:66.5px;height:70.3px">
+        <img src="upload/{image}" style="width:92px;height:98px">
     </div>
-    <p class="position-absolute" style="top:22.7%;left:15%;">{result_id}</p>
-    <p class="position-absolute" style="top:17.8%;left:14.5%;">{issue_date}</p>
-    <p class="position-absolute text-capitlize" style="top:17.8%;left:26.5%;width:410px;text-align:center">{course_name}
+    <p class="position-absolute" style="top:46.35%;left:15%;width:100px">{serial_no}</p>
+    <p class="position-absolute" style="top:36.7%;left:14.5%;">{issue_date}</p>
+    <p class="position-absolute text-capitlize" style="top:36.5%;left:25%;width:630px;text-align:center">{course_name}
     </p>
     <!-- <p class="position-absolute" style="top:17%;right:15%;font-size:12px">{enrollment_no}</p> -->
-    <p class="position-absolute" style="top:20%;left:20.5%">{student_name}</p>
-    <p class="position-absolute" style="top:20%;left:49.5%">{father_name}</p>
-    <p class="position-absolute " style="top:20%;left:70.7%">{session}</p>
-    <p class="position-absolute " style="top:19.8%;left:85%">{dob}</p>
-    <p class="position-absolute " style="top:22.7%;left:36.7%">{enrollment_no}</p>
-    <p class="position-absolute " style="top:22.7%;left:58.5%">{center_name}</p>
+    <p class="position-absolute" style="top:40.8%;left:20.5%">{student_name}</p>
+    <p class="position-absolute" style="top:40.9%;left:49.5%">{father_name}</p>
+    <p class="position-absolute " style="top:40.9%;left:70.7%">{session}</p>
+    <p class="position-absolute " style="top:40.8%;left:85%">{dob}</p>
+    <p class="position-absolute " style="top:46.35%;left:36.7%">{enrollment_no}</p>
+    <p class="position-absolute " style="top:46.35%;left:58.5%">{center_name}</p>
     <!-- <p class="position-absolute " style="top:37.5%;left:36.5%">{duration} {duration_type}</p>
     <p class="position-absolute " style="top:39.6%;left:36.5%">{dob}</p> -->
-    <div class="position-absolute" style="top:41%;left:32.1%;">
-        <img src="upload/images/marksheet_{result_id}.png" style="width:50px;height:50px;" alt="">
+    <div class="position-absolute" style="bottom:9.8%;left:32.1%;">
+        <img src="upload/images/marksheet_{result_id}.png" style="width:67px;" alt="">
     </div>
-    <div class="position-absolute" style="top:26%;left:4.3%">
-        <table class="table" id="first" border="1" style="width:90%" class="position-absolute">
+    <div class="position-absolute" style="top:52%;left:4.3%">
+        <table class="table" id="first" border="1" style="width:97.3%" class="position-absolute">
             <thead>
                 <tr>
                     <th class="f-s-8" style="width:6%;height:20px" rowspan="2">PAPER</th>
@@ -296,8 +296,8 @@
         </table>
     </div> -->
     <!-- <p class="position-absolute" style="bottom:23%;left:32%;font-size:15px">{division}</p> -->
-    <p class="position-absolute" style="top:38.2%;left:40%;width:100px">{obtain_total}</p>
-    <p class="position-absolute" style="top:38.2%;left:66%">{grade} / {percentage} %</p>
+    <p class="position-absolute" style="bottom:16.5%;left:40%;width:100px">{obtain_total}</p>
+    <p class="position-absolute" style="bottom:16.5%;left:66%">{grade} / {percentage} %</p>
 </body>
 
 </html>

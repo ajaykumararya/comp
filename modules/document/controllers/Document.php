@@ -72,7 +72,7 @@ class Document extends MY_Controller
             $result_id = $get->row('result_id');
             $this->ki_theme->generate_qr($result_id, 'marksheet', current_url());
             $get_subect_numers = $this->student_model->marksheet_marks($result_id);
-            if (PATH == 'techno'):
+            if (in_array(PATH,['iedct','techno'])):
                 $admissionTime = strtotime($get->row('admission_date'));
                 // $this->set_data('from_date', date('M Y', $admissionTime));
                 $this->set_data('serial_no', date("Y", $admissionTime) . str_pad($get->row('student_id'), 3, '0', STR_PAD_LEFT));
@@ -134,6 +134,7 @@ class Document extends MY_Controller
             if (PATH == 'iedct') {
                 $this->set_data('theorySubject', $theorySubjects);
                 $this->set_data('practicalSubjects', $practicalSubjects);
+                $this->mypdf->addPage('L');
             }
             $main = [
                 'total' => $ttl,
