@@ -1,5 +1,5 @@
 <section class="sec_padd">
-    <div class="container">
+    <div class="" style="    padding: 0 20px;">
         <div class="row">
             <div class="col-md-3">
                 <div class="card theme-border radius_all_10 box_shadow1 animation animated fadeInUp"
@@ -9,7 +9,7 @@
                     </div>
                     <div class="card-body p-0">
                         <marquee behavior="scroll" direction="up" scrollamount="3" onmouseover="this.stop();"
-                            onmouseout="this.start();" style="height:400px;">
+                            onmouseout="this.start();" style="height:562px;">
                             <ul class="lst">
                                 <?php
                                 $limit = ES('scroll_student_number', 10);
@@ -63,7 +63,7 @@
                     </div>
                     <div class="card-body p-0">
                         <marquee behavior="scroll" direction="up" scrollamount="3" onmouseover="this.stop();"
-                            onmouseout="this.start();" style="height:400px;">
+                            onmouseout="this.start();" style="height:562px;">
                             <ul class="lst">
                                 <?php
                                 $get = $this->student_model->get_switch('passout', [
@@ -107,7 +107,7 @@
                         </div>
                         <div class="card-body p-0">
                             <marquee behavior="scroll" direction="up" scrollamount="3" onmouseover="this.stop();"
-                                onmouseout="this.start();" style="height:400px;">
+                                onmouseout="this.start();" style="height:562px;">
                                 <ul class="lst">
                                     <?php
                                     $limit = ES('scroll_franshise_number', 10);
