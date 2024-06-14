@@ -1,11 +1,11 @@
 <section class="sec_padd">
     <div class="" style="    padding: 0 20px;">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3 mb-3">
                 <div class="card theme-border radius_all_10 box_shadow1 animation animated fadeInUp"
                     data-animation="fadeInUp" data-animation-delay="0.02s" style="animation-delay: 0.02s; opacity: 1;">
                     <div class="card-header theme-back pb-0">
-                        <h5 class="card-title text-white"><i class="fa fa-users"></i> Students</h5>
+                        <h6 class="card-title text-white"><i class="fa fa-users"></i> Recently Joined Students</h6>
                     </div>
                     <div class="card-body p-0">
                         <marquee behavior="scroll" direction="up" scrollamount="3" onmouseover="this.stop();"
@@ -44,7 +44,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6 mb-3">
                 <div class="card theme-border radius_all_10 box_shadow1 animation animated fadeInUp"
                     data-animation="fadeInUp" data-animation-delay="0.02s" style="animation-delay: 0.02s; opacity: 1;">
                     <div class="card-body">
@@ -55,11 +55,11 @@
             <?php
             if (ES('scroll_right_box', 'passout_students') == 'passout_students') {
                 ?>
-                <div class="col-md-3">
+                <div class="col-md-3 mb-3">
                 <div class="card theme-border radius_all_10 box_shadow1 animation animated fadeInUp"
                     data-animation="fadeInUp" data-animation-delay="0.02s" style="animation-delay: 0.02s; opacity: 1;">
                     <div class="card-header theme-back pb-0">
-                        <h5 class="card-title text-white"><i class="fa fa-users"></i> Passout Students</h5>
+                        <h6 class="card-title text-white"><i class="fa fa-users"></i>Recently Passout Students</h6>
                     </div>
                     <div class="card-body p-0">
                         <marquee behavior="scroll" direction="up" scrollamount="3" onmouseover="this.stop();"
@@ -99,7 +99,7 @@
                 <?php
             } else {
                 ?>
-                <div class="col-md-3">
+                <div class="col-md-3 mb-3">
                     <div class="card theme-border radius_all_10 box_shadow1 animation animated fadeInUp"
                         data-animation="fadeInUp" data-animation-delay="0.02s" style="animation-delay: 0.02s; opacity: 1;">
                         <div class="card-header theme-back pb-0">
