@@ -6,7 +6,7 @@
     .student-profile .card .card-header .profile_img {
         width: 150px;
         height: 150px;
-        object-fit: cover;
+        /* object-fit: cover; */
         margin: 10px auto;
         border: 10px solid #ccc;
         border-radius: 50%;
@@ -42,13 +42,16 @@
                     <div class="card-body bg-transparent p-0">
                         <table class="table table-bordered pb-0 mb-0">
                             <tr>
-                                <th>Roll No.</th><td>{roll_no}</td>
+                                <th>Roll No.</th>
+                                <td>{roll_no}</td>
                             </tr>
                             <tr>
-                                <th>Gender</th><td class="text-capitalize">{gender}</td>
+                                <th>Gender</th>
+                                <td class="text-capitalize">{gender}</td>
                             </tr>
                             <tr>
-                                <th>Mobile</th><td>{contact_number}</td>
+                                <th>Mobile</th>
+                                <td>{contact_number}</td>
                             </tr>
                         </table>
                         <!-- <p class="mb-0"><strong class="pr-1">Roll No:</strong>&nbsp;{roll_no}</p>
@@ -60,12 +63,13 @@
             <div class="col-lg-8">
                 <div class="card shadow-sm bg-transparent border-dark">
                     <div class="card-header bg-transparent border-0">
-                        <h3 class="mb-0 card-title "><i class="far fa-clone pr-1 fs-2 text-dark"></i> &nbsp; General Information
+                        <h3 class="mb-0 card-title "><i class="far fa-clone pr-1 fs-2 text-dark"></i> &nbsp; General
+                            Information
                         </h3>
                     </div>
                     <div class="card-body pt-0 p-0">
                         <table class="table table-bordered ">
-                        <tr>
+                            <tr>
                                 <th width="30%">DOB </th>
                                 <td width="2%">:</td>
                                 <td>{dob}</td>
