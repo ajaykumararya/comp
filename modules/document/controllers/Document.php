@@ -72,6 +72,21 @@ class Document extends MY_Controller
             $result_id = $get->row('result_id');
             $this->ki_theme->generate_qr($result_id, 'marksheet', current_url());
             $get_subect_numers = $this->student_model->marksheet_marks($result_id);
+
+            if(PATH == 'isdmedu'){
+                $certificate = $get->row_array();
+                $admissionTime = strtotime($certificate['admission_date']);
+                $this->set_data('from_date', date('M Y', $admissionTime));                
+                $toDateString = strtotime($certificate['createdOn']);
+                $duration = $certificate['duration'];
+                if ($certificate['duration_type'] == 'month') {
+                    $toDateString = strtotime("+$duration months", $admissionTime);
+                } else if ($certificate['duration_type'] == 'year') {
+                    $toDateString = strtotime("+$duration years", $admissionTime);
+                }
+                $toDateString = strtotime('-1 month', $toDateString);
+                $this->set_data('to_date', date('M Y', $toDateString));
+            }
             if (in_array(PATH,['iedct','techno'])):
                 $admissionTime = strtotime($get->row('admission_date'));
                 // $this->set_data('from_date', date('M Y', $admissionTime));

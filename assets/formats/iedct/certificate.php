@@ -80,7 +80,7 @@
         <img src="upload/{image}" style="width:90px;height:94px">
     </div>
 
-    <p class="position-absolute" style="top:40.3%;left:32%;width:300px;text-align:center">{course_name}</p>
+    <p class="position-absolute" style="top:40.3%;left:25%;width:600px;text-align:center">{course_name}</p>
 
     <p class="position-absolute" style="top:43%;left:12%;">{serial_no}</p>
     
