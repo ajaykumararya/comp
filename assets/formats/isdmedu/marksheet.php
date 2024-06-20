@@ -114,6 +114,10 @@
     <div class="position-absolute" style="top:21.5%;left:6.3%;">
         <img src="upload/images/marksheet_{result_id}.png" style="width: 96px;height:90px;" alt="">
     </div>
+
+    <div class="position-absolute" style="top:22.4%;left:83%;">
+        <img src="upload/{centre_logo}" style="width: 80px;height:73px;" alt="">
+    </div>
     <div class="position-absolute " style="top:45%;left:10%;width:80%">
         <table id="first" border="0" style="width:100%">
             <thead>

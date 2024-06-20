@@ -66,6 +66,9 @@
         .t-c {
             text-transform: capitalize;
         }
+        .test{
+            border:1px solid red
+        }
     </style>
 </head>
 
@@ -78,9 +81,12 @@
     <div class="position-absolute" id="photo1">
         <img src="upload/{image}" style="width:110px;height:122.3px">
     </div>
+    <div class="position-absolute" style="top:33.7%;left:81.7%;">
+        <img src="upload/{centre_logo}" style="width: 80px;height:73px;" alt="">
+    </div>
 
     <p class="position-absolute" style="left:22%;top:41.2%;">{enrollment_no}</p>
-    <p class="position-absolute" style="left:74%;top:41.2%;">{roll_no}</p>
+    <p class="position-absolute" style="left:74%;top:41.2%;width:140px">{roll_no}</p>
 
     <!-- <p class="position-absolute" style="top:2.5%;left:20%;">{certiticate_id}</p> -->
     <p class="position-absolute" style="top:63.2%;left:75%;">{createdOn}</p>
