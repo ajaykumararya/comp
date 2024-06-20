@@ -213,6 +213,8 @@ class Website extends Ajax_Controller
             $data['agreement'] = $this->file_up('agreement');
             $data['address_proof'] = $this->file_up('address_proof');
             $data['signature'] = $this->file_up('signature');
+            if(CHECK_PERMISSION('CENTRE_LOGO'))
+                $data['logo'] = $this->file_up('logo');
             $data['isPending'] = 1;
             $this->db->insert('centers', $data);
             $this->response('status', true);

@@ -1,4 +1,3 @@
-
 <section class="gray-bg" data-aos="fade-right">
     <div class="container">
         <div class="row justify-content-center">
@@ -179,48 +178,65 @@
                             </div>
                             <div class="card card-body">
                                 <div class="row">
-                                    <div class="col-md-3 mb-4">
+                                    <div class="col-md-3 mb-2">
                                         <div class="form-control">
                                             <label for="adhar" class="form-label required">Aadhar Card
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-md-9 mb-4">
+                                    <div class="col-md-9 mb-2">
                                         <div class="form-group">
                                             <input type="file" class="form-control" required name="adhar" id="adhar">
                                         </div>
                                     </div>
-                                    <div class="col-md-3 mb-4">
+                                    <div class="col-md-3 mb-2">
                                         <div class="form-control">
                                             <label for="signature" class="form-label required">Signature</label>
                                         </div>
                                     </div>
-                                    <div class="col-md-9 mb-4">
+                                    <div class="col-md-9 mb-2">
                                         <div class="form-group">
                                             <input type="file" class="form-control" required name="signature"
                                                 id="signature">
                                         </div>
                                     </div>
-                                    <div class="col-md-3 mb-4">
+                                    <?php
+                                    if (CHECK_PERMISSION('CENTRE_LOGO')) {
+                                        ?>
+                                        <div class="col-md-3 mb-2">
+                                            <div class="form-control">
+                                                <label for="centre_logo" class="form-label required">Logo</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9 mb-2">
+                                            <div class="form-group">
+                                                <input type="file" required class="form-control" required name="logo"
+                                                    id="centre_logo">
+                                            </div>
+                                        </div>
+                                        <?php
+                                    }
+
+                                    ?>
+                                    <div class="col-md-3 mb-2">
                                         <div class="form-control">
                                             <label for="address_proof" class="form-label">Address Proof</label>
                                         </div>
                                     </div>
-                                    <div class="col-md-9 mb-4">
+                                    <div class="col-md-9 mb-2">
                                         <div class="form-group">
-                                            <input type="file" class="form-control"  name="address_proof"
+                                            <input type="file" class="form-control" name="address_proof"
                                                 id="address_proof">
                                         </div>
                                     </div>
-                                    <div class="col-md-3 mb-4">
+                                    <div class="col-md-3 mb-2">
                                         <div class="form-control">
                                             <label for="agreement" class="form-label">Agreement</label>
                                         </div>
                                     </div>
-                                    <div class="col-md-9 mb-4">
+                                    <div class="col-md-9 mb-2">
                                         <div class="form-group">
-                                            <input type="file" class="form-control"  name="agreement"
-                                                id="agreement">
+                                            <input type="file" class="form-control" name="agreement" id="agreement">
                                         </div>
                                     </div>
                                 </div>

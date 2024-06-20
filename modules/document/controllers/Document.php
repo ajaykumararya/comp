@@ -75,9 +75,10 @@ class Document extends MY_Controller
 
             if(PATH == 'isdmedu'){
                 $certificate = $get->row_array();
+                // pre($certificate,true);
                 $admissionTime = strtotime($certificate['admission_date']);
                 $this->set_data('from_date', date('M Y', $admissionTime));                
-                $toDateString = strtotime($certificate['createdOn']);
+                $toDateString = strtotime($certificate['issue_date']);
                 $duration = $certificate['duration'];
                 if ($certificate['duration_type'] == 'month') {
                     $toDateString = strtotime("+$duration months", $admissionTime);
@@ -163,7 +164,7 @@ class Document extends MY_Controller
                 'total_min_practical' => $ttlpminm,
                 'division' => $per < 40 ? 'Fail' : 'Pass'
             ];
-            // pre($main,true);
+            // pre($get->row(),true);
             $this->set_data($main);
             $pdfContent = $this->parse('marksheet', $get->row_array());
             // echo $pdfContent;
@@ -319,3 +320,5 @@ class Document extends MY_Controller
             </script>';
     }
 }
+
+

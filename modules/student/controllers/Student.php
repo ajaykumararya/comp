@@ -3,16 +3,13 @@ class Student extends MY_Controller
 {
     function index()
     {
-        // $this->parse('panel/index');
-        // $this->student_view('profile');
         redirect('student/profile');
 
     }
     function my_exam(){
         $this->student_view('my-exam');
     }
-    function dashboard()
-    {
+    function dashboard(){
         redirect('student/profile');
         // $this->student_view('profile');
     }

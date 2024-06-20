@@ -3,23 +3,26 @@ class Center extends Ajax_Controller
 {
     function add()
     {
-        // $this->response($_FILES);
-        $data = $this->post();
-        $data['status'] = 1;
-        $data['added_by'] = 'admin';
-        $data['type'] = 'center';
-        $email = $data['email_id'];
-        unset($data['email_id']);
-        $data['email'] = $email;
-        $data['password'] = sha1($data['password']);
-        ///upload docs
-        $data['adhar'] = $this->file_up('adhar');
-        // $data['adhar_back'] = $this->file_up('adhar_back');
-        $data['image'] = $this->file_up('image');
-        $data['agreement'] = $this->file_up('agreement');
-        $data['address_proof'] = $this->file_up('address_proof');
-        $data['signature'] = $this->file_up('signature');
         if ($this->form_validation->run('add_center')) {
+            // $this->response($_FILES);
+            $data = $this->post();
+            $data['status'] = 1;
+            $data['added_by'] = 'admin';
+            $data['type'] = 'center';
+            $email = $data['email_id'];
+            unset($data['email_id']);
+            $data['email'] = $email;
+            $data['password'] = sha1($data['password']);
+
+            ///upload docs
+            $data['adhar'] = $this->file_up('adhar');
+            // $data['adhar_back'] = $this->file_up('adhar_back');
+            $data['image'] = $this->file_up('image');
+            $data['agreement'] = $this->file_up('agreement');
+            $data['address_proof'] = $this->file_up('address_proof');
+            $data['signature'] = $this->file_up('signature');
+            if (CHECK_PERMISSION('CENTRE_LOGO'))
+                $data['logo'] = $this->file_up('logo');
             $this->response(
                 'status',
                 $this->db->insert('centers', $data)
@@ -189,14 +192,14 @@ class Center extends Ajax_Controller
                                 'id' => $row->type_id
                             ]);
                             $tempData['student_name'] = @$student[0]->student_name . ' ' . label('Admission');
-                            $tempData['url'] = base_url('student/profile/'.$row->type_id);
+                            $tempData['url'] = base_url('student/profile/' . $row->type_id);
                             break;
                         case 'marksheet':
                             $marksheet = $this->student_model->marksheet(['id' => $row->type_id]);
                             $student = '';
                             if ($marksheet->num_rows()) {
                                 $drow = $marksheet->row();
-                                $tempData['url'] = base_url('marksheet/'.$this->encode($row->type_id));
+                                $tempData['url'] = base_url('marksheet/' . $this->encode($row->type_id));
 
                                 $student = $drow->student_name . ' ' . label(humnize_duration_with_ordinal($drow->marksheet_duration, $drow->duration_type) . ' Marksheet');
                             }
@@ -206,7 +209,7 @@ class Center extends Ajax_Controller
                             $student_certificates = $this->student_model->student_certificates([
                                 'id' => $row->type_id
                             ]);
-                            $tempData['url'] = base_url('certificate/'.$this->encode(($row->type_id)));
+                            $tempData['url'] = base_url('certificate/' . $this->encode(($row->type_id)));
                             $tempData['student_name'] = $student_certificates->row('student_name') . ' ' . label('Certificate');
                             break;
                     }

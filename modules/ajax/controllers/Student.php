@@ -62,8 +62,18 @@ class Student extends Ajax_Controller
         if ($walletSystem = ( CHECK_PERMISSION('WALLET_SYSTEM') && $this->center_model->isCenter())) {
             $deduction_amount = $this->ki_theme->get_wallet_amount('student_admission_fees');
             $close_balance = $this->ki_theme->wallet_balance();
-            if ($close_balance < 0) {
+            if ($close_balance < 0 or $close_balance > $deduction_amount) {
                 $this->response('html', 'Your Wallet Balance is Low..');
+                exit;
+            }
+        }
+
+        if($walletSystem = ( CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE') )){
+            $deduction_amount = $this->center_model->get_assign_courses($this->post('center_id'),
+            ['course_id' => $this->post('course_id')])->row('course_fee');
+            $close_balance = $this->ki_theme->wallet_balance();
+            if ($close_balance < 0 or $close_balance > $deduction_amount) {
+                $this->response('html', 'Wallet Balance is Low..');
                 exit;
             }
         }

@@ -335,19 +335,21 @@ document.addEventListener('DOMContentLoaded', function (e) {
             var center_id = $(this).val();
             course_box.html('');
             roll_no_box.val('');
+            var show = $('#wallet_system_course_wise').length;
             // alert(center_id);
             $.AryaAjax({
                 url: 'student/genrate-a-new-rollno-with-center-courses',
                 data: { center_id },
                 dataType: 'json'
             }).then(function (res) {
-                log(res);
+                // log(res);
                 if (res.status) {
                     roll_no_box.val(res.roll_no);
                     var options = '<option value=""></option>';
                     if (res.courses.length) {
+                        // log(res.courses);
                         $.each(res.courses, function (index, course) {
-                            options += `<option value="${course.course_id}" data-kt-rich-content-subcontent="${course.duration} ${course.duration_type}">${course.course_name}</option>`;
+                            options += `<option data-price_show="${show}" value="${course.course_id}" data-course_fee="${course.course_fee}" data-kt-rich-content-subcontent="${course.duration} ${course.duration_type}">${course.course_name}</option>`;
                         });
                     }
                     course_box.html(options).select2({
@@ -368,7 +370,24 @@ document.addEventListener('DOMContentLoaded', function (e) {
             templateSelection: optionFormatSecond,
             templateResult: optionFormatSecond,
         });
-
+        if ($('#wallet_system_course_wise').length) {
+            course_box.change(function () {
+                var course_fee = $(this).find('option:selected').data('course_fee');
+                var btn = $('#form').find('button');
+                var price = $('#centre_id').find('option:selected').data('wallet');
+                // alert(price)
+                if (price < course_fee) {
+                    SwalWarning(`Wallet Balance is Low...\n
+                                <b class="text-success">Course Fee : ${inr} ${course_fee}</b>\n
+                                <b class="text-danger">Wallet Balance : ${inr} ${price}</b>
+                                `);
+                    btn.prop("disabled", true);
+                }
+                else {
+                    btn.prop("disabled", false);
+                }
+            })
+        }
 
         if (login_type == 'center') {
             institue_box.trigger("change");

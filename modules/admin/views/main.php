@@ -137,6 +137,11 @@
     data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true"
     data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default"
     <?= sidebar_toggle('data-kt-app-sidebar-minimize="on"') ?>>
+    <?php
+    if (CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE')) {
+        echo '<input type="hidden" id="wallet_system_course_wise">';
+    }
+    ?>
     <!--begin::Theme mode setup on page load-->
     <script>
         var defaultThemeMode = "light";
@@ -220,7 +225,7 @@
                         <div class="app-navbar flex-shrink-0">
 
                             <?php
-                            if ($this->center_model->isCenter() && CHECK_PERMISSION('WALLET_SYSTEM')) {
+                            if ($this->center_model->isCenter() && (CHECK_PERMISSION('WALLET_SYSTEM') or CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE'))) {
                                 ?>
                                 <!--begin::Wallet-->
                                 <div class="app-navbar-item ms-1 ms-md-4 text-center ">
@@ -529,13 +534,14 @@
                                         <div class="input-group d-flex">
                                             <div class="input-group-text p-0" style="width:174px">
 
-                                                <select data-control="select2" required data-placeholder="Select Centre" name="center_id" class="form-control" autocomplete="off">
+                                                <select data-control="select2" required data-placeholder="Select Centre"
+                                                    name="center_id" class="form-control" autocomplete="off">
                                                     <option></option>
                                                     <?php
                                                     $centers = $this->center_model->get_center();
-                                                    if($centers->num_rows()){
-                                                        foreach($centers->result() as $rowc){
-                                                            echo '<option value="'.$rowc->id.'">'.$rowc->institute_name.'</option>';
+                                                    if ($centers->num_rows()) {
+                                                        foreach ($centers->result() as $rowc) {
+                                                            echo '<option value="' . $rowc->id . '">' . $rowc->institute_name . '</option>';
                                                         }
                                                     }
                                                     ?>
@@ -730,14 +736,14 @@
         ajax_url = base_url + 'ajax/';
     const login_type = '<?= $this->center_model->login_type() ?>';
     const all_templates = '';
-    const wallet_system = Boolean(`<?= CHECK_PERMISSION('WALLET_SYSTEM') ?>`);
+    const wallet_system = Boolean(`<?= CHECK_PERMISSION('WALLET_SYSTEM') or CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE') ?>`);
     const wallet_balance = <?= $this->ki_theme->wallet_balance() ?? 0 ?>;
     // console.log(content_css);
     // Default vars of this project
     <?php
     foreach ($this->ki_theme->default_vars() as $var => $var_value) {
         ?>const <?= $var ?> = `<?= $var_value ?>`;
-                            <?php
+                                <?php
     }
     if ($this->center_model->isCenter() && CHECK_PERMISSION('WALLET_SYSTEM')) {
         $get = $this->ki_theme->center_fix_fees();

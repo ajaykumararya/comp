@@ -54,6 +54,9 @@ class Student_model extends MY_Model
             $this->db->join('centers as ce', 'ce.id = s.center_id AND s.center_id = ' . (isset($center_id) ? $center_id : $this->loginId()));
         else
             $this->db->join('centers as ce', 'ce.id = s.center_id', 'left');
+        if (CHECK_PERMISSION('CENTRE_LOGO')) {
+            $this->db->select('ce.logo as centre_logo');
+        }
         switch ($case) {
             case 'assign_exam_student_list':
                 $this->db->select('es.id as assign_exam_id');
@@ -71,9 +74,9 @@ class Student_model extends MY_Model
                 break;
             case 'limit':
                 // $this->not_passout();
-                $this->db->join('student_certificates as sce','sce.student_id != s.id');
+                $this->db->join('student_certificates as sce', 'sce.student_id != s.id');
                 $this->db->group_by('s.id');
-                $this->db->order_by('s.id','DESC')->limit($limit);
+                $this->db->order_by('s.id', 'DESC')->limit($limit);
                 break;
             case 'all':
                 if (isset($condition['without_admission_status']))
@@ -108,10 +111,10 @@ class Student_model extends MY_Model
                 $this->db->where('s.admission_type', 'online');
                 break;
             case 'passout':
-                $this->db->join('student_certificates as sce','sce.student_id = s.id AND sce.course_id = s.course_id');
+                $this->db->join('student_certificates as sce', 'sce.student_id = s.id AND sce.course_id = s.course_id');
                 $this->db->group_by('sce.student_id');
-                $this->db->order_by('s.id','DESC');
-                if(isset($record_limit)){
+                $this->db->order_by('s.id', 'DESC');
+                if (isset($record_limit)) {
                     $this->db->limit($record_limit);
                 }
                 break;
@@ -177,6 +180,7 @@ class Student_model extends MY_Model
                 $this->db->join('student_certificates as sc', "sc.student_id = s.id");
                 $this->db->join('admit_cards as ac', "ac.student_id = sc.student_id and c.duration = ac.duration and c.duration_type = ac.duration_type");
                 $this->db->join('session as ss', "ss.id = ac.session_id");
+
                 if (isset($roll_no)) {
                     unset($condition['roll_no']);
                     $this->myWhere('s', ['roll_no' => $roll_no]);
@@ -189,8 +193,9 @@ class Student_model extends MY_Model
         }
         return $this->db->get();
     }
-    private function not_passout(){
-        $this->db->join('student_certificates as sce','sce.student_id != s.id');
+    private function not_passout()
+    {
+        $this->db->join('student_certificates as sce', 'sce.student_id != s.id');
     }
     function student_certificates($where = [])
     {
@@ -244,8 +249,9 @@ class Student_model extends MY_Model
     {
         return $this->get_switch('online_students')->result();
     }
-    function get_passout_student($where = []){
-        return $this->get_switch('passout',$where)->result();
+    function get_passout_student($where = [])
+    {
+        return $this->get_switch('passout', $where)->result();
     }
     function get_student_course_wise($course_id = 0)
     {
@@ -263,7 +269,8 @@ class Student_model extends MY_Model
     {
         return $this->get_switch('student_id', ['id' => $id]);
     }
-    function id_card($id){
+    function id_card($id)
+    {
         return $this->get_student_via_id($id);
     }
     function get_student_via_batch($batch_id = 0)

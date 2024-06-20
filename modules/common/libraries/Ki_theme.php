@@ -111,6 +111,18 @@ class Ki_theme
             else
                 return 'E';
         }
+        if(PATH == 'isdmedu'){
+            if($score >= 90 && $score <= 100)
+                return 'E';
+            else if($score >= 89 && $score <= 70)
+                return 'A+';
+            else if($score >= 69 && $score <= 50)
+                return 'A';
+            else if($score >=49 && $score <= 30)
+                return 'B';
+            else 
+                return 'C';
+        }
     }
     function generate_qr($id = 0, $type = '', $data = '')
     {

@@ -579,6 +579,13 @@ const optionFormatSecond = (item) => {
     template += '<div class="d-flex flex-column">'
     template += '<span class="fs-4 fw-bold lh-1 text-capitalize">' + item.text + '</span>';
     template += '<span class=" fs-5 text-capitalize ' + subtitleClass + '">' + item.element.getAttribute('data-kt-rich-content-subcontent') + '</span>';
+    if (item.element.hasAttribute('data-price_show')) {
+        var priceShow = item.element.getAttribute('data-price_show');
+        var price = item.element.getAttribute('data-course_fee');
+        if(priceShow){
+            template += ` <span class="fs-5 text-success">${inr} ${price}</span>`;
+        }
+    }
     template += '</div>';
     template += '</div>';
     span.innerHTML = template;
@@ -2021,6 +2028,10 @@ const list_students = (admission_status = 0) => {
         else {
             title = 'Cancel';
             type = 2;
+        }       
+        if(login_type  == 'center' && $('#wallet_system_course_wise').length){
+            SwalWarning(`You can't change their status, please conatct administrator`);
+            return false;
         }
         SwalWarning('Confirmation!', `
             Do you want to ${title}, this student?

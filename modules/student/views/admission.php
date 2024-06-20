@@ -1,6 +1,7 @@
 <div class="row">
     <div class="col-md-12">
         <form id="form" action="" method="POST">
+            
             <div class="{card_class}">
                 <div class="card-header collapsible cursor-pointer rotate" data-bs-toggle="collapse"
                     data-bs-target="#kt_docs_card_collapsible">
@@ -64,7 +65,7 @@
                                     $this->db->where('id', $center_id);
                                 }
                                 ?>
-                                <select class="form-select" name="center_id" data-control="select2"
+                                <select class="form-select" id="centre_id" name="center_id" data-control="select2"
                                     data-placeholder="Select a Center"
                                     data-allow-clear="<?= $this->center_model->isAdmin() ?>">
                                     <option></option>
@@ -72,7 +73,7 @@
                                     $list = $this->db->where('type', 'center')->get('centers')->result();
                                     foreach ($list as $row) {
                                         $selected = $center_id == $row->id ? 'selected' : '';
-                                        echo '<option value="' . $row->id . '" ' . $selected . ' data-kt-rich-content-subcontent="' . $row->institute_name . '"
+                                        echo '<option value="' . $row->id . '" data-wallet="'.$row->wallet.'" ' . $selected . ' data-kt-rich-content-subcontent="' . $row->institute_name . '"
                                     data-kt-rich-content-icon="' . $row->image . '">' . $row->name . '</option>';
                                     }
                                     ?>
@@ -86,7 +87,7 @@
                             <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
                                 <label class="form-label required">Course</label>
                                 <select class="form-select" name="course_id" data-control="select2"
-                                    data-placeholder="Select a Course">
+                                    data-placeholder="Select a Course" data-allow-clear="true">
                                     <option></option>
                                     <?php
                                     // $listCourse = $this->db->get('course');
