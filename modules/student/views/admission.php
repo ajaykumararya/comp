@@ -73,7 +73,7 @@
                                     $list = $this->db->where('type', 'center')->get('centers')->result();
                                     foreach ($list as $row) {
                                         $selected = $center_id == $row->id ? 'selected' : '';
-                                        echo '<option value="' . $row->id . '" data-wallet="'.$row->wallet.'" ' . $selected . ' data-kt-rich-content-subcontent="' . $row->institute_name . '"
+                                        echo '<option value="' . $row->id . '" '.( isset($row->wallet) ? 'data-wallet="'.$row->wallet.'"' : '').' ' . $selected . ' data-kt-rich-content-subcontent="' . $row->institute_name . '"
                                     data-kt-rich-content-icon="' . $row->image . '">' . $row->name . '</option>';
                                     }
                                     ?>
