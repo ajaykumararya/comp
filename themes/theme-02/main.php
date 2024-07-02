@@ -1,4 +1,51 @@
 <style>
+    <?php
+    if (PATH == 'zcc') {
+        ?>
+        :root {
+            --primary: #E22B2B;
+        }
+
+        <?php
+    } else {
+        ?>
+        :root {
+            --primary: #07294d;
+        }
+
+        <?php
+    }
+    ?>
+    .bg_blue_dark {
+        background-color: var(--primary) !important;
+    }
+
+    .btn-default,
+    .page-item.active .page-link,
+    .page-item .page-link:hover,
+    .custome-checkbox .form-check-label::before,
+    .custome-checkbox input[type="checkbox"]+.form-check-label::after,
+    .tags a:hover,
+    .fancy_box::before {
+        border-color: var(--primary) !important;
+    }
+
+    .btn-default,
+    .bg_default,
+    .scrollup:hover,
+    .page-item.active .page-link,
+    .page-item .page-link:hover,
+    .sidebar .widget_title::before,
+    .tags a:hover,
+    .item_meta.duration,
+    .course_rate .review_bar .rating,
+    .cat_style1 a:hover,
+    .sub_heading::before,
+    .carousel_style2 .carousel-control-next:hover,
+    .carousel_style2 .carousel-control-prev:hover {
+        background-color: var(--primary) !important;
+    }
+
     @media only screen and (min-width: 992px) {
         .navbar-nav {
             flex-wrap: wrap;
@@ -7,12 +54,14 @@
 
     h2 span,
     h1 span {
-        color: #ffbc09 !important
+        color: var(--primary) !important
     }
-    .theme-back{
+
+    .theme-back {
         background-color: #07294d !important;
         color: white
     }
+
     .theme-btn:hover {
         outline: medium none;
         color: white

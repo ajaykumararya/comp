@@ -22,8 +22,8 @@
     }
 </style>
 <section class="sec_padd">
-    <div class="container">
-        <div class="row">
+    <div class="">
+        <div class="row" style="flex-direction:column">
             <div class="buttons-usefull parent" align="center">
 
                 <?php
