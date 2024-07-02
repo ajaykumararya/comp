@@ -91,7 +91,7 @@
     <div class="position-absolute text-center " style="width:330px;top:55%;left:65%">{father_name}</div>
     
     <div class="position-absolute text-center" style="width:370px;left:15%;top:61%;">{enrollment_no}</div>
-    <div class="position-absolute text-center" style="width:500px;left:5%;top:66.8%;">{course_name}</div>
+    <div class="position-absolute text-center" style="width:500px;left:5%;top:67.1%;">{course_name}</div>
     
     <div class="position-absolute text-center" style="left:55%;top:67.1%;">{grade} / {percentage}%</div>
     <div class="position-absolute text-center" style="left:76%;top:67.1%;">{from_date}</div>
