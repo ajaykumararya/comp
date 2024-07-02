@@ -27,7 +27,7 @@
     .custome-checkbox input[type="checkbox"]+.form-check-label::after,
     .tags a:hover,
     .fancy_box::before {
-        border-color: var(--primary) !important;
+        border-color: lightgray !important
     }
 
     .btn-default,
@@ -54,12 +54,12 @@
 
     h2 span,
     h1 span {
-        color: var(--primary) !important
+        color: #ffbc09 !important
     }
 
     .theme-back {
-        background-color: #07294d !important;
-        color: white
+        background-color: var(--primary) !important;
+        color: white;
     }
 
     .theme-btn:hover {
@@ -87,7 +87,7 @@
     }
 
     .theme-border {
-        border: 1px solid #07294d !important;
+        border: 1px solid var(--primary) !important;
     }
 </style>
 
