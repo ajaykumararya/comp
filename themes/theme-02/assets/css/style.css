@@ -1933,7 +1933,7 @@ marquee {
 *===================================*/
 .full_screen,
 .full_screen .carousel-item {
-  min-height: 50vh;
+  /* min-height: 50vh; */
 }
 .banner_content_wrap .carousel-item {
   padding: 0px 0;
