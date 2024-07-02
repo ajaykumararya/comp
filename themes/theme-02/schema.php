@@ -32,7 +32,7 @@ if ($isPrimary) {
         }
       }
     </style>
-    <section class="banner_section p-0 full_screen" style="min-height:auto">
+    <section class="banner_section p-0 full_screen" style="min-height:28vh">
       <div id="carouselExampleFade" class="banner_content_wrap carousel slide carousel-fade" data-ride="carousel">
         <div class="carousel-inner">
           <?php
