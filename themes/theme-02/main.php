@@ -27,7 +27,7 @@
     .custome-checkbox input[type="checkbox"]+.form-check-label::after,
     .tags a:hover,
     .fancy_box::before {
-        border-color: lightgray !important
+        border-color: var(--primary) !important
     }
 
     .btn-default,
