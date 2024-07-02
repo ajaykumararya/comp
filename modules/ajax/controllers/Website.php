@@ -310,7 +310,8 @@ class Website extends Ajax_Controller
                 ->update('students', [
                     'roll_no' => $this->post('roll_no'),
                     'batch_id' => $this->post('batch_id'),
-                    'course_id' => $this->post('course_id')
+                    'course_id' => $this->post('course_id'),
+                    'admission_date' => $this->post('admission_date')
                 ]);
             $this->response("status", true);
         }

@@ -40,7 +40,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12 mt-4">
+                        <div class="col-md-6 mt-4">
                             <div class="form-group">
                                 <label for="" class="foem-label">Course</label>
                                 <select name="course_id" data-control="select2" data-placeholder="Select Course"
@@ -53,6 +53,13 @@
                                         echo "<option value='$c->course_id' ".($c->course_id == $course_id ? 'selected' : '') ." data-kt-rich-content-subcontent='{$c->duration} {$c->duration_type}'>$c->course_name</option>";
                                     ?>
                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mt-4">
+                            <div class="form-group">
+                                <label for="" class="foem-label">Admission Date</label>
+                                <input type="text" name="admission_date" class="form-control current-date flatpickr-input" value="{admission_date}">
                             </div>
                         </div>
                     </div>
