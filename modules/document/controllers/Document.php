@@ -179,6 +179,82 @@ class Document extends MY_Controller
         // $reversedKeysArray = array_reverse(array_keys($reversedArray));
         // return array_combine($reversedKeysArray, $reversedArray);
     }
+    private function calculateCertificate($data){
+        extract($data);
+        $where = [];
+        if($duration_type == 'year'){
+            $i = 1;
+            do{
+                $where[] = [
+                    'student_id' => $student_id,
+                    'duration' => $i,
+                    'duration_type' => $duration_type,
+                    'course_id' => $course_id
+                ];
+                $i++;
+            }while($duration >= $i);
+        }
+        else
+            $where[] = $data;
+        // pre($where,true);
+        if(sizeof($where)){
+            $per = $ttl = $ob_ttl = 0;
+            $ttltminm =
+                $ttltmaxm =
+                $ttlpminm =
+                $ttlpmaxm = 0;
+            foreach($where as $whereData){
+                $final_marksheet = $this->student_model->marksheet($whereData);
+                if ($final_marksheet->num_rows()) {
+                    // pre($final_marksheet->row(),true);
+                    $row = $final_marksheet->row();
+                    $this->set_data('enrollment_no', $row->enrollment_no);
+                    $subject_marks = [];
+                    $get_subect_numers = $this->student_model->marksheet_marks($final_marksheet->row("result_id"));
+                   
+                    if ($ttl_subject = $get_subect_numers->num_rows()) {
+                        foreach ($get_subect_numers->result() as $mark) {
+                            $tmm = $this->isMark($mark->theory_max_marks);
+                            $pmm = $this->isMark($mark->practical_max_marks);
+                            $tmim = $this->isMark($mark->theory_min_marks);
+                            $pmim = $this->isMark($mark->practical_min_marks);
+                            $ttl += $this->mark_total($tmm, $tmim) + $this->mark_total($pmm, $pmim);
+                            $ttltminm += $tmim;
+                            $ttltmaxm += $tmm;
+                            $ttlpminm += $pmim;
+                            $ttlpmaxm += $pmm;
+                            $marks = [
+                                'subject_name' => $mark->subject_name,
+                                'theory_min_marks' => $tmim,
+                                'theory_max_marks' => $tmm,
+                                'practical_min_marks' => $pmim,
+                                'practical_max_marks' => $pmm,
+                                'theory_total' => $mark->theory_marks,
+                                'practical_total' => $mark->practical,
+                                'total' => $this->isMark($mark->ttl),
+                            ];
+                            $ob_ttl += $mark->ttl;
+                            array_push($subject_marks, $marks);
+                        }
+                    }
+                }
+            }
+            $per = number_format((($ob_ttl / ($ttltmaxm + $ttlpmaxm)) * 100), 2);
+            
+            $main = [
+                'total' => $ttl,
+                'obtain_total' => $ob_ttl,
+                'marks' => $subject_marks,
+                'percentage' => $per,
+                'grade' => $this->calculateGrade($per),
+                'total_max_theory' => $ttltmaxm,
+                'total_min_theory' => $ttltminm,
+                'total_max_practical' => $ttlpmaxm,
+                'total_min_practical' => $ttlpminm
+            ];
+            $this->set_data($main);
+        }
+    }
     function certificate()
     {
         $get = $this->student_model->student_certificates(['id' => $this->id]);
@@ -200,12 +276,20 @@ class Document extends MY_Controller
             if (isset($certificate['exam_conduct_date']))
                 $this->set_data('exam_conduct_date', date('M Y', strtotime($certificate['exam_conduct_date'])));
             // pre($certificate,true);
-            $final_marksheet = $this->student_model->marksheet([
+            $this->calculateCertificate([
                 'course_id' => $certificate['course_id'],
                 'student_id' => $certificate['student_id'],
                 'duration' => $certificate['duration'],
                 'duration_type' => $certificate['duration_type'],
             ]);
+            // pre($this->public_data,true);
+            /*
+            $final_marksheet = $this->student_model->marksheet([
+                'course_id' => $certificate['course_id'],
+                'student_id' => $certificate['student_id'],
+                'duration' => $certificate['duration'],
+                'duration_type' => $certificate['duration_type'],
+            ]);            
             if ($final_marksheet->num_rows()) {
                 // pre($final_marksheet->row(),true);
                 $row = $final_marksheet->row();
@@ -256,6 +340,7 @@ class Document extends MY_Controller
                 ];
                 $this->set_data($main);
             }
+            */
             // pre($certificate,true);
             $this->ki_theme->generate_qr($this->id, 'student_certificate', current_url());
             // $getLastExam = $this->student_model->last_marksheet($certificate['course_id']);
