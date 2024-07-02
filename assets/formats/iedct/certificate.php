@@ -87,18 +87,18 @@
     <p class="position-absolute" style="top:43%;left:84%;">{dob}</p>
     <p class="position-absolute" style="top:48%;left:16%;">{createdOn}</p>
 
-    <div class="position-absolute text-center" style="width:350px;left:15%;top:55%;">{student_name}</div>
-    <div class="position-absolute text-center" style="width:250px;top:55%;left:65%">{father_name}</div>
+    <div class="position-absolute text-center" style="width:480px;left:15%;top:55%;">{student_name}</div>
+    <div class="position-absolute text-center " style="width:330px;top:55%;left:65%">{father_name}</div>
     
     <div class="position-absolute text-center" style="width:370px;left:15%;top:61%;">{enrollment_no}</div>
-    <div class="position-absolute text-center" style="width:320px;left:5%;top:67.1%;">{course_name}</div>
+    <div class="position-absolute text-center" style="width:500px;left:5%;top:66.8%;">{course_name}</div>
     
-    <div class="position-absolute text-center" style="left:50%;top:67.1%;">{grade} / {percentage}%</div>
+    <div class="position-absolute text-center" style="left:55%;top:67.1%;">{grade} / {percentage}%</div>
     <div class="position-absolute text-center" style="left:76%;top:67.1%;">{from_date}</div>
     <div class="position-absolute text-center" style="left:86%;top:67.1%;">{to_date}</div>
     
     <!-- <div class="position-absolute text-center" style="left:40%;top:69.5%;width:150px">{obtain_total}</div> -->
-    <div class="position-absolute text-center" style="width:550px;left:26%;top:73%;">{center_name}</div>
+    <div class="position-absolute text-center" style="width:760px;left:26%;top:71.7%;">{center_name}</div>
 
     
 </body>
