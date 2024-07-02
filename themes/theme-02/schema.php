@@ -4,6 +4,7 @@ if ($isPrimary) {
   if ($sliders->num_rows()) {
     ?>
     <style>
+
       .banner-bg {
         display: block;
       }
@@ -22,7 +23,7 @@ if ($isPrimary) {
         }
 
         .banner-bg-mobile img {
-          height: 300px;
+          height: 203px;
           width: 100%;
         }
 
@@ -31,7 +32,7 @@ if ($isPrimary) {
         }
       }
     </style>
-    <section class="banner_section p-0 full_screen">
+    <section class="banner_section p-0 full_screen" style="min-height:auto">
       <div id="carouselExampleFade" class="banner_content_wrap carousel slide carousel-fade" data-ride="carousel">
         <div class="carousel-inner">
           <?php
