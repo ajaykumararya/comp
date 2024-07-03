@@ -42,7 +42,8 @@
     .cat_style1 a:hover,
     .sub_heading::before,
     .carousel_style2 .carousel-control-next:hover,
-    .carousel_style2 .carousel-control-prev:hover {
+    .carousel_style2 .carousel-control-prev:hover,
+    .overlay_bg_50::before {
         background-color: var(--primary) !important;
     }
 
