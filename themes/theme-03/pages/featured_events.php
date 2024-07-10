@@ -12,6 +12,12 @@
         border: 1px solid #888888;
     }
 
+    @media (max-width: 600px) {
+        .galleryWrap .fancybox2 {
+            width: 50%;
+        }
+    }
+
     .galleryWrap .fancybox2 .overlay {
         position: absolute;
         overflow: hidden;
@@ -72,7 +78,7 @@ $col = $noticeBoard ? 8 : 12;
 $imageHEight = $noticeBoard ? 170 : 250;
 ?>
 <div class="clearfix row">
-    <div class="col-lg-<?=$col?>">
+    <div class="col-lg-<?= $col ?>">
         <div class="clearfix title-wrap">
             <h2 class="secTitle">
                 <?= ES('title_of_featured_box', 'Our <span>Featured</span> Events') ?>
@@ -83,13 +89,13 @@ $imageHEight = $noticeBoard ? 170 : 250;
             $data = content($type);
             if ($data->num_rows()) {
                 foreach ($data->result() as $row) {
-                    echo '<a class="fancybox2" href="'.$row->field3.'" title="">
-                            '.img([
-                                'src' => UPLOAD.$row->field2,
-                                'style' => 'width:100%;height:'.$imageHEight.'px'
-                            ]).'
+                    echo '<a class="fancybox2" href="' . $row->field3 . '" title="">
+                            ' . img([
+                            'src' => UPLOAD . $row->field2,
+                            'style' => 'width:100%;height:' . $imageHEight . 'px'
+                        ]) . '
                             <span class="overlay">
-                                <p style="margin-top:50px;">'.$row->field1.'</p>
+                                <p style="margin-top:50px;">' . $row->field1 . '</p>
                             </span>
                         </a>';
                 }
@@ -99,24 +105,24 @@ $imageHEight = $noticeBoard ? 170 : 250;
         </div>
         <div class="clearfix text-right">
             <?php
-            if($buttonTitle = ES("{$type}_button_text")):
-            ?>
-            <a href="<?=ES("${type}_button_link")?>" class="btn btn-default">
-                <span>
-                    <span class="hvr-bounce-to-right"><?=$buttonTitle?></span>
-                </span>
-            </a>
-            <?php
+            if ($buttonTitle = ES("{$type}_button_text")):
+                ?>
+                <a href="<?= ES("${type}_button_link") ?>" class="btn btn-default">
+                    <span>
+                        <span class="hvr-bounce-to-right"><?= $buttonTitle ?></span>
+                    </span>
+                </a>
+                <?php
             endif;
             ?>
         </div>
     </div>
     <?php
-    if($noticeBoard):
+    if ($noticeBoard):
         echo '<div class="col-lg-4">';
         echo notice_board();
         echo '</div>';
     endif;
     ?>
-    
+
 </div>
