@@ -153,8 +153,8 @@
     <p class="position-absolute " style="top:46.35%;left:58.5%">{center_name}</p>
     <!-- <p class="position-absolute " style="top:37.5%;left:36.5%">{duration} {duration_type}</p>
     <p class="position-absolute " style="top:39.6%;left:36.5%">{dob}</p> -->
-    <div class="position-absolute" style="bottom:9.8%;left:32.1%;">
-        <img src="upload/images/marksheet_{result_id}.png" style="width:67px;" alt="">
+    <div class="position-absolute" style="bottom:10.2%;left:32.4%;">
+        <img src="upload/images/marksheet_{result_id}.png" style="width:60px;" alt="">
     </div>
     <div class="position-absolute" style="top:52%;left:4.3%">
         <table class="table" id="first" border="1" style="width:97.3%" class="position-absolute">
