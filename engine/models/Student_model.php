@@ -265,6 +265,9 @@ class Student_model extends MY_Model
     {
         return $this->get_switch('all', $where)->result();
     }
+    function get_student($where){
+        return $this->get_switch('all',$where);
+    }
     function get_student_via_roll_no($rollNo = 0)
     {
         return $this->get_switch('roll_no', ['roll_no' => $rollNo]);

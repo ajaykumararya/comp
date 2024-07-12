@@ -173,9 +173,9 @@
                 <div class="d-flex flex-column flex-center pb-0 pb-lg-10 p-10 w-100">
                     <!--begin::Image-->
                     <img class="theme-light-show mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20"
-                        src="{base_url}assets/media/auth/agency.png" alt="" />
+                        src="<?= logo() ?>" alt="" />
                     <img class="theme-dark-show mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20"
-                        src="{base_url}assets/media/auth/agency-dark.png" alt="" />
+                        src="<?= logo() ?>" alt="" />
                     <!--end::Image-->
 
                     <!--begin::Title-->
@@ -223,17 +223,30 @@
                                     <label for="" class="form-label mt-2 required">Roll Number</label>
                                     <input type="text" name="roll_no" placeholder="Enter Roll No." class="form-control">
                                 </div>
-                                <div class="form-group d-grid mb-10">
+                                <div class="form-group d-grid mb-8">
                                     <label for="" class="form-label required mt-3">Password</label>
                                     <input type="text" name="password" placeholder="Enter Password"
                                         class="form-control">
                                 </div>
-                                <div class="form-group d-grid mb-10">
-                                    <p><i class="fa fa-bell"></i> If the password has not been created or changed, then
+                                <div class="form-group d-grid">
+                                    <p><i class="fa fa-bell text-dark"></i> If the password has not been created or changed, then
                                         enter 2 letters of your name and the year of your date of birth. <br>Password
                                         Example : <code> AJ1998</code> </p>
                                 </div>
-
+                                <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
+                                    <div></div>
+                                    <?php
+                                    if(CHECK_PERMISSION('SMS')){
+                                    ?>
+                                    <!--begin::Link-->
+                                    <a href="javascript:;" class="link-primary reset-password-otp">
+                                        Reset Password ?
+                                    </a>
+                                    <!--end::Link-->
+                                    <?PHP
+                                    }
+                                    ?>
+                                </div>
 
                                 <!--begin::Submit button-->
                                 <div class="d-grid mb-10">
@@ -252,6 +265,19 @@
                                         <!--end::Indicator progress--> </button>
                                 </div>
                                 <!--end::Submit button-->
+                                <?php
+                                    if(CHECK_PERMISSION('SMS') && CHECK_PERMISSION('LOGIN_WITH_OTP')){
+                                ?>
+                                <div class="text-gray-500 text-center fw-semibold fs-6">
+                                    Login With OTP?
+
+                                    <a href="javascript:;" class="link-primary login-with-otp">
+                                        Sign up
+                                    </a>
+                                </div>
+                                <?php
+                                    }
+                                    ?>
 
                             </form>
                             <!--end::Form-->
@@ -272,7 +298,31 @@
     <!--end::Root-->
     <!--end::Main-->
 
-
+    <div class="modal fade" tabindex="-1" id="mymodal">
+            <form class="modal-dialog  modal-dialog-centered  modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title title">Modal title</h3>
+                        <!--begin::Close-->
+                        <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
+                            aria-label="Close">
+                            <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span
+                                    class="path2"></span></i>
+                        </div>
+                        <!--end::Close-->
+                    </div>
+                    <div class="modal-body body">
+                        <p>Modal body text goes here.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"
+                            class="btn btn-outline hover-rotate-end btn-outline-dashed btn-outline-danger"
+                            data-bs-dismiss="modal">Close</button>
+                        {update_button}
+                    </div>
+                </div>
+            </form>
+        </div>
 
 </body>
 <!--end::Body-->

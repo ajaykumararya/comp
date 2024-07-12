@@ -118,6 +118,80 @@ $(document).on('ready', function () {
             log(res);
         });
     });
+    $(document).ready(function () {
+        $('.login-with-otp').click(function () {
+            Swal.fire({
+                title: 'Enter your phone number:',
+                input: 'text',
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Send OTP',
+                showLoaderOnConfirm: true,
+                preConfirm: (phoneNumber) => {
+                    return new Promise((resolve) => {
+                        $.ajax({
+                          url: ajax_url + 'website/verify_student_phone',
+                          type: 'POST',
+                          data: {
+                            phoneNumber: phoneNumber
+                          },
+                          success: function(response) {
+                            if (!response.success) {
+                              Swal.showValidationMessage(`The Mobile number is not found..`)
+                            }
+                            resolve();
+                          }
+                        });
+                      });
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'OTP Sent!',
+                        text: 'Please check your phone for the OTP.',
+                        icon: 'success',
+                        confirmButtonText: 'Enter OTP'
+                    }).then(() => {
+                        Swal.fire({
+                            title: 'Enter OTP:',
+                            input: 'text',
+                            inputAttributes: {
+                                autocapitalize: 'off'
+                            },
+                            showCancelButton: true,
+                            confirmButtonText: 'Verify OTP',
+                            showLoaderOnConfirm: true,
+                            preConfirm: (otp) => {
+                                return $.ajax({
+                                    url: 'verify_otp.php',
+                                    type: 'POST',
+                                    data: { otp: otp, phoneNumber: result.value },
+                                    dataType: 'json'
+                                }).then(otpResponse => {
+                                    if (otpResponse.status !== 'success') {
+                                        throw new Error('Invalid OTP');
+                                    }
+                                    return otpResponse;
+                                }).catch(error => {
+                                    Swal.showValidationMessage(
+                                        `Request failed: ${error}`
+                                    );
+                                });
+                            },
+                            allowOutsideClick: () => !Swal.isLoading()
+                        }).then((otpResult) => {
+                            if (otpResult.isConfirmed) {
+                                Swal.fire('Verified!', 'Your phone number has been verified.', 'success');
+                            }
+                        });
+                    });
+                }
+            });
+        });
+    });
 
     $(document).on('submit', '.seach-study-center-form', function (r) {
         r.preventDefault();
@@ -228,17 +302,17 @@ $(document).on('ready', function () {
         });
     }
 
-  /*===================================*
-	08. CONTACT FORM JS
-	*===================================*/
-    $(document).on("submit","#submitGETINTOUCH", function (event) {
+    /*===================================*
+      08. CONTACT FORM JS
+      *===================================*/
+    $(document).on("submit", "#submitGETINTOUCH", function (event) {
         event.preventDefault();
         var mydata = $(this).serialize();
         $.AryaAjax({
-            url : 'website/contact-us-action',
-            data : new FormData(this),
-            success_message : 'Query Submitted Successfully..',
-            page_reload : true
+            url: 'website/contact-us-action',
+            data: new FormData(this),
+            success_message: 'Query Submitted Successfully..',
+            page_reload: true
         })
         /*
         $.ajax({
@@ -267,15 +341,15 @@ $(document).on('ready', function () {
             log(xhr.responseText);
           },
         });*/
-      });
-    
+    });
 
 
 
-     const myDataTable = $('.my-data-table');
-     if(myDataTable){
+
+    const myDataTable = $('.my-data-table');
+    if (myDataTable) {
         myDataTable.DataTable({
-            dom:small_dom,
+            dom: small_dom,
             "pagingType": "full_numbers",
             "language": {
                 "paginate": {
@@ -286,5 +360,5 @@ $(document).on('ready', function () {
                 }
             }
         });
-     }
+    }
 });

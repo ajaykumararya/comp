@@ -407,5 +407,9 @@ class Website extends Ajax_Controller
     {
         $this->response('data', $this->db->order_by('id', 'DESC')->get('syllabus')->result_array());
     }
+    function verify_student_phone(){
+        // $this->student_model->get_student();
+        $this->response('status','success');
+    }
 }
 ?>

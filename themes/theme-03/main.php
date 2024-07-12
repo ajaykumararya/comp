@@ -248,35 +248,40 @@
             }
         </style>
 
+        <?php
+        if(PATH != 'haptronworld') {
+            ?>
 
-        <div class="float-sm">
-            <div class="fl-fl float-fb">
-                <i class="fab fa fa-facebook"></i>
-                <a href="{facebook}" target="_blank"> Like us!</a>
-            </div>
-            <div class="fl-fl float-tw">
-                <i class="fa fab fa-twitter"></i>
-                <a href="{twitter}" target="_blank">Follow us!</a>
-            </div>
-            <div class="fl-fl float-gp">
-                <i class="fa fab fa-youtube"></i>
-                <a href="{youtube}" target="_blank">Recommend us!</a>
-            </div>
-            <div class="fl-fl float-link">
-                <i class="fa fab fa-linkedin"></i>
-                <a href="{linkedin}" target="_blank">Follow us!</a>
-            </div>
-            <div class="fl-fl float-ig">
-                <i class="fa fab fa-instagram"></i>
-                <a href="{instagram}" target="_blank">Follow us!</a>
-            </div>
-            <!-- <div class="fl-fl float-pn">
+            <div class="float-sm">
+                <div class="fl-fl float-fb">
+                    <i class="fab fa fa-facebook"></i>
+                    <a href="{facebook}" target="_blank"> Like us!</a>
+                </div>
+                <div class="fl-fl float-tw">
+                    <i class="fa fab fa-twitter"></i>
+                    <a href="{twitter}" target="_blank">Follow us!</a>
+                </div>
+                <div class="fl-fl float-gp">
+                    <i class="fa fab fa-youtube"></i>
+                    <a href="{youtube}" target="_blank">Recommend us!</a>
+                </div>
+                <div class="fl-fl float-link">
+                    <i class="fa fab fa-linkedin"></i>
+                    <a href="{linkedin}" target="_blank">Follow us!</a>
+                </div>
+                <div class="fl-fl float-ig">
+                    <i class="fa fab fa-instagram"></i>
+                    <a href="{instagram}" target="_blank">Follow us!</a>
+                </div>
+                <!-- <div class="fl-fl float-pn">
                 <i class="fa fab  fa-pinterest"></i>
                 <a href="" target="_blank">Follow us!</a>
             </div> -->
-        </div>
-        <!-- Floating Social Media bar Ends -->
-
+            </div>
+            <!-- Floating Social Media bar Ends -->
+            <?php
+        }
+        ?>
         <style>
             .text {
                 margin: 0 60px;
@@ -345,6 +350,7 @@
                 line-height: 43px !important;
                 vertical-align: top !important;
             }
+
             .float-fb {
                 top: 160px;
             }
