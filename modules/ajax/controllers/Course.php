@@ -38,7 +38,7 @@ class Course extends Ajax_Controller
         if ($course_id) {
             $this->response(
                 'status',
-                $this->db->where('id', $course_id)->update('course',['isDeleted' => 1])
+                $this->db->where('id', $course_id)->update('course', ['isDeleted' => 1])
             );
             $this->response('html', 'Data Delete successfully.');
         } else
@@ -46,12 +46,35 @@ class Course extends Ajax_Controller
     }
     function list()
     {
-        $list = $this->db->select('c.fees,c.id as course_id,c.course_name,c.duration,c.duration_type,cat.title as category')->from('course as c')->join('course_category as cat', 'cat.id = c.category_id')->get();
+        $list = $this->db->select('c.*,c.id as course_id,cat.title as category')->from('course as c')->join('course_category as cat', 'cat.id = c.category_id')->get();
         $data = [];
         if ($list->num_rows())
             $data = $list->result();
         // if()
         $this->response('data', $data);
+    }
+    function setting_form()
+    {
+        if (CHECK_PERMISSION('SHOW_MULTIPLE_CERTIFICATES')) {
+            $get = $this->db->where('id', $this->post('id'))->get('course');
+            if ($get->num_rows()) {
+                $this->response('status', true);
+                $this->set_data($get->row_array());
+                $this->response('html', $this->template('course-multi-certi-setting'));
+            }
+        } else {
+            $this->response('error', 'You have no permission to view this page.');
+        }
+    }
+    function update_multi_certi()
+    {
+        if (CHECK_PERMISSION('SHOW_MULTIPLE_CERTIFICATES')) {
+            $this->db->where('id', $this->post('id'))->update('course', [
+                'parent_id' => $this->post('parent_id')
+            ]);
+            $this->response('status', true);
+            $this->response('html',$this->db->last_query());
+        }
     }
     function add_subject()
     {
@@ -132,26 +155,27 @@ class Course extends Ajax_Controller
         $where = ['course_id' => $this->post('id'), 'isDeleted' => 0];
         $subjects = $this->student_model->course_subject($where);
         if ($subjects->num_rows()) {
-            
+
             $this->set_data('subjects', $subjects->result_array());
-            $this->response('status',true);
+            $this->response('status', true);
             $this->response('html', $this->template('list-course-subjects'));
         } else {
             $this->response('html', alert('Subjects Not Found', 'danger'));
         }
     }
-    function update_arrange_subject(){
+    function update_arrange_subject()
+    {
         // $this->response($this->post());
         $data = [];
-        if($this->post('sortedIds')){
-            foreach($this->post('sortedIds') as $i => $id){
+        if ($this->post('sortedIds')) {
+            foreach ($this->post('sortedIds') as $i => $id) {
                 $data[] = [
                     'id' => $id,
                     'seq' => ($i + 1)
                 ];
             }
-            $this->db->update_batch('subjects',$data,'id');
-            $this->response('status',true);
+            $this->db->update_batch('subjects', $data, 'id');
+            $this->response('status', true);
         }
     }
 }

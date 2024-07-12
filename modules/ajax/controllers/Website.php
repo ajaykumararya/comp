@@ -22,7 +22,7 @@ class Website extends Ajax_Controller
             $status = 1;
             $get = $this->student_model->student_verification([
                 'roll_no' => $roll_no,
-                'dob' => date('d-m-Y',strtotime($dob)),
+                'dob' => date('d-m-Y', strtotime($dob)),
                 'status' => $status
             ]);
             if ($get->num_rows()) {
@@ -30,7 +30,7 @@ class Website extends Ajax_Controller
                 $this->response('status', true);
                 $data = $get->row_array();
                 $this->set_data($data);
-                $this->set_data('contact_number',maskMobileNumber($data['contact_number']));
+                $this->set_data('contact_number', maskMobileNumber($data['contact_number']));
 
                 $this->set_data('admission_status', $data['admission_status'] ? label($this->ki_theme->keen_icon('verify text-white') . ' Verified Student') : label('Un-verified Student', 'danger'));
                 $this->set_data('student_profile', $data['image'] ? base_url('upload/' . $data['image']) : base_url('assets/media/student.png'));
@@ -64,13 +64,13 @@ class Website extends Ajax_Controller
 
                 $this->response('status', 'yes');
                 $this->response('center_number', $row->center_number);
-                
+
                 $this->set_data('center_status', $data['status'] ? label($this->ki_theme->keen_icon('verify text-white') . ' Verified Center') : label('Un-verified Center', 'danger'));
                 $this->set_data('owner_profile', $data['image'] ? base_url('upload/' . $data['image']) : base_url('assets/media/student.png'));
                 // unset($data['status']);
                 $this->set_data($data);
-                $this->set_data('contact_number',maskMobileNumber($data['contact_number']));
-                $this->set_data('email',maskEmail($data['email']));
+                $this->set_data('contact_number', maskMobileNumber($data['contact_number']));
+                $this->set_data('email', maskEmail($data['email']));
 
                 $this->response('html', $this->template('center-details'));
             } else
@@ -86,7 +86,7 @@ class Website extends Ajax_Controller
             $status = 1;
             $get = $this->student_model->student_result_verification([
                 'roll_no' => $roll_no,
-                'dob' => date('d-m-Y',strtotime($dob)),
+                'dob' => date('d-m-Y', strtotime($dob)),
                 'status' => $status
             ]);
             if ($get->num_rows()) {
@@ -213,7 +213,7 @@ class Website extends Ajax_Controller
             $data['agreement'] = $this->file_up('agreement');
             $data['address_proof'] = $this->file_up('address_proof');
             $data['signature'] = $this->file_up('signature');
-            if(CHECK_PERMISSION('CENTRE_LOGO'))
+            if (CHECK_PERMISSION('CENTRE_LOGO'))
                 $data['logo'] = $this->file_up('logo');
             $data['isPending'] = 1;
             $this->db->insert('centers', $data);
@@ -324,8 +324,9 @@ class Website extends Ajax_Controller
         $this->set_data($data);
         $this->response('html', $this->template('edit-fee-record'));
     }
-    function delete_fee_record(){
-        $this->response('status', $this->db->where('id',$this->post('fee_id'))->delete('student_fee_transactions'));
+    function delete_fee_record()
+    {
+        $this->response('status', $this->db->where('id', $this->post('fee_id'))->delete('student_fee_transactions'));
     }
     function update_fee_record()
     {
@@ -354,38 +355,57 @@ class Website extends Ajax_Controller
         $data = $this->exam_model->student_exam($this->post());
         $row = $data->row();
         $this->set_data($data->row_array());
-        $this->set_data('questions', $this->exam_model->get_shuffled_questions($row->exam_id,$row->max_questions));
+        $this->set_data('questions', $this->exam_model->get_shuffled_questions($row->exam_id, $row->max_questions));
         $this->response([
             'title' => $row->exam_title,
             'content' => $this->template('list-papers-questions')
         ]);
     }
-    function submit_exam(){
+    function submit_exam()
+    {
         $mydata = $this->post('submitList') ? $this->post('submitList') : [];
         $data = [
             'attempt_time' => time(),
             'percentage' => $this->post('percentage'),
-            'data' =>  json_encode($mydata),
+            'data' => json_encode($mydata),
             'ttl_right_answers' => $this->post('ttl_right_answers')
         ];
 
         // $this->response($data);
-        $this->db->where('id',$this->post('student_exam_id'))
-                ->update('exam_students',$data);
-        $this->response('status','OK');
-        
+        $this->db->where('id', $this->post('student_exam_id'))
+            ->update('exam_students', $data);
+        $this->response('status', 'OK');
+
     }
 
-    function update_center_docs(){
-        $this->db->where('id',$this->post('center_id'))
-                ->update('centers',[
-                    $this->post('name') => $this->file_up('file')
-                ]);
-        $this->response('query',$this->db->last_query());
-        $this->response('status',true);
+    function update_center_docs()
+    {
+        $this->db->where('id', $this->post('center_id'))
+            ->update('centers', [
+                $this->post('name') => $this->file_up('file')
+            ]);
+        $this->response('query', $this->db->last_query());
+        $this->response('status', true);
     }
-    function list_syllabus(){
-        $this->response('data',$this->db->order_by('id','DESC')->get('syllabus')->result_array());
+    function update_student_docs()
+    {
+        $data = [];
+        if ($this->post('name') == 'adhar_card') {
+            $data['adhar_front'] = $this->file_up('file');
+        } else {
+            $get = $this->db->select('upload_docs')->where('id', $this->post('student_id'))->get('students');
+            $uploads_docs = $get->row('upload_docs');
+            $uploads_docs = $uploads_docs == NULL ? [] : json_decode($uploads_docs, true);
+            $uploads_docs[$this->post('name')] = $this->file_up('file');
+            $data['upload_docs'] = json_encode($uploads_docs);
+        }
+        // $this->response('data',$data);
+        $this->db->where('id', $this->post('student_id'))->update('students', $data);
+        $this->response('status', true);
+    }
+    function list_syllabus()
+    {
+        $this->response('data', $this->db->order_by('id', 'DESC')->get('syllabus')->result_array());
     }
 }
 ?>

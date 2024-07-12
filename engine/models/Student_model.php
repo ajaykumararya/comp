@@ -38,7 +38,10 @@ class Student_model extends MY_Model
                 ce.institute_name as center_name,
                 ce.id as institute_id,
                 ce.center_full_address,
+                ce.center_number as center_code,
                 ce.signature as center_signature,
+                ce.state_id as center_state,
+                ce.city_id as center_city,
                 state.*,
                 district.*'
         )
@@ -47,6 +50,7 @@ class Student_model extends MY_Model
             ->join("course as c", "s.course_id = c.id ", 'left')
             ->join('state', 'state.STATE_ID = s.state_id')
             ->join('district', 'district.DISTRICT_ID = s.city_id and district.STATE_ID = state.STATE_ID')
+            
             ->join('batch as b', "b.id = s.batch_id", 'left');
         if (!isset($without_admission_status))
             $this->db->where('s.admission_status', isset($admission_status) ? $admission_status : 1);

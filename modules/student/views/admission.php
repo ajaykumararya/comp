@@ -258,6 +258,29 @@
                                     </div> -->
                                 </div>
                                 <div class="row">
+                                        <?php
+                                        $uploadDocuments = $this->ki_theme->project_config('upload_ducuments');
+                                        foreach ($uploadDocuments as $key => $value) {
+                                            ?>
+                                            <div class="col-md-3 mb-4">
+                                                <div class="form-group">
+                                                    <label for="<?=$key?>" class="form-label form-control"><?=$value?></label>
+                                                    <input type="hidden" name="upload_docs[title][]" class="form-control"
+                                                        value="<?=$key?>">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9 mb-4">
+                                                <div class="form-group">
+                                                    <input type="file" class="form-control" id="<?=$key?>" name="upload_docs[file][]">
+                                                </div>
+                                            </div>
+                                            <?php
+                                        }
+                                        ?>
+                                    </div>
+                                    <?php
+                                    /*
+                                <div class="row">
                                     <?php
                                     $uploadDocuments = $this->ki_theme->project_config('upload_ducuments');
                                     for ($i = 1; $i <= sizeof($uploadDocuments); $i++) {
@@ -283,6 +306,8 @@
                                     }
                                     ?>
                                 </div>
+                                */
+                                ?>
                             </div>
                         </div>
                     </div>

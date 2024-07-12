@@ -8,6 +8,27 @@ class Document extends MY_Controller
         $this->load->library('common/mypdf');
         $this->id = $this->decode($this->uri->segment(2, '0'));
     }
+    private function get_multi_path($course_id,$file,$page = 'P'){
+        if (CHECK_PERMISSION('SHOW_MULTIPLE_CERTIFICATES')) {
+            $courseData = $this->db->get_where('course', [
+                'id' => $course_id
+            ]);
+            if ($courseData->num_rows()) {
+                $courseRow = $courseData->row();
+                if (isset($courseRow->parent_id)) {
+                    if ($courseRow->parent_id != 0) {
+                        $file = $courseRow->parent_id . '/' . $file;
+                    }
+                }
+            }
+        }
+        
+        if(PATH == 'iedct'){
+            $page = CHECK_PERMISSION('SHOW_MULTIPLE_CERTIFICATES') ? $page : 'L';
+            $this->mypdf->addPage($page);
+        }
+        return $file;
+    }
     function admit_card()
     {
         $get = $this->student_model->admit_card(['id' => $this->id]);
@@ -17,7 +38,7 @@ class Document extends MY_Controller
             $this->set_data('time', date('h:i A', strtotime($get->row('exam_date'))));
             $pdfContent = $this->parse('admit-card');
             // $this->mypdf->setTitle('Hii');
-            if($this->ki_theme->config('admit_card_full'))
+            if ($this->ki_theme->config('admit_card_full'))
                 $this->mypdf->addPage('L');
             $this->pdf($pdfContent);
         } else {
@@ -41,7 +62,7 @@ class Document extends MY_Controller
                     $toDateString = strtotime("+$duration years", $admissionTime);
                 }
                 $toDateString = strtotime('-1 month', $toDateString);
-                $this->set_data('session', date('Y',$admissionTime).'-'.date('Y', $toDateString));
+                $this->set_data('session', date('Y', $admissionTime) . '-' . date('Y', $toDateString));
             }
             $this->ki_theme->generate_qr($get->row('student_id'), 'id_card', current_url());
             $pdfContent = $this->parse('id-card');
@@ -66,18 +87,21 @@ class Document extends MY_Controller
     }
     function marksheet()
     {
+        $file = 'marksheet';
         $get = $this->student_model->marksheet(['id' => $this->id]);
         if ($get->num_rows()) {
+            $row = $get->row();
+            $course_id = $row->course_id;
             // pre($get->row(),true);
-            $result_id = $get->row('result_id');
+            $result_id = $row->result_id;
             $this->ki_theme->generate_qr($result_id, 'marksheet', current_url());
             $get_subect_numers = $this->student_model->marksheet_marks($result_id);
 
-            if(PATH == 'isdmedu'){
+            if (PATH == 'isdmedu') {
                 $certificate = $get->row_array();
                 // pre($certificate,true);
                 $admissionTime = strtotime($certificate['admission_date']);
-                $this->set_data('from_date', date('M Y', $admissionTime));                
+                $this->set_data('from_date', date('M Y', $admissionTime));
                 $toDateString = strtotime($certificate['issue_date']);
                 $duration = $certificate['duration'];
                 if ($certificate['duration_type'] == 'month') {
@@ -88,13 +112,13 @@ class Document extends MY_Controller
                 $toDateString = strtotime('-1 month', $toDateString);
                 $this->set_data('to_date', date('M Y', $toDateString));
             }
-            if (in_array(PATH,['iedct','techno'])):
+            if (in_array(PATH, ['iedct', 'techno'])):
                 $admissionTime = strtotime($get->row('admission_date'));
                 // $this->set_data('from_date', date('M Y', $admissionTime));
                 $this->set_data('serial_no', date("Y", $admissionTime) . str_pad($get->row('student_id'), 3, '0', STR_PAD_LEFT));
             endif;
             // echo $get->row('result_id');
-            // pre($get_subect_numers->result_array());
+            // pre($get_subect_numers->result_array(),true);
             $subject_marks = [];
             $per = $ttl = $ob_ttl = 0;
             $ttltminm =
@@ -134,6 +158,7 @@ class Document extends MY_Controller
                     }
                     $marks = [
                         'subject_name' => $mark->subject_name,
+                        'subject_code' => $mark->subject_code,
                         'theory_min_marks' => $tmim,
                         'theory_max_marks' => $tmm,
                         'practical_min_marks' => $pmim,
@@ -150,7 +175,7 @@ class Document extends MY_Controller
             if (PATH == 'iedct') {
                 $this->set_data('theorySubject', $theorySubjects);
                 $this->set_data('practicalSubjects', $practicalSubjects);
-                $this->mypdf->addPage('L');
+                // $this->mypdf->addPage('L');                
             }
             $main = [
                 'total' => $ttl,
@@ -164,9 +189,10 @@ class Document extends MY_Controller
                 'total_min_practical' => $ttlpminm,
                 'division' => $per < 40 ? 'Fail' : 'Pass'
             ];
+            $file = $this->get_multi_path($course_id,$file);
             // pre($get->row(),true);
             $this->set_data($main);
-            $pdfContent = $this->parse('marksheet', $get->row_array());
+            $pdfContent = $this->parse($file, $get->row_array());
             // echo $pdfContent;
             $this->pdf($pdfContent);
         } else {
@@ -179,12 +205,13 @@ class Document extends MY_Controller
         // $reversedKeysArray = array_reverse(array_keys($reversedArray));
         // return array_combine($reversedKeysArray, $reversedArray);
     }
-    private function calculateCertificate($data){
+    private function calculateCertificate($data)
+    {
         extract($data);
         $where = [];
-        if($duration_type == 'year'){
+        if ($duration_type == 'year') {
             $i = 1;
-            do{
+            do {
                 $where[] = [
                     'student_id' => $student_id,
                     'duration' => $i,
@@ -192,18 +219,17 @@ class Document extends MY_Controller
                     'course_id' => $course_id
                 ];
                 $i++;
-            }while($duration >= $i);
-        }
-        else
+            } while ($duration >= $i);
+        } else
             $where[] = $data;
         // pre($where,true);
-        if(sizeof($where)){
+        if (sizeof($where)) {
             $per = $ttl = $ob_ttl = 0;
             $ttltminm =
                 $ttltmaxm =
                 $ttlpminm =
                 $ttlpmaxm = 0;
-            foreach($where as $whereData){
+            foreach ($where as $whereData) {
                 $final_marksheet = $this->student_model->marksheet($whereData);
                 if ($final_marksheet->num_rows()) {
                     // pre($final_marksheet->row(),true);
@@ -211,7 +237,7 @@ class Document extends MY_Controller
                     $this->set_data('enrollment_no', $row->enrollment_no);
                     $subject_marks = [];
                     $get_subect_numers = $this->student_model->marksheet_marks($final_marksheet->row("result_id"));
-                   
+
                     if ($ttl_subject = $get_subect_numers->num_rows()) {
                         foreach ($get_subect_numers->result() as $mark) {
                             $tmm = $this->isMark($mark->theory_max_marks);
@@ -240,7 +266,7 @@ class Document extends MY_Controller
                 }
             }
             $per = number_format((($ob_ttl / ($ttltmaxm + $ttlpmaxm)) * 100), 2);
-            
+
             $main = [
                 'total' => $ttl,
                 'obtain_total' => $ob_ttl,
@@ -350,7 +376,7 @@ class Document extends MY_Controller
             // ]);
             // pre($certificate,true);
             $output = $this->parse('certificate', $certificate);
-            if(in_array(PATH,['iedct']))
+            if (in_array(PATH, ['iedct']))
                 $this->mypdf->addPage('L');
             $this->pdf($output);
         } else {
@@ -376,13 +402,13 @@ class Document extends MY_Controller
         } else
             $this->not_found("Certificate Not Found..");
     }
-    function pdf($pdfContent,$filename = 'my-pdf.pdf')
+    function pdf($pdfContent, $filename = 'my-pdf.pdf')
     {
         // $this->mypdf->load();
         // $this->mypdf->setPaper('A4', 'portrait');
         $this->mypdf->WriteHTML($pdfContent);
-        $filename = str_replace('.pdf','',$filename);
-        $pdfData = $this->mypdf->Output("{$filename}.pdf",'I');
+        $filename = str_replace('.pdf', '', $filename);
+        $pdfData = $this->mypdf->Output("{$filename}.pdf", 'I');
         // Get the PDF content as a string
         // $pdfData = $this->mypdf->OutputFile('asd.pdf'); // 'S' option for return as string
         // Set the appropriate headers

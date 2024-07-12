@@ -107,8 +107,8 @@ class Student extends Ajax_Controller
                 }
             }
         }
-        $data['adhar_front'] = $this->file_up('adhar_front');
-        $data['adhar_back'] = $this->file_up('adhar_back');
+        $data['adhar_front'] = $this->file_up('adhar_card');
+        // $data['adhar_back'] = $this->file_up('adhar_back');
         $data['image'] = $this->file_up('image');
         $data['upload_docs'] = json_encode($upload_docs_data);
         $data['status'] = true;
