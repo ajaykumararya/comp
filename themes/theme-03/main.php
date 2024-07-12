@@ -1,4 +1,9 @@
 <style type="text/css">
+    @media only screen and (max-width: 600px) {
+        .topBar{
+            background: white!important;
+        }
+    }
     .gray-bg,
     .card,
     .form-control {
@@ -229,7 +234,7 @@
             </div>
             <div class="clearfix copyright text-center">
                 <p>Copyright © {title} {YEAR}.
-                    {copyright}
+                   
                 </p>
             </div>
         </div>
