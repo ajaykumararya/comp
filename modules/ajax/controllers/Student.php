@@ -659,5 +659,11 @@ class Student extends Ajax_Controller
         $this->set_data($this->student_model->get_coupon_by_id($this->post('id'))->row_array());
         $this->response('form', $this->template('update-coupon-status'));
     }
+    function get_id_card_url(){
+        $this->response([
+            'status' => true,
+            'url' => base_url('id-card/'.$this->ki_theme->encrypt($this->post('student_id')))
+        ]);
+    }
 
 }

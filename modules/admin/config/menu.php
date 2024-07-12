@@ -102,6 +102,13 @@ $config['menu'] = array(
             'icon' => array('profile-user', 3),
             'submenu' => array(
                 array(
+                    'label' => 'Student ID Card',
+                    'condition' => CHECK_PERMISSION('STUDENT_ID_CARD'),
+                    'type' => 'student_id_card',
+                    'icon' => array('user-square',3),
+                    'url' => 'student/get-id-card'
+                ),
+                array(
                     'label' => 'Student Details',
                     'type' => 'student_details',
                     'icon' => array('shield-search', 3),
@@ -194,6 +201,7 @@ $config['menu'] = array(
                 )
             )
         ),
+       
         array(
             'label' => 'Admit Card',
             'type' => 'stduent_admit_card',

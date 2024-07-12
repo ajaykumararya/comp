@@ -19,7 +19,8 @@ document.addEventListener('DOMContentLoaded', function (e) {
             url: 'center/get-course-assign-form',
             data: { 'id': center_id }
         }).then(function (rr) {
-            log(rr);
+            // log(rr);
+            var center_name = $('#select-center option:selected').data('kt-rich-content-subcontent');
             // genral_details.html(rr.genral_html);
             center_profile_box.html(rr.profile_html);
             assign_form_and_display_box.html(rr.html).find('#list-center-courses').DataTable({
@@ -42,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                         <div class="separator separator-dashed separator-content border-primary my-5">
                             <span class="fs-3 text-primary">ASSIGN TO</span>
                         </div>
-                        <span class="fs-2">Arya Computer Center</span>
+                        <span class="fs-2">${center_name}</span>
                         <div class="input-group mt-5">
                             <span class="input-group-text">${inr}</span>
                             <input type="text" class="form-control" id="course-fee" placeholder="Enter Amount Here." aria-label="Amount (to the nearest dollar)" value="${amount}" autocomplete="off">

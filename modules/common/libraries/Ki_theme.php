@@ -102,11 +102,11 @@ class Ki_theme
         if (PATH == 'iedct') {
             if ($score >= 60)
                 return 'A';
-            else if ($score > 60 && $score <= 50)
+            else if ($score >= 60 && $score <= 50)
                 return 'B';
-            else if ($score > 50 && $score <= 40)
+            else if ($score >= 50 && $score <= 40)
                 return 'C';
-            else if ($score > 40 && $score <= 33)
+            else if ($score >= 40 && $score <= 33)
                 return 'D';
             else
                 return 'E';
@@ -122,6 +122,18 @@ class Ki_theme
                 return 'B';
             else 
                 return 'C';
+        }
+        if(PATH == 'haptronworld'){
+            if($score >= 90 && $score <= 100)
+                return 'O';
+            else if($score >= 75 && $score <= 89.9)
+                return 'A';
+            else if($score >= 60 && $score <= 74.9)
+                return 'B';
+            else if($score >= 45&& $score <= 59.9)
+                return 'C';
+            else 
+                return 'D';
         }
     }
     function generate_qr($id = 0, $type = '', $data = '')

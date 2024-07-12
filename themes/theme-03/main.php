@@ -233,7 +233,7 @@
                 </div>
             </div>
             <div class="clearfix copyright text-center">
-                <p>Copyright © {title} {YEAR}.
+                <p>Copyright © All Rights Reserved. {title} {YEAR}.
                    
                 </p>
             </div>

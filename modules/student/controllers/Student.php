@@ -199,5 +199,8 @@ class Student extends MY_Controller
     function passout_student_list(){
         $this->view('passout-student-list');
     }
+    function get_id_card(){
+        $this->view('get-id-card');
+    }
 }
 ?>

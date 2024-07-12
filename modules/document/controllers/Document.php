@@ -369,6 +369,9 @@ class Document extends MY_Controller
             */
             // pre($certificate,true);
             $this->ki_theme->generate_qr($this->id, 'student_certificate', current_url());
+            if(PATH == 'haptronworld'){
+                $this->mypdf->addPage('L');
+            }
             // $getLastExam = $this->student_model->last_marksheet($certificate['course_id']);
             $this->set_data($certificate);
             // $fullData = $this->student_model->marksheet([
