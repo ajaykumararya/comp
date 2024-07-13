@@ -242,7 +242,7 @@ class Website extends Ajax_Controller
             $get = $this->student_model->get_student_via_roll_no($rollno);
             if ($get->num_rows()) {
                 $row = $get->row();
-                if ($row->status) {
+                if ($row->student_profile_status) {
                     if (!($stdPassword = $row->password)) {
                         $name = $row->student_name;
                         $dobYear = date('Y', strtotime($row->dob));
