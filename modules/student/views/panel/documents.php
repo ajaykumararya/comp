@@ -75,7 +75,7 @@
                                     ])
                                     ->add_action('View', 'upload/' . $value);
                             } else {
-                                echo badge($doc . ' Found.', 'danger');
+                                echo badge($doc . ' not Found.', 'danger');
                             }
                             echo '
                                             </div>
