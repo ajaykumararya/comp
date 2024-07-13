@@ -1,16 +1,5 @@
 <?php
-if(PATH == 'zcc' && isset($student_docs)){
-    $docs = json_decode($student_docs,true);
-    if(sizeof($docs)){
-        $Events = array_flip($this->ki_theme->project_config('upload_ducuments'));
-        $data = [];
-        foreach($docs as $key => $link){
-            $index = ($key == '') ? 'family_id_document' : $Events[$key];
-            $data[$index ] = $link;
-        }
-        $this->db->update('students',['upload_docs' => json_encode($data)],['id' => $student_id]);
-    }
-}
+
 ?>
 <!--begin::Navbar-->
 <div class="card mb-5 mb-xl-10">
