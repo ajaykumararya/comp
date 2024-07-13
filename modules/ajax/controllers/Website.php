@@ -242,23 +242,27 @@ class Website extends Ajax_Controller
             $get = $this->student_model->get_student_via_roll_no($rollno);
             if ($get->num_rows()) {
                 $row = $get->row();
-                if (!($stdPassword = $row->password)) {
-                    $name = $row->student_name;
-                    $dobYear = date('Y', strtotime($row->dob));
-                    $stdPassword = strtoupper(substr($name, 0, 2) . $dobYear);
-                    $stdPassword = sha1($stdPassword);
+                if ($row->status) {
+                    if (!($stdPassword = $row->password)) {
+                        $name = $row->student_name;
+                        $dobYear = date('Y', strtotime($row->dob));
+                        $stdPassword = strtoupper(substr($name, 0, 2) . $dobYear);
+                        $stdPassword = sha1($stdPassword);
+                    }
+                    if ($stdPassword == sha1($password)) {
+                        $this->session->set_userdata([
+                            'student_login' => true,
+                            'student_id' => $row->student_id
+                        ]);
+                        $this->response('student_name', $row->student_name);
+                        $this->response('status', true);
+                    } else
+                        $this->response('error', alert('Wrong Password.','danger'));
+                } else {
+                    $this->response('error', alert('Your Account is In-active. Please Contact your Admin','danger'));
                 }
-                if ($stdPassword == sha1($password)) {
-                    $this->session->set_userdata([
-                        'student_login' => true,
-                        'student_id' => $row->student_id
-                    ]);
-                    $this->response('student_name', $row->student_name);
-                    $this->response('status', true);
-                } else
-                    $this->response('error', '<div class="alert alert-danger">Wrong Password.</div>');
             } else {
-                $this->response('error', '<div class="alert alert-danger">Wrong Roll Number or Password.</div>');
+                $this->response('error', alert('Wrong Roll Number or Password.','danger'));
             }
         }
     }
@@ -308,11 +312,11 @@ class Website extends Ajax_Controller
         } else {
             $this->db->where('id', $this->post('student_id'))
                 ->update('students', [
-                    'roll_no' => $this->post('roll_no'),
-                    'batch_id' => $this->post('batch_id'),
-                    'course_id' => $this->post('course_id'),
-                    'admission_date' => $this->post('admission_date')
-                ]);
+                        'roll_no' => $this->post('roll_no'),
+                        'batch_id' => $this->post('batch_id'),
+                        'course_id' => $this->post('course_id'),
+                        'admission_date' => $this->post('admission_date')
+                    ]);
             $this->response("status", true);
         }
     }
@@ -382,8 +386,8 @@ class Website extends Ajax_Controller
     {
         $this->db->where('id', $this->post('center_id'))
             ->update('centers', [
-                $this->post('name') => $this->file_up('file')
-            ]);
+                    $this->post('name') => $this->file_up('file')
+                ]);
         $this->response('query', $this->db->last_query());
         $this->response('status', true);
     }
@@ -407,9 +411,10 @@ class Website extends Ajax_Controller
     {
         $this->response('data', $this->db->order_by('id', 'DESC')->get('syllabus')->result_array());
     }
-    function verify_student_phone(){
+    function verify_student_phone()
+    {
         // $this->student_model->get_student();
-        $this->response('status','success');
+        $this->response('status', 'success');
     }
 }
 ?>
