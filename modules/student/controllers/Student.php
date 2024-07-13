@@ -6,10 +6,12 @@ class Student extends MY_Controller
         redirect('student/profile');
 
     }
-    function my_exam(){
+    function my_exam()
+    {
         $this->student_view('my-exam');
     }
-    function dashboard(){
+    function dashboard()
+    {
         redirect('student/profile');
         // $this->student_view('profile');
     }
@@ -52,7 +54,7 @@ class Student extends MY_Controller
     function admission()
     {
         $this->ki_theme->get_wallet_amount('student_admission_fees');
-        $this->view('admission');   
+        $this->view('admission');
     }
     function online_admission()
     {
@@ -120,20 +122,22 @@ class Student extends MY_Controller
             'overview' => ['title' => 'Account Overview', 'icon' => array('people', 2), 'url' => ''],
             'setting' => ['title' => 'Account Setting', 'icon' => array('setting-2', 2), 'url' => 'setting'],
             'fee-record' => ['title' => 'Account Fees Record', 'icon' => array('two-credit-cart', 3), 'url' => 'fee-record'],
-            'change-password' => ['title' => 'Account Change Password', 'icon' => array('key', 2), 'url' => 'change-password'],
-            'documents' => [
-                'title' => 'Document(s)',
-                'icon' => array('tablet-book',5),
-                'url' =>  'documents'
-            ]
+            'change-password' => ['title' => 'Account Change Password', 'icon' => array('key', 2), 'url' => 'change-password']
         ];
-        
+        if ($this->center_model->isAdminOrCenter()) {
+            $tabs['documents'] = [
+                'title' => 'Document(s)',
+                'icon' => array('tablet-book', 5),
+                'url' => 'documents'
+            ];
+        }
+
         if (is_numeric($stdId) and $stdId) {
-            if(!$this->student_model->isStudent())   {
+            if (!$this->student_model->isStudent()) {
                 $tabs['other'] = [
                     'title' => 'Other Setting',
-                    'icon' => array('pencil',3),
-                    'url'  => 'other'
+                    'icon' => array('pencil', 3),
+                    'url' => 'other'
                 ];
             }
             $get = $this->student_model->get_student_via_id($stdId);
@@ -164,15 +168,16 @@ class Student extends MY_Controller
                 $this->student_view('index');
         }
     }
-    function id_card(){
-        if($this->student_model->isStudent()){
-            redirect('id-card/'.$this->ki_theme->encrypt($this->student_model->studentId()));
-        }
-        else
+    function id_card()
+    {
+        if ($this->student_model->isStudent()) {
+            redirect('id-card/' . $this->ki_theme->encrypt($this->student_model->studentId()));
+        } else
             show_404();
     }
 
-    function manage_study_material(){
+    function manage_study_material()
+    {
         $this->view(__FUNCTION__);
     }
     // test area
@@ -182,7 +187,7 @@ class Student extends MY_Controller
     }
     function test()
     {
-    //    $this->load->view('firebase');
+        //    $this->load->view('firebase');
         // $this->ki_theme->set_default_vars('max_upload_size',10485760);
         // echo $this->ki_theme->default_vars('max_upload_size') / 1024;
         // echo $this->student_model->study_materials()->num_rows();
@@ -193,13 +198,16 @@ class Student extends MY_Controller
         pre($record);
     }
     // this is only for referral code
-    function coupons(){
+    function coupons()
+    {
         $this->view(__FUNCTION__);
     }
-    function passout_student_list(){
+    function passout_student_list()
+    {
         $this->view('passout-student-list');
     }
-    function get_id_card(){
+    function get_id_card()
+    {
         $this->view('get-id-card');
     }
 }

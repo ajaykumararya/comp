@@ -1,5 +1,5 @@
 <?php
-if(PATH == 'zcc' && isset($student_docs)){
+if(PATH == 'zcc' && isset($student_docs) && $student_docs){
     $docs = json_decode($student_docs,true);
     if(sizeof($docs)){
         $r = $this->ki_theme->project_config('upload_ducuments');
