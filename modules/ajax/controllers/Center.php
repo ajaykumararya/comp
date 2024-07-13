@@ -95,7 +95,7 @@ class Center extends Ajax_Controller
     }
     function list()
     {
-        $this->response('data', $this->db->where('type', 'center')->where('isDeleted', 0)->get('centers')->result());
+        $this->response('data', $this->db->where('type', 'center')->where('isPending',0)->where('isDeleted', 0)->get('centers')->result());
     }
     function deleted_list()
     {
