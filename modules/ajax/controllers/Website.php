@@ -199,7 +199,7 @@ class Website extends Ajax_Controller
     {
         if ($this->validation('add_center')) {
             $data = $this->post();
-            $data['status'] = 1;
+            $data['status'] = 0;
             $data['added_by'] = 'admin';
             $data['type'] = 'center';
             $email = $data['email_id'];
@@ -230,7 +230,6 @@ class Website extends Ajax_Controller
         $this->response('status', true);
         $this->response('student_data', $this->post());
     }
-
     function student_login_form()
     {
         // sleep(5);
@@ -257,12 +256,12 @@ class Website extends Ajax_Controller
                         $this->response('student_name', $row->student_name);
                         $this->response('status', true);
                     } else
-                        $this->response('error', alert('Wrong Password.','danger'));
+                        $this->response('error', alert('Wrong Password.', 'danger'));
                 } else {
-                    $this->response('error', alert('Your Account is In-active. Please Contact your Admin','danger'));
+                    $this->response('error', alert('Your Account is In-active. Please Contact Your Admin', 'danger'));
                 }
             } else {
-                $this->response('error', alert('Wrong Roll Number or Password.','danger'));
+                $this->response('error', alert('Wrong Roll Number or Password.', 'danger'));
             }
         }
     }
@@ -312,11 +311,11 @@ class Website extends Ajax_Controller
         } else {
             $this->db->where('id', $this->post('student_id'))
                 ->update('students', [
-                        'roll_no' => $this->post('roll_no'),
-                        'batch_id' => $this->post('batch_id'),
-                        'course_id' => $this->post('course_id'),
-                        'admission_date' => $this->post('admission_date')
-                    ]);
+                    'roll_no' => $this->post('roll_no'),
+                    'batch_id' => $this->post('batch_id'),
+                    'course_id' => $this->post('course_id'),
+                    'admission_date' => $this->post('admission_date')
+                ]);
             $this->response("status", true);
         }
     }
@@ -386,8 +385,8 @@ class Website extends Ajax_Controller
     {
         $this->db->where('id', $this->post('center_id'))
             ->update('centers', [
-                    $this->post('name') => $this->file_up('file')
-                ]);
+                $this->post('name') => $this->file_up('file')
+            ]);
         $this->response('query', $this->db->last_query());
         $this->response('status', true);
     }
