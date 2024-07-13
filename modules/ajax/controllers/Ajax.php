@@ -47,12 +47,12 @@ class Ajax extends Ajax_Controller
                     ]);
                     $this->response('status', 1);
                 } else
-                    $this->response('error', alert('Wrong Password.', 'danger'));
+                    $this->response('error', alert('Sorry, the email or password is incorrect, please try again.', 'danger'));
             } else
                 $this->response('error', alert('Your Account is In-active. Please Contact Your Admin', 'danger'));
         }
         else
-            $this->response('error',alert('This email  is not found..','danger'));
+            $this->response('error',alert('Sorry, this email  is not found..','danger'));
     }
     function delete_enquiry($id)
     {

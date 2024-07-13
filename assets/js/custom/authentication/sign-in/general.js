@@ -97,7 +97,7 @@ var KTSigninGeneral = (function () {
                               });
                             const e = t.getAttribute("data-kt-redirect-url");
                             e && (location.href = e);
-                          } else Swal.fire({ text: "Sorry, the email or password is incorrect, please try again.", icon: "error", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn btn-primary" } });
+                          } else Swal.fire({ html: e.data.error, icon: "error", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn btn-primary" } });
                         })
                         .catch(function (t) {
                             console.log(t);
