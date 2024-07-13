@@ -142,7 +142,8 @@ class Student extends MY_Controller
             }
             $get = $this->student_model->get_student_via_id($stdId);
             if ($get->num_rows()) {
-                $this->ki_theme->set_breadcrumb($tabs[$tab]);
+                if(isset($tabs[$tab]))
+                    $this->ki_theme->set_breadcrumb($tabs[$tab]);
                 $this->set_data($get->row_array());
                 $this->set_data('student_details', $get->row_array());
                 // pre($this->public_data,true);
