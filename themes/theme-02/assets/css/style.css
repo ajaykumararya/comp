@@ -2081,7 +2081,7 @@ marquee {
 }
 .carousel-item img {
   position: relative;
-  z-index: -1;
+  /* z-index: -1; */
 }
 .down {
   bottom: 20px;

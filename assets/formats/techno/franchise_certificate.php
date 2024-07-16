@@ -11,6 +11,7 @@
             font-family: Arial, Helvetica, sans-serif;
 
             font-weight: bold;
+            font-size: 19px;
         }
 
         .text-capitlize {
@@ -71,14 +72,14 @@
     <!-- <div class="position-absolute" id="photo1">
         <img src="upload/{image}" style="width:94.7px;height:113px">
     </div> -->
-    <div class="position-absolute" style="top:25.2%;left:17%;width:76%;text-align:center;text-transform:capitalize">{institute_name}</div>
+    <div class="position-absolute" style="top:50.3%;left:17%;width:76%;text-align:center;text-transform:capitalize">{institute_name}</div>
 
-    <div class="position-absolute" style="top:28.2%;left:27%;">{center_number}</div>
-    <div class="position-absolute" style="top:30.4%;left:27%;">{city}, &nbsp;{state}</div>
-    <div class="position-absolute" style="top:32.7%;left:27%;">{name}</div>
+    <div class="position-absolute" style="top:56%;left:27%;">{center_number}</div>
+    <div class="position-absolute" style="top:60.5%;left:27%;">{city}, &nbsp;{state}</div>
+    <div class="position-absolute" style="top:65.4%;left:27%;">{name}</div>
     
-    <div class="position-absolute" style="top:35.1%;left: 27%">{certificate_issue_date}</div>
-    <div class="position-absolute" style="top:35.1%;left:69%">{valid_upto}</div>
+    <div class="position-absolute" style="top:70.1%;left: 27%">{certificate_issue_date}</div>
+    <div class="position-absolute" style="top:70.1%;left:69%">{valid_upto}</div>
 
     <!-- <div class="position-absolute w-100" style="top:28.5%;padding-left:0px;z-index:9999">
 

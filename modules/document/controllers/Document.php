@@ -405,6 +405,9 @@ class Document extends MY_Controller
                     $data['state'] = $this->SiteModel->state($data['state_id']);
                     $data['city'] = $this->SiteModel->city($data['city_id']);
                     $output = $this->parse('franchise_certificate', $data);
+                    if(in_array(PATH,['techno'])){
+                        $this->mypdf->addPage('L');
+                    }
                     $this->pdf($output);
                 } else
                     $this->not_found('This Certificate is incomplete..');

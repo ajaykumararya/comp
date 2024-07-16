@@ -78,7 +78,7 @@
             <div class="middle-div" style="margin-top:1.2rem;margin-left:9.4rem">{father_name}</div>
             <div class="middle-div" style="margin-top:1.34rem">{roll_no}</div>
             
-            <div class="middle-div" style="margin-top:6rem;margin-left:2rem">{duration} {duration_type}</div>
+            <div class="middle-div text-capitlize" style="margin-top:6rem;margin-left:2rem">{duration} {duration_type}</div>
             
 
     </div>

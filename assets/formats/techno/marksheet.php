@@ -96,7 +96,7 @@
     <p class="position-absolute" style="top:47.89%;left:27%">{enrollment_no}</p>
     <p class="position-absolute" style="top:49.75%;left:27%">{center_name}</p>
     <p class="position-absolute" style="top:51.65%;left:27%">{course_name}</p>
-    <p class="position-absolute" style="top:53.55%;left:27%">{duration} {duration_type}</p>
+    <p class="position-absolute text-capitlize" style="top:53.55%;left:27%">{duration} {duration_type}</p>
     <!--
     <div class="position-absolute w-100" style="top:39.62%;padding-left:9px;z-index:9999">
 
