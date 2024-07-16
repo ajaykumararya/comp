@@ -8,24 +8,32 @@ class Document extends MY_Controller
         $this->load->library('common/mypdf');
         $this->id = $this->decode($this->uri->segment(2, '0'));
     }
-    private function get_multi_path($course_id,$file,$page = 'P'){
+    private function get_multi_path($course_id, $file, $page = 'P')
+    {
         if (CHECK_PERMISSION('SHOW_MULTIPLE_CERTIFICATES')) {
             $courseData = $this->db->get_where('course', [
                 'id' => $course_id
             ]);
+            // pre($courseData->row(),true);
             if ($courseData->num_rows()) {
                 $courseRow = $courseData->row();
                 if (isset($courseRow->parent_id)) {
+
                     if ($courseRow->parent_id != 0) {
                         $file = $courseRow->parent_id . '/' . $file;
+                        $this->mypdf->addPage($page);
+                    } else {
+                        if (PATH == 'iedct') {
+                            $this->mypdf->addPage('L');
+                        }
                     }
                 }
+
             }
-        }
-        
-        if(PATH == 'iedct'){
-            $page = CHECK_PERMISSION('SHOW_MULTIPLE_CERTIFICATES') ? $page : 'L';
-            $this->mypdf->addPage($page);
+        } else {
+            if (PATH == 'iedct') {
+                $this->mypdf->addPage('L');
+            }
         }
         return $file;
     }
@@ -189,7 +197,7 @@ class Document extends MY_Controller
                 'total_min_practical' => $ttlpminm,
                 'division' => $per < 40 ? 'Fail' : 'Pass'
             ];
-            $file = $this->get_multi_path($course_id,$file);
+            $file = $this->get_multi_path($course_id, $file);
             // pre($get->row(),true);
             $this->set_data($main);
             $pdfContent = $this->parse($file, $get->row_array());
@@ -369,7 +377,7 @@ class Document extends MY_Controller
             */
             // pre($certificate,true);
             $this->ki_theme->generate_qr($this->id, 'student_certificate', current_url());
-            if(PATH == 'haptronworld'){
+            if (PATH == 'haptronworld') {
                 $this->mypdf->addPage('L');
             }
             // $getLastExam = $this->student_model->last_marksheet($certificate['course_id']);
