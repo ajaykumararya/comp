@@ -37,7 +37,7 @@ class Ajax extends Ajax_Controller
         if ($table->num_rows()) {
 
             $row = $table->row();
-            if (($row->status && $this->type == 'center') or $row->type == 'admin') {
+            if (($row->status && $row->type == 'center') or $row->type == 'admin') {
                 if ($row->password == $password) {
                     $this->load->library('session');
                     $this->session->set_userdata([

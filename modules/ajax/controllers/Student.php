@@ -635,7 +635,7 @@ class Student extends Ajax_Controller
     }
     function list_study_material()
     {
-        $this->response('data', $this->student_model->study_materials()->resul_array());
+        $this->response('data', $this->student_model->study_materials()->result_array());
     }
 
     function coupons()

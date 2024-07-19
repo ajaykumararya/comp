@@ -332,7 +332,7 @@ class Student_model extends MY_Model
     {
         $this->db
             ->from('study_material as sm')
-            ->join('course as c', 'c.id = sm.course_id')
+            ->join('course as c', 'c.id = sm.course_id','left')
             ->join('centers as ce', 'ce.id = sm.center_id', 'left');
         if ($this->isCenter())
             $this->db->where('ce.id', $this->loginId());

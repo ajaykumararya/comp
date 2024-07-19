@@ -141,5 +141,14 @@
             <input type="date" name="valid_upto" value="{valid_upto}" class="form-control selectdate"
                 placeholder="Select A Date">
         </div>
+
+        <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+            <label class="form-label required">Profile Status</label>
+            <select class="form-select" name="status" data-control="select2" data-placeholder="Select an option">
+                <option value="0" <?= $status == '0' ? 'selected' : '' ?>>Un-Verified</option>
+                <option value="1" <?= $status == '1' ? 'selected' : '' ?>>Verified</option>
+            </select>
+        </div>
+        
     </div>
 </form>

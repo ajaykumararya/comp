@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
     const institue_box = $('select[name="center_id"]');
     const course_box = $('select[name="course_id"]');
     const validation = MyFormValidation(form);
-    select2Student('select[name="student_id"]');
+    // select2Student('select[name="student_id"]');
     validation.addField('title', {
         validators: {
             notEmpty: { message: 'Please Enter A Name' }
@@ -36,8 +36,39 @@ document.addEventListener('DOMContentLoaded', function (e) {
             url : ajax_url + 'student/list-study-material'
         },
         column : [
-            // {'data',}
+            {'data':null},
+            {'data':null},
+            {'data':null},
+            {'data':null}
+        ],
+        columnDefs : [
+            {
+                targets : 0,
+                render : function(data,type,row){
+                    return `${row.course_name} ${ (login_type  =='admin' ? `<div class="d-flex"><label class="badge badge-info ">${row.institute_name}</label></div>` : `` )} `;
+                }
+            },
+            {
+                targets : 1,
+                render : function(data,type,row){
+                    return row.title;
+                }
+            },
+            {
+                targets : 2,
+                render : function(data,type,row){
+                    return `<a href="${base_url}upload/${row.file}" target="_blank" class="btn btn-info btn-xs btn-sm"><i class="fa fa-eye"></i> File</a>`;
+                }
+            },
+            {
+                targets : -1,
+                render : function(data,type,row){
+                    return `${deleteBtnRender(1,row.material_id,'Study Material')}`;
+                }
+            },
         ]
+    }).on('draw',function(r){
+        handleDeleteRows('student/delete-study-material');
     });
     form.addEventListener('submit', (r) => {
         r.preventDefault();
@@ -60,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             data: { center_id },
             dataType: 'json'
         }).then(function (res) {
-            log(res);
+            // log(res);
             if (res.status) {
                 var options = '<option value=""></option>';
                 if (res.courses.length) {
@@ -88,4 +119,5 @@ document.addEventListener('DOMContentLoaded', function (e) {
     if (login_type == 'center') {
         institue_box.trigger("change");
     }
+    // study_table.DataTable();
 });
