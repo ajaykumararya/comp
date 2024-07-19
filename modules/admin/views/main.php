@@ -245,24 +245,27 @@
 
                                 <?php
                             }
+                            if ($this->center_model->isAdmin()) {
+                                ?>
 
+                                <!--begin::Chat-->
+                                <div class="app-navbar-item ms-1 ms-md-4">
+                                    <!--begin::Menu wrapper-->
+                                    <button data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-trigger="hover"
+                                        data-bs-dismiss-="click" data-bs-original-title="Filemanager"
+                                        class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px position-relative"
+                                        id="filemanager_button">
+                                        <i class="ki-outline ki-folder fs-2"> </i>
+                                        <span
+                                            class="bullet bullet-dot bg-danger h-6px w-6px position-absolute translate-middle top-0 start-50 animation-blink">
+                                        </span>
+                                    </button>
+                                    <!--end::Menu wrapper-->
+                                </div>
+                                <!--end::Chat-->
+                                <?php
+                            }
                             ?>
-
-                            <!--begin::Chat-->
-                            <div class="app-navbar-item ms-1 ms-md-4">
-                                <!--begin::Menu wrapper-->
-                                <button data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-trigger="hover"
-                                    data-bs-dismiss-="click" data-bs-original-title="Filemanager"
-                                    class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px position-relative"
-                                    id="filemanager_button">
-                                    <i class="ki-outline ki-folder fs-2"> </i>
-                                    <span
-                                        class="bullet bullet-dot bg-danger h-6px w-6px position-absolute translate-middle top-0 start-50 animation-blink">
-                                    </span>
-                                </button>
-                                <!--end::Menu wrapper-->
-                            </div>
-                            <!--end::Chat-->
                             <!--begin::Chat-->
                             <div class="app-navbar-item ms-1 ms-md-4">
                                 <!--begin::Menu wrapper-->
@@ -740,7 +743,7 @@
     <?php
     foreach ($this->ki_theme->default_vars() as $var => $var_value) {
         ?>const <?= $var ?> = `<?= $var_value ?>`;
-                                <?php
+        <?php
     }
     if ($this->center_model->isCenter() && CHECK_PERMISSION('WALLET_SYSTEM')) {
         $get = $this->ki_theme->center_fix_fees();
@@ -749,7 +752,7 @@
         }
     }
     ?>   
-    </script>
+</script>
 <!--begin::Global Javascript Bundle(mandatory for all pages)-->
 <script src="{base_url}assets/plugins/global/plugins.bundle.js"></script>
 <script src="{base_url}assets/js/scripts.bundle.js"></script>
