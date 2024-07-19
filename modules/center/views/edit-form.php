@@ -1,3 +1,8 @@
+<?php
+if($valid_upto){
+    $valid_upto = date('Y-m-d', strtotime($valid_upto));
+}
+?>
 <form action="center/update">
     <input type="hidden" name="id" value="{id}">
     <div class="row">
@@ -138,7 +143,7 @@
         </div>
         <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
             <label class="form-label required">Valid Upto</label>
-            <input type="date" name="valid_upto" value="{valid_upto}" class="form-control selectdate"
+            <input type="date" name="valid_upto" value="<?=$valid_upto?>" class="form-control selectdate"
                 placeholder="Select A Date">
         </div>
 
