@@ -49,7 +49,7 @@
        
         p{
             font-weight: 700;
-            font-size: 24px!important;
+            font-size: 20px!important;
         }
         .middle-div {
             width: 60%;
@@ -103,13 +103,13 @@
     <p class="position-absolute text-center text-capitlize" style="left:5%;top:40.8%;width:90%">{from_date} - {to_date}</p>
     <!-- <p class="position-absolute text-center" style="left:76%;top:67.1%;">{from_date}</p>
     <p class="position-absolute text-center" style="left:86%;top:67.1%;">{to_date}</p> -->
-    <p class="position-absolute text-center " style="left:5%;top:49.6%;width:90%">INDIAN EDUCATION DEGREE COLLEGE TRAINING</p>
+    <p class="position-absolute text-center text-capitlize" style="left:5%;top:49.6%;width:90%">INDIAN EDUCATION DEGREE COLLEGE TRAINING</p>
     <p class="position-absolute text-center " style="left:5%;top:58.1%;width:90%">{grade}</p>
     
     <!-- <div class="position-absolute text-center" style="left:40%;top:69.5%;width:150px">{obtain_total}</div> -->
     <p class="position-absolute text-capitlize text-center" style="left:27%;top:65%;width:68%;line-height:1">{center_name}, <?=get_route($center_city,'city')?>,<?=get_route($center_state,'state')?></p>
-    <p class="position-absolute" style="top:72%;left:29%;">{dob}</p>    
-    <p class="position-absolute text-center" style="left:77%;top:72%;">{createdOn}</p>
+    <p class="position-absolute" style="top:72.4%;left:29%;">{dob}</p>    
+    <p class="position-absolute text-center" style="left:77%;top:72.4%;">{createdOn}</p>
 
     
 </body>
