@@ -113,6 +113,17 @@
         .test {
             border: 1px solid red
         }
+        table tbody {
+  display: block;
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+table thead, table tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
     </style>
 </head>
 
@@ -139,11 +150,11 @@
         <img src="upload/images/marksheet_{result_id}.png" style="width:90px;" alt="">
     </div>
     <div class="position-absolute " style="top:30%;left:10%;width:80%">
-        <table id="first" border="0" style="width:100%">
+        <table id="first" border="0" style="width:100%;">
             <thead>
                 <tr>
-                    <th class="primary" rowspan="2" colspan="2" style="text-align:left;padding-left:35px;width:300px">
-                        PAPER</th>
+                    <th class="primary" rowspan="2" colspan="2" style="text-align:center;width:300px">
+                        PAPERS</th>
                     <th class="primary " colspan="2" style="padding:4px">SCHEME OF MARKS</th>
                     <th class="primary rb" rowspan="2" style="">MARKS OBTAINED </th>
                 </tr>

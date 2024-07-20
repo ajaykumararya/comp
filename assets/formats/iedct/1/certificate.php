@@ -49,7 +49,7 @@
        
         p{
             font-weight: 700;
-            font-size: 18px!important;
+            font-size: 24px!important;
         }
         .middle-div {
             width: 60%;
@@ -94,21 +94,22 @@
     
     <!-- <p class="position-absolute" style="top:48%;left:16%;">{createdOn}</p> -->
 
-    <p class="position-absolute text-center" style="width:90%;left:5%;top:23.5%;">{student_name}</p>
+    <p class="position-absolute text-center" style="width:90%;left:5%;top:22.8%;">{student_name} S/O {father_name}</p>
     <!-- <p class="position-absolute text-center " style="width:330px;top:55%;left:65%">{father_name}</p> -->
     
     <!-- <p class="position-absolute text-center" style="width:370px;left:15%;top:61%;">{enrollment_no}</p> -->
-    <p class="position-absolute text-center" style="width:90%;left:5%;top:32.4%;">{course_name}</p>
+    <p class="position-absolute text-center" style="width:90%;left:5%;top:32%;">{course_name}</p>
     
-    <p class="position-absolute text-center" style="left:5%;top:41%;width:90%">{duration} {duration_type}</p>
+    <p class="position-absolute text-center text-capitlize" style="left:5%;top:40.8%;width:90%">{from_date} - {to_date}</p>
     <!-- <p class="position-absolute text-center" style="left:76%;top:67.1%;">{from_date}</p>
     <p class="position-absolute text-center" style="left:86%;top:67.1%;">{to_date}</p> -->
-    <p class="position-absolute text-center " style="left:5%;top:50%;width:90%">{conducted_by}</p>
-    <p class="position-absolute text-center " style="left:5%;top:58.5%;width:90%">{grade}</p>
+    <p class="position-absolute text-center " style="left:5%;top:49.6%;width:90%">INDIAN EDUCATION DEGREE COLLEGE TRAINING</p>
+    <p class="position-absolute text-center " style="left:5%;top:58.1%;width:90%">{grade}</p>
     
     <!-- <div class="position-absolute text-center" style="left:40%;top:69.5%;width:150px">{obtain_total}</div> -->
-    <p class="position-absolute" style="top:72.5%;left:29%;">{dob}</p>    
-    <p class="position-absolute text-center" style="left:77%;top:72.5%;">{createdOn}</p>
+    <p class="position-absolute text-capitlize text-center" style="left:27%;top:65%;width:68%;line-height:1">{center_name}, <?=get_route($center_city,'city')?>,<?=get_route($center_state,'state')?></p>
+    <p class="position-absolute" style="top:72%;left:29%;">{dob}</p>    
+    <p class="position-absolute text-center" style="left:77%;top:72%;">{createdOn}</p>
 
     
 </body>
