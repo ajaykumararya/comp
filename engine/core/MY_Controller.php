@@ -63,6 +63,9 @@ class MY_Controller extends MX_Controller
             $this->set_data([
                 'owner_name' => $centreRow->name,
                 'owner_email' => $centreRow->email,
+                'owner_phone' => $centreRow->contact_number,
+                'owner_address' => $centreRow->center_full_address,
+                'owner_id' => $centreRow->id,
                 'type' => ucwords($this->center_model->login_type()),
                 'wallet' => @$centreRow->wallet
             ]);

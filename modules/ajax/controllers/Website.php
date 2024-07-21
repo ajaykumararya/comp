@@ -3,15 +3,35 @@ class Website extends Ajax_Controller
 {
     function update_student_profile_image()
     {
+        $this->_update_profile('students');
+    }
+    private function _update_profile($table){
         $this->response($_FILES);
         if ($file = $this->file_up('file')) {
             $this->response('status', true);
-            $this->db->update('students', [
+            $this->response('file',base_url('upload/'.$file));
+            $this->db->update($table, [
                 'image' => $file
             ], [
                 'id' => $this->post('id')
             ]);
         }
+    }
+    function update_center_profile_image()
+    {
+        $this->_update_profile('centers');
+    }
+    function update_center_profile(){
+        // $this->response('data',$this->session->userdata());
+        $this->db->update('centers',[
+            'name' => $this->post('name'),
+            'center_full_address' => $this->post('address'),
+            'contact_number' => $this->post('phone'),
+            'email' => $this->post('email'),
+        ],[
+            'id' => $this->session->userdata('admin_id')
+        ]);
+        $this->response('status',true);
     }
     function student_verification()
     {

@@ -115,9 +115,25 @@ $(document).on('ready', function () {
             url: 'website/add-center',
             data: new FormData(this)
         }).then((res) => {
-            log(res);
+            // log(res);
+            if(res.status){
+                SwalSuccess('Added','Registration Successfully..');
+                location.reload();
+            }
+            showResponseError(res);
         });
     });
+    $(document).on('keyup','#add_center_form [name="institute_name"]',function(){
+        var roll_no = generateRollNumberPrefix(this.value);
+        // console.log(roll_no);
+
+    // Extract the last two digits
+        var lastTwoDigits = String(currentYear()).slice(-2);
+        var newRoll = roll_no+''+lastTwoDigits+'000';
+        if(roll_no == '')
+            newRoll = '';
+        $(document).find('#add_center_form [name="rollno_prefix"]').val(newRoll);
+    })
     $(document).ready(function () {
         $('.login-with-otp').click(function () {
             Swal.fire({

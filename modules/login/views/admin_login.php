@@ -85,7 +85,10 @@
                 <!--begin::Content-->
                 <div class="d-flex flex-column flex-center pb-0 pb-lg-10 p-10 w-100">
                     <!--begin::Image-->
-                    <img class="mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20" src="<?= logo() ?>" alt="" />
+                    <a href="{base_url}">
+                        <img class="mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20" src="<?= logo() ?>" alt="" />
+                    </a>
+
                     <!-- <img class="theme-dark-show mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20"
                         src="{base_url}/assets/media/auth/agency-dark.png" alt="" /> -->
                     <!--end::Image-->

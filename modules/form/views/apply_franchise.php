@@ -34,9 +34,9 @@
                                             class="form-control" placeholder="Enter Qualification of institute head">
                                     </div>
                                     <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
-                                        <label class="form-label required"> Prefix Roll No.</label>
+                                        <label class="form-label required"> Series No.</label>
                                         <input type="text" required name="rollno_prefix" class="form-control"
-                                            placeholder="Enter Prefix Roll No.">
+                                            placeholder="Enter Prefix Roll No." readonly>
                                     </div>
                                     <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
                                         <label class="form-label required required">Date of birth</label>
@@ -128,6 +128,7 @@
                                         <label class="form-label required">Password</label>
                                         <input type="text" required name="password" class="form-control"
                                             placeholder="Enter">
+                                            <span class="text-danger">Use 8 or more characters with a mix of letters, numbers & symbols.</span>
                                     </div>
                                     <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
                                         <label class="form-label required">Reception</label>

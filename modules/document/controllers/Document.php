@@ -343,7 +343,7 @@ class Document extends MY_Controller
                     $data['state'] = $this->SiteModel->state($data['state_id']);
                     $data['city'] = $this->SiteModel->city($data['city_id']);
                     $output = $this->parse('franchise_certificate', $data);
-                    if(in_array(PATH,['techno'])){
+                    if(in_array(PATH,['techno','haptronworld'])){
                         $this->mypdf->addPage('L');
                     }
                     $this->pdf($output);

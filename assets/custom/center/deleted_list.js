@@ -36,29 +36,29 @@ document.addEventListener('DOMContentLoaded', function (e) {
         ],
         'columnDefs': [
             {
-                target : 0,
-                render : function(data,type,row){
+                target: 0,
+                render: function (data, type, row) {
                     return `${data}`;
                 }
             },
             {
                 targets: 2,
-                printable : false,
+                printable: false,
                 render: function (data, type, row) {
                     return `<label class="text-dark">${data}</label>`;
                 }
             },
             {
                 targets: 3,
-                printable : false,
+                printable: false,
                 render: function (data, type, row) {
                     return `<a href="mailto:${data}">${data}</a>`;
                 }
             },
-            
+
             {
                 targets: 4,
-                printable : false,
+                printable: false,
                 render: function (data, type, row) {
                     return `<a href="tel:${data}">${data}</a>`;
                 }
@@ -67,14 +67,16 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 targets: -1,
                 data: null,
                 orderable: false,
-                printable : false,
+                printable: false,
                 className: 'text-end',
                 render: function (data, type, row) {
                     // console.log(data);
-                    return `<div class="btn-group">
-                                
+                    return `<div class="btn-group">                                
                                 <button class="btn btn-sm btn-light-primary undelete-btn">
                                     <i class="fa fa-arrow-left"></i> Move to list
+                                </button>
+                                <button class="btn btn-sm btn-light-danger delete-btn">
+                                    <i class="fa fa-trash"></i> Delete
                                 </button>
                             </div>`;
                 }
@@ -82,8 +84,31 @@ document.addEventListener('DOMContentLoaded', function (e) {
         ]
     })
     table.on('draw', function () {
-        $('#list_center').EditForm('center/edit-rollno_prefix','Update Roll Number Prefix');
-        $('#list_center').unDeleteEvent('centers','Center');
+        $('#list_center').EditForm('center/edit-rollno_prefix', 'Update Roll Number Prefix');
+        $('#list_center').unDeleteEvent('centers', 'Center');
+        $('.delete-btn').click(function () {
+            // log(table.DataTable().data)
+            var rowData = $(document).find('#list_center').DataTable().row($(this).closest('tr')).data();
+            // log(rowData);
+            SwalWarning('Confirmation!', 'Are you sure for permanently delete .', true, 'Delete IT').then((r) => {
+                log(r);
+                if (r.isConfirmed) {
+                    $.AryaAjax({
+                        url: 'center/param_delete',
+                        data: rowData
+                    }).then((e) => {
+                        if (e.status) {
+                            SwalSuccess('Success', 'Deleted Successfully..').then((e) => {
+                                if(e.isConfirmed){
+                                    location.reload();
+                                }
+                            });
+                        }
+                        showResponseError(e);
+                    });
+                }
+            });
+        })
     });
 
 });

@@ -1760,6 +1760,7 @@ $(document).on('change', '[name="avatar"]', function (e) {
         SwalWarning('Please Select A Valid Image.');
     }
 })
+
 const upload_syllabus = $('#upload-syllabus');
 if (upload_syllabus.length) {
     var syllabusValidation = MyFormValidation(document.getElementById('upload-syllabus'));
