@@ -9,3 +9,4 @@ engine/config/config.php
 engine/config/project.php
 modules/document/views
 asstes/formats
+modules/api/config/*

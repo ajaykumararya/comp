@@ -239,8 +239,8 @@
                                     if(CHECK_PERMISSION('SMS')){
                                     ?>
                                     <!--begin::Link-->
-                                    <a href="javascript:;" class="link-primary reset-password-otp">
-                                        Reset Password ?
+                                    <a href="javascript:;" class="link-primary generate-new-password-link">
+                                        Forgot Password ?
                                     </a>
                                     <!--end::Link-->
                                     <?PHP
@@ -272,7 +272,7 @@
                                     Login With OTP?
 
                                     <a href="javascript:;" class="link-primary login-with-otp">
-                                        Sign up
+                                        Sign In
                                     </a>
                                 </div>
                                 <?php

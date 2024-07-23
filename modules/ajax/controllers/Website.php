@@ -5,11 +5,12 @@ class Website extends Ajax_Controller
     {
         $this->_update_profile('students');
     }
-    private function _update_profile($table){
+    private function _update_profile($table)
+    {
         $this->response($_FILES);
         if ($file = $this->file_up('file')) {
             $this->response('status', true);
-            $this->response('file',base_url('upload/'.$file));
+            $this->response('file', base_url('upload/' . $file));
             $this->db->update($table, [
                 'image' => $file
             ], [
@@ -21,17 +22,18 @@ class Website extends Ajax_Controller
     {
         $this->_update_profile('centers');
     }
-    function update_center_profile(){
+    function update_center_profile()
+    {
         // $this->response('data',$this->session->userdata());
-        $this->db->update('centers',[
+        $this->db->update('centers', [
             'name' => $this->post('name'),
             'center_full_address' => $this->post('address'),
             'contact_number' => $this->post('phone'),
             'email' => $this->post('email'),
-        ],[
+        ], [
             'id' => $this->session->userdata('admin_id')
         ]);
-        $this->response('status',true);
+        $this->response('status', true);
     }
     function student_verification()
     {
@@ -430,10 +432,94 @@ class Website extends Ajax_Controller
     {
         $this->response('data', $this->db->order_by('id', 'DESC')->get('syllabus')->result_array());
     }
+    function verify_student_phone_for_reset_password()
+    {
+        $get = $this->student_model->get_student([
+            'contact_number' => $this->post('phoneNumber')
+        ]);
+        if ($get->num_rows()) {
+            $row = $get->row();
+            $templates = $this->load->config('api/sms', true);
+            // pre($templates);
+            if (isset($templates['forgot_password'])) {
+                $message = $templates['forgot_password']['content'];
+                $otp = random_int(100000, 999999);
+                $this->session->set_userdata('forgot_password_otp', $otp);
+                $message = str_replace('{#var#}', $otp, $message);
+                // echo $message;
+                $this->load->module('api/whatsapp');
+                $res = $this->whatsapp->send('91' . $row->contact_number, $message);
+                $this->response(json_decode($res, true));
+                // $this->response(['status' => 'success','otp' => $otp]);
+            }
+        }
+    }
+    function generate_new_password_link()
+    {
+        if ($this->session->has_userdata('forgot_password_otp')) {
+            if ($this->post('otp') == $this->session->userdata('forgot_password_otp')) {
+                $get = $this->student_model->get_student([
+                    'contact_number' => $this->post('phoneNumber')
+                ]);
+                if ($get->num_rows()) {
+                    $row = $get->row();
+                    // $this->session->set_userdata('student_id',$row->id);
+                    $this->session->unset_userdata('forgot_password_otp');
+                    $this->load->library('common/token');
+                    $this->response([
+                        'status' => 'success',
+                        'url' => base_url('student/create-new-password/' . $this->token->encode([
+                            'student_id' => $row->student_id
+                        ]))
+                    ]);
+                }
+            }
+        }
+        // $this->response($this->session->userdata());
+    }
+
     function verify_student_phone()
     {
-        // $this->student_model->get_student();
-        $this->response('status', 'success');
+        $get = $this->student_model->get_student([
+            'contact_number' => $this->post('phoneNumber')
+        ]);
+        if ($get->num_rows()) {
+            $row = $get->row();
+            $templates = $this->load->config('api/sms', true);
+            // pre($templates);
+            if (isset($templates['login_with_otp'])) {
+                $message = $templates['login_with_otp']['content'];
+                $otp = random_int(100000, 999999);
+                $this->session->set_userdata('login_otp', $otp);
+                $message = str_replace('{#var#}', $otp, $message);
+                // echo $message;
+                $this->load->module('api/whatsapp');
+                $res = $this->whatsapp->send('91' . $row->contact_number, $message);
+                $this->response(json_decode($res, true));
+                // $this->response(['status' => 'success']);
+            }
+        }
+    }
+    function verify_login_otp()
+    {
+        if ($this->session->has_userdata('login_otp')) {
+            if ($this->post('otp') == $this->session->userdata('login_otp')) {
+                $get = $this->student_model->get_student([
+                    'contact_number' => $this->post('phoneNumber')
+                ]);
+                if ($get->num_rows()) {
+                    $row = $get->row();
+                    // $this->session->set_userdata('student_id',$row->id);
+                    $this->session->unset_userdata('login_otp');
+                    $this->session->set_userdata([
+                        'student_login' => true,
+                        'student_id' => $row->student_id
+                    ]);
+                    $this->response(['status' => 'success']);
+                }
+            }
+        }
+        // $this->response($this->session->userdata());
     }
 }
 ?>

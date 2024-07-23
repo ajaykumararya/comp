@@ -7,7 +7,13 @@ class Ajax_Controller extends MY_Controller
     function __construct()
     {
         parent::__construct();
-        if (!$this->center_model->isLogin() and $this->router->fetch_method() != 'admin_login' and $this->router->fetch_class() != 'website') {
+        if (
+                !$this->center_model->isLogin() and 
+                $this->router->fetch_method() != 'admin_login' and 
+                $this->router->fetch_class() != 'website' and
+                $this->uri->segment(1,0) != 'api' and
+                $this->uri->segment(1,0) != 'site'
+            ) {
             $this->response('html', 'Invalid Security Token , Please Re-login Now.');
             $this->response('login_expired', true);
             exit;

@@ -79,11 +79,35 @@ class Site extends Site_Controller
     }
     function test()
     {
+        $token['id'] = 1; //From here
+        $token['username'] = 'ajay';
+        $date = new DateTime();
+        $token['iat'] = $date->getTimestamp();
+        $token['exp'] = $date->getTimestamp() + 60 * 30;
+        $this->load->library('common/token');
+        echo $this->token->encode($token);
+        // $templates = $this->load->config('api/sms',true);
+        // // pre($templates);
+        // if(isset($templates['login_with_otp'])){
+        //     $message = $templates['login_with_otp']['content'];
+        //     $message = str_replace('{#var#}',random_int(100000, 999999),$message);
+        //     // echo $message;
+        //     $this->load->module('api/whatsapp');
+        //     $res = $this->whatsapp->send('918533898539',$message);
+        //     pre($res);
+        // }
+        // $get = $this->student_model->get_student([
+        //     'contact_number' => '8533898539'
+        // ]);
+        // if($get->num_rows()){
+        //     pre($get->row());
+        // }
+
         //    echo $this->gen_roll_no(5);
         // echo $this->center_model->wallet_history()->num_rows();
         // $test = $this->ki_theme->center_fix_fees();
         // pre($test);
-
+/*
         $data = [];
         $list = $this->center_model->wallet_history();
         if ($list->num_rows()) {
@@ -131,5 +155,6 @@ class Site extends Site_Controller
             }
         }
         pre($data);
+        */
     }
 }

@@ -214,6 +214,21 @@ function generateCouponCode($length = 8)
 
     return $couponCode;
 }
+function generate_otp()
+{
+    $secret = '8533'; // replace with a secret key
+    $time = time(); // get the current time
+    $otp = generate_hotp($secret, $time, 6); // generate a 6-digit HOTP
+    return $otp;
+}
+
+function generate_hotp($secret, $time, $digits)
+{
+    $hash = hash_hmac('sha1', $time, $secret, true); // generate a HMAC-SHA1 hash
+    $hash = substr($hash, -8); // take the last 8 characters of the hash
+    $otp = str_pad(substr($hash, 0, $digits), $digits, '0', STR_PAD_LEFT); // pad the OTP with zeros
+    return $otp;
+}
 function sup($i)
 {
     $i = ($i == 1) ? 'st' :

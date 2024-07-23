@@ -8,7 +8,7 @@ $(document).on('ready', function () {
             url: 'website/student-verification',
             data: new FormData(this)
         }).then((r) => {
-            log(r);
+            // log(r);
             if (r.status) {
                 var box = $('.show-student-details');
                 box.html(r.html);
@@ -25,7 +25,7 @@ $(document).on('ready', function () {
             url: 'website/student-result-verification',
             data: new FormData(this)
         }).then((r) => {
-            log(r);
+            // log(r);
             if (r.status) {
                 var box = $('.show-student-details');
                 box.html(r.html);
@@ -116,29 +116,29 @@ $(document).on('ready', function () {
             data: new FormData(this)
         }).then((res) => {
             // log(res);
-            if(res.status){
-                SwalSuccess('Added','Registration Successfully..');
+            if (res.status) {
+                SwalSuccess('Added', 'Registration Successfully..');
                 location.reload();
             }
             showResponseError(res);
         });
     });
-    $(document).on('keyup','#add_center_form [name="institute_name"]',function(){
+    $(document).on('keyup', '#add_center_form [name="institute_name"]', function () {
         var roll_no = generateRollNumberPrefix(this.value);
         // console.log(roll_no);
 
-    // Extract the last two digits
+        // Extract the last two digits
         var lastTwoDigits = String(currentYear()).slice(-2);
-        var newRoll = roll_no+''+lastTwoDigits+'000';
-        if(roll_no == '')
+        var newRoll = roll_no + '' + lastTwoDigits + '000';
+        if (roll_no == '')
             newRoll = '';
         $(document).find('#add_center_form [name="rollno_prefix"]').val(newRoll);
     })
     $(document).ready(function () {
-        $('.login-with-otp').click(function () {
+        $('.generate-new-password-link').click(function () {
             Swal.fire({
                 title: 'Enter your phone number:',
-                input: 'text',
+                input: 'number',
                 inputAttributes: {
                     autocapitalize: 'off'
                 },
@@ -146,21 +146,25 @@ $(document).on('ready', function () {
                 confirmButtonText: 'Send OTP',
                 showLoaderOnConfirm: true,
                 preConfirm: (phoneNumber) => {
-                    return new Promise((resolve) => {
+                    return new Promise((resolve, reject) => {
+
                         $.ajax({
-                          url: ajax_url + 'website/verify_student_phone',
-                          type: 'POST',
-                          data: {
-                            phoneNumber: phoneNumber
-                          },
-                          success: function(response) {
-                            if (!response.success) {
-                              Swal.showValidationMessage(`The Mobile number is not found..`)
+                            url: ajax_url + 'website/verify_student_phone_for_reset_password',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: {
+                                phoneNumber: phoneNumber
+                            },
+                            success: function (response) {
+                                // log(response);
+                                if (response.status != 'success') {
+                                    Swal.showValidationMessage(`The Mobile number is not found..`)
+                                }
+                                resolve();
                             }
-                            resolve();
-                          }
                         });
-                      });
+
+                    });
                 },
                 allowOutsideClick: () => !Swal.isLoading()
             }).then((result) => {
@@ -181,26 +185,112 @@ $(document).on('ready', function () {
                             confirmButtonText: 'Verify OTP',
                             showLoaderOnConfirm: true,
                             preConfirm: (otp) => {
-                                return $.ajax({
-                                    url: 'verify_otp.php',
-                                    type: 'POST',
-                                    data: { otp: otp, phoneNumber: result.value },
-                                    dataType: 'json'
-                                }).then(otpResponse => {
-                                    if (otpResponse.status !== 'success') {
-                                        throw new Error('Invalid OTP');
-                                    }
-                                    return otpResponse;
-                                }).catch(error => {
-                                    Swal.showValidationMessage(
-                                        `Request failed: ${error}`
-                                    );
+                                return new Promise((resolve, reject) => {
+                                    $.ajax({
+                                        url: ajax_url + 'website/generate_new_password_link',
+                                        type: 'POST',
+                                        data: { otp: otp, phoneNumber: result.value },
+                                        dataType: 'json',
+                                        success: function (response) {
+                                            // log(response)
+                                            if (response.status != 'success') {
+                                                Swal.showValidationMessage(`Invalid Otp.`)
+                                            }
+                                            resolve(response);
+                                        },
+                                        error : function(a,b,c){
+                                            log(a.responseText)
+                                        }
+                                    })
+                                });
+                            },
+                            allowOutsideClick: () => !Swal.isLoading()
+                        }).then((otpResult) => {
+                            // log(otpResult);
+                            if (otpResult.isConfirmed) {
+                                Swal.fire('Verified!', 'Redirect To Create A New Password.', 'success').then((e)=>{
+                                    location.href = otpResult.value.url;
+                                });
+                            }
+                        });
+                    });
+                }
+            });
+        });
+        $('.login-with-otp').click(function () {
+            Swal.fire({
+                title: 'Enter your phone number:',
+                input: 'number',
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Send OTP',
+                showLoaderOnConfirm: true,
+                preConfirm: (phoneNumber) => {
+                    return new Promise((resolve, reject) => {
+
+                        $.ajax({
+                            url: ajax_url + 'website/verify_student_phone',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: {
+                                phoneNumber: phoneNumber
+                            },
+                            success: function (response) {
+                                // log(response);
+                                if (response.status != 'success') {
+                                    Swal.showValidationMessage(`The Mobile number is not found..`)
+                                }
+                                resolve();
+                            }
+                        });
+
+                    });
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'OTP Sent!',
+                        text: 'Please check your phone for the OTP.',
+                        icon: 'success',
+                        confirmButtonText: 'Enter OTP'
+                    }).then(() => {
+                        Swal.fire({
+                            title: 'Enter OTP:',
+                            input: 'text',
+                            inputAttributes: {
+                                autocapitalize: 'off'
+                            },
+                            showCancelButton: true,
+                            confirmButtonText: 'Verify OTP',
+                            showLoaderOnConfirm: true,
+                            preConfirm: (otp) => {
+                                return new Promise((resolve, reject) => {
+                                    $.ajax({
+                                        url: ajax_url + 'website/verify_login_otp',
+                                        type: 'POST',
+                                        data: { otp: otp, phoneNumber: result.value },
+                                        dataType: 'json',
+                                        success: function (response) {
+                                            // log(response);
+                                            if (response.status != 'success') {
+                                                Swal.showValidationMessage(`Invalid Otp.`)
+                                            }
+                                            resolve();
+                                        }
+                                    })
                                 });
                             },
                             allowOutsideClick: () => !Swal.isLoading()
                         }).then((otpResult) => {
                             if (otpResult.isConfirmed) {
-                                Swal.fire('Verified!', 'Your phone number has been verified.', 'success');
+                                Swal.fire('Verified!', 'Your phone number has been verified, Redirect to Your Dashboard Click to Ok', 'success').then((e)=>{
+                                    if(e.isConfirmed){
+                                        location.reload();
+                                    }
+                                });
                             }
                         });
                     });

@@ -15,7 +15,8 @@
     "ahsankhatri/cryptolib-php": "^1.1",
     "filp/whoops": "^2.15",
     "mpdf/mpdf": "^8.2",
-    "chillerlan/php-qrcode": "^5.0"
+    "chillerlan/php-qrcode": "^5.0",
+    "firebase/php-jwt": "^6.10"
   },
   "config": {
     "allow-plugins": {
