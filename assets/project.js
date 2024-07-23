@@ -243,6 +243,9 @@ $(document).on('ready', function () {
                                     Swal.showValidationMessage(`The Mobile number is not found..`)
                                 }
                                 resolve();
+                            },
+                            error : function (xhr,error,status){
+                                log(xhr.responseText)
                             }
                         });
 
