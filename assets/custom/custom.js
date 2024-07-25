@@ -1872,7 +1872,7 @@ const checkValue = (array, value) => {
     }
     return false; // Value not found
 }
-const list_students = (admission_status = 0) => {
+const list_students = (admission_status = 0,center_id = 0) => {
     // alert(2);
     var my__table = $(document).find('#list-students');
     var dt = my__table.DataTable({
@@ -1880,7 +1880,8 @@ const list_students = (admission_status = 0) => {
         'ajax': {
             'url': ajax_url + 'student/list',
             'data': {
-                admission_status
+                admission_status : admission_status,
+                center_id : center_id
             },
             'type': 'POST',
             success: function (d) {

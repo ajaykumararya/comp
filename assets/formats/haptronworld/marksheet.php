@@ -93,7 +93,7 @@
     <p class="position-absolute" style="top:2.5%;left:20.3%;width:120px">{result_id}</p>
     <p class="position-absolute " style="top:2.5%;left:79.5%;width:120px">{enrollment_no}</p>
 
-
+    <p class="position-absolute" style="top:26.7%;left:50%;width:100px"><?=date('Y',strtotime($issue_date))?></p>
     <!-- <p class="position-absolute" style="top:17%;right:15%;font-size:12px">{enrollment_no}</p> -->
     <p class="position-absolute" style="top:33%;left:5%;width:240px">{student_name}</p>
     <p class="position-absolute" style="top:33%;left:34.9%;width:238px">{father_name}</p>
@@ -124,8 +124,8 @@
     </div>
     <p class="position-absolute" style="bottom:27%;left:69%;width:67px;font-size:15px">{division}</p>
     <p class="position-absolute" style="bottom:27%;left:77%;width:68px;font-size:15px">{grade}</p>
-    <p class="position-absolute" style="bottom:20.35%;width:78px;left:5%;font-size:13px">{center_code}</p>
-    <p class="position-absolute" style="bottom:20.3%;left:15%;font-size:15px;width:495px;line-height:1">{center_name}</p>
+    <p class="position-absolute " style="bottom:20.35%;width:108px;left:5%;font-size:13px">{center_code}</p>
+    <p class="position-absolute " style="bottom:20.3%;left:18.5%;font-size:15px;width:467px;line-height:1">{center_name}</p>
     <p class="position-absolute " style="bottom:27%;left:86%;font-size:15px;width:70px">{obtain_total}</p>
     <p class="position-absolute" style="bottom:20.35%;left:77.3%;font-size:15px;width:138px">{issue_date}</p>
 

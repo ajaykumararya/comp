@@ -4,12 +4,13 @@ class SiteModel extends MY_Model
     function ttl_courses()
     {
         if ($this->isAdmin()) {
-            return $this->db->get('course')->num_rows();
+            return $this->db->where('isDeleted',0)->get('course')->num_rows();
         }
         if ($this->isCenter()) {
             return $this->db //->select()
                 ->from('course as c')
                 ->join('center_courses as cc', 'c.id = cc.course_id and cc.center_id = ' . $this->loginId())
+                ->where('c.isDeleted',0)
                 ->get()->num_rows();
         }
         return 0;

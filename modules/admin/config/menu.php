@@ -127,6 +127,13 @@ $config['menu'] = array(
                     'url' => 'student/passout-student-list',
                 ),
                 array(
+                    'label' => 'List By Center',
+                    'type' => 'student_list_by_center',
+                    'icon' => array('people', 5),
+                    'url' => 'student/list-by-center',
+                    'condition' => OnlyForAdmin()
+                ),
+                array(
                     'label' => 'List Student(s)',
                     'type' => 'all_students',
                     'icon' => array('people', 5),

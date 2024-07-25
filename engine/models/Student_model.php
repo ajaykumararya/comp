@@ -50,7 +50,7 @@ class Student_model extends MY_Model
             ->join("course as c", "s.course_id = c.id ", 'left')
             ->join('state', 'state.STATE_ID = s.state_id')
             ->join('district', 'district.DISTRICT_ID = s.city_id and district.STATE_ID = state.STATE_ID')
-            
+
             ->join('batch as b', "b.id = s.batch_id", 'left');
         if (!isset($without_admission_status))
             $this->db->where('s.admission_status', isset($admission_status) ? $admission_status : 1);
@@ -62,6 +62,12 @@ class Student_model extends MY_Model
             $this->db->select('ce.logo as centre_logo');
         }
         switch ($case) {
+            case 'assign_study_student_list':
+                $this->db->join('student_study_material as ssm', 'ssm.student_id = s.id', 'left');
+                $this->db->group_by('s.id');
+                unset($condition['study_id']);
+                $this->myWhere('s', $condition);
+                break;
             case 'assign_exam_student_list':
                 $this->db->select('es.id as assign_exam_id');
                 $this->db->join('exam_students as es', 'es.student_id = s.id and es.exam_id = "' . $condition['exam_id'] . '"', 'left');
@@ -263,10 +269,15 @@ class Student_model extends MY_Model
     }
     function get_all_student($where = [])
     {
+        if (isset($where['center_id']) && !$where['center_id'])
+            unset($where['center_id']);
+        if (isset($where['admission_status']) && $where['admission_status'] == 'all')
+            unset($where['admission_status']);
         return $this->get_switch('all', $where)->result();
     }
-    function get_student($where){
-        return $this->get_switch('all',$where);
+    function get_student($where)
+    {
+        return $this->get_switch('all', $where);
     }
     function get_student_via_roll_no($rollNo = 0)
     {
@@ -331,8 +342,9 @@ class Student_model extends MY_Model
     function study_materials()
     {
         $this->db
+            ->select('c.id as course_id,c.course_name,ce.id as center_id,ce.institute_name,sm.*')
             ->from('study_material as sm')
-            ->join('course as c', 'c.id = sm.course_id','left')
+            ->join('course as c', 'c.id = sm.course_id', 'left')
             ->join('centers as ce', 'ce.id = sm.center_id', 'left');
         if ($this->isCenter())
             $this->db->where('ce.id', $this->loginId());

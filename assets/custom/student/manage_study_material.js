@@ -63,12 +63,62 @@ document.addEventListener('DOMContentLoaded', function (e) {
             {
                 targets : -1,
                 render : function(data,type,row){
-                    return `${deleteBtnRender(1,row.material_id,'Study Material')}`;
+                    return `
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-xs btn-info assign">
+                                    <i class="ki-duotone fs-2 ki-user-tick ">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                        <span class="path3"></span>
+                                    </i>
+                                    Assign To Students
+                                </button>
+                            </div>
+                            ${deleteBtnRender(1,row.material_id,'Study Material')}
+                            `;
                 }
             },
         ]
     }).on('draw',function(r){
         handleDeleteRows('student/delete-study-material');
+        study_table.find('.assign').on('click', function () {
+            var rowData = study_table.DataTable().row($(this).closest('tr')).data();
+               log(rowData);
+               return false;
+            $.AryaAjax({
+                url: 'student/list-study-assign-students',
+                data: rowData
+            }).then((r) => {
+                if (r.status) {
+                    var drawer = mydrawer('Study Material');
+                    drawer.find('.card-body').html(r.html).css({
+                        paddingTop: 0
+                    });
+                    drawer.find('.table').DataTable({
+                        paging: false,
+                        dom: small_dom
+                    });
+                    drawer.find('.form-check-input').on('change', function () {
+                        var checkStatus = $(this).is(':checked');
+                        $.AryaAjax({
+                            url: 'student/study-assign-to-student',
+                            data: {
+                                student_id: $(this).val(),
+                                exam_id: rowData.exam_id,
+                                center_id: $(this).data('center_id'),
+                                check_status : checkStatus
+                            }
+                        }).then((e) => {
+                            toastr.clear();
+                            if(e.status)
+                                toastr.success(`Student ${checkStatus ? 'Added' : 'Removed'} Successfully..`);
+                            else
+                                toastr.error('Something Went Wrong!');
+                        });
+                    })
+                }
+            })
+        })
     });
     form.addEventListener('submit', (r) => {
         r.preventDefault();

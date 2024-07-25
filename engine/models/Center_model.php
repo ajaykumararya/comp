@@ -21,6 +21,7 @@ class Center_model extends MY_Model
         if ($id)
             $this->db->where('id', $id);    
         $this->db->where('type', $type);
+        $this->db->where('isDeleted', '0');
         return $this->db->get('centers');
         /*
         $this->db->select('c.*,s.STATE_NAME,d.DISTRICT_NAME')

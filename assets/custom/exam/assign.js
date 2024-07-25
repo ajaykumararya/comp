@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function (r) {
     const exam_table = $('#list-exams');
     var count = 1;
     var rowData = [];
-    const type = exam_table.data('type') ?? 'center';
+    const exam_type = exam_table.data('type') ?? 'center';
     exam_table.DataTable({
         dom: small_dom,
         ajax: {
@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function (r) {
                 targets: -1,
                 orderable: false,
                 render: function (data, type, row) {
+                    log(row)
                     return `
                         <div class="btn-group">
                             <button class="btn btn-sm btn-info">
@@ -71,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function (r) {
                                     <span class="path2"></span>
                                     <span class="path3"></span>
                                 </i>
-                                Assign To ${type == 'student' ? 'Student' : 'Center'}
+                                Assign To ${exam_type == 'student' ? 'Student' : 'Center'}
                             </button>
                         </div>
                     `;

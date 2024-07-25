@@ -637,6 +637,16 @@ class Student extends Ajax_Controller
     {
         $this->response('data', $this->student_model->study_materials()->result_array());
     }
+    function list_assign_students(){
+        $students = $this->student_model->get_switch('assign_study_student_list',[
+            'course_id' => $this->post("course_id"),
+            'center_id' => $this->post('center_id')
+        ]);
+        $this->set_data('study_id',$this->post('id'));
+        $this->set_data('students', $students->result_array());
+        $this->response('status',($students->num_rows() > 0));
+        $this->response('html', $this->template('list-study-assign-students'));
+    }
 
     function coupons()
     {

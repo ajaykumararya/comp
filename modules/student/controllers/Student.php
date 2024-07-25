@@ -211,5 +211,8 @@ class Student extends MY_Controller
     {
         $this->view('get-id-card');
     }
+    function list_by_center(){
+        $this->view('list-by-center');
+    }
 }
 ?>
