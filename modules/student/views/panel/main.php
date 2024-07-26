@@ -142,10 +142,7 @@
         }            
     </script>
     <!--end::Theme mode setup on page load-->
-    <!--Begin::Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5FS8GGP" height="0" width="0"
-            style="display:none;visibility:hidden"></iframe></noscript>
-    <!--End::Google Tag Manager (noscript) -->
+
     <!--begin::Page loading(append to body)-->
     <div class="page-loader flex-column bg-dark bg-opacity-25">
         <span class="spinner-border text-primary" role="status"></span>
@@ -470,7 +467,7 @@
                             <!--begin::Copyright-->
                             <div class="text-dark order-2 order-md-1">
                                 <span class="text-muted fw-semibold me-1">2024&copy;</span>
-                                <a href="" target="_blank" class="text-gray-800 text-hover-primary">Arya</a>
+                                <a href="" target="_blank" class="text-gray-800 text-hover-primary"></a>
                             </div>
                             <!--end::Copyright-->
                         </div>
