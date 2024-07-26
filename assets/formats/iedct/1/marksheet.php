@@ -137,15 +137,14 @@ table thead, table tbody tr {
 
 
     <!-- <p class="position-absolute" style="top:17%;right:15%;font-size:12px">{enrollment_no}</p> -->
-    <p class="position-absolute" style="top:18.5%;left:23.5%">{student_name}</p>
-    <p class="position-absolute" style="top:21%;left:23.5%">{father_name}</p>
-    <p class="position-absolute " style="top:23.3%;left:23.5%">{course_name}</p>
-    <p class="position-absolute " style="top:25.5%;left:23.5%">{center_name}</p>
+    <p class="position-absolute" style="top:18.8%;left:23.5%">{student_name}</p>
+    <p class="position-absolute" style="top:21.3%;left:23.5%">{father_name}</p>
+    <p class="position-absolute " style="top:23.6%;left:23.5%">{course_name}</p>
+    <p class="position-absolute " style="top:25.8%;left:23.5%">{center_name}</p>
 
-    <p class="position-absolute " style="top:18.5%;left:68.5%;width:200px">{roll_no}</p>
+    <p class="position-absolute " style="top:18.8%;left:68.5%;width:200px">{roll_no}</p>
 
-    <p class="position-absolute " style="top:21%;left:68.5%">{center_code}</p>
-    <p class="position-absolute " style="top:23.3%;left:67.5%"><?=get_route($center_city,'city')?>,<?=get_route($center_state,'state')?></p>
+    <p class="position-absolute " style="top:21.3%;left:68.5%">{center_code}</p>
     <div class="position-absolute" style="bottom:7.3%;left:17%;">
         <img src="upload/images/marksheet_{result_id}.png" style="width:90px;" alt="">
     </div>
@@ -218,9 +217,9 @@ table thead, table tbody tr {
             </tfoot> -->
         </table>
     </div>
-    <!-- <p class="position-absolute" style="bottom:23%;left:32%;font-size:15px">{division}</p>
-    <p class="position-absolute" style="bottom:20.35%;left:32%;font-size:15px">{grade}</p>
-    <p class="position-absolute" style="bottom:23.5%;left:70%;font-size:15px;width:100px">{obtain_total}</p>
+    <p class="position-absolute" style="bottom:22.3%;left:32%;font-size:18px">{dob}</p>
+    <p class="position-absolute" style="bottom:22.3%;left:77%;font-size:18px">{issue_date}</p>
+   <!--  <p class="position-absolute" style="bottom:23.5%;left:70%;font-size:15px;width:100px">{obtain_total}</p>
     <p class="position-absolute" style="bottom:20.35%;left:70%;font-size:15px">{percentage} %</p> -->
 
 </body>

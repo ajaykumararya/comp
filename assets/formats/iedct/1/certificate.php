@@ -70,8 +70,8 @@
         .highlight{
             font-size: 20px!important;
             color:red;
-            top:11.5rem;
-            left:35.5%;
+            top:11.3rem;
+            left:36%;
             width: 30%;
             text-align: center;
         }
@@ -94,7 +94,7 @@
     
     <!-- <p class="position-absolute" style="top:48%;left:16%;">{createdOn}</p> -->
 
-    <p class="position-absolute text-center" style="width:90%;left:5%;top:22.8%;">{student_name} S/O {father_name}</p>
+    <p class="position-absolute text-center" style="width:90%;left:5%;top:23.4%;">{student_name} S/O {father_name}</p>
     <!-- <p class="position-absolute text-center " style="width:330px;top:55%;left:65%">{father_name}</p> -->
     
     <!-- <p class="position-absolute text-center" style="width:370px;left:15%;top:61%;">{enrollment_no}</p> -->

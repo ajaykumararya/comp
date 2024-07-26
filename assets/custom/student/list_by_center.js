@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function (e) {
     const institue_box = $('select[name="center_id"]');
+    var table;
     institue_box.select2({
         placeholder: "Select a Center",
         templateSelection: optionFormatSecond,
@@ -8,11 +9,14 @@ document.addEventListener('DOMContentLoaded', function (e) {
         // alert('yes');
         var center_id = $(this).val();
         // session_id.html(emptyOption);
+        
         if (center_id) {
             if ( $.fn.dataTable.isDataTable('#list-students') ) {
-                $('#list-students').destroy();
+                // console.log(table);
+                table.destroy();
             }
-            list_students('all',center_id);
+            table = list_students('all',center_id);
+            // log(table);
         }
     });
 });

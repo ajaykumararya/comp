@@ -582,7 +582,7 @@ const optionFormatSecond = (item) => {
     if (item.element.hasAttribute('data-price_show')) {
         var priceShow = item.element.getAttribute('data-price_show');
         var price = item.element.getAttribute('data-course_fee');
-        if(priceShow){
+        if (priceShow) {
             template += ` <span class="fs-5 text-success">${inr} ${price}</span>`;
         }
     }
@@ -716,7 +716,7 @@ const isValidWallet = (balance = 0) => {
     return true;
 }
 const low_balance_message = () => {
-    SwalWarning('Uh oh!','Your wallet balance is running low.');
+    SwalWarning('Uh oh!', 'Your wallet balance is running low.');
 }
 document.addEventListener('DOMContentLoaded', loadSomeFuncation);
 // loadSomeFuncation();
@@ -1872,7 +1872,7 @@ const checkValue = (array, value) => {
     }
     return false; // Value not found
 }
-const list_students = (admission_status = 0,center_id = 0) => {
+const list_students = (admission_status = 0, center_id = 0) => {
     // alert(2);
     var my__table = $(document).find('#list-students');
     var dt = my__table.DataTable({
@@ -1880,8 +1880,8 @@ const list_students = (admission_status = 0,center_id = 0) => {
         'ajax': {
             'url': ajax_url + 'student/list',
             'data': {
-                admission_status : admission_status,
-                center_id : center_id
+                admission_status: admission_status,
+                center_id: center_id
             },
             'type': 'POST',
             success: function (d) {
@@ -1969,17 +1969,18 @@ const list_students = (admission_status = 0,center_id = 0) => {
                     button_html += `<a href="${base_url}student/profile/${student_id}" class="btn btn-light-primary btn-sm">
                                         <i class="fa fa-eye"></i> View
                                     </a>`;
-                    if (admission_status == 1) {
-                        button_html += `
+                    if (admission_status != 'all') {
+                        if (admission_status == 1) {
+                            button_html += `
                             <button class="btn btn-light-warning btn-sm pending change-status">
                                     <i class="fa fa-arrow-circle-left"></i> Pending
                             </button>
                             <button class="btn btn-light-danger btn-sm cancel change-status">
                                 <i class="fa fa-trash"></i> Cancel
                             </button>`;
-                    }
-                    else if (admission_status == 2) {
-                        button_html += `
+                        }
+                        else if (admission_status == 2) {
+                            button_html += `
                                 <button class="btn btn-light-success btn-sm approve change-status">
                                     <i class="fa fa-check"></i> Approve
                                 </button>
@@ -1989,15 +1990,16 @@ const list_students = (admission_status = 0,center_id = 0) => {
                                 <button class="btn btn-light-danger btn-sm delete change-status">
                                     <i class="fa fa-trash"></i> Cancel
                                 </button>`;
-                    }
-                    else {
-                        button_html += `
+                        }
+                        else {
+                            button_html += `
                                 <button class="btn btn-light-success btn-sm approve change-status">
                                     <i class="fa fa-check"></i> Approve
                                 </button>
                                 <button class="btn btn-light-danger btn-sm cancel change-status">
                                     <i class="fa fa-trash"></i> Cancel
                                 </button>`;
+                        }
                     }
                     return `${button_html}</div>`;
                 }
@@ -2030,8 +2032,8 @@ const list_students = (admission_status = 0,center_id = 0) => {
         else {
             title = 'Cancel';
             type = 2;
-        }       
-        if(login_type  == 'center' && $('#wallet_system_course_wise').length){
+        }
+        if (login_type == 'center' && $('#wallet_system_course_wise').length) {
             SwalWarning(`You can't change their status, please conatct administrator`);
             return false;
         }
@@ -2051,7 +2053,8 @@ const list_students = (admission_status = 0,center_id = 0) => {
                 });
             }
         });
-    })
+    });
+    return dt;
 }
 $(document).on('click', '.advanced-set-page', function () {
     var drawerEl = document.querySelector("#kt_drawer_example_advanced");
