@@ -182,7 +182,7 @@ table thead, table tbody tr {
                     <th>Percentage</th>
                     <td>{total_min_theory}</td>
                     <td>{total_max_theory}</td>
-                    <td><b class="fw">TOTAL</b> {total}</td>
+                    <td><b class="fw">TOTAL</b> {obtain_total}</td>
                 </tr>
                 <tr>
                     <td>{grade}</td>

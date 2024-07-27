@@ -91,7 +91,7 @@
     <p class="position-absolute" style="top:3.6%;left:32%;width:120px">{certiticate_id}</p>
     <p class="position-absolute" style="top:3.6%;left:85%;width:122px">{enrollment_no}</p>
 
-    <div class="position-absolute text-center " style="width:550px;left:43%;top:41%;">{student_name}</div>
+    <div class="position-absolute text-center " style="left:48%;top:41%;">{student_name}</div>
     <div class="position-absolute text-center " style="width:340px;top:45.3%;left:37%">{father_name}</div>
     
     <!-- <div class="position-absolute text-center" style="width:450px;left:20%;top:56.5%;">{enrollment_no}</div> -->
