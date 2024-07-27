@@ -1,6 +1,6 @@
 <style>
     <?php
-    if (PATH == 'zcc') {
+    if (in_array(PATH,['zcc','sewaedu']) {
         ?>
         :root {
             --primary: #E22B2B;
