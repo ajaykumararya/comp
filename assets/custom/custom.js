@@ -395,7 +395,7 @@ $.fn.DeleteEvent = function (table_name, title = '', id = 'id') {
     }
     return table;
 }
-$.fn.unDeleteEvent = function (table_name, title = '', id = 'id') {
+$.fn.unDeleteEvent = function (table_name, title = '', id = 'id',field = 'id') {
     var table = this;
     if (table) {
         table.find('.undelete-btn').on('click', function (r) {
@@ -408,7 +408,7 @@ $.fn.unDeleteEvent = function (table_name, title = '', id = 'id') {
                     if (res.isConfirmed) {
                         $.AryaAjax({
                             url: 'undeleted',
-                            data: { field: id, field_value: rowData[id], table_name },
+                            data: { field: field, field_value: rowData[id], table_name },
                         }).then((e) => {
                             mySwal('', 'Record moved successfully..').then((res) => {
                                 if (res.isConfirmed) {
@@ -993,9 +993,9 @@ var handleDeleteRows = (url) => {
                     ).then(function (e) {
                         log(e);
                         // console.log(e);  
-                        deferred.resolve(e.data);
                         if (e.data.status) {
                             toastr.success('Record Deleted Successfully.');
+                            SwalSuccess('Record Deleted Successfully..');
                             parent.remove();
                         }
                         else {
@@ -1010,6 +1010,7 @@ var handleDeleteRows = (url) => {
                                 },
                             });
                         }
+                        deferred.resolve(e.data);
                     })
                         .catch(function (t) {
                             warn(t.message);
@@ -1022,9 +1023,6 @@ var handleDeleteRows = (url) => {
                                 customClass: { confirmButton: "btn btn-primary" },
                             });
                         })
-                        .then(() => {
-                            SwalHideLoading();
-                        });
                 } else if (result.dismiss === 'cancel') {
                     Swal.fire({
                         html: customerName + " was not deleted.",
