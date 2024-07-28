@@ -153,8 +153,8 @@
     <p class="position-absolute " style="top:46.35%;left:58.5%">{center_name}</p>
     <!-- <p class="position-absolute " style="top:37.5%;left:36.5%">{duration} {duration_type}</p>
     <p class="position-absolute " style="top:39.6%;left:36.5%">{dob}</p> -->
-    <div class="position-absolute" style="bottom:10.2%;left:32.4%;">
-        <img src="upload/images/marksheet_{result_id}.png" style="width:60px;" alt="">
+    <div class="position-absolute" style="bottom:8%;left:28.9%;">
+        <img src="upload/images/marksheet_{result_id}.png" style="padding:-4px;width:85px;border:1px solid black" alt="">
     </div>
     <div class="position-absolute" style="top:52%;left:4.3%">
         <table class="table" id="first" border="1" style="width:97.3%" class="position-absolute">
@@ -247,55 +247,7 @@
             </tfoot>
         </table>
     </div>
-    <!-- <div class="position-absolute " style="top:26%;left:10%;width:80%">
-        <table id="first" border="0" style="width:100%">
-            <thead>
-                <tr>
-                    <th class="primary" rowspan="2" width="50%" style="text-align:left;padding-left:35px">SUBJECTS</th>
-                    <th class="primary" colspan="2" style="font-size:11px;padding:4px">MAXIMUM MARKS</th>
-                    <th class="primary lb" colspan="2" style="font-size:11px;padding:4px">MINIMUM MARKS</th>
-                    <th class="primary lb" colspan="3" style="font-size:11px;padding:4px">OBTAINED MARKS</th>
-                </tr>
-                <tr>
-                    <th class="primary b-tb" style="font-size:11px">THEORY</th>
-                    <th class="primary b-tb" style="font-size:11px">PRACTICAL</th>
-                    <th class="primary b-tb lb" style="font-size:11px">THEORY</th>
-                    <th class="primary b-tb" style="font-size:11px">PRACTICAL</th>
-                    <th class="primary b-tb lb" style="font-size:11px">TH.</th>
-                    <th class="primary b-tb" style="font-size:11px">PR.</th>
-                    <th class="primary b-tb" style="font-size:11px">TOTAL</th>
-                </tr>
-            </thead>
-            <tbody>
-                {marks}
-                <tr>
-                    <td class="primary lb" style="text-align:left;padding-left:2px;font-size:12.81px">{subject_name}
-                    </td>
-                    <td class="primary lb" style="font-size:12.81px">{theory_max_marks}</td>
-                    <td class="primary lb" style="font-size:12.81px">{practical_max_marks}</td>
-                    <td class="primary lb" style="font-size:12.81px">{theory_min_marks}</td>
-                    <td class="primary lb" style="font-size:12.81px">{practical_min_marks}</td>
-                    <td class="lb fw" style="font-size:12.819px">{theory_total}</td>
-                    <td class="fw" style="font-size:12.81px">{practical_total}</td>
-                    <td class="fw" style="font-size:12.81px">{total}</td>
-                </tr>
-                {/marks}
-            </tbody>
-            <tfoot>
-                <tr class="fw">
-                    <td class="primary fw" style="font-size:12.81px">TOTAL</td>
-                    <td class="primary lb fw" style="font-size:12.81px">{total_max_theory}</td>
-                    <td class="primary fw" style="font-size:12.81px">{total_max_practical}</td>
-                    <td class="primary fw lb" style="font-size:12.81px">{total_min_theory}</td>
-                    <td class="primary fw" style="font-size:12.81px">{total_min_practical}</td>
-                    <td class="fw lb" style="font-size:12.81px"></td>
-                    <td></td>
-                    <td class="fw" style="font-size:12.81px">{obtain_total}</td>
-                </tr>
-            </tfoot>
-        </table>
-    </div> -->
-    <!-- <p class="position-absolute" style="bottom:23%;left:32%;font-size:15px">{division}</p> -->
+ 
     <p class="position-absolute" style="bottom:16.5%;left:40%;width:100px">{obtain_total}</p>
     <p class="position-absolute" style="bottom:16.5%;left:66%">{grade} / {percentage} %</p>
 </body>

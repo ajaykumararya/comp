@@ -38,9 +38,8 @@
 
         #photo {
             z-index: 999;
-            bottom: 9.3%;
-            left: 32.6%;
-            padding:2px
+            bottom: 10%;
+            left: 30%;
         }
         #photo1
         {
@@ -74,8 +73,7 @@
 <body class="position-relative">
     <img id="back-image" class="position-relative" src="{document_path}/certificate.png">
     <div class="position-absolute" id="photo">
-        <img src="upload/images/student_certificate_{certiticate_id}.png" style="width: 72.1px;
-          ">
+        <img src="upload/images/student_certificate_{certiticate_id}.png" style="width:110px;height:110px;border:1px solid black;padding:-5px">
     </div>
     <div class="position-absolute" id="photo1">
         <img src="upload/{image}" style="width:90px;height:94px">
