@@ -322,7 +322,7 @@ class Document extends MY_Controller
             
             $this->ki_theme->generate_qr($this->id, 'student_certificate', current_url());
             if (PATH == 'haptronworld') {
-                $certificate['certiticate_id'] = (50000 + $this->id);
+                $certificate['serial_no'] = (50000 + $this->id);
                 $this->mypdf->addPage('L');
             }
             // $getLastExam = $this->student_model->last_marksheet($certificate['course_id']);

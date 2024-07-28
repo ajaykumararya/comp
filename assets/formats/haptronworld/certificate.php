@@ -87,7 +87,7 @@
     </div> -->
 
 
-    <p class="position-absolute text-center" style="top:3.6%;left:32%;width:120px">{certiticate_id}</p>
+    <p class="position-absolute text-center" style="top:3.6%;left:32%;width:120px">{serial_no}</p>
     <p class="position-absolute text-center" style="top:3.6%;left:85%;width:122px">{enrollment_no}</p>
 
     <div class="position-absolute " style="left:48%;top:41%;">{student_name}</div>
