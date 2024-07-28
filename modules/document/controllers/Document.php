@@ -124,6 +124,8 @@ class Document extends MY_Controller
                 $admissionTime = strtotime($get->row('admission_date'));
                 // $this->set_data('from_date', date('M Y', $admissionTime));
                 $this->set_data('serial_no', date("Y", $admissionTime) . str_pad($get->row('student_id'), 3, '0', STR_PAD_LEFT));
+            elseif(in_array(PATH,['haptronworld'])):
+                $this->set_data('serial_no','IN' . (100 + $result_id));
             endif;
             // echo $get->row('result_id');
             // pre($get_subect_numers->result_array(),true);
@@ -320,6 +322,7 @@ class Document extends MY_Controller
             
             $this->ki_theme->generate_qr($this->id, 'student_certificate', current_url());
             if (PATH == 'haptronworld') {
+                $certificate['certiticate_id'] = (50000 + $this->id);
                 $this->mypdf->addPage('L');
             }
             // $getLastExam = $this->student_model->last_marksheet($certificate['course_id']);
@@ -335,7 +338,7 @@ class Document extends MY_Controller
     function franchise_certificate()
     {
         $get = $this->center_model->get_center($this->id);
-        $this->set_data('certificate_id', $this->id);
+        // $this->set_data('certificate_id', $this->id);
         if ($get->num_rows()) {
             $data = $get->row_array();
             if ($data['status'] && $data['isPending'] == 0 && $data['isDeleted'] == 0) {

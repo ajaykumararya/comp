@@ -90,7 +90,7 @@
     <div class="position-absolute" id="photo">
         <img src="upload/{image}" style="width:73.3px;height:96px">
     </div>
-    <p class="position-absolute" style="top:2.5%;left:20.3%;width:120px">{result_id}</p>
+    <p class="position-absolute" style="top:2.5%;left:20.3%;width:120px">{serial_no}</p>
     <p class="position-absolute " style="top:2.5%;left:79.5%;width:120px">{enrollment_no}</p>
 
     <p class="position-absolute" style="top:26.7%;left:50%;width:100px"><?=date('Y',strtotime($issue_date))?></p>
