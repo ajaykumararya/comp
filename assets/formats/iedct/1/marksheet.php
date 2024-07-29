@@ -148,6 +148,16 @@ table thead, table tbody tr {
     <div class="position-absolute" style="bottom:7.3%;left:17%;">
         <img src="upload/images/marksheet_{result_id}.png" style="width:90px;" alt="">
     </div>
+    <?php
+    $obtain_total = 0;
+    $total = 0;
+    foreach($marks as $mark){
+        $total += $mark['theory_max_marks'];
+        $obtain_total += $mark['total'];
+    }
+    $per = ($obtain_total / $total * 100 ) ;
+    $grade = $this->ki_theme->grade($per);
+    ?>
     <div class="position-absolute " style="top:30%;left:10%;width:80%">
         <table id="first" border="0" style="width:100%;">
             <thead>
@@ -186,10 +196,11 @@ table thead, table tbody tr {
                 </tr>
                 <tr>
                     <td>{grade}</td>
-                    <td>{percentage}%</td>
+                    <td><?=number_format($per,2)?>%</td>
                     <th>RESULT</th>
                     <td>
                         <?php
+                        
                         $divisions = ['A' => '1ST', 'B' => '2ND', 'C' => '3RD', 'D' => '4TH'];
                         echo isset($divisions[$grade]) ? 'PASS' : 'FAIL';
 
