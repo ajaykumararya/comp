@@ -178,6 +178,40 @@
             </div>
         </div>
     </div>
+
+    <div class="col-md-12 mt-4">
+        <div class="{card_class}">
+            <div class="card-header">
+                <h3 class="card-title"><i class="fa fa-list text-dark fw-bold fs-1"></i> &nbsp; List All Deleted Subjects</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered" id="deleted-list-subjects">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">#</th>
+                                <th rowspan="2">Code</th>
+                                <th rowspan="2">Name</th>
+                                <th rowspan="2">Course</th>
+                                <th class="text-center w-10" colspan="2">Theory</th>
+                                <th class="text-center w-10" colspan="2">Practical</th>
+                                <th rowspan="2">Action</th>
+                            </tr>
+                            <tr>
+
+                                <th style="width:65px!important">Min Marks</th>
+                                <th style="width:65px!important">Max Marks</th>
+
+                                <th style="width:65px!important">Min Marks</th>
+                                <th style="width:65px!important">Max Marks</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script id="formTemplate" type="text/x-handlebars-template">

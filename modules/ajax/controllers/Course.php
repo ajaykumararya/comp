@@ -44,13 +44,24 @@ class Course extends Ajax_Controller
         } else
             $this->response('html', 'Action id undefined');
     }
-    function param_delete(){
+    function param_delete()
+    {
         if ($this->post('course_id')) {
-            $this->response(
-                'status',
-                $this->db->where('id', $this->post('course_id'))->delete('course')
-            );
-            $this->response('html', 'Course Permanently Deleted successfully.');
+            $get = $this->db->where('course_id', $this->post('course_id'))->get('students');
+            if ($get->num_rows()) {
+                $this->response('html', 'There are ' . $get->num_rows() . ' students associated with this course, first delete them.');
+            } else {
+                $get = $this->db->where('course_id', $this->post('course_id'))->get('subjects');
+                if ($get->num_rows()) {
+                    $this->response('html', 'There are ' . $get->num_rows() . ' Subjects associated with this course, first delete them.');
+                } else {
+                    $this->response(
+                        'status',
+                        $this->db->where('id', $this->post('course_id'))->delete('course')
+                    );
+                    $this->response('html', 'Course Permanently Deleted successfully.');
+                }
+            }
         } else
             $this->response('html', 'Action id undefined');
     }
@@ -59,7 +70,7 @@ class Course extends Ajax_Controller
         $list = $this->db->
             select('c.*,c.id as course_id,cat.title as category')
             ->from('course as c')
-            ->join('course_category as cat', 'cat.id = c.category_id','left')
+            ->join('course_category as cat', 'cat.id = c.category_id', 'left')
             ->where('c.isDeleted', 0)
             ->get();
         $data = [];
@@ -68,11 +79,12 @@ class Course extends Ajax_Controller
         // if()
         $this->response('data', $data);
     }
-    function delete_list(){
+    function delete_list()
+    {
         $list = $this->db->
             select('c.*,c.id as course_id,cat.title as category')
             ->from('course as c')
-            ->join('course_category as cat', 'cat.id = c.category_id','left')
+            ->join('course_category as cat', 'cat.id = c.category_id', 'left')
             ->where('c.isDeleted', 1)
             ->get();
         $data = [];
@@ -131,10 +143,23 @@ class Course extends Ajax_Controller
     {
         $this->response('data', $this->student_model->system_subjects()->result());
     }
+    function list_deleted_subjects(){
+        $this->response('data',$this->student_model->system_subjects(1)->result());
+    }
     function subject_delete()
     {
         $this->db->where('id', $this->post('id'))->update('subjects', ['isDeleted' => 1]);
         $this->response('status', true);
+    }
+    function parma_subject_delete()
+    {
+        $get = $this->db->where('subject_id', $this->post('id'))->get('marks_table');
+        if ($get->num_rows()) {
+            $this->response('html', 'There are ' . $get->num_rows() . ' Marksheets associated with this Subject, first delete them.');
+        } else {
+            $this->db->where('id', $this->post('id'))->delete('subjects');
+            $this->response('status', true);
+        }
     }
     /*
     function fetch_course_fees_form()
@@ -171,13 +196,13 @@ class Course extends Ajax_Controller
         if ($category_id) {
             $get = $this->db->where('category_id', $category_id)->get('course');
             if ($get->num_rows()) {
-                $this->response('html','This Category have '.$get->num_rows().' Course(s), before their subjects delete then delete category');
+                $this->response('html', 'This Category have ' . $get->num_rows() . ' Course(s), before their subjects delete then delete category');
             } else {
                 $this->response(
                     'status',
                     $this->db->where('id', $category_id)->delete('course_category')
-                );                
-            $this->response('html', 'Data Delete successfully.');
+                );
+                $this->response('html', 'Data Delete successfully.');
             }
         } else
             $this->response('html', 'Action id undefined');

@@ -355,12 +355,12 @@ class Student_model extends MY_Model
         return $this->db->where('isDeleted', 0)
             ->get('course');
     }
-    function system_subjects()
+    function system_subjects($deleted = 0)
     {
         return $this->db->select('*,s.id as subject_id,s.duration as subject_duration')
             ->from('subjects as s')
             ->join('course as c', 'c.isDeleted = "0" and s.course_id = c.id')
-            ->where('s.isDeleted', 0)
+            ->where('s.isDeleted', $deleted)
             ->get();
     }
     function total_course_fee($institute_id, $course_id = 0)
