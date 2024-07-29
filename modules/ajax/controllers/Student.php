@@ -59,7 +59,7 @@ class Student extends Ajax_Controller
     }
     function add()
     {
-        if ($walletSystem = ( CHECK_PERMISSION('WALLET_SYSTEM') && $this->center_model->isCenter())) {
+        if ($walletSystem = (CHECK_PERMISSION('WALLET_SYSTEM') && $this->center_model->isCenter())) {
             $deduction_amount = $this->ki_theme->get_wallet_amount('student_admission_fees');
             $close_balance = $this->ki_theme->wallet_balance();
             if ($close_balance < 0 or $close_balance > $deduction_amount) {
@@ -68,9 +68,11 @@ class Student extends Ajax_Controller
             }
         }
 
-        if($walletSystem = ( CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE') )){
-            $deduction_amount = $this->center_model->get_assign_courses($this->post('center_id'),
-            ['course_id' => $this->post('course_id')])->row('course_fee');
+        if ($walletSystem = (CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE'))) {
+            $deduction_amount = $this->center_model->get_assign_courses(
+                $this->post('center_id'),
+                ['course_id' => $this->post('course_id')]
+            )->row('course_fee');
             $close_balance = $this->ki_theme->wallet_balance();
             if ($close_balance < 0 or $close_balance > $deduction_amount) {
                 $this->response('html', 'Wallet Balance is Low..');
@@ -116,7 +118,7 @@ class Student extends Ajax_Controller
         if ($this->form_validation->run()) {
             $this->db->insert('students', $data);
             $student_id = $this->db->insert_id();
-            if($walletSystem){
+            if ($walletSystem) {
                 $data = [
                     'center_id' => $this->center_model->loginId(),
                     'amount' => $deduction_amount,
@@ -130,8 +132,8 @@ class Student extends Ajax_Controller
                     'status' => 1,
                     'wallet_status' => 'debit'
                 ];
-                $this->db->insert('wallet_transcations',$data);
-                $this->center_model->update_wallet($data['center_id'],$close_balance);
+                $this->db->insert('wallet_transcations', $data);
+                $this->center_model->update_wallet($data['center_id'], $close_balance);
             }
             if (CHECK_PERMISSION('REFERRAL_ADMISSION') && $this->center_model->isAdmin() && isset($_POST['referral_id'])) {
                 $this->db->insert('referral_coupons', [
@@ -147,7 +149,7 @@ class Student extends Ajax_Controller
             );
         } else
             $this->response('html', $this->errors());
-            
+
     }
     function genrate_a_new_rollno()
     {
@@ -416,7 +418,7 @@ class Student extends Ajax_Controller
     function create_marksheet()
     {
         // $this->response($this->post());
-        if ($walletSystem = ( CHECK_PERMISSION('WALLET_SYSTEM') && $this->center_model->isCenter())) {
+        if ($walletSystem = (CHECK_PERMISSION('WALLET_SYSTEM') && $this->center_model->isCenter())) {
             $deduction_amount = $this->ki_theme->get_wallet_amount('student_marksheet_fees');
             $close_balance = $this->ki_theme->wallet_balance();
             if ($close_balance < 0) {
@@ -460,7 +462,7 @@ class Student extends Ajax_Controller
                 $this->db->insert_batch('marks_table', $subjects);
             }
 
-            if($walletSystem){
+            if ($walletSystem) {
                 $data = [
                     'center_id' => $this->center_model->loginId(),
                     'amount' => $deduction_amount,
@@ -474,8 +476,8 @@ class Student extends Ajax_Controller
                     'status' => 1,
                     'wallet_status' => 'debit'
                 ];
-                $this->db->insert('wallet_transcations',$data);
-                $this->center_model->update_wallet($data['center_id'],$close_balance);
+                $this->db->insert('wallet_transcations', $data);
+                $this->center_model->update_wallet($data['center_id'], $close_balance);
             }
 
             $this->response('subjects', $subjects);
@@ -548,9 +550,8 @@ class Student extends Ajax_Controller
                 if ($get->num_rows()) {
                     $this->response('status', true);
                     $this->response('html', '<div class="alert alert-success">The course <b>' . $course_name . '</b> has been completed, you can generate the certificate.</div>');
-                }
-                else
-                $this->response('html', '<div class="alert alert-danger">The course <b>' . $course_name . '</b> is not completed yet</div>');
+                } else
+                    $this->response('html', '<div class="alert alert-danger">The course <b>' . $course_name . '</b> is not completed yet</div>');
             }
         } else
             $this->response('html', '<div class="alert alert-danger">The course <b>' . $course_name . '</b> Certificate Already Generated.</div>');
@@ -559,7 +560,7 @@ class Student extends Ajax_Controller
     {
         // $this->response($this->post());
         $data = $this->post();
-        if ($walletSystem = ( CHECK_PERMISSION('WALLET_SYSTEM') && $this->center_model->isCenter())) {
+        if ($walletSystem = (CHECK_PERMISSION('WALLET_SYSTEM') && $this->center_model->isCenter())) {
             $deduction_amount = $this->ki_theme->get_wallet_amount('student_certificate_fees');
             $close_balance = $this->ki_theme->wallet_balance();
             if ($close_balance < 0) {
@@ -573,7 +574,7 @@ class Student extends Ajax_Controller
 
             $this->db->insert('student_certificates', $data);
             $certificate_id = $this->db->insert_id();
-            if($walletSystem){
+            if ($walletSystem) {
                 $data = [
                     'center_id' => $this->center_model->loginId(),
                     'amount' => $deduction_amount,
@@ -587,8 +588,8 @@ class Student extends Ajax_Controller
                     'status' => 1,
                     'wallet_status' => 'debit'
                 ];
-                $this->db->insert('wallet_transcations',$data);
-                $this->center_model->update_wallet($data['center_id'],$close_balance);
+                $this->db->insert('wallet_transcations', $data);
+                $this->center_model->update_wallet($data['center_id'], $close_balance);
             }
             $this->response('status', true);
         }
@@ -604,10 +605,15 @@ class Student extends Ajax_Controller
     }
     function delete_admit_card($id)
     {
-        $this->response(
-            'status',
-            $this->db->where('id', $id)->delete('admit_cards')
-        );
+        $check = $this->db->where('admit_card_id', $id)->get('marksheets');
+        if ($check->num_rows()) {
+            $this->response('html','This Admit Card used in Marksheet, please delete marksheet first.');
+        } else {
+            $this->response(
+                'status',
+                $this->db->where('id', $id)->delete('admit_cards')
+            );
+        }
     }
     function delete_marksheet($id)
     {
@@ -637,14 +643,15 @@ class Student extends Ajax_Controller
     {
         $this->response('data', $this->student_model->study_materials()->result_array());
     }
-    function list_assign_students(){
-        $students = $this->student_model->get_switch('assign_study_student_list',[
+    function list_assign_students()
+    {
+        $students = $this->student_model->get_switch('assign_study_student_list', [
             'course_id' => $this->post("course_id"),
             'center_id' => $this->post('center_id')
         ]);
-        $this->set_data('study_id',$this->post('id'));
+        $this->set_data('study_id', $this->post('id'));
         $this->set_data('students', $students->result_array());
-        $this->response('status',($students->num_rows() > 0));
+        $this->response('status', ($students->num_rows() > 0));
         $this->response('html', $this->template('list-study-assign-students'));
     }
 
@@ -669,10 +676,11 @@ class Student extends Ajax_Controller
         $this->set_data($this->student_model->get_coupon_by_id($this->post('id'))->row_array());
         $this->response('form', $this->template('update-coupon-status'));
     }
-    function get_id_card_url(){
+    function get_id_card_url()
+    {
         $this->response([
             'status' => true,
-            'url' => base_url('id-card/'.$this->ki_theme->encrypt($this->post('student_id')))
+            'url' => base_url('id-card/' . $this->ki_theme->encrypt($this->post('student_id')))
         ]);
     }
 
