@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                                     // form.reset(),
                                     SwalHideLoading();
                                     result_box.removeClass('fade').html(e.data.html);
-
+                                    
                                 }
                                 else {
 

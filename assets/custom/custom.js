@@ -1964,7 +1964,7 @@ const list_students = (admission_status = 0, center_id = 0) => {
                     var student_id = row.student_id;
                     // console.log(data);
                     var button_html = `<div class="btn-group" data-id="${student_id}">`;
-                    button_html += `<a href="${base_url}student/profile/${student_id}" class="btn btn-light-primary btn-sm">
+                    button_html += `<a href="${base_url}student/profile/${student_id}" target="_blank" class="btn btn-light-primary btn-sm">
                                         <i class="fa fa-eye"></i> View
                                     </a>`;
                     if (admission_status != 'all') {

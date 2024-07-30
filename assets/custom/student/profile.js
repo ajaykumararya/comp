@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function (d) {
     const update_profile = document.getElementById('save-student-data');
     const course_box = $('select[name="course_id"]');
+    select2Student('select[name="student_id"]');
     if (update_profile) {
         var validation = MyFormValidation(update_profile);
         validation.addField('name', {

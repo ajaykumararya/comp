@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        {search_button}
+                        {search_button}                        
                     </div>
                 </div>
             </div>

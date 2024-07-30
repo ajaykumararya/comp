@@ -53,6 +53,15 @@
                                 <th>Mobile</th>
                                 <td>{contact_number}</td>
                             </tr>
+                            <?php
+                            if($this->center_model->isAdminOrCenter()){
+                                echo '<tr>
+                                    <td colspan="2">
+                                        <a href="' . base_url('student/profile/' . $student_id) . '"  target="_blank" class="btn btn-xs btn-sm btn-info w-100"> <i class="fa fa-user"></i> View Profile</a>
+                                    </td>
+                                </tr>';
+                            }
+                            ?>
                         </table>
                         <!-- <p class="mb-0"><strong class="pr-1">Roll No:</strong>&nbsp;{roll_no}</p>
                         <p class="mb-0 text-capitalize"><strong class="pr-1">Gender:</strong>&nbsp; {gender}</p>
