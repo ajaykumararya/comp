@@ -49,21 +49,21 @@ class Course extends Ajax_Controller
         if ($this->post('course_id')) {
             $get = $this->db->where('course_id', $this->post('course_id'))->get('students');
             if ($get->num_rows()) {
-                $this->response('html', 'There are ' . $get->num_rows() . ' students associated with this course, first delete them.');
+                $this->response('error', 'There are ' . $get->num_rows() . ' students associated with this course, first delete them.');
             } else {
                 $get = $this->db->where('course_id', $this->post('course_id'))->get('subjects');
                 if ($get->num_rows()) {
-                    $this->response('html', 'There are ' . $get->num_rows() . ' Subjects associated with this course, first delete them.');
+                    $this->response('error', 'There are ' . $get->num_rows() . ' Subjects associated with this course, first delete them.');
                 } else {
                     $this->response(
                         'status',
                         $this->db->where('id', $this->post('course_id'))->delete('course')
                     );
-                    $this->response('html', 'Course Permanently Deleted successfully.');
+                    $this->response('error', 'Course Permanently Deleted successfully.');
                 }
             }
         } else
-            $this->response('html', 'Action id undefined');
+            $this->response('error', 'Action id undefined');
     }
     function list()
     {
@@ -155,7 +155,7 @@ class Course extends Ajax_Controller
     {
         $get = $this->db->where('subject_id', $this->post('id'))->get('marks_table');
         if ($get->num_rows()) {
-            $this->response('html', 'There are ' . $get->num_rows() . ' Marksheets associated with this Subject, first delete them.');
+            $this->response('error', 'There are ' . $get->num_rows() . ' Marksheets associated with this Subject, first delete them.');
         } else {
             $this->db->where('id', $this->post('id'))->delete('subjects');
             $this->response('status', true);

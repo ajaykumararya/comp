@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 var rowData = delete_table.DataTable().row($(this).closest('tr')).data();
                 // log(rowData);
                 SwalWarning('Confirmation!', 'Are you sure for permanently delete .', true, 'Delete IT').then((r) => {
-                    log(r);
+                    // log(r);
                     if (r.isConfirmed) {
                         $.AryaAjax({
                             url: 'course/param_delete',

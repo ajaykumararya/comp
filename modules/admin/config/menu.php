@@ -105,7 +105,7 @@ $config['menu'] = array(
                     'label' => 'Student ID Card',
                     'condition' => CHECK_PERMISSION('STUDENT_ID_CARD'),
                     'type' => 'student_id_card',
-                    'icon' => array('user-square',3),
+                    'icon' => array('user-square', 3),
                     'url' => 'student/get-id-card'
                 ),
                 array(
@@ -192,7 +192,7 @@ $config['menu'] = array(
             'label' => 'Attendance',
             'type' => 'attendance',
             'icon' => array('double-check', 2),
-            'condition' => (OnlyForAdmin() && CHECK_PERMISSION('ATTENDANCE')) or CHECK_PERMISSION('CENTRE_ATTENDATION_FUNCTION'), //centre_attendation_function
+            'condition' => (OnlyForAdmin() && CHECK_PERMISSION('ATTENDANCE')) or (CHECK_PERMISSION('CENTRE_ATTENDATION_FUNCTION') && CHECK_PERMISSION('ATTENDANCE')), //centre_attendation_function
             'submenu' => array(
                 array(
                     'label' => 'Student Attendance',
@@ -208,7 +208,7 @@ $config['menu'] = array(
                 )
             )
         ),
-       
+
         array(
             'label' => 'Admit Card',
             'type' => 'stduent_admit_card',
@@ -299,12 +299,14 @@ $config['exam_menu'] = array(
                 array(
                     'url' => 'exam/add',
                     'label' => 'Create',
+                    'type' => 'create_online_exam',
                     'icon' => array('plus', 2)
                 ),
                 array(
                     'url' => 'exam/list',
                     'label' => 'List',
-                    'icon' => array('tablet-text-up', 2)
+                    'icon' => array('tablet-text-up', 2),
+                    'type' => 'list_online_exam'
                 )
             )
         ),
@@ -317,12 +319,14 @@ $config['exam_menu'] = array(
                 array(
                     'url' => 'exam/assign-to-center',
                     'label' => 'To Center',
-                    'icon' => array('cheque', 7)
+                    'icon' => array('cheque', 7),
+                    'type' => 'assign_exam_to_center'
                 ),
                 array(
                     'url' => 'exam/assign-to-student',
                     'label' => 'To Student',
-                    'icon' => array('cheque', 7)
+                    'icon' => array('cheque', 7),
+                    'type' => 'assign_exam_to_student'
                 )
             )
         ),
@@ -452,6 +456,27 @@ $config['cms_setting'] = array(
     'title' => 'CMS',
     'condition' => OnlyForAdmin(),
     'menu' => array(
+        array(
+            'label' => 'Manage Role User',
+            'icon' => array('people', 5),
+            'type' => 'manage_role_user',
+            'condition' => CHECK_PERMISSION('ROLE_SYSTEM'),
+            'submenu' => array(
+                array(
+                    'label' => 'Role Category',
+                    'type' => 'manage_role_category',
+                    'icon' => array('chart', 2),
+                    'url' => 'admin/manage-role-category',
+                ),
+                array(
+                    'label' => 'Manage User',
+                    'type' => 'manage_user',
+                    'icon' => array('people', 5),
+                    'url' => 'admin/manage-role-account'
+                )
+
+            )
+        ),
         array(
             'label' => 'Setting',
             'type' => 'cms_setting',

@@ -42,7 +42,9 @@ class Admin extends MY_Controller
     function wallet_history(){
         $this->view('wallet-history',['isValid' => true]);
     }
-
+    function manage_role_category(){
+        $this->view('manage-role-category');
+    }
     function test(){
         echo $this->ki_theme->wallet_balance();
     }

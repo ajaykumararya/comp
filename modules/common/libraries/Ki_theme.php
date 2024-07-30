@@ -623,10 +623,10 @@ class Ki_theme
         $id = 'clipboard-' + mt_rand();
         return '<div class="d-flex align-items-center flex-wrap">
                     <!--begin::Input-->
-                    <div id="' . $id . '" class="me-5">This is a sample static text string to copy!</div>
+                    <div id="" class="me-5">This is a sample static text string to copy!</div>
                     <!--end::Input-->
                     <!--begin::Button-->
-                    <button class="btn btn-icon my-clipboard btn-sm btn-light" data-clipboard-target="#' . $id . '">
+                    <button class="btn btn-icon my-clipboard btn-sm btn-light" data-clipboard-target="#">
                         <i class="ki-duotone ki-copy fs-2 text-muted"></i>
                     </button>
                     <!--end::Button-->
@@ -1076,6 +1076,53 @@ class Ki_theme
                 $html .= '</div>';
             }
             $html .= '</div>';
+        }
+        return $html;
+    }
+
+    function generate_permission($menuItems, $type = 'menu', $menuType = '')
+    {
+        $html = '';
+        foreach ($menuItems as $menuItem) {
+            
+            if (isset($menuItem['condition'])) {
+                if (!$menuItem['condition']) {
+                    continue;
+                }
+            }
+            
+            $disabled = $type == 'menu' ? '' : 'disabled';
+            if (isset($menuItem['submenu'])) {
+                $html .= '  
+                    <div class="arya-menu">
+	                    <div class="col-md-12">
+    	                    <label style="margin-bottom:3px" class="form-check form-switch form-check-custom form-check-solid pulse pulse-success" for="d-'.$menuItem['type'].'">
+    							<input '.$disabled.' class="form-check-input w-30px h-20px parent-input '.($type == 'menu' ? '' : 'check-input-'.$menuItem['type']).'" type="checkbox" value="'.$menuItem['type'].'" name="permission[]" id="d-'.$menuItem['type'].'">
+    							<span class="pulse-ring ms-n1"></span>
+    							<span class="form-check-label text-gray-600 fs-7">' . $menuItem['label'] . '</span>
+    						</label>
+    					</div>
+    					<div class="col-md-12 row" style="    padding-left: 43px; ">';
+                $html .= $this->generate_permission($menuItem['submenu'], 'submenu', $menuType);
+                $html .= '</div></div>';
+            }
+            else{
+                // $html .= $menuItem['label'] .' - '.(isset($menuItem['type']) ? $menuItem['type'] : 'nn').'<br>';
+                
+                $html .= '
+    					                <div class="col-md-4">
+    					                    <label style="margin-bottom:3px" class="form-check form-switch form-check-custom form-check-solid pulse pulse-success" for="d-'.$menuItem['type'].'">
+                    							<input '.$disabled.' class="form-check-input w-30px h-20px child-input check-input-'.$menuItem['type'].'"  type="checkbox" value="'.$menuItem['type'].'"  name="permission[]" id="d-'.$menuItem['type'].'">
+                    							<span class="pulse-ring ms-n1"></span>
+                    							<span class="form-check-label text-gray-600 fs-7">' . $menuItem['label'] . '</span>
+                    						</label>
+    					                
+    					                </div>
+    					            
+    					            ';
+                                    
+            }
+            // $html .= '</div>';
         }
         return $html;
     }
