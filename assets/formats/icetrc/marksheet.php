@@ -104,7 +104,7 @@
     <p class="position-absolute " style="top:31.1%;left:36.5%">{mother_name}</p>
     <p class="position-absolute " style="top:33.2%;left:36.5%">{course_name}</p>
     <p class="position-absolute " style="top:35.3%;left:36.5%">{center_name}</p>
-    <p class="position-absolute " style="top:37.5%;left:36.5%">{marksheet_duration} {duration_type}</p>
+    <p class="position-absolute " style="top:37.5%;left:36.5%">{duration} {duration_type}</p>
     <p class="position-absolute " style="top:39.6%;left:36.5%">{dob}</p>
     <div class="position-absolute" style="bottom:11.1%;left:4.75%;">
         <img src="upload/images/marksheet_{result_id}.png" style="width:110px;height:110px;" alt="">
