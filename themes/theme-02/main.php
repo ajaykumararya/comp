@@ -5,7 +5,9 @@
         :root {
             --primary: #E22B2B;
         }
-
+        .bg_light_green{
+            background-color: var(--primary)!important;
+        }
         <?php
     } else {
         ?>
