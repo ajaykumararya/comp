@@ -711,7 +711,7 @@ const isWalletSystem = () => {
 }
 const isValidWallet = (balance = 0) => {
     if (isWalletSystem()) {
-        return wallet_balance >= balance;
+        return wallet_balance >= 0;
     }
     return true;
 }

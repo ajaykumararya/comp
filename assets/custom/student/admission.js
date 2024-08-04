@@ -258,6 +258,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             e.preventDefault();
             var submitButton = $(this).find('button');
             if (typeof STUDENT_ADMISSION_FEES !== 'undefined') {
+                log(isValidWallet(STUDENT_ADMISSION_FEES));
                 if (!isValidWallet(STUDENT_ADMISSION_FEES)) {
                     low_balance_message();
                     return false;
