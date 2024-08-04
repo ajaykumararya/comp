@@ -78,6 +78,7 @@ $(document).on('ready', function () {
                     Your Roll No. is <b>${r.roll_no}</b>
                 `).then((res) => {
                     if (res.isConfirmed) {
+                        location.reload();
                         // location.href = base_url + 'student';
                     }
                 });

@@ -1,6 +1,14 @@
 <?php
 class Center extends Ajax_Controller
 {
+    function delete_docs(){
+        if(file_exists('upload/'.$this->post('file')))
+            @unlink('upload/'.$this->post('file'));
+        $this->db->where('id',json_decode($this->post('id')))
+                ->set($this->post('field'),null)
+                ->update('centers');
+        $this->response('status',true);
+    }
     function add()
     {
         if ($this->form_validation->run('add_center')) {

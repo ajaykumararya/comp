@@ -61,7 +61,7 @@ class Site extends Site_Controller
                 }
             }
             // exit;
-            $return['content'] = $html;
+            $return['content'] = $html."\n".$this->parser->parse('default_content',$this->public_data,true);
         }
         return array_merge($this->public_data, $return);
     }

@@ -68,6 +68,21 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+    $(document).on("click",'.delete-center-doc',function(){
+        var field = $(this).data('field'),
+            file = $(this).data('file'),
+            id = $(this).data('id');
+        SwalWarning('Confirmation!','Are you delete this file',true,'Delete').then((e) => {
+            if(e.isConfirmed){
+                $.AryaAjax({
+                    url : 'center/delete-docs',
+                    data : {field,file,id},
+                    success_message : 'Document Removed Successfully.',
+                    page_reload : true
+                });
+            }
+        })
+    })
     const set_fees = $('#set-fees');
     if(set_fees.length){
 

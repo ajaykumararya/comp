@@ -29,6 +29,10 @@
                             <i class="fa fa-eye"></i>
                             View
                         </a>
+                        <button type="button" data-id="{center_id}" data-field="adhar" data-file="{adhar}" class="delete-center-doc btn btn-sm btn-active-danger border border-danger border-1">
+                            <i class="fa fa-trash"></i>
+                            Delete
+                        </button>
                         <?php
                     } else {
                         echo badge('Adhar Not Found.', 'danger');
@@ -55,6 +59,10 @@
                             <i class="fa fa-eye"></i>
                             View
                         </a>
+                        <button type="button" data-id="{center_id}" data-field="signature" data-file="{signature}" class="delete-center-doc btn btn-sm btn-active-danger border border-danger border-1">
+                            <i class="fa fa-trash"></i>
+                            Delete
+                        </button>
                         <?php
                     } else {
                         echo badge('Signature Not Found.', 'danger');
@@ -84,6 +92,10 @@
                                 <i class="fa fa-eye"></i>
                                 View
                             </a>
+                            <button type="button" data-id="{center_id}" data-file="{logo}" data-field="logo" class="delete-center-doc btn btn-sm btn-active-danger border border-danger border-1">
+                                <i class="fa fa-trash"></i>
+                                Delete
+                            </button>
                             <?php
                         } else {
                             echo badge('Centre Logo Not Found.', 'danger');
@@ -113,6 +125,10 @@
                             <i class="fa fa-eye"></i>
                             View
                         </a>
+                        <button type="button" data-id="{center_id}" data-file="{address_proof}" data-field="address_proof" class="delete-center-doc btn btn-sm btn-active-danger border border-danger border-1">
+                            <i class="fa fa-trash"></i>
+                            Delete
+                        </button>
                         <?php
                     } else {
                         echo badge('Address Proof Not Found.', 'danger');
@@ -139,6 +155,10 @@
                             <i class="fa fa-eye"></i>
                             View
                         </a>
+                        <button type="button" data-id="{center_id}" data-file="{agreement}" data-field="agreement" class="delete-center-doc btn btn-sm btn-active-danger border border-danger border-1">
+                            <i class="fa fa-trash"></i>
+                            Delete
+                        </button>
                         <?php
                     } else {
                         echo badge('Agreement Not Found.', 'danger');
