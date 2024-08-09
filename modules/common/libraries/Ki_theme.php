@@ -111,29 +111,40 @@ class Ki_theme
             else
                 return 'E';
         }
-        if(PATH == 'isdmedu'){
-            if($score >= 90 && $score <= 100)
+        if (PATH == 'isdmedu') {
+            if ($score >= 90 && $score <= 100)
                 return 'E';
-            else if($score >= 89 && $score <= 70)
+            else if ($score >= 89 && $score <= 70)
                 return 'A+';
-            else if($score >= 69 && $score <= 50)
+            else if ($score >= 69 && $score <= 50)
                 return 'A';
-            else if($score >=49 && $score <= 30)
+            else if ($score >= 49 && $score <= 30)
                 return 'B';
-            else 
+            else
                 return 'C';
         }
-        if(PATH == 'haptronworld'){
-            if($score >= 90 && $score <= 100)
+        if (PATH == 'haptronworld') {
+            if ($score >= 90 && $score <= 100)
                 return 'O';
-            else if($score >= 75 && $score <= 89.9)
+            else if ($score >= 75 && $score <= 89.9)
                 return 'A';
-            else if($score >= 60 && $score <= 74.9)
+            else if ($score >= 60 && $score <= 74.9)
                 return 'B';
-            else if($score >= 45&& $score <= 59.9)
+            else if ($score >= 45 && $score <= 59.9)
                 return 'C';
-            else 
+            else
                 return 'D';
+        }
+        if (PATH == 'sewaedu') {
+            if ($score >= 90 && $score <= 100)
+                return 'A+';
+            else if ($score >= 70 && $score <= 89.9)
+                return 'A';
+            else if ($score >= 50 && $score <= 69.9)
+                return 'B';
+            else if ($score >= 30 && $score <= 49.9)
+                return 'C';
+            return 'FAIL';
         }
     }
     function generate_qr($id = 0, $type = '', $data = '')
@@ -1084,20 +1095,20 @@ class Ki_theme
     {
         $html = '';
         foreach ($menuItems as $menuItem) {
-            
+
             if (isset($menuItem['condition'])) {
                 if (!$menuItem['condition']) {
                     continue;
                 }
             }
-            
+
             $disabled = $type == 'menu' ? '' : 'disabled';
             if (isset($menuItem['submenu'])) {
                 $html .= '  
                     <div class="arya-menu">
 	                    <div class="col-md-12">
-    	                    <label style="margin-bottom:3px" class="form-check form-switch form-check-custom form-check-solid pulse pulse-success" for="d-'.$menuItem['type'].'">
-    							<input '.$disabled.' class="form-check-input w-30px h-20px parent-input '.($type == 'menu' ? '' : 'check-input-'.$menuItem['type']).'" type="checkbox" value="'.$menuItem['type'].'" name="permission[]" id="d-'.$menuItem['type'].'">
+    	                    <label style="margin-bottom:3px" class="form-check form-switch form-check-custom form-check-solid pulse pulse-success" for="d-' . $menuItem['type'] . '">
+    							<input ' . $disabled . ' class="form-check-input w-30px h-20px parent-input ' . ($type == 'menu' ? '' : 'check-input-' . $menuItem['type']) . '" type="checkbox" value="' . $menuItem['type'] . '" name="permission[]" id="d-' . $menuItem['type'] . '">
     							<span class="pulse-ring ms-n1"></span>
     							<span class="form-check-label text-gray-600 fs-7">' . $menuItem['label'] . '</span>
     						</label>
@@ -1105,14 +1116,13 @@ class Ki_theme
     					<div class="col-md-12 row" style="    padding-left: 43px; ">';
                 $html .= $this->generate_permission($menuItem['submenu'], 'submenu', $menuType);
                 $html .= '</div></div>';
-            }
-            else{
+            } else {
                 // $html .= $menuItem['label'] .' - '.(isset($menuItem['type']) ? $menuItem['type'] : 'nn').'<br>';
-                
+
                 $html .= '
     					                <div class="col-md-4">
-    					                    <label style="margin-bottom:3px" class="form-check form-switch form-check-custom form-check-solid pulse pulse-success" for="d-'.$menuItem['type'].'">
-                    							<input '.$disabled.' class="form-check-input w-30px h-20px child-input check-input-'.$menuItem['type'].'"  type="checkbox" value="'.$menuItem['type'].'"  name="permission[]" id="d-'.$menuItem['type'].'">
+    					                    <label style="margin-bottom:3px" class="form-check form-switch form-check-custom form-check-solid pulse pulse-success" for="d-' . $menuItem['type'] . '">
+                    							<input ' . $disabled . ' class="form-check-input w-30px h-20px child-input check-input-' . $menuItem['type'] . '"  type="checkbox" value="' . $menuItem['type'] . '"  name="permission[]" id="d-' . $menuItem['type'] . '">
                     							<span class="pulse-ring ms-n1"></span>
                     							<span class="form-check-label text-gray-600 fs-7">' . $menuItem['label'] . '</span>
                     						</label>
@@ -1120,7 +1130,7 @@ class Ki_theme
     					                </div>
     					            
     					            ';
-                                    
+
             }
             // $html .= '</div>';
         }

@@ -84,9 +84,13 @@ class Student extends MY_Controller
     {
         $this->view('list-admit-card');
     }
-    function collect_fees()
+    function collect_fees() // old of collect_student_fees
     {
         $this->view('collect-fees');
+    }
+    function collect_student_fees() // updated from collect_fees
+    {
+        $this->view('collect-student-fees');
     }
     function search_fees_payment()
     {

@@ -176,9 +176,9 @@ $config['menu'] = array(
             'submenu' => array(
                 array(
                     'label' => 'Collect Fee',
-                    'type' => 'collect_fee',
+                    'type' => 'collect_student_fee',
                     'icon' => array('double-check-circle', 4),
-                    'url' => 'student/collect-fees',
+                    'url' => 'student/collect-student-fees',
                 ),
                 array(
                     'label' => 'Search Fee Payment',
