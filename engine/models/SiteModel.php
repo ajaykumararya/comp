@@ -214,7 +214,9 @@ class SiteModel extends MY_Model
         return $this->db->get('contact_us_action');
     }
 
-    function get_contents($type){
+    function get_contents($type,$where = 0){
+        if($where && is_array($where))
+            $this->db->where($where);
         return $this->db->where('type',$type)->get('content');
     }
 }

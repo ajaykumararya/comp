@@ -36,6 +36,12 @@ class Site extends Site_Controller
                                 $html .= $get->row('content');
                         }
                         break;
+                    case 'faculty_category':
+                        if (file_exists(THEME_PATH . 'pages/' . $page->event . EXT))
+                            $html .= $this->parse('pages/' . $page->event, [
+                                'type' => $page->event_id
+                            ], true);
+                        break;
                     case 'page':
                         if (file_exists(THEME_PATH . 'pages/' . $page->event_id . EXT))
                             $html .= $this->parse('pages/' . $page->event_id, [
@@ -61,7 +67,7 @@ class Site extends Site_Controller
                 }
             }
             // exit;
-            $return['content'] = $html."\n".$this->parser->parse('default_content',$this->public_data,true);
+            $return['content'] = $html . "\n" . $this->parser->parse('default_content', $this->public_data, true);
         }
         return array_merge($this->public_data, $return);
     }

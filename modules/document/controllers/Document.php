@@ -321,7 +321,7 @@ class Document extends MY_Controller
             ]);
             
             $this->ki_theme->generate_qr($this->id, 'student_certificate', current_url());
-            if (PATH == 'haptronworld') {
+            if (in_array(PATH,['haptronworld','sewaedu'])) {
                 $certificate['serial_no'] = (50000 + $this->id);
                 $this->mypdf->addPage('L');
             }
@@ -346,7 +346,7 @@ class Document extends MY_Controller
                     $data['state'] = $this->SiteModel->state($data['state_id']);
                     $data['city'] = $this->SiteModel->city($data['city_id']);
                     $output = $this->parse('franchise_certificate', $data);
-                    if(in_array(PATH,['techno','haptronworld'])){
+                    if(in_array(PATH,['techno','haptronworld','sewaedu'])){
                         $this->mypdf->addPage('L');
                     }
                     $this->pdf($output);
@@ -384,6 +384,10 @@ class Document extends MY_Controller
                 alert("' . $message . '");
                 window.close();
             </script>';
+    }
+    function test(){
+        echo "*<br>";
+        echo "&nbsp;*";
     }
 }
 

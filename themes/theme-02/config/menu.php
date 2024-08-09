@@ -5,6 +5,11 @@ $menu = array(
     'icon' => array('file', 3),
     'submenu' => array(
         array(
+            'label' => 'Faculty',
+            'url' => 'cms/static-page/faculty',
+            'icon' => array('file', 3)
+        ),
+        array(
             'label' => 'Usefull buttons',
             'type' => 'usefull-buttons',
             'icon' => array('file',4),
