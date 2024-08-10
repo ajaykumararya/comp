@@ -59,7 +59,7 @@ class Student extends Ajax_Controller
     }
     function add()
     {
-        if ($walletSystem = (CHECK_PERMISSION('WALLET_SYSTEM') && $this->center_model->isCenter())) {
+        if ($walletSystem = ( (CHECK_PERMISSION('WALLET_SYSTEM') && $this->center_model->isCenter()))) {
             $deduction_amount = $this->ki_theme->get_wallet_amount('student_admission_fees');
             $close_balance = $this->ki_theme->wallet_balance();
             if ($close_balance < 0 or $close_balance > $deduction_amount) {
@@ -67,14 +67,13 @@ class Student extends Ajax_Controller
                 exit;
             }
         }
-
-        if ($walletSystem = (CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE'))) {
+        elseif ($walletSystem = (CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE') && $this->center_model->isCenter())) {
             $deduction_amount = $this->center_model->get_assign_courses(
                 $this->post('center_id'),
                 ['course_id' => $this->post('course_id')]
             )->row('course_fee');
             $close_balance = $this->ki_theme->wallet_balance();
-            if ($close_balance < 0 or $close_balance < $deduction_amount) {
+            if ($close_balance < 0 or $close_balance > $deduction_amount) {
                 $this->response('html', 'Wallet Balance is Low..');
                 exit;
             }
@@ -133,6 +132,7 @@ class Student extends Ajax_Controller
                     'wallet_status' => 'debit'
                 ];
                 $this->db->insert('wallet_transcations', $data);
+                $this->response('res',$this->db->insert_id());
                 $this->center_model->update_wallet($data['center_id'], $close_balance);
             }
             if (CHECK_PERMISSION('REFERRAL_ADMISSION') && $this->center_model->isAdmin() && isset($_POST['referral_id'])) {
