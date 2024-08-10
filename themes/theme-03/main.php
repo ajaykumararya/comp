@@ -1,9 +1,10 @@
 <style type="text/css">
     @media only screen and (max-width: 600px) {
-        .topBar{
-            background: white!important;
+        .topBar {
+            background: white !important;
         }
     }
+
     .gray-bg,
     .card,
     .form-control {
@@ -233,9 +234,17 @@
                 </div>
             </div>
             <div class="clearfix copyright text-center">
-                <p>Copyright © All Rights Reserved. {title} {YEAR}.
-                   
-                </p>
+                <?php
+                if (PATH == 'sewaedu') {
+                    echo '<p>Copyrights@ All Right Reserved. This is the official Website of Skill Education & Welfare Association (SEWA) Council of Skill and Vocational Studies Designed by Sewa Tech</p>';
+                } else {
+                    ?>
+                    <p>Copyright © All Rights Reserved. {title} {YEAR}.
+
+                    </p>
+                    <?php
+                }
+                ?>
             </div>
         </div>
         <style type="text/css">
@@ -254,7 +263,7 @@
         </style>
 
         <?php
-        if(PATH != 'haptronworld') {
+        if (PATH != 'haptronworld') {
             ?>
 
             <div class="float-sm">
