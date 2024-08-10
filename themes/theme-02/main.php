@@ -1,13 +1,15 @@
 <style>
     <?php
-    if (in_array(PATH,['zcc','sewaedu'])) {
+    if (in_array(PATH, ['zcc', 'sewaedu'])) {
         ?>
         :root {
             --primary: #E22B2B;
         }
-        .bg_light_green{
-            background-color: var(--primary)!important;
+
+        .bg_light_green {
+            background-color: var(--primary) !important;
         }
+
         <?php
     } else {
         ?>
@@ -422,9 +424,18 @@
                             <script>document.write(new Date().getFullYear())</script> All Rights Reserved by RGYCSM.
                             ||
                             <span><a href="privacy-policy.html" style="color:#ffffff;">Privacy Policy</a></span> -->
-                        <p> Copyright @
-                            <script>document.write(new Date().getFullYear())</script> {copyright}
-                        </p>
+                            <?php
+
+                            if (PATH == 'sewaedu') {
+                                echo '<p>Copyrights@ All Right Reserved. This is the official Website of Skill Education & Welfare Association (SEWA) Council of Skill and Vocational Studies Designed by Sewa Tech</p>';
+                            } else {
+                                ?>
+                            <p> Copyright @
+                                <script>document.write(new Date().getFullYear())</script> {copyright}
+                            </p>
+                            <?php
+                            }
+                            ?>
                         </p>
                     </div>
                     <div class="col-md-6">
