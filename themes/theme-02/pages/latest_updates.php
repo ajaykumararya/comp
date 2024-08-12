@@ -8,6 +8,7 @@
         box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.3);
         height: 40px;
         overflow: hidden;
+        border-radius: 36px;
         background: #0b0a07;
         /*border:1px solid #55410e;*/
     }
@@ -33,7 +34,8 @@
 
     .news-container ul li {
         white-space: nowrap;
-        padding: 12px;
+        padding: 5px;
+        font-size: 25px;
         color: #ffc739;
         position: relative;
         line-height: 1;
@@ -76,15 +78,24 @@
         animation-play-state: paused;
     }
 </style>
-<div class="news-container">
-    <div class="title">
-        <i class="fa fa-newspaper me-2" aria-hidden="true"></i> <?=ES('latest_update_title')?>
-    </div>
+<section class="sec_padd">
+    <div class="row" style="
+    flex-direction: column;
+    padding-left: 47px;
+    padding-right: 45px;
+">
 
-    <ul class="">
-        <li><?=ES('latest_update_desc')?></li>
-    </ul>
-</div>
+        <div class="news-container">
+            <!-- <div class="title">
+        <i class="fa fa-newspaper me-2" aria-hidden="true"></i> <?= ES('latest_update_title') ?>
+    </div> -->
+
+            <ul class="">
+                <li><?= ES('latest_update_desc') ?></li>
+            </ul>
+        </div>
+    </div>
+</section>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const newsContainer = document.querySelector('.news-container');
