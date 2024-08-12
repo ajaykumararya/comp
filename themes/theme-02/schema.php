@@ -4,7 +4,6 @@ if ($isPrimary) {
   if ($sliders->num_rows()) {
     ?>
     <style>
-
       .banner-bg {
         display: block;
       }
@@ -57,6 +56,10 @@ if ($isPrimary) {
           </div>
         </div>
     </section>
+    <?php
+    if (ES('latest_update_show', '0') == '1')
+      echo $this->parser->parse('pages/latest_updates', [], true);
+    ?>
     <?php
   }
 } else {
