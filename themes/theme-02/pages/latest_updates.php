@@ -22,6 +22,7 @@
         padding: 20px 25px;
         color: #0b0a07;
         font-weight: bold;
+        border-radius: 36px;
         z-index: 200;
     }
 
@@ -86,9 +87,15 @@
 ">
 
         <div class="news-container">
-            <!-- <div class="title">
-        <i class="fa fa-newspaper me-2" aria-hidden="true"></i> <?= ES('latest_update_title') ?>
-    </div> -->
+            <?php
+            if (ES('latest_update_title') != '') {
+                ?>
+                <div class="title">
+                    <i class="fa fa-newspaper me-2" aria-hidden="true"></i> &nbsp;<?= ES('latest_update_title') ?>
+                </div>
+                <?php
+            }
+            ?>
 
             <ul class="">
                 <li><?= ES('latest_update_desc') ?></li>
