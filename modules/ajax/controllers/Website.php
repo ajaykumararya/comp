@@ -178,8 +178,8 @@ class Website extends Ajax_Controller
                     }
                 }
             }
-            $data['adhar_front'] = $this->file_up('adhar_front');
-            $data['adhar_back'] = $this->file_up('adhar_back');
+            $data['adhar_front'] = $this->file_up('adhar_card');
+            // $data['adhar_back'] = $this->file_up('adhar_back');
             $data['image'] = $this->file_up('image');
             $data['upload_docs'] = json_encode($upload_docs_data);
             $chk = $this->db->insert('students', $data);
@@ -521,6 +521,56 @@ class Website extends Ajax_Controller
             }
         }
         // $this->response($this->session->userdata());
+    }
+    function send_notification()
+    {
+        $isCenter = $this->center_model->isCenter();
+        $data = [
+            'title' => $this->post('title'),
+            'send_time' => time(),
+            'notify_type' => $this->post('notify_type'),
+            'content' => $_POST['message'],
+            'receiver_id' => $this->post('receiver_id'),
+            'receiver_user' => $this->post('type'),
+            'sender_id' => $isCenter ? $this->center_model->loginId() : 0,
+            'send_by' => $isCenter ? 'center' : 'admin'
+        ];
+        $this->response('status', $this->db->insert('manual_notifications', $data));
+    }
+    function view_notification()
+    {
+        $html = '';
+        $get = $this->db->get_where('manual_notifications', ['id' => $this->post('id')]);
+        if ($get->num_rows()) {
+            $row = $get->row();
+            if ( ($this->student_model->isStudent() && $row->receiver_user == 'student') OR ($this->center_model->isCenter() && $row->receiver_user == 'center'))
+                $this->db->set('seen', 'seen + 1', false)->where('id', $row->id)->update('manual_notifications');
+
+            $html .= '<div class="card card-flush">
+                        <div class="card-header">
+                            <h3 class="card-title">' . $row->title . '</h3>
+                        </div>
+                        <div class="card-body">
+                            ' . $row->content . '
+                        </div>    
+                        <div class="card-footer">
+                            <div class="d-fl    ex flex-stack flex-wrap gap-2 py-5 ps-8 pe-5">
+                                <div class="d-flex align-items-center me-3">
+                                    
+                                </div>
+                                <div class="d-flex align-items-center text-primary">
+                                    <i class="ki-duotone ki-time text-primary fs-3">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                    </i> &nbsp;' . date('d-m-Y h:i A', $row->send_time) . '
+                                </div>
+                            </div>
+                        </div>
+            </div>';
+            $this->response('status',true);
+        } else
+            $html .= alert('Something went wrong, can\'t view this message.', 'danger');
+        $this->response('html', $html);
     }
 }
 ?>

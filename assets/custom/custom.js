@@ -395,7 +395,7 @@ $.fn.DeleteEvent = function (table_name, title = '', id = 'id') {
     }
     return table;
 }
-$.fn.unDeleteEvent = function (table_name, title = '', id = 'id',field = 'id') {
+$.fn.unDeleteEvent = function (table_name, title = '', id = 'id', field = 'id') {
     var table = this;
     if (table) {
         table.find('.undelete-btn').on('click', function (r) {
@@ -2130,6 +2130,36 @@ $(document).on('click', '.advanced-set-page', function () {
         });
     });
 });
+$(document).on('submit', '.send-notification', function (e) {
+    e.preventDefault();
+    $.AryaAjax({
+        data: new FormData(this),
+        url: 'website/send-notification',
+        success_message: 'Data Sent Successfully, Now check list for manage.',
+        page_reload: true
+    }).then((e) => showResponseError(e));
+})
+$('#notification-table').DataTable({
+    order: []
+})
+$(document).on("click", '.view-notification', function () {
+    // alert(6);
+    var tr = $(this).closest('tr');
+    var id = tr.data('id');
+    var type = $(this).data('type');
+    var user = $(this).data('user');
+    $.AryaAjax({
+        url: 'website/view-notification',
+        data: { id, user }
+    }).then((e) => {
+        if (user == login_type)
+            $(tr).removeClass('unseen').removeClass(type).addClass('seen')
+        var drawerEl = document.querySelector("#kt_drawer_view_details_box");
+        KTDrawer.getInstance(drawerEl, { overlay: true }).hide();
+        drawerEl.setAttribute('data-kt-drawer-width', "{default:'300px', 'md': '900px'}");
+        mydrawer('View Message').find('.card-body').html(e.html);
+    })
+})
 $(document).on("submit", 'form.extra-setting', function (d) {
     d.preventDefault();
     var formData = new FormData(this);

@@ -72,7 +72,7 @@
                             </tr>
                         </table>
                         <?php
-                        if (!$this->student_model->isStudent()) {
+                        if ($this->student_model->isAdminOrCenter()) {
                             ?>
                             <h3>Answer-Sheet of <b class="text-primary">{exam_title}</b></h3>
                             <?php

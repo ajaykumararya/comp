@@ -73,8 +73,9 @@ class Student extends Ajax_Controller
                 ['course_id' => $this->post('course_id')]
             )->row('course_fee');
             $close_balance = $this->ki_theme->wallet_balance();
-            if ($close_balance < 0 or $close_balance > $deduction_amount) {
-                $this->response('html', 'Wallet Balance is Low..');
+            $close_balance = $close_balance - $deduction_amount;
+            if ($close_balance < 0 or $close_balance < 0) {
+                $this->response('html', 'Wallet Balance is Low..'.$deduction_amount);
                 exit;
             }
         }

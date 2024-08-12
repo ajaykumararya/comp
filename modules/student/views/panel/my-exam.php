@@ -5,10 +5,13 @@ $get = $this->student_model->get_switch(
         'id' => $this->student_model->studentId()
     ]
 );
+// echo $this->db->last_query();
 if ($get->num_rows()) {
     echo '<div class="row">';
     foreach ($get->result() as $row) {
         $examDone = $row->percentage != null;
+        // echo $row->exam_date;
+        // pre($row);
         ?>
         <div class="col-md-6">
             <a href="javascript:void(0)" class="card card-image border-hover-primary <?= $examDone ? 'done' : 'ready' ?>"

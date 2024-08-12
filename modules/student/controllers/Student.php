@@ -124,7 +124,7 @@ class Student extends MY_Controller
     {
         $tabs = [
             'overview' => ['title' => 'Account Overview', 'icon' => array('people', 2), 'url' => ''],
-            'setting' => ['title' => 'Account Setting', 'icon' => array('setting-2', 2), 'url' => 'setting'],
+            'setting' => ['title' => 'Update', 'icon' => array('pencil', 3), 'url' => 'setting'],
             'fee-record' => ['title' => 'Account Fees Record', 'icon' => array('two-credit-cart', 3), 'url' => 'fee-record'],
             'change-password' => ['title' => 'Account Change Password', 'icon' => array('key', 2), 'url' => 'change-password']
         ];
@@ -135,19 +135,26 @@ class Student extends MY_Controller
                 'url' => 'documents'
             ];
         }
-
+        if (table_exists('manual_notifications')) {
+            $tabs['notification'] = [
+                'title' => 'Notification(s)',
+                'icon' => array('notification', 3),
+                'url' => 'notification'
+            ];
+        }
         if (is_numeric($stdId) and $stdId) {
             if (!$this->student_model->isStudent()) {
                 $tabs['other'] = [
-                    'title' => 'Other Setting',
-                    'icon' => array('pencil', 3),
+                    'title' => 'Setting',
+                    'icon' => array('setting-2', 2),
                     'url' => 'other'
                 ];
             }
             $get = $this->student_model->get_student_via_id($stdId);
             if ($get->num_rows()) {
-                if(isset($tabs[$tab]))
+                if (isset($tabs[$tab]))
                     $this->ki_theme->set_breadcrumb($tabs[$tab]);
+                // pre($get->row_array(),true);
                 $this->set_data($get->row_array());
                 $this->set_data('student_details', $get->row_array());
                 // pre($this->public_data,true);
@@ -215,7 +222,8 @@ class Student extends MY_Controller
     {
         $this->view('get-id-card');
     }
-    function list_by_center(){
+    function list_by_center()
+    {
         $this->view('list-by-center');
     }
 }

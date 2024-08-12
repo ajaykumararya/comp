@@ -363,7 +363,7 @@
                                         <div class="menu-content d-flex align-items-center px-3">
                                             <!--begin::Avatar-->
                                             <div class="symbol symbol-50px me-5">
-                                                <img alt="Logo" src="{profile_image}" class="owner-image"/>
+                                                <img alt="Logo" src="{profile_image}" class="owner-image" />
                                             </div>
                                             <!--end::Avatar-->
                                             <!--begin::Username-->
@@ -389,6 +389,27 @@
                                         </a>
                                     </div>
                                     <!--end::Menu item-->
+                                    <?php
+                                    if ($this->center_model->isCenter() && table_exists('manual_notifications')) {
+                                        ?>
+                                        <!--begin::Menu item-->
+                                        <div class="menu-item px-5">
+                                            <a href="{base_url}center/notification" class="menu-link px-5">
+                                                <span class="menu-title position-relative">
+                                                    Notification
+                                                    <span class="ms-5 position-absolute translate-middle-y top-50 end-0">
+                                                        <?= $this->ki_theme->count_manual_notification([
+                                                            'receiver_id' => $this->center_model->loginId(),
+                                                            'receiver_user' => 'center'
+                                                        ]) ?>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </div>
+                                        <!--end::Menu item-->
+                                        <?php
+                                    }
+                                    ?>
                                     <!--begin::Menu separator-->
                                     <div class="separator my-2"></div>
                                     <!--end::Menu separator-->

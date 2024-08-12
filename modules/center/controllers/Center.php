@@ -32,6 +32,14 @@ class Center extends MY_Controller
     {
         $this->view('assign-courses');
     }
+    function notification()
+    {
+        if ($this->center_model->isCenter() && $this->access_method()) {
+            $this->view('notification',[
+                'id' => $this->center_model->loginId()
+            ]);
+        }
+    }
     function profile()
     {
         if ($this->center_model->isAdmin())
@@ -42,29 +50,36 @@ class Center extends MY_Controller
         $tab = $this->uri->segment(4, 'overview');
         $tabs = [
             'overview' => [
-                'title' => 'Center Profile Overview',
+                'title' => 'Overview',
                 'icon' => array('eye', 3),
                 'url' => 'overview'
             ],
             'documents' => [
                 'title' => 'Documents',
-                'icon' => array('file',5),
+                'icon' => array('file', 5),
                 'url' => 'documents'
             ],
             'change-password' => [
-                'title' => 'Change Password of Center',
+                'title' => 'Change Password',
                 'icon' => array('key', 4),
                 'url' => 'change-password'
             ]
         ];
-        if(CHECK_PERMISSION('CENTRE_WISE_WALLET_SYSTEM') AND $this->center_model->isAdmin()){
+        if (CHECK_PERMISSION('CENTRE_WISE_WALLET_SYSTEM') and $this->center_model->isAdmin()) {
             $tabs['fee-system'] = [
                 'title' => 'Fee System',
                 'icon' => array('bill', 5),
                 'url' => 'fee-system'
             ];
         }
-        if (isset ($tabs[$tab])) {
+        if (table_exists('manual_notifications')) {
+            $tabs['notification'] = [
+                'title' => 'Notification(s)',
+                'icon' => array('notification', 3),
+                'url' => 'notification'
+            ];
+        }
+        if (isset($tabs[$tab])) {
             // $this->ki_theme->set_title($tabs[$tab]['title']);
             $this->ki_theme->set_breadcrumb($tabs[$tab]);
             $center = $this->center_model->get_center($center_id);
@@ -76,5 +91,29 @@ class Center extends MY_Controller
             $this->view('profile', ['tabs' => $tabs, 'tab' => $tab, 'current_link' => base_url('center/profile/' . $center_id), 'center_id' => $center_id]);
         } else
             show_404();
+    }
+    function test(){
+        if ($walletSystem = ( (CHECK_PERMISSION('WALLET_SYSTEM') && $this->center_model->isCenter()))) {
+            $deduction_amount = $this->ki_theme->get_wallet_amount('student_admission_fees');
+            $close_balance = $this->ki_theme->wallet_balance();
+            // echo $close_balance;
+            if ($close_balance < 0 or $close_balance < 0) {
+                echo ('Your Wallet Balance is Low..');
+                exit;
+            }
+        }
+        elseif ($walletSystem = (CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE') && $this->center_model->isCenter())) {
+            $deduction_amount = $this->center_model->get_assign_courses(
+                5,
+                ['course_id' => 44]
+            )->row('course_fee');
+            $close_balance = $this->ki_theme->wallet_balance();
+            $close_balance = $close_balance - $deduction_amount;
+            if ($close_balance < 0 or $close_balance < 0 ) {
+                echo ('Wallet Balance is Low..'.$deduction_amount);
+                exit;
+            }
+        }
+        echo $deduction_amount;
     }
 }

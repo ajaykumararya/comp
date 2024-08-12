@@ -236,6 +236,9 @@ function sup($i)
             (($i == 3) ? 'rd' : 'th'));
     return '<sup>' . $i . '</sup>';
 }
+function table_exists($table){
+    return get_instance()->db->table_exists($table);
+}
 function get_route($id, $table)
 {
     $CI = &get_instance();

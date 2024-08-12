@@ -224,17 +224,17 @@
                                     <div class="row">
                                         <div class="col-md-3 mb-4">
                                             <div class="form-control">
-                                                <label for="adhar_front" class="form-label required">Aadhar Card
-                                                    Front</label>
+                                                <label for="adhar_card" class="form-label required">Aadhar Card
+                                                    Card</label>
                                             </div>
                                         </div>
                                         <div class="col-md-9 mb-4">
                                             <div class="form-group">
-                                                <input type="file" class="form-control" name="adhar_front"
-                                                    id="adhar_front">
+                                                <input type="file" class="form-control" name="adhar_card"
+                                                    id="adhar_card">
                                             </div>
                                         </div>
-                                        <div class="col-md-3 mb-4">
+                                        <!-- <div class="col-md-3 mb-4">
                                             <div class="form-control">
                                                 <label for="adhar_back" class="form-label required">Aadhar Card
                                                     Back</label>
@@ -245,7 +245,7 @@
                                                 <input type="file" class="form-control" name="adhar_back"
                                                     id="adhar_back">
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="row">
                                         <?php

@@ -78,8 +78,14 @@ class Student_model extends MY_Model
             case 'student_exams':
                 $this->db->select('es.id as assign_exam_id,es.*,e.exam_title');
                 $this->db->join('exam_students as es', 'es.student_id = s.id ');
-                $this->db->join('exams as e', 'e.id = es.exam_id', 'left');
+                $this->db->join('exams as e', "e.id = es.exam_id and e.status = '1'");
                 // $this->db->group_by('s.id');
+                //online_exam_via_admit_card
+                if(CHECK_PERMISSION('ONLINE_EXAM_VIA_ADMIT_CARD')){
+                    $this->db->select('ac.exam_date');
+                    $this->db->join('admit_cards as ac',"ac.student_id = s.id");
+                    $this->db->where('ac.exam_date <=',date('Y-m-d H:i'));
+                }
                 $this->myWhere('s', $condition);
                 break;
             case 'limit':

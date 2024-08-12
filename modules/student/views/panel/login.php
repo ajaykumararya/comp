@@ -172,12 +172,13 @@
                 <!--begin::Content-->
                 <div class="d-flex flex-column flex-center pb-0 pb-lg-10 p-10 w-100">
                     <!--begin::Image-->
-                    <img class="theme-light-show mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20"
-                        src="<?= logo() ?>" alt="" />
-                    <img class="theme-dark-show mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20"
-                        src="<?= logo() ?>" alt="" />
-                    <!--end::Image-->
-
+                    <a href="{base_url}">
+                        <img class="theme-light-show mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20"
+                            src="<?= logo() ?>" alt="" />
+                        <img class="theme-dark-show mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20"
+                            src="<?= logo() ?>" alt="" />
+                        <!--end::Image-->
+                    </a>
                     <!--begin::Title-->
                     <h1 class="text-gray-800 fs-2qx fw-bold text-center mb-7">
                         Fast, Efficient and Productive
@@ -229,21 +230,22 @@
                                         class="form-control">
                                 </div>
                                 <div class="form-group d-grid">
-                                    <p><i class="fa fa-bell text-dark"></i> If the password has not been created or changed, then
+                                    <p><i class="fa fa-bell text-dark"></i> If the password has not been created or
+                                        changed, then
                                         enter 2 letters of your name and the year of your date of birth. <br>Password
                                         Example : <code> AJ1998</code> </p>
                                 </div>
                                 <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
                                     <div></div>
                                     <?php
-                                    if(CHECK_PERMISSION('SMS')){
-                                    ?>
-                                    <!--begin::Link-->
-                                    <a href="javascript:;" class="link-primary generate-new-password-link">
-                                        Forgot Password ?
-                                    </a>
-                                    <!--end::Link-->
-                                    <?PHP
+                                    if (CHECK_PERMISSION('SMS')) {
+                                        ?>
+                                        <!--begin::Link-->
+                                        <a href="javascript:;" class="link-primary generate-new-password-link">
+                                            Forgot Password ?
+                                        </a>
+                                        <!--end::Link-->
+                                        <?PHP
                                     }
                                     ?>
                                 </div>
@@ -266,18 +268,18 @@
                                 </div>
                                 <!--end::Submit button-->
                                 <?php
-                                    if(CHECK_PERMISSION('SMS') && CHECK_PERMISSION('LOGIN_WITH_OTP')){
-                                ?>
-                                <div class="text-gray-500 text-center fw-semibold fs-6">
-                                    Login With OTP?
-
-                                    <a href="javascript:;" class="link-primary login-with-otp">
-                                        Sign In
-                                    </a>
-                                </div>
-                                <?php
-                                    }
+                                if (CHECK_PERMISSION('SMS') && CHECK_PERMISSION('LOGIN_WITH_OTP')) {
                                     ?>
+                                    <div class="text-gray-500 text-center fw-semibold fs-6">
+                                        Login With OTP?
+
+                                        <a href="javascript:;" class="link-primary login-with-otp">
+                                            Sign In
+                                        </a>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
 
                             </form>
                             <!--end::Form-->
@@ -299,30 +301,28 @@
     <!--end::Main-->
 
     <div class="modal fade" tabindex="-1" id="mymodal">
-            <form class="modal-dialog  modal-dialog-centered  modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title title">Modal title</h3>
-                        <!--begin::Close-->
-                        <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
-                            aria-label="Close">
-                            <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span
-                                    class="path2"></span></i>
-                        </div>
-                        <!--end::Close-->
+        <form class="modal-dialog  modal-dialog-centered  modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title title">Modal title</h3>
+                    <!--begin::Close-->
+                    <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
                     </div>
-                    <div class="modal-body body">
-                        <p>Modal body text goes here.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button"
-                            class="btn btn-outline hover-rotate-end btn-outline-dashed btn-outline-danger"
-                            data-bs-dismiss="modal">Close</button>
-                        {update_button}
-                    </div>
+                    <!--end::Close-->
                 </div>
-            </form>
-        </div>
+                <div class="modal-body body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline hover-rotate-end btn-outline-dashed btn-outline-danger"
+                        data-bs-dismiss="modal">Close</button>
+                    {update_button}
+                </div>
+            </div>
+        </form>
+    </div>
 
 </body>
 <!--end::Body-->

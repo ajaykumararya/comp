@@ -86,4 +86,9 @@ class Exam extends MY_Controller
             $this->site->error_404();
         }
     }
+    function student_exams(){
+        $this->ki_theme->set_title('List Exams', true);
+
+        $this->view("student-exams");
+    }
 }

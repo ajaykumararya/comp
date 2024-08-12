@@ -6,7 +6,18 @@
                 <h3 class="card-title">Add Notice</h3>
             </div>
             <div class="card-body">
-                
+                <div class="form-group">
+                    <label for="" class="form-label required">Date</label>
+                    <input type="text" name="field1" class="form-control selectdate" value="<?=date('d-m-Y')?>"> 
+                </div>
+                <div class="form-group">
+                    <label for="" class="form-label" required>Title</label>
+                    <input type="text" required name="field2" class="form-control" placeholder="Enter Title">
+                </div>
+                <div class="form-group">
+                    <label for="" class="form-label">Enter Url</label>
+                    <input type="text" name="field3" required value="#" class="form-control">
+                </div>
             </div>
             <div class="card-footer">
                 {save_button}
@@ -26,6 +37,9 @@
                         <input type="text" name="<?= $type ?>_title" class="form-control"
                             value="<?= ES("{$type}_title", 'Notice <span>Board</span></h1>') ?>" placeholder="Enter Title">
                     </div>
+                    <?php
+                    echo $this->ki_theme->extra_setting_button_input('notice_board_button');
+                    ?>
                 </div>
                 <div class="card-footer">
                     {save_button}
@@ -47,7 +61,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Icon</th>
+                                <th>Date</th>
                                 <th>Title</th>
                                 <th>Action</th>
                             </tr>
@@ -64,7 +78,7 @@
                                             <?= $index++ ?>.
                                         </td>
                                         <td>
-                                            <?= ('<i class="' . $row->field1 . ' text-dark" style="font-size: 30px"></i>') ?>
+                                            <?= $row->field1 ?>
                                         </td>
                                         <td>
                                             <?= $row->field2 ?>

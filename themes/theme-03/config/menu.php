@@ -22,12 +22,12 @@ $menu = array(
             'icon' => array('file', 4),
             'url' => 'cms/static-page/our_counter',
         ),
-        array(
-            'label' => 'Latest Updates',
-            'type' => 'latest_updates',
-            'icon' => array('file', 4),
-            'url' => 'cms/static-page/latest_updates',
-        ),
+        // array(
+        //     'label' => 'Latest Updates',
+        //     'type' => 'latest_updates',
+        //     'icon' => array('file', 4),
+        //     'url' => 'cms/static-page/latest_updates',
+        // ),
         array(
             'label' => 'Notice Board',
             'type' => 'notice-board',
