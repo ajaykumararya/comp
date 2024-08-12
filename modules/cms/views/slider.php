@@ -39,7 +39,7 @@
 </div>
 <?php
 // echo PATH;
-if (THEME == 'theme-03') {
+if (in_array(THEME,['theme-02','theme-03'])) {
     $status = ES('latest_update_show','0');
     ?>
     <div class="row mt-4">

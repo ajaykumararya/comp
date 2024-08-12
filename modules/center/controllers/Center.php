@@ -92,28 +92,4 @@ class Center extends MY_Controller
         } else
             show_404();
     }
-    function test(){
-        if ($walletSystem = ( (CHECK_PERMISSION('WALLET_SYSTEM') && $this->center_model->isCenter()))) {
-            $deduction_amount = $this->ki_theme->get_wallet_amount('student_admission_fees');
-            $close_balance = $this->ki_theme->wallet_balance();
-            // echo $close_balance;
-            if ($close_balance < 0 or $close_balance < 0) {
-                echo ('Your Wallet Balance is Low..');
-                exit;
-            }
-        }
-        elseif ($walletSystem = (CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE') && $this->center_model->isCenter())) {
-            $deduction_amount = $this->center_model->get_assign_courses(
-                5,
-                ['course_id' => 44]
-            )->row('course_fee');
-            $close_balance = $this->ki_theme->wallet_balance();
-            $close_balance = $close_balance - $deduction_amount;
-            if ($close_balance < 0 or $close_balance < 0 ) {
-                echo ('Wallet Balance is Low..'.$deduction_amount);
-                exit;
-            }
-        }
-        echo $deduction_amount;
-    }
 }
