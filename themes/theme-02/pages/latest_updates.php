@@ -8,6 +8,7 @@
         box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.3);
         height: 40px;
         overflow: hidden;
+        width: 100%;
         border-radius: 36px;
         background: #0b0a07;
         /*border:1px solid #55410e;*/

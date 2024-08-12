@@ -70,9 +70,9 @@ class Ki_theme
         if (PATH == 'zcc') {
             if ($score >= 80 && $score <= 100)
                 return 'A+';
-            elseif ($score >= 60 && $score <= 79)
+            elseif ($score >= 60 && $score < 80)
                 return 'A';
-            elseif ($score >= 50 && $score <= 59)
+            elseif ($score >= 50 && $score < 60)
                 return 'B';
             else
                 return 'C';
@@ -80,11 +80,11 @@ class Ki_theme
         if (PATH == 'psdmt') {
             if ($score >= 90 && $score <= 100)
                 return 'S';
-            else if ($score >= 70 && $score <= 89)
+            else if ($score >= 70 && $score < 90)
                 return 'A+';
-            else if ($score >= 50 && $score <= 59)
+            else if ($score >= 50 && $score < 60)
                 return 'A';
-            else if ($score >= 30 && $score <= 49)
+            else if ($score >= 30 && $score < 50)
                 return 'B';
             else
                 return 'C';
@@ -92,9 +92,9 @@ class Ki_theme
         if (in_array(PATH, ['techno', 'satvam', 'icetrc'])) {
             if ($score >= 75 && $score <= 100)
                 return 'A';
-            else if ($score >= 60 && $score <= 74)
+            else if ($score >= 60 && $score < 75)
                 return 'B';
-            else if ($score >= 50 && $score <= 59)
+            else if ($score >= 50 && $score < 60)
                 return 'C';
             else
                 return 'D';
@@ -102,11 +102,11 @@ class Ki_theme
         if (PATH == 'iedct') {
             if ($score >= 60)
                 return 'A';
-            else if ($score >= 60 && $score <= 50)
+            else if ($score < 60 && $score >= 50)
                 return 'B';
-            else if ($score >= 50 && $score <= 40)
+            else if ($score < 50 && $score >= 40)
                 return 'C';
-            else if ($score >= 40 && $score <= 33)
+            else if ($score < 40 && $score >= 33)
                 return 'D';
             else
                 return 'E';
@@ -114,11 +114,11 @@ class Ki_theme
         if (PATH == 'isdmedu') {
             if ($score >= 90 && $score <= 100)
                 return 'E';
-            else if ($score >= 89 && $score <= 70)
+            else if ($score < 90 && $score >= 70)
                 return 'A+';
-            else if ($score >= 69 && $score <= 50)
+            else if ($score < 70 && $score >= 50)
                 return 'A';
-            else if ($score >= 49 && $score <= 30)
+            else if ($score < 50 && $score >= 30)
                 return 'B';
             else
                 return 'C';
@@ -126,11 +126,11 @@ class Ki_theme
         if (PATH == 'haptronworld') {
             if ($score >= 90 && $score <= 100)
                 return 'O';
-            else if ($score >= 75 && $score <= 89.9)
+            else if ($score >= 75 && $score < 90)
                 return 'A';
-            else if ($score >= 60 && $score <= 74.9)
+            else if ($score >= 60 && $score < 75)
                 return 'B';
-            else if ($score >= 45 && $score <= 59.9)
+            else if ($score >= 45 && $score < 60)
                 return 'C';
             else
                 return 'D';
@@ -138,18 +138,19 @@ class Ki_theme
         if (PATH == 'sewaedu') {
             if ($score >= 90 && $score <= 100)
                 return 'A+';
-            else if ($score >= 70 && $score <= 89.9)
+            else if ($score >= 70 && $score < 90)
                 return 'A';
-            else if ($score >= 50 && $score <= 69.9)
+            else if ($score >= 50 && $score < 70)
                 return 'B';
-            else if ($score >= 30 && $score <= 49.9)
+            else if ($score >= 30 && $score < 50)
                 return 'C';
             return 'FAIL';
         }
     }
-    function count_manual_notification($where,$seen = 0){
-        if(table_exists('manual_notifications'))
-            return label($this->CI->db->where('seen',$seen)->where($where)->get('manual_notifications')->num_rows());
+    function count_manual_notification($where, $seen = 0)
+    {
+        if (table_exists('manual_notifications'))
+            return label($this->CI->db->where('seen', $seen)->where($where)->get('manual_notifications')->num_rows());
         return;
     }
     function generate_qr($id = 0, $type = '', $data = '')
