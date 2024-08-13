@@ -20,10 +20,61 @@ if (PATH == 'zcc' && isset($student_docs) && $student_docs) {
     <!--begin::Ribbon-->
     <div class="ribbon ribbon-triangle ribbon-top-end border-primary">
         <!--begin::Ribbon icon-->
-        <div class="ribbon-icon mt-n5 me-n6">
+        <div class="ribbon-icon mt-n5 me-n6 cursor-pointer" data-kt-menu-trigger="click"
+            data-kt-menu-placement="bottom-end">
             <i class="bi bi-search fs-2 text-white"></i>
         </div>
         <!--end::Ribbon icon-->
+        <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px border border-1 border-primary"
+            data-kt-menu="true" id="kt_menu_66bb6ef30759d" style=""
+            data-select2-id="select2-data-kt_menu_66bb6ef30759d">
+            <!--begin::Header-->
+            <div class="px-7 py-5">
+                <div class="fs-5 text-gray-900 fw-bold">Filter Options</div>
+            </div>
+            <!--end::Header-->
+
+            <!--begin::Menu separator-->
+            <div class="separator border-primary"></div>
+            <!--end::Menu separator-->
+
+
+            <!--begin::Form-->
+            <div class="px-7 py-5" data-select2-id="select2-data-120-tpsc">
+                <div class="mb-10">
+                    <!--begin::Label-->
+                    <label class="form-label fw-semibold">Select Sudent:</label>
+                    <!--end::Label-->
+
+                    <!--begin::Options-->
+                    <div class="d-flex">
+                        <select name="student_id" data-control="select2" data-placeholder="Select Student"
+                            class="form-select first m-h-100px get-std-id" data-allow-clear="true">
+                            <option></option>
+                        </select>
+                    </div>
+                    <div class="d-flex">
+                        <ol class="mt-3" type="l">
+                            <li>Roll No</li>
+                            <li>Name</li>
+                            <li>Mobile</li>
+                        </ol>
+                    </div>
+                    <div class="d-flex message"></div>
+                    <!--end::Options-->
+                </div>
+                <div class="d-flex justify-content-end">
+                    <div class="form-check form-check-custom form-check-solid me-6">
+                        <input class="form-check-input" type="checkbox" value="1" id="openNEwTab" />
+                        <label class="form-check-label text-dark" for="openNEwTab">
+                            Open New Tab
+                        </label>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-primary search">Apply</button>
+                </div>
+            </div>
+            <!--end::Form-->
+        </div>
     </div>
     <!--end::Ribbon-->
     <div class="card mb-5 mb-xl-10">
@@ -67,7 +118,8 @@ if (PATH == 'zcc' && isset($student_docs) && $student_docs) {
                                 class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
                                 data-kt-image-input-action="change" data-bs-toggle="tooltip" data-bs-dismiss="click"
                                 title="Change avatar">
-                                <i class="ki-duotone ki-pencil fs-6"><span class="path1"></span><span class="path2"></span></i>
+                                <i class="ki-duotone ki-pencil fs-6"><span class="path1"></span><span
+                                        class="path2"></span></i>
 
                                 <!--begin::Inputs-->
                                 <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
@@ -119,15 +171,19 @@ if (PATH == 'zcc' && isset($student_docs) && $student_docs) {
                             <!--end::Name-->
                             <!--begin::Info-->
                             <div class="d-flex flex-wrap fw-semibold fs-6 mb-4 pe-2">
-                                <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
+                                <a href="#"
+                                    class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
                                     <i class="ki-outline ki-profile-circle fs-4 me-1"></i> Student
                                 </a>
-                                <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
-                                    <i class="ki-outline ki-geolocation fs-4 me-1"></i> &nbsp; <spn class="student-address">
+                                <a href="#"
+                                    class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
+                                    <i class="ki-outline ki-geolocation fs-4 me-1"></i> &nbsp; <spn
+                                        class="student-address">
                                         {address}</spn>
                                 </a>
                                 <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary mb-2">
-                                    <i class="ki-outline ki-sms fs-4"></i> &nbsp;<span class="student-email">{email}</span>
+                                    <i class="ki-outline ki-sms fs-4"></i> &nbsp;<span
+                                        class="student-email">{email}</span>
                                 </a>
                             </div>
                             <!--end::Info-->
@@ -142,7 +198,8 @@ if (PATH == 'zcc' && isset($student_docs) && $student_docs) {
                             <!--begin::Stats-->
                             <div class="d-flex flex-wrap">
                                 <!--begin::Stat-->
-                                <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                <div
+                                    class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                     <!--begin::Number-->
                                     <div class="d-flex align-items-center flex-wrap">
                                         <div class="fs-2 fw-bold me-5" id="roll_no">{roll_no}</div>
@@ -159,7 +216,8 @@ if (PATH == 'zcc' && isset($student_docs) && $student_docs) {
                                 </div>
                                 <!--end::Stat-->
                                 <!--begin::Stat-->
-                                <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                <div
+                                    class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                     <!--begin::Number-->
                                     <div class="d-flex align-items-center">
                                         <div class="fs-2 fw-bold student-dob">{dob} </div>
@@ -172,7 +230,8 @@ if (PATH == 'zcc' && isset($student_docs) && $student_docs) {
                                 <!--end::Stat-->
 
                                 <!--begin::Stat-->
-                                <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                <div
+                                    class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                     <!--begin::Number-->
                                     <div class="d-flex align-items-center">
                                         <div class="fs-2 fw-bold text-capitalize student-gender">{gender} </div>
@@ -187,7 +246,8 @@ if (PATH == 'zcc' && isset($student_docs) && $student_docs) {
                                 if (CHECK_PERMISSION('REFERRAL_ADMISSION')) {
                                     ?>
                                     <!--begin::Stat-->
-                                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                    <div
+                                        class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <!--begin::Number-->
                                         <div class="d-flex align-items-center flex-wrap">
                                             <?= $this->ki_theme->keen_icon('people', 5, 1, 'outline text-success') ?>

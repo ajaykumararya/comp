@@ -1,6 +1,6 @@
 <?php
 $get = $this->student_model->get_switch(
-    'student_exams',
+    'active_student_exams',
     [
         'id' => $this->student_model->studentId()
     ]

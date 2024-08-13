@@ -125,7 +125,7 @@
                                             <div class="btn-group">
                                         <button class="btn btn-sm btn-xs btn-primary view-notification" data-user="student" data-type="' . $row->notify_type . '"><i class="fa fa-eye"></i></button>';
                                     if ($isAdminorCenter) {
-                                        echo '<button class="btn btn-xs btn-sm btn-danger"><i class="fa fa-trash"></i></button>';
+                                        echo '<button class="btn btn-xs btn-sm btn-danger delete-notitication" data-user="student" ><i class="fa fa-trash"></i></button>';
                                     }
                                     echo '</div></td>
                                          </tr>';

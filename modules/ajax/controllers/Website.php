@@ -529,6 +529,12 @@ class Website extends Ajax_Controller
         }
         // $this->response($this->session->userdata());
     }
+    function delete_notification(){
+        $this->response(
+            'status',
+            $this->db->where($this->post())->delete('manual_notifications')
+        );
+    }
     function send_notification()
     {
         $isCenter = $this->center_model->isCenter();

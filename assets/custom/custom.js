@@ -137,6 +137,11 @@ if ($.isFunction($.fn.maxlength)) {
         limitReachedClass: "badge badge-success"
     });
 }
+const uri_segment = (number = 1, default_value = '') => {
+    const url = JSON.parse($('body').attr('uri-segs'));
+    // log(url);
+    return url[number] || default_value;
+}
 const numberFormat = (number) => {
     return number.toLocaleString();
 }
@@ -262,8 +267,8 @@ const warn = (message) => {
     MyConsole(message, 'warn');
 }
 const timeStringToTime = (timestring) => {
-        const date = new Date(timestring * 1000);
-        return moment(date).format('YYYY-MM-DD h:mm A');
+    const date = new Date(timestring * 1000);
+    return moment(date).format('YYYY-MM-DD h:mm A');
 }
 const formDataObject = (form) => {
     var formDataArray = $(form).serializeArray();
@@ -2145,6 +2150,20 @@ $(document).on('submit', '.send-notification', function (e) {
 })
 $('#notification-table').DataTable({
     order: []
+})
+$(document).on('click', '.delete-notitication', function () {
+    var tr = $(this).closest('tr');
+    var id = tr.data('id');
+    SwalWarning('Confirmation!', 'Are you sure for delete this notification.', true, 'Delete It').then((e) => {
+        if (e.isConfirmed) {
+            $.AryaAjax({
+                url: 'website/delete-notification',
+                data: { id },
+                success_message: 'Notification deleted successfully.',
+                page_reload: true
+            });
+        }
+    })
 })
 $(document).on("click", '.view-notification', function () {
     // alert(6);

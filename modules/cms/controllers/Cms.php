@@ -71,7 +71,7 @@ class Cms extends MY_Controller
         $this->view('gallery-images');
     }
     function enquiry_data(){
-        $this->set_data('list',$this->SiteModel->list_enquiries('enquiry')->result_array());
+        $this->set_data('list',$this->SiteModel->list_enquiries((THEME == 'theme-02' ? 'get_in_touch' : 'enquiry'))->result_array());
         $this->view('enquiry-data');
     }
 

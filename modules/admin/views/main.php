@@ -136,7 +136,8 @@
     data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true"
     data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true"
     data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default"
-    <?= sidebar_toggle('data-kt-app-sidebar-minimize="on"') ?>>
+    <?= sidebar_toggle('data-kt-app-sidebar-minimize="on"') ?>
+    uri-segs='<?=json_encode($this->uri->segment_array())?>'>
     <?php
     if (CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE')) {
         echo '<input type="hidden" id="wallet_system_course_wise">';

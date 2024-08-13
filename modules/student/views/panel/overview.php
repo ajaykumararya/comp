@@ -31,7 +31,7 @@
                     </tr>
                     <tr>
                         <th>Mobile</th>
-                        <td><a href="tel:{contact_number}">{contact_number}</a> <label class="badge badge-info text-capitalize">{alt_mobile_type}</label></td>
+                        <td><a href="tel:{contact_number}">{contact_number}</a> <label class="badge badge-info text-capitalize">{contact_no_type}</label></td>
                         <th>Email</th>
                         <td><a href="mailto:{email}">{email}</a></td>
                     </tr>

@@ -2,6 +2,30 @@ document.addEventListener('DOMContentLoaded', function (d) {
     const update_profile = document.getElementById('save-student-data');
     const course_box = $('select[name="course_id"]');
     select2Student('select[name="student_id"]');
+    const search = $('.search');
+    search.on('click', function () {
+        var box = $(this).closest('.menu');
+        box.find('.message').html('');
+        var searchValue = $('.get-std-id').val();
+        
+        if(searchValue == ''){
+            box.find('.message').html(badge('Please Select An Student.','danger'));
+            return;
+        }
+        if (searchValue == uri_segment(3, 0)) {
+            box.find('.message').html(badge('This student\'s profile is already open.', 'danger'));
+            return;
+        }
+        SwalShowloading();
+        var url = `${base_url}student/profile/${searchValue}/${uri_segment(4)}`;
+        if (box.find('#openNEwTab:checked').val()){
+            window.open(url, '_blank');
+            SwalHideLoading();
+        }
+        else
+            window.location.href = url;
+        // location.href = ;
+    })
     if (update_profile) {
         var validation = MyFormValidation(update_profile);
         validation.addField('name', {
@@ -181,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function (d) {
 
         formData.append('file', file);
         formData.append('student_id', id);
-        formData.append('name',$(fileInput).attr('name'));
+        formData.append('name', $(fileInput).attr('name'));
 
         Swal.fire({
             title: 'Uploading...',
@@ -190,10 +214,10 @@ document.addEventListener('DOMContentLoaded', function (d) {
             showConfirmButton: false,
             willOpen: () => {
                 $.ajax({
-                    url: ajax_url+'website/update-student-docs', // Change this to your upload endpoint
+                    url: ajax_url + 'website/update-student-docs', // Change this to your upload endpoint
                     type: 'POST',
                     data: formData,
-                    dataType : 'json',
+                    dataType: 'json',
                     processData: false,
                     contentType: false,
                     xhr: function () {
@@ -208,10 +232,10 @@ document.addEventListener('DOMContentLoaded', function (d) {
                     },
                     success: function (response) {
                         console.log(response);
-                        if(response.status){
+                        if (response.status) {
                             // SwalSuccess('Uploaded','File Uploaded Successfully').then( (r) => {
                             //     if(r.isConfirmed){
-                                    location.reload();
+                            location.reload();
                             //     }
                             // })
                         }
