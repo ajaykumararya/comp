@@ -4,7 +4,10 @@ document.addEventListener('DOMContentLoaded', function (e) {
     student_Exams.DataTable({
         order: [],
         ajax: {
-            url: ajax_url + 'exam/student-exams'
+            url: ajax_url + 'exam/student-exams',
+            error : function(xhr,s,d){
+                log(xhr.responseText);
+            }
         },
         columns: [
             { 'data': null },
