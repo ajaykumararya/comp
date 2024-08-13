@@ -21,6 +21,15 @@
                 }
                 echo '</select>
                         </div>';
+                if(PATH == 'isdmedu'){
+                    ?>
+                    <div class="form-group mb-4">
+                        <label for="" class="form-label required">Select Icon Image</label>
+                        <input type="file" required name="field1" class="form-control">
+                    </div>
+                    <?php
+                }
+                else
                 echo inconPickerInput('field1');
                 ?>
                 <div class="form-group mt-4">
@@ -131,7 +140,12 @@
                                             <?= isset($cats[$row->field3]) ? $cats[$row->field3] : badge('Deleted','danger') ?>
                                         </td>
                                         <td>
-                                            <?= ('<i class="' . $row->field1 . ' text-dark" style="font-size: 30px"></i>') ?>
+                                            <?php
+                                            if(PATH == 'isdmedu')
+                                                echo img('upload/'.$row->field1,true,['width' => 30]);
+                                            else
+                                             echo ('<i class="' . $row->field1 . ' text-dark" style="font-size: 30px"></i>');
+                                            ?>
                                         </td>
                                         <td>
                                             <?= $row->field2 ?>

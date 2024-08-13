@@ -261,6 +261,10 @@ const createSlug = (text) => {
 const warn = (message) => {
     MyConsole(message, 'warn');
 }
+const timeStringToTime = (timestring) => {
+        const date = new Date(timestring * 1000);
+        return moment(date).format('YYYY-MM-DD h:mm A');
+}
 const formDataObject = (form) => {
     var formDataArray = $(form).serializeArray();
     // Convert the array into a single object

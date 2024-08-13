@@ -359,6 +359,12 @@ $config['center_exam_menu'] = array(
                 )
             )
         ),
+        array(
+            'label' => 'Student Exam(S)',
+            'type' => 'student_exams',
+            'icon' => array('note-2', 4),
+            'url' => 'exam/student-exams'
+        )
     )
 );
 

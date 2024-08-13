@@ -191,4 +191,10 @@ class Exam extends Ajax_Controller
             $this->response("status",true);
         }
     }    
+    function student_exams(){
+        $where = [];
+        if($this->center_model->isCenter())
+            $where['center_id'] = $this->center_model->loginId();
+        $this->response('data', $this->student_model->get_switch('student_exams',$where)->result_array());
+    }
 }
