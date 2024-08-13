@@ -21,7 +21,7 @@
                 }
                 echo '</select>
                         </div>';
-                if(PATH == 'isdmedu'){
+                if(PATH == 'sewaedu'){
                     ?>
                     <div class="form-group mb-4">
                         <label for="" class="form-label required">Select Icon Image</label>
@@ -141,7 +141,7 @@
                                         </td>
                                         <td>
                                             <?php
-                                            if(PATH == 'isdmedu')
+                                            if(PATH == 'sewaedu')
                                                 echo img('upload/'.$row->field1,true,['width' => 30]);
                                             else
                                              echo ('<i class="' . $row->field1 . ' text-dark" style="font-size: 30px"></i>');
