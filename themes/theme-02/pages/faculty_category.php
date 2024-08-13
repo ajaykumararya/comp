@@ -24,15 +24,26 @@ if ($get->num_rows()) {
                     foreach ($getItems->result() as $item) {
                         ?>
                         <div class="col-lg-2 col-md-2">
-                            <div style="min-height:1px;border:2px solid var(--primary);color:var(--primary);border-radius:0" class="icon_box text-center  icon_box_style2 box_shadow2 radius_all_10 animation animated fadeInUp"
+                            <div style="min-height:1px;border:2px solid var(--primary);color:var(--primary);border-radius:0"
+                                class="icon_box text-center  icon_box_style2 box_shadow2 radius_all_10 animation animated fadeInUp"
                                 data-animation="fadeInUp" data-animation-delay="0.02s" style="animation-delay: 0.02s; opacity: 1;">
+                                <?php
+                                if (file_exists('upload/' . $item->field1)) {
+                                    ?>
+                                    <img src="<?= base_url('upload/' . $item->field1) ?>">
+                                    <?php
+                                } else {
+                                    ?>
 
-                                <div class="<?=$item->field1?> mb-3" style="font-size:30px">
+                                    <div class="<?= $item->field1 ?> mb-3" style="font-size:30px">
 
-                                </div>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
 
                                 <div class="intro_desc" style="color:var(--primary)">
-                                    <?=$item->field2?>
+                                    <?= $item->field2 ?>
                                 </div>
                             </div>
                         </div>
