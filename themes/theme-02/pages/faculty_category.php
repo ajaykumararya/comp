@@ -34,7 +34,6 @@ if ($get->num_rows()) {
                                     <?php
                                 } else {
                                     ?>
-
                                     <div class="<?= $item->field1 ?> mb-3" style="font-size:30px">
 
                                     </div>

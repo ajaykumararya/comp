@@ -218,6 +218,13 @@ class Website extends Ajax_Controller
         );
 
     }
+    function enquiry_update_status()
+    {
+        $this->response(
+            'status',
+            $this->db->where('id', $this->post('id'))->update('contact_us_action', ['admin_message' => $this->post('value')])
+        );
+    }
     function add_center()
     {
         if ($this->validation('add_center')) {
@@ -543,7 +550,7 @@ class Website extends Ajax_Controller
         $get = $this->db->get_where('manual_notifications', ['id' => $this->post('id')]);
         if ($get->num_rows()) {
             $row = $get->row();
-            if ( ($this->student_model->isStudent() && $row->receiver_user == 'student') OR ($this->center_model->isCenter() && $row->receiver_user == 'center'))
+            if (($this->student_model->isStudent() && $row->receiver_user == 'student') or ($this->center_model->isCenter() && $row->receiver_user == 'center'))
                 $this->db->set('seen', 'seen + 1', false)->where('id', $row->id)->update('manual_notifications');
 
             $html .= '<div class="card card-flush">
@@ -567,7 +574,7 @@ class Website extends Ajax_Controller
                             </div>
                         </div>
             </div>';
-            $this->response('status',true);
+            $this->response('status', true);
         } else
             $html .= alert('Something went wrong, can\'t view this message.', 'danger');
         $this->response('html', $html);

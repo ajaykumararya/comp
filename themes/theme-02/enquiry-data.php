@@ -16,6 +16,10 @@
                             <th>Mobile</th>
                             <th>Course Name</th>
                             <th>Message</th>
+                            <?php
+                            if(PATH == 'aicesm')
+                                echo '<th>Admin Status</th>';
+                            ?>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -29,6 +33,13 @@
                                 <td>{mobile}</td>
                                 <td>{course_name}</td>
                                 <td>{message}</td>
+                                <?php
+                                if(PATH == 'aicesm'){
+                                    ?>
+                                    <td><button  data-text='{admin_message}' class='btn btn-xs btn-sm btn-info update-status'>Update Status</button></td>
+                                    <?php
+                                }
+                                ?>
                                 <td>{id}</td>
                             </tr>
                         {/list}
