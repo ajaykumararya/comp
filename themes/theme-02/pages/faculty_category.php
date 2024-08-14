@@ -30,7 +30,7 @@ if ($get->num_rows()) {
                                 <?php
                                 if (file_exists('upload/' . $item->field1)) {
                                     ?>
-                                    <img src="<?= base_url('upload/' . $item->field1) ?>" style="height:62px">
+                                    <img src="<?= base_url('upload/' . $item->field1) ?>" style="height:83px">
                                     <?php
                                 } else {
                                     ?>
