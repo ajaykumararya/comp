@@ -121,7 +121,7 @@ if (PATH == 'zcc') {
             width: 200px;
             height: 100px;
             background-color: black; /* Initial background color */
-            animation: blinky 1s infinite; /* Apply the blink-bg animation */
+            animation: blinky 2s infinite; /* Apply the blink-bg animation */
         }
 
         @keyframes blinky {
