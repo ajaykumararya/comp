@@ -150,7 +150,7 @@ class Ki_theme
     function count_manual_notification($where, $seen = 0)
     {
         if (table_exists('manual_notifications'))
-            return label($this->CI->db->where('seen', $seen)->where($where)->get('manual_notifications')->num_rows());
+            return $this->CI->db->where('seen', $seen)->where($where)->get('manual_notifications')->num_rows();
         return;
     }
     function generate_qr($id = 0, $type = '', $data = '')

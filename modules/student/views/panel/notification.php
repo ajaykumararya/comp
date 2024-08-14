@@ -103,7 +103,7 @@
                                 foreach ($get->result() as $row) {
                                     $sendBY = '';
                                     if ($isAdminorCenter)
-                                        $sendBY = label(($row->send_by == 'center' ? 'Send By ' . (($isCenter ? 'You' : ' &nbsp;<b> ' . $center_name . '</b>')) : 'Send By ' . (($isAdmin ? 'You' : 'Admin'))), 'dark');
+                                        $sendBY = label(($row->send_by == 'center' ? 'Send By ' . (($isCenter ? 'You' : ' &nbsp;<b> ' . $center_name . '</b>')) : 'Send By ' . (($isAdminorCenter ? 'You' : 'Admin'))), 'dark');
                                     echo '<tr data-id="' . $row->id . '" class="' . ($row->seen ? 'seen' : 'unseen') . ' ' . $row->notify_type . '">
                                             <td>
                                                 <div class="d-flex flex-stack flex-wrap gap-2 py-5 ps-8 pe-5">

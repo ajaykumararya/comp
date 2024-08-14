@@ -12,11 +12,19 @@ document.addEventListener('DOMContentLoaded',function(e){
             {'data' : 'roll_no'},
             {'data' : 'student_name'},
             {'data' : 'course_name'},
-            {'data' : 'duration'},
+            {'data' : 'marksheet_duration'},
             {'data' : 'center_name'},
             {'data' : null}
         ],
         columnDefs : [
+            {
+                targets : 3,
+                render:function(data,type,row){
+                    return `${ordinal_number(data)} ${$.ucfirst(row.duration_type)} 
+                        ${row.duration == row.marksheet_duration ? badge('Final Marksheet', 'success text-black') : ''}
+                    `;
+                }
+            },
             {
                 targets : -1,
                 orderable : false,

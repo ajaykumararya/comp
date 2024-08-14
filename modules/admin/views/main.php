@@ -136,8 +136,7 @@
     data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true"
     data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true"
     data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default"
-    <?= sidebar_toggle('data-kt-app-sidebar-minimize="on"') ?>
-    uri-segs='<?=json_encode($this->uri->segment_array())?>'>
+    <?= sidebar_toggle('data-kt-app-sidebar-minimize="on"') ?> uri-segs='<?= json_encode($this->uri->segment_array()) ?>'>
     <?php
     if (CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE')) {
         echo '<input type="hidden" id="wallet_system_course_wise">';
@@ -355,6 +354,19 @@
                                     data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent"
                                     data-kt-menu-placement="bottom-end">
                                     <img src="{profile_image}" class="rounded-3 owner-image" alt="user" />
+                                    <?php
+                                    if ($this->center_model->isCenter() && table_exists('manual_notifications')) {
+
+                                        $notificationCount = $this->ki_theme->count_manual_notification([
+                                            'receiver_id' => $this->center_model->loginId(),
+                                            'receiver_user' => 'center'
+                                        ]);
+                                        if ($notificationCount)
+                                            echo '<span class="badge badge-info animation-blink position-absolute translate-middle top-0 start-100">' . $notificationCount . '</span>';
+                                    }
+
+                                    ?>
+
                                 </div>
                                 <!--begin::User account menu-->
                                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px"
@@ -399,10 +411,7 @@
                                                 <span class="menu-title position-relative">
                                                     Notification
                                                     <span class="ms-5 position-absolute translate-middle-y top-50 end-0">
-                                                        <?= $this->ki_theme->count_manual_notification([
-                                                            'receiver_id' => $this->center_model->loginId(),
-                                                            'receiver_user' => 'center'
-                                                        ]) ?>
+                                                        <?= badge($notificationCount,'info') ?>
                                                     </span>
                                                 </span>
                                             </a>
