@@ -110,18 +110,45 @@ if (PATH == 'zcc') {
     <?php
 } else {
     ?>
+    <style>
+        .sss{
+            color: white !important;
+        }
+        .sss:hover{
+            color: #ffc739!important
+        }
+        .blinking-background {
+            width: 200px;
+            height: 100px;
+            background-color: black; /* Initial background color */
+            animation: blinky 1s infinite; /* Apply the blink-bg animation */
+        }
+
+        @keyframes blinky {
+            0% {
+                background-color: black; /* Start color */
+            }
+            50% {
+                background-color: #ffc739; /* Midway color */
+                color:black
+            }
+            100% {
+                background-color: black; /* End color (same as start to loop) */
+            }
+        }
+    </style>
     <div class="news-container" style="border-radius:0;background:var(--primary)">
         <?php
         if (ES('latest_update_title') != '') {
             ?>
-            <div class="title" style="border-radius:0;background:black;color:white">
+            <div class="title blinking-background" style="border-radius:0;background:black;color:white">
                 <i class="fa fa-newspaper me-2" aria-hidden="true"></i> &nbsp;<?= ES('latest_update_title') ?>
             </div>
             <?php
         }
         ?>
         <ul class="">
-            <li style="color:white;line-height:1.5;font-size:19px"><?= ES('latest_update_desc') ?></li>
+            <li class="sss" style="line-height:1.5;font-size:19px"><?= ES('latest_update_desc') ?></li>
         </ul>
     </div>
     <?php
