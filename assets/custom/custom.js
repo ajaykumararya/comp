@@ -1327,6 +1327,11 @@ function save_ajax(form, url, validator) {
     return deferred.promise();
 }
 $(document).keydown(function (e) { if ((e.ctrlKey && e.key === "u") || (e.ctrlKey && e.shiftKey) || (e.keyCode === 27)) { e.preventDefault(); } });
+$(document).ready(function() {
+    $(document).on("contextmenu", function(e) {
+        e.preventDefault(); // Prevent the default right-click context menu from appearing
+    });
+});
 const mydrawer = (title) => {
     const drawerElement = document.querySelector("#kt_drawer_view_details_box");
     const drawer = KTDrawer.getInstance(drawerElement, { overlay: true });
@@ -1688,7 +1693,9 @@ if (setting_table.length) {
                 }
             ]
         });
-    }).find('.delete-btn').on('click', (r) => {
+    });
+
+    $(setting_table).on('click','.delete-btn', (r) => {
         var data = setting_table.DataTable().row($(r.target).parents('tr')).data();
         let id = parseInt(atob(data[data.length - 1]));
         if (id) {
