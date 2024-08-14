@@ -114,7 +114,7 @@ if (PATH == 'zcc') {
         <?php
         if (ES('latest_update_title') != '') {
             ?>
-            <div class="title" style="border-radius:0;background:rgba(0,0,0,.4);color:white">
+            <div class="title" style="border-radius:0;background:black;color:white">
                 <i class="fa fa-newspaper me-2" aria-hidden="true"></i> &nbsp;<?= ES('latest_update_title') ?>
             </div>
             <?php
