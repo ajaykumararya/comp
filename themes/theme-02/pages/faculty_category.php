@@ -24,7 +24,7 @@ if ($get->num_rows()) {
                     foreach ($getItems->result() as $item) {
                         ?>
                         <div class="col-lg-2 col-md-2">
-                            <div style="min-height:1px;border:2px solid var(--primary);color:var(--primary);border-radius:0"
+                            <div style="padding:21px;min-height:1px;border:2px solid var(--primary);color:var(--primary);border-radius:0"
                                 class="icon_box text-center  icon_box_style2 box_shadow2 radius_all_10 animation animated fadeInUp"
                                 data-animation="fadeInUp" data-animation-delay="0.02s" style="animation-delay: 0.02s; opacity: 1;">
                                 <?php
@@ -41,7 +41,7 @@ if ($get->num_rows()) {
                                 }
                                 ?>
 
-                                <div class="intro_desc" style="color:var(--primary)">
+                                <div class="intro_desc" style="color:var(--primary);font-size:12px">
                                     <?= $item->field2 ?>
                                 </div>
                             </div>
