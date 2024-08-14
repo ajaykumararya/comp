@@ -80,30 +80,53 @@
         animation-play-state: paused;
     }
 </style>
-<section class="sec_padd">
-    <div class="row" style="
+<?php
+if (PATH == 'zcc') {
+    ?>
+    <section class="sec_padd">
+        <div class="row" style="
     flex-direction: column;
     padding-left: 47px;
     padding-right: 45px;
 ">
 
-        <div class="news-container">
-            <?php
-            if (ES('latest_update_title') != '') {
-                ?>
-                <div class="title">
-                    <i class="fa fa-newspaper me-2" aria-hidden="true"></i> &nbsp;<?= ES('latest_update_title') ?>
-                </div>
+            <div class="news-container">
                 <?php
-            }
-            ?>
+                if (ES('latest_update_title') != '') {
+                    ?>
+                    <div class="title">
+                        <i class="fa fa-newspaper me-2" aria-hidden="true"></i> &nbsp;<?= ES('latest_update_title') ?>
+                    </div>
+                    <?php
+                }
+                ?>
 
-            <ul class="">
-                <li><?= ES('latest_update_desc') ?></li>
-            </ul>
+                <ul class="">
+                    <li><?= ES('latest_update_desc') ?></li>
+                </ul>
+            </div>
         </div>
+    </section>
+    <?php
+} else {
+    ?>
+    <div class="news-container" style="border-radius:0;background:var(--primary)">
+        <?php
+        if (ES('latest_update_title') != '') {
+            ?>
+            <div class="title" style="border-radius:0;background:rgba(0,0,0,.4);color:white">
+                <i class="fa fa-newspaper me-2" aria-hidden="true"></i> &nbsp;<?= ES('latest_update_title') ?>
+            </div>
+            <?php
+        }
+        ?>
+        <ul class="">
+            <li style="color:white"><?= ES('latest_update_desc') ?></li>
+        </ul>
     </div>
-</section>
+    <?php
+}
+?>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const newsContainer = document.querySelector('.news-container');
