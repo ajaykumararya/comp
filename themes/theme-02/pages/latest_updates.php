@@ -121,7 +121,7 @@ if (PATH == 'zcc') {
         }
         ?>
         <ul class="">
-            <li style="color:white"><?= ES('latest_update_desc') ?></li>
+            <li style="color:white;line-height:2;font-size:17px"><?= ES('latest_update_desc') ?></li>
         </ul>
     </div>
     <?php
