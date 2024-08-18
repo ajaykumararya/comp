@@ -7,7 +7,9 @@
             --theme-primary: white;
             --text-color: #11446b;
         }
-
+        .btn-default, .bg_default, .scrollup:hover, .page-item.active .page-link, .page-item .page-link:hover, .sidebar .widget_title::before, .tags a:hover, .item_meta.duration, .course_rate .review_bar .rating, .cat_style1 a:hover, .sub_heading::before, .carousel_style2 .carousel-control-next:hover, .carousel_style2 .carousel-control-prev:hover, .overlay_bg_50::before{
+            background-color: var(--text-color)!important;
+        }
         .logo_dark.head-logo {
             width: 351px;
         }
