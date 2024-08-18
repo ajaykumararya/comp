@@ -15,7 +15,7 @@
         }
 
         .bg_light_green {
-            background-color: white !important;
+            background-color: var(--text-color) !important;
         }
 
         .head-text-logo {
