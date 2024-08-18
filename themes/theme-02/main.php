@@ -3,9 +3,12 @@
     if (in_array(PATH, ['sewaedu'])) {
         ?>
         :root {
-            --primary: #11446b;
+            --primary: #E22B2B;
             --theme-primary: white;
             --text-color: #11446b;
+        }
+        .overlay_bg_50::before{
+            background-color: var(--text-color)!important;
         }
         .logo_dark.head-logo {
             width: 351px;
@@ -56,7 +59,9 @@
             .bg_light_green {
                 background-color: var(--primary) !important;
             }
-
+            .overlay_bg_50::before{
+            background-color: var(--primary)!important;
+        }
         <?php
     } else {
         ?>
@@ -64,6 +69,9 @@
                 --primary: #07294d;
                 --theme-primary: #07294d
             }
+            .overlay_bg_50::before{
+            background-color: var(--primary)!important;
+        }
 
         <?php
     }
@@ -94,8 +102,7 @@
     .cat_style1 a:hover,
     .sub_heading::before,
     .carousel_style2 .carousel-control-next:hover,
-    .carousel_style2 .carousel-control-prev:hover,
-    .overlay_bg_50::before {
+    .carousel_style2 .carousel-control-prev:hover{
         background-color: var(--primary) !important;
     }
 
