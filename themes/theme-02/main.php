@@ -1,27 +1,76 @@
 <style>
     <?php
-    if (in_array(PATH, ['zcc', 'sewaedu'])) {
+    if (in_array(PATH, ['sewaedu'])) {
         ?>
         :root {
             --primary: #E22B2B;
+            --theme-primary: white;
+            --text-color: #11446b;
+        }
+
+        .logo_dark.head-logo {
+            width: 351px;
         }
 
         .bg_light_green {
-            background-color: var(--primary) !important;
+            background-color: white !important;
         }
+
+        .head-text-logo {
+            display: none;
+        }
+
+        .main-heading.center-heading {
+            color: var(--text-color) !important
+        }
+
+        .top-header.light_skin .contact_detail li,
+        .top-header.light_skin .contact_detail li a,
+        .top-header.light_skin .contact_detail li a i {
+            color: var(--text-color) !important;
+            font-weight: 900;
+            font-size: 19px;
+        }
+
+        .footer_dark {
+            background-color: var(--text-color) !important;
+        }
+
+        .navbar-expand-lg .navbar-nav>li>.nav-link,
+        .dark_skin .navbar-expand-lg .navbar-nav .dropdown-item,
+        .dark_skin .navbar-expand-lg .navbar-nav .dropdown-header,
+        .dark_skin .cart_quantity,
+        .dark_skin .cart_total {
+            color: var(--text-color) !important;
+            font-size: 19px;
+            font-weight: 900;
+        }
+
+        <?php
+    } else if (in_array(PATH, ['zcc'])) {
+        ?>
+            :root {
+                --primary: #E22B2B;
+                --theme-primary: #E22B2B
+            }
+
+            .bg_light_green {
+                background-color: var(--primary) !important;
+            }
 
         <?php
     } else {
         ?>
-        :root {
-            --primary: #07294d;
-        }
+            :root {
+                --primary: #07294d;
+                --theme-primary: #07294d
+            }
 
         <?php
     }
     ?>
     .bg_blue_dark {
-        background-color: var(--primary) !important;
+        background-color: var(--theme-primary) !important;
     }
 
     .btn-default,
@@ -336,9 +385,16 @@
                 <div class="row">
                     <div class="col-lg-3 col-sm-3 mb-4 mb-lg-0">
                         <div class="footer_logo mt-3">
-                            <a href="{base_url}"><img alt="logo" style="width:150px"
-                                    src="{base_url}<?= UPLOAD . $this->ki_theme->config('logo') ?>" /></a>
+                            <?php
+                            if (PATH != 'sewaedu') {
+                                ?>
+                                <a href="{base_url}"><img alt="logo" style="width:150px"
+                                        src="{base_url}<?= UPLOAD . $this->ki_theme->config('logo') ?>" /></a>
+                                <?php
+                            }
+                            ?>
                             <div>&nbsp;</div>
+
                             <ul class="contact_info contact_info_light list_none mb-3">
                                 <li>
                                     <i class="fa fa-map-marker-alt"></i>
