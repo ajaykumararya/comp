@@ -42,6 +42,9 @@ class Admin extends MY_Controller
     function wallet_history(){
         $this->view('wallet-history',['isValid' => true]);
     }
+    function wallet_load(){
+        $this->view('wallet-load',['isValid' => true]);
+    }
     function manage_role_category(){
         $this->view('manage-role-category');
     }

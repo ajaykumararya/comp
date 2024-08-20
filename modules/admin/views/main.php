@@ -232,9 +232,9 @@
                                         <span data-kt-countup="true" data-kt-countup-value="<?= $center_data['wallet'] ?>"
                                             data-kt-countup-prefix='{inr}'>0</span>
 
-                                        <button class="btn btn-primary p-1 btn-sm">&nbsp;<i class="fa fa-plus"></i></button>
-                                        <a href="{base_url}admin/wallet-history" class="btn btn-warning p-1 btn-sm"
-                                            title="History">&nbsp;<i class="fa fa-history"></i></a>
+                                        <!-- <button class="btn btn-primary p-1 btn-sm">&nbsp;<i class="fa fa-plus"></i></button> -->
+                                        <a href="{base_url}admin/wallet-load" class="btn btn-primary p-1 btn-sm"
+                                            title="History">&nbsp;<i class="fa fa-plus"></i></a>
 
                                         <small class="d-flex" style="font-size:12px;    justify-content: center;">My
                                             Wallet</small>

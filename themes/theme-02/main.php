@@ -46,7 +46,7 @@
         .dark_skin .cart_quantity,
         .dark_skin .cart_total {
             color: var(--text-color) !important;
-            font-size: 19px;
+            font-size: 15px;
             font-weight: 900;
         }
 
