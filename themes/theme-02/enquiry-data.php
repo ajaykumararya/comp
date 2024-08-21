@@ -14,8 +14,9 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Mobile</th>
-                            <th>Course Name</th>
+                            <th>Subject/Course Name</th>
                             <th>Message</th>
+                            <th>Enquiry Type</th>
                             <?php
                             if(PATH == 'aicesm')
                                 echo '<th>Admin Status</th>';
@@ -40,6 +41,7 @@
                                     <?php
                                 }
                                 ?>
+                                <td><label class="badge badge-primary">{type_data}</label></td>
                                 <td>{id}</td>
                             </tr>
                         {/list}

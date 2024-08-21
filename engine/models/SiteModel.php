@@ -206,11 +206,14 @@ class SiteModel extends MY_Model
     {
         return $this->db->where('id', $id)->delete('our_acheivements');
     }
-    function list_enquiries($type)
+    function list_enquiries($type = 0)
     {
-        $this->db->select('*,DATE_FORMAT(timestamp,"%d-%m-%Y") as date')
-            ->where('type', $type)
+        $this->db->select("*,DATE_FORMAT(timestamp,'%d-%m-%Y') as date,UPPER(REPLACE(type,'_', ' ')) AS `type_data`")
+            
             ->order_by('id', 'DESC');
+        if($type){
+            $this->db->where('type', $type);
+        }
         return $this->db->get('contact_us_action');
     }
 
