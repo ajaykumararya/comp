@@ -39,36 +39,38 @@
                                             </select>
                                         </div>
                                     </center>
-                                    <table class="table table-bordered table-striped w-100">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Category</th>
-                                                <th>Course Name</th>
-                                                <th>Duration</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            foreach ($cats->result() as $cat):
-                                                $courses = $this->db->get_where('course', ['category_id' => $cat->id]);
-                                                if ($courses->num_rows()) {
-                                                    $i = 1;
-                                                    foreach ($courses->result() as $course):
-                                                        echo '
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped w-100">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Category</th>
+                                                    <th>Course Name</th>
+                                                    <th>Duration</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                foreach ($cats->result() as $cat):
+                                                    $courses = $this->db->get_where('course', ['category_id' => $cat->id]);
+                                                    if ($courses->num_rows()) {
+                                                        $i = 1;
+                                                        foreach ($courses->result() as $course):
+                                                            echo '
                                                             <tr data-category_id="' . $cat->id . '">
                                                                 <td>' . $i++ . '.</td>
                                                                 <td>' . $cat->title . '</td>
                                                                 <td>' . $course->course_name . '</td>
-                                                                <td>' . $course->duration . ' '.$course->duration_type.'</td>
+                                                                <td>' . $course->duration . ' ' . $course->duration_type . '</td>
                                                             </tr>
                                                         ';
-                                                    endforeach;
-                                                }
-                                            endforeach;
-                                            ?>
-                                        </tbody>
-                                    </table>
+                                                        endforeach;
+                                                    }
+                                                endforeach;
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                     <?php
                                 }
                                 ?>
@@ -81,13 +83,13 @@
     </div>
 </section>
 <script>
-    $('#filter-with-cats').on('change',function(){
+    $('#filter-with-cats').on('change', function () {
         var id = $(this).val();
-        
+
         $('[data-category_id]').show();
-        if(id != '0'){
+        if (id != '0') {
             $('[data-category_id]').hide();
-            $('[data-category_id="'+id+'"]').show(500);
+            $('[data-category_id="' + id + '"]').show(500);
         }
     })
 </script>
