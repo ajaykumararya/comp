@@ -155,7 +155,18 @@
         border: 1px solid var(--primary) !important;
     }
 </style>
-
+<?php
+if(PATH == 'sewaedu'){
+    ?>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-proxima-nova@1.0.1/style.min.css">
+    <style>
+        body{
+            font-family: 'Proxima Nova', sans-serif !important;
+        }
+    </style>
+    <?php
+}
+?>
 <body>
     <div class="modal fade lr_popup" id="Login" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
