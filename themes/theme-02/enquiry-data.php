@@ -34,6 +34,8 @@
                                 <td>{mobile}</td>
                                 <td>{course_name}</td>
                                 <td>{message}</td>
+                                
+                                <td><label class="badge badge-primary">{type_data}</label></td>
                                 <?php
                                 if(PATH == 'aicesm'){
                                     ?>
@@ -41,7 +43,6 @@
                                     <?php
                                 }
                                 ?>
-                                <td><label class="badge badge-primary">{type_data}</label></td>
                                 <td>{id}</td>
                             </tr>
                         {/list}
