@@ -160,7 +160,7 @@ if(PATH == 'sewaedu'){
     ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-proxima-nova@1.0.1/style.min.css">
     <style>
-        body{
+        body, li, .title{
             font-family: 'Proxima Nova', sans-serif !important;
         }
     </style>
