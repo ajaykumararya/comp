@@ -21,21 +21,25 @@
                 }
                 echo '</select>
                         </div>';
-                if(PATH == 'sewaedu'){
+                if (PATH == 'sewaedu') {
                     ?>
                     <div class="form-group mb-4">
                         <label for="" class="form-label required">Select Icon Image</label>
                         <input type="file" required name="field1" class="form-control">
                     </div>
                     <?php
-                }
-                else
-                echo inconPickerInput('field1');
+                } else
+                    echo inconPickerInput('field1');
                 ?>
                 <div class="form-group mt-4">
                     <label for="" class="form-label">Title</label>
                     <input type="text" name="field2" id="field2" value="" class="form-control"
                         placeholder="Enter Title">
+                </div>
+                <div class="form-group mt-4">
+                    <label for="field4" class="form-label">Url or Link</label>
+                    <textarea type="text" name="field4" id="field4" value="" class="form-control"
+                        placeholder="Enter Link"></textarea>
                 </div>
             </div>
             <div class="card-footer">
@@ -90,9 +94,10 @@
                                     <td>
                                         <?= $row->field1 ?>
                                     </td>
-                                    <td><?= $this->ki_theme->drawer_button('faculty_category',$row->id,'Faculty Category') ?></td>
+                                    <td><?= $this->ki_theme->drawer_button('faculty_category', $row->id, 'Faculty Category') ?>
+                                    </td>
+
                                     <td>
-                                        
                                         <?= base64_encode($row->id) ?>
                                     </td>
                                 </tr>
@@ -122,6 +127,8 @@
                                 <th>Category</th>
                                 <th>Icon</th>
                                 <th>Title</th>
+                                <th>Link</th>
+                                <th>Update</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -137,18 +144,32 @@
                                             <?= $index++ ?>.
                                         </td>
                                         <td>
-                                            <?= isset($cats[$row->field3]) ? $cats[$row->field3] : badge('Deleted','danger') ?>
+                                            <?= isset($cats[$row->field3]) ? $cats[$row->field3] : badge('Deleted', 'danger') ?>
                                         </td>
                                         <td>
                                             <?php
-                                            if(PATH == 'sewaedu')
-                                                echo img('upload/'.$row->field1,true,['width' => 30]);
+                                            if (PATH == 'sewaedu')
+                                                echo img('upload/' . $row->field1, true, ['width' => 30]);
                                             else
-                                             echo ('<i class="' . $row->field1 . ' text-dark" style="font-size: 30px"></i>');
+                                                echo ('<i class="' . $row->field1 . ' text-dark" style="font-size: 30px"></i>');
                                             ?>
                                         </td>
                                         <td>
                                             <?= $row->field2 ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if ($row->field4)
+                                                echo anchor($row->field4, $row->field4, [
+                                                    'target' => '_blank'
+                                                ]);
+                                            else
+                                                echo '<i class="text-danger">Empty</i>';
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-primary btn-sm btn-xs edit-faculty"><i
+                                                    class="fa fa-edit"></i></button>
                                         </td>
                                         <td>
                                             <?= base64_encode($row->id) ?>
@@ -165,3 +186,17 @@
         </div>
     </div>
 </div>
+
+<script id="formTemplate" type="text/x-handlebars-template">
+    <div class="row"> 
+    <input type="hidden" name="id" value="{{id}}">
+    <div class="form-group mb-4">
+        <label class="form-label required required">Title</label>
+        <input type="text" name="title" class="form-control" value="{{title}}" placeholder="Enter title">
+    </div>
+    <div class="form-group mb-4">
+        <label class="form-label required required">Link</label>
+        <textarea type="text" name="link" class="form-control" placeholder="Enter Link">{{link}}</textarea>
+    </div>
+    </div>
+</script>

@@ -585,5 +585,13 @@ class Website extends Ajax_Controller
             $html .= alert('Something went wrong, can\'t view this message.', 'danger');
         $this->response('html', $html);
     }
+    function factuly_update(){
+        $this->db->where('id',$this->post('id'))
+                ->update('content',[
+                    'field2' => $this->post('title'),
+                    'field4' => $this->post('link')
+                ]);
+        $this->response('status',true);
+    }
 }
 ?>

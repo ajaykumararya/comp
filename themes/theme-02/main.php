@@ -156,17 +156,20 @@
     }
 </style>
 <?php
-if(PATH == 'sewaedu'){
+if (PATH == 'sewaedu') {
     ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-proxima-nova@1.0.1/style.min.css">
     <style>
-        body, li, .title{
+        body,
+        li,
+        .title {
             font-family: 'Proxima Nova', sans-serif !important;
         }
     </style>
     <?php
 }
 ?>
+
 <body>
     <div class="modal fade lr_popup" id="Login" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -424,6 +427,18 @@ if(PATH == 'sewaedu'){
                                         <?= $this->ki_theme->config('address') ?>
                                     </address>
                                 </li>
+                                <?php
+                                if (PATH == 'sewaedu') {
+                                    ?>
+                                    <li>
+                                        <i class="fa fa-map-marker-alt"></i>
+                                        <address style="text-align: justify;">
+                                            <?= $this->ki_theme->config('alternate_address') ?>
+                                        </address>
+                                    </li>
+                                    <?php
+                                }
+                                ?>
                                 <li>
                                     <i class="fa fa-envelope"></i>
                                     <a href="mailto:<?= $this->ki_theme->config('email') ?>">

@@ -22,8 +22,9 @@ if ($get->num_rows()) {
                 $getItems = $this->SiteModel->get_contents('faculty', ['field3' => $row->id]);
                 if ($getItems->num_rows()) {
                     foreach ($getItems->result() as $item) {
+                        echo '<'.($item->field4 ? 'a href="'.$item->field4.'"' : 'div').' class="col-lg-2 col-md-2">';
                         ?>
-                        <div class="col-lg-2 col-md-2">
+                        <!-- <div class="col-lg-2 col-md-2"> -->
                             <div style="padding:14px;min-height:1px;border:2px solid var(--primary);color:var(--primary);border-radius:0"
                                 class="icon_box text-center  icon_box_style2 box_shadow2 radius_all_10 animation animated fadeInUp"
                                 data-animation="fadeInUp" data-animation-delay="0.02s" style="animation-delay: 0.02s; opacity: 1;">
@@ -45,8 +46,9 @@ if ($get->num_rows()) {
                                     <?= $item->field2 ?>
                                 </div>
                             </div>
-                        </div>
+                        <!-- </div> -->
                         <?php
+                        echo '</'. ($item->field4 ? 'a' : 'div').'>';
                     }
                 }
                 ?>

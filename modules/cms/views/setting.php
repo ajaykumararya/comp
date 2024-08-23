@@ -56,6 +56,17 @@
                         <textarea name="address" id="address" class="form-control"
                             placeholder="Enter Address"><?= $this->SiteModel->get_setting('address') ?></textarea>
                     </div>
+                    <?php
+                    if (PATH == 'sewaedu') {
+                        ?>
+                        <div class="form-group mb-4">
+                            <label for="a_address" class="form-label required">Enter Alternate Address</label>
+                            <textarea name="alternate_address" id="a_address" class="form-control"
+                                placeholder="Enter Alternate Address"><?= $this->SiteModel->get_setting('alternate_address') ?></textarea>
+                        </div>
+                        <?php
+                    }
+                    ?>
                 </div>
                 <div class="card-footer">
                     {publish_button}
@@ -160,7 +171,7 @@ if (THEME == 'theme-03') {
                         <h4 class="mb-1 text-success">This is an Information</h4>
                         <span>
                         If you put <code>{newicon}</code> in the title, you will get a blinking image in the output.
-                        <code>Example:- <img src="'.base_url('themes/newicon.gif').'"></code>
+                        <code>Example:- <img src="' . base_url('themes/newicon.gif') . '"></code>
                         </span>
                     </div>
                 </div>
