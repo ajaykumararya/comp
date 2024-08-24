@@ -60,4 +60,11 @@ class Payment extends Ajax_Controller
         $this->response('status', true);
         $this->response('html', $this->template('student-fees-structure'));
     }
+
+
+    ///RAZORPAY GETWAY
+    function create_razorpay_order_for_center_wallet(){
+        return 2.5;
+    }
+    //END RAZORPAY GETWAY
 }

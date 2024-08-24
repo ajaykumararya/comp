@@ -16,7 +16,8 @@
     "filp/whoops": "^2.15",
     "mpdf/mpdf": "^8.2",
     "chillerlan/php-qrcode": "^5.0",
-    "firebase/php-jwt": "^6.10"
+    "firebase/php-jwt": "^6.10",
+    "razorpay/razorpay": "^2.9"
   },
   "config": {
     "allow-plugins": {

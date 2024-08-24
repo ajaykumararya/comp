@@ -9,11 +9,13 @@ const driverObj = driver();
 const myeditor = $(".aryaeditor");
 const ki_modal = $('#mymodal');
 const defaultStudent = base_url + 'assets/media/student.png';
+/*
 Handlebars.registerHelper('stripHTML', function(text) {
     const div = document.createElement("div");
     div.innerHTML = text;
     return div.textContent || div.innerText || "";
 });
+*/
 // console.log(typeof content_css);
 var MYEditorCss = [];
 // $.each(content_css, function (i, n) {
