@@ -86,6 +86,7 @@ class Student extends MY_Controller
     }
     function collect_fees() // old of collect_student_fees
     {
+        $this->access_method();
         $this->view('collect-fees');
     }
     function collect_student_fees() // updated from collect_fees

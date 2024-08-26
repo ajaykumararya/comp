@@ -714,7 +714,28 @@ const loadSomeFuncation = () => {
             // Additional options can be set as needed
         });
     }
-    $('[data-control="select2"]').select2();
+    $('input[type="number"]').on('keydown', function(e) {
+        // Get the key code of the pressed key
+        var key = e.key;
+
+        // List of forbidden keys
+        var forbiddenKeys = ['e', 'E', '+', '-', '*', '/', '%', '=', '.'];
+
+        // Check if the pressed key is in the forbidden keys array
+        if (forbiddenKeys.includes(key) || e.keyCode === 38 || e.keyCode === 40) {
+            e.preventDefault(); // Prevent the keypress
+        }
+    });
+    $('[data-control="select2"]').each(function() {
+        var $element = $(this);
+
+        // Check if select2 is already initialized
+        if (!$element.hasClass("select2-hidden-accessible")) {
+            $element.select2({
+                // Your select2 options here
+            });
+        }
+    });
     $(document).on('change', 'input[type="checkbox"][name="schedule_status"]', function () {
         $('.selectRange-with-time').prop('disabled', !$(this).is(':checked'));
     });

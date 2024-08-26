@@ -11,6 +11,13 @@ class MY_Model extends CI_Model
             $this->login_id = $this->session->userdata('admin_id');
         }
     }
+    function select($select){
+        $this->db->select($select);
+        return $this;
+    }
+    function withEMI(){
+        return $this->select('s.fee_emi,s.fee_emi_type');
+    }
     function myWhere($table, $condition = [])
     {
         if (sizeof($condition)) {

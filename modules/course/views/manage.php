@@ -134,11 +134,11 @@
 
 <script id="formTemplate" type="text/x-handlebars-template">
     <input type="hidden" name="id" value="{{course_id}}">
-    <div class="form-group col-md-3 mb-4">
+    <div class="form-group mb-4">
         <label class="form-label required">Enter Course Name</label>
         <input type="text" name="course_name" class="form-control" placeholder="Enter Course name" value="{{course_name}}">
     </div>
-    <div class="form-group col-md-3 mb-4">
+    <div class="form-group mb-4">
         <label class="form-label">Enter Course Fee</label>
         <input type="number" name="fees" class="form-control" placeholder="Enter Course Fee" value="{{fees}}">
     </div>

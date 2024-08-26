@@ -60,6 +60,11 @@ if (!function_exists('theme_url')) {
         return base_url('themes/' . THEME . '/');
     }
 }
+if(!function_exists('duration_in_month')){
+    function duration_in_month($duration,$duration_type = 'month'){
+        return $duration * ($duration_type == 'month' ? 1 : ($duration_type == 'semester' ? 6 : 12));
+    }
+}
 function ordinal_number($i)
 {
     $suffixes = ['st', 'nd', 'rd'];

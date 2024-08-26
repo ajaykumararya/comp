@@ -42,6 +42,17 @@
     <script src="{base_url}assets/icon-picker/dist/iconpicker-1.5.0.js"></script>
     <link rel="stylesheet" href="{base_url}assets/custom/custom.css">
     <style>
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
         tr .eye-btn {
             display: none;
         }
@@ -136,7 +147,8 @@
     data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true"
     data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true"
     data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default"
-    <?= sidebar_toggle('data-kt-app-sidebar-minimize="on"') ?> uri-segs='<?= json_encode($this->uri->segment_array()) ?>'>
+    <?= sidebar_toggle('data-kt-app-sidebar-minimize="on"') ?>
+    uri-segs='<?= json_encode($this->uri->segment_array()) ?>'>
     <?php
     if (CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE')) {
         echo '<input type="hidden" id="wallet_system_course_wise">';
@@ -411,7 +423,7 @@
                                                 <span class="menu-title position-relative">
                                                     Notification
                                                     <span class="ms-5 position-absolute translate-middle-y top-50 end-0">
-                                                        <?= badge($notificationCount,'info') ?>
+                                                        <?= badge($notificationCount, 'info') ?>
                                                     </span>
                                                 </span>
                                             </a>
