@@ -9,6 +9,7 @@ const driverObj = driver();
 const myeditor = $(".aryaeditor");
 const ki_modal = $('#mymodal');
 const defaultStudent = base_url + 'assets/media/student.png';
+
 /*
 Handlebars.registerHelper('stripHTML', function(text) {
     const div = document.createElement("div");
@@ -144,6 +145,14 @@ if ($.isFunction($.fn.maxlength)) {
         limitReachedClass: "badge badge-success"
     });
 }
+const formatNumber = (number) => {
+    number = Number(number);
+    if (Number.isInteger(number)) {
+        return number.toString();
+    } else {
+        return number.toFixed(2);
+    }
+}
 const uri_segment = (number = 1, default_value = '') => {
     const url = JSON.parse($('body').attr('uri-segs'));
     // log(url);
@@ -273,9 +282,9 @@ const createSlug = (text) => {
 const warn = (message) => {
     MyConsole(message, 'warn');
 }
-const timeStringToTime = (timestring) => {
+const timeStringToTime = (timestring, format = 'YYYY-MM-DD h:mm A') => {
     const date = new Date(timestring * 1000);
-    return moment(date).format('YYYY-MM-DD h:mm A');
+    return moment(date).format(format);
 }
 const formDataObject = (form) => {
     var formDataArray = $(form).serializeArray();
@@ -455,6 +464,7 @@ $.fn.EditForm = function (url, title = 'Edit Record') {
         table.find('.edit-record').on('click', function (e) {
             e.preventDefault();
             var rowData = table.DataTable().row($(this).closest('tr')).data();
+            // log(rowData);
             if (rowData) {
                 var templateSource = document.getElementById('formTemplate');
                 if (templateSource) {
@@ -467,19 +477,9 @@ $.fn.EditForm = function (url, title = 'Edit Record') {
                         if (d.status) {
                             table.DataTable().ajax.reload();
                             ki_modal.modal('hide');
-
                         }
                         else {
-                            // alert('hi');
-                            if ('errors' in d) {
-                                log(d.errors);
-                                $.each(d.errors, function (i, v) {
-                                    toastr.error(v);
-                                });
-                            }
-                            else {
-                                mySwal('Something Went Wrong.', 'Record not Update.', 'error')
-                            }
+                            showResponseError(d);
                         }
                     });
                 }
@@ -714,19 +714,19 @@ const loadSomeFuncation = () => {
             // Additional options can be set as needed
         });
     }
-    $('input[type="number"]').on('keydown', function(e) {
+    $('input[type="number"]').on('keydown', function (e) {
         // Get the key code of the pressed key
         var key = e.key;
 
         // List of forbidden keys
-        var forbiddenKeys = ['e', 'E', '+', '-', '*', '/', '%', '=', '.'];
+        var forbiddenKeys = ['e', 'E', '+', '-', '*', '/', '%', '='];
 
         // Check if the pressed key is in the forbidden keys array
         if (forbiddenKeys.includes(key) || e.keyCode === 38 || e.keyCode === 40) {
             e.preventDefault(); // Prevent the keypress
         }
     });
-    $('[data-control="select2"]').each(function() {
+    $('[data-control="select2"]').each(function () {
         var $element = $(this);
 
         // Check if select2 is already initialized
@@ -1355,8 +1355,8 @@ function save_ajax(form, url, validator) {
     return deferred.promise();
 }
 $(document).keydown(function (e) { if ((e.ctrlKey && e.key === "u") || (e.ctrlKey && e.shiftKey) || (e.keyCode === 27)) { e.preventDefault(); } });
-$(document).ready(function() {
-    $(document).on("contextmenu", function(e) {
+$(document).ready(function () {
+    $(document).on("contextmenu", function (e) {
         e.preventDefault(); // Prevent the default right-click context menu from appearing
     });
 });
@@ -1723,7 +1723,7 @@ if (setting_table.length) {
         });
     });
 
-    $(setting_table).on('click','.delete-btn', (r) => {
+    $(setting_table).on('click', '.delete-btn', (r) => {
         var data = setting_table.DataTable().row($(r.target).parents('tr')).data();
         let id = parseInt(atob(data[data.length - 1]));
         if (id) {
@@ -2266,3 +2266,26 @@ $.fn.releaseSnapshot = function () {
             this.style[stylesToSnapshot[i]] = "";
     });
 };
+if (typeof Handlebars !== undefined) {
+    Handlebars.registerHelper('formatNumber', function (number) {
+        return formatNumber(number);
+    });
+    Handlebars.registerHelper('timeStringToTime', function (timestamp) {
+        if (!timestamp) {
+            timestamp = Math.floor(Date.now() / 1000); // Current Unix timestamp in seconds
+        }
+        // return timeStringToTime(timesting,format);
+        let date = new Date(parseInt(timestamp) * 1000);
+
+        // Extract the date components
+        let year = date.getFullYear();
+        let month = String(date.getMonth() + 1).padStart(2, '0');
+        let day = String(date.getDate()).padStart(2, '0');
+        let hours = String(date.getHours()).padStart(2, '0');
+        let minutes = String(date.getMinutes()).padStart(2, '0');
+
+        // Return formatted date string
+        return `${year}-${month}-${day} ${hours}:${minutes}`;
+    });
+}
+//timeStringToTime

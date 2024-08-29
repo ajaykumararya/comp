@@ -5,7 +5,7 @@
                 <div class="text-center animation animated fadeInUp" data-aos="fade-up" data-animation="fadeInUp"
                     data-animation-delay="0.01s" style="animation-delay: 0.01s; opacity: 1;">
                     <div class="heading_s1 text-center">
-                        <h1 class="main-heading center-heading"><i class="fa fa-wpforms"></i> Online Exam Result</h1>
+                        <h1 class="main-heading center-heading"><i class="fab fa-wpforms"></i> Online Exam Result</h1>
                     </div>
                 </div>
             </div>
@@ -51,31 +51,47 @@
                                 if ($this->student_model->isStudent()) {
                                     echo '<a href="' . base_url('student') . '" class="btn formSend_btn btn-sm btn-primary">Dashboard</a>';
                                 }
+                                $pass = $percentage > 33;
                                 ?>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
-                        <h3>Overview</h3>
-                        <table class="table table-bordered mb-4">
-                            <tr>
-                                <th>Total Questions</th>
-                                <td>{max_questions}</td>
-                                <th>Total Attemped</th>
-                                <td>{max_questions}</td>
-                            </tr>
-                            <tr>
-                                <th>Total Right Answers</th>
-                                <td>{ttl_right_answers}</td>
-                                <th>Total Percentage</th>
-                                <td>{percentage} %</td>
-                            </tr>
-                        </table>
+                        <center  style="
+                                font-size: 49px;
+                                font-weight: 900;
+                                color: <?=$pass ? 'green' : 'red'?>;
+                                font-family: cursive;
+                            ">
+
+                            <span><?= $pass ? 'PASS' : 'FAIL' ?></span>
+                            <span style="font-weight:600;font-size:20px">with</span>
+                            <span>{percentage} %</span>
+                        </center>
                         <?php
                         if ($this->student_model->isAdminOrCenter()) {
                             ?>
+                            <h3>Overview</h3>
+                            <table class="table table-bordered mb-4">
+                                <tr>
+                                    <th>Total Questions</th>
+                                    <td>{max_questions}</td>
+                                    <th>Total Attemped</th>
+                                    <td>{max_questions}</td>
+                                </tr>
+                                <tr>
+                                    <th>Total Right Answers</th>
+                                    <td>{ttl_right_answers}</td>
+                                    <th>Total Percentage</th>
+                                    <td>{percentage} %</td>
+                                </tr>
+                            </table>
+
                             <h3>Answer-Sheet of <b class="text-primary">{exam_title}</b></h3>
                             <?php
+                            if (isset($isEdited) && $isEdited) {
+                                echo alert('This exam has been edited.','danger');
+                            }
                             $index = 1;
                             if ($attempt_questions) {
                                 foreach ($exam_questions as $myRow) {

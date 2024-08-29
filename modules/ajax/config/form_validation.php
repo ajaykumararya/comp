@@ -379,5 +379,28 @@ $config = array(
             'label' => 'Issue Date',
             'rules' => 'required'
         )
+    ),
+    'update_student_exam' => array(
+        array(
+            'field' => 'attempt_time',
+            'label' => 'Attempt Time',
+            'rules' => 'required'
+        ),
+        array(
+            'field' => 'percentage',
+            'label' => 'Percentage',
+            'rules' => [
+                'callback_percentage_check' => function ($value) {
+                    // Inline validation logic
+                    if (is_numeric($value) && $value >= 0 && $value <= 100) {
+                        return TRUE;
+                    }
+                    return FALSE;
+                }
+            ],
+            'errors' => array(
+                'percentage_check' => 'Percentage should be between 0 and 100'
+            )
+        ),
     )
 );

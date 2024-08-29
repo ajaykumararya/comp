@@ -4,8 +4,8 @@ class Exam extends Ajax_Controller
     function create()
     {
         $data = $this->post();
-        $data['timer_status'] = isset ($data['timer_status']) ? 1 : 0;
-        $data['schedule_status'] = isset ($data['schedule_status']) ? 1 : 0;
+        $data['timer_status'] = isset($data['timer_status']) ? 1 : 0;
+        $data['schedule_status'] = isset($data['schedule_status']) ? 1 : 0;
         // $this->response($this->post());
         $this->db->insert('exams', $data);
         $this->response('status', true);
@@ -20,8 +20,8 @@ class Exam extends Ajax_Controller
     {
         $id = $this->decode($id);
         $data = $this->post();
-        $data['timer_status'] = isset ($data['timer_status']) ? 1 : 0;
-        $data['schedule_status'] = isset ($data['schedule_status']) ? 1 : 0;
+        $data['timer_status'] = isset($data['timer_status']) ? 1 : 0;
+        $data['schedule_status'] = isset($data['schedule_status']) ? 1 : 0;
         $this->response('status', $this->db->where('id', $id)->update('exams', $data));
     }
     function list()
@@ -92,9 +92,9 @@ class Exam extends Ajax_Controller
     }
     function manage_question_with_answers()
     {
-        $isEdit = isset ($_POST['question_id']);
-        if(!$isEdit){
-            $this->form_validation->set_rules('question','Question','required|is_unique[exam_questions.question]');
+        $isEdit = isset($_POST['question_id']);
+        if (!$isEdit) {
+            $this->form_validation->set_rules('question', 'Question', 'required|is_unique[exam_questions.question]');
         }
         if ($this->validation('question_add')) {
             // $this->response($this->post());
@@ -120,7 +120,7 @@ class Exam extends Ajax_Controller
                     'ques_id' => $ques_id
                 ];
 
-                if (isset ($ansIDs[$i]) AND $ansIDs[$i]) {
+                if (isset($ansIDs[$i]) and $ansIDs[$i]) {
                     $tempAns['id'] = $ansIDs[$i];
                     $updateAns[] = $tempAns;
                 } else {
@@ -128,10 +128,10 @@ class Exam extends Ajax_Controller
                 }
             }
             if ($ques_id) {
-                if (count($saveAns) > 0){
+                if (count($saveAns) > 0) {
                     $this->db->insert_batch('exam_ques_answers', $saveAns);
                 }
-                if (count($updateAns) > 0){
+                if (count($updateAns) > 0) {
                     $this->db->update_batch('exam_ques_answers', $updateAns, 'id');
                 }
                 $this->response('status', true);
@@ -149,27 +149,30 @@ class Exam extends Ajax_Controller
         $this->db->where($this->post())->delete('exam_ques_answers');
         $this->response('status', true);
     }
-    function submit_request(){
+    function submit_request()
+    {
         $data = $this->post();
         $data['request_time'] = time();
         $data['center_id'] = $this->center_model->loginId();
-        $this->db->insert('exam_requests',$data);
-        $this->response('status',true);
+        $this->db->insert('exam_requests', $data);
+        $this->response('status', true);
     }
-    function list_requests(){
+    function list_requests()
+    {
         // $this->center_model->list_requests();
         $this->response('data', $this->center_model->list_requests()->result_array());
     }
 
 
-    function list_assign_students(){
-        $students = $this->student_model->get_switch('assign_exam_student_list',[
+    function list_assign_students()
+    {
+        $students = $this->student_model->get_switch('assign_exam_student_list', [
             'course_id' => $this->post("course_id"),
             'exam_id' => $this->post('exam_id')
         ]);
-        $this->set_data('exam_id',$this->post('exam_id'));
+        $this->set_data('exam_id', $this->post('exam_id'));
         $this->set_data('students', $students->result_array());
-        $this->response('status',($students->num_rows() > 0));
+        $this->response('status', ($students->num_rows() > 0));
         $this->response('html', $this->template('list-assign-students'));
     }
     function assign_to_student()
@@ -180,24 +183,41 @@ class Exam extends Ajax_Controller
             'exam_id' => $this->post("exam_id")
         ];
         // $this->response($this->post());
-        if($this->post('check_status') == 'true'){
+        if ($this->post('check_status') == 'true') {
             $data['assign_time'] = time();
             $data['added_by'] = $this->student_model->login_type();
-            $this->db->insert('exam_students', $data);  
-            $this->response("status",true);
+            $this->db->insert('exam_students', $data);
+            $this->response("status", true);
+        } else {
+            $this->db->delete('exam_students', $data);
+            $this->response("status", true);
         }
-        else{
-            $this->db->delete('exam_students',$data);
-            $this->response("status",true);
-        }
-    }    
-    function student_exams(){
+    }
+    function student_exams()
+    {
         $where = [];
-        if($this->center_model->isCenter())
+        if ($this->center_model->isCenter())
             $where['center_id'] = $this->center_model->loginId();
-        $get =  $this->student_model->get_switch('student_exams',$where);
+        $get = $this->student_model->get_switch('student_exams', $where);
         $data = $get->num_rows() ? $get->result_array() : [];
-        $this->response('data',$data);
-        $this->response('query',$this->db->last_query());
+        $this->response('data', $data);
+        $this->response('query', $this->db->last_query());
+    }
+    function update_student_exam()
+    {
+        if ($this->validation('update_student_exam')) {
+            $this->response('status', $this->db->update('exam_students', [
+                'isEdited' => 1,
+                'percentage' => $this->post('percentage'),
+                'attempt_time' => strtotime($this->post('attempt_time'))
+            ], ['id' => $this->post('id')]));
+        }
+        // $this->response('formData',$this->post());
+    }
+    function delete_exam()
+    {
+        $this->response('status', $this->db->delete('exam_students', [
+            'id' => $this->post('exam_id')
+        ]));
     }
 }

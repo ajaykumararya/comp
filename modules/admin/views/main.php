@@ -132,6 +132,9 @@
             display: flex;
             flex-wrap: wrap;
         }
+        div:where(.swal2-container){
+            z-index: 99999!important;
+        }
     </style>
     <script>
         // Frame-busting to prevent site from being loaded within a frame without permission (click-jacking)

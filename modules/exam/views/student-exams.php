@@ -24,23 +24,17 @@
         </div>
     </div>
 </div>
-<!-- <script id="template" type="text/x-handlebars-template">
-    <label class="parent-ans btn btn-outline btn-outline-dashed btn-active-light-primary d-flex flex-stack text-start p-2 mb-5 {{parent_class}}">
-        <div class="d-flex align-items-center me-2">
-            <div class="form-check form-check-custom form-check-solid form-check-primary me-6">
-                <input class="form-check-input is-right" type="radio" name="is_right[]" {{is_chcked}}/>
-                <input type="hidden" name="ans[]" class="ans" value="{{answer}}">
-            </div>
-            <div class="flex-grow-1">
-                <h2 class="d-flex align-items-center fs-3 fw-bold flex-wrap ans-title">
-                    {{answer}}
-                </h2>
-            </div>
-        </div>
-        <div class="ms-5">
-            <button class="btn btn-primary edit-ans btn-sm" type="button"><span class="fa fa-edit"></span></button>
-            <button class="btn btn-danger delete-ans btn-sm" type="button"><span class="fa fa-trash"></span></button>
-            <input type="hidden" name="ans_id[]" class="ans_id" value="{{answer_id}}">
-        </div>
-    </label>
-</script> -->
+<script id="formTemplate" type="text/x-handlebars-template">
+    <input type="hidden" name="id" value="{{assign_exam_id}}">
+     <div class="input-group mb-5">
+        <label for="d" class="input-group-text">Attemped Time</label>        
+        <input type="text" id="d" name="attempt_time" class="form-control date-with-time" placeholder="Select Date & Time" value="{{timeStringToTime attempt_time}}">
+
+    </div>
+
+     <div class="input-group mb-5">
+        <label class="input-group-text">Percentage</label>
+        <input type="number" name="percentage" placeholder="Enter Percentage" min="0" max="100" step="0.01" value="{{percentage}}" class="form-control percenatge-input">
+        <span class="input-group-text">%</span>
+    </div>
+</script>

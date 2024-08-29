@@ -77,7 +77,15 @@ class MY_Controller extends MX_Controller
             defined('DefaultPage') or define('DefaultPage', $get->row("active_page"));
         }
     }
-    
+    public function percentage_check($value)
+    {
+        if (is_numeric($value) && $value >= 0 && $value <= 100)
+        {
+            return TRUE;
+        }
+        $this->form_validation->set_message('percentage_check', 'The {field} field must be between 0 and 100.');
+        return FALSE;
+    }
     function encode($id = 0)
     {
         return $this->ki_theme->encrypt($id);
