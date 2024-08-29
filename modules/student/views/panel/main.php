@@ -171,7 +171,7 @@
                     <!--end::Sidebar mobile toggle-->
                     <!--begin::Mobile logo-->
                     <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-                        <a href="{base_url}student" class="text-capitalize text-danger fs-1 fw-bolder">
+                        <a href="{base_url}student" class="text-capitalize fs-1 fw-bolder" style="color:#E22B2B">
                             <!-- <img alt="Logo" src="{base_url}assets/media/logos/default-small.svg" class="h-30px" /> -->
                             {center_name}
                         </a>
