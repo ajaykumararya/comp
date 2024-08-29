@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                         var per = formatNumber(row.percentage);
                         var edited = ``;
                         if(typeof row.isEdited !== undefined){
-                            edited = row.isEdited ? badge('Edited','dark') : '';
+                            edited = row.isEdited == 1 ? badge('Edited','dark') : '';
                         }
                         return `${row.percentage > 33 ? badge('PASS') : badge('FAIL', 'danger')} with ${per}% ${edited}`;
                     }
