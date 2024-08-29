@@ -90,7 +90,7 @@
                             <h3>Answer-Sheet of <b class="text-primary">{exam_title}</b></h3>
                             <?php
                             if (isset($isEdited) && $isEdited) {
-                                echo alert('This exam has been edited.','danger');
+                                // echo alert('This exam has been edited.','danger');
                             }
                             $index = 1;
                             if ($attempt_questions) {

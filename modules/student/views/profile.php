@@ -17,6 +17,9 @@ if (PATH == 'zcc' && isset($student_docs) && $student_docs) {
 ?>
 <!--begin::Navbar-->
 <div class="overflow-hidden position-relative card-rounded">
+    <?php
+    if($this->center_model->isAdminOrCenter()){
+    ?>
     <!--begin::Ribbon-->
     <div class="ribbon ribbon-triangle ribbon-top-end border-primary">
         <!--begin::Ribbon icon-->
@@ -77,6 +80,9 @@ if (PATH == 'zcc' && isset($student_docs) && $student_docs) {
         </div>
     </div>
     <!--end::Ribbon-->
+    <?php
+    }
+    ?>
     <div class="card mb-5 mb-xl-10">
         <div class="card-body pt-9 pb-0">
             <!--begin::Details-->
