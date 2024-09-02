@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
 
     const update_enquiry = $('.update-status');
     const table = $('#enquiry_data');
-    update_enquiry.on('click', function (r) {
+    $(document).on('click','.update-status', function (r) {
         var text = $(this).attr('data-text');
         var data = table.DataTable().row($(r.target).parents('tr')).data();
         var id = (data[data.length - 1]);

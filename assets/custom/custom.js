@@ -1411,7 +1411,7 @@ const request_abort = () => {
     AryaAjaxXhr && AryaAjaxXhr.abort();
     log('Request Aborted!');
 };
-$.AryaAjax = function (options) {
+$.AryaAjax = async function (options) {
     return new Promise(function (resolve, reject) {
         // log(options);
         // Default settings

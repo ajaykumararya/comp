@@ -187,10 +187,12 @@ class Ki_theme
         return base64_encode($result);
     }
 
-    function center_fix_fees()
+    function center_fix_fees($flag = false)
     {
         $array = [];
-        if (CHECK_PERMISSION('WALLET_SYSTEM')) {
+        if (CHECK_PERMISSION('WALLET_SYSTEM') OR $flag) {
+            if($flag)
+                $this->CI->db->where('status',1);
             $getFees = $this->CI->db->where('onlyFor', 'center')->get('student_fix_payment');
             if ($getFees->num_rows()) {
                 foreach ($getFees->result() as $row) {

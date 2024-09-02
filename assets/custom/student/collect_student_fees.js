@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async function (r) {
             loadSomeFuncation();
         });
     });
-    $(document).on('change', '.select-search-type', function (r) {
+    $(document).on('change', 'select.select-search-type', function (r) {
         var type = $(this).val();
         var student_id = liststudentBox.val();
         fees_box_footer.html('');
@@ -33,11 +33,12 @@ document.addEventListener('DOMContentLoaded', async function (r) {
             fee_emi = $('input[name="fee_emi"]').val(),
             fee_emi_type = $('input[name="fee_emi_type"]').val();
         fee_emi = fee_emi == '' ? null : fee_emi;
+        // log( { student_id, type, course_id, center_id, roll_no, fee_emi, fee_emi_type });
         $.AryaAjax({
             url: 'fees/get-fees-structure',
             data: { student_id, type, course_id, center_id, roll_no, fee_emi, fee_emi_type }
         }).then((r) => {
-            log(r);
+            // log(r);
             fees_structure_box.html(r.html);
             if (typeof r.empty_footer && r.empty_footer)
                 fees_box_footer.html('');
@@ -47,7 +48,9 @@ document.addEventListener('DOMContentLoaded', async function (r) {
             loadSomeFuncation();
         });
     })
-    //89619
+    $(document).on('click','.setting-refresh',function(){
+        $('.select-search-type').trigger('change');
+    })
     $(document).on("keyup blur", '.amount,.discount', function () {
         var value = $(this).val();
         if (value.length > 1 && value.startsWith('0')) {
@@ -81,18 +84,22 @@ document.addEventListener('DOMContentLoaded', async function (r) {
         $('.ttl-discount').html(ttl_discount);
         $('.payable-amount').html(total);
         $('.paid-amount').html(total_amount);
-        $('.pay-now').prop('disabled', (!(total_amount >= 0) || !flag));
+        $('.pay-now').prop('disabled', ( (!(total_amount >= 0) || !flag)));
+        if($('.check-input:checked').hasClass('d-none') && !total){
+            $('.pay-now').prop('disabled', true);
+        }
 
     }
     form.submit(function (d) {
         d.preventDefault();
         var form_data = new FormData(this);
-        // log($(this).serialize());
+        // log($(this).serializeArray());
+        // return false;
         $.AryaAjax({
             url: 'fees/submit-fees',
             data: form_data
         }).then((e) => {
-            if(e.status){
+            if (e.status) {
                 toastr.success('Fee Submitted Successfully...');
                 $('.select-search-type').trigger('change');
             }
@@ -137,6 +144,19 @@ document.addEventListener('DOMContentLoaded', async function (r) {
                 })
             }
             showResponseError(re);
+        });
+    })
+    $(document).on('click', '.undo-setting', function () {
+        // var box=$(this).closest('.card-body');
+        // box.toggleClass('animation animation-slide-in-up')
+        // toastr.success('HII');
+        var id = liststudentBox.val();
+        $.AryaAjax({
+            url: 'fees/setup_student_emis',
+            data: { student_id: id, emi: null }
+        }).then((r) => {
+            toastr.success('Fee Setting Reset Successfully...');
+            $('.select-search-type').trigger('change');
         });
     })
 });

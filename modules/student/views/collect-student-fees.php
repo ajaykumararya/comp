@@ -22,14 +22,7 @@
                     </div>
                 </div>
                 <div class="card-footer footer-box">
-                    <?php
-                    $center_course = $this->center_model->get_assign_courses(7, ['course_id' => 6]);
-                    $course_fees = 0;
-                    if ($center_course->num_rows()) {
-                        $course_fees = $center_course->row('course_fee');
-                    }
-                    echo $course_fees;
-                    ?>
+                    
                 </div>
             </div>
         </form>

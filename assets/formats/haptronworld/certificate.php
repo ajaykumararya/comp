@@ -22,8 +22,9 @@
             position: absolute;
             font-weight: bold;
         }
-        div.position-absolute{
-            font-size:18px;
+
+        div.position-absolute {
+            font-size: 18px;
         }
 
         .w-100 {
@@ -43,15 +44,16 @@
             top: 78.9%;
             left: 55.1%;
         }
-        #photo1
-        {
+
+        #photo1 {
             top: 28.39%;
             left: 22.87rem;
         }
-       
-        p{
+
+        p {
             font-weight: bold;
         }
+
         .middle-div {
             width: 60%;
             margin-left: 9rem;
@@ -59,16 +61,20 @@
             /* border:1px solid red; */
             font-weight: bold;
         }
-        .text-center{
-            text-align: center;            
+
+        .text-center {
+            text-align: center;
         }
-        .t-c{
+
+        .t-c {
             text-transform: capitalize;
         }
-        .test{
-            border:1px solid red
+
+        .test {
+            border: 1px solid red
         }
-        #center_signature{
+
+        #center_signature {
             z-index: 999;
             top: 43rem;
             left: 22rem;
@@ -92,22 +98,28 @@
 
     <div class="position-absolute " style="left:48%;top:41%;">{student_name}</div>
     <div class="position-absolute " style="width:340px;top:45.3%;left:40%">{father_name}</div>
-    
+
     <!-- <div class="position-absolute text-center" style="width:450px;left:20%;top:56.5%;">{enrollment_no}</div> -->
     <!-- <div class="position-absolute text-center t-c" style="left:60%;top:59%;">{duration} {duration_type}</div> -->
     <div class="position-absolute " style="width:680px;left:33%;top:49.5%;">{course_name}</div>
-    
+
     <div class="position-absolute text-center" style="width:160px;left:38%;top:54%;">{from_date}</div>
     <div class="position-absolute text-center" style="width:140px;left:54.5%;top:54%;">{to_date}</div>
-    
+
     <div class="position-absolute text-center" style="left:78%;top:67.3%;width:150px">{grade}</div>
     <div class="position-absolute text-center" style="left:58.5%;top:73.5%;width:150px">{createdOn}</div>
     <div class="position-absolute" style="width:580px;left:42%;top:58.5%;">{center_name}</div>
     <!-- createdOn -->
-    <div class="position-absolute" id="center_signature">
-        <img src="upload/{center_signature}" style="width:200px;height:80px">
-    </div>
-    
+    <?php
+    if (file_exists('upload/' . $center_signature)) {
+        ?>
+        <div class="position-absolute" id="center_signature">
+            <img src="upload/{center_signature}" style="width:200px;height:80px">
+        </div>
+        <?php
+    }
+    ?>
+
 </body>
 
 </html>

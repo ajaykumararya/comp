@@ -282,4 +282,18 @@ function maskEmail($email)
 
     return $maskedUsername . '@' . $domain;
 }
-?>
+function fixConifFee($index){
+    $CI =& get_instance();
+    if($CI->center_model->isCenter()){
+        $index = $index == 'admission_fees' ? 'student_admission_fees' : $index;
+        $fees = $CI->ki_theme->center_fix_fees(true);
+        if(isset($fees[$index]))
+            return $fees[$index];
+    }
+    else{
+        $get = $CI->db->where(['key' => $index,'onlyFor' => 'student','status' => 1])->get('student_fix_payment');
+        if($get->num_rows())
+            return $get->row('amount');
+    }
+    return null;
+}

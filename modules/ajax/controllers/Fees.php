@@ -10,12 +10,34 @@ class Fees extends Ajax_Controller
     {
         return $this->config->item('searching_types')[$index] ?? 'undefined';
     }
-    private function get_fee_box($array = [],$checked = true)
+    private function get_fee_box($array = [], $checked = true)
     {
         extract($array);
         $randID = generateCouponCode(3);
         $readonly = $type == 'course_fees' ? 'readonly' : '';
-        if ($added) {
+        if ($fee == null) {
+            $loginType = $this->center_model->isCenter() ? 'center' : 'student';
+            $this->response('empty_footer',true);
+            return '<div class="overflow-auto pb-5 mb-2">
+                        <div class="notice d-flex bg-light-danger rounded border-danger border border-dashed min-w-lg-600px flex-shrink-0 p-6">
+                            <i class="ki-duotone ki-notification fs-2tx text-danger me-4"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+
+                            <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
+                                <div class="mb-3 mb-md-0 fw-semibold">
+                                    <h4 class="text-gray-900 fw-bold">' . $title . ' not Defined!</h4>
+
+                                    <div class="fs-6 text-gray-700 pe-7">Go to Set Fee Section, And update fee then click on refresh button.</div>
+                                </div>
+                                <div> 
+                                    <button type="button" class="btn btn-active-danger px-6 align-self-center text-nowrap setting-refresh border-dashed border-2 border-danger"> Refresh</button>
+                                    <a href="' . base_url('payment/'.$loginType . '-payment-setting') . '" target="_blank" class="btn btn-active-danger px-6 align-self-center text-nowrap undo-setting border-dashed border-2 border-danger"> Configure Fee </a>                           
+                                </div>
+                            </div>
+                        </div>                
+                    </div>';
+        }
+        if (isset($added) && $added) {
+            $this->response('empty_footer',true);
             return alert('Already Submit this fees', 'danger');
         }
         return '
@@ -25,7 +47,7 @@ class Fees extends Ajax_Controller
                             <div class="row p-0">
                                 <div class="col-md-3">
                                     <div class="form-check mt-7 form-switch form-check-custom form-check-success form-check-solid">
-                                        <input class="form-check-input check-input" type="checkbox" name="key_id[]" value="' . $index . '" '.($checked ? 'checked' : '').' id="key_' . $randID . '"/>
+                                        <input class="form-check-input check-input" type="checkbox" name="key_id[]" value="' . $index . '" ' . ($checked ? 'checked' : '') . ' id="key_' . $randID . '"/>
                                         <label class="form-check-label text-dark fs-2" for="key_' . $randID . '">
                                             ' . $title . '
                                         </label>
@@ -124,37 +146,39 @@ class Fees extends Ajax_Controller
         $this->response('where', $where);
         extract($where);
         $Html = '<div class="row">';
-        switch ($this->post('type')) {
-            case 'admission_fees':
-                $get = $this->student_model->get_fee_transcations(['type' => 'admission_fee', 'type_key' => 'admission_fee'] + $where);
-                $this->response('empty_footer', $get->num_rows());
-                $Html .= $this->get_fee_box([
-                    'type' => 'admission_fee',
-                    'title' => 'Admission Fees',
-                    'fee' => 500,
-                    'index' => 'admission_fee',
-                    'added' => $get->num_rows(),
-                    'record' => $get->num_rows() ? $get->row() : new stdClass
-                ]);
-                break;
-            case 'course_fees':
-                $getStudent = $this->student_model->withEMI()->get_student_via_id($where['student_id']);
-                if ($getStudent->num_rows()) {
-                    $row = $getStudent->row();
-                    $center_course = $this->center_model->get_assign_courses($center_id, ['course_id' => $course_id]);
-                    $course_fees = ($center_course->num_rows()) ? $center_course->row('course_fee') : 0;
-                    $totalPaidAmount =
-                        $totalDiscount =
-                        $totalFee = 0;
+        $switchType = $this->post('type');
+        if ($switchType) {
+            switch ($switchType) {
+                default:
+                    $get = $this->student_model->get_fee_transcations(['type' => $switchType, 'type_key' => $switchType] + $where);
+                    $this->response('empty_footer', $get->num_rows());
+                    $Html .= $this->get_fee_box([
+                        'type' => $switchType,
+                        'title' => $this->GetConfig($switchType),
+                        'fee' => fixConifFee($switchType),
+                        'index' => $switchType,
+                        'added' => $get->num_rows(),
+                        'record' => $get->num_rows() ? $get->row() : new stdClass
+                    ]);
+                    break;
+                case 'course_fees':
+                    $getStudent = $this->student_model->withEMI()->get_student_via_id($where['student_id']);
+                    if ($getStudent->num_rows()) {
+                        $row = $getStudent->row();
+                        $center_course = $this->center_model->get_assign_courses($center_id, ['course_id' => $course_id]);
+                        $course_fees = ($center_course->num_rows()) ? $center_course->row('course_fee') : 0;
+                        $totalPaidAmount =
+                            $totalDiscount =
+                            $totalFee = 0;
 
-                    if ($row->fee_emi !== null) {
-                        $getFee = $this->db->select('SUM(amount) as ttl_fee,SUM(discount) as ttl_discount,SUM(payable_amount) as ttl_paid_amount')->where($where + ['type_key' => $this->post('type')])->group_by('student_id')->limit(1)->get('student_fee_transactions');
-                        if ($getFee->num_rows()) {
-                            $totalFee = $getFee->row()->ttl_fee;
-                            $totalDiscount = $getFee->row()->ttl_discount;
-                            $totalPaidAmount = $getFee->row()->ttl_paid_amount;
-                        }
-                        $Html .= '<div class="d-flex flex-wrap">
+                        if ($row->fee_emi !== null) {
+                            $getFee = $this->db->select('SUM(amount) as ttl_fee,SUM(discount) as ttl_discount,SUM(payable_amount) as ttl_paid_amount')->where($where + ['type_key' => $this->post('type')])->group_by('student_id')->limit(1)->get('student_fee_transactions');
+                            if ($getFee->num_rows()) {
+                                $totalFee = $getFee->row()->ttl_fee;
+                                $totalDiscount = $getFee->row()->ttl_discount;
+                                $totalPaidAmount = $getFee->row()->ttl_paid_amount;
+                            }
+                            $Html .= '<div class="d-flex flex-wrap">
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <div class="d-flex align-items-center">
                                             <i class="fs-1 text-success me-2">' . $inrIcon . '</i>                                    
@@ -184,12 +208,12 @@ class Fees extends Ajax_Controller
                                         <div class="fw-semibold fs-6 text-gray-600">Remaining Fee</div>
                                     </div>
                                 </div>';
-                    }
+                        }
 
-                    if ($row->fee_emi == null) { // POPUP FOR GET EMI OR NOT
-                        $this->response('empty_footer', true);
-                        $numDur = duration_in_month($row->duration, $row->duration_type);
-                        $Html .= '<div class="col-md-3"></div>
+                        if ($row->fee_emi == null) { // POPUP FOR GET EMI OR NOT
+                            $this->response('empty_footer', true);
+                            $numDur = duration_in_month($row->duration, $row->duration_type);
+                            $Html .= '<div class="col-md-3"></div>
                             <div class="col-md-6">
                                 <div class="card border-primary card-image">
                                     <div class="card-header border-primary">
@@ -225,9 +249,9 @@ class Fees extends Ajax_Controller
                                                     <select class="form-control cal-emis" name="emi" data-placeholder="SELECT EMIs" data-control="select2">
                                                         <option></option>
                                                         ';
-                        for ($i = 1; $i <= $numDur; $i++)
-                            $Html .= '<option value="' . $i . '">' . $i . ' Month EMIs</option>';
-                        $Html .= '</select>
+                            for ($i = 1; $i <= $numDur; $i++)
+                                $Html .= '<option value="' . $i . '">' . $i . ' Month EMIs</option>';
+                            $Html .= '</select>
                                             </div>
                                         </div>
                                     </div>
@@ -242,52 +266,69 @@ class Fees extends Ajax_Controller
                                 </div>
                             </div>
                         ';// 9410435006
-                    } else if ($row->fee_emi) {
-                        $nextEMIs = '';
-                        $firstEMIs = '';
-                        $emiCount = 0;
-                        $paidEMIs = 0;
-                        $lastHistory = '';
-                        $perMonthFee = round($course_fees / $row->fee_emi);
-                        for ($i = 1; $i <= $row->fee_emi; $i++) {
-                            $check = $this->student_model->get_fee_transcations(['duration' => $i, 'type_key' => 'course_fees'] + $where);
-                            if ($check->num_rows()) {
-                                $paidEMIs++;
-                                $checkRow = $check->row();
-                                $lastHistory = '<div class="overflow-auto pb-5 mb-2">
+                        } else if ($row->fee_emi) {
+                            $nextEMIs = '';
+                            $firstEMIs = '';
+                            $emiCount = 0;
+                            $paidEMIs = 0;
+                            $lastHistory = '';
+                            $perMonthFee = round($course_fees / $row->fee_emi);
+                            for ($i = 1; $i <= $row->fee_emi; $i++) {
+                                $check = $this->student_model->get_fee_transcations(['duration' => $i, 'type_key' => 'course_fees'] + $where);
+                                if ($check->num_rows()) {
+                                    $paidEMIs++;
+                                    $checkRow = $check->row();
+                                    $lastHistory = '<div class="overflow-auto pb-5 mb-2">
                                                     <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed min-w-lg-600px flex-shrink-0 p-6">
                                                         <i class="ki-duotone ki-bank fs-2tx text-primary me-4"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
     
                                                         <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
                                                             <div class="mb-3 mb-md-0 fw-semibold">
-                                                                <h4 class="text-gray-900 fw-bold">Last Transaction of '.ordinal_number($i).' Month EMI on '.$checkRow->payment_date.'!</h4>
+                                                                <h4 class="text-gray-900 fw-bold">Last Transaction of ' . ordinal_number($i) . ' Month EMI on ' . $checkRow->payment_date . '!</h4>
                 
-                                                                <div class="fs-6 text-gray-700 pe-7">Amount : '.$checkRow->amount.' '.$inrIcon.', Doscount : '.$checkRow->discount.' '.$inrIcon.', Paid Amount '.$checkRow->payable_amount.' '.$inrIcon.' </div>
+                                                                <div class="fs-6 text-gray-700 pe-7">Amount : ' . $checkRow->amount . ' ' . $inrIcon . ', Doscount : ' . $checkRow->discount . ' ' . $inrIcon . ', Paid Amount ' . $checkRow->payable_amount . ' ' . $inrIcon . ' </div>
                                                             </div>
         
                                                             <!--a href="#" class="btn btn-primary px-6 align-self-center text-nowrap"> Proceed</a --->
                                                         </div>
                                                     </div>                
                                                 </div>';
-                            } else {
-                                $view = $this->get_fee_box([
-                                    'type' => 'course_fees',
-                                    'title' => ordinal_number($i).' Month EMI',
-                                    'fee' => $perMonthFee,
-                                    'index' => $i,
-                                    'added' => 0,
-                                    'record' => $newSTDClass
-                                ],empty($firstEMIs));
-                                if (empty($firstEMIs) OR ($i == $row->fee_emi && empty($nextEMIs))) {
-                                    $firstEMIs .= $view;
                                 } else {
-                                    $nextEMIs .= $view;
+                                    $view = $this->get_fee_box([
+                                        'type' => 'course_fees',
+                                        'title' => ordinal_number($i) . ' Month EMI',
+                                        'fee' => $perMonthFee,
+                                        'index' => $i,
+                                        'added' => 0,
+                                        'record' => $newSTDClass
+                                    ], empty($firstEMIs));
+                                    if (empty($firstEMIs) or ($i == $row->fee_emi && empty($nextEMIs))) {
+                                        $firstEMIs .= $view;
+                                    } else {
+                                        $nextEMIs .= $view;
+                                    }
                                 }
                             }
-                        }
-                        $Html .= $lastHistory."\n".$firstEMIs;
-                        if (!empty($nextEMIs)) {
-                            $Html .= '<div class="accordion" id="kt_accordion_1">
+                            if ($paidEMIs == 0) {
+                                $Html .= '<div class="overflow-auto pb-5 mb-2">
+                                                    <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed min-w-lg-600px flex-shrink-0 p-6">
+                                                        <i class="ki-duotone ki-notification fs-2tx text-warning me-4"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+    
+                                                        <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
+                                                            <div class="mb-3 mb-md-0 fw-semibold">
+                                                                <h4 class="text-gray-900 fw-bold">Undo EMIs Setting!</h4>
+                
+                                                                <div class="fs-6 text-gray-700 pe-7">If you want to change or remove the EMIs setting, Please Clcik Undo Button.</div>
+                                                            </div>
+        
+                                                            <button type="button" class="btn btn-active-warning px-6 align-self-center text-nowrap undo-setting border-dashed border-2 border-warning"> Setting Undo</button>
+                                                        </div>
+                                                    </div>                
+                                                </div>';
+                            }
+                            $Html .= $lastHistory . "\n" . $firstEMIs;
+                            if (!empty($nextEMIs)) {
+                                $Html .= '<div class="accordion" id="kt_accordion_1">
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="kt_accordion_1_header_1">
                                             <button class="accordion-button fs-4 fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#kt_accordion_1_body_1" aria-expanded="true" aria-controls="kt_accordion_1_body_1">
@@ -301,13 +342,67 @@ class Fees extends Ajax_Controller
                                         </div>
                                     </div>
                                 </div>';
-                        }
-                    } else {
-                        $Html .= 'Start with course fees';
-                    }
+                            }
+                        } else {
+                            if ($totalFee == 0) {
+                                $Html .= '<div class="overflow-auto pb-5 mb-2">
+                                    <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed min-w-lg-600px flex-shrink-0 p-6">
+                                        <i class="ki-duotone ki-notification fs-2tx text-warning me-4"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
 
-                }
-                break;
+                                        <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
+                                            <div class="mb-3 mb-md-0 fw-semibold">
+                                                <h4 class="text-gray-900 fw-bold">Undo Course Fees Setting!</h4>
+
+                                                <div class="fs-6 text-gray-700 pe-7">If you want to change or remove the Fees setting, Please Clcik Undo Button.</div>
+                                            </div>
+
+                                            <button type="button" class="btn btn-active-warning px-6 align-self-center text-nowrap undo-setting border-dashed border-2 border-warning"> Setting Undo</button>
+                                        </div>
+                                    </div>                
+                                </div>';
+                            }
+                            $type = $index = 'course_fee';
+
+
+                            $Html .= '<div class="col-md-3"></div>
+                            <div class="col-md-6">
+                                <div class="card border-primary card-image my-fee-box">
+                                    <div class="card-header border-primary">
+                                        <h3 class="card-title text-dark fs-1">' . $inrIcon . ' Collect Course Fee</h3>
+                                    </div>
+                                    <div class="card-body pt-2">
+                                        <h3 class="text-center text-danger">Remaining Fee : ' . ($course_fees - $totalFee) . ' ' . $inrIcon . '</h3>
+                                        
+                                        <input type="checkbox" name="key_id[]" value="' . $type . '" checked class="check-input d-none">            
+                                        <input type="hidden" name="index_key[]" value="' . $type . '">
+
+                                        <div class="form-group mb-2">
+                                            <label class="required form-label">Payment Date</label>
+                                            <input type="text" class="form-control current-date" name="payment_date[' . $index . ']" value="' . date('d-m-Y') . '" required>
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <label class="required form-label">Amount</label>
+                                            <input type="number" class="form-control amount" name="payable_amount[' . $index . ']" value="' . ($course_fees - $totalFee) . '" required>
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <label class="form-label">Discount</label>
+                                            <input type="number" class="form-control discount" name="discount[' . $index . ']" placeholder="Discount" value="0">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Note</label>
+                                            <textarea class="form-control" placeholder="Note" name="note[' . $index . ']"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>';
+                        }
+
+                    }
+                    break;
+            }
+        } else {
+            $this->response('empty_footer', true);
+            $Html = '';
         }
         $Html .= '</div>                  
         ';
