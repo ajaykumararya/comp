@@ -467,4 +467,25 @@ class Fees extends Ajax_Controller
         } else
             $this->response('error', 'Something went wrong');
     }
+    function sync_fee_data(){
+        $items = $this->config->item('searching_types');
+        unset($items['course_fees']);
+        $i = 0;
+        foreach($items as  $in => $value){
+            $where = ['key' => $in,'onlyFor' => 'student'];
+            $get = $this->db->where($where)->get('student_fix_payment');
+            if($get->num_rows() == 0){
+                $this->db->insert('student_fix_payment',$where+['description' => 'One Time','amount' => 500,'title' => $value]);
+                $i++;
+            }
+            $in = $in == 'admission_fees' ? 'student_admission_fees' : $in;
+            $where = ['key' => $in,'onlyFor' => 'center'];
+            $get = $this->db->where($where)->get('student_fix_payment');
+            if($get->num_rows() == 0){
+                $this->db->insert('student_fix_payment',$where+['description' => 'One Time','amount' => 500,'title' => $value]);
+                $i++;
+            }
+        }
+        $this->response('status', $i != 0);
+    }
 }

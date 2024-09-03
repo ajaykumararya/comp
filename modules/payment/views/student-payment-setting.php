@@ -26,6 +26,7 @@
                 </div>
                 <div class="card-footer">
                     {save_button}
+                    <button type="button" class="btn btn-info sync-fee-data">Sync Fee Data</button>
                 </div>
             </div>
         </form>

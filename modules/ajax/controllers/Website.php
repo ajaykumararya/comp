@@ -417,7 +417,7 @@ class Website extends Ajax_Controller
             ->update('centers', [
                 $this->post('name') => $this->file_up('file')
             ]);
-        $this->response('query', $this->db->last_query());
+        // $this->response('query', $this->db->last_query());
         $this->response('status', true);
     }
     function update_student_docs()

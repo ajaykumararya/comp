@@ -10,9 +10,9 @@ document.addEventListener('DOMContentLoaded', function (e) {
             dom: '',
             searching: false,
             'ajax': {
-                'url': ajax_url + 'payment/student-payment-setting',                
+                'url': ajax_url + 'payment/student-payment-setting',
                 'type': 'POST',
-                data : {type : 'center'},
+                data: { type: 'center' },
                 success: function (d) {
                     console.log(d);
                     if (d.data && d.data.length) {
@@ -55,14 +55,14 @@ document.addEventListener('DOMContentLoaded', function (e) {
             'columnDefs': [
                 {
                     targets: 0,
-                    render: function (data, type, row,meta) {
+                    render: function (data, type, row, meta) {
                         return `${meta.row + 1}.`;
                     }
                 },
                 {
                     targets: 1,
                     render: function (data, type, row) {
-                        return `<b>${data}</b> ` + (row.description ? ` ${ badge( row.description)}` : ``);
+                        return `<b>${data}</b> ` + (row.description ? ` ${badge(row.description)}` : ``);
                     }
                 },
                 {
@@ -105,8 +105,18 @@ document.addEventListener('DOMContentLoaded', function (e) {
             })
         });
     }
-
-
-
-
+    $(document).on('click', '.sync-fee-data', function () {
+        // toastr.success('HELLO');
+        $.AryaAjax({
+            url: 'fees/sync-fee-data'
+        }).then((re) => {
+            if (re.status) {
+                toastr.success('Fee Syncing Successfully...');
+                table.DataTable().ajax.reload();
+            }
+            else {
+                toastr.warning('Fees Already Synced.');
+            }
+        });
+    })
 });

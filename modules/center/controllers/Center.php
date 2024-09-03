@@ -86,6 +86,8 @@ class Center extends MY_Controller
             $this->set_data('ttl_student', $this->db->where('center_id', $center_id)->get('students')->num_rows());
             $this->set_data('ttl_course', $this->db->where('center_id', $center_id)->get('center_courses')->num_rows());
             $this->set_data($center->row_array());
+            // pre($center->row(),true)
+            // ;
             $this->set_data('center_details', $center->row_array());
             $center_id = base64_encode($center_id);
             $this->view('profile', ['tabs' => $tabs, 'tab' => $tab, 'current_link' => base_url('center/profile/' . $center_id), 'center_id' => $center_id]);

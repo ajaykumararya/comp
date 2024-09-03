@@ -11,6 +11,43 @@
                 </strong>
             </th>
         </tr>
+        <?php
+        if ($this->center_model->isAdmin()) {
+            ?>
+            <tr>
+                <th class="w-50">Profile Photo</th>
+                <td class="w-50">
+                    <div class="btn-group">
+                        <label class="btn btn-active-info btn-sm border-info border border-1" for="image">
+                            <input type="file" name="image" class="d-none upload-center-docs" accept="image/*,.pdf"
+                                id="image">
+                            <i class="fa fa-cloud-upload"></i>
+                            Change
+                        </label>
+                        <?php
+                        if (file_exists('upload/' . $image) && $image) {
+                            ?>
+                            <a href="{base_url}upload/{image}" target="_blank"
+                                class="btn btn-sm btn-active-primary border-primary border border-1">
+                                <i class="fa fa-eye"></i>
+                                View
+                            </a>
+                            <button type="button" data-id="{center_id}" data-field="image" data-file="{image}"
+                                class="delete-center-doc btn btn-sm btn-active-danger border border-danger border-1">
+                                <i class="fa fa-trash"></i>
+                                Delete
+                            </button>
+                            <?php
+                        } else {
+                            echo badge('Adhar Not Found.', 'danger');
+                        }
+                        ?>
+                    </div>
+                </td>
+            </tr>
+            <?php
+        }
+        ?>
         <tr>
             <th class="w-50">Aadhar Card</th>
             <td class="w-50">
@@ -29,7 +66,39 @@
                             <i class="fa fa-eye"></i>
                             View
                         </a>
-                        <button type="button" data-id="{center_id}" data-field="adhar" data-file="{adhar}" class="delete-center-doc btn btn-sm btn-active-danger border border-danger border-1">
+                        <button type="button" data-id="{center_id}" data-field="adhar" data-file="{adhar}"
+                            class="delete-center-doc btn btn-sm btn-active-danger border border-danger border-1">
+                            <i class="fa fa-trash"></i>
+                            Delete
+                        </button>
+                        <?php
+                    } else {
+                        echo badge('Adhar Not Found.', 'danger');
+                    }
+                    ?>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th class="w-50">Aadhar Card</th>
+            <td class="w-50">
+                <div class="btn-group">
+                    <label class="btn btn-active-info btn-sm border-info border border-1" for="adhar">
+                        <input type="file" name="adhar" class="d-none upload-center-docs" accept="image/*,.pdf"
+                            id="adhar">
+                        <i class="fa fa-cloud-upload"></i>
+                        Change
+                    </label>
+                    <?php
+                    if (file_exists('upload/' . $adhar) && $adhar) {
+                        ?>
+                        <a href="{base_url}upload/{adhar}" target="_blank"
+                            class="btn btn-sm btn-active-primary border-primary border border-1">
+                            <i class="fa fa-eye"></i>
+                            View
+                        </a>
+                        <button type="button" data-id="{center_id}" data-field="adhar" data-file="{adhar}"
+                            class="delete-center-doc btn btn-sm btn-active-danger border border-danger border-1">
                             <i class="fa fa-trash"></i>
                             Delete
                         </button>
@@ -59,7 +128,8 @@
                             <i class="fa fa-eye"></i>
                             View
                         </a>
-                        <button type="button" data-id="{center_id}" data-field="signature" data-file="{signature}" class="delete-center-doc btn btn-sm btn-active-danger border border-danger border-1">
+                        <button type="button" data-id="{center_id}" data-field="signature" data-file="{signature}"
+                            class="delete-center-doc btn btn-sm btn-active-danger border border-danger border-1">
                             <i class="fa fa-trash"></i>
                             Delete
                         </button>
@@ -92,7 +162,8 @@
                                 <i class="fa fa-eye"></i>
                                 View
                             </a>
-                            <button type="button" data-id="{center_id}" data-file="{logo}" data-field="logo" class="delete-center-doc btn btn-sm btn-active-danger border border-danger border-1">
+                            <button type="button" data-id="{center_id}" data-file="{logo}" data-field="logo"
+                                class="delete-center-doc btn btn-sm btn-active-danger border border-danger border-1">
                                 <i class="fa fa-trash"></i>
                                 Delete
                             </button>
@@ -125,7 +196,8 @@
                             <i class="fa fa-eye"></i>
                             View
                         </a>
-                        <button type="button" data-id="{center_id}" data-file="{address_proof}" data-field="address_proof" class="delete-center-doc btn btn-sm btn-active-danger border border-danger border-1">
+                        <button type="button" data-id="{center_id}" data-file="{address_proof}" data-field="address_proof"
+                            class="delete-center-doc btn btn-sm btn-active-danger border border-danger border-1">
                             <i class="fa fa-trash"></i>
                             Delete
                         </button>
@@ -155,7 +227,8 @@
                             <i class="fa fa-eye"></i>
                             View
                         </a>
-                        <button type="button" data-id="{center_id}" data-file="{agreement}" data-field="agreement" class="delete-center-doc btn btn-sm btn-active-danger border border-danger border-1">
+                        <button type="button" data-id="{center_id}" data-file="{agreement}" data-field="agreement"
+                            class="delete-center-doc btn btn-sm btn-active-danger border border-danger border-1">
                             <i class="fa fa-trash"></i>
                             Delete
                         </button>
