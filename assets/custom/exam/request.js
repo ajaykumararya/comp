@@ -76,7 +76,6 @@ document.addEventListener('DOMContentLoaded',function(e){
     course_box.select2({
         placeholder: "Select a Course",
         templateSelection: optionFormatSecond,
-        templateResult: optionFormatSecond
-,
+        templateResult: optionFormatSecond,
     });
 });

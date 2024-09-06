@@ -62,6 +62,7 @@ class Center extends Ajax_Controller
         $get = $this->center_model->get_center($id);
         if ($get->num_rows()) {
             $row = $get->row();
+            // pre($row,true);
             $this->set_data((array) $row);
             $this->set_data('image', base_url(($row->image ? UPLOAD . $row->image : DEFAULT_USER_ICON)));
             $this->response('profile_html', $this->template('custom-profile'));

@@ -361,7 +361,7 @@ class Fees extends Ajax_Controller
                                     </div>                
                                 </div>';
                             }
-                            $type = $index = 'course_fee';
+                            $type = $index = 'course_fees';
 
 
                             $Html .= '<div class="col-md-3"></div>
