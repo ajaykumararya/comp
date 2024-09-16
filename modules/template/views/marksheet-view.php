@@ -9,7 +9,7 @@
         <table class="table table-bordered table-striped">
             <tr>
                 <th colspan="2">Marksheet Duration</th>
-                <td><?=humnize_duration_with_ordinal($marksheet_duration,$duration_type)?></td>
+                <td><?= humnize_duration_with_ordinal($marksheet_duration, $duration_type) ?></td>
                 <th>Course</th>
                 <td colspan="4">{course_name} ({duration} {duration_type})</td>
             </tr>
@@ -25,6 +25,7 @@
             </tr>
         </table>
         <?php
+        $this->load->module('document');
         $result = $this->document->id($marksheet_id)->marksheet();
         // pre($result);
         
@@ -87,7 +88,7 @@
                 <th>Percentage</th>
                 <td><?= $result['percentage'] ?> %</td>
                 <th>Total</th>
-                <td><?= $result['max_total'] ?> / <?=$result['obtain_total']?></td>
+                <td><?= $result['max_total'] ?> / <?= $result['obtain_total'] ?></td>
             </tr>
         </table>
     </div>
