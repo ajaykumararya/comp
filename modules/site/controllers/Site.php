@@ -74,6 +74,8 @@ class Site extends Site_Controller
     function error_404()
     {
         $error_file = 'error_404';
+        $this->set_data('title', 'Page Not Found');
+        $this->set_data('page_name', '404');
         $file = (file_exists(THEME_PATH . $error_file . EXT)) ? '' : 'default_'; //error_404';
         $this->render("{$file}{$error_file}");
     }
@@ -82,6 +84,31 @@ class Site extends Site_Controller
         $this->set_data($data);
         $this->render($content, 'content');
         // pre($this->public_data,true);
+    }
+    function marksheet_print()
+    {
+        $token = $this->uri->segment(2);
+        try {
+            $this->token->decode($token);
+            $id = $this->token->data('id');
+            $get = $this->student_model->marksheet(['id' => $id]);
+            if (!$get->num_rows())
+                throw new Exception('Not Found.');
+            $data = $get->row_array();
+            $this->set_data('page_name', $data['student_name'] . ' Marksheet');
+            $this->set_data('marksheet_id', $data['result_id']);
+            $this->set_data($data);
+            $this->set_data('isPrimary', false);
+            $this->load->module('document');
+            $html = '<div class="container pt-3">' . $this->template('marksheet-view') . '</div>';
+            // $this->render($html, 'content');
+            $this->render(
+                'schema',
+                ['content' => $html]
+            );
+        } catch (Exception $e) {
+            $this->error_404();
+        }
     }
     function test()
     {

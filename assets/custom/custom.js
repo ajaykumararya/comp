@@ -145,6 +145,23 @@ if ($.isFunction($.fn.maxlength)) {
         limitReachedClass: "badge badge-success"
     });
 }
+const razorpayPOPUP = (options, reload = false) => {
+    options.modal = {
+        ondismiss: function () {
+            console.log("This code runs when the popup is closed");
+            if (reload)
+                location.reload();
+        },
+        // Boolean indicating whether pressing escape key 
+        // should close the checkout form. (default: true)
+        escape: true,
+        // Boolean indicating whether clicking translucent blank
+        // space outside checkout form should close the form. (default: false)
+        backdropclose: false
+    };
+    var rzp = new Razorpay(options);
+    rzp.open();
+}
 const formatNumber = (number) => {
     number = Number(number);
     if (Number.isInteger(number)) {
@@ -2266,7 +2283,8 @@ $.fn.releaseSnapshot = function () {
             this.style[stylesToSnapshot[i]] = "";
     });
 };
-if (typeof Handlebars !== undefined) {
+// log(typeof Handlebars);
+if (typeof Handlebars !== 'undefined') {
     Handlebars.registerHelper('formatNumber', function (number) {
         return formatNumber(number);
     });

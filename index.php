@@ -1,5 +1,5 @@
 <?php
-date_default_timezone_set('asia/kolkata');
+date_default_timezone_set('Asia/Kolkata');
 
 /**
  * @package	CodeIgniter

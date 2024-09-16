@@ -144,6 +144,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                         r.preventDefault();
                         let amount = inputEl.val();
                         let description = $(e.modal).find('textarea').val();
+                        // alert(amount);
                         if (amount) {
                             // amount min value 100
                             if (amount >= 100) {
@@ -169,8 +170,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                                 SwalWarning(`Please Enter amount minimum 100 ${inr}`);
                         }
                         else {
-                            SwalWarning(`Please Enter Amount ${inr}`)
-
+                            SwalWarning(`Please Enter Amount ${inr}`);
                         }
                     });
 

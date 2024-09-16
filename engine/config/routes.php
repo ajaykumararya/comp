@@ -59,6 +59,7 @@ $route['marksheet/(:any)'] = 'document/marksheet';
 $route['certificate/(:any)'] = 'document/certificate';
 $route['id-card/(:any)'] = 'document/id_card';
 $route['franchise-certificate/(:any)'] = 'document/franchise_certificate';
+$route['marksheet-verification/(:any)'] = 'site/marksheet_print/$1';
 $route['(:any)'] = 'site/index';
 
 $route['404_override'] = 'site/error_404';

@@ -2,11 +2,27 @@
 class Document extends MY_Controller
 {
     private $id;
+    private $return = false;
     function __construct()
     {
         parent::__construct();
         $this->load->library('common/mypdf');
         $this->id = $this->decode($this->uri->segment(2, '0'));
+    }
+    function percentage($ob_ttl,$ttl)
+    {
+        $percentage = (($ob_ttl / $ttl) * 100);
+        if (is_float($percentage) && $percentage != floor($percentage)) {
+            return number_format($percentage, 2);
+        } else {
+            return (int) $percentage;
+        }
+    }
+    function id($id, $return = true)
+    {
+        $this->id = $id;
+        $this->return = $return;
+        return $this;
     }
     private function get_multi_path($course_id, $file, $page = 'P')
     {
@@ -102,7 +118,8 @@ class Document extends MY_Controller
             $course_id = $row->course_id;
             // pre($get->row(),true);
             $result_id = $row->result_id;
-            $this->ki_theme->generate_qr($result_id, 'marksheet', current_url());
+            if (!$this->return)
+                $this->ki_theme->generate_qr($result_id, 'marksheet', current_url());
             $get_subect_numers = $this->student_model->marksheet_marks($result_id);
 
             if (PATH == 'isdmedu') {
@@ -124,8 +141,8 @@ class Document extends MY_Controller
                 $admissionTime = strtotime($get->row('admission_date'));
                 // $this->set_data('from_date', date('M Y', $admissionTime));
                 $this->set_data('serial_no', date("Y", $admissionTime) . str_pad($get->row('student_id'), 3, '0', STR_PAD_LEFT));
-            elseif(in_array(PATH,['haptronworld'])):
-                $this->set_data('serial_no','IN' . (100 + $result_id));
+            elseif (in_array(PATH, ['haptronworld'])):
+                $this->set_data('serial_no', 'IN' . (100 + $result_id));
             endif;
             // echo $get->row('result_id');
             // pre($get_subect_numers->result_array(),true);
@@ -180,7 +197,7 @@ class Document extends MY_Controller
                     $ob_ttl += $mark->ttl;
                     array_push($subject_marks, $marks);
                 }
-                $per = number_format((($ob_ttl / ($ttltmaxm + $ttlpmaxm)) * 100), 2);
+                $per = $this->percentage($ob_ttl,($ttltmaxm + $ttlpmaxm));
             }
             if (PATH == 'iedct') {
                 $this->set_data('theorySubject', $theorySubjects);
@@ -189,6 +206,7 @@ class Document extends MY_Controller
             }
             $main = [
                 'total' => $ttl,
+                'max_total' => ($ttltmaxm + $ttlpmaxm),
                 'obtain_total' => $ob_ttl,
                 'marks' => $subject_marks,
                 'percentage' => $per,
@@ -200,6 +218,8 @@ class Document extends MY_Controller
                 'division' => $per < 40 ? 'Fail' : 'Pass'
             ];
             $file = $this->get_multi_path($course_id, $file);
+            if ($this->return)
+                return $main;
             // pre($get->row(),true);
             $this->set_data($main);
             $pdfContent = $this->parse($file, $get->row_array());
@@ -319,17 +339,17 @@ class Document extends MY_Controller
                 'duration' => $certificate['duration'],
                 'duration_type' => $certificate['duration_type'],
             ]);
-            
+
             $this->ki_theme->generate_qr($this->id, 'student_certificate', current_url());
-            if (in_array(PATH,['haptronworld','sewaedu'])) {
+            if (in_array(PATH, ['haptronworld', 'sewaedu'])) {
                 $certificate['serial_no'] = (50000 + $this->id);
                 $this->mypdf->addPage('L');
             }
             // $getLastExam = $this->student_model->last_marksheet($certificate['course_id']);
             $this->set_data($certificate);
-            
-            $output = $this->parse( $this->get_multi_path($certificate['course_id'],'certificate'), $certificate);
-           
+
+            $output = $this->parse($this->get_multi_path($certificate['course_id'], 'certificate'), $certificate);
+
             $this->pdf($output);
         } else {
             $this->not_found("Certificate Not Found..");
@@ -346,7 +366,7 @@ class Document extends MY_Controller
                     $data['state'] = $this->SiteModel->state($data['state_id']);
                     $data['city'] = $this->SiteModel->city($data['city_id']);
                     $output = $this->parse('franchise_certificate', $data);
-                    if(in_array(PATH,['techno','haptronworld','sewaedu'])){
+                    if (in_array(PATH, ['techno', 'haptronworld', 'sewaedu'])) {
                         $this->mypdf->addPage('L');
                     }
                     $this->pdf($output);
@@ -385,7 +405,8 @@ class Document extends MY_Controller
                 window.close();
             </script>';
     }
-    function test(){
+    function test()
+    {
         echo "*<br>";
         echo "&nbsp;*";
     }

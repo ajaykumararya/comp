@@ -45,7 +45,7 @@ class MY_Controller extends MX_Controller
             'save_button' => $this->ki_theme->set_class('save-btn')->save_button('Save', 'save-2'),
             'update_button' => $this->ki_theme->set_class('save-btn')->save_button('Save Changes', 'save-2'),
             'send_button' => $this->ki_theme->set_class('sen-btn')->save_button('Send', 'send'),
-            'card_class' => 'card shadow-sm border-2 border-primary',
+            'card_class' => 'card shadow-sm border-2 border-primary mb-5',
             'inr' => ' <span class="">₹</span> ',
             'current_date' => $this->ki_theme->date(),
             'theme_url' => theme_url(),
@@ -76,6 +76,7 @@ class MY_Controller extends MX_Controller
         if ($get->num_rows()) {
             defined('DefaultPage') or define('DefaultPage', $get->row("active_page"));
         }
+        defined('PROJECT_RAND_NUM') or  define('PROJECT_RAND_NUM',mt_rand(0,999).strtoupper(PATH).mt_rand(0,999));
     }
     public function percentage_check($value)
     {

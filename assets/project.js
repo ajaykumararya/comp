@@ -2,6 +2,8 @@ $(document).on('ready', function () {
 
     //log($('.student-verification-form'));
     $(document).on('submit', '.student-verification-form', function (e) {
+        var box = $(this).closest('section').find('.show-student-details');
+        box.html('');
         // alert(0);
         e.preventDefault();
         $.AryaAjax({
@@ -10,7 +12,7 @@ $(document).on('ready', function () {
         }).then((r) => {
             // log(r);
             if (r.status) {
-                var box = $('.show-student-details');
+                // var box = $('.show-student-details');
                 box.html(r.html);
                 scrollToDiv(box);
             }
@@ -19,15 +21,17 @@ $(document).on('ready', function () {
     })
 
     $(document).on('submit', '.student-result-verification-form', function (e) {
+        var box = $(this).closest('section').find('.show-student-details');
+        box.html('');
         // alert(0);
         e.preventDefault();
         $.AryaAjax({
             url: 'website/student-result-verification',
             data: new FormData(this)
         }).then((r) => {
-            // log(r);
+            log(r);
             if (r.status) {
-                var box = $('.show-student-details');
+                // var box = $('.show-student-details');
                 box.html(r.html);
                 scrollToDiv(box);
             }
@@ -65,8 +69,11 @@ $(document).on('ready', function () {
                 SwalWarning('This Center have not roll_no Prefix , Please Assign it.');
             }
         });
+    });
+    $(document).on('click', '.print-btn', function (e) {
+        e.preventDefault();
+        window.print();
     })
-
     $(document).on('submit', '.student-admission-form', function (e) {
         e.preventDefault();
         $.AryaAjax({
@@ -199,7 +206,7 @@ $(document).on('ready', function () {
                                             }
                                             resolve(response);
                                         },
-                                        error : function(a,b,c){
+                                        error: function (a, b, c) {
                                             log(a.responseText)
                                         }
                                     })
@@ -209,7 +216,7 @@ $(document).on('ready', function () {
                         }).then((otpResult) => {
                             // log(otpResult);
                             if (otpResult.isConfirmed) {
-                                Swal.fire('Verified!', 'Redirect To Create A New Password.', 'success').then((e)=>{
+                                Swal.fire('Verified!', 'Redirect To Create A New Password.', 'success').then((e) => {
                                     location.href = otpResult.value.url;
                                 });
                             }
@@ -245,7 +252,7 @@ $(document).on('ready', function () {
                                 }
                                 resolve();
                             },
-                            error : function (xhr,error,status){
+                            error: function (xhr, error, status) {
                                 log(xhr.responseText)
                             }
                         });
@@ -290,8 +297,8 @@ $(document).on('ready', function () {
                             allowOutsideClick: () => !Swal.isLoading()
                         }).then((otpResult) => {
                             if (otpResult.isConfirmed) {
-                                Swal.fire('Verified!', 'Your phone number has been verified, Redirect to Your Dashboard Click to Ok', 'success').then((e)=>{
-                                    if(e.isConfirmed){
+                                Swal.fire('Verified!', 'Your phone number has been verified, Redirect to Your Dashboard Click to Ok', 'success').then((e) => {
+                                    if (e.isConfirmed) {
                                         location.reload();
                                     }
                                 });

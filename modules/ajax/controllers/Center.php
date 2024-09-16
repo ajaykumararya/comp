@@ -1,13 +1,14 @@
 <?php
 class Center extends Ajax_Controller
 {
-    function delete_docs(){
-        if(file_exists('upload/'.$this->post('file')))
-            @unlink('upload/'.$this->post('file'));
-        $this->db->where('id',json_decode($this->post('id')))
-                ->set($this->post('field'),null)
-                ->update('centers');
-        $this->response('status',true);
+    function delete_docs()
+    {
+        if (file_exists('upload/' . $this->post('file')))
+            @unlink('upload/' . $this->post('file'));
+        $this->db->where('id', json_decode($this->post('id')))
+            ->set($this->post('field'), null)
+            ->update('centers');
+        $this->response('status', true);
     }
     function add()
     {
@@ -201,7 +202,7 @@ class Center extends Ajax_Controller
                     'status' => $row->wallet_status,
                     'url' => 0
                 ];
-                if ($row->type_id) {
+                if ($row->type_id && $row->type != 'wallet_load') {
                     switch ($row->type) {
                         case 'admission':
                             $student = $this->student_model->get_all_student([
@@ -237,5 +238,179 @@ class Center extends Ajax_Controller
         }
         $this->response('data', $data);
     }
+    function wallet_load()
+    {
+        $center_id = $this->center_model->loginId();
+
+        $amount = $this->post('amount');
+
+        $data = [
+            'amount' => $amount * 100,
+            'receipt' => PROJECT_RAND_NUM,
+            'currency' => 'INR',
+            'notes' => [
+                'center_id' => $this->center_model->loginId(),
+                'message' => $this->post('note')
+            ]
+        ];
+        $this->load->module('razorpay');
+        $order_id = $this->razorpay->create_order($data);
+        // $order_id = $order['id'];
+        // pre($data);
+        $trans = [
+            'trans_for' => 'wallet_load',
+            'amount' => $amount,
+            'payment_id' => PROJECT_RAND_NUM,
+            'order_id' => $order_id,
+            'user_id' => $center_id,
+            'user_type' => 'center'
+        ];
+        $this->db->insert('transactions', $trans);
+        $trans_id = $this->db->insert_id();
+        $this->response('data', $trans);
+
+        // $order_id = "order_Ox2Pf0s7PibuEo";
+        // $payment_id = "942SEWAEDU938";
+        // $trans_id = 2;
+
+        $data = [
+            'key' => RAZORPAY_KEY_ID,
+            'amount' => $amount * 100,
+            'name' => ES('title'),
+            'description' => 'Computer Institute',
+            'image' => logo(),
+            'prefill' => [
+                'name' => $this->get_data('owner_name'),
+                'email' => $this->get_data('owner_email'),
+                'contact' => $this->get_data('owner_phone')
+            ],
+            'notes' => [
+                'merchant_order_id' => $trans_id,
+                'center_id' => $center_id
+            ],
+            'order_id' => $order_id
+        ];
+        $this->response('status', true);
+        $this->response('option', $data);
+    }
+    function wallet_update()
+    {
+        $post = $this->post();
+
+        $razorpay_payment_id = $post['razorpay_payment_id'];
+        $razorpay_order_id = $post['razorpay_order_id'];
+        $razorpay_signature = $post['razorpay_signature'];
+        $merchant_order_id = $post['merchant_order_id'];
+        $this->load->module('razorpay');
+
+        try {
+
+            $get = $this->db->where(['id' => $merchant_order_id, 'payment_status' => 1])->get('transactions');
+            if ($get->num_rows()) {
+                throw new Exception('Payment has already been updated');
+            }
+
+            $verifyPayment = true;//$this->razorpay->verifyPayment($razorpay_payment_id, $razorpay_order_id, $razorpay_signature);
+            if ($verifyPayment) {
+                $status = $this->razorpay->fetchOrderStatus($razorpay_order_id);
+                if ($status) {
+                    $amount = $post['amount'];
+                    $centre = $this->get_data('center_data');
+                    $center_id = $centre['id'];
+                    $opening_balance = $centre['wallet'] or 0;
+
+                    $closing_balance = ($amount + $opening_balance);
+                    $data = [
+                        'center_id' => $center_id,
+                        'amount' => $amount,
+                        'o_balance' => $opening_balance,
+                        'c_balance' => $closing_balance,
+                        'type' => 'wallet_load',
+                        'description' => 'online load',
+                        'added_by' => 'self',
+                        'order_id' => $razorpay_order_id,
+                        'status' => 1,
+                        'wallet_status' => 'credit',
+                        'type_id' => $merchant_order_id
+                    ];
+                    $this->response('data', $data);
+                    $this->db->insert('wallet_transcations', $data);
+                    $this->center_model->update_wallet($center_id, $closing_balance);
+                    $this->db->update('transactions', [
+                        'payment_status' => 1,
+                        'responseData' => json_encode([
+                            'razorpay_payment_id' => $razorpay_payment_id,
+                            'razorpay_order_id' => $razorpay_order_id,
+                            'razorpay_signature' => $razorpay_signature
+                        ])
+                    ], ['id' => $merchant_order_id]);
+                    $this->response('status', true);
+                }
+
+            }
+        } catch (Exception $e) {
+            $this->response('status', false);
+            $this->response('error', $e->getMessage());
+        }
+    }
+    function old_transaction()
+    {
+        $get = $this->db->where($this->post())->get('transactions');
+        if ($get->num_rows()) {
+            $this->response('status', true);
+            $row = $get->row();
+            $this->load->module('razorpay');
+            $status = $this->razorpay->fetchOrder($row->order_id, 'status');
+            if ($status == 'paid' or $status == 'captured') {
+                $amount = $row->amount;
+                $razorpay_order_id = $row->order_id;
+                // $this->response('order_status',$status);
+                $centre = $this->get_data('center_data');
+                $center_id = $centre['id'];
+                $opening_balance = $centre['wallet'] or 0;
+
+                $closing_balance = ($amount + $opening_balance);
+                $data = [
+                    'center_id' => $center_id,
+                    'amount' => $amount,
+                    'o_balance' => $opening_balance,
+                    'c_balance' => $closing_balance,
+                    'type' => 'wallet_load',
+                    'description' => 'online load',
+                    'added_by' => 'self',
+                    'order_id' => $razorpay_order_id,
+                    'status' => 1,
+                    'wallet_status' => 'credit',
+                    'type_id' => $row->id
+                ];
+                $this->db->insert('wallet_transcations', $data);
+                $this->center_model->update_wallet($center_id, $closing_balance);
+                $this->db->update('transactions', [
+                    'payment_status' => 1
+                ], ['id' => $row->id]);
+                $this->response('status',true);
+            } else {
+                $data = [
+                    'key' => RAZORPAY_KEY_ID,
+                    'amount' => $row->amount * 100,
+                    'name' => ES('title'),
+                    'description' => 'Computer Institute',
+                    'image' => logo(),
+                    'prefill' => [
+                        'name' => $this->get_data('owner_name'),
+                        'email' => $this->get_data('owner_email'),
+                        'contact' => $this->get_data('owner_phone')
+                    ],
+                    'notes' => [
+                        'merchant_order_id' => $row->id,
+                        'center_id' => $this->get_data('owner_id')
+                    ],
+                    'order_id' => $row->order_id
+                ];
+                $this->response('status', true);
+                $this->response('option', $data);
+                $this->response('amount', $row->amount);
+            }
+        }
+    }
 }
-?>

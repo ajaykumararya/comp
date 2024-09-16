@@ -11,7 +11,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Date</th>
-                                <th>Student Name</th>
+                                <th>Record</th>
                                 <th>Status</th>
                                 <th>Message</th>
                                 <th>Amount</th>

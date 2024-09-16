@@ -106,7 +106,7 @@ class Student_model extends MY_Model
                 $this->myWhere('s', $condition);
                 break;
             case 'student_result_verification':
-                $this->db->select('m.id as marksheet_id');
+                $this->db->select('m.id as marksheet_id,m.duration as marksheet_duration,ac.enrollment_no');
                 $this->db->where('s.roll_no', $roll_no);
                 $this->db->where('s.dob', $dob);
                 $this->db->where('s.status', isset($status) ? $status : 0);

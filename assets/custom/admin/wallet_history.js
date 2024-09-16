@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     return `<div class="d-flex flex-stack">      
                     <span>${data} </span>    
 
-                    ${row.url ? '<a href="'+row.url+'" target="_blank" class="btn btn-light btn-sm btn-color-muted fs-7 fw-bold px-5"><i class="fa  fa-eye"></i></a>' : ''}
+                    ${row.url ? '<a href="' + row.url + '" target="_blank" class="btn btn-light btn-sm btn-color-muted fs-7 fw-bold px-5"><i class="fa  fa-eye"></i></a>' : ''}
                 </div>`;
                 }
             },

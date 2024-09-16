@@ -60,8 +60,9 @@ if (!function_exists('theme_url')) {
         return base_url('themes/' . THEME . '/');
     }
 }
-if(!function_exists('duration_in_month')){
-    function duration_in_month($duration,$duration_type = 'month'){
+if (!function_exists('duration_in_month')) {
+    function duration_in_month($duration, $duration_type = 'month')
+    {
         return $duration * ($duration_type == 'month' ? 1 : ($duration_type == 'semester' ? 6 : 12));
     }
 }
@@ -241,7 +242,8 @@ function sup($i)
             (($i == 3) ? 'rd' : 'th'));
     return '<sup>' . $i . '</sup>';
 }
-function table_exists($table){
+function table_exists($table)
+{
     return get_instance()->db->table_exists($table);
 }
 function get_route($id, $table)
@@ -282,18 +284,50 @@ function maskEmail($email)
 
     return $maskedUsername . '@' . $domain;
 }
-function fixConifFee($index){
+function fixConifFee($index)
+{
     $CI =& get_instance();
-    if($CI->center_model->isCenter()){
+    if ($CI->center_model->isCenter()) {
         $index = $index == 'admission_fees' ? 'student_admission_fees' : $index;
         $fees = $CI->ki_theme->center_fix_fees(true);
-        if(isset($fees[$index]))
+        if (isset($fees[$index]))
             return $fees[$index];
-    }
-    else{
-        $get = $CI->db->where(['key' => $index,'onlyFor' => 'student','status' => 1])->get('student_fix_payment');
-        if($get->num_rows())
+    } else {
+        $get = $CI->db->where(['key' => $index, 'onlyFor' => 'student', 'status' => 1])->get('student_fix_payment');
+        if ($get->num_rows())
             return $get->row('amount');
     }
     return null;
+}
+
+function timeAgo($time)
+{
+    // Get the current time and calculate the difference
+    $timeDifference = time() - strtotime($time); // if $time is a timestamp, directly pass it instead of using strtotime
+
+    // Define time periods in seconds
+    $seconds = $timeDifference;
+    $minutes = round($timeDifference / 60);
+    $hours = round($timeDifference / 3600);
+    $days = round($timeDifference / 86400);
+    $weeks = round($timeDifference / 604800);
+    $months = round($timeDifference / 2600640); // (30.44 * 24 * 60 * 60)
+    $years = round($timeDifference / 31207680); // (365.25 * 24 * 60 * 60)
+
+    // Determine how to express the time ago
+    if ($seconds <= 60) {
+        return "just now";
+    } elseif ($minutes <= 60) {
+        return $minutes == 1 ? "1 minute ago" : "$minutes minutes ago";
+    } elseif ($hours <= 24) {
+        return $hours == 1 ? "1 hour ago" : "$hours hours ago";
+    } elseif ($days <= 7) {
+        return $days == 1 ? "yesterday" : "$days days ago";
+    } elseif ($weeks <= 4) {
+        return $weeks == 1 ? "1 week ago" : "$weeks weeks ago";
+    } elseif ($months <= 12) {
+        return $months == 1 ? "1 month ago" : "$months months ago";
+    } else {
+        return $years == 1 ? "1 year ago" : "$years years ago";
+    }
 }

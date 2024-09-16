@@ -41,6 +41,7 @@
     <link rel="stylesheet" href="{base_url}assets/icon-picker/dist/iconpicker-1.5.0.css">
     <script src="{base_url}assets/icon-picker/dist/iconpicker-1.5.0.js"></script>
     <link rel="stylesheet" href="{base_url}assets/custom/custom.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style>
         input[type="number"]::-webkit-outer-spin-button,
         input[type="number"]::-webkit-inner-spin-button {

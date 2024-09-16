@@ -103,6 +103,7 @@ class Website extends Ajax_Controller
     function student_result_verification()
     {
         if ($this->validation('website_student_verification')) {
+          
             $this->response($this->post());
             $roll_no = $this->post('roll_no');
             $dob = $this->post("dob");
@@ -118,9 +119,34 @@ class Website extends Ajax_Controller
                 $this->response('ttl_record', $get->num_rows());
                 if ($get->num_rows() == 1) {
                     $data = $get->row_array();
+                    $this->set_data($data);
+                    $this->response('html', $this->template('marksheet-view'));
                     $this->response('data', $data);
                 } else {
-                    $this->response('data', $get->result_array());
+                    $html = '<div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <h4>List Of Results</h4>
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Result</th>
+                                <th>View</th>
+                            </tr>
+                        ';
+                    foreach ($get->result() as $row) {
+                        $token = $this->token->withExpire()->encode([
+                            'id' => $row->marksheet_id
+                        ]);
+                        $url = base_url('marksheet-verification/'.$token);
+                        $html .= '<tr>
+                                    <td><a href="'.$url.'" target="_blank">'.humnize_duration_with_ordinal($row->marksheet_duration,$row->duration_type).' Result</a></td>
+                                    <td>
+                                        <a href="'.$url.'" target="_blank" class="btn btn-primary btn-xs btn-sm">View Result</a>
+                                    </td>
+                        </tr>';
+                    }
+                    $html .= '</table>
+                    </div>';
+                    $this->response('html', $html);
                 }
             } else {
                 $this->response('error', '<div class="alert alert-danger">Marksheet Not Found.</div>');
@@ -529,7 +555,8 @@ class Website extends Ajax_Controller
         }
         // $this->response($this->session->userdata());
     }
-    function delete_notification(){
+    function delete_notification()
+    {
         $this->response(
             'status',
             $this->db->where($this->post())->delete('manual_notifications')
@@ -585,13 +612,14 @@ class Website extends Ajax_Controller
             $html .= alert('Something went wrong, can\'t view this message.', 'danger');
         $this->response('html', $html);
     }
-    function factuly_update(){
-        $this->db->where('id',$this->post('id'))
-                ->update('content',[
-                    'field2' => $this->post('title'),
-                    'field4' => $this->post('link')
-                ]);
-        $this->response('status',true);
+    function factuly_update()
+    {
+        $this->db->where('id', $this->post('id'))
+            ->update('content', [
+                'field2' => $this->post('title'),
+                'field4' => $this->post('link')
+            ]);
+        $this->response('status', true);
     }
 }
 ?>
