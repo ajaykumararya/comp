@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function (r) {
                         $.extend(v, {
                             answer_id: i
                         });
-                        template('template', v).then((re) => {
+                        my_template('template', v).then((re) => {
                             $('.answer-area').append(re);
                         });
                     })
@@ -301,7 +301,7 @@ document.addEventListener('DOMContentLoaded', function (r) {
                 }
             })
             if (i == 0) {
-                template('template', {
+                my_template('template', {
                     answer: answer,
                     parent_class: '',
                     is_chcked: '',
