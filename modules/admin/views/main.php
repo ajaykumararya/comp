@@ -796,6 +796,9 @@
         </div>
         <!--end::Drawer-->
         <!--end::View component-->
+        <?php
+        if(isDemo()){
+            ?>
         
         <!--begin::Toast-->
         <div class="position-fixed p-3" style="z-index:9999;top: 68px;">
@@ -813,6 +816,9 @@
             </div>
         </div>
         <!--end::Toast-->
+        <?php
+        }
+        ?>
 </body>
 <!--end::Body-->
 <!--begin::Javascript-->
