@@ -21,6 +21,16 @@ class Ajax_Controller extends MY_Controller
         if (!count($this->post()))
             $this->response('html', 'Form Data is Empty.');
     }
+    function isDemo(){
+        if(isDemo()){
+            $html = 'This is a demo panel, you can not update some function in it .';
+            $this->response('html',$html);
+            $this->response('error',$html);
+            $this->response('errors',['isDemo'=>$html]);
+            return true;
+        }
+        return false;
+    }
     function validation($index = '')
     {
         if ($this->form_validation->run($index) === FALSE) {

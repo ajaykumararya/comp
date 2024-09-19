@@ -510,7 +510,7 @@
                     <!--begin::Logo-->
                     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
 
-                        <div class="">
+                        <div class="d-flex">
                             <!--begin::User info-->
                             <!--begin::Menu wrapper-->
                             <div class="cursor-pointer symbol symbol-35px">
@@ -518,7 +518,7 @@
 
 
                             </div>
-                            <a href="{base_url}admin/profile"
+                            <a href="{base_url}admin/profile" style="line-height:1"
                                 class="text-white text-hover-primary fs-4 fw-bold ms-3 app-sidebar-minimize-d-none profile-title">
                                 {owner_name} <span
                                     class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">{type}</span>
@@ -796,6 +796,23 @@
         </div>
         <!--end::Drawer-->
         <!--end::View component-->
+        
+        <!--begin::Toast-->
+        <div class="position-fixed p-3" style="z-index:9999;top: 68px;">
+            <div id="demoWarning" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <i class="ki-duotone ki-abstract-19 fs-1 text-danger me-3"><span class="path1"></span><span
+                            class="path2"></span></i>
+                    <strong class="me-auto fs-4 text-danger">HYPER PRP WEBTECH</strong>
+                    <small class="text-capitalize"><?=timeAgo('2024-09-19')?></small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body text-dark fs-5">
+                This is a demo panel, you can not update some function in it .
+                </div>
+            </div>
+        </div>
+        <!--end::Toast-->
 </body>
 <!--end::Body-->
 <!--begin::Javascript-->
@@ -803,6 +820,7 @@
     var base_url = "<?= base_url() ?>",
         ajax_url = base_url + 'ajax/';
     const login_type = '<?= $this->center_model->login_type() ?>';
+    const isDemo = <?=isDemo()?>;
     const all_templates = '';
     const wallet_system = Boolean(`<?= CHECK_PERMISSION('WALLET_SYSTEM') or CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE') ?>`);
     const wallet_balance = <?= $this->ki_theme->wallet_balance() ?? 0 ?>;

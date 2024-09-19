@@ -40,6 +40,9 @@ if (!function_exists('isJson')) {
         return (json_last_error() == JSON_ERROR_NONE);
     }
 }
+function isDemo(){
+    return defined('isDemo') ? isDemo : false;
+}
 function dash_box($array){
     $array['count_icon'] = isset($array['count_icon']) ? 'data-kt-countup-prefix=" <span class=&quot;&quot;>₹</span> "' : '';
     $array['base_url'] = base_url();

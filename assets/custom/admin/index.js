@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
             url : 'center/get-student-record',
             data : {year}
         }).then((ree) => {
-            // log(ree.data)
+            showResponseError(ree)
             // chart.updateSeries([{
             //     data: ree.data
             // }]);

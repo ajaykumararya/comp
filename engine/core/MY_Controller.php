@@ -87,6 +87,7 @@ class MY_Controller extends MX_Controller
         $this->form_validation->set_message('percentage_check', 'The {field} field must be between 0 and 100.');
         return FALSE;
     }
+    
     function encode($id = 0)
     {
         return $this->ki_theme->encrypt($id);

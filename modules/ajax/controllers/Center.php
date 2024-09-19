@@ -140,12 +140,13 @@ class Center extends Ajax_Controller
     }
     function update_password()
     {
-        if ($this->validation('change_password')) {
+        if ($this->validation('change_password') && !$this->isDemo()) {
             $this->db->update('centers', ['password' => sha1($this->post('password'))], [
                 'id' => $this->post('center_id')
             ]);
             $this->response('status', true);
         }
+
     }
 
     function list_certificates()
@@ -423,18 +424,19 @@ class Center extends Ajax_Controller
         $this->db->where('YEAR(STR_TO_DATE(admission_date, "%d-%m-%Y")) =', $year);
         $this->db->group_by("MONTH(STR_TO_DATE(admission_date, '%d-%m-%Y'))");
         // $this->db->order_by("MONTH(STR_TO_DATE(admission_date, '%d-%m-%Y'))", "ASC");
-        if($this->center_model->isCenter())
-            $this->db->where('center_id',$this->center_model->loginId());
+        if ($this->center_model->isCenter())
+            $this->db->where('center_id', $this->center_model->loginId());
         $query = $this->db->get();
         $results = $query->result();
         $monthlyTotals = array_fill(1, 12, 0);
-        
+
         // Update the array with actual totals
         foreach ($results as $row) {
-            $monthlyTotals[(int)( $row->month)] = (int)$row->total_records;
+            $monthlyTotals[(int) ($row->month)] = (int) $row->total_records;
         }
-        $this->response('status',true);
+        $this->response('status', true);
 
         $this->response('data', $monthlyTotals);
+        // $this->isDemo();
     }
 }
