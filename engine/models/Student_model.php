@@ -81,10 +81,10 @@ class Student_model extends MY_Model
                 $this->db->join('exams as e', "e.id = es.exam_id and e.status = '1'");
                 // $this->db->group_by('s.id');
                 //online_exam_via_admit_card
-                if(CHECK_PERMISSION('ONLINE_EXAM_VIA_ADMIT_CARD')){
+                if (CHECK_PERMISSION('ONLINE_EXAM_VIA_ADMIT_CARD')) {
                     $this->db->select('ac.exam_date');
-                    $this->db->join('admit_cards as ac',"ac.student_id = s.id");
-                    $this->db->where('ac.exam_date <=',date('Y-m-d H:i'));
+                    $this->db->join('admit_cards as ac', "ac.student_id = s.id");
+                    $this->db->where('ac.exam_date <=', date('Y-m-d H:i'));
                 }
                 $this->myWhere('s', $condition);
                 break;
@@ -133,8 +133,17 @@ class Student_model extends MY_Model
                 $this->db->where('s.admission_type', 'online');
                 break;
             case 'passout':
-                $this->db->join('student_certificates as sce', 'sce.student_id = s.id AND sce.course_id = s.course_id');
+                $this->db->join('student_certificates as sce', 'sce.student_id = s.id '); //AND sce.course_id = s.course_id
                 $this->db->group_by('sce.student_id');
+                $this->db->order_by('s.id', 'DESC');
+                if (isset($record_limit)) {
+                    $this->db->limit($record_limit);
+                }
+                break;
+            case 'active_student':
+                $this->db->join('student_certificates as sce', 'sce.student_id != s.id'); //AND sce.course_id = s.course_id
+                $this->db->group_by('sce.student_id');
+                $this->db->where('sce.student_id !=','s.id');
                 $this->db->order_by('s.id', 'DESC');
                 if (isset($record_limit)) {
                     $this->db->limit($record_limit);

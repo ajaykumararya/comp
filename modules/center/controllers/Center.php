@@ -94,4 +94,5 @@ class Center extends MY_Controller
         } else
             show_404();
     }
+    
 }

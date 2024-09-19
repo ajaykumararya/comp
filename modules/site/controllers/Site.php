@@ -112,13 +112,64 @@ class Site extends Site_Controller
     }
     function test()
     {
-        $token['id'] = 1; //From here
-        $token['username'] = 'ajay';
-        $date = new DateTime();
-        $token['iat'] = $date->getTimestamp();
-        $token['exp'] = $date->getTimestamp() + 60 * 30;
-        $this->load->library('common/token');
-        echo $this->token->encode($token);
+        // $year = 2023;
+        // $i = 1;
+        // $N = 125;
+        // do{
+        //     print $N * $i.'<br>';
+        //     $i++;
+        // }
+        // while($i <= 10);
+        // // for($i = 1; $i <= 10; $i++){
+        // //     echo $N * $i.'<br>';
+        // // }
+        // // while($i <= 10){ // 1 <= 10 // 2 <=10 // 11 <= 10
+        // //     echo $N * $i.'<br>';
+        // //     $i++;
+        // // }
+        // exit;
+        // // echo chr(97); // ASCCII CODE
+        // echo '<table border="1" style="width:10%">
+        //     <tr>
+        //         <th>ASCCI VALUE</th>
+        //         <th>VALUE</th>
+        //         </tr>
+        // ';
+        // for($i = 1; $i <= 126; $i++){
+        //     echo '<tr>
+        //             <td>'.$i.'</td>    
+        //             <td>'.chr($i).'</td>    
+        //     </tr>';
+        // }
+        // echo '</table>';
+        // return 12;
+        // for($a = 1; $a <= 26;$a++)
+        //     echo '<h1 style="margin:0">'.chr($a).'</h1>';
+        
+
+        // $this->load->driver('cache', array('adapter' => 'file'));
+            //   $cached_data = ['name' => 'ajay','name1' => 'fff'];
+            // $this->cache->save('cache_key', $cached_data, 60);
+        // $cached_data = $this->cache->get('cache_key');
+        // foreach($this->cache->get_metadata('cache_key') as $key => $value){
+        //     echo "$key = ".date('d-m-Y h:i A',$value).'<br>';
+        // }
+        // if ($cached_data === FALSE) {
+        //     // Cache miss: Compute and cache the data
+        //     $cached_data = ['name' => 'ajay'];
+        //     $this->cache->save('cache_key', $cached_data, 60);
+        // }
+        // $this->cache->delete('cache_key');
+        // pre( $cached_data);
+        // $token['id'] = 1; //From here
+        // $token['username'] = 'ajay';
+        // $date = new DateTime();
+        // $token['iat'] = $date->getTimestamp();
+        // $token['exp'] = $date->getTimestamp() + 60 * 30;
+        // $this->load->library('common/token');
+        // echo $this->token->encode($token);
+
+
         // $templates = $this->load->config('api/sms',true);
         // // pre($templates);
         // if(isset($templates['login_with_otp'])){

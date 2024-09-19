@@ -1,10 +1,11 @@
 <?php
 class Center_model extends MY_Model
 {
-    function center_fees($id = 0,$select = '*'){
+    function center_fees($id = 0, $select = '*')
+    {
         $id = $id ? $id : $this->loginId();
         $this->db->select($select);
-        return $this->db->where('center_id',$id)->get('center_fees');
+        return $this->db->where('center_id', $id)->get('center_fees');
     }
     function get_assign_courses($id, $condition = false)
     {
@@ -16,12 +17,23 @@ class Center_model extends MY_Model
             $this->myWhere('cc', $condition);
         return $this->db->get();
     }
-    function get_center($id = 0, $type = 'center')
+    function get_assign_course_cats($id, $userType = 'center', $condition = false)
+    {
+        $this->db->select('c.*,ccc.*')
+            ->from('centers as c')
+            ->join('center_course_category as ccc', "ccc.user_id = c.id and c.id = '$id' AND ccc.user_type = '$userType'")
+            ->join('course_category as cc', 'cc.id = ccc.category_id');
+        if (is_array($condition))
+            $this->myWhere('ccc', $condition);
+        return $this->db->get();
+    }
+    function get_center($id = 0, $type = 'center', $isDeleted = 0)
     {
         if ($id)
-            $this->db->where('id', $id);    
+            $this->db->where('id', $id);
         $this->db->where('type', $type);
-        $this->db->where('isDeleted', '0');
+        if (!is_bool($isDeleted))
+            $this->db->where('isDeleted', $isDeleted);
         return $this->db->get('centers');
         /*
         $this->db->select('c.*,s.STATE_NAME,d.DISTRICT_NAME')
@@ -39,10 +51,10 @@ class Center_model extends MY_Model
     function get_verified($where = 0)
     {
         $this->myWhere('c', $where);
-        $get =  $this->db
+        $get = $this->db
             ->from('centers as c')
-            ->join('state as s', 's.STATE_ID = c.state_id','left')
-            ->join('district as d', 'd.DISTRICT_ID = c.city_id','left')
+            ->join('state as s', 's.STATE_ID = c.state_id', 'left')
+            ->join('district as d', 'd.DISTRICT_ID = c.city_id', 'left')
             ->get();
         // echo $this->db->last_query();
         return $get;
@@ -51,7 +63,8 @@ class Center_model extends MY_Model
         // $this->db->where('type', 'center');
         // return $this->db->get('centers');
     }
-    function get_details(){
+    function get_details()
+    {
 
     }
     function list_requests()
@@ -64,22 +77,25 @@ class Center_model extends MY_Model
             $this->db->where('c.id', $this->loginId());
         return $this->db->get();
     }
-    function update_wallet($centre_id , $wallet){
-        return $this->db->where('id',$centre_id)->update('centers',['wallet' => $wallet]);
+    function update_wallet($centre_id, $wallet)
+    {
+        return $this->db->where('id', $centre_id)->update('centers', ['wallet' => $wallet]);
     }
-    function verified_centers(){
-        $this->db->where('type','center');
-        $this->db->where('isPending',0);
-        $this->db->where('isDeleted',0);
-        $this->db->where('status',1);
-        $this->db->where('valid_upto !=','');
+    function verified_centers()
+    {
+        $this->db->where('type', 'center');
+        $this->db->where('isPending', 0);
+        $this->db->where('isDeleted', 0);
+        $this->db->where('status', 1);
+        $this->db->where('valid_upto !=', '');
         return $this->db->get('centers');
     }
-    function wallet_history(){
+    function wallet_history()
+    {
         $this->db->select('wt.*,DATE_FORMAT(wt.timestamp,"%d-%m-%Y") as date');
         $this->db->from('wallet_transcations as wt');
-        $this->db->where('wt.center_id',$this->loginId());        
-        return $this->db->order_by('id','DESC')->get();
+        $this->db->where('wt.center_id', $this->loginId());
+        return $this->db->order_by('id', 'DESC')->get();
     }
 }
 ?>

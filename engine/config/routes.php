@@ -61,6 +61,7 @@ $route['id-card/(:any)'] = 'document/id_card';
 $route['franchise-certificate/(:any)'] = 'document/franchise_certificate';
 $route['marksheet-verification/(:any)'] = 'site/marksheet_print/$1';
 $route['(:any)'] = 'site/index';
+$route['co-ordinate/(:any)'] = 'Coordinate/$1';
 
 $route['404_override'] = 'site/error_404';
 $route['translate_uri_dashes'] = TRUE;

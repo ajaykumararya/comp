@@ -24,7 +24,7 @@ class Fees extends Ajax_Controller
 
                             <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
                                 <div class="mb-3 mb-md-0 fw-semibold">
-                                    <h4 class="text-gray-900 fw-bold">' . $title . ' not Defined!</h4>
+                                    <h4 class="text-gray-900 f,w-bold">' . $title . ' not Defined!</h4>
 
                                     <div class="fs-6 text-gray-700 pe-7">Go to Set Fee Section, And update fee then click on refresh button.</div>
                                 </div>
@@ -46,13 +46,23 @@ class Fees extends Ajax_Controller
                         <div class="card-body p-0 pt-3 pb-2">   
                             <div class="row p-0">
                                 <div class="col-md-3">
-                                    <div class="form-check mt-7 form-switch form-check-custom form-check-success form-check-solid">
+                                    <div class="form-check form-switch form-check-custom form-check-success form-check-solid">
                                         <input class="form-check-input check-input" type="checkbox" name="key_id[]" value="' . $index . '" ' . ($checked ? 'checked' : '') . ' id="key_' . $randID . '"/>
                                         <label class="form-check-label text-dark fs-2" for="key_' . $randID . '">
                                             ' . $title . '
                                         </label>
                                     </div>
                                     <h3 class="text-center text-success">Fee Amount : ' . $fee . ' ' . $this->get_data('inr') . '</h3>
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" readonly class="form-control" value="Payment Type">
+                                        <span class="input-group-text" id="basic-addon2"
+                                            style="width:140px;padding:0px!important">
+                                            <select name="payment_type['.$index.']"  class="form-select">
+                                                <option value="cash">Cash</option>
+                                                <option value="online">Online</option>
+                                            </select>
+                                        </span>
+                                    </div>
                                 </div>
                                                  
                                 <input type="hidden" name="index_key[]" value="' . $type . '">
@@ -73,6 +83,7 @@ class Fees extends Ajax_Controller
                                     <label class="form-label">Note</label>
                                     <textarea class="form-control" placeholder="Note" name="note[' . $index . ']"></textarea>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -95,6 +106,7 @@ class Fees extends Ajax_Controller
                     'discount' => $dicsount,
                     'payable_amount' => $amount - $dicsount,
                     'description' => $_POST['note'][$index_key],
+                    'payment_type' => $_POST['payment_type'][$index_key],
                     'payment_id' => $payment_id,
                     'payment_date' => $_POST['payment_date'][$index_key],
                     'student_id' => $_POST['student_id'],
@@ -280,14 +292,15 @@ class Fees extends Ajax_Controller
                                     $checkRow = $check->row();
                                     $lastHistory = '<div class="overflow-auto pb-5 mb-2">
                                                     <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed min-w-lg-600px flex-shrink-0 p-6">
-                                                        <i class="ki-duotone ki-bank fs-2tx text-primary me-4"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+                                                        <i class="ki-duotone ki-bank '.(empty($checkRow->description) ? 'fs-2tx' : 'fs-5tx').' text-primary me-4"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
     
                                                         <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
                                                             <div class="mb-3 mb-md-0 fw-semibold">
                                                                 <h4 class="text-gray-900 fw-bold">Last Transaction of ' . ordinal_number($i) . ' Month EMI on ' . $checkRow->payment_date . '!</h4>
                 
                                                                 <div class="fs-6 text-gray-700 pe-7">Amount : ' . $checkRow->amount . ' ' . $inrIcon . ', Doscount : ' . $checkRow->discount . ' ' . $inrIcon . ', Paid Amount ' . $checkRow->payable_amount . ' ' . $inrIcon . ' </div>
-                                                            </div>
+                                                                <div class="fs-3 text-success">Note : '.$checkRow->description.'</div>
+                                                                </div>
         
                                                             <!--a href="#" class="btn btn-primary px-6 align-self-center text-nowrap"> Proceed</a --->
                                                         </div>
@@ -391,6 +404,13 @@ class Fees extends Ajax_Controller
                                         <div class="form-group">
                                             <label class="form-label">Note</label>
                                             <textarea class="form-control" placeholder="Note" name="note[' . $index . ']"></textarea>
+                                        </div>
+                                        <div class="form-group mt-3">
+                                            <label class="form-label">Payment Type</label>
+                                            <select class="form-select form-control-solid" name="payment_type['.$index.']">
+                                                <option value="cash">Cash</option>
+                                                <option value="online">Online</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

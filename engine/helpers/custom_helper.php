@@ -40,6 +40,30 @@ if (!function_exists('isJson')) {
         return (json_last_error() == JSON_ERROR_NONE);
     }
 }
+function dash_box($array){
+    $array['count_icon'] = isset($array['count_icon']) ? 'data-kt-countup-prefix=" <span class=&quot;&quot;>₹</span> "' : '';
+    $array['base_url'] = base_url();
+    return get_instance()->parser->parse_string('<div class="card" style="background: linear-gradient(to right, {color1}, {color2}) !important;">
+                <div class="card-statistic-3 p-4">
+                    <div class="card-icon card-icon-large"><i class="fas fa-{icon}"></i></div>
+                    <div class="mb-4">
+                        <h5 class="card-title mb-0">{title}</h5>
+                    </div>
+                    <div class="row align-items-center mb-2 d-flex">
+                        <div class="col-12">
+                            <h2 class="d-flex align-items-center mb-0 text-white">
+                                <span class="fw-semibold w-100 fs-3x text-white lh-1 ls-n2" data-kt-countup="true"
+                                    data-kt-countup-value="{count}" {count_icon}>
+                                    0
+                                </span>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="{base_url}{url}" class="card-action"><i class="fa fa-{url_icon}"></i> {url_title}</a>
+            </div>',$array,true);
+}
 if (!function_exists('humnize_duration_with_ordinal')) {
     function humnize_duration_with_ordinal($duration, $duration_type)
     {

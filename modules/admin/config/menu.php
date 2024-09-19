@@ -367,7 +367,37 @@ $config['center_exam_menu'] = array(
         )
     )
 );
-
+$config['co_ordinator'] = array(
+    'title' => 'Co-Ordinate User',
+    'condition' => OnlyForAdmin() && CHECK_PERMISSION("CO_ORDINATE_SYSTEM"),
+    'menu' => array(
+        array(
+            'label' => 'Co Ordinator Account',
+            'type' => 'co_ordinate_account',
+            'icon' => array('profile-user', 3),
+            'submenu' => array(
+                array(
+                    'label' => 'Create Account',
+                    'type' => 'create_co_ordinate_user',
+                    'icon' => array('plus', 2),
+                    'url' => 'co-ordinate/create'
+                ),
+                array(
+                    'label' => 'List Account(s)',
+                    'type' => 'list_co_ordinate_user',
+                    'icon' => array('message-text', 2),
+                    'url' => 'co-ordinate/list'
+                ),                
+                array(
+                    'label' => 'Assign Course(s)',
+                    'type' => 'assign_course_co_ordinate_user',
+                    'icon' => array('book', 2),
+                    'url' => 'co-ordinate/assign-course'
+                )
+            )
+        )
+    )
+);
 $config['center_area'] = array(
     'title' => 'Center Area',
     'condition' => OnlyForAdmin(),
@@ -388,6 +418,7 @@ $config['center_area'] = array(
                     'type' => 'assign_courses_with_center',
                     'icon' => array('arrow-circle-right', 2),
                     'url' => 'center/assign-courses',
+                    'condition' => !CHECK_PERMISSION('CO_ORDINATE_SYSTEM')
                 ),
                 array(
                     'label' => 'Pending Centers',

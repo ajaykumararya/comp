@@ -388,7 +388,7 @@ class Center extends Ajax_Controller
                 $this->db->update('transactions', [
                     'payment_status' => 1
                 ], ['id' => $row->id]);
-                $this->response('status',true);
+                $this->response('status', true);
             } else {
                 $data = [
                     'key' => RAZORPAY_KEY_ID,
@@ -412,5 +412,29 @@ class Center extends Ajax_Controller
                 $this->response('amount', $row->amount);
             }
         }
+    }
+    function get_student_record()
+    {
+        $year = $this->post('year');
+
+        $this->db->select("MONTH(STR_TO_DATE(admission_date, '%d-%m-%Y')) AS month", FALSE);
+        $this->db->select("COUNT(*) AS total_records");
+        $this->db->from('students');
+        $this->db->where('YEAR(STR_TO_DATE(admission_date, "%d-%m-%Y")) =', $year);
+        $this->db->group_by("MONTH(STR_TO_DATE(admission_date, '%d-%m-%Y'))");
+        // $this->db->order_by("MONTH(STR_TO_DATE(admission_date, '%d-%m-%Y'))", "ASC");
+        if($this->center_model->isCenter())
+            $this->db->where('center_id',$this->center_model->loginId());
+        $query = $this->db->get();
+        $results = $query->result();
+        $monthlyTotals = array_fill(1, 12, 0);
+        
+        // Update the array with actual totals
+        foreach ($results as $row) {
+            $monthlyTotals[(int)( $row->month)] = (int)$row->total_records;
+        }
+        $this->response('status',true);
+
+        $this->response('data', $monthlyTotals);
     }
 }

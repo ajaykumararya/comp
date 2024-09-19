@@ -35,6 +35,34 @@ $config = array(
         ),
 
     ),
+    'add_co_ordinator' => array(
+        array(
+            'field' => 'email',
+            'label' => 'Email',
+            'rules' => 'required|is_unique[centers.email]',
+            'errors' => [
+                'is_unique' => 'This %s is already exists.'
+            ]
+        ),
+        array(
+            'field' => 'contact_number',
+            'label' => 'Contact Number',
+            'rules' => 'required|is_unique[centers.contact_number]',
+            'errors' => [
+                'is_unique' => 'This %s is already exists.'
+            ]
+        ),
+        array(
+            'field' => 'password',
+            'label' => 'Password',
+            'rules' => 'required',
+        ),
+        array(
+            'field' => 'name',
+            'label' => 'Name',
+            'rules' => 'required',
+        )
+    ),
     'add_center' => array(
         array(
             'field' => 'email_id',

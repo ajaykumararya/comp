@@ -1,225 +1,410 @@
-<div class="row">
-    <div class="col-sm-6 col-xl-2 mb-xl-10">
-
-        <!--begin::Card widget 2-->
-        <div class=" h-lg-100 shadow {card_class}">
-            <!--begin::Body-->
-            <div class="card-body card-image d-flex justify-content-between align-items-start flex-column">
-                <!--begin::Icon-->
-                <div class="m-0">
-                    <i class="ki-duotone ki-people fs-2hx text-gray-600">
-                        <span class="path1"></span>
-                        <span class="path2"></span>
-                        <span class="path3"></span>
-                        <span class="path4"></span>
-                        <span class="path5"></span>
-                    </i>
-
-                </div>
-                <!--end::Icon-->
-
-                <!--begin::Section-->
-                <div class="d-flex flex-column my-7">
-                    <!--begin::Number-->
-                    <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2" data-kt-countup="true"
-                        data-kt-countup-value="<?= $this->student_model->get_switch('all', [
-                            'without_admission_status' => true,
-                            'admission_status' => 1
-                        ])->num_rows() ?>">
-                        0
-                    </span>
-                    <!--end::Number-->
-
-                    <!--begin::Follower-->
-                    <div class="m-0">
-                        <span class="fw-semibold fs-6 text-gray-500">
-                            Active Student(s) </span>
-
-                    </div>
-                    <!--end::Follower-->
-                </div>
-                <!--end::Section-->
-
-            </div>
-            <!--end::Body-->
-        </div>
-        <!--end::Card widget 2-->
-
-
-    </div>
-    <?php
-    if ($this->center_model->isAdmin()) {
-        ?>
-        <div class="col-sm-6 col-xl-2 mb-xl-10">
-
-            <!--begin::Card widget 2-->
-            <div class=" h-lg-100 shadow {card_class}">
-                <!--begin::Body-->
-                <div class="card-body card-image d-flex justify-content-between align-items-start flex-column">
-                    <!--begin::Icon-->
-                    <div class="m-0">
-                        <i class="ki-duotone ki-people fs-2hx text-gray-600">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                            <span class="path3"></span>
-                            <span class="path4"></span>
-                            <span class="path5"></span>
-                        </i>
-
-                    </div>
-                    <!--end::Icon-->
-
-                    <!--begin::Section-->
-                    <div class="d-flex flex-column my-7">
-                        <!--begin::Number-->
-                        <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2" data-kt-countup="true"
-                            data-kt-countup-value="<?= $this->center_model->get_center()->num_rows() ?>">
-                            0
-                        </span>
-                        <!--end::Number-->
-
-                        <!--begin::Follower-->
-                        <div class="m-0">
-                            <span class="fw-semibold fs-6 text-gray-500">
-                                Center(s) </span>
-
-                        </div>
-                        <!--end::Follower-->
-                    </div>
-                    <!--end::Section-->
-
-                </div>
-                <!--end::Body-->
-            </div>
-            <!--end::Card widget 2-->
-
-
-        </div>
-        <?php
+<style>
+    .card {
+        color: #fff;
+        border-radius: 10px;
+        border: none;
+        position: relative;
+        margin-bottom: 30px;
+        border: 1px solid white;
+        border-top:3px solid white;
+        box-shadow: 0 0.46875rem 2.1875rem rgba(90, 97, 105, 0.1), 0 0.9375rem 1.40625rem rgba(90, 97, 105, 0.1), 0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12), 0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1);
     }
-    // ttl_courses
-    ?>
-    <div class="col-sm-6 col-xl-2 mb-xl-10">
 
-        <!--begin::Card widget 2-->
-        <div class=" h-lg-100 shadow {card_class}">
-            <!--begin::Body-->
-            <div class="card-body card-image d-flex justify-content-between align-items-start flex-column">
-                <!--begin::Icon-->
-                <div class="m-0">
-                    <i class="ki-duotone ki-book fs-2hx text-gray-600">
-                        <span class="path1"></span>
-                        <span class="path2"></span>
-                        <span class="path3"></span>
-                        <span class="path4"></span>
-                        <span class="path5"></span>
-                    </i>
+    .card:hover .card-icon>i {
+        transition: all .2s ease;
+        font-size: 65px !important
+    }
 
-                </div>
-                <!--end::Icon-->
+    .card:hover .card-icon {
+        top: 20px !important;
+        right: 30px !important
+    }
 
-                <!--begin::Section-->
-                <div class="d-flex flex-column my-7">
-                    <!--begin::Number-->
-                    <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2" data-kt-countup="true"
-                        data-kt-countup-value="<?= $this->SiteModel->ttl_courses() ?>">
-                        0
-                    </span>
-                    <!--end::Number-->
+    .l-bg-cherry {
+        background: linear-gradient(to right, #493240, #f09) !important;
+        color: #fff;
+    }
 
-                    <!--begin::Follower-->
-                    <div class="m-0">
-                        <span class="fw-semibold fs-6 text-gray-500">
-                            Course(s) </span>
+    .l-bg-blue-dark {
+        background: linear-gradient(to right, #373b44, #4286f4) !important;
+        color: #fff;
+    }
 
-                    </div>
-                    <!--end::Follower-->
-                </div>
-                <!--end::Section-->
+    .l-bg-green-dark {
+        background: linear-gradient(to right, #0a504a, #38ef7d) !important;
+        color: #fff;
+    }
 
-            </div>
-            <!--end::Body-->
+    .l-bg-orange-dark {
+        background: linear-gradient(to right, #a86008, #ffba56) !important;
+        color: #fff;
+    }
+
+    .card .card-statistic-3 .card-icon-large .fas,
+    .card .card-statistic-3 .card-icon-large .far,
+    .card .card-statistic-3 .card-icon-large .fab,
+    .card .card-statistic-3 .card-icon-large .fal {
+        font-size: 42px;
+        transition: all .4s ease;
+        color: white;
+    }
+
+    .card .card-statistic-3 .card-icon {
+        text-align: center;
+        line-height: 33px;
+        margin-left: 15px;
+        position: absolute;
+        right: 24px;
+        top: 39px;
+        transition: all .4s ease;
+        opacity: 0.5;
+    }
+
+    .l-bg-cyan {
+        background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
+        color: #fff;
+    }
+
+    .l-bg-green {
+        background: linear-gradient(135deg, #23bdb8 0%, #43e794 100%) !important;
+        color: #fff;
+    }
+
+    .l-bg-orange {
+        background: linear-gradient(to right, #f9900e, #ffba56) !important;
+        color: #fff;
+    }
+
+    .l-bg-cyan {
+        background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
+        color: #fff;
+    }
+
+    .card-action {
+        padding: 4px !important;
+        padding-left: 18px !important;
+        color: white;
+        background: rgba(0, 0, 0, .2);
+        border-radius: 10px;
+        text-align: left;
+        transition: all 0.3s ease;
+        border-top: 3px solid white;
+    }
+
+    .card-action i {
+        color: white;
+    }
+
+    .card-action:hover {
+        padding-left: 30% !important;
+        transition: all 0.3s ease;
+        background-color: rgb(0, 0, 0, .5);
+    }
+</style>
+<?php
+$loginId = $this->center_model->loginId();
+$isCenter = $this->center_model->isCenter();
+$where = $isCenter ? ['center_id' => $loginId] : [];
+$this->db->from('course_category as coc');
+if($isCenter){
+    $this->db->join('course as c','c.category_id = coc.id');
+    $this->db->join('center_courses as cc','c.id = cc.course_id');
+    $this->db->group_by('c.category_id');
+}
+$courseCategory = $this->db->get()->num_rows();
+$allStudents = $this->student_model->get_switch('all', [
+    'without_admission_status' => true
+])->num_rows();
+$approvedStudents = $this->student_model->get_switch('all', [
+    'without_admission_status' => true,
+    'admission_status' => 1
+])->num_rows();
+$pendingStudents = $this->student_model->get_switch('all', [
+    'without_admission_status' => true,
+    'admission_status' => 0
+])->num_rows();
+$cancelStudents = $this->student_model->get_switch('all', [
+    'without_admission_status' => true,
+    'admission_status' => 2
+])->num_rows();
+$passoutStudent = $this->student_model->get_switch('passout', [
+    'without_admission_status' => false
+])->num_rows();
+
+$ttl_courses = $this->SiteModel->ttl_courses();
+$ttlAmitCards = $this->db->where($where)->get('admit_cards')->num_rows();
+$ttlResults = $this->db->where($where)->get('marksheets')->num_rows();
+$ttlIDCards = $approvedStudents;
+if ($this->center_model->isAdmin()) {
+    $ttlCentres = $this->center_model->get_center(0,'center',false)->num_rows();
+    $ttlPendingCenters = $this->db->where([
+        'isPending' => 1,
+        'type' => 'center'
+    ])->get('centers')->num_rows();
+    $ttlCencelCenters = $this->center_model->get_center(0,'center',1)->num_rows();
+    $ttlActiveCenters = $this->db->where([
+        'status' => 1,
+        'isDeleted' => 0,
+        'isPending' => 0,
+        'type' => 'center'
+    ])->get('centers')->num_rows();
+}
+if ($isCenter)
+    $this->db->where('center_id', $loginId);
+$ttlFees = $this->db->select('sum(payable_amount) as ttl_collection')->get('student_fee_transactions')->row('ttl_collection');
+?>
+<div class="container">
+    <div class="row ">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <?= dash_box([
+                'color1' => '#000000',
+                'color2' => '#30026a',
+                'title' => 'Active Student(s)',
+                'count' => $approvedStudents - $passoutStudent,
+                'url' => 'student/approve-list',
+                'url_icon' => 'list',
+                'url_title' => 'View List',
+                'icon' => 'book'
+            ]) ?>
         </div>
-        <!--end::Card widget 2-->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <?= dash_box([
+                'color1' => '#112339',
+                'color2' => '#20c2e4',
+                'title' => 'Passout Student(S)',
+                'count' => $passoutStudent,
+                'url' => 'student/passout-student-list',
+                'url_icon' => 'list',
+                'url_title' => 'View List',
+                'icon' => 'users'
+            ]) ?>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <?= dash_box([
+                'color1' => '#0a504a',
+                'color2' => '#38ef7d',
+                'title' => 'Course Category',
+                'count' => $courseCategory,
+                'url' => 'course/category',
+                'url_icon' => 'eye',
+                'url_title' => 'Manage Category',
+                'icon' => 'book'
+            ]) ?>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <?= dash_box([
+                'color1' => '#493240',
+                'color2' => '#f09',
+                'title' => 'Course(S)',
+                'count' => $ttl_courses,
+                'url' => 'course/manage',
+                'url_icon' => 'eye',
+                'url_title' => 'Manage Course',
+                'icon' => 'book'
+            ]) ?>
+        </div>
 
 
+
+
+
+
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <?= dash_box([
+                'color1' => '#373b44',
+                'color2' => '#4286f4',
+                'title' => 'Admission(S)',
+                'count' => $allStudents,
+                'url' => 'student/search',
+                'url_icon' => 'search',
+                'url_title' => 'Search Student',
+                'icon' => 'users'
+            ]) ?>
+        </div>
+
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <?= dash_box([
+                'color1' => '#a86008',
+                'color2' => '#ffba56',
+                'title' => 'Approved Admission(S)',
+                'count' => $approvedStudents,
+                'url' => 'student/approve-list',
+                'url_icon' => 'eye',
+                'url_title' => 'View List',
+                'icon' => 'users'
+            ]) ?>
+        </div>
+
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <?= dash_box([
+                'color1' => '#f70c0c',
+                'color2' => '#e4a520',
+                'title' => 'Pending Admission(S)',
+                'count' => $pendingStudents,
+                'url' => 'student/pending-list',
+                'url_icon' => 'eye',
+                'url_title' => 'View List',
+                'icon' => 'users'
+            ]) ?>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <?= dash_box([
+                'color1' => '#493240',
+                'color2' => '#e420e4',
+                'title' => 'Cancel Admission(S)',
+                'count' => $cancelStudents,
+                'url' => 'student/cencel-list',
+                'url_icon' => 'eye',
+                'url_title' => 'View List',
+                'icon' => 'users'
+            ]) ?>
+        </div>
+
+
+
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <?= dash_box([
+                'color1' => '#493240',
+                'color2' => '#e4205a',
+                'title' => 'Admit Card Generate',
+                'count' => $ttlAmitCards,
+                'url' => 'student/generate-admit-card',
+                'url_icon' => 'plus',
+                'url_title' => 'Generate Admit Card',
+                'icon' => 'table-o'
+            ]) ?>
+        </div>
+
+
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <?= dash_box([
+                'color1' => '#371d0c',
+                'color2' => '#a45017',
+                'title' => 'Result Generate',
+                'count' => $ttlResults,
+                'url' => 'student/create-marksheet',
+                'url_icon' => 'plus',
+                'url_title' => 'Create Marksheet',
+                'icon' => 'table'
+            ]) ?>
+        </div>
+
+
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <?= dash_box([
+                'color1' => '#46560e',
+                'color2' => '#9dc31a',
+                'title' => 'ID Card Generate',
+                'count' => $ttlIDCards,
+                'url' => 'student/get-id-card',
+                'url_icon' => 'eye',
+                'url_title' => 'Get ID Card',
+                'icon' => 'credit-card'
+            ]) ?>
+        </div>
+
+
+        <?php
+        if ($this->center_model->isAdmin()) {
+            ?>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <?= dash_box([
+                    'color1' => '#0d0a37',
+                    'color2' => '#646464',
+                    'title' => 'Total Centre(S)',
+                    'count' => $ttlCentres,
+                    'url' => 'center/list',
+                    'url_icon' => 'eye',
+                    'url_title' => 'View',
+                    'icon' => 'users'
+                ]) ?>
+            </div>
+
+
+            <div class="col-xl-3 col-md-6 mb-4">
+                <?= dash_box([
+                    'color1' => '#313c12',
+                    'color2' => '#20e4d8',
+                    'title' => 'Total Pending Centre(S)',
+                    'count' => $ttlPendingCenters,
+                    'url' => 'center/pending-list',
+                    'url_icon' => 'eye',
+                    'url_title' => 'View',
+                    'icon' => 'users'
+                ]) ?>
+            </div>
+
+
+            <div class="col-xl-3 col-md-6 mb-4">
+                <?= dash_box([
+                    'color1' => '#650021',
+                    'color2' => '#066146',
+                    'title' => 'Total Approved Centre(S)',
+                    'count' => $ttlActiveCenters,
+                    'url' => 'center/list',
+                    'url_icon' => 'eye',
+                    'url_title' => 'View',
+                    'icon' => 'users'
+                ]) ?>
+            </div>
+
+            <div class="col-xl-3 col-md-6 mb-4">
+                <?= dash_box([
+                    'color1' => '#ff1515',
+                    'color2' => '#240d0d',
+                    'title' => 'Total Deleted Centre(S)',
+                    'count' => $ttlCencelCenters,
+                    'url' => 'center/deleted-list',
+                    'url_icon' => 'eye',
+                    'url_title' => 'View',
+                    'icon' => 'users'
+                ]) ?>
+            </div>
+            <?php
+        }
+        ?>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <?= dash_box([
+                'color1' => '#050746',
+                'color2' => '#2027e4',
+                'title' => 'Fee Collection(S)',
+                'count_icon' => true,
+                'count' => $ttlFees,
+                'url' => 'student/collect-student-fees',
+                'url_icon' => 'bank',
+                'url_title' => 'Collect Fee',
+                'icon' => 'bank'
+            ]) ?>
+        </div>
     </div>
-
-
-
 </div>
 
-<div class="row mt-3">
-    <?php
-    if($this->center_model->isCenter()){
-    ?>
-    <div class="col-md-6">
-        <div class="card card-flush h-md-100 border-primary border-dashed border-3 shadow">
-            <!--begin::Body-->
-            <div class="card-body d-flex flex-column justify-content-between mt-9 bgi-no-repeat bgi-size-cover bgi-position-x-center pb-0"
-                style="background-position: 100% 50%; background-image:url('https://aadesignpaintingpolish.in/assets/metro-theme/assets/media/stock/900x600/42.png')">
-                <!--begin::Wrapper-->
-                <div class="mb-10">
-                    <!--begin::Title-->
-                    <div class="fs-2hx fw-bold text-gray-800 text-center mb-13">
-                        <span class="me-2">
-                            Certificate
-                            <br>
-                            <?php
-                            if ($isValid = ($center_data['valid_upto'] && $center_data['certificate_issue_date'])):
-                                if(strtotime($center_data['valid_upto']) >= time()){
-                                ?>
-                                <span class="position-relative d-inline-block text-primary">
-                                    <a href="#" data-id="<?=$center_data['id']?>" data-type="center_certificate" class="click-to-view-link text-primary opacity-75-hover">
-                                        <i class="fa fa-eye fs-2hx text-primary"></i> View</a>
-                                    <!--begin::Separator-->
-                                    <span
-                                        class="position-absolute opacity-15 bottom-0 start-0 border-4 border-primary border-bottom w-100"></span>
-                                    <!--end::Separator-->
-                                </span>
-                                <?php
-                                }
-                                else
-                                    echo '<span class="text-danger">Expired</span>';
-                                
-                            endif;
-                            ?>
-                        </span>
-                    </div>
-                    <!--end::Title-->
-                    <?php
-                    if ($isValid):
-                        ?>
-                        <!--begin::Action-->
-                        <div class="text-center">
-                            <span>
-                                Issued on <strong><?=date('d F Y',strtotime($center_data['certificate_issue_date']))?></strong></span>
-                        </div>
-                        <!--begin::Action-->
-                        <!--begin::Action-->
-                        <div class="text-center">
-                            <span>
-                                Expired on <strong><?=date('d F Y',strtotime($center_data['valid_upto']))?></strong> </span>
-                        </div>
-                        <!--begin::Action-->
-                        <?php
-                    endif;
-                    ?>
-                </div>
-                <!--begin::Wrapper-->
-                <!--begin::Illustration-->
-                <img class="mx-auto h-150px h-lg-200px  theme-light-show"
-                    src="https://aadesignpaintingpolish.in/assets/metro-theme/assets/media/illustrations/misc/upgrade.svg"
-                    alt="">
-                <img class="mx-auto h-150px h-lg-200px  theme-dark-show"
-                    src="https://aadesignpaintingpolish.in/assets/metro-theme/assets/media/illustrations/misc/upgrade-dark.svg"
-                    alt="">
-                <!--end::Illustration-->
-            </div>
-            <!--end::Body-->
+<div class="card card-bordered">
+    <div class="card-header">
+        <h3 class="card-title">Student Record Chart</h3>
+        <div class="card-toolbar">
+            <select class="form-select fetch-record form-control-solid" data-placeholder="Select an option"
+                data-hide-search="true">
+                <?php
+                $year = 2023;
+                $current_year = date('Y');
+                while ($year <= $current_year) {
+                    echo '<option value="' . $year . '" ' . ($year == $current_year ? 'selected' : '') . '>' . $year . '</option>';
+                    $year++;
+                }
+                ?>
+            </select>
         </div>
     </div>
-    <?php
-    }
-    ?>
+    <div class="card-body">
+        <div id="kt_apexcharts_3" style="height: 350px;"></div>
+    </div>
 </div>

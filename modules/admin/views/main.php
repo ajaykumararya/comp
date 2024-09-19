@@ -121,6 +121,7 @@
             background-color: var(--bs-scrollbar-color)
         }
 
+
         #IconPreview {
             color: black !important;
         }
@@ -133,8 +134,9 @@
             display: flex;
             flex-wrap: wrap;
         }
-        div:where(.swal2-container){
-            z-index: 99999!important;
+
+        div:where(.swal2-container) {
+            z-index: 99999 !important;
         }
     </style>
     <script>
@@ -507,17 +509,36 @@
                     data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
                     <!--begin::Logo-->
                     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
+
+                        <div class="">
+                            <!--begin::User info-->
+                            <!--begin::Menu wrapper-->
+                            <div class="cursor-pointer symbol symbol-35px">
+                                <img src="{profile_image}" class="rounded-3 owner-image" alt="user" />
+
+
+                            </div>
+                            <a href="{base_url}admin/profile"
+                                class="text-white text-hover-primary fs-4 fw-bold ms-3 app-sidebar-minimize-d-none profile-title">
+                                {owner_name} <span
+                                    class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">{type}</span>
+                            </a>
+                            <!--end::User account menu-->
+                        </div>
+
+
+
                         <!--begin::Logo image-->
-                        <a href="{base_url}admin" class="fs-1">
-                            <?php
-                            // echo isset($_COOKIE["sidebar_minimize_state"]) && $_COOKIE["sidebar_minimize_state"] === "on";
-                            echo ucfirst($this->session->userdata('admin_type')) . ' Panel';
-                            ?>
-                            <!-- <img alt="Logo" src="{base_url}assets/media/logos/default-dark.svg"
+                        <!-- <a href="{base_url}admin" class="fs-1"> -->
+                        <?php
+                        // echo isset($_COOKIE["sidebar_minimize_state"]) && $_COOKIE["sidebar_minimize_state"] === "on";
+                        // echo ucfirst($this->session->userdata('admin_type')) . ' Panel';
+                        ?>
+                        <!-- <img alt="Logo" src="{base_url}assets/media/logos/default-dark.svg"
                                 class="h-25px app-sidebar-logo-default" />
                             <img alt="Logo" src="{base_url}assets/media/logos/default-small.svg"
                                 class="h-20px app-sidebar-logo-minimize" /> -->
-                        </a>
+                        <!-- </a> -->
                         <!--end::Logo image-->
                         <!--begin::Sidebar toggle-->
                         <!--begin::Minimized sidebar setup: -->
@@ -575,7 +596,7 @@
                                     echo '<a href="' . base_url('admin/switch-back') . '" class="btn btn-sm btn-light btn-active-light-primary me-2"><i class="fa fa-arrow-left"></i> Switch Back</a>';
                                 } else {
                                     ?>
-                                    <form action="" method="POST">
+                                    <form action="" method="POST" class="app-sidebar-minimize-d-none">
                                         <input type="hidden" name="status" value="temp_login">
                                         <lable class="form-label">Login As Centre</lable>
                                         <div class="input-group d-flex">
