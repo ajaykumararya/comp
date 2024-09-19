@@ -100,6 +100,11 @@
         transition: all 0.3s ease;
         background-color: rgb(0, 0, 0, .5);
     }
+    @media only screen and (max-width: 768px) {
+        .card .card-statistic-3{
+            height: 121px;
+        }
+    }
 </style>
 <?php
 $loginId = $this->center_model->loginId();
