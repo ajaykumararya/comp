@@ -399,7 +399,7 @@ $ttlFees = $this->db->select('sum(payable_amount) as ttl_collection')->get('stud
             <select class="form-select fetch-record form-control-solid" data-placeholder="Select an option"
                 data-hide-search="true">
                 <?php
-                $year = 2023;
+                $year = 2020;
                 $current_year = date('Y');
                 while ($year <= $current_year) {
                     echo '<option value="' . $year . '" ' . ($year == $current_year ? 'selected' : '') . '>' . $year . '</option>';
