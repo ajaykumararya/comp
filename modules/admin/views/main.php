@@ -197,7 +197,7 @@
                 data-kt-sticky-activate="{default: true, lg: true}" data-kt-sticky-name="app-header-minimize"
                 data-kt-sticky-offset="{default: '200px', lg: '0'}" data-kt-sticky-animation="false">
                 <!--begin::Header container-->
-                <div class="app-container  container-fluid d-flex align-items-stretch justify-content-between "
+                <div class="app-container  container-fluid d-flex align-items-stretch justify-content-between border-bottom-dashed border-bottom border-gray-300"
                     id="kt_app_header_container">
                     <!--begin::Sidebar mobile toggle-->
                     <div class="d-flex align-items-center d-lg-none ms-n3 me-1 me-md-2" title="Show sidebar menu">
@@ -596,12 +596,31 @@
                                     echo '<a href="' . base_url('admin/switch-back') . '" class="btn btn-sm btn-light btn-active-light-primary me-2"><i class="fa fa-arrow-left"></i> Switch Back</a>';
                                 } else {
                                     ?>
-                                    <form action="" method="POST" class="app-sidebar-minimize-d-none">
-                                        <input type="hidden" name="status" value="temp_login">
-                                        <lable class="form-label">Login As Centre</lable>
-                                        <div class="input-group d-flex">
-                                            <div class="input-group-text p-0" style="width:174px">
+                                    <a href="#" class="btn btn-sm btn-flex btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary app-sidebar-minimize-d-none fw-bold" data-kt-menu-trigger="click"
+                                        data-kt-menu-placement="left-start">
+                                        <i class="ki-duotone ki-entrance-left fs-6 text-primary me-1"><span class="path1"></span><span
+                                                class="path2"></span></i>
+                                        Login as centre
+                                    </a>
+                                    <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true"
+                                        id="kt_menu_66ed51d91ec62"
+                                        style="z-index: 107; position: fixed; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-107.333px, 81.3333px, 0px);"
+                                        data-popper-placement="left-start" data-select2-id="select2-data-kt_menu_66ed51d91ec62">
+                                        <!--begin::Header-->
+                                        <div class="px-7 py-5">
+                                            <div class="fs-5 text-gray-900 fw-bold">Login As Centre</div>
+                                        </div>
+                                        <!--end::Header-->
 
+                                        <!--begin::Menu separator-->
+                                        <div class="separator border-gray-200"></div>
+                                        <!--end::Menu separator-->
+
+
+                                        <!--begin::Form-->
+                                        <div class="px-7 py-5" data-select2-id="select2-data-123-unff">
+                                            <form action="" method="POST" class="">
+                                                <input type="hidden" name="status" value="temp_login">
                                                 <select data-control="select2" required data-placeholder="Select Centre"
                                                     name="center_id" class="form-control" autocomplete="off">
                                                     <option></option>
@@ -614,13 +633,19 @@
                                                     }
                                                     ?>
                                                 </select>
-                                            </div>
-                                            <button class="input-group-text btn-success btn btn-xs btn-sm" id="basic-addon2">
-                                                <i class="fa fa-sign-in"></i>
-                                            </button>
+                                                <!--begin::Actions-->
+                                                <div class="d-flex justify-content-end mt-5">
+                                                    <button type="reset"
+                                                        class="btn btn-sm btn-light btn-active-light-primary me-2"
+                                                        data-kt-menu-dismiss="true">Reset</button>
+
+                                                    <button type="submit" class="btn btn-sm btn-primary"
+                                                        data-kt-menu-dismiss="true">Login</button>
+                                                </div>
+                                                <!--end::Actions-->
                                         </div>
 
-                                    </form>
+                                    </div>
 
                                     <?php
                                 }
@@ -797,26 +822,26 @@
         <!--end::Drawer-->
         <!--end::View component-->
         <?php
-        if(isDemo()){
+        if (isDemo()) {
             ?>
-        
-        <!--begin::Toast-->
-        <div class="position-fixed p-3" style="z-index:9999;top: 68px;">
-            <div id="demoWarning" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                    <i class="ki-duotone ki-abstract-19 fs-1 text-danger me-3"><span class="path1"></span><span
-                            class="path2"></span></i>
-                    <strong class="me-auto fs-4 text-danger">HYPER PRP WEBTECH</strong>
-                    <small class="text-capitalize"><?=timeAgo('2024-09-19')?></small>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div class="toast-body text-dark fs-5">
-                This is a demo panel, you can not update some function in it .
+
+            <!--begin::Toast-->
+            <div class="position-fixed p-3" style="z-index:9999;top: 68px;">
+                <div id="demoWarning" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <i class="ki-duotone ki-abstract-19 fs-1 text-danger me-3"><span class="path1"></span><span
+                                class="path2"></span></i>
+                        <strong class="me-auto fs-4 text-danger">HYPER PRP WEBTECH</strong>
+                        <small class="text-capitalize"><?= timeAgo('2024-09-19') ?></small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body text-dark fs-5">
+                        This is a demo panel, you can not update some function in it .
+                    </div>
                 </div>
             </div>
-        </div>
-        <!--end::Toast-->
-        <?php
+            <!--end::Toast-->
+            <?php
         }
         ?>
 </body>
@@ -826,7 +851,7 @@
     var base_url = "<?= base_url() ?>",
         ajax_url = base_url + 'ajax/';
     const login_type = '<?= $this->center_model->login_type() ?>';
-    const isDemo = Boolean(<?=isDemo()?>);
+    const isDemo = Boolean(<?= isDemo() ?>);
     const all_templates = '';
     const wallet_system = Boolean(`<?= CHECK_PERMISSION('WALLET_SYSTEM') or CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE') ?>`);
     const wallet_balance = <?= $this->ki_theme->wallet_balance() ?? 0 ?>;

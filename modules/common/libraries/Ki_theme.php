@@ -167,7 +167,7 @@ class Ki_theme
             'eccLevel' => QRCode::ECC_L,
             'imageBase64' => false,
             'margin' => 0,
-            'imageTransparent' => 127
+            'imageTransparent' => true
         ]);
         // Create QR code
         $qrCode = new QRCode($options);

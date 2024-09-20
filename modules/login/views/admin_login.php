@@ -40,7 +40,7 @@
 <body id="kt_body" class="app-blank bgi-size-cover bgi-attachment-fixed bgi-position-center">
     <!--begin::Theme mode setup on page load-->
     <script>
-        var defaultThemeMode = "system";
+        var defaultThemeMode = "dark";
         var themeMode;
 
         if (document.documentElement) {
