@@ -1126,7 +1126,7 @@ class Ki_theme
                 $html .= '</div></div>';
             } else {
                 // $html .= $menuItem['label'] .' - '.(isset($menuItem['type']) ? $menuItem['type'] : 'nn').'<br>';
-
+                
                 $html .= '
     					                <div class="col-md-4">
     					                    <label style="margin-bottom:3px" class="form-check form-switch form-check-custom form-check-solid pulse pulse-success" for="d-' . $menuItem['type'] . '">

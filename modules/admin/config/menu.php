@@ -178,7 +178,7 @@ $config['menu'] = array(
                     'label' => 'Collect Fee',
                     'type' => 'collect_student_fee',
                     'icon' => array('double-check-circle', 4),
-                    'url' => 'student/collect-student-fees',
+                    'url' => 'student/'. ( CHECK_PERMISSION('FEES_COLLECTION_OLD') ? 'collect-fees' : 'collect-student-fees'),
                 ),
                 array(
                     'label' => 'Search Fee Payment',

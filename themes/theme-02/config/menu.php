@@ -6,12 +6,13 @@ $menu = array(
     'submenu' => array(
         array(
             'label' => 'Faculty',
+            'type' => 'faculty_page',
             'url' => 'cms/static-page/faculty',
             'icon' => array('file', 3)
         ),
         array(
             'label' => 'Usefull buttons',
-            'type' => 'usefull-buttons',
+            'type' => 'usefull_buttons',
             'icon' => array('file',4),
             'url' => 'cms/static-page/usefull-buttons'
         ),

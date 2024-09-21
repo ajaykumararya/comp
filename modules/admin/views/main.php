@@ -643,6 +643,7 @@
                                                         data-kt-menu-dismiss="true">Login</button>
                                                 </div>
                                                 <!--end::Actions-->
+                                            </form>
                                         </div>
 
                                     </div>
