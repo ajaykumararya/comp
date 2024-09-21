@@ -61,8 +61,8 @@
     <p class="position-absolute" style="top:45.8%;left:15%">{dob}</p>
 
     <p class="position-absolute" style="top:54.8%;left:12%">{course_name}</p>
-    <p class="position-absolute" style="top:58.8%;left:45%">{date}</p>
-    <p class="position-absolute" style="top:58.8%;left:18%">{time}</p>
+    <p class="position-absolute" style="top:58.8%;left:45%">{time}</p>
+    <p class="position-absolute" style="top:58.8%;left:18%">{date}</p>
     <p class="position-absolute" style="top:62.5%;left:16%">{center_name}</p>
     <?php
     $this->ki_theme->generate_qr($admit_card_id, 'admit_card', current_url());
