@@ -960,9 +960,9 @@ const course_duration_humnize_without_ordinal = (duration, duration_type, flag =
     return (duration + ` ` + $.ucfirst(duration_type));
 }
 const SwalHideLoading = () => {
-    if(isDemo){
-        $('#demoWarning').addClass('show').removeClass('hide');
-    }
+    // if(isDemo){
+    //     $('#demoWarning').addClass('show').removeClass('hide');
+    // }
     Swal.hideLoading();
     Swal.close();
 }
