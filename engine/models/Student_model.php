@@ -141,6 +141,10 @@ class Student_model extends MY_Model
                     $this->db->limit($record_limit);
                     unset($condition['record_limit']);
                 }
+                if(isset($condition['limit'])){
+                    unset($condition['limit']);
+                }
+                $this->myWhere('s',$condition);
                 break;
             case 'active_student':
                 $this->db->join('student_certificates as sce', 'sce.student_id = s.id', 'left'); //AND sce.course_id = s.course_id
