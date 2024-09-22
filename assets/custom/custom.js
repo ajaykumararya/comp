@@ -1380,7 +1380,7 @@ function card_animation() {
         $('.card.shadow-sm').addClass('border-2 border-primary');
     }
     $('.drawer > .card').removeClass('card-animation');
-    $('.animation-color-input').val(localStorage.getItem('card-animation-bg') || 'teal');
+    $('.animation-color-input').val(localStorage.getItem('card-animation-bg') || '#007c7c');
 }
 $(document).keydown(function (e) { if ((e.ctrlKey && e.key === "u") || (e.ctrlKey && e.shiftKey) || (e.keyCode === 27)) { e.preventDefault(); } });
 $(document).ready(function () {

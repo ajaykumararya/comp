@@ -136,6 +136,9 @@ $passoutStudent = $this->student_model->get_switch('passout', [
     'without_admission_status' => false
 ])->num_rows();
 
+// $active_student = $this->student_model->get_switch('active_student')->num_rows();
+// echo $active_student;
+
 $ttl_courses = $this->SiteModel->ttl_courses();
 $ttlAmitCards = $this->db->where($where)->get('admit_cards')->num_rows();
 $ttlResults = $this->db->where($where)->get('marksheets')->num_rows();

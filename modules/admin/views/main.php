@@ -724,7 +724,7 @@
         <!--end::Scrolltop-->
         <button id="kt_app_layout_builder_toggle" class="btn btn-sm btn-flex btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary app-layout-builder-toggle lh-1 py-4"
             data-bs-custom-class="tooltip-inverse" data-bs-toggle="tooltip" data-bs-placement="left"
-            data-bs-dismiss="click" data-bs-trigger="hover" data-bs-original-title="Metronic Builder"
+            data-bs-dismiss="click" data-bs-trigger="hover" data-bs-original-title="Arya CMS"
             data-kt-initialized="1">
             <i class="ki-solid ki-setting-4 fs-4 me-1"></i> Customize
         </button>
