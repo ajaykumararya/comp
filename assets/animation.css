@@ -42,6 +42,7 @@
     --angle: 360deg;
   }
 }
+/*
 .card-animation h2,
 .card-animation h3 {
   position: relative;
@@ -63,7 +64,7 @@
 .card-animation:is(:hover) h3::after {
   width: 100%;
 }
-
+*/
 input.animation-color-input{    
     border-radius: 50%;
     width: 40px;
