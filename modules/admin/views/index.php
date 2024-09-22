@@ -132,9 +132,7 @@ $cancelStudents = $this->student_model->get_switch('all', [
     'without_admission_status' => true,
     'admission_status' => 2
 ])->num_rows();
-$passoutStudent = $this->student_model->get_switch('passout', [
-    'without_admission_status' => false
-])->num_rows();
+$passoutStudent = $this->student_model->get_switch('passout')->num_rows();
 
 // $active_student = $this->student_model->get_switch('active_student')->num_rows();
 // echo $active_student;

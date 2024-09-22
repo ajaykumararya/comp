@@ -30,6 +30,9 @@
     }
 </style>
 <!-- Student Profile -->
+ <?php
+$IsPassout = $this->student_model->get_switch('passout',['id' => $student_id])->num_rows();
+?>
 <div class="student-profile py-4">
     <div class="container">
         <div class="row">
@@ -91,7 +94,7 @@
                             <tr>
                                 <th width="30%">Time Table </th>
                                 <td width="2%">:</td>
-                                <td>{batch_name}</td>
+                                <td>{batch_name} <?=$IsPassout ? label('Student Passout','success') : ''?></td>
                             </tr>
                             <tr>
                                 <th width="30%">Center Name </th>

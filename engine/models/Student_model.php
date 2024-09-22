@@ -140,12 +140,13 @@ class Student_model extends MY_Model
                 if (isset($record_limit)) {
                     $this->db->limit($record_limit);
                 }
+                $this->myWhere('s',$condition);
                 break;
             case 'active_student':
                 $this->db->join('student_certificates as sce', 'sce.student_id = s.id', 'left'); //AND sce.course_id = s.course_id
 
                 $this->db->where('sce.student_id IS NULL');
-                $this->myWhere('s',$condition);
+                $this->myWhere('s', $condition);
                 break;
             case 'course':
                 $this->db->where('c.id', $course_id);
@@ -256,7 +257,7 @@ class Student_model extends MY_Model
     }
     function fetch_student_center_wise($id)
     {
-        return $this->get_switch('center', ['center_id' => $id]);
+        return $this->get_switch('active_student', ['center_id' => $id]);
     }
     function get_fee_transcations_ttl($where)
     {
@@ -291,11 +292,10 @@ class Student_model extends MY_Model
         if (isset($where['center_id']) && !$where['center_id'])
             unset($where['center_id']);
         if (isset($where['admission_status'])) {
+            if ($where['admission_status'] === 1)
+                return $this->get_switch('active_student', $where)->result();
             if ($where['admission_status'] == 'all')
                 unset($where['admission_status']);
-            if ($where['admission_status'] == 1)
-                return $this->get_switch('active_student', $where)->result();
-
         }
 
         return $this->get_switch('all', $where)->result();
