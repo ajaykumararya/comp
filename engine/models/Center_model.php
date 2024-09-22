@@ -19,7 +19,7 @@ class Center_model extends MY_Model
     }
     function get_assign_course_cats($id, $userType = 'center', $condition = false)
     {
-        $this->db->select('c.*,ccc.*')
+        $this->db->select('c.*,ccc.*,cc.*')
             ->from('centers as c')
             ->join('center_course_category as ccc', "ccc.user_id = c.id and c.id = '$id' AND ccc.user_type = '$userType'")
             ->join('course_category as cc', 'cc.id = ccc.category_id');

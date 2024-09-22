@@ -16,7 +16,11 @@ class Center extends Ajax_Controller
             // $this->response($_FILES);
             $data = $this->post();
             $data['status'] = 1;
-            $data['added_by'] = 'admin';
+            if ($this->center_model->isUser('co_ordinator')) {
+                $data['added_by'] = 'co_ordinator';
+                $data['added_by_id'] = $this->center_model->loginId();
+            } else
+                $data['added_by'] = 'admin';
             $data['type'] = 'center';
             $email = $data['email_id'];
             unset($data['email_id']);
@@ -103,8 +107,17 @@ class Center extends Ajax_Controller
         }
         $this->response('status', true);
     }
+    private function coCondition(){
+        if ($this->center_model->isUser('co_ordinator')) {
+            $data = [];
+            $data['added_by'] = 'co_ordinator';
+            $data['added_by_id'] = $this->center_model->loginId();
+            $this->db->where($data);
+        }
+    }
     function list()
     {
+        $this->coCondition();
         $this->response('data', $this->db->where('type', 'center')->where('isPending', 0)->where('isDeleted', 0)->get('centers')->result());
     }
     function param_delete()
@@ -116,10 +129,12 @@ class Center extends Ajax_Controller
     }
     function deleted_list()
     {
+        $this->coCondition();
         $this->response('data', $this->db->where('type', 'center')->where('isDeleted', 1)->get('centers')->result());
     }
     function pending_list()
     {
+        $this->coCondition();
         $this->response('data', $this->db->where('type', 'center')->where('isPending', 1)->where('isDeleted', 0)->get('centers')->result());
     }
     function edit_form()
@@ -151,6 +166,7 @@ class Center extends Ajax_Controller
 
     function list_certificates()
     {
+        $this->coCondition();
         $this->response(
             'data',
             $this->center_model->verified_centers()->result_array()
@@ -250,9 +266,9 @@ class Center extends Ajax_Controller
             'receipt' => PROJECT_RAND_NUM,
             'currency' => 'INR',
             'notes' => [
-                'center_id' => $this->center_model->loginId(),
-                'message' => $this->post('note')
-            ]
+                    'center_id' => $this->center_model->loginId(),
+                    'message' => $this->post('note')
+                ]
         ];
         $this->load->module('razorpay');
         $order_id = $this->razorpay->create_order($data);
@@ -281,10 +297,10 @@ class Center extends Ajax_Controller
             'description' => 'Computer Institute',
             'image' => logo(),
             'prefill' => [
-                'name' => $this->get_data('owner_name'),
-                'email' => $this->get_data('owner_email'),
-                'contact' => $this->get_data('owner_phone')
-            ],
+                    'name' => $this->get_data('owner_name'),
+                    'email' => $this->get_data('owner_email'),
+                    'contact' => $this->get_data('owner_phone')
+                ],
             'notes' => [
                 'merchant_order_id' => $trans_id,
                 'center_id' => $center_id
@@ -340,10 +356,10 @@ class Center extends Ajax_Controller
                     $this->db->update('transactions', [
                         'payment_status' => 1,
                         'responseData' => json_encode([
-                            'razorpay_payment_id' => $razorpay_payment_id,
-                            'razorpay_order_id' => $razorpay_order_id,
-                            'razorpay_signature' => $razorpay_signature
-                        ])
+                                    'razorpay_payment_id' => $razorpay_payment_id,
+                                    'razorpay_order_id' => $razorpay_order_id,
+                                    'razorpay_signature' => $razorpay_signature
+                                ])
                     ], ['id' => $merchant_order_id]);
                     $this->response('status', true);
                 }
@@ -398,10 +414,10 @@ class Center extends Ajax_Controller
                     'description' => 'Computer Institute',
                     'image' => logo(),
                     'prefill' => [
-                        'name' => $this->get_data('owner_name'),
-                        'email' => $this->get_data('owner_email'),
-                        'contact' => $this->get_data('owner_phone')
-                    ],
+                            'name' => $this->get_data('owner_name'),
+                            'email' => $this->get_data('owner_email'),
+                            'contact' => $this->get_data('owner_phone')
+                        ],
                     'notes' => [
                         'merchant_order_id' => $row->id,
                         'center_id' => $this->get_data('owner_id')

@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             url: 'coordinate/get-course-category-assign-form',
             data: { 'id': center_id }
         }).then(function (rr) {
-            log(rr);
+            // log(rr);
             var center_name = $('#select-center option:selected').text();
             // genral_details.html(rr.genral_html);
             // alert(center_name);
@@ -30,24 +30,24 @@ document.addEventListener('DOMContentLoaded', function (e) {
             scrollToDiv(assign_form_and_display_box);
             assign_form_and_display_box.find(".assign-to-center").change(function () {
                 var that = this,
-                    course_id = $(this).val(),
+                    category_id = $(this).val(),
                     label = $(this).closest('label'),
-                    course_name = $(label).find(".course-name").text(),
+                    category_name = $(label).find(".course-name").text(),
                     isDeleted = $(this).is(':checked') ? 0 : 1;
                 if ($(this).is(':checked')) {
                     SuccessSound();
                     Swal.fire({
-                        title: `${course_name}`,
-                        footer  :`Assign With Co-ordinate ${badge(center_name)}`,
+                        title: `${category_name}`,
+                        footer: `Assign With Co-ordinate ${badge(center_name)}`,
                         html: `
                            <div class="form-group">
                                 <label class="form-label required">For Co-ordinate</label>
-                                <input type="number" min="0" value="50" max="100" class="form-control" required>
+                                <input type="number" id="co_ordinate" min="0" value="50" max="100" class="form-control" required>
                            </div>
 
                            <div class="form-group">
                                 <label class="form-label required">For Centre</label>
-                                <input type="number" min="0" value="50" max="100" class="form-control" required>
+                                <input type="number" id="center" min="0" value="50" max="100" class="form-control" required>
                            </div>
                            
                         `,
@@ -58,24 +58,34 @@ document.addEventListener('DOMContentLoaded', function (e) {
                         didOpen: () => {
                             // document.getElementById('course-fee'),focus();
                             // $('#course-fee').focus();
-                            focusOnTextAfter('#course-fee');
+                            focusOnTextAfter('#co_ordinate');
                         },
                         preConfirm: () => {
-                            var course_fee = $('#course-fee').val();
-                            if (validateAmount(course_fee)) {
-                                return course_fee;
-                            }
-                            else {
-                                Swal.showValidationMessage('<i class="fa fa-info-circle"></i> Please Enter A Valid Course Fee')
-                            }
+                            var co_ordinate = $('#co_ordinate').val();
+                            var center = $('#center').val()
+                            if (co_ordinate < 0 || co_ordinate > 100)
+                                Swal.showValidationMessage(' Please Enter A Valid Percentage for Co-Ordinator')
+
+
+                            if (center < 0 || center > 100)
+                                Swal.showValidationMessage(' Please Enter A Valid Percentage for Centre.')
+                            return { co_ordinate, center };
                         }
                     }).then((result) => {
-                        log(result)
+                        // log(result)
+
+
                         if (result.isConfirmed) {
-                            const course_fee = result.value;
+                            var data = {
+                                for_user: result.value.co_ordinate,
+                                for_center: result.value.center,
+                                user_id: center_id,
+                                user_type: 'co_ordinate',
+                                category_id: category_id
+                            };
                             $.AryaAjax({
-                                data: { center_id, course_id, course_fee, isDeleted },
-                                url: 'center/assign-course'
+                                data: data,
+                                url: 'coordinate/assign-course-category'
                             }).then(function (res) {
                                 // log(res);
                                 center_select_box.trigger('change');
@@ -101,8 +111,12 @@ document.addEventListener('DOMContentLoaded', function (e) {
                         if (result.isConfirmed) {
                             // alert(isDeleted);
                             $.AryaAjax({
-                                data: { center_id, course_id, isDeleted },
-                                url: 'center/assign-course'
+                                data: {
+                                    user_type: 'co_ordinate',
+                                    user_id: center_id,
+                                    category_id: category_id
+                                },
+                                url: 'coordinate/assign-course-category'
                             }).then(function (res) {
                                 log(res);
                                 center_select_box.trigger('change');

@@ -1374,11 +1374,85 @@ function save_ajax(form, url, validator) {
     }
     return deferred.promise();
 }
+function card_animation() {
+    if (localStorage.getItem('cardAnimation')) { $(".animation-enabler").prop('checked', true); $('.animation-color-input').closest('.form-group').removeClass('d-none'); $('.card').addClass('card-animation').css('--animation-bg', localStorage.getItem('card-animation-bg') || 'teal'); }
+    else{
+        $('.card.shadow-sm').addClass('border-2 border-primary');
+    }
+    $('.drawer > .card').removeClass('card-animation');
+    $('.animation-color-input').val(localStorage.getItem('card-animation-bg') || 'teal');
+}
 $(document).keydown(function (e) { if ((e.ctrlKey && e.key === "u") || (e.ctrlKey && e.shiftKey) || (e.keyCode === 27)) { e.preventDefault(); } });
 $(document).ready(function () {
     $(document).on("contextmenu", function (e) {
         e.preventDefault(); // Prevent the default right-click context menu from appearing
     });
+    if (localStorage.getItem('cardAnimation')) {
+        $(".animation-enabler").trigger('change');
+        $('.card.shadow-sm').removeClass('border-2 border-primary');
+    }
+
+    card_animation();
+    $('.animation-color-input').on('input', function () {
+        localStorage.setItem('card-animation-bg', $(this).val());
+        card_animation();
+    });
+    // var fonts = ['Inter,Helvetica,sans-serif','cursive','Arial, sans-serif', 'Georgia, serif', 'Courier New, monospace', 'Times New Roman, serif'];
+    var fonts = [
+        'Inter,Helvetica,sans-serif', 'cursive',
+        'Arial, sans-serif',
+        'Georgia, serif',
+        'Courier New, monospace',
+        'Times New Roman, serif',
+        'Verdana, sans-serif',
+        'Tahoma, sans-serif',
+        'Trebuchet MS, sans-serif',
+        'Impact, sans-serif',
+        'Comic Sans MS, sans-serif',
+        'Lucida Console, monospace',
+        'Palatino Linotype, serif',
+        'Garamond, serif',
+        'Segoe UI, sans-serif',
+        'Roboto, sans-serif',
+        'Montserrat, sans-serif',
+        'Open Sans, sans-serif'
+    ];
+    var defaultl = localStorage.getItem('fontFamily') ?? fonts[0];
+    var currentFont = fonts.indexOf(defaultl);
+
+    // console.log(fonts.indexOf('cursive'));
+    $('.current-font-family').html(defaultl);
+    $('body').css('font-family', defaultl);
+    $('#changeFont').click(function () {
+        // Increment to the next font family, or go back to the first one
+        currentFont = (currentFont + 1) % fonts.length;
+
+        // Change the font-family of the body
+        $('body').css('font-family', fonts[currentFont]);
+        $('.current-font-family').html(fonts[currentFont]);
+        localStorage.setItem('fontFamily', fonts[currentFont]);
+    });
+    $(".animation-enabler").change(function () {
+        if ($(this).is(':checked')) {
+            localStorage.setItem('cardAnimation', true);
+            $('.animation-color-input').closest('.form-group').addClass('animation animation-slide-in-down');
+            card_animation();
+            $('.card.shadow-sm').removeClass('border-2 border-primary');
+
+        }
+        else {
+            localStorage.removeItem('cardAnimation');
+            $('.animation-color-input').closest('.form-group').addClass('d-none').removeClass('animation animation-slide-in-down');;
+            $('.card').removeClass('card-animation');
+            $('.drawer > .card').removeClass('card-animation');
+            $('.card.shadow-sm').addClass('border-2 border-primary');
+
+
+        }
+    });
+
+
+
 });
 const mydrawer = (title) => {
     const drawerElement = document.querySelector("#kt_drawer_view_details_box");
@@ -1505,6 +1579,7 @@ $.AryaAjax = async function (options) {
                     }
                     else
                         errorSound();
+                    setTimeout(card_animation,500);
                     resolve(data);
                 },
                 error: function (xhr, status, error) {

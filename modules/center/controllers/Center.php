@@ -35,14 +35,14 @@ class Center extends MY_Controller
     function notification()
     {
         if ($this->center_model->isCenter() && $this->access_method()) {
-            $this->view('notification',[
+            $this->view('notification', [
                 'id' => $this->center_model->loginId()
             ]);
         }
     }
     function profile()
     {
-        if ($this->center_model->isAdmin())
+        if ($this->center_model->isAdmin() or $this->center_model->isUser('co_ordinator'))
             $this->access_method();
         $center_id = $this->uri->segment(3, 0);
         $center_id = $center_id ? base64_decode($center_id) : $center_id;
@@ -65,19 +65,21 @@ class Center extends MY_Controller
                 'url' => 'change-password'
             ]
         ];
-        if (CHECK_PERMISSION('CENTRE_WISE_WALLET_SYSTEM') and $this->center_model->isAdmin()) {
-            $tabs['fee-system'] = [
-                'title' => 'Fee System',
-                'icon' => array('bill', 5),
-                'url' => 'fee-system'
-            ];
-        }
-        if (table_exists('manual_notifications')) {
-            $tabs['notification'] = [
-                'title' => 'Notification(s)',
-                'icon' => array('notification', 3),
-                'url' => 'notification'
-            ];
+        if (!$this->center_model->isUser('co_ordinator')) {
+            if (CHECK_PERMISSION('CENTRE_WISE_WALLET_SYSTEM') and $this->center_model->isAdmin()) {
+                $tabs['fee-system'] = [
+                    'title' => 'Fee System',
+                    'icon' => array('bill', 5),
+                    'url' => 'fee-system'
+                ];
+            }
+            if (table_exists('manual_notifications')) {
+                $tabs['notification'] = [
+                    'title' => 'Notification(s)',
+                    'icon' => array('notification', 3),
+                    'url' => 'notification'
+                ];
+            }
         }
         if (isset($tabs[$tab])) {
             // $this->ki_theme->set_title($tabs[$tab]['title']);
@@ -94,5 +96,5 @@ class Center extends MY_Controller
         } else
             show_404();
     }
-    
+
 }

@@ -190,9 +190,9 @@ class Ki_theme
     function center_fix_fees($flag = false)
     {
         $array = [];
-        if (CHECK_PERMISSION('WALLET_SYSTEM') OR $flag) {
-            if($flag)
-                $this->CI->db->where('status',1);
+        if (CHECK_PERMISSION('WALLET_SYSTEM') or $flag) {
+            if ($flag)
+                $this->CI->db->where('status', 1);
             $getFees = $this->CI->db->where('onlyFor', 'center')->get('student_fix_payment');
             if ($getFees->num_rows()) {
                 foreach ($getFees->result() as $row) {
@@ -1002,7 +1002,10 @@ class Ki_theme
     }
     function get_menu()
     {
-        $adminMenu = $this->CI->load->config('admin/menu', true);
+        // if ((CHECK_PERMISSION('CO_ORDINATE_SYSTEM') && $this->CI->center_model->isUser('co_ordinator')))
+            $adminMenu = $this->CI->load->config('coordinate/menu', true);
+        // else
+        //     $adminMenu = $this->CI->load->config('admin/menu', true);
         // pre($adminMenu,true);
         $this->adminMenu = $adminMenu;
         // $this->current_method = recursiveArraySearchReturnValue($this->uri_string(),$adminMenu['ui_setting']['menu'],'type');
@@ -1126,7 +1129,7 @@ class Ki_theme
                 $html .= '</div></div>';
             } else {
                 // $html .= $menuItem['label'] .' - '.(isset($menuItem['type']) ? $menuItem['type'] : 'nn').'<br>';
-                
+
                 $html .= '
     					                <div class="col-md-4">
     					                    <label style="margin-bottom:3px" class="form-check form-switch form-check-custom form-check-solid pulse pulse-success" for="d-' . $menuItem['type'] . '">

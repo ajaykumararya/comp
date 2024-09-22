@@ -24,6 +24,7 @@
     <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
     <link href="{base_url}/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
     <link href="{base_url}/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="{base_url}/assets/animation.css" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
 
     <script>
@@ -117,7 +118,7 @@
             <!--begin::Body-->
             <div class="d-flex flex-column-fluid flex-lg-row-auto justify-content-center justify-content-lg-end p-12">
                 <!--begin::Wrapper-->
-                <div class="bg-body d-flex flex-column flex-center rounded-4 w-md-600px p-10">
+                <div class="card bg-body d-flex flex-column flex-center rounded-4 w-md-600px p-10">
                     <!--begin::Content-->
                     <div class="d-flex flex-center flex-column align-items-stretch h-lg-100 w-md-400px">
                         <!--begin::Wrapper-->
@@ -129,9 +130,9 @@
                                 <!--begin::Heading-->
                                 <div class="text-center mb-11">
                                     <!--begin::Title-->
-                                    <h1 class="text-dark fw-bolder mb-3">
+                                    <h2 class="text-dark fw-bolder mb-3 m-auto">
                                         Sign In
-                                    </h1>
+                                    </h2>
                                     <!--end::Title-->
 
                                     <!--begin::Subtitle-->
@@ -209,20 +210,20 @@
     <!--begin::Javascript-->
     <script>
         var base_url = "{base_url}",
-            ajax_url = base_url + 'ajax';        
+            ajax_url = base_url + 'ajax',f;        
     </script>
 
     <!--begin::Global Javascript Bundle(mandatory for all pages)-->
     <script src="{base_url}/assets/plugins/global/plugins.bundle.js"></script>
     <script src="{base_url}/assets/js/scripts.bundle.js"></script>
     <!--end::Global Javascript Bundle-->
-
-
     <!--begin::Custom Javascript(used for this page only)-->
     <script src="{base_url}/assets/js/custom/authentication/sign-in/general.js"></script>
     <!--end::Custom Javascript-->
     <!--end::Javascript-->
-
+    <script>
+    if(f = localStorage.getItem('fontFamily')){$('body').css("font-family",f)}
+    if(localStorage.getItem('cardAnimation')){$('.card').addClass('card-animation').css('--animation-bg',localStorage.getItem('card-animation-bg')||'teal');}</script>        
 </body>
 <!--end::Body-->
 

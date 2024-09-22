@@ -298,7 +298,7 @@ class Fees extends Ajax_Controller
                                                             <div class="mb-3 mb-md-0 fw-semibold">
                                                                 <h4 class="text-gray-900 fw-bold">Last Transaction of ' . ordinal_number($i) . ' Month EMI on ' . $checkRow->payment_date . '!</h4>
                 
-                                                                <div class="fs-6 text-gray-700 pe-7">Amount : ' . $checkRow->amount . ' ' . $inrIcon . ', Doscount : ' . $checkRow->discount . ' ' . $inrIcon . ', Paid Amount ' . $checkRow->payable_amount . ' ' . $inrIcon . ' </div>
+                                                                <div class="fs-6 text-gray-700 pe-7">Amount : ' . $checkRow->amount . ' ' . $inrIcon . ', Discount : ' . $checkRow->discount . ' ' . $inrIcon . ', Paid Amount ' . $checkRow->payable_amount . ' ' . $inrIcon . ' </div>
                                                                 <div class="fs-3 text-success">Note : '.$checkRow->description.'</div>
                                                                 </div>
         

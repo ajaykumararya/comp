@@ -4,7 +4,7 @@
             <div class="{card_class}">
                 <div class="card-header collapsible cursor-pointer rotate" data-bs-toggle="collapse"
                     data-bs-target="#kt_docs_card_collapsible">
-                    <h3 class="card-title">Select Center</h3>
+                    <h3 class="card-title">Select Co-Ordinate User</h3>
                     <div class="card-toolbar rotate-180">
                         <i class="ki-duotone ki-down fs-1"></i>
                     </div>
@@ -13,7 +13,7 @@
                     <div class="card-body">
                         <div class="border rounded">
                             <select id="select-center" class="form-select form-select-transparent" name="..."
-                                data-placeholder="Select A Center" data-allow-clear="true" data-control="select2">
+                                data-placeholder="Select A Co-Ordinate User" data-allow-clear="true" data-control="select2">
                                 <option></option>
                                 <?php
                                 $list = $this->db->where('type', 'co_ordinator')->get('centers')->result();

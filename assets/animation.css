@@ -1,0 +1,74 @@
+:root {
+  --animation-bg: teal;
+}
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+.card-animation:not(.card){
+  border-radius: 10px;
+  position: relative;
+}
+.card-animation::after,
+.card-animation::before {
+  content: "";
+  position: absolute;
+  background-image: conic-gradient(
+    from var(--angle),
+    transparent 70%,
+    var(--animation-bg)
+  );
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: -1;
+  padding: 4px;
+  box-sizing: content-box;
+  border-radius: inherit;
+  animation: move 3s linear infinite;
+}
+.card-animation::before {
+  filter: blur(10px);
+  opacity: 0.7;
+}
+@keyframes move {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
+}
+.card-animation h2,
+.card-animation h3 {
+  position: relative;
+  width: max-content;
+}
+.card-animation h2::after,
+.card-animation h3::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(270deg, #000, var(--animation-bg));
+  inset-inline-start: 0;
+  inset-block-end: 0;
+  border-radius: 10px;
+  transition: 0.5s ease-in-out;
+}
+.card-animation:is(:hover) h2::after,
+.card-animation:is(:hover) h3::after {
+  width: 100%;
+}
+
+input.animation-color-input{    
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    outline: 0;
+    border: 4px solid white;
+    padding: 0;
+}

@@ -152,6 +152,4 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
     fetch_record.trigger('change');
-
-    
 })

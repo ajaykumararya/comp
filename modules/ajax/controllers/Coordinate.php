@@ -44,5 +44,21 @@ class Coordinate extends Ajax_Controller
         else
             $this->response('html', ' ');
     }
+    function assign_course_category()
+    {
+        $data = $this->post();
+        $where = [
+            'user_type' => $data['user_type'],
+            'user_id' => $data['user_id'],
+            'category_id' => $data['category_id']
+        ];
+        $get = $this->db->where($where)->get('center_course_category');
+        if ($get->num_rows()) {
+            $this->db->where(['id' => $get->row('id')])->delete('center_course_category');
+        } else {
+            $this->db->insert('center_course_category', $data);
+        }
+        $this->response('status', true);
+    }
 }
 ?>

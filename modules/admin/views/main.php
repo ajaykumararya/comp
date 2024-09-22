@@ -42,6 +42,8 @@
     <script src="{base_url}assets/icon-picker/dist/iconpicker-1.5.0.js"></script>
     <link rel="stylesheet" href="{base_url}assets/custom/custom.css">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <link href="{base_url}/assets/animation.css" rel="stylesheet" type="text/css" />
+
     <style>
         input[type="number"]::-webkit-outer-spin-button,
         input[type="number"]::-webkit-inner-spin-button {
@@ -596,10 +598,11 @@
                                     echo '<a href="' . base_url('admin/switch-back') . '" class="btn btn-sm btn-light btn-active-light-primary me-2"><i class="fa fa-arrow-left"></i> Switch Back</a>';
                                 } else {
                                     ?>
-                                    <a href="#" class="btn btn-sm btn-flex btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary app-sidebar-minimize-d-none fw-bold" data-kt-menu-trigger="click"
-                                        data-kt-menu-placement="left-start">
-                                        <i class="ki-duotone ki-entrance-left fs-6 text-primary me-1"><span class="path1"></span><span
-                                                class="path2"></span></i>
+                                    <a href="#"
+                                        class="btn btn-sm btn-flex btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary app-sidebar-minimize-d-none fw-bold"
+                                        data-kt-menu-trigger="click" data-kt-menu-placement="left-start">
+                                        <i class="ki-duotone ki-entrance-left fs-6 text-primary me-1"><span
+                                                class="path1"></span><span class="path2"></span></i>
                                         Login as centre
                                     </a>
                                     <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true"
@@ -719,6 +722,113 @@
             <i class="ki-duotone ki-arrow-up"><span class="path1"></span><span class="path2"></span></i>
         </div>
         <!--end::Scrolltop-->
+        <button id="kt_app_layout_builder_toggle" class="btn btn-sm btn-flex btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary app-layout-builder-toggle lh-1 py-4"
+            data-bs-custom-class="tooltip-inverse" data-bs-toggle="tooltip" data-bs-placement="left"
+            data-bs-dismiss="click" data-bs-trigger="hover" data-bs-original-title="Metronic Builder"
+            data-kt-initialized="1">
+            <i class="ki-solid ki-setting-4 fs-4 me-1"></i> Customize
+        </button>
+        <div id="kt_app_layout_builder" class="bg-body drawer drawer-end" data-kt-drawer="true"
+            data-kt-drawer-name="app-settings" data-kt-drawer-activate="true" data-kt-drawer-overlay="true"
+            data-kt-drawer-width="{default:'300px', 'lg': '380px'}" data-kt-drawer-direction="end"
+            data-kt-drawer-toggle="#kt_app_layout_builder_toggle" data-kt-drawer-close="#kt_app_layout_builder_close"
+            style="width: 380px !important;">
+
+            <!--begin::Card-->
+            <div class="card border-0 shadow-none rounded-0 w-100">
+                <!--begin::Card header-->
+                <div class="card-header bgi-position-y-bottom bgi-position-x-end bgi-size-cover bgi-no-repeat rounded-0 border-0 py-4"
+                    id="kt_app_layout_builder_header"
+                    style="background-image:url('{base_url}assets/media/misc/layout/customizer-header-bg.jpg')">
+
+                    <!--begin::Card title-->
+                    <h3 class="card-title fs-3 fw-bold text-white flex-column m-0">Arya CMS<small
+                            class="text-white opacity-50 fs-7 fw-semibold pt-1">
+                            Get your product deeply customized
+                        </small>
+                    </h3>
+                    <!--end::Card title-->
+
+                    <!--begin::Card toolbar-->
+                    <div class="card-toolbar">
+                        <button type="button" class="btn btn-sm btn-icon btn-color-white p-0 w-20px h-20px rounded-1"
+                            id="kt_app_layout_builder_close">
+                            <i class="ki-solid ki-cross-square fs-2"></i> </button>
+                    </div>
+                    <!--end::Card toolbar-->
+                </div>
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body position-relative" id="kt_app_layout_builder_body">
+                    <!--begin::Content-->
+                    <div id="kt_app_settings_content" class="position-relative scroll-y me-n5 pe-5"
+                        data-kt-scroll="true" data-kt-scroll-height="auto"
+                        data-kt-scroll-wrappers="#kt_app_layout_builder_body"
+                        data-kt-scroll-dependencies="#kt_app_layout_builder_header, #kt_app_layout_builder_footer"
+                        data-kt-scroll-offset="5px" style="height: 392px;">
+                        <!--begin::Card body-->
+                        <div class="card-body p-0">
+
+                            <div class="mb-3">
+                                <!--begin::Form group-->
+                                <div class="form-group d-flex flex-stack">
+                                    <!--begin::Heading-->
+                                    <div class="d-flex flex-column">
+                                        <h4 class="fw-bold text-gray-900">Animation Mode</h4>
+                                        <div class="fs-7 fw-semibold text-muted">
+                                            Enjoy with customize Animation
+                                        </div>
+                                    </div>
+                                    <!--end::Heading-->
+
+                                    <!--begin::Option-->
+                                    <div class="d-flex justify-content-end">
+                                        <div class="form-check form-switch form-check-custom form-check-solid">
+                                            <input class="form-check-input animation-enabler" type="checkbox"
+                                                value="" />
+                                        </div>
+                                    </div>
+                                    <!--end::Option-->
+                                </div>
+                                <!--end::Form group-->
+                                <div class="separator separator-dashed my-5"></div>
+                                <div class="form-group d-flex flex-stack d-none">
+                                    <label for="" class="form-label">Pick a Color</label>
+                                    <input type="color" id="animation-color" class="animation-color-input">
+                                </div>
+                            </div>
+                            <div class="mt-5">
+                                <div class="form-group d-flex flex-stack">
+                                    <!--begin::Heading-->
+                                    <div class="d-flex flex-column">
+                                        <h4 class="fw-bold text-gray-900">Font Family</h4>
+                                        <div class="fs-7 fw-semibold text-muted current-font-family">
+
+                                        </div>
+                                    </div>
+                                    <!--end::Heading-->
+
+                                    <!--begin::Option-->
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn btn-sm btn-primary" type="button"
+                                            id="changeFont">Change</button>
+                                    </div>
+                                    <!--end::Option-->
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <!--end::Card body-->
+                    </div>
+                    <!--end::Content-->
+                </div>
+                <!--end::Card body-->
+
+            </div>
+            <!--end::Card-->
+        </div>
         <!--begin::View component-->
         <div id="kt_drawer_view_details_box" data-kt-drawer="true" data-kt-drawer-activate="true"
             data-kt-drawer-toggle="#kt_drawer_example_advanced_button"

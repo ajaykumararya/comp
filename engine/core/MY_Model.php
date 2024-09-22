@@ -11,11 +11,13 @@ class MY_Model extends CI_Model
             $this->login_id = $this->session->userdata('admin_id');
         }
     }
-    function select($select){
+    function select($select)
+    {
         $this->db->select($select);
         return $this;
     }
-    function withEMI(){
+    function withEMI()
+    {
         return $this->select('s.fee_emi,s.fee_emi_type');
     }
     function myWhere($table, $condition = [])
@@ -38,18 +40,25 @@ class MY_Model extends CI_Model
     {
         return $this->login_type == 'admin';
     }
+    function isUser($type = 'user')
+    {
+        return $this->login_type == $type;
+    }
     function isCenter()
     {
         return $this->login_type == 'center';
     }
-    function isAdminOrCenter(){
-        return $this->isAdmin() or $this->isCenter();
+    function isAdminOrCenter()
+    {
+        return $this->isAdmin() or $this->isCenter()  or ( CHECK_PERMISSION('CO_ORDINATE_SYSTEM') && $this->isUser('co_ordinator'));
     }
-    function isStudent(){
+    function isStudent()
+    {
         return $this->session->has_userdata('student_login') === TRUE;
     }
-    function studentId(){
-        if($this->isStudent())
+    function studentId()
+    {
+        if ($this->isStudent())
             return $this->session->userdata('student_id');
         return 0;
     }

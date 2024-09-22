@@ -79,8 +79,8 @@
                                         <td>{$index}</td>
                                         <td>{$row['title']}
                                         </td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{$row['for_user']}%</td>
+                                        <td>{$row['for_center']}%</td>
                                         <td>" . get_status($row['status']) . "</td>
                                      </tr>";
                                 $index++;
