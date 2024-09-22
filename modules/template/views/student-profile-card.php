@@ -91,7 +91,7 @@ $IsPassout = $this->student_model->get_switch('passout',['id' => $student_id])->
                                 <td width="2%">:</td>
                                 <td>{admission_date}</td>
                             </tr>
-                            <tr>
+                            <tr> 
                                 <th width="30%">Time Table </th>
                                 <td width="2%">:</td>
                                 <td>{batch_name} <?=$IsPassout ? label('Student Passout','success') : ''?></td>
