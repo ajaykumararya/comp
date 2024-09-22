@@ -1002,10 +1002,10 @@ class Ki_theme
     }
     function get_menu()
     {
-        // if ((CHECK_PERMISSION('CO_ORDINATE_SYSTEM') && $this->CI->center_model->isUser('co_ordinator')))
+        if ((CHECK_PERMISSION('CO_ORDINATE_SYSTEM') && $this->CI->center_model->isUser('co_ordinator')))
             $adminMenu = $this->CI->load->config('coordinate/menu', true);
-        // else
-        //     $adminMenu = $this->CI->load->config('admin/menu', true);
+        else
+            $adminMenu = $this->CI->load->config('admin/menu', true);
         // pre($adminMenu,true);
         $this->adminMenu = $adminMenu;
         // $this->current_method = recursiveArraySearchReturnValue($this->uri_string(),$adminMenu['ui_setting']['menu'],'type');
