@@ -16,7 +16,7 @@ class Center extends Ajax_Controller
             // $this->response($_FILES);
             $data = $this->post();
             $data['status'] = 1;
-            if ($this->center_model->isUser('co_ordinator')) {
+            if ($this->center_model->isCoordinator()) {
                 $data['added_by'] = 'co_ordinator';
                 $data['added_by_id'] = $this->center_model->loginId();
             } else
@@ -107,8 +107,9 @@ class Center extends Ajax_Controller
         }
         $this->response('status', true);
     }
-    private function coCondition(){
-        if ($this->center_model->isUser('co_ordinator')) {
+    private function coCondition()
+    {
+        if ($this->center_model->isCoordinator()) {
             $data = [];
             $data['added_by'] = 'co_ordinator';
             $data['added_by_id'] = $this->center_model->loginId();
@@ -266,49 +267,54 @@ class Center extends Ajax_Controller
             'receipt' => PROJECT_RAND_NUM,
             'currency' => 'INR',
             'notes' => [
-                    'center_id' => $this->center_model->loginId(),
-                    'message' => $this->post('note')
-                ]
+                'center_id' => $this->center_model->loginId(),
+                'message' => $this->post('note')
+            ]
         ];
         $this->load->module('razorpay');
-        $order_id = $this->razorpay->create_order($data);
-        // $order_id = $order['id'];
-        // pre($data);
-        $trans = [
-            'trans_for' => 'wallet_load',
-            'amount' => $amount,
-            'payment_id' => PROJECT_RAND_NUM,
-            'order_id' => $order_id,
-            'user_id' => $center_id,
-            'user_type' => 'center'
-        ];
-        $this->db->insert('transactions', $trans);
-        $trans_id = $this->db->insert_id();
-        $this->response('data', $trans);
+        try {
+            $order_id = $this->razorpay->create_order($data);
+            // $order_id = $order['id'];
+            // pre($data);
+            $trans = [
+                'trans_for' => 'wallet_load',
+                'amount' => $amount,
+                'payment_id' => PROJECT_RAND_NUM,
+                'order_id' => $order_id,
+                'user_id' => $center_id,
+                'user_type' => 'center'
+            ];
+            $this->db->insert('transactions', $trans);
+            $trans_id = $this->db->insert_id();
+            $this->response('data', $trans);
 
-        // $order_id = "order_Ox2Pf0s7PibuEo";
-        // $payment_id = "942SEWAEDU938";
-        // $trans_id = 2;
 
-        $data = [
-            'key' => RAZORPAY_KEY_ID,
-            'amount' => $amount * 100,
-            'name' => ES('title'),
-            'description' => 'Computer Institute',
-            'image' => logo(),
-            'prefill' => [
+            // $order_id = "order_Ox2Pf0s7PibuEo";
+            // $payment_id = "942SEWAEDU938";
+            // $trans_id = 2;
+
+            $data = [
+                'key' => RAZORPAY_KEY_ID,
+                'amount' => $amount * 100,
+                'name' => ES('title'),
+                'description' => 'Computer Institute',
+                'image' => logo(),
+                'prefill' => [
                     'name' => $this->get_data('owner_name'),
                     'email' => $this->get_data('owner_email'),
                     'contact' => $this->get_data('owner_phone')
                 ],
-            'notes' => [
-                'merchant_order_id' => $trans_id,
-                'center_id' => $center_id
-            ],
-            'order_id' => $order_id
-        ];
-        $this->response('status', true);
-        $this->response('option', $data);
+                'notes' => [
+                    'merchant_order_id' => $trans_id,
+                    'center_id' => $center_id
+                ],
+                'order_id' => $order_id
+            ];
+            $this->response('status', true);
+            $this->response('option', $data);
+        } catch (Exception $e) {
+            $this->response('error', $e->getMessage());
+        }
     }
     function wallet_update()
     {

@@ -7,6 +7,7 @@ use Mpdf\Barcode\Rm4Scc;
 class Ki_theme
 {
     protected $CI,
+    $pageState = 200,
     $breadcrumb_data = ['actions_buttons' => '', 'title_icon' => '', 'session_message' => ''],
     $attr = [],
     $tag_html = '',
@@ -363,6 +364,15 @@ class Ki_theme
             return $this->list_pages;
         }
     }
+    function setPageState($state = 200)
+    {
+        $this->pageState = $state;
+        return $this;
+    }
+    function getPageState()
+    {
+        return $this->pageState;
+    }
     function modules_and_pages()
     {
         $modules = [];
@@ -675,8 +685,10 @@ class Ki_theme
     }
     function get_breadcrumb()
     {
-        $this->get_session_flashdata();
-        return $this->CI->parser->parse('template/admin/static_breadcrumb.tpl', $this->breadcrumb_data, true);
+        if ($this->getPageState() == 200) {
+            $this->get_session_flashdata();
+            return $this->CI->parser->parse('template/admin/static_breadcrumb.tpl', $this->breadcrumb_data, true);
+        }
     }
     private function reset_props()
     {
@@ -1002,7 +1014,7 @@ class Ki_theme
     }
     function get_menu()
     {
-        if ((CHECK_PERMISSION('CO_ORDINATE_SYSTEM') && $this->CI->center_model->isUser('co_ordinator')))
+        if ($this->CI->center_model->isCoordinator())
             $adminMenu = $this->CI->load->config('coordinate/menu', true);
         else
             $adminMenu = $this->CI->load->config('admin/menu', true);

@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             {
                 targets: -2,
                 render: function (data, type, row) {
-                    if (wallet_system)
+                    if (wallet_system && login_type == 'admin')
                         return `<span class="fs-3 text-dark text-center fw-bold">${inr} ${numberFormat(data)} </span><button class="btn btn-sm btn-primary w-100 p-1 load-wallet">&nbsp;<i class="fa fa-plus"></i></button>`;
                     return row.center_full_address;
                 }
@@ -98,6 +98,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             .DeleteEvent('centers', 'Center')
             .EditAjax('center/edit-form', 'Center');
         if (wallet_system) {
+            if(login_type == 'admin')
             $('#list_center thead th').eq(6).text('Wallet');
             table.on('click', '.load-wallet', function () {
                 let centre = $('#list_center').DataTable().row($(this).closest('tr')).data();

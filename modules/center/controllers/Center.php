@@ -42,7 +42,7 @@ class Center extends MY_Controller
     }
     function profile()
     {
-        if ($this->center_model->isAdmin() or $this->center_model->isUser('co_ordinator'))
+        if ($this->center_model->isAdmin() or $this->center_model->isCoordinator())
             $this->access_method();
         $center_id = $this->uri->segment(3, 0);
         $center_id = $center_id ? base64_decode($center_id) : $center_id;
@@ -65,7 +65,7 @@ class Center extends MY_Controller
                 'url' => 'change-password'
             ]
         ];
-        if (!$this->center_model->isUser('co_ordinator')) {
+        if (!$this->center_model->isCoordinator()) {
             if (CHECK_PERMISSION('CENTRE_WISE_WALLET_SYSTEM') and $this->center_model->isAdmin()) {
                 $tabs['fee-system'] = [
                     'title' => 'Fee System',

@@ -39,6 +39,7 @@ class MY_Controller extends MX_Controller
         $adminCard = $this->center_model->isAdminOrCenter() ? '' : 'border-2 border-primary';
         $this->public_data = [
             'base_url' => base_url(),
+            'wallet_message' => '',
             'current_url' => $this->my_current_url(),
             'publish_button' => $this->ki_theme->publish_button(),
             'search_button' => $this->ki_theme->save_button('Search', 'calendar-search', 4),
@@ -55,7 +56,7 @@ class MY_Controller extends MX_Controller
         $this->ki_theme->set_config_item('newicon',img(base_url('themes/newicon.gif')));
         $this->set_data('basic_header_link', $this->parse('site/common-header', [], true));
         // pre($this->public_data,true);
-        if ($this->center_model->isAdminOrCenter()) {
+        if ($this->center_model->isAdminOrCenter() || $this->center_model->isCoordinator()) {
             $getCentre = $this->center_model->get_center($this->center_model->loginId(), $this->center_model->login_type());
             $centreRow = $getCentre->row();
             $this->public_data['center_data'] = $getCentre->row_array();
@@ -217,6 +218,7 @@ class MY_Controller extends MX_Controller
                 pre($r->getMessage(), true);
             }
         } else {
+            $this->ki_theme->setPageState(403);
             $this->public_data['page_output'] = $this->template('permission-denied');
         }
     }

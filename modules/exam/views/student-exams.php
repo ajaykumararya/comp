@@ -10,6 +10,7 @@
                         <thead>
                             <tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
                                 <th>#</th>
+                                <th>Roll No</th>
                                 <th>Student</th>
                                 <th>Exam</th>
                                 <th>Attempt Time</th>

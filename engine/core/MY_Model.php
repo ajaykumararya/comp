@@ -40,9 +40,12 @@ class MY_Model extends CI_Model
     {
         return $this->login_type == 'admin';
     }
-    function isUser($type = 'user')
-    {
-        return $this->login_type == $type;
+    // function isUser($type = 'user')
+    // {
+    //     return $this->login_type == $type;
+    // }
+    function isCoordinator(){
+        return (CHECK_PERMISSION('CO_ORDINATE_SYSTEM') && $this->login_type == 'co_ordinator');
     }
     function isCenter()
     {
@@ -50,7 +53,7 @@ class MY_Model extends CI_Model
     }
     function isAdminOrCenter()
     {
-        return $this->isAdmin() or $this->isCenter()  or ( CHECK_PERMISSION('CO_ORDINATE_SYSTEM') && $this->isUser('co_ordinator'));
+        return $this->isAdmin() or $this->isCenter() ;
     }
     function isStudent()
     {

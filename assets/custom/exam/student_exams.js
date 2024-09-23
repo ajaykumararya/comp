@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
         },
         columns: [
             { 'data': null },
+            { 'data': 'roll_no' },
             { 'data': 'student_name' },
             { 'data': 'exam_title' },
             { 'data': 'attempt_time' },
@@ -25,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 }
             },
             {
-                targets: 4,
+                targets: 5,
                 render: function (data, type, row) {
                     if (row.attempt_time) {
                         var per = formatNumber(row.percentage);
@@ -39,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 }
             },
             {
-                targets: 3,
+                targets: 4,
                 render: function (data, type, row) {
                     // log(row);
                     if (data != null) {

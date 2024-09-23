@@ -45,6 +45,11 @@
     <link href="{base_url}/assets/animation.css" rel="stylesheet" type="text/css" />
 
     <style>
+        .pulse-ring {
+            height: 37px !important;
+            width: 37px !important
+        }
+
         input[type="number"]::-webkit-outer-spin-button,
         input[type="number"]::-webkit-inner-spin-button {
             -webkit-appearance: none;
@@ -722,10 +727,10 @@
             <i class="ki-duotone ki-arrow-up"><span class="path1"></span><span class="path2"></span></i>
         </div>
         <!--end::Scrolltop-->
-        <button id="kt_app_layout_builder_toggle" class="btn btn-sm btn-flex btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary app-layout-builder-toggle lh-1 py-4"
+        <button id="kt_app_layout_builder_toggle"
+            class="btn btn-sm btn-flex btn-light-primary app-layout-builder-toggle lh-1 py-4"
             data-bs-custom-class="tooltip-inverse" data-bs-toggle="tooltip" data-bs-placement="left"
-            data-bs-dismiss="click" data-bs-trigger="hover" data-bs-original-title="Arya CMS"
-            data-kt-initialized="1">
+            data-bs-dismiss="click" data-bs-trigger="hover" data-bs-original-title="Arya CMS" data-kt-initialized="1">
             <i class="ki-solid ki-setting-4 fs-4 me-1"></i> Customize
         </button>
         <div id="kt_app_layout_builder" class="bg-body drawer drawer-end" data-kt-drawer="true"

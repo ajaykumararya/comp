@@ -31,15 +31,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 render: function (data, type, row) {
                     return `
                     <div class="btn-group">
-                        <a class="btn btn-sm btn-light-info edit-record">
+                    ${isAdmin() ?
+                            `<a class="btn btn-sm btn-light-info edit-record">
                             <i class="fa fa-edit"></i>
-                        </a>
+                        </a>` : ``}
                         ${generate_link_btn(row.id, 'center_certificate')} 
                     </div>`;
                 }
             }
         ]
     }).on('draw', function (r) {
-        $('#centre-certificates').EditForm('center/update-dates', 'Update Date(s)')
+        if (isAdmin())
+            $('#centre-certificates').EditForm('center/update-dates', 'Update Date(s)')
     });
 })

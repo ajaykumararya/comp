@@ -70,6 +70,7 @@
                                     data-allow-clear="<?= $this->center_model->isAdmin() ?>">
                                     <option></option>
                                     <?php
+                                    $this->db->where('isDeleted',0);
                                     $list = $this->db->where('type', 'center')->get('centers')->result();
                                     foreach ($list as $row) {
                                         $selected = $center_id == $row->id ? 'selected' : '';

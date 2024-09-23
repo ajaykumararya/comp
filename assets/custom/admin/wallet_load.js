@@ -17,27 +17,30 @@ document.addEventListener('DOMContentLoaded', async function () {
                     url: 'center/wallet-load',
                     data: { amount }
                 }).then((R) => {
+                    showResponseError(R);
                     // log(R);
-                    var options = R.option;
-                    options.handler = function (response) {
-                        $.AryaAjax({
-                            url: 'center/update-wallet',
-                            data: {
-                                razorpay_payment_id: response.razorpay_payment_id,
-                                razorpay_order_id: options.order_id,
-                                razorpay_signature: response.razorpay_signature,
-                                merchant_order_id: options.notes.merchant_order_id,
-                                amount: amount
-                            }
-                        }).then((res) => {
-                            showResponseError(res);
-                            if (res.status) {
-                                SwalSuccess('Success!', 'Wallet Updated');
-                                location.reload();
-                            }
-                        });
-                    };
-                    razorpayPOPUP(options);
+                    if (R.status) {
+                        var options = R.option;
+                        options.handler = function (response) {
+                            $.AryaAjax({
+                                url: 'center/update-wallet',
+                                data: {
+                                    razorpay_payment_id: response.razorpay_payment_id,
+                                    razorpay_order_id: options.order_id,
+                                    razorpay_signature: response.razorpay_signature,
+                                    merchant_order_id: options.notes.merchant_order_id,
+                                    amount: amount
+                                }
+                            }).then((res) => {
+                                showResponseError(res);
+                                if (res.status) {
+                                    SwalSuccess('Success!', 'Wallet Updated');
+                                    location.reload();
+                                }
+                            });
+                        };
+                        razorpayPOPUP(options);
+                    }
                 });
             }
             else {
@@ -56,8 +59,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             data: { id }
         }).then((R) => {
             if (typeof R.option === 'undefined') {
-                SwalSuccess('Success!', 'This payment has been made and has been updated in your account.',false,'ok').then((rresult)=>{
-                    if(rresult.isConfirmed)
+                SwalSuccess('Success!', 'This payment has been made and has been updated in your account.', false, 'ok').then((rresult) => {
+                    if (rresult.isConfirmed)
                         location.reload();
                 });
             }

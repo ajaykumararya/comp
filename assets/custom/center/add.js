@@ -350,6 +350,8 @@ document.addEventListener('DOMContentLoaded', function (e) {
                                             customClass: {
                                                 confirmButton: "btn btn-primary",
                                             },
+                                        }).then((r) => {
+                                            location.reload();
                                         });
                                 }
                                 else {

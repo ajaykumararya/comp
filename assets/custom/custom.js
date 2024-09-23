@@ -162,6 +162,9 @@ const razorpayPOPUP = (options, reload = false) => {
     var rzp = new Razorpay(options);
     rzp.open();
 }
+const isAdmin = () => {
+    return login_type == 'admin';
+}
 const formatNumber = (number) => {
     number = Number(number);
     if (Number.isInteger(number)) {
