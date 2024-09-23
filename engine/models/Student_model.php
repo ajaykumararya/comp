@@ -296,7 +296,7 @@ class Student_model extends MY_Model
         if (isset($where['center_id']) && !$where['center_id'])
             unset($where['center_id']);
         if (isset($where['admission_status'])) {
-            if ($where['admission_status'] === 1)
+            if ($where['admission_status'] == 1)
                 return $this->get_switch('active_student', $where)->result();
             if ($where['admission_status'] == 'all')
                 unset($where['admission_status']);
