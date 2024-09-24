@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', function (e) {
         templateSelection: optionFormatSecond,
         templateResult: optionFormatSecond,
     }).on('change', function () {
+        var type = $(this).find('option:selected').data('type');
+        var max = $(this).find('option:selected').data('max') ?? 100;
+        var typeMessage = type == 'center' ? 'Centre' : 'Co-ordinate';
         center_profile_box.html('');
         assign_form_and_display_box.html('');
         // genral_details.html('');
@@ -17,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
         var center_id = $(this).val();
         $.AryaAjax({
             url: 'coordinate/get-course-category-assign-form',
-            data: { 'id': center_id }
+            data: { 'id': center_id ,type : type}
         }).then(function (rr) {
             // log(rr);
             var center_name = $('#select-center option:selected').text();
@@ -38,16 +41,11 @@ document.addEventListener('DOMContentLoaded', function (e) {
                     SuccessSound();
                     Swal.fire({
                         title: `${category_name}`,
-                        footer: `Assign With Co-ordinate ${badge(center_name)}`,
+                        footer: `Assign With ${typeMessage} - ${badge(center_name)}`,
                         html: `
                            <div class="form-group">
-                                <label class="form-label required">For Co-ordinate</label>
-                                <input type="number" id="co_ordinate" min="0" value="50" max="100" class="form-control" required>
-                           </div>
-
-                           <div class="form-group">
-                                <label class="form-label required">For Centre</label>
-                                <input type="number" id="center" min="0" value="50" max="100" class="form-control" required>
+                                <label class="form-label required">Set Percatnge</label>
+                                <input type="number" id="co_ordinate" min="0" value="${ type == 'center' ? max : '50'}" max="${max}" class="form-control" required>
                            </div>
                            
                         `,
@@ -63,13 +61,9 @@ document.addEventListener('DOMContentLoaded', function (e) {
                         preConfirm: () => {
                             var co_ordinate = $('#co_ordinate').val();
                             var center = $('#center').val()
-                            if (co_ordinate < 0 || co_ordinate > 100)
-                                Swal.showValidationMessage(' Please Enter A Valid Percentage for Co-Ordinator')
-
-
-                            if (center < 0 || center > 100)
-                                Swal.showValidationMessage(' Please Enter A Valid Percentage for Centre.')
-                            return { co_ordinate, center };
+                            if (co_ordinate < 0 || co_ordinate > max)
+                                Swal.showValidationMessage(`Please Enter A Valid Percentage  ${typeMessage} ${ max > 0 ? `, set Maximum Only ${max}%.` : `.`}`)
+                            return co_ordinate;
                         }
                     }).then((result) => {
                         // log(result)
@@ -77,10 +71,9 @@ document.addEventListener('DOMContentLoaded', function (e) {
 
                         if (result.isConfirmed) {
                             var data = {
-                                for_user: result.value.co_ordinate,
-                                for_center: result.value.center,
+                                percentage : result.value,
                                 user_id: center_id,
-                                user_type: 'co_ordinate',
+                                user_type: type,
                                 category_id: category_id
                             };
                             $.AryaAjax({

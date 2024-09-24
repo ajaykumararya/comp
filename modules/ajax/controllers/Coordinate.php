@@ -29,16 +29,23 @@ class Coordinate extends Ajax_Controller
 
     function get_course_category_assign_form()
     {
-        $get = $this->center_model->get_assign_course_cats($this->post("id"), 'co_ordinate');
+        $loginId = $this->center_model->loginId();
+        $get = $this->center_model->get_assign_course_cats($this->post("id"), $this->post('type'));
         $assignedCourses = [];
         if ($get->num_rows()) {
             $assignedCourses = $get->result_array();
         }
-        $this->set_data('id', $this->post('id'));
+        $this->set_data($this->post());
+        $this->response('sql', $this->db->last_query());
         $this->set_data('assignedCategory', $assignedCourses);
         $this->response('assignedCategory', $assignedCourses);
         $this->response('status', true);
-        $this->set_data("all_category", $this->db->get('course_category')->result_array());
+        $allCats = [];
+        if ($this->center_model->isCoordinator())
+            $allCats = $this->center_model->get_assign_course_cats($loginId, 'co_ordinator')->result_array();
+        if ($this->center_model->isAdmin())
+            $allCats = $this->db->get('course_category')->result_array();
+        $this->set_data("all_category", $allCats);
         if ($this->post('id'))
             $this->response('html', $this->template('assign-course-category-co-ordinate'));
         else

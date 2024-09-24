@@ -11,6 +11,18 @@ class Ajax extends Ajax_Controller
         }
         $this->response($this->post());
     }
+    function register()
+    {
+        $this->db->insert('demo_query', $this->post());
+        try {
+            $this->set_data($this->post());
+            $this->do_email('hyperprowebtech@gmail.com', 'New Demo Checklist', $this->template('email/demo-query'));
+        } catch (Exception $e) {
+
+        }
+        $this->response('status', true);
+        $this->response('html', 'Thankyou..');
+    }
     function deleted()
     {
         $this->response(
@@ -50,9 +62,8 @@ class Ajax extends Ajax_Controller
                     $this->response('error', alert('Sorry, the email or password is incorrect, please try again.', 'danger'));
             } else
                 $this->response('error', alert('Your Account is In-active. Please Contact Your Admin', 'danger'));
-        }
-        else
-            $this->response('error',alert('Sorry, this email  is not found..','danger'));
+        } else
+            $this->response('error', alert('Sorry, this email  is not found..', 'danger'));
     }
     function delete_enquiry($id)
     {

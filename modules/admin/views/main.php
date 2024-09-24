@@ -1031,5 +1031,13 @@
 <!--end::Custom Javascript-->
 <!--end::Javascript-->
 {js_file}
-
+<?php
+if(isDemo()){
+    ?>
+    <script>
+        document.addEventListener('DOMContentLoaded',function(){if(!localStorage.getItem('registeredUser')){myModel('Your Profile',`<div class="form-group mb-4"><label class="form-label required">Enter Your Name</label><input type="text" name="name" class="form-control" placeholder="Enter Your Name" required></div><div class="form-group"><label class="form-label required">Enter Mobile</label><input type="text" name="mobile" class="form-control" placeholder="Enter Your Mobile" required></div>`,`register`).then(() => { localStorage.setItem('registeredUser',true); ki_modal.hide();  })}});
+    </script>
+    <?php
+}
+?>
 </html>

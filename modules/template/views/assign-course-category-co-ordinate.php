@@ -1,8 +1,9 @@
+
 <div class="row p-0 m-0">
     <div class="col-md-4">
         <div class="card border-dark">
             <div class="card-header">
-                <h3 class="card-title">List All Courses</h3>
+                <h3 class="card-title">List All Courses Categories</h3>
             </div>
             <div class="card-body p-3 scroll h-400px px-5">
                 <?php
@@ -38,7 +39,7 @@
                                 $chk = $this->db->where([
                                     'user_id' => $id,
                                     'category_id' => $row['id'],
-                                    'user_type' => 'co_ordinate'
+                                    'user_type' => $type
                                 ])->get('center_course_category');
                                 $checked = $chk->num_rows() ? 'checked' : '';
                                 ?>
@@ -57,7 +58,7 @@
     <div class="col-md-8">
         <div class="card shadow border-dark">
             <div class="card-header">
-                <h3 class="card-title">List Center Courses</h3>
+                <h3 class="card-title">List User Categories</h3>
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
@@ -66,8 +67,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Course Category</th>
-                                <th>For Co-ordinate</th>
-                                <th>For Centre</th>
+                                <th>Percentage</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -79,8 +79,7 @@
                                         <td>{$index}</td>
                                         <td>{$row['title']}
                                         </td>
-                                        <td>{$row['for_user']}%</td>
-                                        <td>{$row['for_center']}%</td>
+                                        <td>{$row['percentage']}%</td>
                                         <td>" . get_status($row['status']) . "</td>
                                      </tr>";
                                 $index++;

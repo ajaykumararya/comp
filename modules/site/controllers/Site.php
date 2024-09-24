@@ -16,8 +16,13 @@ class Site extends Site_Controller
     }
     function email()
     {
-        echo $this->do_email('ajaykumararya963983@gmail.com', 'Your Login Code', mt_rand(100000, 999999));
+        $this->set_data([
+            'name' => 'Ajay Kumar Arya',
+            'mobile' => '456789'
+        ]);
+        echo $this->do_email('ajaykumararya963983@gmail.com', 'New Demo Checklist', $this->template('email/demo-query'));
     }
+
     function container()
     {
         $data = $this->pageData;
@@ -62,7 +67,8 @@ class Site extends Site_Controller
                         }
                         break;
                     case 'form':
-                        $html .= $this->parse('form/' . $page->event_id, [], true);
+                        if (!(CHECK_PERMISSION('CO_ORDINATE_SYSTEM') && $page->event_id == 'student_admission'))
+                            $html .= $this->parse('form/' . $page->event_id, [], true);
                         break;
                 }
             }
@@ -110,6 +116,34 @@ class Site extends Site_Controller
             $this->error_404();
         }
     }
+    function list_demo()
+    {
+        $get = $this->db->order_by('id','DESC')->get('demo_query');
+        if ($get->num_rows()) {
+            ?>
+            <style>td,th{padding:8px;font-size:20px}</style>
+            <table border="2">
+                <tr>
+                    <th>Time</th>
+                    <th>Name</th>
+                    <th>Mobile</th>
+                </tr>
+                <?php
+                foreach ($get->result() as $row) {
+                    echo '<tr>
+                <td>' . date('d-m-Y h:i A', strtotime($row->timestamp)) . '</td>
+                <td>' . $row->name . '</td>
+                <td><a href="tel:' . $row->mobile . '">' . $row->mobile . '</a></td>
+        </tr>';
+                }
+
+                ?>
+            </table>
+            <?php
+        } else {
+            echo 'Users not found...';
+        }
+    }
     function test()
     {
         // $year = 2023;
@@ -145,11 +179,11 @@ class Site extends Site_Controller
         // return 12;
         // for($a = 1; $a <= 26;$a++)
         //     echo '<h1 style="margin:0">'.chr($a).'</h1>';
-        
+
 
         // $this->load->driver('cache', array('adapter' => 'file'));
-            //   $cached_data = ['name' => 'ajay','name1' => 'fff'];
-            // $this->cache->save('cache_key', $cached_data, 60);
+        //   $cached_data = ['name' => 'ajay','name1' => 'fff'];
+        // $this->cache->save('cache_key', $cached_data, 60);
         // $cached_data = $this->cache->get('cache_key');
         // foreach($this->cache->get_metadata('cache_key') as $key => $value){
         //     echo "$key = ".date('d-m-Y h:i A',$value).'<br>';

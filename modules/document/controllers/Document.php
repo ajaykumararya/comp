@@ -62,7 +62,7 @@ class Document extends MY_Controller
             $this->set_data('time', date('h:i A', strtotime($get->row('exam_date'))));
             $pdfContent = $this->parse('admit-card');
             // $this->mypdf->setTitle('Hii');
-            if ($this->ki_theme->config('admit_card_full'))
+            if ($this->ki_theme->config('admit_card_full') )
                 $this->mypdf->addPage('L');
             $this->pdf($pdfContent);
         } else {

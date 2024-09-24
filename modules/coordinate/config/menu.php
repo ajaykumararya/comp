@@ -19,10 +19,10 @@ $config['center_area'] = array(
                     'url' => 'center/add',
                 ),
                 array(
-                    'label' => 'Assign Courses',
+                    'label' => 'Assign Courses Category',
                     'type' => 'assign_courses_with_center',
                     'icon' => array('arrow-circle-right', 2),
-                    'url' => 'center/assign-courses-category',
+                    'url' => 'co-ordinate/assign-course',
                 ),
                 array(
                     'label' => 'List Center',

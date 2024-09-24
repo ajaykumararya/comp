@@ -32,6 +32,9 @@ class Center extends MY_Controller
     {
         $this->view('assign-courses');
     }
+    function assign_courses_category(){
+        $this->view('assign-courses-category');
+    }
     function notification()
     {
         if ($this->center_model->isCenter() && $this->access_method()) {

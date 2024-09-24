@@ -7,12 +7,21 @@ class Center_model extends MY_Model
         $this->db->select($select);
         return $this->db->where('center_id', $id)->get('center_fees');
     }
-    function get_assign_courses($id, $condition = false)
+    function get_assign_courses($id, $condition = false, $userType = 'center')
     {
-        $this->db->select('c.*,co.course_name,co.id as course_id,co.fees,co.duration,co.duration_type,cc.course_fee,cc.status as course_status')
-            ->from('centers as c')
-            ->join('center_courses as cc', "cc.center_id = c.id and c.id = '$id' and cc.isDeleted = '0' ")
-            ->join('course as co', 'co.id = cc.course_id');
+        $this->db->select('c.*,co.course_name,co.id as course_id,co.fees,co.duration,co.duration_type')
+            ->from('centers as c');
+        if (CHECK_PERMISSION('CO_ORDINATE_SYSTEM')) {
+            $this->db->join('center_course_category as cc', "cc.user_id = c.id and c.id = '$id' AND cc.user_type = '$userType'");
+            $this->db->select('co.fees,(co.fees * (cc.percentage / 100)) as commission ,(co.fees - (co.fees * (cc.percentage / 100))) as course_fee')->join('course as co', 'co.category_id = cc.category_id');
+            if (isset($condition['course_id'])) {
+                $this->db->where('co.id', $condition['course_id']);
+                unset($condition['course_id']);
+            }
+        } else {
+            $this->db->select('cc.course_fee,cc.status as course_status')->join('center_courses as cc', "cc.center_id = c.id and c.id = '$id' and cc.isDeleted = '0' ");
+            $this->db->join('course as co', 'co.id = cc.course_id');
+        }
         if (is_array($condition))
             $this->myWhere('cc', $condition);
         return $this->db->get();
@@ -25,6 +34,17 @@ class Center_model extends MY_Model
             ->join('course_category as cc', 'cc.id = ccc.category_id');
         if (is_array($condition))
             $this->myWhere('ccc', $condition);
+        return $this->db->get();
+    }
+    function get_assign_co_ordinate_courses($id, $userType = 'center', $condition = false)
+    {
+        $this->db->select('c.*,co.course_name,co.id as course_id,co.fees,co.duration,co.duration_type,cc.course_fee,cc.status as course_status')
+            ->from('centers as c')
+            // ->join('center_courses as cc', "cc.center_id = c.id and c.id = '$id' and cc.isDeleted = '0' ")
+            ->join('center_course_category as ccc', "ccc.user_id = c.id and c.id = '$id' AND ccc.user_type = '$userType'")
+            ->join('course as co', 'co.id = ccc.course_id');
+        if (is_array($condition))
+            $this->myWhere('cc', $condition);
         return $this->db->get();
     }
     function get_center($id = 0, $type = 'center', $isDeleted = 0)
