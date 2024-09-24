@@ -19,7 +19,8 @@ class Center_model extends MY_Model
                 unset($condition['course_id']);
             }
         } else {
-            $this->db->select('cc.course_fee,cc.status as course_status')->join('center_courses as cc', "cc.center_id = c.id and c.id = '$id' and cc.isDeleted = '0' ");
+            $this->db->select('cc.course_fee,cc.status as course_status');
+            $this->db->join('center_courses as cc', "cc.center_id = c.id and c.id = '$id' and cc.isDeleted = '0' ");
             $this->db->join('course as co', 'co.id = cc.course_id');
         }
         if (is_array($condition))

@@ -167,9 +167,6 @@ class Student extends Ajax_Controller
     }
     function get_center_courses()
     {
-        $where = false;
-        if(CHECK_PERMISSION('CO_ORDINATE_SYSTEM'))
-
         $get = $this->center_model->get_assign_courses($this->post('center_id'));
         if ($get->num_rows()) {
             $this->response('courses', $get->result_array());

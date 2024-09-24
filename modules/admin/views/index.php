@@ -113,7 +113,7 @@ $isCenter = ($this->center_model->isCenter());
 $where = $isCenter ? ['center_id' => $loginId] : [];
 
 if ($this->center_model->isAdminOrCenter()) {
-    echo 'yes';
+    // echo 'yes';
     $this->db->from('course_category as coc');
     if ($isCenter) {
         $this->db->join('course as c', 'c.category_id = coc.id');
