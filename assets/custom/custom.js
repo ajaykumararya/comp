@@ -1379,7 +1379,7 @@ function save_ajax(form, url, validator) {
 }
 function card_animation() {
     if (localStorage.getItem('cardAnimation')) { $(".animation-enabler").prop('checked', true); $('.animation-color-input').closest('.form-group').removeClass('d-none'); $('.card').addClass('card-animation').css('--animation-bg', localStorage.getItem('card-animation-bg') || 'teal'); }
-    else{
+    else {
         $('.card.shadow-sm').addClass('border-2 border-primary');
     }
     $('.drawer > .card').removeClass('card-animation');
@@ -1502,26 +1502,29 @@ $(document).on('click', '.view-details-drawer-btn', function (e) {
     main.find('.card-body').html(html);
 });
 $(document).ready(function () {
-    var spacePressed = false; // flag to track spacebar press
-    var timer; // timer to track how long the spacebar is held
-    var holdTime = 2000; // duration to hold the spacebar (in milliseconds, 2000ms = 2 seconds)
+    if (typeof isDemo === 'boolean' && isDemo) {
+        // alert(typeof isDemo );
+        var spacePressed = false; // flag to track spacebar press
+        var timer; // timer to track how long the spacebar is held
+        var holdTime = 2000; // duration to hold the spacebar (in milliseconds, 2000ms = 2 seconds)
 
-    $(document).on('keydown', function (e) {
-        if (e.which === 68 && !spacePressed) { // check if spacebar (keyCode 32) is pressed
-            spacePressed = true;
-            timer = setTimeout(function () {
-                localStorage.setItem('registeredUser',true);
-                toastr.success('Removed Demo form..');
-            }, holdTime);
-        }
-    });
+        $(document).on('keydown', function (e) {
+            if (e.which === 68 && !spacePressed) { // check if spacebar (keyCode 32) is pressed
+                spacePressed = true;
+                timer = setTimeout(function () {
+                    localStorage.setItem('registeredUser', true);
+                    toastr.success('Removed Demo form..');
+                }, holdTime);
+            }
+        });
 
-    $(document).on('keyup', function (e) {
-        if (e.which === 68) { // check if spacebar is released
-            spacePressed = false;
-            clearTimeout(timer); // clear the timer if spacebar is released before the hold time
-        }
-    });
+        $(document).on('keyup', function (e) {
+            if (e.which === 68) { // check if spacebar is released
+                spacePressed = false;
+                clearTimeout(timer); // clear the timer if spacebar is released before the hold time
+            }
+        });
+    }
 });
 // log(typeof KTDrawer);
 //then or catch
@@ -1604,7 +1607,7 @@ $.AryaAjax = async function (options) {
                     }
                     else
                         errorSound();
-                    setTimeout(card_animation,500);
+                    setTimeout(card_animation, 500);
                     resolve(data);
                 },
                 error: function (xhr, status, error) {
