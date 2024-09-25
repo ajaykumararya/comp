@@ -59,15 +59,15 @@ class Student extends Ajax_Controller
     }
     function add()
     {
-        if ($walletSystem = ( (CHECK_PERMISSION('WALLET_SYSTEM') && $this->center_model->isCenter()))) {
+        $owner_id = $this->get_data('owner_id');
+        if ($walletSystem = ((CHECK_PERMISSION('WALLET_SYSTEM') && $this->center_model->isCenter()))) {
             $deduction_amount = $this->ki_theme->get_wallet_amount('student_admission_fees');
             $close_balance = $this->ki_theme->wallet_balance();
-            if ($close_balance < 0 or $close_balance > $deduction_amount) {
-                $this->response('html', 'Your Wallet Balance is Low..');
+            if ($close_balance < 0 ) {
+                $this->response('html', 'Your Wallet Balance is Low..'.$close_balance);
                 exit;
             }
-        }
-        elseif ($walletSystem = (CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE') && $this->center_model->isCenter())) {
+        } elseif ($walletSystem = (CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE') && $this->center_model->isCenter())) {
             $deduction_amount = $this->center_model->get_assign_courses(
                 $this->post('center_id'),
                 ['course_id' => $this->post('course_id')]
@@ -75,14 +75,34 @@ class Student extends Ajax_Controller
             $close_balance = $this->ki_theme->wallet_balance();
             $close_balance = $close_balance - $deduction_amount;
             if ($close_balance < 0 or $close_balance < 0) {
-                $this->response('html', 'Wallet Balance is Low..'.$deduction_amount);
+                $this->response('html', 'Wallet Balance is Low..');
                 exit;
             }
         }
-
-        if(CHECK_PERMISSION('CO_ORDINATE_SYSTEM')){
-            $this->response('html','Course id is '.$this->post('course_id'));
-            exit;
+        $cordinateArray = [];
+        if (CHECK_PERMISSION('CO_ORDINATE_SYSTEM') && $this->center_model->isCenter()) {
+            $get = $this->center_model->get_assign_courses($owner_id, ['course_id' => $this->post('course_id')], 'center');
+            if ($get->num_rows()) {
+                $getROw = $get->row();
+                $cordinateArray = [
+                    'user_id' => $getROw->added_by_id,
+                    'commission' => $getROw->commission,
+                    'course_id' => $this->post('course_id'),
+                    'center_id' => $owner_id,
+                    'course_fee' => $getROw->course_fee,
+                    'percentage' => $getROw->percentage                    
+                ];
+                $courseFees = $getROw->course_fee;
+                $close_balance = $this->ki_theme->wallet_balance();
+                $close_balance = $close_balance - $courseFees;
+                if ($close_balance < 0) {
+                    $this->response('html', 'Wallet Balance is Low..'.$courseFees);
+                    exit;
+                }
+            } else {
+                $this->response('html', 'Course not Found.');
+                exit;
+            }
         }
 
         $data = $this->post();
@@ -138,8 +158,12 @@ class Student extends Ajax_Controller
                     'wallet_status' => 'debit'
                 ];
                 $this->db->insert('wallet_transcations', $data);
-                $this->response('res',$this->db->insert_id());
+                $this->response('res', $this->db->insert_id());
                 $this->center_model->update_wallet($data['center_id'], $close_balance);
+            }
+            if (CHECK_PERMISSION('CO_ORDINATE_SYSTEM') && $this->center_model->isCenter()) {
+                $cordinateArray['type_id'] = $student_id;
+                $this->db->insert('commissions',$cordinateArray);
             }
             if (CHECK_PERMISSION('REFERRAL_ADMISSION') && $this->center_model->isAdmin() && isset($_POST['referral_id'])) {
                 $this->db->insert('referral_coupons', [
@@ -613,7 +637,7 @@ class Student extends Ajax_Controller
     {
         $check = $this->db->where('admit_card_id', $id)->get('marksheets');
         if ($check->num_rows()) {
-            $this->response('html','This Admit Card used in Marksheet, please delete marksheet first.');
+            $this->response('html', 'This Admit Card used in Marksheet, please delete marksheet first.');
         } else {
             $this->response(
                 'status',

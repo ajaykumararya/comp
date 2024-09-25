@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                         var options = R.option;
                         options.handler = function (response) {
                             $.AryaAjax({
-                                url: 'center/update-wallet',
+                                url: 'center/wallet-update',
                                 data: {
                                     razorpay_payment_id: response.razorpay_payment_id,
                                     razorpay_order_id: options.order_id,

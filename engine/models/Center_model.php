@@ -11,9 +11,9 @@ class Center_model extends MY_Model
     {
         $this->db->select('c.*,co.course_name,co.id as course_id,co.fees,co.duration,co.duration_type')
             ->from('centers as c');
-        if (CHECK_PERMISSION('CO_ORDINATE_SYSTEM') && $this->isCenter()) {
+        if (CHECK_PERMISSION('CO_ORDINATE_SYSTEM')) {
             $this->db->join('center_course_category as cc', "cc.user_id = c.id and c.id = '$id' AND cc.user_type = '$userType'");
-            $this->db->select('co.fees,(co.fees * (cc.percentage / 100)) as commission ,(co.fees - (co.fees * (cc.percentage / 100))) as course_fee')->join('course as co', 'co.category_id = cc.category_id');
+            $this->db->select('co.fees,cc.percentage,(co.fees * (cc.percentage / 100)) as commission ,(co.fees - (co.fees * (cc.percentage / 100))) as course_fee')->join('course as co', 'co.category_id = cc.category_id');
             if (isset($condition['course_id'])) {
                 $this->db->where('co.id', $condition['course_id']);
                 unset($condition['course_id']);

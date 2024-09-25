@@ -1,3 +1,4 @@
+
 <div class="row">
     <div class="col-md-12">
         <form id="form" action="" method="POST">
@@ -63,6 +64,13 @@
                                 if ($this->center_model->isCenter()) {
                                     $center_id = $this->center_model->loginId();
                                     $this->db->where('id', $center_id);
+                                }
+
+                                if($this->center_model->isAdmin()){
+                                    $this->db->where([
+                                        'isDeleted' => 0,
+                                        'isPending' => 0
+                                    ]);
                                 }
                                 ?>
                                 <select class="form-select" id="centre_id" name="center_id" data-control="select2"
