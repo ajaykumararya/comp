@@ -421,8 +421,42 @@ if ($this->center_model->isAdminOrCenter()) {
     <?php
 } else {
     if ($this->center_model->isCoordinator()) {
+        // echo $owner_id;
+        $commision = $this->db->select("SUM(CASE WHEN status = 0 THEN commission ELSE 0 END) AS ttlPendingCommision, SUM(CASE WHEN status = 1 THEN commission ELSE 0 END) AS ttlCommision")->where([
+            'user_id' => $owner_id,
+            'user_type' => 'co_ordinator'
+        ])->get('commissions');
+        $totalCommision = $commision->row('ttlCommision');
+        $totalPCommision = $commision->row('ttlPendingCommision');
         ?>
-
+        <div class="container">
+            <div class="row ">
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <?= dash_box([
+                        'color1' => '#000000',
+                        'color2' => '#30026a',
+                        'title' => 'Total Commision',
+                        'count' => $totalCommision,
+                        'url' => 'co-ordinate/list-commission',
+                        'url_icon' => 'eye',
+                        'url_title' => 'View List',
+                        'icon' => 'rupee'
+                    ]) ?>
+                </div>
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <?= dash_box([
+                        'color1' => '#ff1515',
+                        'color2' => '#240d0d',
+                        'title' => 'Total Pending Commission',
+                        'count' => $totalPCommision,
+                        'url' => 'co-ordinate/list-commission',
+                        'url_icon' => 'eye',
+                        'url_title' => 'View',
+                        'icon' => 'rupee'
+                    ]) ?>
+                </div>
+            </div>
+        </div>
         <?php
     }
 }

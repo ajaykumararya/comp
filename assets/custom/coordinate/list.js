@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             { 'data': 'name' },
             { 'data': 'email' },
             { 'data': 'contact_number' },
+            { 'data': 'ttlCommission' },
             { 'data': null }
             // Add more columns as needed
         ],
@@ -27,6 +28,28 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 printable: false,
                 render: function (data, type, row) {
                     return `<a href="tel:${data}">${data}</a>`;
+                }
+            },
+            {
+                targets: 3,
+                render: function (data, type, row) {
+                    return `
+                    <table class="p-0">
+                        <tbody class="p-0">
+                            <tr class="text-success">
+                                <th class="p-0" style="width:120px">PAID</th><td class="p-0">${data != null ? data : 0} ${inr} </td>
+                            </tr>
+                            <tr class="text-danger">
+                                <th class="p-0" style="width:120px">UNPAID</th><td class="p-0">${row.ttlPendingCommission != null ? row.ttlPendingCommission : 0} ${inr} </td>
+                            </tr>
+                            ${(data != null)
+                                ? `<tr>
+                                        <td class="p-1" style="width:120px" colspan="2"><a href="${base_url}co-ordinate/list-commission/${row.id}" class="p-1 btn w-100 btn-sm btn-primary"><i class="fa fa-eye"></i> View</a>
+                                    </td>
+                                ` : ``}
+                            </tr>
+                        </tbody>
+                    </table> `;
                 }
             },
             {
@@ -49,6 +72,6 @@ document.addEventListener('DOMContentLoaded', function (e) {
 
         $('#list_center')
             .DeleteEvent('centers', 'Center');
-            // .EditAjax('center/edit-form', 'Center');
+        // .EditAjax('center/edit-form', 'Center');
     });
 });

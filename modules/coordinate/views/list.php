@@ -13,13 +13,14 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <!--begin::Datatable-->
-                        <table id="list_center" class="table align-middle table-row-dashed fs-6 gy-5">
+                        <table id="list_center" class="table align-middle table-row-dashed fs-6 gy-5 table-loading">
                             <thead>
                                 <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
 
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Mobile</th>
+                                    <th>Commission</th>
                                     <th class="text-end min-w-100px">Actions</th>
                                 </tr>
                             </thead>
