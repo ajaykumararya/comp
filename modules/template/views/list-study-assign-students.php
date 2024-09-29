@@ -1,3 +1,4 @@
+
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -10,14 +11,12 @@
         <?php
         foreach ($students as $student) {
             $this->ki_theme->set_attribute('data-center_id', $student['institute_id']);
-            $check = $this->student_model->get_student_study([
-                'student_id' => $student['student_id'],
-                'material_id' => $exam_id
-            ]);
-            if ($check->num_rows()) {
+            // $check = $this->student_model->get_student_study([
+            //     'student_id' => $student['student_id'],
+            //     'material_id' => $study_id
+            // ]);
+            if ($student['assign_time']) {
                 $this->ki_theme->checked(true);
-                if ($check->row('percentage') != null)
-                    $this->ki_theme->disabled(true);
             }
             echo '<tr>
             <td>

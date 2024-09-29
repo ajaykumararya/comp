@@ -37,6 +37,12 @@ $config['dashboard'] = array(
             'url' => 'student/profile/fee-record',
             'icon' => array('notepad', 5)
         ),
+        array(
+            'label' => 'Study Material',
+            'type' => 'study_material',
+            'url' => 'student/study-material',
+            'icon' => array('book', 5)
+        ),
     )
 );
 

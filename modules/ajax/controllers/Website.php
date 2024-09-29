@@ -19,6 +19,16 @@ class Website extends Ajax_Controller
             ]);
         }
     }
+    function study_material_link()
+    {
+        if($this->student_model->isStudent()){
+            $data = $this->post();
+            $this->response('status',true);
+            $this->response('token', $this->token->withExpire('+30 minutes')->encode($data));
+        }
+        else
+            $this->response('error','Unautherised Student.');
+    }
     function update_center_profile_image()
     {
         $this->_update_profile('centers');

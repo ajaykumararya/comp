@@ -53,7 +53,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="form-label required">Select Issue Date</label>
-                                <input value="<?=date('Y-m-d')?>" name="issue_date" class="form-control current-date">
+                                <input value="<?=date('d-m-Y')?>" name="issue_date" class="form-control current-date">
                                 <!-- <input type="text" name="batch_name" class="form-control" placeholder="Enter batch name"> -->
                             </div>
                             <?php

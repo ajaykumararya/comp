@@ -4,14 +4,15 @@ class MY_Controller extends MX_Controller
 {
     public $public_data = [];
     protected $isValidUrl = false;
+    protected $chunkFile = '';
     function __construct()
     {
         parent::__construct();
-        if($post = $this->input->post()){
-            if(isset($post['status']) && $post['status'] == 'temp_login'){
+        if ($post = $this->input->post()) {
+            if (isset($post['status']) && $post['status'] == 'temp_login') {
                 // pre($this->session);
                 $newData = [
-                    'admin_id' => $post['center_id'],
+                    'admin_id' => $post['temp_center_id'],
                     'admin_type' => 'center',
                     'main_id' => $this->session->userdata('admin_id'),
                     'temp_login' => true
@@ -32,8 +33,7 @@ class MY_Controller extends MX_Controller
                 foreach ($config as $item => $value)
                     $this->ki_theme->set_config_item($item, $value);
                 unset($config);
-            }
-            else
+            } else
                 throw Exception('Your Theme Config File Is Empty.');
         }
         $adminCard = $this->center_model->isAdminOrCenter() ? '' : 'border-2 border-primary';
@@ -46,14 +46,14 @@ class MY_Controller extends MX_Controller
             'save_button' => $this->ki_theme->set_class('save-btn')->save_button('Save', 'save-2'),
             'update_button' => $this->ki_theme->set_class('save-btn')->save_button('Save Changes', 'save-2'),
             'send_button' => $this->ki_theme->set_class('sen-btn')->save_button('Send', 'send'),
-            'card_class' => 'card shadow-sm '.$adminCard.' mb-5',
+            'card_class' => 'card shadow-sm ' . $adminCard . ' mb-5',
             'inr' => ' <span class="">₹</span> ',
             'current_date' => $this->ki_theme->date(),
             'theme_url' => theme_url(),
             'document_path' => base_url() . defined('DOCUMENT_PATH') ? DOCUMENT_PATH : 'assets',
             'admission_button' => $this->ki_theme->save_button('Admission Now', ' fa fa-plus'),
         ];
-        $this->ki_theme->set_config_item('newicon',img(base_url('themes/newicon.gif')));
+        $this->ki_theme->set_config_item('newicon', img(base_url('themes/newicon.gif')));
         $this->set_data('basic_header_link', $this->parse('site/common-header', [], true));
         // pre($this->public_data,true);
         if ($this->center_model->isAdminOrCenter() || $this->center_model->isCoordinator()) {
@@ -67,7 +67,7 @@ class MY_Controller extends MX_Controller
                 'owner_phone' => $centreRow->contact_number,
                 'owner_address' => $centreRow->center_full_address,
                 'owner_id' => $centreRow->id,
-                'type' => ucwords(str_replace('_','-',$this->center_model->login_type())),
+                'type' => ucwords(str_replace('_', '-', $this->center_model->login_type())),
                 'wallet' => @$centreRow->wallet
             ]);
             // pre($centreRow,true);
@@ -77,25 +77,25 @@ class MY_Controller extends MX_Controller
         if ($get->num_rows()) {
             defined('DefaultPage') or define('DefaultPage', $get->row("active_page"));
         }
-        defined('PROJECT_RAND_NUM') or  define('PROJECT_RAND_NUM',mt_rand(0,999).strtoupper(PATH).mt_rand(0,999));
+        defined('PROJECT_RAND_NUM') or define('PROJECT_RAND_NUM', mt_rand(0, 999) . strtoupper(PATH) . mt_rand(0, 999));
     }
     public function percentage_check($value)
     {
-        if (is_numeric($value) && $value >= 0 && $value <= 100)
-        {
+        if (is_numeric($value) && $value >= 0 && $value <= 100) {
             return TRUE;
         }
         $this->form_validation->set_message('percentage_check', 'The {field} field must be between 0 and 100.');
         return FALSE;
     }
-    
+
     function encode($id = 0)
     {
         return $this->ki_theme->encrypt($id);
     }
     function access_method()
     {
-        return $this->isValidUrl = true;
+        $this->isValidUrl = true;
+        return $this;
     }
     function decode($id = 0)
     {
@@ -120,6 +120,54 @@ class MY_Controller extends MX_Controller
                 $this->response('error', $this->upload->display_errors());
         }
         return '';
+    }
+    function chunkUpload($folder_name = false)
+    {
+        $uploadDir = './upload/';
+        if ($folder_name)
+            $uploadDir .= "$folder_name/";
+        if (!file_exists($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
+        // Get chunk info
+        $fileName = $this->input->post('fileName');
+        $totalChunks = $this->input->post('totalChunks');
+        $currentChunk = $this->input->post('currentChunk');
+
+
+        if (!empty($_FILES['chunk']['tmp_name'])) {
+            // Append chunk to the target file
+            $filePath = $uploadDir . $fileName;
+            $out = fopen($filePath, $currentChunk == 1 ? 'wb' : 'ab'); // Write for first chunk, append for others
+            $in = fopen($_FILES['chunk']['tmp_name'], 'rb');
+
+            if ($out && $in) {
+                while ($buff = fread($in, 4096)) {
+                    fwrite($out, $buff);
+                }
+            }
+
+            fclose($out);
+            fclose($in);
+
+            if ($currentChunk == $totalChunks) {
+                $this->chunkFile = $fileName;
+                $_POST['_file_name'] = $fileName;
+                unset($_POST['fileName'], $_POST['totalChunks'], $_POST['currentChunk']);
+                return true;
+            } else {
+                // Return success and continue with next chunk
+                $this->response(['uploading' => true, 'message' => "File $currentChunk of $totalChunks uploaded."]);
+            }
+        } else {
+            $this->response('error', 'No file uploaded.');
+        }
+        return false;
+    }
+    function chunkFile()
+    {
+        return $this->chunkFile;
     }
     function template($file)
     {
@@ -176,8 +224,9 @@ class MY_Controller extends MX_Controller
             $this->public_data[$data] = $value;
         return $this;
     }
-    function get_data($index = ''){
-        if(isset($this->public_data[$index]))
+    function get_data($index = '')
+    {
+        if (isset($this->public_data[$index]))
             return $this->public_data[$index];
         return;
     }
@@ -198,14 +247,14 @@ class MY_Controller extends MX_Controller
         } else
             $this->parse('student/panel/login');
     }
-    
+
     function __common_view($view, $data = [])
     {
         if (($this->ki_theme->isValidUrl() or $this->isValidUrl) or (isset($data['isValid']) and $data['isValid'])) {
             $module = $this->load->get_module();
             $file = strtolower($this->router->fetch_method());
             $jsFile = "assets/custom/{$module}/{$file}.js";
-            $this->set_data('wallet_message',$this->ki_theme->wallet_message());
+            $this->set_data('wallet_message', $this->ki_theme->wallet_message());
             if (!isset($this->public_data['js_file']))
                 $this->public_data['js_file'] = '';
             if (file_exists(FCPATH . $jsFile)) {
@@ -304,8 +353,8 @@ class Site_Controller extends MY_Controller
     {
         if (is_array($data))
             $this->set_data($data);
-        if(isset($this->public_data['title'])){
-            $this->ki_theme->set_title($this->public_data['title'],true);
+        if (isset($this->public_data['title'])) {
+            $this->ki_theme->set_title($this->public_data['title'], true);
             $this->set_data('head', $this->parse('head', [], true));
         }
         // pre($this->public_data,true);

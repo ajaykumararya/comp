@@ -169,7 +169,8 @@ class Cms extends Ajax_Controller
         $status = $this->SiteModel->update_schema($this->post());
         $this->response('status', true);
     }
-    private function build_post_data(){
+    private function build_post_data()
+    {
         $data = [];
         foreach ($_POST as $index => $value) {
             $data[$index] = is_array($value) ? json_encode($value) : $value;
@@ -195,17 +196,19 @@ class Cms extends Ajax_Controller
             }
         }
     }
-    function insert_content(){
+    function insert_content()
+    {
         $type = $this->post('type');
         unset($_POST['type']);
         $data = $this->build_post_data();
         $data['type'] = $type;
-        $this->db->insert('content',$data);
-        $this->response('status',true);
+        $this->db->insert('content', $data);
+        $this->response('status', true);
     }
-    function delete_content(){
+    function delete_content()
+    {
         $this->db->where($this->post())->delete('content');
-        $this->response('status',true);
+        $this->response('status', true);
     }
     function add_course_for_content()
     {
@@ -281,11 +284,12 @@ class Cms extends Ajax_Controller
             $this->response('error', $this->upload->display_errors('', ''));
         }
     }
-    function update_gallery_image_title(){
-        $this->db->where('id',$this->post('id'))->update('gallery_images',[
+    function update_gallery_image_title()
+    {
+        $this->db->where('id', $this->post('id'))->update('gallery_images', [
             'title' => $this->post("title")
         ]);
-        $this->response('status',true);
+        $this->response('status', true);
     }
     function list_gallery_images()
     {
@@ -298,8 +302,9 @@ class Cms extends Ajax_Controller
     }
     function upload_syllabus()
     {
-        $file = $this->file_up('file');
+        $file = $this->chunkUpload();
         if ($file) {
+            $file = $this->post('_file_name');
             $this->response(
                 'status',
                 $this->db->insert('syllabus', [
@@ -309,11 +314,19 @@ class Cms extends Ajax_Controller
             );
         }
     }
-    function list_syllabus(){
-        $this->response('data',$this->db->order_by('id','DESC')->get('syllabus')->result_array());
+    function list_syllabus()
+    {
+        $this->response('data', $this->db->order_by('id', 'DESC')->get('syllabus')->result_array());
     }
-    function delete_syllabus($id){
-        $this->db->delete('syllabus',['id' => $id]);
-        $this->response('status',true);
+    function delete_syllabus($id)
+    {
+        $get = $this->db->get_where('syllabus', ['id' => $id]);
+        if ($get->num_rows()) {
+            $row = $get->row();
+            $this->db->delete('syllabus', ['id' => $id]);
+            if(file_exists('upload/'.$row->file))
+                @unlink('upload/'.$row->file);
+            $this->response('status', true);
+        }
     }
 }

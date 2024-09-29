@@ -12,7 +12,7 @@
                     </div>
                     <div class="form-group">
                         <label for="file" class="form-label mt-4">Select File</label>
-                        <input type="file" name="file" class="form-control">
+                        <input type="file" id="file" class="form-control">
                     </div>
                 </div>
                 <div class="card-footer">

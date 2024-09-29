@@ -63,8 +63,8 @@ class Student extends Ajax_Controller
         if ($walletSystem = ((CHECK_PERMISSION('WALLET_SYSTEM') && $this->center_model->isCenter()))) {
             $deduction_amount = $this->ki_theme->get_wallet_amount('student_admission_fees');
             $close_balance = $this->ki_theme->wallet_balance();
-            if ($close_balance < 0 ) {
-                $this->response('html', 'Your Wallet Balance is Low..'.$close_balance);
+            if ($close_balance < 0) {
+                $this->response('html', 'Your Wallet Balance is Low..' . $close_balance);
                 exit;
             }
         } elseif ($walletSystem = (CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE') && $this->center_model->isCenter())) {
@@ -90,13 +90,13 @@ class Student extends Ajax_Controller
                     'course_id' => $this->post('course_id'),
                     'center_id' => $owner_id,
                     'course_fee' => $getROw->course_fee,
-                    'percentage' => $getROw->percentage                    
+                    'percentage' => $getROw->percentage
                 ];
                 $courseFees = $getROw->course_fee;
                 $close_balance = $this->ki_theme->wallet_balance();
                 $close_balance = $close_balance - $courseFees;
                 if ($close_balance < 0) {
-                    $this->response('html', 'Wallet Balance is Low..'.$courseFees);
+                    $this->response('html', 'Wallet Balance is Low..' . $courseFees);
                     exit;
                 }
             } else {
@@ -163,7 +163,7 @@ class Student extends Ajax_Controller
             }
             if (CHECK_PERMISSION('CO_ORDINATE_SYSTEM') && $this->center_model->isCenter()) {
                 $cordinateArray['type_id'] = $student_id;
-                $this->db->insert('commissions',$cordinateArray);
+                $this->db->insert('commissions', $cordinateArray);
             }
             if (CHECK_PERMISSION('REFERRAL_ADMISSION') && $this->center_model->isAdmin() && isset($_POST['referral_id'])) {
                 $this->db->insert('referral_coupons', [
@@ -660,15 +660,24 @@ class Student extends Ajax_Controller
     }
     function upload_study_material()
     {
-        $this->ki_theme->set_default_vars('max_upload_size', 10485760); // 10MB
-        if ($file = $this->file_up('file')) {
+        // $this->ki_theme->set_default_vars('max_upload_size', 10485760); // 10MB
+        // if ($file = $this->file_up('file')) {
+        //     $this->response('status', true);
+        //     $data = $this->post();
+        //     $data['file'] = $file;
+        //     $data['upload_by'] = $this->student_model->login_type();
+        //     $this->db->insert('study_material', $data);
+        // }
+        if ($file = $this->chunkUpload('study-mat')) {
             $this->response('status', true);
             $data = $this->post();
-            $data['file'] = $file;
+            $data['file'] = $this->post('_file_name');
+            unset($data['_file_name']);
             $data['upload_by'] = $this->student_model->login_type();
             $this->db->insert('study_material', $data);
         }
     }
+
     function list_study_material()
     {
         $this->response('data', $this->student_model->study_materials()->result_array());
@@ -680,15 +689,30 @@ class Student extends Ajax_Controller
             'center_id' => $this->post('center_id')
         ]);
         $this->set_data('study_id', $this->post('id'));
+        $this->set_data('sql', $this->db->last_query());
         $this->set_data('students', $students->result_array());
         $this->response('status', ($students->num_rows() > 0));
         $this->response('html', $this->template('list-study-assign-students'));
     }
-
+    function study_assign_to_student(){
+        $data = [
+            'material_id' => $this->post('material_id'),
+            'student_id' => $this->post('student_id')
+        ];
+        if(!$this->post('check_status')){
+            $this->db->where($data)->delete('student_study_material');                
+        }
+        else{
+            $data['assign_time'] = time();
+            $this->db->insert('student_study_material', $data);
+        }
+        $this->response('status',true);
+    }
     function coupons()
     {
         $this->response('data', $this->student_model->coupons()->result_array());
     }
+    
     function coupon_update()
     {
         $this->response(

@@ -56,7 +56,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="file" class="form-label required mt-4">File</label>
-                                <input type="file" class="form-control" name="file">
+                                <input type="file" class="form-control" id="file">
                             </div>
                         </div>
                         <div class="col-md-12">

@@ -227,5 +227,27 @@ class Student extends MY_Controller
     {
         $this->view('list-by-center');
     }
+    function study_material()
+    {
+        if ($view = $this->uri->segment(3, 0)) {
+            try {
+                // throw new Exception('HELLO');
+                $this->token->decode($view);
+                $id = ($this->token->data('id'));
+                $get = $this->student_model->get_student_study(['material_id' => $id]);
+
+                if (!$get->num_rows())
+                    throw new Exception('Not Found..');
+                // echo $this->token->expiredOn();
+                $row = $get->row();
+                $file = $row->material_file;
+                $this->load->view('panel/study', ['url' => base_url('assets/student-study/' . $file)]);
+
+            } catch (Exception $e) {
+
+            }
+        } else
+            $this->student_view('study-material');
+    }
 }
 ?>

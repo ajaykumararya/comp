@@ -266,6 +266,13 @@ const viewImage = (image) => {
                     <i class="fa fa-eye"></i> View File
                 </button>`;
 }
+function formDataToArray(formData) {
+    let formArray = [];
+    formData.forEach((value, key) => {
+        formArray.push([key, value]);
+    });
+    return formArray;
+}
 const isLink = (string) => {
     return string.startsWith('http');
 }
@@ -910,9 +917,11 @@ const SwalShowloading = (message = '') => {
         html: message,
         allowOutsideClick: false,
         showCancelButton: false,
-        showConfirmButton: false
+        showConfirmButton: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
     });
-    Swal.showLoading();
 }
 const mySwal = (title = '', message, type = 'success', cancelButton = false, confirmButtonText = 'Ok') => {
     return Swal.fire({
@@ -968,6 +977,11 @@ const SwalHideLoading = () => {
     // }
     Swal.hideLoading();
     Swal.close();
+}
+function SwalUpdateLoading(message) {
+    Swal.update({
+        html: message
+    })
 }
 var deleteBtnRender = (td = 0, id = 0, message = '') => {
     return `<buton class="btn btn-danger btn-sm" data-message="${message}" data-table-filter="delete_row" data-target="${td}" data-id="${id}"><i class="ki-outline ki-trash"></i> Delete</buton>`;
@@ -1541,6 +1555,8 @@ $.AryaAjax = async function (options) {
             type: 'POST',
             url: '',
             data: {},
+            chunkSize: 1024 * 1024, // 1 MB chunk size
+            file: null, // The file to upload (if applicable)
             loading_message: 'Please Wait.., Until Process is completed.',
             success_message: false,
             dataType: 'json',
@@ -1553,20 +1569,133 @@ $.AryaAjax = async function (options) {
                 contentType: false,
             });
         }
-        // log(typeof settings.success_message);
-        // log(settings);
-        // return false;
         if ('boolean' !== typeof settings.validation) {
             settings.validation.validate().then(function (status) {
                 // log(status);
                 if (status == 'Valid') {
-                    callAjax(settings);
+                    if (settings.file instanceof File)
+                        uploadChunks(settings.file, settings.data);
+                    else
+                        callAjax(settings);
+                    // callAjax(settings);
                 }
             });
         }
         else {
-            callAjax(settings);
+            if (settings.file instanceof File)
+                uploadChunks(settings.file, settings.data);
+            else
+                callAjax(settings);
         }
+
+        function uploadChunks(file, formData) {
+            var totalChunks = Math.ceil(file.size / settings.chunkSize);
+            var currentChunk = 0;
+            var totalUploadedSize = 0; // Keep track of the total uploaded size
+
+            function uploadNextChunk() {
+                var start = currentChunk * settings.chunkSize;
+                var end = Math.min(file.size, start + settings.chunkSize);
+                var chunk = file.slice(start, end); // Create the blob
+                totalUploadedSize += chunk.size;
+
+                var chunkData = new FormData(); // New FormData for each chunk
+                chunkData.append('chunk', chunk);
+                chunkData.append('fileName', file.name);
+                chunkData.append('totalChunks', totalChunks);
+                chunkData.append('currentChunk', currentChunk + 1);
+
+                if (formData instanceof FormData) {
+                    formData.forEach((value, key) => {
+                        chunkData.append(key, value);
+                    });
+                }
+                else {
+                    for (var key in formData) {
+                        chunkData.append(key, formData[key]);
+                    }
+                }
+
+                // Calculate percentage
+                var percentage = Math.round((totalUploadedSize / file.size) * 100);
+
+                // Extend settings for chunk
+                var chunkSettings = $.extend({}, settings, {
+                    data: chunkData,
+                    processData: false,
+                    contentType: false,
+                });
+
+                // Call Ajax for each chunk
+                AryaAjaxXhr = $.ajax({
+                    type: chunkSettings.type,
+                    url: ajax_url + chunkSettings.url,
+                    data: chunkSettings.data,
+                    dataType: chunkSettings.dataType,
+                    contentType: chunkSettings.contentType,
+                    processData: chunkSettings.processData,
+                    success: function (data) {
+                        if (data.uploading) {
+                            var progress = Math.round((currentChunk / totalChunks) * 100);
+                            Swal.update({
+                                title: 'Uploading..',
+                                html: `
+            <div class="progress-bar-container" style="position:relative; width: 100%; height: 20px; background-color: #e0e0e0; border-radius: 10px;">
+                <div id="progress-bar" style="position: absolute; width: ${progress}%; height: 100%; background-color: teal; border-radius: 10px;"></div>
+            </div>
+            <p id="progress-text">${progress}% complete</p>
+        `
+                            });
+                        }
+                        // log(data);
+                        if ('login_expired' in data) {
+                            warn("Session Expired.");
+                            SwalWarning('Session Expired!', data.html).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            });
+                            errorSound();
+                            return false;
+                        }
+                        currentChunk++;
+                        log(currentChunk + '<' + totalChunks)
+                        if (currentChunk < totalChunks) {
+                            // Upload next chunk
+                            uploadNextChunk();
+                        } else {
+                            if (data.status) {
+                                SuccessSound();
+                                if (typeof settings.success_message === 'string' || (typeof settings.success_message === 'boolean' && settings.success_message)) {
+                                    let message = typeof settings.success_message === 'boolean' ? data.html : settings.success_message;
+                                    SwalSuccess('Success', message).then((re) => {
+                                        if (re.isConfirmed) {
+                                            if (settings.page_reload) {
+                                                location.reload();
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                            else
+                                errorSound();
+                            resolve(data);
+                            SwalHideLoading();
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        SwalHideLoading();
+                        SwalWarning(error, xhr.responseText);
+                        reject({ xhr, status, error, myerror: xhr.responseText });
+                    }
+                });
+            }
+
+            // Start uploading the first chunk
+            SwalShowloading(`Uploading 0%...`);
+            uploadNextChunk();
+        }
+
         function callAjax(settings) {
             // console.log(settings);
             SwalShowloading(settings.loading_message);
@@ -1940,8 +2069,8 @@ if (upload_syllabus.length) {
             file: {
                 extension: 'jpg,jpeg,png,gif,pdf',
                 type: 'image/jpeg,image/png,image/gif,application/pdf',
-                maxSize: max_upload_size, // 5 MB
-                message: 'The selected file is not valid. Allowed types: jpg, jpeg, png, gif and pdf. Maximum size: 2 MB.'
+                maxSize: (1024 * 1024 * 100), // 5 MB
+                message: 'The selected file is not valid. Allowed types: jpg, jpeg, png, gif and pdf. Maximum size: 100 MB.'
             }
         }
     });
@@ -1988,8 +2117,10 @@ if (upload_syllabus.length) {
     });
     upload_syllabus.on('submit', function (res) {
         res.preventDefault();
+        var file = $('#file')[0].files[0];
         $.AryaAjax({
             url: 'cms/upload-syllabus',
+            file: file,
             data: new FormData(this),
             validation: syllabusValidation
         }).then((r) => {

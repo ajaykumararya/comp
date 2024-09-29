@@ -83,12 +83,13 @@ document.addEventListener('DOMContentLoaded', function (e) {
         handleDeleteRows('student/delete-study-material');
         study_table.find('.assign').on('click', function () {
             var rowData = study_table.DataTable().row($(this).closest('tr')).data();
-               log(rowData);
-               return false;
+            //    log(rowData);
+            //    return false;
             $.AryaAjax({
-                url: 'student/list-study-assign-students',
+                url: 'student/list-assign-students',
                 data: rowData
             }).then((r) => {
+                log(r)
                 if (r.status) {
                     var drawer = mydrawer('Study Material');
                     drawer.find('.card-body').html(r.html).css({
@@ -99,34 +100,44 @@ document.addEventListener('DOMContentLoaded', function (e) {
                         dom: small_dom
                     });
                     drawer.find('.form-check-input').on('change', function () {
-                        var checkStatus = $(this).is(':checked');
+                        var checkStatus = $(this).is(':checked') ? 1 : 0;
+                        // log(checkStatus);
                         $.AryaAjax({
                             url: 'student/study-assign-to-student',
                             data: {
                                 student_id: $(this).val(),
-                                exam_id: rowData.exam_id,
+                                material_id: rowData.material_id,
                                 center_id: $(this).data('center_id'),
                                 check_status : checkStatus
                             }
                         }).then((e) => {
+                            log(e);
                             toastr.clear();
                             if(e.status)
-                                toastr.success(`Student ${checkStatus ? 'Added' : 'Removed'} Successfully..`);
+                                toastr.success(`Study Material ${checkStatus ? 'Assigned' : 'Removed'} Successfully..`);
                             else
                                 toastr.error('Something Went Wrong!');
                         });
                     })
+                }
+                else{
+                    // alert(4);
+                    SwalWarning('Alert','Students are not found on this Institute..');
                 }
             })
         })
     });
     form.addEventListener('submit', (r) => {
         r.preventDefault();
+        var file = $('#file')[0].files[0];
         $.AryaAjax({
             url: 'student/upload-study-material',
+            file : file,
             data: new FormData(form),
-            validation: validation
+            validation: validation,
+            
         }).then((s) => {
+            log(s);
             showResponseError(s);
             if (s.status)
                 study_table.DataTable().ajax.reload();

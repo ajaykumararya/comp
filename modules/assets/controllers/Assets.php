@@ -5,10 +5,21 @@ class Assets extends MY_Controller
     public $real_path = ('assets/file/');
     function file()
     {
-        $file = $this->uri->segment(3, 0);
-        $file = $this->file_path . $file;
-        if (!file_exists($file)) {
-            // echo 'f';
+        $file = '';
+        if ($this->uri->segment(3, 0)) {
+            $files = $this->uri->segment_array();
+            $t = &$files;
+            array_splice($t, 0, 2);
+            $file = implode('/', $t);
+        }
+        // exit(urldecode($file));
+        $this->_view($file);
+    }
+    private function _view($file)
+    {
+        $file = urldecode($this->file_path . $file);
+
+        if (!file_exists(($file))) {
             $file = 'assets/no_image.png';
         }
         $ext = strtolower((substr(strrchr($file, '.'), 1)));
@@ -16,7 +27,7 @@ class Assets extends MY_Controller
             case 'pdf':
                 header('Content-Type: application/pdf');
                 // Specify the file name for download
-                header('Content-Disposition: attachment; filename="' . basename($file) . '"');
+                header('Content-Disposition: inline; filename="' . basename($file) . '"');
                 break;
             case 'gif':
                 $ctype = 'image/gif';
@@ -32,8 +43,21 @@ class Assets extends MY_Controller
                 $ctype = 'image/svg+xml';
                 break;
         }
-        header('Content-Type: ' . $ctype);
+        if ($ext != 'pdf')
+            header('Content-Type: ' . $ctype);
         readfile($file);
+    }
+    function student_study()
+    {
+        $file = ($this->uri->segment(3, 0));
+        if($this->student_model->isStudent()){
+            $this->_view('study-mat/'.$file);
+        }
+        else{
+            $this->output->set_status_header(403);
+            $this->output->set_output("Permission Denied: You do not have access to this file.");
+            
+        }
     }
     function all_files()
     {
@@ -96,7 +120,7 @@ class Assets extends MY_Controller
         foreach ($query->result() as $k => $data) {
             $thisRef['id'] = $data->id;
             $thisRef['link'] = $data->link;
-            $thisRef['type'] = start_with('http',$data->link) ? 'Link' : 'Content';
+            $thisRef['type'] = start_with('http', $data->link) ? 'Link' : 'Content';
             $thisRef['isPrimary'] = $data->id == DefaultPage;
             $thisRef['url'] = $data->id == DefaultPage ? base_url() : ($data->link ? (start_with($data->link, 'http') ? $data->link : base_url($data->link)) : (base_url . '/web/' . AJ_ENCODE($data->id, true) . '/' . Print_page($data->page_name)));
             $thisRef['title'] = $data->page_name;

@@ -630,7 +630,7 @@
                                             <form action="" method="POST" class="">
                                                 <input type="hidden" name="status" value="temp_login">
                                                 <select data-control="select2" required data-placeholder="Select Centre"
-                                                    name="center_id" class="form-control" autocomplete="off">
+                                                    name="temp_center_id" class="form-control" autocomplete="off">
                                                     <option></option>
                                                     <?php
                                                     $centers = $this->center_model->get_center();

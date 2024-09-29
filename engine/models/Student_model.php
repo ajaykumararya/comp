@@ -62,9 +62,30 @@ class Student_model extends MY_Model
             $this->db->select('ce.logo as centre_logo');
         }
         switch ($case) {
-            case 'assign_study_student_list':
+            case 'get_student_study_material':
+                $this->db->select('sm.title as material_title,sm.file as material_file,sm.description as material_description');
+                $this->db->join('study_material as sm', 'sm.course_id = s.course_id');
+                $this->db->join('student_study_material as ssm', 'ssm.material_id = sm.material_id');
+                $this->db->group_by('ssm.material_id');
+                $this->myWhere('ssm',$condition);
+                break;
+            case 'student_study_data':
+                $this->db->select('ssm.assign_time,sm.*');
                 $this->db->join('student_study_material as ssm', 'ssm.student_id = s.id', 'left');
-                $this->db->group_by('s.id');
+                $this->db->join('study_material as sm', 'sm.material_id = ssm.material_id');
+                $this->db->group_by('ssm.assign_time');                
+                $this->db->join('student_certificates as sce', 'sce.student_id = s.id','left'); //AND sce.course_id = s.course_id
+                $this->db->where('sce.student_id IS NULL');                
+                $this->db->order_by('ssm.assign_time','DESC');
+                $this->db->where('s.id',$id);          
+                break;
+            case 'assign_study_student_list':
+                $this->db->select('ssm.assign_time');
+                $this->db->join('student_study_material as ssm', 'ssm.student_id = s.id', 'left');
+                $this->db->group_by('s.id');                
+                $this->db->join('student_certificates as sce', 'sce.student_id = s.id', 'left'); //AND sce.course_id = s.course_id
+                
+                $this->db->where('sce.student_id IS NULL');
                 unset($condition['study_id']);
                 $this->myWhere('s', $condition);
                 break;
@@ -432,5 +453,8 @@ class Student_model extends MY_Model
     function check_is_referred($student_id)
     {
         return $this->db->where('student_id', $student_id)->get('referral_coupons');
+    }
+    function get_student_study($where){
+        return $this->get_switch('get_student_study_material',$where);
     }
 }
