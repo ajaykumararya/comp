@@ -181,6 +181,9 @@ class Student extends MY_Controller
                 $this->student_view('index');
         }
     }
+    function your_attendance(){
+        $this->student_view('your_attendance');
+    }
     function id_card()
     {
         if ($this->student_model->isStudent()) {

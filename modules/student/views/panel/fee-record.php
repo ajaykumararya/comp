@@ -40,7 +40,7 @@ $isCenterOrAdmin = $this->student_model->isAdminOrCenter();
                                     <td>' . $i++ . '</td>
                                     <td>' . $record->payment_date . '</td>
                                     <td>' . $record->payment_id . '</td>
-                                    <td class="fs-4 fw-bolder">' . $record->ttl_amount .'
+                                    <td class="fs-4 fw-bolder">' . $record->amount .'
                                     </td>
                                     <td class="text-capitalize">' . $record->payment_type . (
                                         $record->ttl_discount ? '

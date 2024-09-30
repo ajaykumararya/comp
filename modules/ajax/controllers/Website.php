@@ -6,6 +6,43 @@ class Website extends Ajax_Controller
     {
         $this->_update_profile('students');
     }
+    public function fetch_attendance()
+    {
+        $roll_no = $this->post('roll_no'); // Assuming student is logged in
+        $this->db->select('sa.date, sa.attendance_type_id as status,at.type as title')
+                ->from('student_attendances sa')
+                ->join('attendence_type as at','sa.attendance_type_id = at.id')
+                ->where('sa.roll_no', $roll_no);
+        $query = $this->db->get();
+        $attendance = $query->result_array();
+
+        $data = array();
+        foreach ($attendance as $row) {
+            $data[] = array(
+                'title' => ucfirst($row['title']),
+                'type' => $row['status'],
+                'start' => $row['date'],
+                'color' => $this->get_status_color($row['status']) // Optional color for status
+            );
+        }
+
+        $this->response('data', $data);
+    }
+
+    // Optional function to assign different colors for attendance status
+    private function get_status_color($status)
+    {
+        switch ($status) {
+            case '1':
+                return '#28a745'; // Green
+            case '4':
+                return '#dc3545'; // Red
+            case '3':
+                return '#ffc107'; // Yellow
+            default:
+                return '#007bff'; // Default Blue
+        }
+    }
     private function _update_profile($table)
     {
         $this->response($_FILES);
@@ -21,13 +58,12 @@ class Website extends Ajax_Controller
     }
     function study_material_link()
     {
-        if($this->student_model->isStudent()){
+        if ($this->student_model->isStudent()) {
             $data = $this->post();
-            $this->response('status',true);
+            $this->response('status', true);
             $this->response('token', $this->token->withExpire('+30 minutes')->encode($data));
-        }
-        else
-            $this->response('error','Unautherised Student.');
+        } else
+            $this->response('error', 'Unautherised Student.');
     }
     function update_center_profile_image()
     {
@@ -113,7 +149,7 @@ class Website extends Ajax_Controller
     function student_result_verification()
     {
         if ($this->validation('website_student_verification')) {
-          
+
             $this->response($this->post());
             $roll_no = $this->post('roll_no');
             $dob = $this->post("dob");
@@ -146,11 +182,11 @@ class Website extends Ajax_Controller
                         $token = $this->token->withExpire()->encode([
                             'id' => $row->marksheet_id
                         ]);
-                        $url = base_url('marksheet-verification/'.$token);
+                        $url = base_url('marksheet-verification/' . $token);
                         $html .= '<tr>
-                                    <td><a href="'.$url.'" target="_blank">'.humnize_duration_with_ordinal($row->marksheet_duration,$row->duration_type).' Result</a></td>
+                                    <td><a href="' . $url . '" target="_blank">' . humnize_duration_with_ordinal($row->marksheet_duration, $row->duration_type) . ' Result</a></td>
                                     <td>
-                                        <a href="'.$url.'" target="_blank" class="btn btn-primary btn-xs btn-sm">View Result</a>
+                                        <a href="' . $url . '" target="_blank" class="btn btn-primary btn-xs btn-sm">View Result</a>
                                     </td>
                         </tr>';
                     }

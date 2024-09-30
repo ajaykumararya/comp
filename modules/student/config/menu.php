@@ -14,6 +14,13 @@ $config['dashboard'] = array(
             'condition' => CHECK_PERMISSION('STUDENT_ID_CARD')
         ),
         array(
+            'label' => 'Attendance',
+            'type' => 'your_attendance',
+            'url' => 'student/your_attendance',
+            'icon' => array('user',3),
+            'condition' => CHECK_PERMISSION('ATTENDANCE')
+        ),
+        array(
             'label' => 'Admit Card',
             'type' => 'marksheet',
             'url' => 'student/admit-card',

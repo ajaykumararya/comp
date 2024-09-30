@@ -39,7 +39,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.css" />
     <!--end::Global Stylesheets Bundle-->
     <link rel="stylesheet" href="{base_url}assets/custom/custom.css">
-    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" rel="stylesheet">
+
     <style>
         tr .eye-btn {
             display: none;
@@ -655,6 +656,8 @@
         display: none !important;
     }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+
 <script src="{base_url}assets/custom/custom.js"></script>
 <!--end::Custom Javascript-->
 <!--end::Javascript-->

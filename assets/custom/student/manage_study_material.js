@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             {
                 targets : 2,
                 render : function(data,type,row){
-                    return `<a href="${base_url}upload/${row.file}" target="_blank" class="btn btn-info btn-xs btn-sm"><i class="fa fa-eye"></i> File</a>`;
+                    return `<a href="${base_url}assets/student-study/${row.file}" target="_blank" class="btn btn-info btn-xs btn-sm"><i class="fa fa-eye"></i> File</a>`;
                 }
             },
             {

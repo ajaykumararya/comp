@@ -18,7 +18,7 @@ class Assets extends MY_Controller
     private function _view($file)
     {
         $file = urldecode($this->file_path . $file);
-
+        // exit($file);
         if (!file_exists(($file))) {
             $file = 'assets/no_image.png';
         }
@@ -50,7 +50,7 @@ class Assets extends MY_Controller
     function student_study()
     {
         $file = ($this->uri->segment(3, 0));
-        if($this->student_model->isStudent()){
+        if($this->student_model->isStudent() or $this->center_model->isAdminOrCenter()){
             $this->_view('study-mat/'.$file);
         }
         else{

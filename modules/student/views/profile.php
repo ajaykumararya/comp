@@ -275,6 +275,37 @@ if (PATH == 'zcc' && isset($student_docs) && $student_docs) {
                                 ?>
 
 
+<?php
+                                if (!CHECK_PERMISSION('CO_ORDINATE_SYSTEM')) {
+                                    ?>
+                                    <!--begin::Stat-->
+                                    <div
+                                        class="border border-danger border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                        <!--begin::Number-->
+                                        <div class="d-flex align-items-center flex-wrap">
+                                            <?= $this->ki_theme->keen_icon('bank', 5, 1, 'outline text-danger') ?>
+                                            <div class="fs-2 fw-bold me-5 text-danger" data-kt-countup="true"
+                                                data-kt-countup-value="<?= $this->student_model->remaining_course_fees([
+                                                    'student_id' => $student_id,
+                                                    'center_id' => $institute_id,
+                                                    'course_id' => $course_id
+                                                    ]) ?>">
+                                                0</div>
+                                        </div>
+                                        <!--end::Number-->
+                                        <!--begin::Label-->
+                                        <div class="fw-semibold fs-6 text-danger align-items-center flex-wrap w-100">
+                                            Remaining Course Fee
+                                        </div>
+                                        <!--end::Label-->
+                                    </div>
+                                    <!--end::Stat-->
+                                    <?php
+                                }
+
+                                ?>
+
+
                             </div>
                             <!--end::Stats-->
                         </div>

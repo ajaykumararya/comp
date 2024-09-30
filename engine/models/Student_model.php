@@ -67,24 +67,24 @@ class Student_model extends MY_Model
                 $this->db->join('study_material as sm', 'sm.course_id = s.course_id');
                 $this->db->join('student_study_material as ssm', 'ssm.material_id = sm.material_id');
                 $this->db->group_by('ssm.material_id');
-                $this->myWhere('ssm',$condition);
+                $this->myWhere('ssm', $condition);
                 break;
             case 'student_study_data':
                 $this->db->select('ssm.assign_time,sm.*');
                 $this->db->join('student_study_material as ssm', 'ssm.student_id = s.id', 'left');
                 $this->db->join('study_material as sm', 'sm.material_id = ssm.material_id');
-                $this->db->group_by('ssm.assign_time');                
-                $this->db->join('student_certificates as sce', 'sce.student_id = s.id','left'); //AND sce.course_id = s.course_id
-                $this->db->where('sce.student_id IS NULL');                
-                $this->db->order_by('ssm.assign_time','DESC');
-                $this->db->where('s.id',$id);          
+                $this->db->group_by('ssm.assign_time');
+                $this->db->join('student_certificates as sce', 'sce.student_id = s.id', 'left'); //AND sce.course_id = s.course_id
+                $this->db->where('sce.student_id IS NULL');
+                $this->db->order_by('ssm.assign_time', 'DESC');
+                $this->db->where('s.id', $id);
                 break;
             case 'assign_study_student_list':
                 $this->db->select('ssm.assign_time');
                 $this->db->join('student_study_material as ssm', 'ssm.student_id = s.id', 'left');
-                $this->db->group_by('s.id');                
+                $this->db->group_by('s.id');
                 $this->db->join('student_certificates as sce', 'sce.student_id = s.id', 'left'); //AND sce.course_id = s.course_id
-                
+
                 $this->db->where('sce.student_id IS NULL');
                 unset($condition['study_id']);
                 $this->myWhere('s', $condition);
@@ -162,10 +162,10 @@ class Student_model extends MY_Model
                     $this->db->limit($record_limit);
                     unset($condition['record_limit']);
                 }
-                if(isset($condition['limit'])){
+                if (isset($condition['limit'])) {
                     unset($condition['limit']);
                 }
-                $this->myWhere('s',$condition);
+                $this->myWhere('s', $condition);
                 break;
             case 'active_student':
                 $this->db->join('student_certificates as sce', 'sce.student_id = s.id', 'left'); //AND sce.course_id = s.course_id
@@ -183,6 +183,10 @@ class Student_model extends MY_Model
                 $this->db->where('s.roll_no', $roll_no);
                 break;
             case 'batch':
+                $this->db->join('student_certificates as sce', 'sce.student_id = s.id', 'left'); //AND sce.course_id = s.course_id
+
+                $this->db->where('sce.student_id IS NULL');
+
                 $this->db->where('b.id', $batch_id);
                 break;
             case 'fetch_fee_transactions':
@@ -454,7 +458,19 @@ class Student_model extends MY_Model
     {
         return $this->db->where('student_id', $student_id)->get('referral_coupons');
     }
-    function get_student_study($where){
-        return $this->get_switch('get_student_study_material',$where);
+    function get_student_study($where)
+    {
+        return $this->get_switch('get_student_study_material', $where);
     }
+    function remaining_course_fees($where = [])
+    {
+        extract($where);
+        $ttlSubmited = $this->db->select('SUM(amount) as ttlAmount')->where('type_key', 'course_fees')->where('student_id', $student_id)->get('student_fee_transactions')->row('ttlAmount');
+        // return $ttlSubmited;
+        $courseFee = $this->db->select('course_fee')->where([
+            'course_id' => $course_id,
+            'center_id' => $center_id
+        ])->get('center_courses')->row('course_fee');
+        return $courseFee - $ttlSubmited;
+    } 
 }
