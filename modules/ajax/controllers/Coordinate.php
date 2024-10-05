@@ -25,11 +25,15 @@ class Coordinate extends Ajax_Controller
     function list()
     {
         $this->db->select('c.*,SUM( CASE WHEN co.status = 1 THEN co.commission ELSE 0 END) as ttlCommission,SUM( CASE WHEN co.status = 0 THEN co.commission ELSE 0 END) as ttlPendingCommission')
-                ->from('centers as c')
-                ->join('commissions as co','co.user_id = c.id','left')
-                ->where('c.type','co_ordinator')
-                ->where('c.isPending','0')
-                ->where('c.isDeleted','0');
+        // $this->db->select('c.*')
+        //     ->select('IFNULL(SUM(CASE WHEN co.status = 1 THEN co.commission ELSE 0 END), 0) as ttlCommission, 
+        //                 IFNULL(SUM(CASE WHEN co.status = 0 THEN co.commission ELSE 0 END), 0) as ttlPendingCommission')
+            ->from('centers as c')
+            ->join('commissions as co', 'co.user_id = c.id', 'left')
+            ->where('c.type', 'co_ordinator')
+            ->where('c.isPending', '0')
+            ->where('c.isDeleted', '0')
+            ->group_by('c.id');
         $this->response('data', $this->db->get()->result());
     }
 
@@ -73,20 +77,22 @@ class Coordinate extends Ajax_Controller
         }
         $this->response('status', true);
     }
-    function list_commission(){
+    function list_commission()
+    {
         $id = $this->post('id');
         $this->db->select('co.*,ce.institute_name,s.name as student_name')
-                ->from('commissions as co')
-                ->join('centers as ce','ce.id = co.center_id')
-                ->join('students as s','s.id = co.type_id')
-                ->where('co.user_type','co_ordinator')
-                ->where('co.user_id',$id);
-        
+            ->from('commissions as co')
+            ->join('centers as ce', 'ce.id = co.center_id')
+            ->join('students as s', 's.id = co.type_id')
+            ->where('co.user_type', 'co_ordinator')
+            ->where('co.user_id', $id);
+
         $this->response('data', $this->db->get()->result_array());
     }
-    function update_commission(){
-        $this->db->where('id',$this->post('id'))->update('commissions',['status' => 1]);
-        $this->response('status',true);
+    function update_commission()
+    {
+        $this->db->where('id', $this->post('id'))->update('commissions', ['status' => 1]);
+        $this->response('status', true);
     }
 }
 ?>

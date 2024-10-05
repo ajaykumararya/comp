@@ -51,7 +51,7 @@
         }
 
         <?php
-    } else if (in_array(PATH, ['zcc'])) {
+    } else if (in_array(PATH, ['zcc','skycanworld'])) {
         ?>
             :root {
                 --primary: #E22B2B;

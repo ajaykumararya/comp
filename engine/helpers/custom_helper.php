@@ -13,6 +13,16 @@ function start_with($haystack, $needle)
 {
     return substr($haystack, 0, strlen($needle)) === $needle;
 }
+function module_view_exists($module_name, $view_file) {
+    // Path to the module's views folder
+    $view_path = APPPATH . 'modules/' . $module_name . '/views/' . $view_file . '.php';
+
+    // Check if the file exists
+    if (file_exists($view_path)) {
+        return true;
+    }
+    return false;
+}
 if (!function_exists('get_first_letter')) {
     function get_first_latter($string)
     {

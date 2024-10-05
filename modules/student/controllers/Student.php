@@ -95,6 +95,7 @@ class Student extends MY_Controller
     }
     function search_fees_payment()
     {
+        $this->ki_theme->breadcrumb_action_html('filter_fee_record',true);
         $this->view('search-fees-payment');
     }
     function generate_certificate()

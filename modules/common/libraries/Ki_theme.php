@@ -609,8 +609,14 @@ class Ki_theme
         $this->breadcrumb_data['title_icon'] = $this->keen_icon($clss, $path, $fs, $type);
         return $this;
     }
-    function breadcrumb_action_html($data)
+    function breadcrumb_action_html($data, $isFile = false)
     {
+        if ($isFile) {
+            if (module_view_exists('template', 'action/'.$data))
+                $data = $this->CI->load->view('template/' . $data, [], true);
+            else
+                $data = alert("$data.php page not found.",'danger');
+        }
         $this->breadcrumb_data['actions_buttons'] .= $data;
         return $this;
     }

@@ -339,6 +339,7 @@ class Student_model extends MY_Model
     }
     function get_student_via_id($id = 0)
     {
+        $this->db->select('s.fee_emi,s.fee_emi_type');
         return $this->get_switch('student_id', ['id' => $id]);
     }
     function id_card($id)
@@ -472,5 +473,8 @@ class Student_model extends MY_Model
             'center_id' => $center_id
         ])->get('center_courses')->row('course_fee');
         return $courseFee - $ttlSubmited;
-    } 
+    }
+    function remaining_emis($std_id){
+        
+    }
 }

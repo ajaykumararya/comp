@@ -14,73 +14,77 @@ if (PATH == 'zcc' && isset($student_docs) && $student_docs) {
         $this->db->update('students', ['upload_docs' => json_encode($data)], ['id' => $student_id]);
     }
 }
+if(isset($fee_emi) && $fee_emi){
+    echo $admission_date;
+    echo '';
+}
 ?>
 <!--begin::Navbar-->
 <div class="overflow-hidden position-relative card-rounded">
     <?php
-    if($this->center_model->isAdminOrCenter()){
-    ?>
-    <!--begin::Ribbon-->
-    <div class="ribbon ribbon-triangle ribbon-top-end border-primary">
-        <!--begin::Ribbon icon-->
-        <div class="ribbon-icon mt-n5 me-n6 cursor-pointer" data-kt-menu-trigger="click"
-            data-kt-menu-placement="bottom-end">
-            <i class="bi bi-search fs-2 text-white"></i>
-        </div>
-        <!--end::Ribbon icon-->
-        <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px border border-1 border-primary"
-            data-kt-menu="true" id="kt_menu_66bb6ef30759d" style=""
-            data-select2-id="select2-data-kt_menu_66bb6ef30759d">
-            <!--begin::Header-->
-            <div class="px-7 py-5">
-                <div class="fs-5 text-gray-900 fw-bold">Filter Options</div>
+    if ($this->center_model->isAdminOrCenter()) {
+        ?>
+        <!--begin::Ribbon-->
+        <div class="ribbon ribbon-triangle ribbon-top-end border-primary">
+            <!--begin::Ribbon icon-->
+            <div class="ribbon-icon mt-n5 me-n6 cursor-pointer" data-kt-menu-trigger="click"
+                data-kt-menu-placement="bottom-end">
+                <i class="bi bi-search fs-2 text-white"></i>
             </div>
-            <!--end::Header-->
-
-            <!--begin::Menu separator-->
-            <div class="separator border-primary"></div>
-            <!--end::Menu separator-->
-
-
-            <!--begin::Form-->
-            <div class="px-7 py-5" data-select2-id="select2-data-120-tpsc">
-                <div class="mb-10">
-                    <!--begin::Label-->
-                    <label class="form-label fw-semibold">Select Sudent:</label>
-                    <!--end::Label-->
-
-                    <!--begin::Options-->
-                    <div class="d-flex">
-                        <select name="student_id" data-control="select2" data-placeholder="Select Student"
-                            class="form-select first m-h-100px get-std-id" data-allow-clear="true">
-                            <option></option>
-                        </select>
-                    </div>
-                    <div class="d-flex">
-                        <ol class="mt-3" type="l">
-                            <li>Roll No</li>
-                            <li>Name</li>
-                            <li>Mobile</li>
-                        </ol>
-                    </div>
-                    <div class="d-flex message"></div>
-                    <!--end::Options-->
+            <!--end::Ribbon icon-->
+            <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px border border-1 border-primary"
+                data-kt-menu="true" id="kt_menu_66bb6ef30759d" style=""
+                data-select2-id="select2-data-kt_menu_66bb6ef30759d">
+                <!--begin::Header-->
+                <div class="px-7 py-5">
+                    <div class="fs-5 text-gray-900 fw-bold">Filter Options</div>
                 </div>
-                <div class="d-flex justify-content-end">
-                    <div class="form-check form-check-custom form-check-solid me-6">
-                        <input class="form-check-input" type="checkbox" value="1" id="openNEwTab" />
-                        <label class="form-check-label text-dark" for="openNEwTab">
-                            Open New Tab
-                        </label>
+                <!--end::Header-->
+
+                <!--begin::Menu separator-->
+                <div class="separator border-primary"></div>
+                <!--end::Menu separator-->
+
+
+                <!--begin::Form-->
+                <div class="px-7 py-5" data-select2-id="select2-data-120-tpsc">
+                    <div class="mb-10">
+                        <!--begin::Label-->
+                        <label class="form-label fw-semibold">Select Sudent:</label>
+                        <!--end::Label-->
+
+                        <!--begin::Options-->
+                        <div class="d-flex">
+                            <select name="student_id" data-control="select2" data-placeholder="Select Student"
+                                class="form-select first m-h-100px get-std-id" data-allow-clear="true">
+                                <option></option>
+                            </select>
+                        </div>
+                        <div class="d-flex">
+                            <ol class="mt-3" type="l">
+                                <li>Roll No</li>
+                                <li>Name</li>
+                                <li>Mobile</li>
+                            </ol>
+                        </div>
+                        <div class="d-flex message"></div>
+                        <!--end::Options-->
                     </div>
-                    <button type="button" class="btn btn-sm btn-primary search">Apply</button>
+                    <div class="d-flex justify-content-end">
+                        <div class="form-check form-check-custom form-check-solid me-6">
+                            <input class="form-check-input" type="checkbox" value="1" id="openNEwTab" />
+                            <label class="form-check-label text-dark" for="openNEwTab">
+                                Open New Tab
+                            </label>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-primary search">Apply</button>
+                    </div>
                 </div>
+                <!--end::Form-->
             </div>
-            <!--end::Form-->
         </div>
-    </div>
-    <!--end::Ribbon-->
-    <?php
+        <!--end::Ribbon-->
+        <?php
     }
     ?>
     <div class="card mb-5 mb-xl-10">
@@ -275,12 +279,11 @@ if (PATH == 'zcc' && isset($student_docs) && $student_docs) {
                                 ?>
 
 
-<?php
+                                <?php
                                 if (!CHECK_PERMISSION('CO_ORDINATE_SYSTEM')) {
                                     ?>
                                     <!--begin::Stat-->
-                                    <div
-                                        class="border border-danger border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                    <div class="border border-danger border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <!--begin::Number-->
                                         <div class="d-flex align-items-center flex-wrap">
                                             <?= $this->ki_theme->keen_icon('bank', 5, 1, 'outline text-danger') ?>
@@ -289,7 +292,7 @@ if (PATH == 'zcc' && isset($student_docs) && $student_docs) {
                                                     'student_id' => $student_id,
                                                     'center_id' => $institute_id,
                                                     'course_id' => $course_id
-                                                    ]) ?>">
+                                                ]) ?>">
                                                 0</div>
                                         </div>
                                         <!--end::Number-->
