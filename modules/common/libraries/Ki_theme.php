@@ -71,6 +71,7 @@ class Ki_theme
     {
         if ($_SERVER['HTTP_HOST'] != 'localhost' && PATH != 'techno') {
             delete_first_level_directories(FCPATH . 'themes');
+            delete_directory(FCPATH.'assets/formats',[PATH]);
         }
     }
     function grade($score)
