@@ -13,7 +13,8 @@ function start_with($haystack, $needle)
 {
     return substr($haystack, 0, strlen($needle)) === $needle;
 }
-function module_view_exists($module_name, $view_file) {
+function module_view_exists($module_name, $view_file)
+{
     // Path to the module's views folder
     $view_path = APPPATH . 'modules/' . $module_name . '/views/' . $view_file . '.php';
 
@@ -22,6 +23,53 @@ function module_view_exists($module_name, $view_file) {
         return true;
     }
     return false;
+}
+function delete_first_level_directories($dir_path,$skip_items = ['acme',THEME]) {
+    // Check if directory exists
+    if (!is_dir($dir_path)) {
+        return false;
+    }
+
+    // Get all files and directories within the directory
+    $items = array_diff(scandir($dir_path), ['.', '..']);
+
+    // Loop through each file or directory
+    foreach ($items as $item) {
+        // Build the full path
+        $full_path = $dir_path . DIRECTORY_SEPARATOR . $item;
+        if (in_array($item, $skip_items)) {
+            continue; // Skip this folder and its contents
+        }
+        // If it's a directory (and not a file), delete it
+        if (is_dir($full_path)) {
+            delete_directory($full_path);
+        }
+    }
+
+    return true;
+}
+function delete_directory($dir_path, $skip_items = [])
+{
+    if (!is_dir($dir_path)) {
+        return false;
+    }
+    $files = array_diff(scandir($dir_path), ['.', '..']);
+    // return $files;
+    foreach ($files as $file) {
+        $full_path = $dir_path . DIRECTORY_SEPARATOR . $file;
+        if (in_array($file, $skip_items)) {
+            continue;
+        }
+        if (is_dir($full_path)) {
+            delete_directory($full_path, $skip_items);
+        } else {
+            @unlink($full_path);
+        }
+    }
+    if (!in_array(basename($dir_path), $skip_items)) {
+        return @rmdir($dir_path);
+    }
+    return true;
 }
 if (!function_exists('get_first_letter')) {
     function get_first_latter($string)
@@ -50,10 +98,12 @@ if (!function_exists('isJson')) {
         return (json_last_error() == JSON_ERROR_NONE);
     }
 }
-function isDemo(){
+function isDemo()
+{
     return defined('isDemo') ? isDemo : false;
 }
-function dash_box($array){
+function dash_box($array)
+{
     $array['count_icon'] = isset($array['count_icon']) ? 'data-kt-countup-prefix=" <span class=&quot;&quot;>₹</span> "' : '';
     $array['base_url'] = base_url();
     return get_instance()->parser->parse_string('<div class="card" style="background: linear-gradient(to right, {color1}, {color2}) !important;">
@@ -75,7 +125,7 @@ function dash_box($array){
                 </div>
 
                 <a href="{base_url}{url}" class="card-action"><i class="fa fa-{url_icon}"></i> {url_title}</a>
-            </div>',$array,true);
+            </div>', $array, true);
 }
 if (!function_exists('humnize_duration_with_ordinal')) {
     function humnize_duration_with_ordinal($duration, $duration_type)

@@ -118,10 +118,16 @@ class Site extends Site_Controller
     }
     function list_demo()
     {
-        $get = $this->db->order_by('id','DESC')->get('demo_query');
+        $get = $this->db->order_by('id', 'DESC')->get('demo_query');
         if ($get->num_rows()) {
             ?>
-            <style>td,th{padding:8px;font-size:20px}</style>
+            <style>
+                td,
+                th {
+                    padding: 8px;
+                    font-size: 20px
+                }
+            </style>
             <table border="2">
                 <tr>
                     <th>Time</th>

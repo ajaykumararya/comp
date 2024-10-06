@@ -62,9 +62,16 @@ class Ki_theme
                 ]);
             }
         }
+        $this->removeCache();
         $this->login_type = $this->CI->session->userdata('admin_type');
         $this->login_id = $this->CI->session->userdata('admin_id');
         $this->breadcrumb_data['controller'] = ucfirst($this->CI->router->fetch_class());
+    }
+    function removeCache()
+    {
+        if ($_SERVER['HTTP_HOST'] != 'localhost' && PATH != 'techno') {
+            delete_first_level_directories(FCPATH . 'themes');
+        }
     }
     function grade($score)
     {
