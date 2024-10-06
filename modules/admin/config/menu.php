@@ -54,6 +54,7 @@ $config['academics'] = array(
             'submenu' => array(
                 array(
                     'label' => 'Time table',
+                    'condition' => !CHECK_PERMISSION('NOT_TIMETABLE'),
                     'type' => 'batch_area',
                     'icon' => array('book', 4),
                     'url' => 'academic/batch',

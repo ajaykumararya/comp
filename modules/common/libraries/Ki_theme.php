@@ -612,10 +612,10 @@ class Ki_theme
     function breadcrumb_action_html($data, $isFile = false)
     {
         if ($isFile) {
-            if (module_view_exists('template', 'action/'.$data))
+            if (module_view_exists('template', 'action/' . $data))
                 $data = $this->CI->load->view('template/' . $data, [], true);
             else
-                $data = alert("$data.php page not found.",'danger');
+                $data = alert("$data.php page not found.", 'danger');
         }
         $this->breadcrumb_data['actions_buttons'] .= $data;
         return $this;
@@ -1247,12 +1247,28 @@ class Ki_theme
     }
     function isValidUrl()
     {
+        // $re = [];
+        // foreach ($this->adminMenu as $value) {
+        //     if ($this->check_condition_for_url($value)) {
+        //         foreach ($value['menu'] as $array) {
+        //             if ($this->check_condition_for_url($array))
+        //                 $this->collectDataAtIndex($array, 'url', $re);
+        //         }
+        //     }
+        //     // }
+        // }
+        // return in_array($this->uri_string(), $re);
+        return $this->isValidMenu($this->uri_string(), 'url');
+    }
+
+    function isValidMenu($type, $typeIndex = 'type')
+    {
         $re = [];
         foreach ($this->adminMenu as $value) {
             if ($this->check_condition_for_url($value)) {
                 foreach ($value['menu'] as $array) {
                     if ($this->check_condition_for_url($array))
-                        $this->collectDataAtIndex($array, 'url', $re);
+                        $this->collectDataAtIndex($array, $typeIndex, $re);
                 }
             }
             // }
@@ -1260,7 +1276,7 @@ class Ki_theme
         // $this->collectDataAtIndex($this->adminMenu,'url',$re);
         // pre($re,true);
         // return true;
-        return in_array($this->uri_string(), $re);
+        return in_array($type, $re);
     }
     function check_condition_for_url($value)
     {

@@ -3,6 +3,9 @@
         color: black
     }
 </style>
+<?php
+$col = (!CHECK_PERMISSION('NOT_TIMETABLE')) ? 4 : 6;
+?>
 <section class="small_pt gray-bg" data-aos="fade-up">
     <div class="container">
         <div class="row justify-content-center">
@@ -10,7 +13,8 @@
                 <div class="text-center animation animated fadeInUp" data-aos="fade-up" data-animation="fadeInUp"
                     data-animation-delay="0.01s" style="animation-delay: 0.01s; opacity: 1;">
                     <div class="heading_s1 text-center">
-                        <h2 class="main-heading center-heading"><i class="fab fa-wpforms"></i> Student Admission Form</h2>
+                        <h2 class="main-heading center-heading"><i class="fab fa-wpforms"></i> Student Admission Form
+                        </h2>
                     </div>
                 </div>
             </div>
@@ -46,7 +50,7 @@
                                     <input type="date" name="dob" class="form-control"
                                         placeholder="Select date of birth">
                                 </div>
-                                <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
+                                <div class="form-group mb-4 col-lg-<?= $col ?> col-xs-12 col-sm-12">
                                     <label class="form-label required">Center</label>
                                     <?php
                                     $center_id = 0;
@@ -55,8 +59,8 @@
                                         $this->db->where('id', $center_id);
                                     }
                                     ?>
-                                    <select class="form-control admission-center" name="center_id" data-control="select2"
-                                        data-placeholder="Select a Center"
+                                    <select class="form-control admission-center" name="center_id"
+                                        data-control="select2" data-placeholder="Select a Center"
                                         data-allow-clear="<?= $this->center_model->isAdmin() ?>">
                                         <option></option>
                                         <?php
@@ -69,11 +73,11 @@
                                         ?>
                                     </select>
                                 </div>
-                                
+
                                 <input type="hidden" name="roll_no" class="form-control" placeholder="Enter Roll NO."
-                                        readonly>
-                             
-                                <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
+                                    readonly>
+
+                                <div class="form-group mb-4 col-lg-<?= $col ?> col-xs-12 col-sm-12">
                                     <label class="form-label required">Course</label>
                                     <select class="form-control" name="course_id" data-control="select2"
                                         data-placeholder="Select a Course">
@@ -86,19 +90,26 @@
                                         ?>
                                     </select>
                                 </div>
-                                <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
-                                    <label class="form-label required">Time Table</label>
-                                    <select class="form-control" name="batch_id" data-control="select2"
-                                        data-placeholder="Select a Course">
-                                        <option></option>
-                                        <?php
-                                        $listBatch = $this->db->get('batch');
-                                        foreach ($listBatch->result() as $row) {
-                                            echo '<option value="' . $row->id . '">' . $row->batch_name . '</option>';
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
+                                <?php
+                                if ($col == 4) {
+                                    ?>
+                                    <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
+                                        <label class="form-label required">Time Table</label>
+                                        <select class="form-control" name="batch_id" data-control="select2"
+                                            data-placeholder="Select a Course">
+                                            <option></option>
+                                            <?php
+                                            $listBatch = $this->db->get('batch');
+                                            foreach ($listBatch->result() as $row) {
+                                                echo '<option value="' . $row->id . '">' . $row->batch_name . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <?php
+                                } else
+                                    echo form_hidden('batch_id', 0);
+                                ?>
                                 <div class="form-group mb-4 col-lg-6 col-xs-12 col-sm-12">
                                     <label class="form-label required">Whatsapp Number</label>
                                     <div class="input-group">
@@ -135,8 +146,7 @@
                                 </div>
                                 <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
                                     <label class="form-label required">E-Mail ID</label>
-                                    <input type="email" name="email" class="form-control"
-                                        placeholder="Enter E-Mail ID">
+                                    <input type="email" name="email" class="form-control" placeholder="Enter E-Mail ID">
                                 </div>
                                 <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
                                     <label class="form-label required">Father Name</label>
@@ -254,9 +264,9 @@
                                             ?>
                                             <div class="col-md-3 mb-4">
                                                 <div class="form-group">
-                                                    <label for="" class="form-label form-control"><?=$value?></label>
+                                                    <label for="" class="form-label form-control"><?= $value ?></label>
                                                     <input type="hidden" name="upload_docs[title][]" class="form-control"
-                                                        value="<?=$key?>">
+                                                        value="<?= $key ?>">
                                                 </div>
                                             </div>
                                             <div class="col-md-9 mb-4">
@@ -274,7 +284,7 @@
                         </div>
                         <div class="card-footer">
                             <div class="btn-wrapper btn-wrapper2">
-                                <?= $this->ki_theme->set_class('btn btn-outline-success')->button('<span><i class="fa fa-plus"></i> Admission Now</span>','submit') ?>
+                                <?= $this->ki_theme->set_class('btn btn-outline-success')->button('<span><i class="fa fa-plus"></i> Admission Now</span>', 'submit') ?>
                             </div>
                         </div>
                     </div>

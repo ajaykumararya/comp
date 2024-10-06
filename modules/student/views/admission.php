@@ -72,6 +72,11 @@
                                         'isPending' => 0
                                     ]);
                                 }
+                                $rolCol = 2;
+                                $courseCol = 3;
+                                if(CHECK_PERMISSION('NOT_TIMETABLE')){
+                                    $rolCol = $courseCol = 4;
+                                }
                                 ?>
                                 <select class="form-select" id="centre_id" name="center_id" data-control="select2"
                                     data-placeholder="Select a Center"
@@ -89,26 +94,23 @@
                                 </select>
                             </div>
 
-                            <div class="form-group mb-4 col-lg-2 col-xs-12 col-sm-12">
+                            <div class="form-group mb-4 col-lg-<?=$rolCol?> col-xs-12 col-sm-12">
                                 <label class="form-label required">Roll No.</label>
                                 <input type="text" name="roll_no" class="form-control" placeholder="Enter Roll NO.">
                             </div>
-                            <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                            <div class="form-group mb-4 col-lg-<?=$courseCol?> col-xs-12 col-sm-12">
                                 <label class="form-label required">Course</label>
                                 <select class="form-select" name="course_id" data-control="select2"
                                     data-placeholder="Select a Course" data-allow-clear="true">
                                     <option></option>
-                                    <?php
-                                    // $listCourse = $this->db->get('course');
-                                    // foreach ($listCourse->result() as $row) {
-                                    //     echo '<option value="' . $row->id . '">' . $row->course_name . '</option>';
-                                    // }
-                                    ?>
                                 </select>
                             </div>
 
 
-
+                            <?php
+                            if(!CHECK_PERMISSION('NOT_TIMETABLE'))     {
+                                ?>
+                            
                             <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
                                 <label class="form-label required">Time Table</label>
                                 <select class="form-select" name="batch_id" data-control="select2"
@@ -122,6 +124,11 @@
                                     ?>
                                 </select>
                             </div>
+                            <?php
+                            }
+                            else
+                                echo form_hidden('batch_id',0);
+                            ?>
 
 
                             <div class="form-group mb-4 col-lg-6 col-xs-12 col-sm-12">

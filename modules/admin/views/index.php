@@ -380,6 +380,7 @@ if ($this->center_model->isAdminOrCenter()) {
                 </div>
                 <?php
             }
+            if($this->ki_theme->isValidMenu('fees_collection')){
             ?>
             <div class="col-xl-3 col-md-6 mb-4">
                 <?= dash_box([
@@ -394,6 +395,9 @@ if ($this->center_model->isAdminOrCenter()) {
                     'icon' => 'bank'
                 ]) ?>
             </div>
+            <?php
+            }
+            ?>
         </div>
     </div>
 

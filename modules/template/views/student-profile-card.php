@@ -30,8 +30,8 @@
     }
 </style>
 <!-- Student Profile -->
- <?php
-$IsPassout = $this->student_model->get_switch('passout',['id' => $student_id])->num_rows();
+<?php
+$IsPassout = $this->student_model->get_switch('passout', ['id' => $student_id])->num_rows();
 ?>
 <div class="student-profile py-4">
     <div class="container">
@@ -57,7 +57,7 @@ $IsPassout = $this->student_model->get_switch('passout',['id' => $student_id])->
                                 <td>{contact_number}</td>
                             </tr>
                             <?php
-                            if($this->center_model->isAdminOrCenter()){
+                            if ($this->center_model->isAdminOrCenter()) {
                                 echo '<tr>
                                     <td colspan="2">
                                         <a href="' . base_url('student/profile/' . $student_id) . '"  target="_blank" class="btn btn-xs btn-sm btn-info w-100"> <i class="fa fa-user"></i> View Profile</a>
@@ -91,11 +91,17 @@ $IsPassout = $this->student_model->get_switch('passout',['id' => $student_id])->
                                 <td width="2%">:</td>
                                 <td>{admission_date}</td>
                             </tr>
-                            <tr> 
-                                <th width="30%">Time Table </th>
-                                <td width="2%">:</td>
-                                <td>{batch_name} <?=$IsPassout ? label('Student Passout','success') : ''?></td>
-                            </tr>
+                            <?php
+                            if (!CHECK_PERMISSION('NOT_TIMETABLE')) {
+                                ?>
+                                <tr>
+                                    <th width="30%">Time Table </th>
+                                    <td width="2%">:</td>
+                                    <td>{batch_name} <?= $IsPassout ? label('Passount Student', 'success') : '' ?></td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
                             <tr>
                                 <th width="30%">Center Name </th>
                                 <td width="2%">:</td>
