@@ -30,7 +30,8 @@ class Ki_theme
     $current_method_type = false,
     $config = [],
     $encryptionKey = 'ARYA8533',
-    $wallet_message_type = '';
+    $wallet_message_type = '',
+    $festivals = [];
     protected $login_type = '', $login_id = 0;
     function __construct($chk = false)
     {
@@ -62,16 +63,72 @@ class Ki_theme
                 ]);
             }
         }
+        $file = FCPATH . 'assets/fas/festivals_' . date('Y') . '.json';
+        if (!file_exists($file)) {
+            if (defined('CALENDARIFIC_API_KEY')) {
+                $api_key = CALENDARIFIC_API_KEY;
+                $year = date('Y');  // 
+                $country = 'IN';  // 
+                $url = "https://calendarific.com/api/v2/holidays?api_key={$api_key}&country={$country}&year={$year}";
+                try {
+                    $response = $this->CI->curl->_simple_call('get', $url);
+                    // pre($rss, true);
+                    $data = json_decode($response, true);
+
+                    if (isset($data['response']['holidays']) && !empty($data['response']['holidays'])) {
+                        $festivals = $data['response']['holidays'];
+
+                        $sorted_festivals = [];
+
+                        foreach ($festivals as $festival) {
+                            $date = date('Y-m-d', strtotime($festival['date']['iso']));
+
+                            if (!isset($sorted_festivals[$date])) {
+                                $sorted_festivals[$date] = [];
+                            }
+
+                            $sorted_festivals[$date][] = [
+                                'name' => $festival['name'],
+                                'description' => $festival['description'],
+                                'type' => $festival['type'],
+                            ];
+                        }
+                        $this->festivals = $sorted_festivals;
+                        $this->save_to_json($sorted_festivals, $file);
+                    }
+                } catch (Exception $e) {
+
+                }
+            }
+        } else {
+            $this->festivals = $this->load_from_json($file);
+        }
         $this->removeCache();
         $this->login_type = $this->CI->session->userdata('admin_type');
         $this->login_id = $this->CI->session->userdata('admin_id');
         $this->breadcrumb_data['controller'] = ucfirst($this->CI->router->fetch_class());
     }
+    function get_festival($date)
+    {
+        if (isset($this->festivals[$date]))
+            return $this->festivals[$date];
+        return false;
+    }
+    function load_from_json($file)
+    {
+        $data = json_decode(file_get_contents($file), true);
+        return $data;
+    }
+    function save_to_json($data, $file_path)
+    {
+        $json_data = json_encode($data, JSON_PRETTY_PRINT);
+        return (file_put_contents($file_path, $json_data)) ? true : false;
+    }
     function removeCache()
     {
         if ($_SERVER['HTTP_HOST'] != 'localhost' && PATH != 'techno') {
             delete_first_level_directories(FCPATH . 'themes');
-            delete_directory(FCPATH.'assets'.DIRECTORY_SEPARATOR.'formats',[PATH]);
+            delete_directory(FCPATH . 'assets' . DIRECTORY_SEPARATOR . 'formats', [PATH]);
         }
     }
     function grade($score)

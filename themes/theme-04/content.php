@@ -1,6 +1,6 @@
-<div class="pt-40 pb-40 pt-xs-60 ">
+<div class="ttm-row services-section clearfix ">
     <div class="container">
-        <div class="row pb-30">
+        <div class="row">
             <div class="col-md-12">
                 {content}
             </div>

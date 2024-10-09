@@ -208,7 +208,7 @@ if ($header_sections) {
                                 foreach ($fields as $value) {
                                     $my_index = $value->title;
                                     $value = $value->link;
-                                    echo '<div class="form-group position-relative mb-4">
+                                    echo '<div class="form-group position-relative mb-4 sortable-item">
                                             <input type="text" name="title[]" placeholder="Enter Title" class="form-control border border-primary border-bottom-0 br-none p-2" value="' . $my_index . '">
                                             <input type="text" name="value[]" placeholder="Enter Value" class="form-control border border-primary border-bottom-0 br-none p-2" autocomplete="off" value="' . $value . '">
                                             <a href="javascript:;" class="btn border-1 border-danger border btn-light-danger h-25px lh-0 w-100 br-none p-2"><i class="ki-outline ki-trash"></i> Delete</a>
@@ -233,6 +233,28 @@ if ($header_sections) {
 }
 ?>
 <?php
+if (THEME == 'theme-04') {
+    ?>
+    <form class="extra-setting">
+
+        <div class="{card_class}">
+            <div class="card-header">
+                <h3 class="card-title">Footer About US</h3>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="footer_about_us">About US Content</label>
+                    <textarea name="footer_about_us" class="form-control" id="tinymce_basic" data-kt-autosize="true"><?=$title = $this->SiteModel->get_setting('footer_about_us');?></textarea>
+                </div>
+            </div>
+            <div class="card-footer">
+                {save_button}
+            </div>
+
+        </div>
+    </form>
+    <?php
+}
 $footer_sections = $this->ki_theme->config('footer_sections');
 if ($footer_sections) {
     ?>
@@ -263,7 +285,7 @@ if ($footer_sections) {
                                     $value = $value->link;
                                     echo '<div class="form-group position-relative mb-4">
                                             <input type="text" name="title[]" placeholder="Enter Title" class="form-control border border-primary border-bottom-0 br-none p-2" value="' . $my_index . '">
-                                            <input type="text" name="value[]" placeholder="Enter Value" class="form-control border border-primary border-bottom-0 br-none p-2" autocomplete="off" value="' . $value . '">
+                                               <input type="text" name="value[]" placeholder="Enter Value" class="form-control border border-primary border-bottom-0 br-none p-2" autocomplete="off" value="' . $value . '">
                                             <a href="javascript:;" class="btn border-1 border-danger border btn-light-danger h-25px lh-0 w-100 br-none p-2"><i class="ki-outline ki-trash"></i> Delete</a>
                                         </div>';
                                 }

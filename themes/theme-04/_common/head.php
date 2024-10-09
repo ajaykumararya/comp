@@ -1,26 +1,45 @@
-<!-- CSS -->
-<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700,800%7CLato:300,400,700%7CRoboto:400,500,700"
-    rel="stylesheet" type="text/css">
-<link href="{theme_url}assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+<!-- fontawesome -->
+<link rel="stylesheet" type="text/css" href="{theme_url}assets/css/font-awesome.css" />
 
-<link href="{theme_url}assets/css/flaticon.css" rel="stylesheet" type="text/css">
-<!-- carousel -->
-<link href="{theme_url}assets/css/owl.carousel.css" rel="stylesheet" type="text/css">
-<!-- mediaelementplayer -->
-<link href="{theme_url}assets/css/mediaelementplayer.css" rel="stylesheet" type="text/css">
-<!--Light box-->
-<link href="{theme_url}assets/css/jquery.fancybox.css" rel="stylesheet" type="text/css">
-<!-- Revolution Style-sheet -->
-<!--Main Style-->
-<link href="{theme_url}assets/css/nav_corporate.css" rel="stylesheet" type="text/css">
-<link href="{theme_url}assets/css/style1.css" rel="stylesheet" type="text/css">
+<!-- themify -->
+<link rel="stylesheet" type="text/css" href="{theme_url}assets/css/themify-icons.css" />
+
+<!-- flaticon -->
+<link rel="stylesheet" type="text/css" href="{theme_url}assets/css/flaticon.css" />
+
+<!-- REVOLUTION LAYERS STYLES -->
 
 
-<link href="{theme_url}assets/css/index3.css" rel="stylesheet" type="text/css">
+<!-- bootstrap -->
+<link rel="stylesheet" type="text/css" href="{theme_url}assets/css/bootstrap.min.css" />
 
-<!--Theme Color-->
+<!-- animate -->
+<link rel="stylesheet" type="text/css" href="{theme_url}assets/css/animate.css" />
 
-<link href="{theme_url}assets/css/theme-color/default.css" rel="stylesheet" id="theme-color" type="text/css">
+<!-- owl-carousel -->
+<link rel="stylesheet" type="text/css" href="{theme_url}assets/css/owl.carousel.css">
 
+<!-- fontawesome -->
+<link rel="stylesheet" type="text/css" href="{theme_url}assets/css/font-awesome.css" />
 
-<link rel="stylesheet" type="text/css" href="{theme_url}wslider/engine1/style.css" />
+<!-- themify -->
+<link rel="stylesheet" type="text/css" href="{theme_url}assets/css/themify-icons.css" />
+
+<!-- flaticon -->
+<link rel="stylesheet" type="text/css" href="{theme_url}assets/css/flaticon.css" />
+
+<!-- REVOLUTION LAYERS STYLES -->
+
+<link rel="stylesheet" type="text/css" href="{theme_url}assets/revolution/css/rs6.css">
+
+<!-- prettyphoto -->
+<link rel="stylesheet" type="text/css" href="{theme_url}assets/css/prettyPhoto.css">
+
+<!-- shortcodes -->
+<link rel="stylesheet" type="text/css" href="{theme_url}assets/css/shortcodes.css" />
+
+<!-- main -->
+<link rel="stylesheet" type="text/css" href="{theme_url}assets/css/main.css" />
+
+<!-- responsive -->
+<link rel="stylesheet" type="text/css" href="{theme_url}assets/css/responsive.css" />

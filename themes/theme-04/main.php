@@ -1,658 +1,498 @@
-<script type="text/javascript" src="{theme_url}wslider/engine1/jquery.js"></script>
-<style type="text/css">
-    .welcome {
-        position: fixed;
-        top: 10%;
-        left: 20%;
-        z-index: 1000;
-    }
 
-    .welcome .close {
-        position: absolute;
-        top: -5px;
-        right: 100px;
-        width: 70px;
-        height: 50px;
-        line-height: 50px;
-        padding: 1px;
-        background: url('adm/files/close.png') no-repeat center;
-        z-index: 1001;
-        opacity: 1
-    }
 
-    .demoTest {
-        position: fixed;
-        z-index: 5000;
-        right: 0px;
-        top: 330px;
-        width: 45px;
-        height: 170px;
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
-        background: #0066CC;
-        color: #000000;
-        background-image: url(free.png);
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: 24px 168px;
-        -moz-transition: background 0.4s;
-        -ms-transition: background 0.4s;
-        -o-transition: background 0.4s;
-        transition: background 0.4s;
-    }
-
-    .demoTest:hover {
-        background: #67B3FE;
-        background-image: url(free.png);
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: 24px 160px;
-    }
-
-    .demoTest1 {
-        position: fixed;
-        z-index: 5000;
-        right: 0px;
-        top: 150px;
-        width: 45px;
-        height: 170px;
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
-        background: #0066CC;
-        color: #000000;
-        background-image: url(free1.png);
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: 24px 168px;
-        -moz-transition: background 0.4s;
-        -ms-transition: background 0.4s;
-        -o-transition: background 0.4s;
-        transition: background 0.4s;
-    }
-
-    .demoTest1:hover {
-        background: #67B3FE;
-        background-image: url(free1.png);
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: 24px 160px;
-    }
-</style>
-<style>
-    .popupBox {
-        display: none;
-        position: fixed;
-        top: 30%;
-        left: 40%;
-        margin-top: -9em;
-        /*set to a negative number 1/2 of your height*/
-        margin-left: -15em;
-        width: 30em;
-        height: 36em;
-        color: #000000;
-        border: 5px solid #4E93A2;
-        -moz-border-radius: 8px;
-        -webkit-border-radius: 8px;
-        background-color: #FFFFFF;
-        z-index: 1000;
-    }
-
-    .popupContent {
-        display: none;
-        font-family: Arial, Helvetica, sans-serif;
-        color: #4E93A2;
-        margin-top: 30px;
-        margin-left: 30px;
-        margin-right: 30px;
-    }
-
-    .deleteMeetingButton {
-        clear: both;
-        cursor: pointer;
-        width: 100px;
-        height: 30px;
-        border-radius: 4px;
-        background-color: #5CD2D2;
-        border: none;
-        text-align: center;
-        line-height: 10px;
-        color: #FFFFFF;
-        font-size: 11px;
-        font-family: Arial, Helvetica, sans-serif;
-        font-weight: bold;
-    }
-
-    /* added code below */
-    .deleteMeetingClose {
-        font-size: 1.5em;
-        cursor: pointer;
-        position: absolute;
-        right: 10px;
-        top: 5px;
-    }
-</style>
 <script>
-    $(document).ready(function () {
-        /*
-        $('.deleteMeeting').click(function () {
-            $('#overlay').fadeIn('slow');
-            $('#popupBox').fadeIn('slow');
-            $('#popupContent').fadeIn('slow');
-        });
-        */
-        $('#b0').click(function () {
-            $('.deleteMeetingClose').trigger('click');
-            $('.popupBox').width('32em');
-            $('.popupBox').height('28em');
-            $('#popupBox0').fadeIn('slow');
-            $('#popupContent0').fadeIn('slow');
-        });
-        $('#b1').click(function () {
-            $('.deleteMeetingClose').trigger('click');
-            $('.popupBox').width('20em');
-            $('.popupBox').height('26em');
-            $('#popupBox1').fadeIn('slow');
-            $('#popupContent1').fadeIn('slow');
-        });
-        $('#b2').click(function () {
-            $('.deleteMeetingClose').trigger('click');
-            $('.popupBox').width('20em');
-            $('.popupBox').height('26em');
-            $('#popupBox2').fadeIn('slow');
-            $('#popupContent2').fadeIn('slow');
-        });
-        $('#b3').click(function () {
-            $('.deleteMeetingClose').trigger('click');
-            $('.popupBox').width('20em');
-            $('.popupBox').height('26em');
-            $('#popupBox3').fadeIn('slow');
-            $('#popupContent3').fadeIn('slow');
-        });
-        $('#b4').click(function () {
-            $('.deleteMeetingClose').trigger('click');
-            $('.popupBox').width('26em');
-            $('.popupBox').height('16em');
-            $('#popupBox4').fadeIn('slow');
-            $('#popupContent4').fadeIn('slow');
-        });
-        $('#b5').click(function () {
-            $('.deleteMeetingClose').trigger('click');
-            $('.popupBox').width('26em');
-            $('.popupBox').height('16em');
-            $('#popupBox5').fadeIn('slow');
-            $('#popupContent5').fadeIn('slow');
-        });
-        $('#b6').click(function () {
-            $('.deleteMeetingClose').trigger('click');
-            $('.popupBox').width('22em');
-            $('.popupBox').height('26em');
-            $('#popupBox6').fadeIn('slow');
-            $('#popupContent6').fadeIn('slow');
-        });
-        $('#b7').click(function () {
-            $('.deleteMeetingClose').trigger('click');
-            $('.popupBox').width('18em');
-            $('.popupBox').height('30em');
-            $('#popupBox7').fadeIn('slow');
-            $('#popupContent7').fadeIn('slow');
-        });
-        // added .deleteMeetingClose into the selectors
-        $('.deleteMeetingClose').click(function () {
-            $('#overlay').fadeOut('slow');
-            $('.popupBox').fadeOut('slow');
-            $('.popupContent').fadeOut('slow');
-        });
-    });
-</script>
-</head>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
 
-<body class="full-intro background--dark">
-    <font-family: Verdana, sans-serif;>
-        <font colour="#DAA520"></font>
-        <a href="scEnquiry.html" class="demoTest" alt=""></a>
-        <a href="candidate/index.html" class="demoTest1" alt=""></a>
-        <!--loader-->
-        <div id="preloader">
-            <div class="sk-circle">
-                <div class="sk-circle1 sk-child"></div>
-                <div class="sk-circle2 sk-child"></div>
-                <div class="sk-circle3 sk-child"></div>
-                <div class="sk-circle4 sk-child"></div>
-                <div class="sk-circle5 sk-child"></div>
-                <div class="sk-circle6 sk-child"></div>
-                <div class="sk-circle7 sk-child"></div>
-                <div class="sk-circle8 sk-child"></div>
-                <div class="sk-circle9 sk-child"></div>
-                <div class="sk-circle10 sk-child"></div>
-                <div class="sk-circle11 sk-child"></div>
-                <div class="sk-circle12 sk-child"></div>
-            </div>
-        </div>
-        <!--loader-->
-        <!-- Site Wrapper -->
-        <div class="wrapper">
-            <!-- All India Computer Saksharta Mission -->
-            <script type="text/javascript">
-                (function () {
-                    var options = {
-                        whatsapp: "+91 9667555300 ", // WhatsApp number
-                        call_to_action: "May i Help you..!!!", // Call to action
-                        position: "left", // Position may be 'right' or 'left'
-                    };
-                    var proto = document.location.protocol, host = "getbutton.io", url = proto + "//static." + host;
-                    var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
-                    s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
-                    var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
-                })();
-            </script>
-            <!-- HEADER -->
-            <!--Start Top bar area -->
-            <section class="top-bar-area">
-                <div class="container">
-                    <div class="clearfix">
-                        <div class="right">
-                            <p>
-                            <div id="google_translate_element"></div>
-                            <script type="text/javascript">
-                                function googleTranslateElementInit() {
-                                    new google.translate.TranslateElement({
-                                        pageLanguage: 'en',
-                                        includedLanguages: 'hi,gu,bn,ur,ta,te',
-                                        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-                                    }, 'google_translate_element');
-                                }
-                            </script>
-                            <script type="text/javascript"
-                                src="../translate.google.com/translate_a/elementa0d8.js?cb=googleTranslateElementInit"></script>
-                            <div class="Right">
-                                <i class="phone-office.svg"><img src="{theme_url}image/linkage/phone-office.svg"></i>
-                                Help Line :-
-                                0744-2392007</b>
-                                <div class="pull-right">
-                                    <a href="http://skills.aicsm.com/" class="_blank" alt="">
-                                        <button class="btn btn-primary" type="button">Skills Website</button></a>
-                                    <a href="https://aicsm.online/public/" class="_blank" alt="">
-                                        <button class="btn btn-primary" type="button">E-Learn</button></a>
-                                    <a href="adm/index.html"><button class="btn btn-primary" type="button" alt="">Center
-                                            Login</button></a>
-                                    <a href="adm/index.html"> <button class="btn btn-danger" type="button"
-                                            alt="">Officer
-                                            Login</button></a>
-                                    <a href="candidate/index.html"><button class="btn btn-success" alt="">
-                                            Student Login</button></a>
-                                    <a href="SrchByFrmNoOutSide.html"><button class="btn btn-info" alt="">
-                                            Student Verification</button></a>
-                                    </p>
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
+
+<body>
+    
+    <!--page start-->
+    <div class="page">
+
+
+        <!--header start-->
+        <header id="masthead" class="header ttm-header-style-01">
+
+            <!-- ttm-header-wrap -->
+            <div class="ttm-header-wrap">
+                <!-- ttm-stickable-header-w -->
+                <div id="ttm-stickable-header-w" class="ttm-stickable-header-w clearfix">
+                    <!-- ttm-topbar-wrapper -->
+                    <div class="ttm-topbar-wrapper ttm-textcolor-white clearfix">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="ttm-topbar-content">
+                                        <div class="topbar-right text-right">
+                                            <ul class="top-contact text-left">
+                                                <li><i class="fa fa-phone ttm-textcolor-skincolor"></i><a
+                                                        href="tel:+91{number}">+91 {number}</a></li>
+                                                <li><i class="fa fa-envelope-o ttm-textcolor-skincolor"></i><a
+                                                        href="mailto:{email}">{email}</a>
+                                                </li>
+                                            </ul>
+                                            <!-- <div class="header-btn">
+                                                <a class="font-weight-600" style="margin-left: 2px;"
+                                                    href="workshop-form/index.html" target="_blank">Workshop
+                                                    Registration</a>
+                                            </div>
+                                            <div class="header-btn">
+                                                <a class="font-weight-600" href="model-form/index.html"
+                                                    target="_blank">Model Registration</a>
+                                            </div> -->
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-            </section>
-            <!--End Top bar area -->
-            <!--Start header area-->
-            <header class="header-area">
+                    </div><!-- ttm-topbar-wrapper end -->
+
+                    <div id="site-header-menu" class="site-header-menu">
+                        <div class="site-header-menu-inner ttm-stickable-header">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <!--site-navigation -->
+                                        <div id="site-navigation" class="site-navigation d-flex flex-row">
+                                            <div class="site-branding mr-auto">
+                                                <!-- site-branding -->
+                                                <a class="home-link" href="{base_url}" title="{title}"
+                                                    rel="home">
+                                                    <img id="logo-img" class="img-center lazyload" src="{assets}{logo}"
+                                                        alt="logo">
+                                                </a>
+                                                <!-- site-branding end -->
+                                            </div>
+                                            <div class="ttm-menu-toggle">
+                                                <input type="checkbox" id="menu-toggle-form" />
+                                                <label for="menu-toggle-form" class="ttm-menu-toggle-block">
+                                                    <span class="toggle-block toggle-blocks-1"></span>
+                                                    <span class="toggle-block toggle-blocks-2"></span>
+                                                    <span class="toggle-block toggle-blocks-3"></span>
+                                                </label>
+                                            </div>
+                                            <nav id="menu" class="menu">
+                                            <?php
+                                            $pageCount = 0;
+                                            function get_menu($items, $class = '', $liClass = '', $linkClass = '', $boxID = '', $attr = '')
+                                            {
+                                                $html = "<ul class=\"" . $class . "\" id=\"" . $boxID . "\" $attr>";
+                                                foreach ($items as $key => $value) {
+                                                    $activeCss = $value['isActive'] ? 'active' : ''; //getActiveMenu($value['page_id'],'active');
+                                                    $link = $value['link'];
+                                                    $iconWithTExt = $value['label'];
+                                                    if (array_key_exists('child', $value)) {
+                                                        $html .= '<li class="' . $activeCss . ' dropdown"><a href="#" ' . $value['target'] . ' class="menu-css ' . $linkClass . ' " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' . $iconWithTExt . '</a>';
+                                                    } else
+                                                        $html .= '<li class="' . $activeCss . '"><a href="' . $link . '" ' . $value['target'] . ' class="menu-css ' . $linkClass . '">' . $iconWithTExt . '</a>';
+                                                    if (array_key_exists('child', $value)) {
+                                                        // $html .= '<div class="dropdown-menu">';
+                                                        $html .= get_menu($value['child'], '', '', '');
+                                                        // $html .= '</div>';
+                                                    }
+                                                    $html .= "</li>";
+                                                }
+                                                $html .= "</ul>";
+                                                return $html;
+                                            }
+                                            echo get_menu($menus, 'dropdown');
+                                            ?>
+                                                 
+                                            </nav>
+                                        </div><!-- site-navigation end-->
+                                        <marquee class="lbaama" behavior="scroll" scrollamount="5" direction="left">
+                                            <p><strong>LONDON BEAUTY ACADEMY BY AMA CERTIFIED, APPROVED & ENDORSED BY
+                                                    QUALIFI & HABIA A LEADING INTERNATIONAL AWARDING & STANDARDS SETTING
+                                                    BODY OF UNITED KINGDOM ENGLAND & BEAUTY PROFESSIONALS ASSOCIATION
+                                                    (BPRO) FOR QUALITY INTERNATIONAL STANDARDS & EXCELLENCE IN BEAUTY
+                                                    INDUSTRY EDUCATION</strong></p>
+                                        </marquee>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- ttm-stickable-header-w end-->
+            </div><!--ttm-header-wrap end -->
+
+        </header>
+        <!--header end-->
+
+        <!-- <div class="row">
+            <video width="100%" autoplay="" loop="" muted="">
+                <source src="ADETE-MA%27AM.mp4" type="video/mp4">
+                <source src="ADETE-MA%27AM.mp4" type="video/ogg">
+            </video>
+        </div> -->
+        <!-- END homebanner -->
+
+        {output}
+        <!-- <section class="clearfix res-1199-mt-0 position-relative z-1">
+            <div class="row bg-img1 no-gutters ttm-bgcolor-white box-shadow2">
+
+                <div class="offer">
+                    <a href="#enquiry">
+                        <h4><i class="fa fa-address-book" aria-hidden="true"></i> Book A Visit </h4>
+                    </a>
+                </div>
+
+                <div class="offer">
+                    <a href="#enquiry">
+                        <h4><i class="fa fa-hourglass-start" aria-hidden="true"></i> Campus tour </h4>
+                    </a>
+                </div>
+
+                <div class="offer">
+                    <a href="33-reasons.html">
+                        <h4><i class="fa fa-quora" aria-hidden="true"></i>33 Reasons</h4>
+                    </a>
+                </div>
+
+                <div class="offer">
+                    <a href="#enquiry">
+                        <h4><i class="fa fa-hand-pointer-o" aria-hidden="true"></i> Offers</h4>
+                    </a>
+                </div>
+
+                <div class="offer">
+                    <a href="#enquiry">
+                        <h4><i class="fa fa-wpforms" aria-hidden="true"></i> Request A Catalog</h4>
+                    </a>
+                </div>
+
+            </div>
+        </section> -->
+
+        
+
+
+        <!-- <div class="ttm">
+            <div class="bg-img1 part position-relative z-2 res-767-m-0">
+                <div class="container">
+                    <div class="row par-add pt-30">
+                        <div class="col-md-6 col-sm-6">
+                            <img src="{theme_url}assets/images/client/logo4.png">
+                            <h5>7 Acorn Business Park
+                                Commercial Gate,<br> Nottingham
+                                Nottinghamshire NG18 1EX United Kingdom.</h5>
+                        </div>
+                        <div class="col-md-6 col-sm-6 text-right">
+                            <img src="{theme_url}assets/images/client/logo5.png">
+                            <h5>1 Top Farm Court, Top Street, Bawtry,<br> Doncaster DN10 6TF United Kingdom.</h5>
+                        </div>
+                    </div>
+                </div>
+                <style>
+                    .part h5 {
+                        font-weight: 600;
+                        padding-top: 30px;
+                        line-height: 32px;
+                        padding-bottom: 10px;
+                    }
+                </style>
+            </div>
+        </div> -->
+
+        <!--footer start-->
+        <footer class="footer widget-footer clearfix">
+            <div class="second-footer ttm-textcolor-white">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-3 col-sm-12 col-xs-12">
-                            <div class="logo">
-                                <a href="index.html" target="_blank" alt="">
-                                    <img src="{theme_url}img/aicsmlogo2.jpg" alt="">
-                                </a>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 widget-area">
+                            <div class="widget widget_text clearfix">
+                                <h3>About Us</h3>
+                                <div class="textwidget widget-text">
+                                    <p class="pb-10 res-767-p-0">{footer_about_us}</p>
+                                    <!-- <a class="ttm-color-skincolor" title="">Sites Map</a>
+                                    <a class="ttm-textcolor-skincolor" href="privacy-policy.html">Privacy Policy</a> -->
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                            <div class="logo" align="center">
-                                <a href="index.html" targe="_blank" alt="">
-                                    <img src="{theme_url}img/AICSM%20TEXT.jpg" alt="">
-                                </a>
-                                <br>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-10 col-xs-10">
-                            <div class="logo" align="center">
-                                <a href="index.html" alt="">
-                                    <img src="{theme_url}img/aicsmlogo1.jpg" alt="">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-            <!--End header area-->
-            <!--Start mainmenu area-->
-            <section class="mainmenu-area">
-                <div class="container">
-                    <div class="mainmenu-bg">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-8 col-xs-8">
-                                <!--Start mainmenu-->
-                                <nav class="main-menu">
-                                    <div class="navbar-header">
-                                        <button type="button" class="navbar-toggle" data-toggle="collapse"
-                                            data-target=".navbar-collapse">
-                                            <span class="icon-bar"></span><span class="icon-bar"></span><span
-                                                class="icon-bar"></span>
-                                        </button>
-                                    </div>
-                                    <div class="navbar-collapse collapse clearfix">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 widget-area">
+                            <div class="widget widget_text clearfix">
+                                <h3 class="widget-title"></h3>
+                                <div class="row">
+                                    <div class="col-md-5 no-padding">
+                                        
+                                        <ul>
                                         <?php
-                                        $pageCount = 0;
-                                        // $ismobile = false;
-                                        function get_menu($items, $class = '', $liClass = '', $linkClass = 'dropdown-toggle nav-link', $boxID = '')
-                                        {
-
-
-                                            // global $ismobile;
-                                            $html = "<ul class=\"" . $class . "\" id=\"" . $boxID . "\">";
-
-
-
-                                            foreach ($items as $key => $value) {
-                                                $activeCss = $value['isActive'] ? 'active' : ''; //getActiveMenu($value['page_id'],'active');
-                                                $link = $value['link'];
-
-                                                $iconWithTExt = $value['label'];
-
-                                                if (array_key_exists('child', $value))
-
-                                                    $html .= '<li class="' . $activeCss . ' "><a href="#!" ' . $value['target'] . ' class="menu-css ' . $linkClass . '" data-toggle="dropdown"><font color="#FDFDFD">' . $iconWithTExt . '</font></a>' . ($liClass == 'isMobile' ? '<span class="submenu-button"></span>' : '');
-                                                else
-
-                                                    $html .= '<li class="' . $activeCss . '"><a href="' . $link . '" ' . $value['target'] . ' class="menu-css dropdown-item nav-link nav_item">' . $iconWithTExt . '</a>';
-
-
-
-                                                if (array_key_exists('child', $value)) {
-                                                    // $html .= '<div class="dropdown-menu">';
-                                                    $html .= get_menu($value['child'], 'sub-nav', '', '');
-                                                    // $html .= '</div>';
-                                                }
-
-                                                $html .= "</li>";
-
-                                            }
-
-                                            $html .= "</ul>";
-
-
-
-                                            return $html;
-
-
-
+                                        foreach ($this->ki_theme->config('footer_first_links') as $linkRow) {
+                                            echo '<li><a href="' . $linkRow->link . '">' . $linkRow->title . '</a></li>';
                                         }
-                                        echo get_menu($menus, 'navigation clearfix');
-                                        // $ismobile = true;
-                                        echo get_menu($menus, 'mobile-menu clearfix', 'isMobile');
                                         ?>
-                                        <!-- ==============================
-                                        =========Mobile Navigation==========
-                                        ==================================== -->
-
+                                        </ul>
                                     </div>
+                                    <div class="col-md-4 no-padding">
+                                        <ul>
+                                        <?php
+                                        foreach ($this->ki_theme->config('footer_second_links') as $linkRow) {
+                                            echo '<li><a href="' . $linkRow->link . '">' . $linkRow->title . '</a></li>';
+                                        }
+                                        ?>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-3 no-padding">
+                                        <ul>
+                                        <?php
+                                        foreach ($this->ki_theme->config('footer_third_links') as $linkRow) {
+                                            echo '<li><a href="' . $linkRow->link . '">' . $linkRow->title . '</a></li>';
+                                        }
+                                        ?>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 widget-area">
+                            <div class="widget flicker_widget clearfix">
+                                <h3 class="widget-title">Get In Touch</h3>
+                                <div class="textwidget widget-text">
+                                    <div class="featured-icon-box icon-align-before-content icon-ver_align-top style3">
+                                        <div class="featured-icon">
+                                            <div
+                                                class="ttm-icon ttm-icon_element-onlytxt ttm-icon_element-color-skincolor ttm-icon_element-size-sm">
+                                                <i class="fa fa-map-marker"></i>
+                                            </div>
+                                        </div>
+                                        <div class="featured-content">
+                                            <div class="featured-desc">
+                                                <p>{address}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="featured-icon-box icon-align-before-content icon-ver_align-top style3">
+                                        <div class="featured-icon">
+                                            <div
+                                                class="ttm-icon ttm-icon_element-onlytxt ttm-icon_element-color-skincolor ttm-icon_element-size-sm">
+                                                <i class="fa fa-envelope-o"></i>
+                                            </div>
+                                        </div>
+                                        <div class="featured-content">
+                                            <div class="featured-desc">
+                                                <p><a
+                                                        href="mailto:{email}">{email}</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="featured-icon-box icon-align-before-content icon-ver_align-top style3">
+                                        <div class="featured-icon">
+                                            <div
+                                                class="ttm-icon ttm-icon_element-onlytxt ttm-icon_element-color-skincolor ttm-icon_element-size-sm">
+                                                <i class="fa fa-phone"></i>
+                                            </div>
+                                        </div>
+                                        <div class="featured-content">
+                                            <div class="featured-desc">
+                                                <p>{number}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-            </section>
-            <div class="clearfix"></div>
-            <!-- End Intro Section -->
-            <div>
-                <div class="row">
-                    {output}
                 </div>
-
-
-                <!-- Client Logos Section -->
-                <!-- End Client Logos Section -->
-                <!-- FOOTER -->
-                <footer class="footer pt-80 pt-xs-60">
-                    <div class="container">
-                        <!--Footer Info -->
-                        <div class="row footer-info mb-60">
-                            <div class="col-md-3 col-sm-4 col-xs-12 mb-sm-30">
-                                <h4 class="mb-30">
-                                    <font color="#653a88;">CONTACT Us</font>
-                                </h4>
-                                <address>
-                                    <i class="fa fa-angle-double-right"></i></i>
-                                    <font color="#653a88;">
-                                        Head Office : 96 - II Floor Kalawati Paliwal Market, Gumanpura, Kota,
-                                        Rajasthan.(India)
-                                    </font>
-                                </address>
-                                <ul class="link-small">
-                                    <li>
-                                        <a><i class="fa fa-angle-double-right"></i>
-                                            <font color="#653a88;"><a href="mailto:rjits@aicsm.com">rjits@aicsm.com
-                                            </font>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a><i class="fa fa-angle-double-right"></i>
-                                            <font color="#653a88;">+91-744 -2392007</font>
-                                        </a>
-                                    </li>
-                                    <a
-                                        href="https://api.whatsapp.com/send/?phone=919667555300&amp;text&amp;app_absent=0">
-                                        <i class="fa fa-whatsapp">
-                                            <font color="#653a88;"></span>9667555300</font>
-                                        </i> </a>
-                                </ul>
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-12 mb-sm-30">
-                                <h4 class="mb-30">Quick Links</h4>
-                                <ul class="link blog-link">
-                                    <li>
-                                        <a href="aicsmIntro.html"><i class="arrow-circle-right-duotone.svg"
-                                                style="color: #653a88;" alt=""><img
-                                                    src="{theme_url}image/linkage/arrow-circle-right-duotone.svg"></i>
-                                            AICSM
-                                            Introduction</a>
-                                    </li>
-                                    <li>
-                                        <a href="how-to-get-center-frenchise.html"><i
-                                                class="arrow-circle-right-duotone.svg" style="color: #653a88;"
-                                                alt=""><img
-                                                    src="{theme_url}image/linkage/arrow-circle-right-duotone.svg"></i>
-                                            How to
-                                            get Affiliation </a>
-                                    </li>
-                                    <li>
-                                        <a href="SrchByFrmNoOutSide.html"><i class="arrow-circle-right-duotone.svg"
-                                                style="color: #653a88;" alt=""><img
-                                                    src="{theme_url}image/linkage/arrow-circle-right-duotone.svg"></i>
-                                            Student
-                                            Verification</a>
-                                    </li>
-                                    <li>
-                                        <a href="Insurance.html"><i class="arrow-circle-right-duotone.svg"
-                                                style="color: #653a88;" alt=""><img
-                                                    src="{theme_url}image/linkage/arrow-circle-right-duotone.svg"></i>
-                                            Insurance </a>
-                                    </li>
-                                    <li>
-                                        <a href="Career.html"><i class="arrow-circle-right-duotone.svg"
-                                                style="color: #653a88;" alt=""><img
-                                                    src="{theme_url}image/linkage/arrow-circle-right-duotone.svg"></i>
-                                            Career
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="CustomerEnquiry.html"><i class="arrow-circle-right-duotone.svg"
-                                                style="color: #653a88;" alt=""><img
-                                                    src="{theme_url}image/linkage/arrow-circle-right-duotone.svg"></i>
-                                            Aicsm
-                                            Trusted Brand Since-1999 </a>
-                                    </li>
-                                    <li>
-                                        <a href="WhyAicsm.html"><i class="arrow-circle-right-duotone.svg"
-                                                style="color: #653a88;" alt=""><img
-                                                    src="{theme_url}image/linkage/arrow-circle-right-duotone.svg"></i>
-                                            Why
-                                            Aicsm Best Franchise</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-md-2 col-sm-4 col-xs-12 mb-sm-30">
-                                <h4 class="mb-30">Courses</h4>
-                                <ul class="link blog-link">
-                                    <li>
-                                        <a href="CerifiedCourse.html"
-                                            alt="best Computer Franchise,Computer Course, Indias no. 1 franchise,Govt Authorized certification,best computer education ,Govt Authorized Computer Courses,all india saksharta mission,all india computer saksharta mission certificate,aicsm logo,aicsm courses,computer saksharta mission franchise,computer saksharta,computer course by government of india,sarkari computer centre,free computer training centre,computer institute registration form,computer institute registration,govt registere,Contact For- Computer Education Franchise-9667555300,computer education franchisee,Govt Job Oriented certificate,helpfull For govt job,Job me sahayak,Saksharta mission IT course,Saksharta mission IT progrme,best computer education in india,govt affiliation for computer institute, govt computer courses,online computer courses india omputer education Franchisee call 9667555300aicsm,best computer franchise,best computer education, Indias no. 1 franchise,Govt Authorized certification,best computer education ,Govt Authorized Computer Courses,all india saksharta mission,all india computer saksharta mission certificate,aicsm logo,aicsm courses,computer saksharta mission franchise,computer saksharta,computer course by government of india,sarkari computer centre,free computer training centre,computer institute registration form,computer institute registration,govt registere,Contact For- Computer Education Franchise-9667555300,computer education franchisee,Govt Job Oriented certificate,helpfull For govt job,Job me sahayak,Saksharta mission IT course,Saksharta mission IT progrme,best computer education in india,govt affiliation for computer institute, govt computer courses,online computer courses india,trusted Skill Education,no1 Franchise brand,Why Aicsm Best,Boost the skills,NSDC training center franchise, skill development campaign, large scale across the country, purpose is to provide training also employment,Skill development ,huge role in getting the youth to stand on their feet. NSDC franchise, computer center franchise, AICSM – All India Computer Saksharta Mission,Become NSDC Authorized Training Center,Government Recognize Computer institute,Valid certification in Government sector Boost the skills,NSDC training center franchise, skill development campaign, large scale across the country, purpose is to provide training also employment,Skill development ,huge role in getting the youth to stand on their feet.no1 Franchise,trusted Skill Education,no1 Franchise brand,Why Aicsm Best,Boost the skills,NSDC training center franchise, skill development campaign, large scale across the country, purpose is to provide training also employment,Skill development ,huge role in getting job"><i
-                                                class="arrow-circle-right-duotone.svg"><img
-                                                    src="{theme_url}image/linkage/arrow-circle-right-duotone.svg"></i>Certified
-                                            Courses</i></a>
-                                    </li>
-                                    <li>
-                                        <a href="DiplomaCourse.html" alt=""><i
-                                                class="arrow-circle-right-duotone.svg"><img
-                                                    src="{theme_url}image/linkage/arrow-circle-right-duotone.svg"></i>
-                                            Diploma
-                                            Courses</a>
-                                    </li>
-                                    <li>
-                                        <a href="PgdcaCourse.html" alt=""><i class="arrow-circle-right-duotone.svg"><img
-                                                    src="{theme_url}image/linkage/arrow-circle-right-duotone.svg"></i>
-                                            PG
-                                            Diploma Courses</i></a>
-                                    </li>
-                                    <li>
-                                        <a href="AdvanceDiploma.html" alt=""><i
-                                                class="arrow-circle-right-duotone.svg"><img
-                                                    src="{theme_url}image/linkage/arrow-circle-right-duotone.svg"></i>
-                                            Advance
-                                            Diploma</i></a>
-                                    </li>
-                                    <li>
-                                        <a href="https://nsdcindia.org/nos-listing/21" alt=""><i
-                                                class="arrow-circle-right-duotone.svg"><img
-                                                    src="{theme_url}image/linkage/arrow-circle-right-duotone.svg"></i></i>
-                                            Medical</a>
-                                    </li>
-                                    <li>
-                                        <a href="https://yoga.in/" alt=""><i class="arrow-circle-right-duotone.svg"><img
-                                                    src="{theme_url}image/linkage/arrow-circle-right-duotone.svg"></i></i>Yoga</a>
-                                    </li>
-                                    <li>
-                                        <a href="AllCourse.html" alt=""><i class="arrow-circle-right-duotone.svg"><img
-                                                    src="{theme_url}image/linkage/arrow-circle-right-duotone.svg"></i>
-                                            All
-                                            Course's</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-md-4 col-sm-12 col-xs-12 mt-sm-30 mt-xs-30">
-                                <div class="icons-hover-black">
-                                    <a href="https://web.facebook.com/allindiacomputer/"><i
-                                            class="fa-brands fa-facebook"><img
-                                                src="{theme_url}image/linkage/facebook-round-icon.svg"></i></a>
-                                    <a href="https://twitter.com/AICSM2"> <i class="fa fa-twitter"><img
-                                                src="{theme_url}image/linkage/twitter-round-icon.svg"></i> </a>
-                                    <a href="https://www.youtube.com/channel/UCiuOUJpSb5bczYeeZKERwtg"> <i
-                                            class="fa fa-youtube"><img
-                                                src="{theme_url}image/linkage/youtube-round-icon.svg"></i> </a>
-                                    <a href="https://www.linkedin.com/feed/?trk=onboarding-landing"> <i
-                                            class="fa fa-linkedin"><img
-                                                src="{theme_url}image/linkage/linkedin-round-icon.svg"></i> </a>
-                                    <a href="https://www.instagram.com/aicsm_99/"> <i class="fa fa-instagram"><img
-                                                src="{theme_url}image/linkage/instagram-round-icon.svg"></i> </a>
-                                    <a
-                                        href="https://api.whatsapp.com/send/?phone=919667555300&amp;text&amp;app_absent=0">
-                                        <i class="fa fa-whatsapp"><img
-                                                src="{theme_url}image/linkage/whatsapp-round-icon.svg"></i> </a>
-                                </div>
-                                <div class="newsletter">
-                                    Feel Free to contact us, any of the mail ids: rjits@aicsm.com ,
-                                    director@aicsm.com
-                                    <br> Or call Mobile No : 91-96675-55300, 96675-35700, 96672-22800, 96672-22700
-                                    <br> <br>
-                                    <a href="TermsCondition.html">
-                                        <font color="#0072B5">Terms & Condition</font>
-                                    </a>
-                                    <font color="#0072B5"> |
-                                    </font> <a href="Disclaimer.html">
-                                        <font color="#0072B5">Disclaimer </font>
-                                    </a>
-                                    <br>
-                                    <a href="PrivacyPolicy.html">
-                                        <font color="#0072B5">Privacy Policy </font>
-                                    </a>
-                                    <font color="#0072B5"> </font> <a href="refundpollicy.html">
-                                        <font color="#0072B5">Refund Policy </font>
-                                    </a>
-                                    <br>
-                                    <a href="https://rss.app/feeds/F4h1ZUn6hqzMFPjd.xml">
-                                        <font color="#0072B5">RSS Feed</font>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Footer Info -->
-                    </div>
-                    <!-- Copyright Bar -->
-                    <div class="copyright">
-                        <div class="container">
-                            <p>
-                                <font color="#FDAC53">© 1999 <a>
-                                        <font color="#FDAC53">ALL INDIA COMPUTER SAKSHARTA MISSION</font>
-                                    </a>
-                                    <font color="#FFFAFA"> All Rights Reserved</font>
-                            </p>
-                        </div>
-                    </div>
-                    <!-- End Copyright Bar -->
-                </footer>
-                <!-- END FOOTER -->
             </div>
-            <!-- Site Wraper End -->
-            <script>
-                $(document).ready(function () {
-                    $('.close').click(function () {
-                        $(".welcome").hide()
-                    });
-                    $('.welcome').click(function () {
-                        $(".welcome").hide();
-                    });
-                });
-                $(document).ready(function () {
-                    $("button").click(function () {
-                        $(".newupdates").hide()
-                    });
-                });
-                $(document).ready(function () {
-                    $("button").click(function () {
-                        $(".frm").show()
-                    });
-                });
-            </script>
-            <!-- masonry,isotope Effect Js -->
-            <!-- <script src="{theme_url}assets/js/jquery-1.12.4.min.js" type="text/javascript"></script> -->
-            <script src="{theme_url}assets/js/imagesloaded.pkgd.min.js" type="text/javascript"></script>
-            <script src="{theme_url}assets/js/isotope.pkgd.min.js" type="text/javascript"></script>
-            <script src="{theme_url}assets/js/masonry.pkgd.min.js" type="text/javascript"></script>
-            <script src="{theme_url}assets/js/jquery.appear.js" type="text/javascript"></script>
-            <!-- bootstrap Js -->
-            <script src="{theme_url}assets/js/bootstrap.min.js" type="text/javascript"></script>
-            <!-- carousel Js -->
-            <script src="{theme_url}assets/js/plugin/owl.carousel.js" type="text/javascript"></script>
-            <!-- fancybox Js -->
-            <script src="{theme_url}assets/js/jquery.mousewheel-3.0.6.pack.js" type="text/javascript"></script>
-            <script src="{theme_url}assets/js/jquery.fancybox.pack.js" type="text/javascript"></script>
-            <!-- carousel Js -->
-            <script src="{theme_url}assets/js/jquery.parallax-1.1.3.js" type="text/javascript"></script>
-            <!-- carousel Js -->
-            <script src="{theme_url}assets/js/mediaelement-and-player.min.js" type="text/javascript"></script>
-            <!-- Form Js -->
-            <script src="{theme_url}assets/js/mail.js" type="text/javascript"></script>
-            <!-- revolution Js -->
-            <script type="text/javascript"
-                src="{theme_url}assets/rs-slider/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-            <script type="text/javascript"
-                src="{theme_url}assets/rs-slider/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-            <script type="text/javascript" src="{theme_url}assets/js/revolution-custom.js"></script>
-            <!-- Height Js -->
-            <script src="{theme_url}assets/js/jquery.matchHeight-min.js" type="text/javascript"></script>
-            <!-- custom Js -->
-            <script src="{theme_url}assets/js/custom.js" type="text/javascript"></script>
+            <div class="bottom-footer-text">
+                <div class="container">
+                    <div class="row copyright">
+                        <div class="col-md-9">
+                            <div class="ttm-textcolor-white">
+                                <span>Copyright &copy;&nbsp;<a class="ttm-textcolor-skincolor" href="{base_url}">{title}</a> All rights reserved.</span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="d-flex flex-row align-items-center justify-content-end social-icons">
+                                <ul class="social-icons list-inline">
+                                    <li><a href="#" class=" tooltip-top" data-tooltip="Phone"><i
+                                                class="fa fa-phone"></i></a>
+                                    </li>
+                                    <li><a href="#" class=" tooltip-top" data-tooltip="Whatsapp"><i
+                                                class="fab fa-whatsapp"></i></a>
+                                    </li>
+                                    <li><a href="https://www.instagram.com/londonbeautyacademy_official"
+                                            class=" tooltip-top" data-tooltip="Instagram"><i
+                                                class="fab fa-instagram"></i></a>
+                                    </li>
+                                    <li><a href="https://www.facebook.com/mylondonbeautyacademy" class=" tooltip-top"
+                                            data-tooltip="Facebook"><i class="fab fa-facebook"></i></a>
+                                    </li>
+                                    <li><a href="#" class=" tooltip-top" data-tooltip="Youtube"><i
+                                                class="fab fa-youtube"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!--footer end-->
+
+        <!--back-to-top start-->
+        <a id="totop" href="index-2.html#top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+        <!--back-to-top end-->
+
+    </div><!-- page end -->
+
+    <div class="left-bar">
+        <ul>
+            <li><a href="https://api.whatsapp.com/send?phone=9999223332&amp;text=&amp;source=&amp;data="
+                    target="blank"><i class="fab fa-whatsapp"></i><span>Whatsapp</span></a></li>
+            <li><a href="tel:+919999223332"><i class="fa fa-phone"></i><span> +919999223332</span></a></li>
+            <li><a href="https://www.instagram.com/londonbeautyacademy_official/" target="blank"><i
+                        class="fab fa-instagram"></i><span>Instagram</span></a></li>
+            <li><a href="https://www.facebook.com/londonbeautyacademydelhincr" target="blank"><i
+                        class="fab fa-facebook-f"></i><span>Facebook</span></a></li>
+            <li><a href="https://www.youtube.com/@LondonBeautyacademybyAMA" target="blank"><i
+                        class="fab fa-youtube"></i><span>Youtube</span></a></li>
+        </ul>
+    </div>
+<!-- Javascript -->
+
+<!-- <script src="{theme_url}assets/js/jquery.min.js"></script> -->
+<script src="{theme_url}assets/js/tether.min.js"></script>
+<script src="{theme_url}assets/js/bootstrap.min.js"></script>
+<script src="{theme_url}assets/js/jquery.easing.js"></script>    
+<script src="{theme_url}assets/js/jquery-waypoints.js"></script>    
+<script src="{theme_url}assets/js/jquery-validate.js"></script> 
+<script src="{theme_url}assets/js/owl.carousel.js"></script>
+<script src="{theme_url}assets/js/jquery.prettyPhoto.js"></script>
+<script src="{theme_url}assets/js/numinate.min69596959.js?ver=4.9.3"></script>
+<script src="{theme_url}assets/js/lazysizes.min.js"></script>
+<script src="{theme_url}assets/js/main.js"></script>
+
+<!-- Revolution Slider -->
+<!-- <script src="{theme_url}assets/revolution/revolution.tools.min.js"></script>
+<script src="{theme_url}assets/revolution/js/rs6.min.js"></script> 
+<script src="{theme_url}assets/revolution/js/slider.js"></script> -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" type="text/css" media="screen" />
+<script>
+$(document).ready(function() {
+  $(".gallery a").fancybox();
+});
+</script>
+
+<script>
+// function submitForm(event) {
+//     event.preventDefault();
+
+//     document.getElementById("submitBtn").disabled = true;
+//     let error = validateForm();
+
+//     if (!error) {
+//         callAPI();
+//     } else {
+//         document.getElementById("submitBtn").disabled = false;
+//     }
+// }
+
+// console.log(document.getElementById("courses").value)
+
+// function validateForm() {
+//     var inputName = document.getElementById("name").value;
+//     var inputEmail = document.getElementById("email").value;
+//     let emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+//     var inputphone = document.getElementById("phone").value;
+//     let numberRegex = /^[\d\n\r]*$/;
+//     var inputCourses = document.getElementById("courses").value;
+//     var inputLocation =  document.getElementById("location").value;
+//     var error = false;
+
+//     if (inputName.length < 1) {
+//         document.getElementById('regex-error-name').style.display = "block";
+//         error = true
+//     } 
+    
+//     if (!emailRegex.test(inputEmail)) {
+//         document.getElementById('regex-error-email').style.display = "block";
+//         error = true
+//     } 
+
+//     if (!numberRegex.test(inputphone) || inputphone.length < 10) {
+//         document.getElementById('regex-error-phone').style.display = "block";
+//         error = true
+//     } 
+
+//     if (inputCourses.length == 0) {
+//         document.getElementById('regex-error-course').style.display = "block";
+//         error = true
+//     } 
+    
+//     if (inputLocation.length == 0) {
+//         document.getElementById('regex-error-location').style.display = "block";
+//         error = true
+//     } 
+    
+    
+//     return error;
+// }
+
+// async function callAPI() {
+//     var inputName = document.getElementById("name").value;
+//     var inputEmail = document.getElementById("email").value;
+//     var inputphone = document.getElementById("phone").value;
+//     var inputCourses = document.getElementById("courses").value;
+//     var inputLocation =  document.getElementById("location").value;
+
+
+
+//     const requestOptions = {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify(
+//             {
+//                 "projectKey": "VW50aXRsZSBQcm9qZWN0MTY4NzUwNTk3NzY2OA==",
+//                 "audienceId": "AMA_"+new Date().valueOf(),
+//                 "name": inputName,
+//                 "email": inputEmail,
+//                 "mobile": inputphone,
+//                 "paramList": [
+//                     {
+//                         "paramKey": "course_you_are_interest",
+//                         "paramValue": inputCourses
+//                     },
+//                     {
+//                         "paramKey": "your_location",
+//                         "paramValue": inputLocation
+//                     },
+//                     {
+//                         "paramKey": "websitename",
+//                         "paramValue": "LBA MW"
+//                     }
+                    
+//                 ]
+//             })
+//     };
+
+//     try {
+//         const response = await fetch('https://register.cronberry.com/api/campaign/register-audience-data', requestOptions);
+//         await response.json();
+//         // Construct the API URL and prepare the data to be sent
+//         if (response) {
+//             window.location = "thank-you.html";
+//         }
+//         document.getElementById("submitBtn").disabled = false;
+//     } catch (err) {
+//         console.log("error", err)
+//     }
+// }
+    
+</script>
+<!-- Javascript end-->
+
 </body>
 
 </html>

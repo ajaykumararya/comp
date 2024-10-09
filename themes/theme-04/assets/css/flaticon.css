@@ -1,12 +1,13 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 13/11/2017 12:19
+  	Creation date: 04/02/2020 06:30
   	*/
 
 @font-face {
   font-family: "Flaticon";
   src: url("../fonts/Flaticon.eot");
-  src: url("../fonts/Flaticond41d.eot?#iefix") format("embedded-opentype"),
+  src: url("../fonts/Flaticond41dd41d.eot?#iefix") format("embedded-opentype"),
+       url("../fonts/Flaticon.woff2") format("woff2"),
        url("../fonts/Flaticon.woff") format("woff"),
        url("../fonts/Flaticon.ttf") format("truetype"),
        url("../fonts/Flaticon.svg#Flaticon") format("svg");
@@ -17,22 +18,70 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: "Flaticon";
-    src: url("../fonts/Flaticon.svg#Flaticon") format("svg");
+    src: url("Flaticon.html#Flaticon") format("svg");
   }
 }
 
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
   font-family: Flaticon;
-        font-size: 20px;
-font-style: normal;
-
+  font-style: normal;
 }
 
-.flaticon-soap:before { content: "\f100"; }
-.flaticon-toilet:before { content: "\f101"; }
-.flaticon-shower:before { content: "\f102"; }
-.flaticon-tap:before { content: "\f103"; }
-.flaticon-battery-1:before { content: "\f104"; }
-.flaticon-battery:before { content: "\f105"; }
-.flaticon-waste-pipe:before { content: "\f106"; }
+.flaticon-house:before { content: "\f100"; }
+.flaticon-play-button:before { content: "\f101"; }
+.flaticon-location:before { content: "\f102"; }
+.flaticon-placeholder:before { content: "\f103"; }
+.flaticon-map:before { content: "\f104"; }
+.flaticon-message:before { content: "\f105"; }
+.flaticon-keyboard-right-arrow-button:before { content: "\f106"; }
+.flaticon-pdf:before { content: "\f107"; }
+.flaticon-word:before { content: "\f108"; }
+.flaticon-scissors:before { content: "\f109"; }
+.flaticon-hair-dye-kit:before { content: "\f10a"; }
+.flaticon-salon:before { content: "\f10b"; }
+.flaticon-scissor-and-comb:before { content: "\f10c"; }
+.flaticon-hairdryer-silhouette-side-view:before { content: "\f10d"; }
+.flaticon-hair-curler:before { content: "\f10e"; }
+.flaticon-comb:before { content: "\f10f"; }
+.flaticon-haircut:before { content: "\f110"; }
+.flaticon-hair:before { content: "\f111"; }
+.flaticon-hair-1:before { content: "\f112"; }
+.flaticon-hairdresser:before { content: "\f113"; }
+.flaticon-haircut-1:before { content: "\f114"; }
+.flaticon-hair-2:before { content: "\f115"; }
+.flaticon-hair-straightener:before { content: "\f116"; }
+.flaticon-beauty:before { content: "\f117"; }
+.flaticon-beauty-salon:before { content: "\f118"; }
+.flaticon-barbershop:before { content: "\f119"; }
+.flaticon-barber:before { content: "\f11a"; }
+.flaticon-comb-1:before { content: "\f11b"; }
+.flaticon-hair-cut:before { content: "\f11c"; }
+.flaticon-hair-salon:before { content: "\f11d"; }
+.flaticon-hair-brush:before { content: "\f11e"; }
+.flaticon-comb-3:before { content: "\f11f"; }
+.flaticon-comb-4:before { content: "\f120"; }
+.flaticon-massage-spa-body-treatment:before { content: "\f121"; }
+.flaticon-spa:before { content: "\f122"; }
+.flaticon-cupping:before { content: "\f123"; }
+.flaticon-hammam:before { content: "\f124"; }
+.flaticon-bathrobe:before { content: "\f125"; }
+.flaticon-person-silhouette-in-sauna:before { content: "\f126"; }
+.flaticon-herbal:before { content: "\f127"; }
+.flaticon-spa-1:before { content: "\f128"; }
+.flaticon-wellness:before { content: "\f129"; }
+.flaticon-wellness-1:before { content: "\f12a"; }
+.flaticon-hairdresser-with-scissors-cutting-the-hair-to-a-client-sitting-in-front-of-him:before { content: "\f12b"; }
+.flaticon-polish:before { content: "\f12c"; }
+.flaticon-facial-treatment:before { content: "\f12d"; }
+.flaticon-dryer:before { content: "\f12e"; }
+.flaticon-eyelash-mascara:before { content: "\f12f"; }
+.flaticon-hair-cut-1:before { content: "\f130"; }
+.flaticon-beauty-treatment:before { content: "\f131"; }
+.flaticon-couch:before { content: "\f132"; }
+.flaticon-hair-straightener-1:before { content: "\f133"; }
+.flaticon-towels:before { content: "\f134"; }
+.flaticon-spa-2:before { content: "\f135"; }
+.flaticon-cream:before { content: "\f136"; }
+.flaticon-plus-1:before { content: "\f137"; }
+.flaticon-plus:before { content: "\f138"; }

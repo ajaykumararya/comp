@@ -12,11 +12,11 @@
                         <li class="grid_item events" >
                             <div class="gallery_item" style="height:250px">
                                 <a href="#" class="image_link">
-                                    <img src="{base_url}upload/<?=$img['image']?>" alt="image" style="height:100%">
+                                    <img src="{assets}<?=$img['image']?>" alt="image" style="height:100%">
                                 </a>
                                 <div class="gallery_content">
                                     <div class="link_container">
-                                        <a href="{base_url}upload/<?=$img['image']?>"
+                                        <a href="{assets}<?=$img['image']?>"
                                             class="image_popup"><span class="ripple"><i class="ion-image"></i></span></a>
                                     </div>
                                     <!--<div class="text_holder text_white">

@@ -46,12 +46,13 @@ class MY_Controller extends MX_Controller
             'save_button' => $this->ki_theme->set_class('save-btn')->save_button('Save', 'save-2'),
             'update_button' => $this->ki_theme->set_class('save-btn')->save_button('Save Changes', 'save-2'),
             'send_button' => $this->ki_theme->set_class('sen-btn')->save_button('Send', 'send'),
-            'card_class' => 'card shadow-sm ' . $adminCard . ' mb-5',
+            'card_class' => 'card shadow-sm ' . $adminCard . ' mb-5 '.($this->input->post() ? '' : 'd-none'),
             'inr' => ' <span class="">₹</span> ',
             'current_date' => $this->ki_theme->date(),
             'theme_url' => theme_url(),
             'document_path' => base_url() . defined('DOCUMENT_PATH') ? DOCUMENT_PATH : 'assets',
             'admission_button' => $this->ki_theme->save_button('Admission Now', ' fa fa-plus'),
+            'assets' => base_url('assets/file/')
         ];
         $this->ki_theme->set_config_item('newicon', img(base_url('themes/newicon.gif')));
         $this->set_data('basic_header_link', $this->parse('site/common-header', [], true));

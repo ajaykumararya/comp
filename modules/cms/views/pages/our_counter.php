@@ -102,6 +102,7 @@
         font-weight: 700;
         text-transform: uppercase;
         margin: 0 0 15px;
+        line-height: 1;
     }
 
     .cms-counter .counter.blue {

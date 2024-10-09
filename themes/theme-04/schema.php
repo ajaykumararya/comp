@@ -3,49 +3,90 @@ if ($isPrimary) {
     $sliders = $this->SiteModel->slider();
     if ($sliders->num_rows()) {
         ?>
-        <div class=" bgakc1 pt-4 pb-4">
+        <style>
+            .banner-bg {
+                display: block;
+                height: 600px
+            }
 
-            <div id="wowslider-container1" class="shadow">
-                <div class="ws_images">
-                    <ul>
+            .banner-bg img {
+                height: 100%;
+            }
+
+            .banner-bg-mobile {
+                display: none;
+            }
+
+            @media only screen and (max-width: 767px) {
+                .banner-bg {
+                    display: none;
+                }
+
+                .banner-bg-mobile {
+                    display: block;
+                }
+
+                .banner-bg-mobile img {
+                    height: 203px;
+                    width: 100%;
+                }
+
+                .banner_content_wrap .carousel-item {
+                    padding: 0px 0;
+                }
+            }
+        </style>
+        <section class="banner_section p-0 full_screen">
+            <div id="carouselExampleFade" class="banner_content_wrap carousel slide carousel-fade" data-ride="carousel">
+                <div class="carousel-inner">
                     <?php
-                        $i = 1;
-                        foreach ($sliders->result() as $slider) {
-                            $active = $i == 1 ? 'active' : '';
-                            echo '<li><img src="{base_url}upload/'.$slider->image.'" alt="" title="{title}"
-                            id="wows1_'.$i.'" /></li>';
-                            $i++;
-                        }
+                    $i = 1;
+                    foreach ($sliders->result() as $slider) {
+                        $active = $i == 1 ? 'active' : '';
                         ?>
-                    </ul>
-                </div>
-            </div>
-            <script type="text/javascript" src="{theme_url}wslider/engine1/wowslider.js"></script>
-            <script type="text/javascript" src="{theme_url}wslider/engine1/script.js"></script>
-            <!-- Offer -->
-            <div class="col-sm-11 bgakc0 ptb-5">
-            </div>
-            <!-- Offer End-->
-            <div class="col-sm-12 bgakc1 ptb-5">
-            </div>
-        </div>
-            <?php
-    }
-} else {
-    ?>
-        <div class="clearfix"></div>
-        <section class="inner-intro  padding ptb-xs-40 bg-img1 overlay-dark light-color">
-            <div class="container">
-                <div class="row title">
-                    <h1>{page_name}</h1>
-                    <div class="page-breadcrumb">
-                        <a>Home</a>/<span>{page_name}</span>
+                        <div class="carousel-item <?= $active ?>  background_bg overlay_bg_40 background_bg_image<?= $i++ ?>">
+                            <span class="banner-bg"><img src="{base_url}upload/<?= $slider->image ?>" width="100%"></span>
+                            <span class="banner-bg-mobile"><img src="{base_url}upload/<?= $slider->image ?>" width="100%"></span>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                    <div class="carousel-nav carousel_style1">
+                        <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+                            <i class="ion-chevron-left"></i>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+                            <i class="ion-chevron-right"></i>
+                        </a>
                     </div>
                 </div>
-            </div>
         </section>
         <?php
+    }
+} else {
+
+    ?>
+    <section class="ttm-row styleservices-section ttm-bgcolor-skincolor res-991-pb-100 clearfix">
+        <div class="container">
+            <!-- section title -->
+            <div class="row section-title with-desc clearfix">
+                <div class="col-md-12 p-0 ml-15">
+                    <div class="title-header overflow-hidden">
+                        <h5 class="ttm-textcolor-skincolor">{title}</h5>
+                        <h1 class="title ttm-textcolor-white">{page_name}</h1>
+                    </div>
+                </div>
+                <!-- <div class="col-md-6">
+                    <div
+                        class="title-desc ttm-textcolor-white border-left pl-30 pr-30 pt-10 pb-10 mt-30 res-767-p-0 res-767-mt-0 res-767-b-0">
+                        Helping you achieve your dreams by nurturing the international Beauty Artist in You</div>
+                </div> -->
+                <!-- section title end -->
+            </div>
+        </div>
+    </section>
+    <?php
+
 }
 ?>
-
-{content}
+<div class="site-main">{content}</div>

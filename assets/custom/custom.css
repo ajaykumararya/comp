@@ -104,10 +104,10 @@
   box-sizing: border-box;
   -moz-box-sizing: border-box;
 }
-[data-bs-theme=dark] .dd-placeholder,
-[data-bs-theme=dark] .dd-empty{
-    background-color: #121212;
-    border-color:red
+[data-bs-theme="dark"] .dd-placeholder,
+[data-bs-theme="dark"] .dd-empty {
+  background-color: #121212;
+  border-color: red;
 }
 .dd-empty {
   border: 1px dashed #bbb;
@@ -239,10 +239,10 @@
   color: #2ea8e5;
   background: #fff;
 }
-[data-bs-theme=dark] .dd3-content{
-    background: #121212;
-    color:white;
-    border-color:#0c0a0a
+[data-bs-theme="dark"] .dd3-content {
+  background: #121212;
+  color: white;
+  border-color: #0c0a0a;
 }
 .dd-dragel > .dd3-item > .dd3-content {
   margin: 0;
@@ -286,4 +286,12 @@
 }
 .span-right {
   float: right;
+}
+.field-area > div:before {
+  content: "\f0b2";
+  font-family: FontAwesome;
+  position: absolute;
+  font-size: 19px;
+  top: 5px;
+  right: 7px;
 }
