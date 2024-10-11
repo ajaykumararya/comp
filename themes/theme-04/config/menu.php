@@ -11,10 +11,16 @@ $menu = array(
             'url' => 'cms/static-page/contact_us',
         ),
         array(
-            'label' => 'APPRECIATED BY',
-            'type' => 'appreciated-by',
+            'label' => 'Header',
+            'type' => 'header_setting',
             'icon' => array('file',4),
-            'url' => 'cms/static-page/appreciated-by'
+            'url' => 'cms/static-page/header'
+        ),        
+        array(
+            'label' => 'About us',
+            'type' => 'about_us',
+            'icon' => array('file',4),
+            'url' => 'cms/static-page/about_us'
         )
     )
 );

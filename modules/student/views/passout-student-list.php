@@ -20,7 +20,7 @@
                                     <th>Contact</th>
                                     <th>Email</th>
                                     <th>Course</th>
-                                    <!-- <th class="text-end min-w-150px">Actions</th> -->
+                                    <th class="text-end min-w-150px">Actions</th>
                                 </tr>
                             </thead>
                             <tbody class="text-gray-600 fw-semibold">

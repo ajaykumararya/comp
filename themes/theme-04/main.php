@@ -107,11 +107,7 @@ function closeForm() {
                                             </nav>
                                         </div><!-- site-navigation end-->
                                         <marquee class="lbaama" behavior="scroll" scrollamount="5" direction="left">
-                                            <p><strong>LONDON BEAUTY ACADEMY BY AMA CERTIFIED, APPROVED & ENDORSED BY
-                                                    QUALIFI & HABIA A LEADING INTERNATIONAL AWARDING & STANDARDS SETTING
-                                                    BODY OF UNITED KINGDOM ENGLAND & BEAUTY PROFESSIONALS ASSOCIATION
-                                                    (BPRO) FOR QUALITY INTERNATIONAL STANDARDS & EXCELLENCE IN BEAUTY
-                                                    INDUSTRY EDUCATION</strong></p>
+                                            <p><strong>{header_marquee}</strong></p>
                                         </marquee>
                                     </div>
                                 </div>
