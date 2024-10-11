@@ -9,8 +9,7 @@
                     <div class="form-group">
                         <label for="title" class="form-label">Marquee</label>
                         <textarea name="header_marquee" class="form-control"
-                            value="<?= ES('header_marquee', '') ?>"
-                            placeholder="Enter Marquee Data"></textarea>
+                            placeholder="Enter Marquee Data"><?= ES('header_marquee', '') ?></textarea>
 
                     </div>
 

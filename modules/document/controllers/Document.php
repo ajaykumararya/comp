@@ -9,7 +9,7 @@ class Document extends MY_Controller
         $this->load->library('common/mypdf');
         $this->id = $this->decode($this->uri->segment(2, '0'));
     }
-    function percentage($ob_ttl,$ttl)
+    function percentage($ob_ttl, $ttl)
     {
         $percentage = (($ob_ttl / $ttl) * 100);
         if (is_float($percentage) && $percentage != floor($percentage)) {
@@ -62,7 +62,7 @@ class Document extends MY_Controller
             $this->set_data('time', date('h:i A', strtotime($get->row('exam_date'))));
             $pdfContent = $this->parse('admit-card');
             // $this->mypdf->setTitle('Hii');
-            if ($this->ki_theme->config('admit_card_full') )
+            if ($this->ki_theme->config('admit_card_full'))
                 $this->mypdf->addPage('L');
             $this->pdf($pdfContent);
         } else {
@@ -197,7 +197,7 @@ class Document extends MY_Controller
                     $ob_ttl += $mark->ttl;
                     array_push($subject_marks, $marks);
                 }
-                $per = $this->percentage($ob_ttl,($ttltmaxm + $ttlpmaxm));
+                $per = $this->percentage($ob_ttl, ($ttltmaxm + $ttlpmaxm));
             }
             if (PATH == 'iedct') {
                 $this->set_data('theorySubject', $theorySubjects);
@@ -295,7 +295,11 @@ class Document extends MY_Controller
                     }
                 }
             }
-            $per = number_format((($ob_ttl / ($ttltmaxm + $ttlpmaxm)) * 100), 2);
+            try {
+                $per = number_format((($ob_ttl / ($ttltmaxm + $ttlpmaxm)) * 100), 2);
+            } catch (Exception $e) {
+                $per = 100;
+            }
 
             $main = [
                 'total' => $ttl,

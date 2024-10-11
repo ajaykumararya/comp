@@ -21,6 +21,18 @@ $menu = array(
             'type' => 'about_us',
             'icon' => array('file',4),
             'url' => 'cms/static-page/about_us'
+        ),        
+        array(
+            'label' => 'Enquiry Page',
+            'type' => 'enquiry_page',
+            'icon' => array('file',4),
+            'url' => 'cms/static-page/enquiry_page'
+        ),
+        array(
+            'label' => 'Testimonial',
+            'type' => 'testimonial',
+            'icon' => array('file',4),
+            'url' => 'cms/static-page/testimonial'
         )
     )
 );

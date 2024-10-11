@@ -38,6 +38,8 @@
     </div>
 </div>
 <?php
+if(file_exists(THEME_PATH.'theme_setting.php'))
+    echo $this->parser->parse('theme_setting',[],true);
 // echo PATH;
 if (in_array(THEME,['theme-02','theme-03'])) {
     $status = ES('latest_update_show','0');

@@ -63,6 +63,22 @@ if ($isPrimary) {
         </section>
         <?php
     }
+    if ($this->SiteModel->get_setting('slider_icons') == 'on') {
+        echo '<section class="clearfix res-1199-mt-0 position-relative z-1">
+                <div class="row bg-img1 no-gutters ttm-bgcolor-white box-shadow2">';
+        for ($i = 1; $i <= 5; $i++) {
+            $title = $this->SiteModel->get_setting('slider_title_' . $i);
+            $value = $this->SiteModel->get_setting('slider_value_' . $i, '#');
+            $icon = $this->SiteModel->get_setting('slider_icon_' . $i);
+            echo '<div class="offer">
+                    <a href="'.$value.'">
+                        <h4><i class="'.$icon.'" aria-hidden="true"></i> '.$title.' </h4>
+                    </a>
+                </div>';
+        }
+        echo '</div>
+            </section>';
+    }
 } else {
 
     ?>

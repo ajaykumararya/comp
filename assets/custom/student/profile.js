@@ -314,22 +314,23 @@ document.addEventListener('DOMContentLoaded', function (d) {
                 title = main.find('.card-title');
             // console.log(title);
             title.html('Fee Receipt');
-            body.html(res.html).find('button').on('click', async function () {
+            body.html(res.html).find('button').on('click', function () {
+                // alert(9);
                 var content = $(this).closest('.card-body').clone();
                 content.find('button').remove();
                 content = content.html();
 
                 var newWindow = window.open('', '_blank');
                 newWindow.document.open();
-                await newWindow.document.write(`<html><head><title>Print Receipt</title>`);
-                await newWindow.document.write(`<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">`);
+                newWindow.document.write(`<html><head><title>Print Receipt</title>`);
+                newWindow.document.write(`<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">`);
                 // await newWindow.document.write(`<link href="${base_url}assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css">`);
                 // await newWindow.document.write(`<link href="${base_url}assets/css/style.bundle.css" rel="stylesheet" type="text/css">`);
-                await newWindow.document.write(`</head><body>${content}</body></html>`);
+                newWindow.document.write(`</head><body style="padding:20px">${content}</body></html>`);
 
                 newWindow.document.close();
-                await newWindow.print();
-                newWindow.close();
+                newWindow.print();
+                // newWindow.close();
             });
         });
     });
