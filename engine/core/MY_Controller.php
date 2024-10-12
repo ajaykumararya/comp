@@ -24,6 +24,10 @@ class MY_Controller extends MX_Controller
         }
         $this->load->library('common/ki_theme');
         $this->load->config('form/forms');
+        // if (!defined('DIWALI')) {
+        //     define('DIWALI', true);
+        //     $this->ki_theme->breadcrumb_action_html('<p class="con" id="Diwalitext">Happy Diwali</p>');
+        // }
         // exit(THEME_ID);
         if (file_exists(THEME_PATH . 'config.php') and !defined('theme_config')) {
             // ob_start();
@@ -34,7 +38,7 @@ class MY_Controller extends MX_Controller
                     $this->ki_theme->set_config_item($item, $value);
                 unset($config);
             } else
-                throw Exception('Your Theme Config File Is Empty.');
+                throw new Exception('Your Theme Config File Is Empty.');
         }
         $adminCard = $this->center_model->isAdminOrCenter() ? '' : 'border-2 border-primary';
         $this->public_data = [
@@ -46,7 +50,7 @@ class MY_Controller extends MX_Controller
             'save_button' => $this->ki_theme->set_class('save-btn')->save_button('Save', 'save-2'),
             'update_button' => $this->ki_theme->set_class('save-btn')->save_button('Save Changes', 'save-2'),
             'send_button' => $this->ki_theme->set_class('sen-btn')->save_button('Send', 'send'),
-            'card_class' => 'card shadow-sm ' . $adminCard . ' mb-5 '.($this->input->post() ? '' : 'd-none'),
+            'card_class' => 'card shadow-sm ' . $adminCard . ' mb-5 ' . ($this->input->post() ? '' : 'd-none'),
             'inr' => ' <span class="">₹</span> ',
             'current_date' => $this->ki_theme->date(),
             'theme_url' => theme_url(),

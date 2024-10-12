@@ -1,0 +1,95 @@
+<style>
+    .con {
+            letter-spacing: 3px;
+            /* position: absolute;
+            top: -50vh; */
+        }
+
+        #Diwalitext span {
+            color: orange;
+            transition: all 1s linear;
+            -webkit-box-reflect: below 50px;
+            opacity: 0;
+            font-family: cursive;
+        }
+
+        #Diwalitext span.active {
+            animation: bounce 2s linear forwards;
+            opacity: 1;
+        } 
+
+        @keyframes bounce {
+            0% {
+                top: 0vh;
+            }
+
+            25% {
+                top: 50vh;
+            }
+
+            50% {
+                top: 80vh;
+            }
+
+            75% {
+                top: 60vh;
+            }
+
+            100% {
+                top: 80vh;
+            }
+        }
+</style>
+<p class="con" id="Diwalitext">Happy Diwali</p>
+<script>
+    let text = document.getElementById("Diwalitext");
+let k = text.innerHTML;
+let klen = k.length;
+
+text.innerHTML = "";
+for (let i = 0; i < klen; i++) {
+    text.innerHTML += `<span>${k[i]}</span>`;
+}
+
+let i = 0;
+let letters = document.querySelectorAll("#Diwalitext span");
+let colors = [
+    "red",
+    "green",
+    "blue",
+    "violet",
+    "brown",
+    "orange",
+    "cyan",
+    "orangered"
+];
+function bounce() {
+    letters[i].style.color = "white";
+    letters[i].style.fontSize = "60px";
+    letters[i].classList.add("active");
+    i++;
+    if (i == klen) {
+        clearInterval(id);
+
+        function lightening() {
+            let r = Math.floor(Math.random() * colors.length);
+            // let m = Math.floor(Math.random() * klen);
+            let q = 0;
+            function colorIt() {
+                letters[q].style.color = `${colors[r]}`;
+                letters[q].style.textShadow = `2px 20px 20px ${colors[r]}`;
+                q++;
+                if (q >= klen) {
+                    q = 0;
+                }
+            }
+            let id4 = setInterval(colorIt, 400);
+
+            // letters[m].style.color = `${colors[r]}`;
+        }
+        let id2 = setInterval(lightening, 500);
+    }
+}
+
+let id = setInterval(bounce, 100);
+</script>

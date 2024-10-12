@@ -36,7 +36,7 @@
                                     value='$title'>
                                         </td>
                                         <td>
-                                        <input name='{$index}_value' class='custom_setting_input'
+                                        <input name='{$index}_value' class='w-100 custom_setting_input'
                                         value='$value' placeholder='Enter $title value'>
                                         </td>
                                     </tr>

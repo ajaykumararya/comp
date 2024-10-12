@@ -12,7 +12,7 @@ $menu = array(
         ),
         array(
             'label' => 'Usefull buttons',
-            'type' => 'usefull_buttons',
+            'type' => 'usefull-buttons',
             'icon' => array('file',4),
             'url' => 'cms/static-page/usefull-buttons'
         ),

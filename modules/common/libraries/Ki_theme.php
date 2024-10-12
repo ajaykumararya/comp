@@ -39,6 +39,7 @@ class Ki_theme
         if (is_object($chk)) {
             $this->CI = $chk;
         }
+        
         $this->set_breadcrumb();
         if (!$chk) {
             if (!$this->ThemeSchemaVars)
@@ -63,6 +64,8 @@ class Ki_theme
                 ]);
             }
         }
+        $this->removeCache();
+
         $file = FCPATH . 'assets/fas/festivals_' . date('Y') . '.json';
         if (!file_exists($file)) {
             if (defined('CALENDARIFIC_API_KEY')) {
@@ -103,16 +106,69 @@ class Ki_theme
         } else {
             $this->festivals = $this->load_from_json($file);
         }
-        $this->removeCache();
         $this->login_type = $this->CI->session->userdata('admin_type');
         $this->login_id = $this->CI->session->userdata('admin_id');
         $this->breadcrumb_data['controller'] = ucfirst($this->CI->router->fetch_class());
+    }
+    function get_festivals()
+    {
+        return $this->festivals;
     }
     function get_festival($date)
     {
         if (isset($this->festivals[$date]))
             return $this->festivals[$date];
         return false;
+    }
+    function isDiwali()
+    {
+        $get_festival = $this->findEvent('Diwali');
+
+        $givenDateString = date('d-m-Y', strtotime($get_festival['date']));
+
+        // Create a DateTime object from the given date
+        $givenDate = DateTime::createFromFormat('d-m-Y', $givenDateString);
+
+        // Check if the date creation was successful
+        if (!$givenDate) {
+            return false;
+            // die("Invalid date format. Please use 'dd-mm-yyyy'.");
+        }
+
+        // Get the day of the week for the given date (0 = Sunday, 6 = Saturday)
+        $dayOfWeek = $givenDate->format('w'); // 0 (for Sunday) through 6 (for Saturday)
+
+        // Calculate the start of the week (Monday)
+        $startOfWeek = clone $givenDate;
+        $startOfWeek->modify('-' . ($dayOfWeek + 5) . ' days');
+
+        // Calculate the end of the week (Sunday)
+        $endOfWeek = clone $givenDate;
+        $endOfWeek->modify('+' . (2 - $dayOfWeek) . ' days');
+
+        // Get the first and last dates
+        $firstDate = $startOfWeek->format('d-m-Y'); // First date of the week
+        $lastDate = $endOfWeek->format('d-m-Y');
+        $currentDate = new DateTime();
+        $currentDate = $currentDate->format('d-m-Y');
+        // return $firstDate.' '.$lastDate;
+        // Check if the current date is within the week range
+        return ($currentDate >= $firstDate && $currentDate <= $lastDate);
+
+    }
+    function findEvent($eventTitle)
+    {
+        foreach ($this->festivals as $date => $eventList) {
+            foreach ($eventList as $event) {
+                if (stripos($event['name'], $eventTitle) !== false) { // Case-insensitive search
+                    return array(
+                        'date' => $date,
+                        'event' => $event
+                    );
+                }
+            }
+        }
+        return null; // Return null if no event is found
     }
     function load_from_json($file)
     {
