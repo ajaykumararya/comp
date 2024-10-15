@@ -134,6 +134,9 @@ if (!function_exists('humnize_duration_with_ordinal')) {
         return (ordinal_number($duration) . ' ' . ucfirst($duration_type));
     }
 }
+function humnize($number,$string){
+    return $number > 1 ? plural($string) : singular($string);
+}
 if (!function_exists('print_string')) {
     function print_string($string, $data = [])
     {

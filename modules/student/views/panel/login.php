@@ -181,7 +181,7 @@
                     </a>
                     <!--begin::Title-->
                     <h1 class="text-gray-800 fs-2qx fw-bold text-center mb-7">
-                        Fast, Efficient and Productive
+                        <?=ES('login_title',ES('title'))?>
                     </h1>
                     <!--end::Title-->
 

@@ -43,7 +43,7 @@
     <div class="position-absolute" id="photo">
         <img src="upload/{image}" style="width:148px;height:177px">
     </div>
-    <p class="position-absolute " style="top:26rem;left:24%;line-height:1">{course_name}</p>
+    <p class="position-absolute " style="top:26rem;left:24%;line-height:1; text-transform: uppercase;">{course_name}</p>
     <p class="position-absolute" style="top:28.7rem;left:25%;text-transform: uppercase;">{roll_no}</p>
     <p class="position-absolute" style="top:31.4rem;left:23.5%">{session}</p>
     <p class="position-absolute" style="top:34rem;left:33%">{father_name}</p>

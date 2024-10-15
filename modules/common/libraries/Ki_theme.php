@@ -39,7 +39,7 @@ class Ki_theme
         if (is_object($chk)) {
             $this->CI = $chk;
         }
-        
+
         $this->set_breadcrumb();
         if (!$chk) {
             if (!$this->ThemeSchemaVars)
@@ -189,6 +189,18 @@ class Ki_theme
     }
     function grade($score)
     {
+        if (PATH == 'skycrownworld') {
+            if ($score >= 85)
+                return 'A+ (Excellent)';
+            elseif ($score >= 75 && $score < 85)
+                return 'A (Very Good)';
+            else if ($score >= 60 && $score < 75)
+                return 'B (Good)';
+            else if ($score >= 40 && $score < 60)
+                return 'C (Satisfactory)';
+            else
+                return 'F (Failure)';
+        }
         if (PATH == 'zcc') {
             if ($score >= 80 && $score <= 100)
                 return 'A+';

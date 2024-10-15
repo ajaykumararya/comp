@@ -31,9 +31,17 @@
                 </div>
                 <div class="card-body p-3">
                     <div class="form-group mb-4">
+                        <?php
+                        $sitetitle = $this->SiteModel->get_setting('title');
+                        ?>
+                        <label for="slogo" class="form-label required">Enter Login Page Slogan </label>
+                        <textarea name="login_title" id="slogo" class="form-control"
+                            placeholder="Enter Title"><?= ES('login_title', $sitetitle) ?></textarea>
+                    </div>
+                    <div class="form-group mb-4">
                         <label for="image" class="form-label required">Enter Title</label>
                         <textarea name="title" id="image" class="form-control"
-                            placeholder="Enter Title"><?= $this->SiteModel->get_setting('title') ?></textarea>
+                            placeholder="Enter Title"><?= $sitetitle ?></textarea>
                     </div>
                     <div class="form-group mb-4">
                         <label for="email" class="form-label required">Enter Email</label>
@@ -244,7 +252,8 @@ if (THEME == 'theme-04') {
             <div class="card-body">
                 <div class="form-group">
                     <label for="footer_about_us">About US Content</label>
-                    <textarea name="footer_about_us" class="form-control" id="tinymce_basic" data-kt-autosize="true"><?=$title = $this->SiteModel->get_setting('footer_about_us');?></textarea>
+                    <textarea name="footer_about_us" class="form-control" id="tinymce_basic"
+                        data-kt-autosize="true"><?= $title = $this->SiteModel->get_setting('footer_about_us'); ?></textarea>
                 </div>
             </div>
             <div class="card-footer">

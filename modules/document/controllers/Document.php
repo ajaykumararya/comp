@@ -222,13 +222,16 @@ class Document extends MY_Controller
                 return $main;
             // pre($get->row(),true);
             $this->set_data($main);
-            $pdfContent = $this->parse($file, $get->row_array());
+            $rowArray = $get->row_array();
+            $rowArray['duration_type'] = (humnize($rowArray['duration'], $rowArray['duration_type']));
+            $pdfContent = $this->parse($file, $rowArray);
             // echo $pdfContent;
             $this->pdf($pdfContent);
         } else {
             $this->not_found("Marksheet Not Found..");
         }
     }
+
     private function reverse_array($originalArray)
     {
         // $reversedArray = array_reverse($originalArray, true);
@@ -259,6 +262,7 @@ class Document extends MY_Controller
                 $ttltmaxm =
                 $ttlpminm =
                 $ttlpmaxm = 0;
+            $subjects = [];
             foreach ($where as $whereData) {
                 $final_marksheet = $this->student_model->marksheet($whereData);
                 if ($final_marksheet->num_rows()) {
@@ -270,6 +274,7 @@ class Document extends MY_Controller
 
                     if ($ttl_subject = $get_subect_numers->num_rows()) {
                         foreach ($get_subect_numers->result() as $mark) {
+                            $subjects[] = $mark->subject_name;
                             $tmm = $this->isMark($mark->theory_max_marks);
                             $pmm = $this->isMark($mark->practical_max_marks);
                             $tmim = $this->isMark($mark->theory_min_marks);
@@ -302,6 +307,8 @@ class Document extends MY_Controller
             }
 
             $main = [
+                'subjects' => $subjects,
+                'subject_html' => implode(',',$subjects),
                 'total' => $ttl,
                 'obtain_total' => $ob_ttl,
                 'marks' => $subject_marks,
@@ -362,15 +369,16 @@ class Document extends MY_Controller
     function franchise_certificate()
     {
         $get = $this->center_model->get_center($this->id);
-        // $this->set_data('certificate_id', $this->id);
+        $this->set_data('certificate_id', $this->id);
         if ($get->num_rows()) {
             $data = $get->row_array();
+            // pre($data,true);
             if ($data['status'] && $data['isPending'] == 0 && $data['isDeleted'] == 0) {
                 if ($data['valid_upto'] && $data['certificate_issue_date']) {
                     $data['state'] = $this->SiteModel->state($data['state_id']);
                     $data['city'] = $this->SiteModel->city($data['city_id']);
                     $output = $this->parse('franchise_certificate', $data);
-                    if (in_array(PATH, ['techno', 'haptronworld', 'sewaedu'])) {
+                    if (in_array(PATH, ['techno', 'haptronworld', 'sewaedu','skycrownworld'])) {
                         $this->mypdf->addPage('L');
                     }
                     $this->pdf($output);

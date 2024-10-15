@@ -96,7 +96,7 @@
 
                     <!--begin::Title-->
                     <h1 class="text-gray-800 fs-2qx fw-bold text-center mb-7">
-                        <?= ES('title') ?>
+                        <?= ES('login_title', ES('title')) ?>
                     </h1>
                     <!--end::Title-->
 
@@ -210,7 +210,7 @@
     <!--begin::Javascript-->
     <script>
         var base_url = "{base_url}",
-            ajax_url = base_url + 'ajax',f;        
+            ajax_url = base_url + 'ajax', f;        
     </script>
 
     <!--begin::Global Javascript Bundle(mandatory for all pages)-->
@@ -222,8 +222,8 @@
     <!--end::Custom Javascript-->
     <!--end::Javascript-->
     <script>
-    if(f = localStorage.getItem('fontFamily')){$('body').css("font-family",f)}
-    if(localStorage.getItem('cardAnimation')){$('.card').addClass('card-animation').css('--animation-bg',localStorage.getItem('card-animation-bg')||'teal');}</script>        
+        if (f = localStorage.getItem('fontFamily')) { $('body').css("font-family", f) }
+        if (localStorage.getItem('cardAnimation')) { $('.card').addClass('card-animation').css('--animation-bg', localStorage.getItem('card-animation-bg') || 'teal'); }</script>
 </body>
 <!--end::Body-->
 

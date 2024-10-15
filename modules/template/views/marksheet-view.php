@@ -8,6 +8,13 @@
     <div class="col-md-12 p-0 row">
         <table class="table table-bordered table-striped">
             <tr>
+                <td rowspan="3" width="200px">
+                    <img src="{assets}{image}" style="width:100%;height:100%">
+                </td>
+                <th colspan="2">Institute Name</th>
+                <td colspan="6">HOO</td>
+            </tr>
+            <tr>
                 <th colspan="2">Marksheet Duration</th>
                 <td><?= humnize_duration_with_ordinal($marksheet_duration, $duration_type) ?></td>
                 <th>Course</th>

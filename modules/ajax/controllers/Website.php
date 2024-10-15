@@ -166,6 +166,7 @@ class Website extends Ajax_Controller
                 if ($get->num_rows() == 1) {
                     $data = $get->row_array();
                     $this->set_data($data);
+                    $this->set_data('duration_type',(humnize($data['duration'], $data['duration_type'])));
                     $this->response('html', $this->template('marksheet-view'));
                     $this->response('data', $data);
                 } else {
