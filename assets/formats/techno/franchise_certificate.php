@@ -74,7 +74,7 @@
     </div> -->
     <div class="position-absolute" style="top:50.3%;left:17%;width:76%;text-align:center;text-transform:capitalize">{institute_name}</div>
 
-    <div class="position-absolute" style="top:56%;left:27%;">{center_number}</div>
+    <div class="position-absolute" style="top:56%;left:27%;text-transform: uppercase;">{center_number}</div>
     <div class="position-absolute" style="top:60.5%;left:27%;">{city}, &nbsp;{state}</div>
     <div class="position-absolute" style="top:65.4%;left:27%;">{name}</div>
     

@@ -52,10 +52,11 @@
 
         <?php
     } else if (in_array(PATH, ['zcc','skycrownworld'])) {
+        $primaryC = PATH == 'skycrownworld' ? '002448' :'E22B2B';
         ?>
             :root {
-                --primary: #E22B2B;
-                --theme-primary: #E22B2B
+                --primary: #<?=$primaryC?>;
+                --theme-primary: #<?=$primaryC?>
             }
 
             .bg_light_green {

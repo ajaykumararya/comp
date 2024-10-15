@@ -23,6 +23,14 @@
                         </div>
                         <?php
                     }
+                    if (THEME == 'theme-04') {
+                        ?>
+                        <div class="form-group mb-4">
+                            <label for="image" class="form-label mb-1">Course Description</label>
+                            <textarea type="text" class="form-control" name="description" placeholder="Enter description"></textarea>
+                        </div>
+                        <?php
+                    }
                     ?>
                     <div class="form-group mb-4">
                         <label for="button_title" class="form-label mb-1">Button Title</label>

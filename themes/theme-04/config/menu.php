@@ -15,7 +15,13 @@ $menu = array(
             'type' => 'header_setting',
             'icon' => array('file',4),
             'url' => 'cms/static-page/header'
-        ),        
+        ),      
+        array(
+            'label' => 'Our Courses',
+            'type' => 'our_courses',
+            'icon' => array('file', 4),
+            'url' => 'cms/static-page/our_courses',
+        ),  
         array(
             'label' => 'About us',
             'type' => 'about_us',
