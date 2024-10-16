@@ -522,7 +522,10 @@ if (PATH == 'sewaedu') {
 
                             if (PATH == 'sewaedu') {
                                 echo '<p>Copyrights@ All Right Reserved. This is the official Website of Skill Education & Welfare Association (SEWA) Council of Skill and Vocational Studies Designed by Sewa Tech</p>';
-                            } else {
+                            } 
+                            else if(PATH == 'sewaeducation'){
+                                echo 'Copyrights@ All Right Reserved . SKILL EDUCATION AND WELFARE ASSOCIATION';
+                            }else {
                                 ?>
                             <p> Copyright @
                                 <script>document.write(new Date().getFullYear())</script> {copyright}
