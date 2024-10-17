@@ -52,6 +52,8 @@ class Student_model extends MY_Model
             ->join('district', 'district.DISTRICT_ID = s.city_id and district.STATE_ID = state.STATE_ID')
 
             ->join('batch as b', "b.id = s.batch_id", 'left');
+        if(CHECK_PERMISSION('ADMISSION_WITH_SESSION'))
+            $this->db->select('s.session_id,ses.title as session')->join('session as ses','ses.id =  s.session_id','left');
         if (!isset($without_admission_status))
             $this->db->where('s.admission_status', isset($admission_status) ? $admission_status : 1);
         if (($this->isCenter() and $withCenter) or ($case == 'center' and isset($center_id)))
@@ -171,6 +173,10 @@ class Student_model extends MY_Model
                 $this->db->join('student_certificates as sce', 'sce.student_id = s.id', 'left'); //AND sce.course_id = s.course_id
 
                 $this->db->where('sce.student_id IS NULL');
+                if(isset($condition['session_id'])){
+                    $this->db->where('s.session_id', $condition['session_id']);
+                    unset($condition['session_id']);
+                }
                 $this->myWhere('s', $condition);
                 break;
             case 'course':
@@ -321,6 +327,9 @@ class Student_model extends MY_Model
         if (isset($where['center_id']) && !$where['center_id'])
             unset($where['center_id']);
         if (isset($where['admission_status'])) {
+            if ($where['admission_status'] == 'session') {
+                return $this->get_switch('active_student', ['session_id' => $where['center_id']])->result();
+            }
             if ($where['admission_status'] == 1)
                 return $this->get_switch('active_student', $where)->result();
             if ($where['admission_status'] == 'all')
@@ -474,7 +483,8 @@ class Student_model extends MY_Model
         ])->get('center_courses')->row('course_fee');
         return $courseFee - $ttlSubmited;
     }
-    function remaining_emis($std_id){
-        
+    function remaining_emis($std_id)
+    {
+
     }
 }

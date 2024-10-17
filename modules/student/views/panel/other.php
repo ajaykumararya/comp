@@ -24,11 +24,14 @@
                                     value="{roll_no}">
                             </div>
                         </div>
+                        <?php
+                    if (!CHECK_PERMISSION('NOT_TIMETABLE')) {
+                        ?>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="roll_no" class="form-label required">Time Table</label>
                                 <select class="form-select" name="batch_id" data-control="select2"
-                                    data-placeholder="Select a Course">
+                                    data-placeholder="Select a Time Table">
                                     <option></option>
                                     <?php
                                     $listBatch = $this->db->get('batch');
@@ -39,7 +42,29 @@
                                 </select>
                             </div>
                         </div>
+                        <?php
+                    }
 
+                    if (CHECK_PERMISSION('ADMISSION_WITH_SESSION')) {
+                        ?>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="roll_no" class="form-label required">Session</label>
+                                <select class="form-select" name="batch_id" data-control="select2"
+                                    data-placeholder="Select a Session">
+                                    <option></option>
+                                    <?php
+                                    $listBatch = $this->db->where('status',1)->get('session');
+                                    foreach ($listBatch->result() as $row) {
+                                        echo '<option value="' . $row->id . '" ' . (@$session_id == $row->id ? 'selected' : '') . '>' . $row->title . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
                         <div class="col-md-6 mt-4">
                             <div class="form-group">
                                 <label for="" class="foem-label">Course</label>

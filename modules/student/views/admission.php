@@ -1,8 +1,7 @@
-
 <div class="row">
     <div class="col-md-12">
         <form id="form" action="" method="POST">
-            
+
             <div class="{card_class}">
                 <div class="card-header collapsible cursor-pointer rotate" data-bs-toggle="collapse"
                     data-bs-target="#kt_docs_card_collapsible">
@@ -66,7 +65,7 @@
                                     $this->db->where('id', $center_id);
                                 }
 
-                                if($this->center_model->isAdmin()){
+                                if ($this->center_model->isAdmin()) {
                                     $this->db->where([
                                         'isDeleted' => 0,
                                         'isPending' => 0
@@ -74,7 +73,7 @@
                                 }
                                 $rolCol = 2;
                                 $courseCol = 3;
-                                if(CHECK_PERMISSION('NOT_TIMETABLE')){
+                                if (CHECK_PERMISSION('NOT_TIMETABLE') && !CHECK_PERMISSION('ADMISSION_WITH_SESSION')) {
                                     $rolCol = $courseCol = 4;
                                 }
                                 ?>
@@ -83,22 +82,22 @@
                                     data-allow-clear="<?= $this->center_model->isAdmin() ?>">
                                     <option></option>
                                     <?php
-                                    $this->db->where('isDeleted',0);
+                                    $this->db->where('isDeleted', 0);
                                     $list = $this->db->where('type', 'center')->get('centers')->result();
                                     foreach ($list as $row) {
                                         $selected = $center_id == $row->id ? 'selected' : '';
-                                        echo '<option value="' . $row->id . '" '.( isset($row->wallet) ? 'data-wallet="'.$row->wallet.'"' : '').' ' . $selected . ' data-kt-rich-content-subcontent="' . $row->institute_name . '"
+                                        echo '<option value="' . $row->id . '" ' . (isset($row->wallet) ? 'data-wallet="' . $row->wallet . '"' : '') . ' ' . $selected . ' data-kt-rich-content-subcontent="' . $row->institute_name . '"
                                     data-kt-rich-content-icon="' . $row->image . '">' . $row->name . '</option>';
                                     }
                                     ?>
                                 </select>
                             </div>
 
-                            <div class="form-group mb-4 col-lg-<?=$rolCol?> col-xs-12 col-sm-12">
+                            <div class="form-group mb-4 col-lg-<?= $rolCol ?> col-xs-12 col-sm-12">
                                 <label class="form-label required">Roll No.</label>
                                 <input type="text" name="roll_no" class="form-control" placeholder="Enter Roll NO.">
                             </div>
-                            <div class="form-group mb-4 col-lg-<?=$courseCol?> col-xs-12 col-sm-12">
+                            <div class="form-group mb-4 col-lg-<?= $courseCol ?> col-xs-12 col-sm-12">
                                 <label class="form-label required">Course</label>
                                 <select class="form-select" name="course_id" data-control="select2"
                                     data-placeholder="Select a Course" data-allow-clear="true">
@@ -108,27 +107,45 @@
 
 
                             <?php
-                            if(!CHECK_PERMISSION('NOT_TIMETABLE'))     {
+                            if (!CHECK_PERMISSION('NOT_TIMETABLE')) {
                                 ?>
-                            
-                            <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
-                                <label class="form-label required">Time Table</label>
-                                <select class="form-select" name="batch_id" data-control="select2"
-                                    data-placeholder="Select a Course">
-                                    <option></option>
-                                    <?php
-                                    $listBatch = $this->db->get('batch');
-                                    foreach ($listBatch->result() as $row) {
-                                        echo '<option value="' . $row->id . '">' . $row->batch_name . '</option>';
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                            <?php
+
+                                <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                    <label class="form-label required">Time Table</label>
+                                    <select class="form-select" name="batch_id" data-control="select2"
+                                        data-placeholder="Select a Course">
+                                        <option></option>
+                                        <?php
+                                        $listBatch = $this->db->get('batch');
+                                        foreach ($listBatch->result() as $row) {
+                                            echo '<option value="' . $row->id . '">' . $row->batch_name . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <?php
+                            } else
+                                echo form_hidden('batch_id', 0);
+                            if (CHECK_PERMISSION('ADMISSION_WITH_SESSION')) {
+                                ?>
+
+                                <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                    <label class="form-label required">Session</label>
+                                    <select class="form-select" name="session_id" data-control="select2"
+                                        data-placeholder="Select a Session" required>
+                                        <option></option>
+                                        <?php
+                                        $listBatch = $this->db->where('status',1)->get('session');
+                                        foreach ($listBatch->result() as $row) {
+                                            echo '<option value="' . $row->id . '">' . $row->title . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <?php
                             }
-                            else
-                                echo form_hidden('batch_id',0);
                             ?>
+
 
 
                             <div class="form-group mb-4 col-lg-6 col-xs-12 col-sm-12">
@@ -274,55 +291,56 @@
                                     </div> -->
                                 </div>
                                 <div class="row">
-                                        <?php
-                                        $uploadDocuments = $this->ki_theme->project_config('upload_ducuments');
-                                        foreach ($uploadDocuments as $key => $value) {
-                                            ?>
-                                            <div class="col-md-3 mb-4">
-                                                <div class="form-group">
-                                                    <label for="<?=$key?>" class="form-label form-control"><?=$value?></label>
-                                                    <input type="hidden" name="upload_docs[title][]" class="form-control"
-                                                        value="<?=$key?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-9 mb-4">
-                                                <div class="form-group">
-                                                    <input type="file" class="form-control" id="<?=$key?>" name="upload_docs[file][]">
-                                                </div>
-                                            </div>
-                                            <?php
-                                        }
-                                        ?>
-                                    </div>
-                                    <?php
-                                    /*
-                                <div class="row">
                                     <?php
                                     $uploadDocuments = $this->ki_theme->project_config('upload_ducuments');
-                                    for ($i = 1; $i <= sizeof($uploadDocuments); $i++) {
+                                    foreach ($uploadDocuments as $key => $value) {
                                         ?>
                                         <div class="col-md-3 mb-4">
                                             <div class="form-group">
-                                                <select name="upload_docs[title][]" class="form-control"
-                                                    data-placeholder="Select Dcoument Title" data-control="select2">
-                                                    <option></option>
-                                                    <?php
-                                                    foreach ($uploadDocuments as $key => $value)
-                                                        echo "<option value'$key'>$value</option>";
-                                                    ?>
-                                                </select>
+                                                <label for="<?= $key ?>" class="form-label form-control"><?= $value ?></label>
+                                                <input type="hidden" name="upload_docs[title][]" class="form-control"
+                                                    value="<?= $key ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-9 mb-4">
                                             <div class="form-group">
-                                                <input type="file" class="form-control" name="upload_docs[file][]">
+                                                <input type="file" class="form-control" id="<?= $key ?>"
+                                                    name="upload_docs[file][]">
                                             </div>
                                         </div>
                                         <?php
                                     }
                                     ?>
                                 </div>
-                                */
+                                <?php
+                                /*
+                            <div class="row">
+                                <?php
+                                $uploadDocuments = $this->ki_theme->project_config('upload_ducuments');
+                                for ($i = 1; $i <= sizeof($uploadDocuments); $i++) {
+                                    ?>
+                                    <div class="col-md-3 mb-4">
+                                        <div class="form-group">
+                                            <select name="upload_docs[title][]" class="form-control"
+                                                data-placeholder="Select Dcoument Title" data-control="select2">
+                                                <option></option>
+                                                <?php
+                                                foreach ($uploadDocuments as $key => $value)
+                                                    echo "<option value'$key'>$value</option>";
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9 mb-4">
+                                        <div class="form-group">
+                                            <input type="file" class="form-control" name="upload_docs[file][]">
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+                            </div>
+                            */
                                 ?>
                             </div>
                         </div>

@@ -127,6 +127,14 @@ $config['menu'] = array(
                     'icon' => array('bookmark-2', 3),
                     'url' => 'student/passout-student-list',
                 ),
+                //ADMISSION_WITH_SESSION
+                array(
+                    'label' => 'List By Session',
+                    'type' => 'student_list_by_session',
+                    'icon' => array('people', 5),
+                    'url' => 'student/list-by-session',
+                    'condition' =>  CHECK_PERMISSION('ADMISSION_WITH_SESSION')
+                ),
                 array(
                     'label' => 'List By Center',
                     'type' => 'student_list_by_center',

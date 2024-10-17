@@ -231,6 +231,10 @@ class Student extends MY_Controller
     {
         $this->view('list-by-center');
     }
+    function list_by_session()
+    {
+        $this->view('list-by-session');
+    }
     function study_material()
     {
         if ($view = $this->uri->segment(3, 0)) {

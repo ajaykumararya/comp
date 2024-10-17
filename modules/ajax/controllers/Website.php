@@ -10,9 +10,9 @@ class Website extends Ajax_Controller
     {
         $roll_no = $this->post('roll_no'); // Assuming student is logged in
         $this->db->select('sa.date, sa.attendance_type_id as status,at.type as title')
-                ->from('student_attendances sa')
-                ->join('attendence_type as at','sa.attendance_type_id = at.id')
-                ->where('sa.roll_no', $roll_no);
+            ->from('student_attendances sa')
+            ->join('attendence_type as at', 'sa.attendance_type_id = at.id')
+            ->where('sa.roll_no', $roll_no);
         $query = $this->db->get();
         $attendance = $query->result_array();
 
@@ -166,7 +166,7 @@ class Website extends Ajax_Controller
                 if ($get->num_rows() == 1) {
                     $data = $get->row_array();
                     $this->set_data($data);
-                    $this->set_data('duration_type',(humnize($data['duration'], $data['duration_type'])));
+                    $this->set_data('duration_type', (humnize($data['duration'], $data['duration_type'])));
                     $this->response('html', $this->template('marksheet-view'));
                     $this->response('data', $data);
                 } else {
@@ -412,13 +412,18 @@ class Website extends Ajax_Controller
         if ($get->num_rows()) {
             $this->response('error', 'This Roll Number already exists.');
         } else {
+            $data = [
+                'roll_no' => $this->post('roll_no'),
+                // 'batch_id' => $this->post('batch_id'),
+                'course_id' => $this->post('course_id'),
+                'admission_date' => $this->post('admission_date')
+            ];
+            if (isset($_POST['batch_id']))
+                $data['batch_id'] = $this->post('batch_id');
+            if (isset($_POST['session_id']))
+                $data['session_id'] = $this->post('session_id');
             $this->db->where('id', $this->post('student_id'))
-                ->update('students', [
-                    'roll_no' => $this->post('roll_no'),
-                    'batch_id' => $this->post('batch_id'),
-                    'course_id' => $this->post('course_id'),
-                    'admission_date' => $this->post('admission_date')
-                ]);
+                ->update('students', $data);
             $this->response("status", true);
         }
     }

@@ -101,6 +101,15 @@ $IsPassout = $this->student_model->get_switch('passout', ['id' => $student_id])-
                                 </tr>
                                 <?php
                             }
+                            if (CHECK_PERMISSION('ADMISSION_WITH_SESSION')) {
+                                ?>
+                                <tr>
+                                    <th width="30%">Session </th>
+                                    <td width="2%">:</td>
+                                    <td>{session} <?= $IsPassout ? label('Passount Student', 'success') : '' ?></td>
+                                </tr>
+                                <?php
+                            }
                             ?>
                             <tr>
                                 <th width="30%">Center Name </th>

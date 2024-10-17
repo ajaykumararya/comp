@@ -134,6 +134,8 @@ class Student extends Ajax_Controller
                 }
             }
         }
+        if (isset($_POST['session_id']))
+            $data['session_id'] = $_POST['session_id'];
         $data['adhar_front'] = $this->file_up('adhar_card');
         // $data['adhar_back'] = $this->file_up('adhar_back');
         $data['image'] = $this->file_up('image');
@@ -694,25 +696,25 @@ class Student extends Ajax_Controller
         $this->response('status', ($students->num_rows() > 0));
         $this->response('html', $this->template('list-study-assign-students'));
     }
-    function study_assign_to_student(){
+    function study_assign_to_student()
+    {
         $data = [
             'material_id' => $this->post('material_id'),
             'student_id' => $this->post('student_id')
         ];
-        if(!$this->post('check_status')){
-            $this->db->where($data)->delete('student_study_material');                
-        }
-        else{
+        if (!$this->post('check_status')) {
+            $this->db->where($data)->delete('student_study_material');
+        } else {
             $data['assign_time'] = time();
             $this->db->insert('student_study_material', $data);
         }
-        $this->response('status',true);
+        $this->response('status', true);
     }
     function coupons()
     {
         $this->response('data', $this->student_model->coupons()->result_array());
     }
-    
+
     function coupon_update()
     {
         $this->response(
