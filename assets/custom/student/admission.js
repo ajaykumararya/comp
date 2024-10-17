@@ -228,9 +228,9 @@ document.addEventListener('DOMContentLoaded', function (e) {
                         },
                     },
                     */
-                    batch_id: {
-                        validators: { notEmpty: { message: 'Please Select a Time Table' } }
-                    },
+                    // batch_id: {
+                    //     validators: { notEmpty: { message: 'Please Select a Value' } }
+                    // },
                     course_id: {
                         validators: { notEmpty: { message: 'Please Select a course' } }
                     },

@@ -405,7 +405,7 @@ if (PATH == 'sewaedu') {
 <i class="fa fa-phone getin-call"></i>
 </a>-->
     <!-- START FOOTER -->
-    <footer class="bg-black footer_dark" style="background:black">
+    <footer class="bg-black footer_dark" style="background:<?=(PATH == 'skycrownworld') ? 'var(--primary)' : 'black'?>">
         <div class="top_footer">
             <div class="container">
                 <div class="row">
@@ -529,7 +529,8 @@ if (PATH == 'sewaedu') {
                                 ?>
                             <p> Copyright @
                                 <script>document.write(new Date().getFullYear())</script> {copyright}
-                            </p>
+                            </p><br>
+                            <p>Copyright@All Right Reserved . Jamai Urdu Aligarh</p>
                             <?php
                             }
                             ?>

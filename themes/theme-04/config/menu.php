@@ -17,6 +17,12 @@ $menu = array(
             'url' => 'cms/static-page/header'
         ),      
         array(
+            'label' => 'Our Counter',
+            'type' => 'our_counter',
+            'icon' => array('file', 4),
+            'url' => 'cms/static-page/our_counter',
+        ),
+        array(
             'label' => 'Our Courses',
             'type' => 'our_courses',
             'icon' => array('file', 4),
