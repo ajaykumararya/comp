@@ -421,13 +421,20 @@ $config['center_area'] = array(
                     'type' => 'add_center',
                     'icon' => array('add-item', 4),
                     'url' => 'center/add',
+                ),                
+                array(
+                    'label' => 'Assign Courses Category',
+                    'type' => 'assign_courses_with_center',
+                    'icon' => array('arrow-circle-right', 2),
+                    'url' => 'center/assign-courses-category',
+                    'condition' => CHECK_PERMISSION('ASSIGN_COURSE_CATEGORY')
                 ),
                 array(
                     'label' => 'Assign Courses',
                     'type' => 'assign_courses_with_center',
                     'icon' => array('arrow-circle-right', 2),
                     'url' => 'center/assign-courses',
-                    'condition' => !CHECK_PERMISSION('CO_ORDINATE_SYSTEM')
+                    'condition' => !CHECK_PERMISSION('CO_ORDINATE_SYSTEM') && !CHECK_PERMISSION('ASSIGN_COURSE_CATEGORY')
                 ),
                 array(
                     'label' => 'Pending Centers',

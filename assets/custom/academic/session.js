@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
     const save_url = 'academic/add-session';
     const table = $('#session_list');
     const columns = [
+        { 'data': 'status' },
         { 'data': 'title' },
         { 'data': null }
     ];
@@ -30,6 +31,15 @@ document.addEventListener('DOMContentLoaded', function (e) {
             columns: columns,
             columnDefs: [
                 {
+                    targets: 0,
+                    orderable : false,
+                    render: function (data, type, row) {
+                        return `<div class="form-check form-switch form-check-custom form-check-solid me-10">
+                                    <input class="form-check-input check-status" ${data == 1 ? 'checked' : ''} type="checkbox" value="${row.id}"/>                                    
+                                </div>`;
+                    }
+                },
+                {
                     targets: -1,
                     data: null,
                     orderable: false,
@@ -52,6 +62,16 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 // console.log(e);
                 table.DataTable().ajax.reload();
             });
+            table.find('.check-status').on('change',function(){
+                // alert(this.value);
+                const id = $(this).val();
+                const status = $(this).is(':checked') ? 1 : 0;
+                $.AryaAjax({
+                    url : 'academic/update-session-status',
+                    data : {id,status},
+                    success_message : 'Status Changed Successfully..'
+                });
+            })
         })
     }
     if (form) {

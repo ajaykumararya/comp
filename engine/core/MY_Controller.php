@@ -22,8 +22,10 @@ class MY_Controller extends MX_Controller
                 exit;
             }
         }
+        $this->load->library('common/database_manager','','build_db');
         $this->load->library('common/ki_theme');
         $this->load->config('form/forms');
+        $this->checkUpdate();
         // if (!defined('DIWALI')) {
         //     define('DIWALI', true);
         //     $this->ki_theme->breadcrumb_action_html('<p class="con" id="Diwalitext">Happy Diwali</p>');
@@ -91,6 +93,26 @@ class MY_Controller extends MX_Controller
         }
         $this->form_validation->set_message('percentage_check', 'The {field} field must be between 0 and 100.');
         return FALSE;
+    }
+    function checkUpdate(){
+        $checkField = $this->build_db->field_exists('session','status');
+        if(!$checkField){
+            $this->build_db->add_field('session',[
+                'status' => [
+                    'type' => 'int',
+                    'default' => 1
+                ]
+            ]);
+        }
+        $checkField = $this->build_db->field_exists('centers','show_in_front');
+        if(!$checkField){
+            $this->build_db->add_field('centers',[
+                'show_in_front' => [
+                    'type' => 'int',
+                    'default' => 0
+                ]
+            ]);
+        }
     }
 
     function encode($id = 0)

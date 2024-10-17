@@ -20,7 +20,11 @@
                             echo '<tr>
                                     <td>' . $i++ . '.</td>
                                     <td>' . $form . '</td>
-                                    <td class="p-4">'.$this->ki_theme->drawer_button('form',$index,$form).'</td>
+                                    <td class="p-4">'.$this->ki_theme->drawer_button('form',$index,$form);
+                                    if($index == 'student_admission'){
+                                        echo '<button class="btn btn-primary m-2 student-admission-setting"><i class="fa fa-cog"></i></button>';
+                                    }
+                                    echo '</td>
                                 </tr>';
                         }
                         ?>

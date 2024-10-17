@@ -5,6 +5,7 @@
 </style>
 <?php
 $col = (!CHECK_PERMISSION('NOT_TIMETABLE')) ? 4 : 6;
+$col =  CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4  : $col;
 ?>
 <section class="small_pt gray-bg" data-aos="fade-up">
     <div class="container">
@@ -58,6 +59,7 @@ $col = (!CHECK_PERMISSION('NOT_TIMETABLE')) ? 4 : 6;
                                         $center_id = $this->center_model->loginId();
                                         $this->db->where('id', $center_id);
                                     }
+                                    $this->db->where('show_in_front',1);
                                     ?>
                                     <select class="form-control admission-center" name="center_id"
                                         data-control="select2" data-placeholder="Select a Center"
@@ -109,6 +111,24 @@ $col = (!CHECK_PERMISSION('NOT_TIMETABLE')) ? 4 : 6;
                                     <?php
                                 } else
                                     echo form_hidden('batch_id', 0);
+                                    if (CHECK_PERMISSION('ADMISSION_WITH_SESSION')) {
+                                        ?>
+        
+                                        <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                            <label class="form-label required">Session</label>
+                                            <select class="form-select" name="session_id" data-control="select2"
+                                                data-placeholder="Select a Session" required>
+                                                <option></option>
+                                                <?php
+                                                $listBatch = $this->db->where('status',1)->get('session');
+                                                foreach ($listBatch->result() as $row) {
+                                                    echo '<option value="' . $row->id . '">' . $row->title . '</option>';
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <?php
+                                    }
                                 ?>
                                 <div class="form-group mb-4 col-lg-6 col-xs-12 col-sm-12">
                                     <label class="form-label required">Whatsapp Number</label>

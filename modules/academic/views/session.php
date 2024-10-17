@@ -40,6 +40,7 @@
                             <thead>
                                 <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
 
+                                    <th class="">Status</th>
                                     <th>Title</th>
                                     <th class="text-end min-w-100px">Actions</th>
                                 </tr>

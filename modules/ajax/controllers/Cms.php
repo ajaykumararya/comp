@@ -205,6 +205,20 @@ class Cms extends Ajax_Controller
         $this->db->insert('content', $data);
         $this->response('status', true);
     }
+    function form_setting()
+    {
+        $this->response('results', $this->center_model->get_center()->result());
+        $this->response('status', true);
+    }
+    function center_show_in_front()
+    {
+        $this->response(
+            'status',
+            $this->db->where('id', $this->post('id'))->update('centers', [
+                'show_in_front' => $this->post('status')
+            ])
+        );
+    }
     function delete_content()
     {
         $this->db->where($this->post())->delete('content');
@@ -324,8 +338,8 @@ class Cms extends Ajax_Controller
         if ($get->num_rows()) {
             $row = $get->row();
             $this->db->delete('syllabus', ['id' => $id]);
-            if(file_exists('upload/'.$row->file))
-                @unlink('upload/'.$row->file);
+            if (file_exists('upload/' . $row->file))
+                @unlink('upload/' . $row->file);
             $this->response('status', true);
         }
     }
