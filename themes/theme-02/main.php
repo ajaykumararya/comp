@@ -525,12 +525,13 @@ if (PATH == 'sewaedu') {
                             } 
                             else if(PATH == 'sewaeducation'){
                                 echo 'Copyrights@ All Right Reserved . SKILL EDUCATION AND WELFARE ASSOCIATION';
+                                echo '<br>
+                            <p>Copyright@All Right Reserved . Jamai Urdu Aligarh</p>';
                             }else {
                                 ?>
                             <p> Copyright @
                                 <script>document.write(new Date().getFullYear())</script> {copyright}
-                            </p><br>
-                            <p>Copyright@All Right Reserved . Jamai Urdu Aligarh</p>
+                            </p>
                             <?php
                             }
                             ?>
