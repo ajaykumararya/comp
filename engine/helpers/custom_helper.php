@@ -212,7 +212,26 @@ function CHECK_PERMISSION($type)
     return defined($type) ? constant($type) === 'yes' : false;
 }
 
+function search_file($folder_path, $file_name) {
 
+    $folder_path = rtrim($folder_path, '/') . '/';
+
+    $files = scandir($folder_path);
+
+    $found_files = array_filter($files, function($file) use ($file_name) {
+        return strpos($file, $file_name) !== false;
+    });
+
+    if (!empty($found_files)) {
+        return $found_files;
+        // foreach ($found_files as $file) {
+        //     echo "File found: " . $file . "<br>";
+        // }
+    } else {
+        return false;
+        // echo "No file found matching the criteria.";
+    }
+}
 function getRadomNumber($n = 10)
 {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

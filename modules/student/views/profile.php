@@ -15,8 +15,8 @@ if (PATH == 'zcc' && isset($student_docs) && $student_docs) {
     }
 }
 if(isset($fee_emi) && $fee_emi){
-    echo $admission_date;
-    echo '';
+    // echo $admission_date;
+    // echo '';
 }
 ?>
 <!--begin::Navbar-->

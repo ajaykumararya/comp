@@ -114,8 +114,9 @@ class Ki_theme
     {
         return $this->festivals;
     }
-    function get_festival($date)
+    function get_festival($date = 0)
     {
+        $date = $date == 0 ? date('Y-m-d') : $date;
         if (isset($this->festivals[$date]))
             return $this->festivals[$date];
         return false;

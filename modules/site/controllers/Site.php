@@ -153,8 +153,9 @@ class Site extends Site_Controller
     function test()
     {
 
-        echo ($this->ki_theme->isDiwali()) ? 'YES' : 'NO';
-
+        // echo ($this->ki_theme->isDiwali()) ? 'YES' : 'NO';
+        // pre($this->ki_theme->get_festival());
+        pre(search_file(FCPATH.UPLOAD,'23322'));
         // $year = 2023;
         // $i = 1;
         // $N = 125;
