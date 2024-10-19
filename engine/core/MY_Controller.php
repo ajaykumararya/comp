@@ -22,7 +22,7 @@ class MY_Controller extends MX_Controller
                 exit;
             }
         }
-        $this->load->library('common/database_manager','','build_db');
+        $this->load->library('common/database_manager', '', 'build_db');
         $this->load->library('common/ki_theme');
         $this->load->config('form/forms');
         $this->checkUpdate();
@@ -94,24 +94,42 @@ class MY_Controller extends MX_Controller
         $this->form_validation->set_message('percentage_check', 'The {field} field must be between 0 and 100.');
         return FALSE;
     }
-    function checkUpdate(){
-        $checkField = $this->build_db->field_exists('session','status');
-        if(!$checkField){
-            $this->build_db->add_field('session',[
+    function checkUpdate()
+    {
+        $checkField = $this->build_db->field_exists('session', 'status');
+        if (!$checkField) {
+            $this->build_db->add_field('session', [
                 'status' => [
                     'type' => 'int',
                     'default' => 1
                 ]
             ]);
         }
-        $checkField = $this->build_db->field_exists('centers','show_in_front');
-        if(!$checkField){
-            $this->build_db->add_field('centers',[
+        $checkField = $this->build_db->field_exists('centers', 'show_in_front');
+        if (!$checkField) {
+            $this->build_db->add_field('centers', [
                 'show_in_front' => [
                     'type' => 'int',
                     'default' => 0
                 ]
             ]);
+        }
+        $checkField = $this->build_db->field_exists('student_fee_transactions', 'status');
+        if (!$checkField) {
+            $this->build_db->add_field('student_fee_transactions', [
+                'late_fee' => [
+                    'type' => 'VARCHAR(100)',
+                    'default' => 0
+                ],
+                'status' => [
+                    'type' => 'int',
+                    'default' => 0
+                ]
+            ]);
+            // $this->db->set('month_year', 'DATE_FORMAT(STR_TO_DATE(payment_date, "%Y-%m-%d"), "%Y-%m")', FALSE);
+            $this->db->set('status', '1', FALSE);
+            // $this->db->where('payment_date IS NOT NULL', NULL, FALSE);
+            $this->db->update('student_fee_transactions');
         }
     }
 

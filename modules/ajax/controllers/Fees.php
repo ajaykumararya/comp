@@ -15,9 +15,10 @@ class Fees extends Ajax_Controller
         extract($array);
         $randID = generateCouponCode(3);
         $readonly = $type == 'course_fees' ? 'readonly' : '';
+        $penalty = isset($penalty) ? $penalty : false;
         if ($fee == null) {
             $loginType = $this->center_model->isCenter() ? 'center' : 'student';
-            $this->response('empty_footer',true);
+            $this->response('empty_footer', true);
             return '<div class="overflow-auto pb-5 mb-2">
                         <div class="notice d-flex bg-light-danger rounded border-danger border border-dashed min-w-lg-600px flex-shrink-0 p-6">
                             <i class="ki-duotone ki-notification fs-2tx text-danger me-4"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
@@ -30,14 +31,14 @@ class Fees extends Ajax_Controller
                                 </div>
                                 <div> 
                                     <button type="button" class="btn btn-active-danger px-6 align-self-center text-nowrap setting-refresh border-dashed border-2 border-danger"> Refresh</button>
-                                    <a href="' . base_url('payment/'.$loginType . '-payment-setting') . '" target="_blank" class="btn btn-active-danger px-6 align-self-center text-nowrap undo-setting border-dashed border-2 border-danger"> Configure Fee </a>                           
+                                    <a href="' . base_url('payment/' . $loginType . '-payment-setting') . '" target="_blank" class="btn btn-active-danger px-6 align-self-center text-nowrap undo-setting border-dashed border-2 border-danger"> Configure Fee </a>                           
                                 </div>
                             </div>
                         </div>                
                     </div>';
         }
         if (isset($added) && $added) {
-            $this->response('empty_footer',true);
+            $this->response('empty_footer', true);
             return alert('Already Submit this fees', 'danger');
         }
         return '
@@ -52,12 +53,12 @@ class Fees extends Ajax_Controller
                                             ' . $title . '
                                         </label>
                                     </div>
-                                    <h3 class="text-center text-success">Fee Amount : ' . $fee . ' ' . $this->get_data('inr') . '</h3>
+                                    <h3 class="text-center text-success">Fee Amount : ' . $fee . ' ' . ($inr = $this->get_data('inr') ). '</h3>
                                     <div class="input-group input-group-sm">
                                         <input type="text" readonly class="form-control" value="Payment Type">
                                         <span class="input-group-text" id="basic-addon2"
                                             style="width:140px;padding:0px!important">
-                                            <select name="payment_type['.$index.']"  class="form-select">
+                                            <select name="payment_type[' . $index . ']"  class="form-select">
                                                 <option value="cash">Cash</option>
                                                 <option value="online">Online</option>
                                             </select>
@@ -69,11 +70,19 @@ class Fees extends Ajax_Controller
 
                                 <div class="form-group col-md-2">
                                     <label class="required form-label">Payment Date</label>
-                                    <input type="text" class="form-control current-date" name="payment_date[' . $index . ']" value="' . date('d-m-Y') . '" required>
+                                    <input type="text" class="form-control current-date" name="payment_date[' . $index . ']" value="' . $date . '" required>
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label class="required form-label">Amount</label>
                                     <input type="number" class="form-control amount" ' . $readonly . ' name="payable_amount[' . $index . ']" value="' . $fee . '" required>
+                                    '.(($penalty) ? '
+                                    <div class="form-check form-switch form-check-danger form-check-solid mt-2">
+                                        <input checked class="form-check-input h-20px w-30px penalty-input" type="checkbox" value="" id="'.$index.'"/>
+                                        <label class="form-check-label text-dark" for="'.$index.'">
+                                            Penalty : 100 '.$inr.'
+                                        </label>
+                                    </div>
+                                    ' : '').'
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label class="form-label">Discount</label>
@@ -159,6 +168,7 @@ class Fees extends Ajax_Controller
         extract($where);
         $Html = '<div class="row">';
         $switchType = $this->post('type');
+        $isPenalty = false;
         if ($switchType) {
             switch ($switchType) {
                 default:
@@ -168,6 +178,7 @@ class Fees extends Ajax_Controller
                         'type' => $switchType,
                         'title' => $this->GetConfig($switchType),
                         'fee' => fixConifFee($switchType),
+                        'date' => date("d-m-Y"),
                         'index' => $switchType,
                         'added' => $get->num_rows(),
                         'record' => $get->num_rows() ? $get->row() : new stdClass
@@ -179,6 +190,7 @@ class Fees extends Ajax_Controller
                         $row = $getStudent->row();
                         $center_course = $this->center_model->get_assign_courses($center_id, ['course_id' => $course_id]);
                         $course_fees = ($center_course->num_rows()) ? $center_course->row('course_fee') : 0;
+                        $admissionDate = $row->admission_date;
                         $totalPaidAmount =
                             $totalDiscount =
                             $totalFee = 0;
@@ -279,27 +291,38 @@ class Fees extends Ajax_Controller
                             </div>
                         ';// 9410435006
                         } else if ($row->fee_emi) {
+                            $isEmis = true;
                             $nextEMIs = '';
                             $firstEMIs = '';
                             $emiCount = 0;
                             $paidEMIs = 0;
                             $lastHistory = '';
                             $perMonthFee = round($course_fees / $row->fee_emi);
+                            $emi_date = '01-' . date('m-Y', strtotime($admissionDate));
+                            $date = DateTime::createFromFormat('d-m-Y', $emi_date);
+                            $currentDate = DateTime::createFromFormat('d-m-Y', date('d-m-Y'));
                             for ($i = 1; $i <= $row->fee_emi; $i++) {
                                 $check = $this->student_model->get_fee_transcations(['duration' => $i, 'type_key' => 'course_fees'] + $where);
+                                $emiDate = $date->format('d-m-Y');
+                                $interval = $date->diff($currentDate);
+                                $penalty = false;
+                                if ($date < $currentDate) {
+                                    $isPenalty = $penalty = $interval->days;
+                                }
+                                $date->modify('+1 month');
                                 if ($check->num_rows()) {
                                     $paidEMIs++;
                                     $checkRow = $check->row();
                                     $lastHistory = '<div class="overflow-auto pb-5 mb-2">
                                                     <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed min-w-lg-600px flex-shrink-0 p-6">
-                                                        <i class="ki-duotone ki-bank '.(empty($checkRow->description) ? 'fs-2tx' : 'fs-5tx').' text-primary me-4"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+                                                        <i class="ki-duotone ki-bank ' . (empty($checkRow->description) ? 'fs-2tx' : 'fs-5tx') . ' text-primary me-4"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
     
                                                         <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
                                                             <div class="mb-3 mb-md-0 fw-semibold">
                                                                 <h4 class="text-gray-900 fw-bold">Last Transaction of ' . ordinal_number($i) . ' Month EMI on ' . $checkRow->payment_date . '!</h4>
                 
                                                                 <div class="fs-6 text-gray-700 pe-7">Amount : ' . $checkRow->amount . ' ' . $inrIcon . ', Discount : ' . $checkRow->discount . ' ' . $inrIcon . ', Paid Amount ' . $checkRow->payable_amount . ' ' . $inrIcon . ' </div>
-                                                                <div class="fs-3 text-success">Note : '.$checkRow->description.'</div>
+                                                                <div class="fs-3 text-success">Note : ' . $checkRow->description . '</div>
                                                                 </div>
         
                                                             <!--a href="#" class="btn btn-primary px-6 align-self-center text-nowrap"> Proceed</a --->
@@ -307,11 +330,15 @@ class Fees extends Ajax_Controller
                                                     </div>                
                                                 </div>';
                                 } else {
+
+
                                     $view = $this->get_fee_box([
                                         'type' => 'course_fees',
                                         'title' => ordinal_number($i) . ' Month EMI',
                                         'fee' => $perMonthFee,
+                                        'date' => $emiDate,
                                         'index' => $i,
+                                        'penalty' => $penalty,
                                         'added' => 0,
                                         'record' => $newSTDClass
                                     ], empty($firstEMIs));
@@ -320,6 +347,7 @@ class Fees extends Ajax_Controller
                                     } else {
                                         $nextEMIs .= $view;
                                     }
+
                                 }
                             }
                             if ($paidEMIs == 0) {
@@ -407,7 +435,7 @@ class Fees extends Ajax_Controller
                                         </div>
                                         <div class="form-group mt-3">
                                             <label class="form-label">Payment Type</label>
-                                            <select class="form-select form-control-solid" name="payment_type['.$index.']">
+                                            <select class="form-select form-control-solid" name="payment_type[' . $index . ']">
                                                 <option value="cash">Cash</option>
                                                 <option value="online">Online</option>
                                             </select>
@@ -455,7 +483,20 @@ class Fees extends Ajax_Controller
                                 <b class="ttl-discount">0</b> </div>
                             <!--end::Label-->
                         </div>
-                        <!--end::Item-->
+                        <!--end::Item-->          
+                        '.($isPenalty ? '              
+                        <!--begin::Item-->
+                        <div class="d-flex flex-stack mb-3">
+                            <!--begin::Code-->
+                            <div class="fw-semibold pe-10 text-gray-600 fs-7">Total Penalty Amount:</div>
+                            <!--end::Code-->
+
+                            <!--begin::Label-->
+                            <div class="text-end fw-bold fs-6 text-gray-800"> <span class="">₹</span>
+                                <b class="penalty-amount">0</b> </div>
+                            <!--end::Label-->
+                        </div>
+                        <!--end::Item-->' : '').'
                         <!--begin::Item-->
                         <div class="d-flex flex-stack mb-3">
                             <!--begin::Code-->
@@ -487,22 +528,23 @@ class Fees extends Ajax_Controller
         } else
             $this->response('error', 'Something went wrong');
     }
-    function sync_fee_data(){
+    function sync_fee_data()
+    {
         $items = $this->config->item('searching_types');
         unset($items['course_fees']);
         $i = 0;
-        foreach($items as  $in => $value){
-            $where = ['key' => $in,'onlyFor' => 'student'];
+        foreach ($items as $in => $value) {
+            $where = ['key' => $in, 'onlyFor' => 'student'];
             $get = $this->db->where($where)->get('student_fix_payment');
-            if($get->num_rows() == 0){
-                $this->db->insert('student_fix_payment',$where+['description' => 'One Time','amount' => 500,'title' => $value]);
+            if ($get->num_rows() == 0) {
+                $this->db->insert('student_fix_payment', $where + ['description' => 'One Time', 'amount' => 500, 'title' => $value]);
                 $i++;
             }
             $in = $in == 'admission_fees' ? 'student_admission_fees' : $in;
-            $where = ['key' => $in,'onlyFor' => 'center'];
+            $where = ['key' => $in, 'onlyFor' => 'center'];
             $get = $this->db->where($where)->get('student_fix_payment');
-            if($get->num_rows() == 0){
-                $this->db->insert('student_fix_payment',$where+['description' => 'One Time','amount' => 500,'title' => $value]);
+            if ($get->num_rows() == 0) {
+                $this->db->insert('student_fix_payment', $where + ['description' => 'One Time', 'amount' => 500, 'title' => $value]);
                 $i++;
             }
         }

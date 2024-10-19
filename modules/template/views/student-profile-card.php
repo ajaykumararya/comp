@@ -60,7 +60,10 @@ $IsPassout = $this->student_model->get_switch('passout', ['id' => $student_id])-
                             if ($this->center_model->isAdminOrCenter()) {
                                 echo '<tr>
                                     <td colspan="2">
-                                        <a href="' . base_url('student/profile/' . $student_id) . '"  target="_blank" class="btn btn-xs btn-sm btn-info w-100"> <i class="fa fa-user"></i> View Profile</a>
+                                    <div class="btn-wrapper btn-wrapper2">
+                                        <a href="' . base_url('student/profile/' . $student_id) . '"  target="_blank" class="btn btn-xs btn-sm btn-info w-100"> <span><i class="fa fa-user"></i> View Profile</span></a>
+                                    
+                                    </div>
                                     </td>
                                 </tr>';
                             }

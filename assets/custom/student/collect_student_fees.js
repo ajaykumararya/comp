@@ -62,10 +62,11 @@ document.addEventListener('DOMContentLoaded', async function (r) {
         }
         calculate_fees();
     });
-    $(document).on('change', '.check-input', calculate_fees);
+    $(document).on('change', '.check-input,.penalty-input', calculate_fees);
     function calculate_fees() {
         var total = 0,
-            ttl_discount = 0;
+            ttl_discount = 0,
+            ttl_penalty = 0;
 
         $('.my-fee-box').find('.card').removeClass('border-success').addClass('border-hover-primary');
         var flag = 0;
@@ -75,15 +76,18 @@ document.addEventListener('DOMContentLoaded', async function (r) {
             box.find('.card').addClass('border-success').removeClass('border-hover-primary');
             var amount = parseFloat(box.find('.amount').val());
             var discount_amount = parseFloat(box.find('.discount').val());
+            var penalty = box.find('.penalty-input:checked').length ? 100 : 0;
+            ttl_penalty += penalty;
             total += amount;
             ttl_discount += discount_amount;
         });
         // log(flag);   
-        var total_amount = total - ttl_discount;
+        var total_amount = ( total - ttl_discount ) + ttl_penalty;
         // alert(total_amount);
         $('.ttl-discount').html(ttl_discount);
         $('.payable-amount').html(total);
-        $('.paid-amount').html(total_amount);
+        $('.penalty-amount').html(ttl_penalty);
+        $('.paid-amount').html(total_amount );
         $('.pay-now').prop('disabled', ( (!(total_amount >= 0) || !flag)));
         if($('.check-input:checked').hasClass('d-none') && !total){
             $('.pay-now').prop('disabled', true);

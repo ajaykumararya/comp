@@ -7,6 +7,7 @@
     width: 100%;
     top: -25px;
     border-bottom: 1px solid #222;
+    z-index: -3;
     height: 100px;
 }
 
