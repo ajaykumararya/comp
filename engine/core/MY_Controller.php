@@ -94,8 +94,26 @@ class MY_Controller extends MX_Controller
         $this->form_validation->set_message('percentage_check', 'The {field} field must be between 0 and 100.');
         return FALSE;
     }
+    function checkField($table,$field){
+        $checkField = $this->build_db->field_exists('session', 'status');
+        return  $checkField;
+
+    }
     function checkUpdate()
     {
+        $checkField = $this->checkField('students','fee_emi');
+        if(!$checkField){
+            $this->build_db->add_field('students',[
+                'fee_emi' => [
+                    'type' => 'varchar(100)',
+                    'default' => null
+                ],
+                'fee_emi_type' => [
+                    'type' => 'varchar(100)',
+                    'default' => 'month'
+                ]
+            ]);
+        }
         $checkField = $this->build_db->field_exists('session', 'status');
         if (!$checkField) {
             $this->build_db->add_field('session', [
