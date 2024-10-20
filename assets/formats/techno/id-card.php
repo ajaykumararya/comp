@@ -36,6 +36,10 @@
             top: 15.28%;
             left: 15.3rem;
         }
+
+        .text-upper{
+            text-transform: uppercase!important;
+        }
     </style>
 </head>
 <body class="position-relative">
@@ -52,7 +56,7 @@
     <p class="position-absolute " style="top:42.1rem;left:38.5%">{admission_date}</p>
     <p class="position-absolute " style="top:44.8rem;left:23.5%">{contact_number}</p>
     <p class="position-absolute " style="top:47.6rem;left:20.5%">{address}</p>
-    <p class="position-absolute " style="top:55.9rem;left:5%;font-size:20px;width:65%;text-align:center">{center_name}</p>
+    <p class="position-absolute text-upper" style="top:55.9rem;left:5%;font-size:20px;width:65%;text-align:center">{center_name}</p>
     
 </body>
 </html>
