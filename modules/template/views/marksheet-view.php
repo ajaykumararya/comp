@@ -1,7 +1,8 @@
 <div class="row mb-3">
     <div class="col-md-8"></div>
-    <div class="col-md-4">
-        <button class="btn btn-primary print-btn"><i class="fa fa-print"></i> Print</button>
+    <div class="col-md-4 btn-wrapper btn-wrapper2">
+        
+        <button class="btn btn-primary print-btn" style="width:150px"><span><i class="fa fa-print"></i> Print</span></button>
     </div>
 </div>
 <div id="printableContent">
@@ -12,7 +13,7 @@
                     <img src="{assets}{image}" style="width:100%;height:100%">
                 </td>
                 <th colspan="2">Institute Name</th>
-                <td colspan="6">HOO</td>
+                <td colspan="6">{center_name}</td>
             </tr>
             <tr>
                 <th colspan="2">Marksheet Duration</th>

@@ -17,6 +17,9 @@
         .text-capitlize{
             text-transform: capitalize;
         }
+        .text-upper{
+            text-transform: uppercase;
+        }
         .position-relative{
             position: relative;
         }
@@ -58,7 +61,7 @@
     <p class="position-absolute" style="top:39.89%;left:25%">{enrollment_no}</p>
     <p class="position-absolute" style="top:42.6%;left:25%">{course_name}</p>
     <p class="position-absolute" style="top:45.4%;left:25%">{session}</p>
-    <p class="position-absolute" style="top:48.4%;left:25%">{center_name}</p>
+    <p class="position-absolute text-upper" style="top:48.4%;left:25%">{center_name}</p>
     <p class="position-absolute" style="top:51.2%;left:25%">{exam_date}</p>
     <!-- <p class="position-absolute"></p> -->
     <!-- <div class="position-absolute w-100" style="top:27.72%;padding-left:9px;z-index:9999">
