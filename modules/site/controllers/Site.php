@@ -164,6 +164,7 @@ class Site extends Site_Controller
                 ]
             ]);
         }
+        echo $checkField ? 'Done' : 'NO';
     }
     function test()
     {
