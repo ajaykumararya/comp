@@ -375,13 +375,26 @@
                     <!--begin::Logo-->
                     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
                         <!--begin::Logo image-->
-                        <a href="{base_url}student" class="fs-1">
-                            Stduent Panel
+                        <div class="d-flex">
+                            <!--begin::User info-->
+                            <!--begin::Menu wrapper-->
+                            <div class="cursor-pointer symbol symbol-35px">
+                                <img src="{base_url}upload/{image}" class="rounded-3 owner-image" alt="user">
+
+
+                            </div>
+                            <a href="{base_url}student" style="line-height:1" class="text-white text-hover-primary fs-4 fw-bold ms-3 app-sidebar-minimize-d-none profile-title">
+                                {student_name} <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Student</span>
+                            </a>
+                            <!--end::User account menu-->
+                        </div>
+                        <!-- <a href="{base_url}student" class="fs-1"> -->
+                            <!-- Stduent Panel -->
                             <!-- <img alt="Logo" src="{base_url}assets/media/logos/default-dark.svg"
                                 class="h-25px app-sidebar-logo-default" />
                             <img alt="Logo" src="{base_url}assets/media/logos/default-small.svg"
                                 class="h-20px app-sidebar-logo-minimize" /> -->
-                        </a>
+                        <!-- </a> -->
                         <!--end::Logo image-->
                         <!--begin::Sidebar toggle-->
                         <!--begin::Minimized sidebar setup: -->

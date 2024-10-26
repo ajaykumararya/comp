@@ -57,12 +57,16 @@ class Document extends MY_Controller
     {
         $get = $this->student_model->admit_card(['id' => $this->id]);
         if ($get->num_rows()) {
+            $dob = strtotime($get->row('dob'));
             $this->set_data($get->row_array());
+            $this->set_data('dob_day',date('d',$dob));
+            $this->set_data('dob_month',date('m',$dob));
+            $this->set_data('dob_year',date('Y',$dob));
             $this->set_data('date', date('d-m-Y', strtotime($get->row('exam_date'))));
             $this->set_data('time', date('h:i A', strtotime($get->row('exam_date'))));
             $pdfContent = $this->parse('admit-card');
             // $this->mypdf->setTitle('Hii');
-            if ($this->ki_theme->config('admit_card_full'))
+            if ($this->ki_theme->config('admit_card_full') OR in_array(PATH,['iedct']))
                 $this->mypdf->addPage('L');
             $this->pdf($pdfContent);
         } else {

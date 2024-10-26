@@ -189,7 +189,25 @@
                                         <!--end::Indicator progress--> </button>
                                 </div>
                                 <!--end::Submit button-->
+                                <?php
+                                if(isDemo()):
+                                ?>
+                                <div class="separator separator-content my-14">
+                                    <span class="w-125px text-gray-500 fw-semibold fs-7">Login As</span>
+                                </div>
+                                <div class="d-flex">
 
+                                    <button type="button" data-type="admin"
+                                        class="demoLogin btn btn-light-warning fw-bolder w-50 me-2"> Admin
+                                        Login</button>
+                                    <button type="button" data-type="center"
+                                        class="demoLogin btn btn-light-danger fw-bolder w-50"> Centre login</button>
+                                </div>
+                                <a href="{base_url}student" class="mt-3 btn btn-light-info text-white fw-bolder w-100">Student Login</a>
+
+                                <?php
+                                endif;
+                                ?>
                             </form>
                             <!--end::Form-->
 
@@ -222,8 +240,34 @@
     <!--end::Custom Javascript-->
     <!--end::Javascript-->
     <script>
+        <?php
+        if (isDemo()) {
+            ?>
+            var login = {
+                admin: {
+                    email: 'admin@gmail.com',
+                    password: 'admin',
+                },
+                center: {
+                    email: 'centre@gmail.com',
+                    password: 'admin',
+                }
+            };
+            $('.demoLogin').on('click', function () {
+                var type = $(this).data('type');
+                var email = login[type].email;
+                // alert(email);
+                var password = login[type].password;
+                $('[name="email"]').val(email);
+                $('[name="password"]').val(password);
+            })
+
+            <?php
+        }
+        ?>
         if (f = localStorage.getItem('fontFamily')) { $('body').css("font-family", f) }
-        if (localStorage.getItem('cardAnimation')) { $('.card').addClass('card-animation').css('--animation-bg', localStorage.getItem('card-animation-bg') || 'teal'); }</script>
+        if (localStorage.getItem('cardAnimation')) { $('.card').addClass('card-animation').css('--animation-bg', localStorage.getItem('card-animation-bg') || 'teal'); }
+    </script>
 </body>
 <!--end::Body-->
 

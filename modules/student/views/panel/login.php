@@ -201,7 +201,7 @@
 
                             <!--begin::Form-->
                             <form class="form w-100 student-login-form" novalidate="novalidate" id="kt_sign_in_form"
-                                data-kt-redirect-url="/metronic8/demo2/index.html" action="#">
+                                data-kt-redirect-url="" action="#">
                                 <!--begin::Heading-->
                                 <div class="text-center mb-11">
                                     <!--begin::Title-->
@@ -222,11 +222,11 @@
 
                                 <div class="form-group d-grid mb-1">
                                     <label for="" class="form-label mt-2 required">Roll Number</label>
-                                    <input type="text" name="roll_no" placeholder="Enter Roll No." class="form-control">
+                                    <input value="<?=isDemo() ? 'SC240001' : ''?>" type="text" name="roll_no" placeholder="Enter Roll No." class="form-control">
                                 </div>
                                 <div class="form-group d-grid mb-8">
                                     <label for="" class="form-label required mt-3">Password</label>
-                                    <input type="text" name="password" placeholder="Enter Password"
+                                    <input value="<?=isDemo() ? 'TE1999' : ''?>" type="text" name="password" placeholder="Enter Password"
                                         class="form-control">
                                 </div>
                                 <div class="form-group d-grid">
@@ -278,6 +278,20 @@
                                         </a>
                                     </div>
                                     <?php
+                                }
+                                if(isDemo()){
+                                    echo '<table class="table table-striped table-bordered bg-danger">
+                                                <tr>
+                                                    <th colspan="2">Demo Login Details</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>Roll No.</th><td>SC240001</td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <th>Password</th><td>TE1999</td>
+                                                </tr>
+                                            </table>';
                                 }
                                 ?>
 

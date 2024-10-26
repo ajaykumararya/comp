@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+.text-capitlize {
+    text-transform: capitalize;
+}
+.position-relative {
+    position: relative;
+}
+.position-absolute {
+    position: absolute;
+}
+.w-100 {
+    width: 100%;
+    display: grid;
+}
+p {
+    font-weight: bold;
+    color: black;
+    font-size: 14px;
+    width: 400px;
+    /* word-spacing: 1px; */
+}
+#photo {
+    z-index: 999;
+    top: 30%;
+    left: 40%;
+}
+#back-image{
+    width:100%;
+    margin-left:32px;
+}
+.image{
+    border-radius: 30px;
+}
