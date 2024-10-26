@@ -101,19 +101,19 @@ class MY_Controller extends MX_Controller
     }
     function checkUpdate()
     {
-        $checkField = $this->checkField('students','fee_emi');
-        if(!$checkField){
-            $this->build_db->add_field('students',[
-                'fee_emi' => [
-                    'type' => 'varchar(100)',
-                    'default' => null
-                ],
-                'fee_emi_type' => [
-                    'type' => 'varchar(100)',
-                    'default' => 'month'
-                ]
-            ]);
-        }
+        // $checkField = $this->checkField('students','fee_emi');
+        // if(!$checkField){
+        //     $this->build_db->add_field('students',[
+        //         'fee_emi' => [
+        //             'type' => 'varchar(100)',
+        //             'default' => null
+        //         ],
+        //         'fee_emi_type' => [
+        //             'type' => 'varchar(100)',
+        //             'default' => 'month'
+        //         ]
+        //     ]);
+        // }
         $checkField = $this->build_db->field_exists('session', 'status');
         if (!$checkField) {
             $this->build_db->add_field('session', [
