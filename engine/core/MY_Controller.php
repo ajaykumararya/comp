@@ -94,9 +94,10 @@ class MY_Controller extends MX_Controller
         $this->form_validation->set_message('percentage_check', 'The {field} field must be between 0 and 100.');
         return FALSE;
     }
-    function checkField($table,$field){
+    function checkField($table, $field)
+    {
         $checkField = $this->build_db->field_exists('session', 'status');
-        return  $checkField;
+        return $checkField;
 
     }
     function checkUpdate()
@@ -114,6 +115,11 @@ class MY_Controller extends MX_Controller
         //         ]
         //     ]);
         // }
+        if (PATH == 'iedct') {
+            $checkField = $this->build_db->field_exists('fee_transactions', 'type_key');
+            if (!$checkField)
+                $this->db->query("ALTER TABLE arya_student_fee_transactions ADD type_key VARCHAR(100) NULL AFTER type;");
+        }
         $checkField = $this->build_db->field_exists('session', 'status');
         if (!$checkField) {
             $this->build_db->add_field('session', [
