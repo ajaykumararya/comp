@@ -150,6 +150,21 @@ class Site extends Site_Controller
             echo 'Users not found...';
         }
     }
+    function update(){
+        $checkField = $this->checkField('students','fee_emi');
+        if(!$checkField){
+            $this->build_db->add_field('students',[
+                'fee_emi' => [
+                    'type' => 'varchar(100)',
+                    'default' => null
+                ],
+                'fee_emi_type' => [
+                    'type' => 'varchar(100)',
+                    'default' => 'month'
+                ]
+            ]);
+        }
+    }
     function test()
     {
 
