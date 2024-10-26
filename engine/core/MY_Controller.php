@@ -117,8 +117,15 @@ class MY_Controller extends MX_Controller
         // }
         if (PATH == 'iedct') {
             $checkField = $this->build_db->field_exists('fee_transactions', 'type_key');
-            if (!$checkField)
-                $this->db->query("ALTER TABLE arya_student_fee_transactions ADD type_key VARCHAR(100) NULL AFTER type;");
+            if (!$checkField){
+                $this->build_db->add_field('fee_transactions', [
+                    'type_key' => [
+                        'type' => 'VARCHAR(100)',
+                        'default' => null
+                    ]
+                ]);
+            }
+                // $this->db->query("ALTER TABLE arya_student_fee_transactions ADD type_key VARCHAR(100) NULL AFTER type;");
         }
         $checkField = $this->build_db->field_exists('session', 'status');
         if (!$checkField) {
