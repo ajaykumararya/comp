@@ -348,6 +348,7 @@ class Student_model extends MY_Model
     }
     function get_student_via_id($id = 0)
     {
+        if(PATH != 'iedct')
         $this->db->select('s.fee_emi,s.fee_emi_type');
         return $this->get_switch('student_id', ['id' => $id]);
     }
