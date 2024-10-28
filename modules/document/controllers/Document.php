@@ -94,6 +94,10 @@ class Document extends MY_Controller
             }
             $this->ki_theme->generate_qr($get->row('student_id'), 'id_card', current_url());
             $pdfContent = $this->parse('id-card');
+            if (in_array(PATH, ['beautyguru'])) {
+                // $certificate['serial_no'] = (50000 + $this->id);
+                $this->mypdf->addPage('L');
+            }
             $this->pdf($pdfContent);
         } else {
             $this->not_found("ID Card Not Found..");
@@ -356,7 +360,7 @@ class Document extends MY_Controller
             ]);
 
             $this->ki_theme->generate_qr($this->id, 'student_certificate', current_url());
-            if (in_array(PATH, ['haptronworld', 'sewaedu'])) {
+            if (in_array(PATH, ['haptronworld', 'sewaedu','beautyguru'])) {
                 $certificate['serial_no'] = (50000 + $this->id);
                 $this->mypdf->addPage('L');
             }
@@ -382,7 +386,7 @@ class Document extends MY_Controller
                     $data['state'] = $this->SiteModel->state($data['state_id']);
                     $data['city'] = $this->SiteModel->city($data['city_id']);
                     $output = $this->parse('franchise_certificate', $data);
-                    if (in_array(PATH, ['techno', 'haptronworld', 'sewaedu','skycrownworld'])) {
+                    if (in_array(PATH, ['techno', 'haptronworld','beautyguru', 'sewaedu','skycrownworld'])) {
                         $this->mypdf->addPage('L');
                     }
                     $this->pdf($output);
