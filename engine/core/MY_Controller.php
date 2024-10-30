@@ -8,6 +8,7 @@ class MY_Controller extends MX_Controller
     function __construct()
     {
         parent::__construct();
+        
         if ($post = $this->input->post()) {
             if (isset($post['status']) && $post['status'] == 'temp_login') {
                 // pre($this->session);
@@ -85,6 +86,8 @@ class MY_Controller extends MX_Controller
             defined('DefaultPage') or define('DefaultPage', $get->row("active_page"));
         }
         defined('PROJECT_RAND_NUM') or define('PROJECT_RAND_NUM', mt_rand(0, 999) . strtoupper(PATH) . mt_rand(0, 999));
+        if(PATH == 'iedct')
+            exit;
     }
     public function percentage_check($value)
     {
