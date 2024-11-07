@@ -1,6 +1,6 @@
 <style>
     <?php
-    if (in_array(PATH, ['sewaedu'])) {
+    if (in_array(PATH, ['sewaedu','softworldedu'])) {
         ?>
         :root {
             --primary: #E22B2B;

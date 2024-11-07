@@ -197,6 +197,11 @@ function OnlyForAdmin()
     $ci = &get_instance();
     return $ci->session->userdata('admin_type') == 'admin';
 }
+function OnlyForCentre()
+{
+    $ci = &get_instance();
+    return $ci->session->userdata('admin_type') == 'center';
+}
 function pre($array = [], $flg = false)
 {
     echo '<pre>';

@@ -93,208 +93,347 @@ $config['coupon_menu'] = array(
         )
     )
 );
+if (CHECK_PERMISSION('CENTRE_ONLY_ADD_STUDENT') && OnlyForCentre()) {
 
-$config['menu'] = array(
-    'title' => 'Student Area',
-    'menu' => array(
-        array(
-            'label' => 'Student Information',
-            'type' => 'student_information',
-            'icon' => array('profile-user', 3),
-            'submenu' => array(
-                array(
-                    'label' => 'Student ID Card',
-                    'condition' => CHECK_PERMISSION('STUDENT_ID_CARD'),
-                    'type' => 'student_id_card',
-                    'icon' => array('user-square', 3),
-                    'url' => 'student/get-id-card'
-                ),
-                array(
-                    'label' => 'Student Details',
-                    'type' => 'student_details',
-                    'icon' => array('shield-search', 3),
-                    'url' => 'student/search',
-                ),
-                array(
-                    'label' => 'Student Admission',
-                    'type' => 'student_admission',
-                    'icon' => array('plus', 3),
-                    'url' => 'student/admission',
-                ),
-                array(
-                    'label' => 'Passout Student',
-                    'type' => 'passout_students',
-                    'icon' => array('bookmark-2', 3),
-                    'url' => 'student/passout-student-list',
-                ),
-                //ADMISSION_WITH_SESSION
-                array(
-                    'label' => 'List By Session',
-                    'type' => 'student_list_by_session',
-                    'icon' => array('people', 5),
-                    'url' => 'student/list-by-session',
-                    'condition' =>  CHECK_PERMISSION('ADMISSION_WITH_SESSION')
-                ),
-                array(
-                    'label' => 'List By Center',
-                    'type' => 'student_list_by_center',
-                    'icon' => array('people', 5),
-                    'url' => 'student/list-by-center',
-                    'condition' => OnlyForAdmin()
-                ),
-                array(
-                    'label' => 'List Student(s)',
-                    'type' => 'all_students',
-                    'icon' => array('people', 5),
-                    'url' => 'student/all',
-                    'submenu' => array(
-                        array(
-                            'label' => 'Pending List',
-                            'type' => 'pending_students',
-                            'icon' => array('arrow-circle-left text-warning', 5),
-                            'url' => 'student/pending-list',
-                        ),
-                        array(
-                            'label' => 'Approved List',
-                            'type' => 'approved_students',
-                            'icon' => array('user-tick text-success', 0),
-                            'url' => 'student/approve-list',
-                        ),
-                        array(
-                            'label' => 'Cancel List',
-                            'type' => 'cancel_students',
-                            'icon' => array('cross-circle text-danger', 2),
-                            'url' => 'student/cancel-list',
+    $config['menu'] = array(
+        'title' => 'Student Area',
+        'menu' => array(
+            array(
+                'label' => 'Student Information',
+                'type' => 'student_information',
+                'icon' => array('profile-user', 3),
+                'submenu' => array(
+                    array(
+                        'label' => 'Student ID Card',
+                        'condition' => CHECK_PERMISSION('STUDENT_ID_CARD'),
+                        'type' => 'student_id_card',
+                        'icon' => array('user-square', 3),
+                        'url' => 'student/get-id-card'
+                    ),
+                    array(
+                        'label' => 'Student Details',
+                        'type' => 'student_details',
+                        'icon' => array('shield-search', 3),
+                        'url' => 'student/search',
+                    ),
+                    array(
+                        'label' => 'Student Admission',
+                        'type' => 'student_admission',
+                        'icon' => array('plus', 3),
+                        'url' => 'student/admission',
+                    ),
+                    array(
+                        'label' => 'Passout Student',
+                        'type' => 'passout_students',
+                        'icon' => array('bookmark-2', 3),
+                        'url' => 'student/passout-student-list',
+                    ),
+                    //ADMISSION_WITH_SESSION
+                    array(
+                        'label' => 'List By Session',
+                        'type' => 'student_list_by_session',
+                        'icon' => array('people', 5),
+                        'url' => 'student/list-by-session',
+                        'condition' => CHECK_PERMISSION('ADMISSION_WITH_SESSION')
+                    ),
+                    array(
+                        'label' => 'List By Center',
+                        'type' => 'student_list_by_center',
+                        'icon' => array('people', 5),
+                        'url' => 'student/list-by-center',
+                        'condition' => OnlyForAdmin()
+                    ),
+                    array(
+                        'label' => 'List Student(s)',
+                        'type' => 'all_students',
+                        'icon' => array('people', 5),
+                        'url' => 'student/all',
+                        'submenu' => array(
+                            array(
+                                'label' => 'Pending List',
+                                'type' => 'pending_students',
+                                'icon' => array('arrow-circle-left text-warning', 5),
+                                'url' => 'student/pending-list',
+                            ),
+                            array(
+                                'label' => 'Approved List',
+                                'type' => 'approved_students',
+                                'icon' => array('user-tick text-success', 0),
+                                'url' => 'student/approve-list',
+                            ),
+                            array(
+                                'label' => 'Cancel List',
+                                'type' => 'cancel_students',
+                                'icon' => array('cross-circle text-danger', 2),
+                                'url' => 'student/cancel-list',
+                            )
                         )
-                    )
-                ),
-                // array(
-                //     'label' => 'List By Center',
-                //     'type' => 'list_by_center',
-                //     'condition' => OnlyForAdmin(),
-                //     'icon' => array('tablet-text-down', 4),
-                //     'url' => 'student/list-by-center',
-                // )
-            )
-        ),
-        array(
-            'label' => 'Fees Collection',
-            'type' => 'fees_collection',
-            'icon' => array('bill', 6),
-            'condition' => ( (OnlyForAdmin() && CHECK_PERMISSION('FEES_COLLECTION')) or CHECK_PERMISSION('CENTRE_FEES_COLLECTION')) && !CHECK_PERMISSION('CO_ORDINATE_SYSTEM'),
-            'submenu' => array(
-                array(
-                    'label' => 'Collect Fee',
-                    'type' => 'collect_student_fee',
-                    'icon' => array('double-check-circle', 4),
-                    'url' => 'student/'. ( CHECK_PERMISSION('FEES_COLLECTION_OLD') ? 'collect-fees' : 'collect-student-fees'),
-                ),
-                array(
-                    'label' => 'Search Fee Payment',
-                    'type' => 'search_fee_payment',
-                    'icon' => array('calendar-tick', 6),
-                    'url' => 'student/search-fees-payment',
+                    ),
                 )
+            ),
+            array(
+                'label' => 'List Admit Card(s)',
+                'type' => 'list_student_admit_cards',
+                'icon' => array('tablet-text-up', 3),
+                'url' => 'student/list-admit-card',
+            ),
+            array(
+                'label' => 'List Result',
+                'type' => 'list_student_marksheet',
+                'icon' => array('tablet-text-up', 3),
+                'url' => 'student/list-marksheet',
+            ),
+            array(
+                'label' => 'Get Certificate',
+                'type' => 'get_student_certificate',
+                'icon' => array('tablet-text-up', 3),
+                'url' => 'student/get-certificate',
             )
-        ),
-        array(
-            'label' => 'Attendance',
-            'type' => 'attendance',
-            'icon' => array('double-check', 2),
-            'condition' => (OnlyForAdmin() && CHECK_PERMISSION('ATTENDANCE')) or (CHECK_PERMISSION('CENTRE_ATTENDATION_FUNCTION') && CHECK_PERMISSION('ATTENDANCE')), //centre_attendation_function
-            'submenu' => array(
-                array(
-                    'label' => 'Student Attendance',
-                    'type' => 'student_attendance',
-                    'icon' => array('double-check-circle', 4),
-                    'url' => 'student/attendance',
-                ),
-                array(
-                    'label' => 'Attendance By Date',
-                    'type' => 'attendance_by_date',
-                    'icon' => array('calendar-tick', 6),
-                    'url' => 'student/attendance-report',
-                )
-            )
-        ),
-
-        array(
-            'label' => 'Admit Card',
-            'type' => 'stduent_admit_card',
-            'icon' => array('notepad', 5),
-            'submenu' => array(
-                array(
-                    'label' => 'Generate Admit Card',
-                    'type' => 'generate_student_admit_card',
-                    'icon' => array('add-notepad', 4),
-                    'url' => 'student/generate-admit-card',
-                ),
-                // array(
-                //     'label' => 'Get Admit Card',
-                //     'type' => 'get_student_admit_card',
-                //     'icon' => array('tablet-text-up', 3),
-                //     'url' => 'student/get-admit-card',
-                // ),
-                array(
-                    'label' => 'List Admit Card(s)',
-                    'type' => 'list_student_admit_cards',
-                    'icon' => array('tablet-text-up', 3),
-                    'url' => 'student/list-admit-card',
-                )
-            )
-        ),
-        array(
-            'label' => 'Result',
-            'type' => 'student_marksheet',
-            'icon' => array('notepad', 5),
-            'submenu' => array(
-                array(
-                    'label' => 'Create Result',
-                    'type' => 'generate_student_marksheet',
-                    'icon' => array('add-notepad', 4),
-                    'url' => 'student/create-marksheet',
-                ),
-                // array(
-                //     'label' => 'Get Result',
-                //     'type' => 'get_student_marksheet',
-                //     'icon' => array('tablet-text-up', 3),
-                //     'url' => 'student/get-marksheet',
-                // ),
-                array(
-                    'label' => 'List Result',
-                    'type' => 'list_student_marksheet',
-                    'icon' => array('tablet-text-up', 3),
-                    'url' => 'student/list-marksheet',
-                )
-            )
-        ),
-        array(
-            'label' => 'Student Certificate',
-            'type' => 'stduent_certificate',
-            'icon' => array('notepad', 5),
-            'submenu' => array(
-                array(
-                    'label' => 'Generate Certificate',
-                    'type' => 'generate_student_certiificate',
-                    'icon' => array('add-notepad', 4),
-                    'url' => 'student/generate-certificate',
-                ),
-                array(
-                    'label' => 'Get Certificate',
-                    'type' => 'get_student_certificate',
-                    'icon' => array('tablet-text-up', 3),
-                    'url' => 'student/get-certificate',
-                )
-            )
-        ),
-        array(
-            'label' => 'Study Material',
-            'type' => 'study_material',
-            'icon' => array('message-text', 3),
-            'url' => 'student/manage-study-material'
         )
-    )
-);
+    );
+    $config['center_exam_menu'] = array(
+        'title' => 'Online Exam Area',
+        'condition' => !OnlyForAdmin() && CHECK_PERMISSION("EXAM"),
+        'menu' => array(
+            array(
+                'label' => 'Student Exam(S)',
+                'type' => 'student_exams',
+                'icon' => array('note-2', 4),
+                'url' => 'exam/student-exams'
+            )
+        )
+    );
+} else {
+    $config['menu'] = array(
+        'title' => 'Student Area',
+        'menu' => array(
+            array(
+                'label' => 'Student Information',
+                'type' => 'student_information',
+                'icon' => array('profile-user', 3),
+                'submenu' => array(
+                    array(
+                        'label' => 'Student ID Card',
+                        'condition' => CHECK_PERMISSION('STUDENT_ID_CARD'),
+                        'type' => 'student_id_card',
+                        'icon' => array('user-square', 3),
+                        'url' => 'student/get-id-card'
+                    ),
+                    array(
+                        'label' => 'Student Details',
+                        'type' => 'student_details',
+                        'icon' => array('shield-search', 3),
+                        'url' => 'student/search',
+                    ),
+                    array(
+                        'label' => 'Student Admission',
+                        'type' => 'student_admission',
+                        'icon' => array('plus', 3),
+                        'url' => 'student/admission',
+                    ),
+                    array(
+                        'label' => 'Passout Student',
+                        'type' => 'passout_students',
+                        'icon' => array('bookmark-2', 3),
+                        'url' => 'student/passout-student-list',
+                    ),
+                    //ADMISSION_WITH_SESSION
+                    array(
+                        'label' => 'List By Session',
+                        'type' => 'student_list_by_session',
+                        'icon' => array('people', 5),
+                        'url' => 'student/list-by-session',
+                        'condition' => CHECK_PERMISSION('ADMISSION_WITH_SESSION')
+                    ),
+                    array(
+                        'label' => 'List By Center',
+                        'type' => 'student_list_by_center',
+                        'icon' => array('people', 5),
+                        'url' => 'student/list-by-center',
+                        'condition' => OnlyForAdmin()
+                    ),
+                    array(
+                        'label' => 'List Student(s)',
+                        'type' => 'all_students',
+                        'icon' => array('people', 5),
+                        'url' => 'student/all',
+                        'submenu' => array(
+                            array(
+                                'label' => 'Pending List',
+                                'type' => 'pending_students',
+                                'icon' => array('arrow-circle-left text-warning', 5),
+                                'url' => 'student/pending-list',
+                            ),
+                            array(
+                                'label' => 'Approved List',
+                                'type' => 'approved_students',
+                                'icon' => array('user-tick text-success', 0),
+                                'url' => 'student/approve-list',
+                            ),
+                            array(
+                                'label' => 'Cancel List',
+                                'type' => 'cancel_students',
+                                'icon' => array('cross-circle text-danger', 2),
+                                'url' => 'student/cancel-list',
+                            )
+                        )
+                    ),
+                    // array(
+                    //     'label' => 'List By Center',
+                    //     'type' => 'list_by_center',
+                    //     'condition' => OnlyForAdmin(),
+                    //     'icon' => array('tablet-text-down', 4),
+                    //     'url' => 'student/list-by-center',
+                    // )
+                )
+            ),
+            array(
+                'label' => 'Fees Collection',
+                'type' => 'fees_collection',
+                'icon' => array('bill', 6),
+                'condition' => ((OnlyForAdmin() && CHECK_PERMISSION('FEES_COLLECTION')) or CHECK_PERMISSION('CENTRE_FEES_COLLECTION')) && !CHECK_PERMISSION('CO_ORDINATE_SYSTEM'),
+                'submenu' => array(
+                    array(
+                        'label' => 'Collect Fee',
+                        'type' => 'collect_student_fee',
+                        'icon' => array('double-check-circle', 4),
+                        'url' => 'student/' . (CHECK_PERMISSION('FEES_COLLECTION_OLD') ? 'collect-fees' : 'collect-student-fees'),
+                    ),
+                    array(
+                        'label' => 'Search Fee Payment',
+                        'type' => 'search_fee_payment',
+                        'icon' => array('calendar-tick', 6),
+                        'url' => 'student/search-fees-payment',
+                    )
+                )
+            ),
+            array(
+                'label' => 'Attendance',
+                'type' => 'attendance',
+                'icon' => array('double-check', 2),
+                'condition' => (OnlyForAdmin() && CHECK_PERMISSION('ATTENDANCE')) or (CHECK_PERMISSION('CENTRE_ATTENDATION_FUNCTION') && CHECK_PERMISSION('ATTENDANCE')), //centre_attendation_function
+                'submenu' => array(
+                    array(
+                        'label' => 'Student Attendance',
+                        'type' => 'student_attendance',
+                        'icon' => array('double-check-circle', 4),
+                        'url' => 'student/attendance',
+                    ),
+                    array(
+                        'label' => 'Attendance By Date',
+                        'type' => 'attendance_by_date',
+                        'icon' => array('calendar-tick', 6),
+                        'url' => 'student/attendance-report',
+                    )
+                )
+            ),
+            array(
+                'label' => 'Admit Card',
+                'type' => 'stduent_admit_card',
+                'icon' => array('notepad', 5),
+                'submenu' => array(
+                    array(
+                        'label' => 'Generate Admit Card',
+                        'type' => 'generate_student_admit_card',
+                        'icon' => array('add-notepad', 4),
+                        'url' => 'student/generate-admit-card',
+                    ),
+                    // array(
+                    //     'label' => 'Get Admit Card',
+                    //     'type' => 'get_student_admit_card',
+                    //     'icon' => array('tablet-text-up', 3),
+                    //     'url' => 'student/get-admit-card',
+                    // ),
+                    array(
+                        'label' => 'List Admit Card(s)',
+                        'type' => 'list_student_admit_cards',
+                        'icon' => array('tablet-text-up', 3),
+                        'url' => 'student/list-admit-card',
+                    )
+                )
+            ),
+            array(
+                'label' => 'Result',
+                'type' => 'student_marksheet',
+                'icon' => array('notepad', 5),
+                'submenu' => array(
+                    array(
+                        'label' => 'Create Result',
+                        'type' => 'generate_student_marksheet',
+                        'icon' => array('add-notepad', 4),
+                        'url' => 'student/create-marksheet',
+                    ),
+                    // array(
+                    //     'label' => 'Get Result',
+                    //     'type' => 'get_student_marksheet',
+                    //     'icon' => array('tablet-text-up', 3),
+                    //     'url' => 'student/get-marksheet',
+                    // ),
+                    array(
+                        'label' => 'List Result',
+                        'type' => 'list_student_marksheet',
+                        'icon' => array('tablet-text-up', 3),
+                        'url' => 'student/list-marksheet',
+                    )
+                )
+            ),
+            array(
+                'label' => 'Student Certificate',
+                'type' => 'stduent_certificate',
+                'icon' => array('notepad', 5),
+                'submenu' => array(
+                    array(
+                        'label' => 'Generate Certificate',
+                        'type' => 'generate_student_certiificate',
+                        'icon' => array('add-notepad', 4),
+                        'url' => 'student/generate-certificate',
+                    ),
+                    array(
+                        'label' => 'Get Certificate',
+                        'type' => 'get_student_certificate',
+                        'icon' => array('tablet-text-up', 3),
+                        'url' => 'student/get-certificate',
+                    )
+                )
+            ),
+            array(
+                'label' => 'Study Material',
+                'type' => 'study_material',
+                'icon' => array('message-text', 3),
+                'url' => 'student/manage-study-material'
+            )
+        )
+    );
+    $config['center_exam_menu'] = array(
+        'title' => 'Online Exam Area',
+        'condition' => !OnlyForAdmin() && CHECK_PERMISSION("EXAM"),
+        'menu' => array(
+            array(
+                'label' => 'Exam(S)',
+                'type' => 'exams',
+                'icon' => array('note-2', 4),
+                'submenu' => array(
+                    array(
+                        'url' => 'exam/request',
+                        'label' => 'Request',
+                        'icon' => array('plus', 2)
+                    ),
+                    array(
+                        'url' => 'exam/approved-list',
+                        'label' => 'List',
+                        'icon' => array('tablet-text-up', 2)
+                    )
+                )
+            ),
+            array(
+                'label' => 'Student Exam(S)',
+                'type' => 'student_exams',
+                'icon' => array('note-2', 4),
+                'url' => 'exam/student-exams'
+            )
+        )
+    );
+}
 
 $config['exam_menu'] = array(
     'title' => 'Online Exam Section',
@@ -347,35 +486,7 @@ $config['exam_menu'] = array(
         )
     )
 );
-$config['center_exam_menu'] = array(
-    'title' => 'Online Exam Area',
-    'condition' => !OnlyForAdmin() && CHECK_PERMISSION("EXAM"),
-    'menu' => array(
-        array(
-            'label' => 'Exam(S)',
-            'type' => 'exams',
-            'icon' => array('note-2', 4),
-            'submenu' => array(
-                array(
-                    'url' => 'exam/request',
-                    'label' => 'Request',
-                    'icon' => array('plus', 2)
-                ),
-                array(
-                    'url' => 'exam/approved-list',
-                    'label' => 'List',
-                    'icon' => array('tablet-text-up', 2)
-                )
-            )
-        ),
-        array(
-            'label' => 'Student Exam(S)',
-            'type' => 'student_exams',
-            'icon' => array('note-2', 4),
-            'url' => 'exam/student-exams'
-        )
-    )
-);
+
 $config['co_ordinator'] = array(
     'title' => 'Co-Ordinate User',
     'condition' => OnlyForAdmin() && CHECK_PERMISSION("CO_ORDINATE_SYSTEM"),
@@ -396,7 +507,7 @@ $config['co_ordinator'] = array(
                     'type' => 'list_co_ordinate_user',
                     'icon' => array('message-text', 2),
                     'url' => 'co-ordinate/list'
-                ),                
+                ),
                 array(
                     'label' => 'Assign Course(s)',
                     'type' => 'assign_course_co_ordinate_user',
@@ -421,7 +532,7 @@ $config['center_area'] = array(
                     'type' => 'add_center',
                     'icon' => array('add-item', 4),
                     'url' => 'center/add',
-                ),                
+                ),
                 array(
                     'label' => 'Assign Courses Category',
                     'type' => 'assign_courses_with_center',
