@@ -22,7 +22,6 @@
         }
         .position-absolute{
             position: absolute;
-            text-align: center;
         }
         .w-100{
             width: 100%;
