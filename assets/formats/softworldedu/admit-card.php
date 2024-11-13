@@ -54,9 +54,9 @@
     <!-- <p class="position-absolute" style="top:1%;left:16%">{admit_card_id}</p> -->
 
     <!-- <p class="position-absolute" style="top:1%;left:80%">{createdOn}</p> -->
-    <p class="position-absolute " style="top:49%;left:28%;">{enrollment_no}</p>
-    <p class="position-absolute" style="top:52.5%;left:28%">{student_name}</p>
-    <p class="position-absolute" style="top:56.5%;left:28%">{father_name}</p>
+    <p class="position-absolute " style="top:49%;left:28%;width:70%">{enrollment_no}</p>
+    <p class="position-absolute" style="top:52.5%;left:28%;width:70%">{student_name}</p>
+    <p class="position-absolute" style="top:56.5%;left:28%;width:70%">{father_name}</p>
     <!-- <p class="position-absolute" style="top:42%;left:55%;">{roll_no}</p> -->
     <!-- <p class="position-absolute" style="top:45.8%;left:15%">{dob}</p> -->
 
