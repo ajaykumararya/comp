@@ -146,7 +146,7 @@
     </p>
     <!-- <p class="position-absolute" style="top:17%;right:15%;font-size:12px">{enrollment_no}</p> -->
     <p class="position-absolute" style="top:40.8%;left:20.5%">{student_name}</p>
-    <p class="position-absolute" style="top:40.9%;left:49.5%">{father_name}</p>
+    <p class="position-absolute" style="top:40.9%;left:49.5%;width:250px">{father_name}</p>
     <p class="position-absolute " style="top:40.9%;left:70.7%">{session}</p>
     <p class="position-absolute " style="top:40.8%;left:85%">{dob}</p>
     <p class="position-absolute " style="top:46.35%;left:36.7%">{enrollment_no}</p>
