@@ -66,7 +66,7 @@ class Document extends MY_Controller
             $this->set_data('time', date('h:i A', strtotime($get->row('exam_date'))));
             $pdfContent = $this->parse('admit-card');
             // $this->mypdf->setTitle('Hii');
-            if ($this->ki_theme->config('admit_card_full') OR in_array(PATH,['iedct']))
+            if ($this->ki_theme->config('admit_card_full') OR in_array(PATH,['iedct','softworldedu']))
                 $this->mypdf->addPage('L');
             $this->pdf($pdfContent);
         } else {
@@ -145,7 +145,7 @@ class Document extends MY_Controller
                 $toDateString = strtotime('-1 month', $toDateString);
                 $this->set_data('to_date', date('M Y', $toDateString));
             }
-            if (in_array(PATH, ['iedct', 'techno'])):
+            if (in_array(PATH, ['iedct', 'techno','softworldedu'])):
                 $admissionTime = strtotime($get->row('admission_date'));
                 // $this->set_data('from_date', date('M Y', $admissionTime));
                 $this->set_data('serial_no', date("Y", $admissionTime) . str_pad($get->row('student_id'), 3, '0', STR_PAD_LEFT));
@@ -271,6 +271,7 @@ class Document extends MY_Controller
                 $ttlpminm =
                 $ttlpmaxm = 0;
             $subjects = [];
+            $subject_marks = [];
             foreach ($where as $whereData) {
                 $final_marksheet = $this->student_model->marksheet($whereData);
                 if ($final_marksheet->num_rows()) {
@@ -383,10 +384,13 @@ class Document extends MY_Controller
             // pre($data,true);
             if ($data['status'] && $data['isPending'] == 0 && $data['isDeleted'] == 0) {
                 if ($data['valid_upto'] && $data['certificate_issue_date']) {
+                    // pre($data,true);
+                    $year = date('Y',strtotime($data['certificate_issue_date']));
+                    $data['serial_no'] = $year.str_pad($data['id'],3,0,STR_PAD_LEFT);
                     $data['state'] = $this->SiteModel->state($data['state_id']);
                     $data['city'] = $this->SiteModel->city($data['city_id']);
                     $output = $this->parse('franchise_certificate', $data);
-                    if (in_array(PATH, ['techno', 'haptronworld','beautyguru', 'sewaedu','skycrownworld'])) {
+                    if (in_array(PATH, ['techno', 'haptronworld','beautyguru', 'sewaedu','skycrownworld','softworldedu'])) {
                         $this->mypdf->addPage('L');
                     }
                     $this->pdf($output);

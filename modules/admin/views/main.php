@@ -506,7 +506,7 @@
                 </div>
                 <!--end::Header container-->
                 <?php
-                if ($this->ki_theme->isDiwali() or isDemo())
+                if ($this->ki_theme->isDiwali() && isDemo())
                     require FCPATH . 'diwali.php';
                 ?>
             </div>
