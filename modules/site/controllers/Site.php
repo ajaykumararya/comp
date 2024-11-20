@@ -169,9 +169,13 @@ class Site extends Site_Controller
     function test()
     {
 
+        echo $this->center_model->roleUsers()->num_rows();
+
+        echo $this->db->last_query();
+
         // echo ($this->ki_theme->isDiwali()) ? 'YES' : 'NO';
         // pre($this->ki_theme->get_festival());
-        pre(search_file(FCPATH.UPLOAD,'23322'));
+        // pre(search_file(FCPATH.UPLOAD,'23322'));
         // $year = 2023;
         // $i = 1;
         // $N = 125;

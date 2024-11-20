@@ -23,6 +23,7 @@ class Ki_theme
     $forceUpdate = false;
     private $card = ['title' => '', 'subtitle' => '', 'actions' => ''],
     $list_pages = 0,
+    $rolePermissions = [],
     $ThemeSchemaVars = [],
     $theme_menu_items = [],
     $plan_methods = [],
@@ -108,8 +109,63 @@ class Ki_theme
         }
         $this->login_type = $this->CI->session->userdata('admin_type');
         $this->login_id = $this->CI->session->userdata('admin_id');
+        if ($this->login_type == 'role_user') {
+            $this->rolePermissions = $this->CI->center_model->permissions();
+            $this->rolePermissions = array_merge($this->rolePermissions, ['dashboard']);
+            // pre($this->rolePermissions, true);
+        }
+        $this->process_menu();
         $this->breadcrumb_data['controller'] = ucfirst($this->CI->router->fetch_class());
     }
+    function isValidForPermission($type)
+    {
+        if ($this->login_type == 'role_user') {
+            return in_array($type, $this->rolePermissions);
+        }
+        return false;
+    }
+    function filterByAllowedTypes($array, $allowedTypes)
+    {
+        $result = [];
+
+        foreach ($array as $key => $value) {
+            if (is_array($value) && isset($value['type']) && in_array($value['type'], $allowedTypes)) {
+
+                $result[$key] = $value;
+                if (isset($value['submenu'])) {
+                    $result[$key]['submenu'] = $this->filterByAllowedTypes($value['submenu'], $allowedTypes);
+                }
+            } elseif (is_array($value)) {
+                $filtered = $this->filterByAllowedTypes($value, $allowedTypes);
+                if (!empty($filtered)) {
+                    $result[$key] = $filtered;
+                }
+            }
+        }
+
+        return $result;
+    }
+    function createTitleArrayByType($array = 0)
+    {
+        $titleArray = [];
+        $array = $array == 0 ? $this->adminMenu : $array;
+
+        foreach ($array as $key => $value) {
+            // Check if 'type' exists and add to the result array
+            if (is_array($value) && isset($value['type'])) {
+                $findTitle = $value['label'];
+                $titleArray[$value['type']] = $findTitle;
+            }
+
+            // Recursively process nested arrays
+            if (is_array($value)) {
+                $titleArray = array_merge($titleArray, $this->createTitleArrayByType($value));
+            }
+        }
+
+        return $titleArray;
+    }
+
     function get_festivals()
     {
         return $this->festivals;
@@ -1148,11 +1204,12 @@ class Ki_theme
                     continue;
                 }
             }
+
             $html .= $this->generateMenu($menus['menu'], 'menu', $menuType);
         }
         return $html; //count($adminMenu);//$this->parser->parse('common/admin-menu',[],true);
     }
-    function get_menu()
+    function process_menu()
     {
         if ($this->CI->center_model->isCoordinator())
             $adminMenu = $this->CI->load->config('coordinate/menu', true);
@@ -1160,9 +1217,15 @@ class Ki_theme
             $adminMenu = $this->CI->load->config('admin/menu', true);
         // pre($adminMenu,true);
         $this->adminMenu = $adminMenu;
+        if ($this->login_type == 'role_user') {
+            $this->adminMenu = $adminMenu = $this->filterByAllowedTypes($this->adminMenu, $this->rolePermissions);
+        }
+    }
+    function get_menu()
+    {
         // $this->current_method = recursiveArraySearchReturnValue($this->uri_string(),$adminMenu['ui_setting']['menu'],'type');
         $html = '';
-        foreach ($adminMenu as $menuType => $menus) {
+        foreach ($this->adminMenu as $menuType => $menus) {
             // echo $menuType;
             if (isset($menus['condition'])) {
                 if (!$menus['condition']) {
@@ -1264,6 +1327,7 @@ class Ki_theme
                     continue;
                 }
             }
+            // pre($menuItem);
 
             $disabled = $type == 'menu' ? '' : 'disabled';
             if (isset($menuItem['submenu'])) {
@@ -1271,13 +1335,13 @@ class Ki_theme
                     <div class="arya-menu">
 	                    <div class="col-md-12">
     	                    <label style="margin-bottom:3px" class="form-check form-switch form-check-custom form-check-solid pulse pulse-success" for="d-' . $menuItem['type'] . '">
-    							<input ' . $disabled . ' class="form-check-input w-30px h-20px parent-input ' . ($type == 'menu' ? '' : 'check-input-' . $menuItem['type']) . '" type="checkbox" value="' . $menuItem['type'] . '" name="permission[]" id="d-' . $menuItem['type'] . '">
+    							<input ' . $disabled . ' data-parent="' . $menuType . '" class="form-check-input w-30px h-20px parent-input ' . ($type == 'menu' ? '' : 'check-input-' . $menuItem['type']) . '" type="checkbox" value="' . $menuItem['type'] . '" name="permission[]" id="d-' . $menuItem['type'] . '">
     							<span class="pulse-ring ms-n1"></span>
     							<span class="form-check-label text-gray-600 fs-7">' . $menuItem['label'] . '</span>
     						</label>
     					</div>
     					<div class="col-md-12 row" style="    padding-left: 43px; ">';
-                $html .= $this->generate_permission($menuItem['submenu'], 'submenu', $menuType);
+                $html .= $this->generate_permission($menuItem['submenu'], 'submenu', $menuItem['type']);
                 $html .= '</div></div>';
             } else {
                 // $html .= $menuItem['label'] .' - '.(isset($menuItem['type']) ? $menuItem['type'] : 'nn').'<br>';
@@ -1285,7 +1349,7 @@ class Ki_theme
                 $html .= '
     					                <div class="col-md-4">
     					                    <label style="margin-bottom:3px" class="form-check form-switch form-check-custom form-check-solid pulse pulse-success" for="d-' . $menuItem['type'] . '">
-                    							<input ' . $disabled . ' class="form-check-input w-30px h-20px child-input check-input-' . $menuItem['type'] . '"  type="checkbox" value="' . $menuItem['type'] . '"  name="permission[]" id="d-' . $menuItem['type'] . '">
+                    							<input ' . $disabled . '  data-parent="' . $menuType . '" class="form-check-input w-30px h-20px child-input check-input-' . $menuItem['type'] . '"  type="checkbox" value="' . $menuItem['type'] . '"  name="permission[]" id="d-' . $menuItem['type'] . '">
                     							<span class="pulse-ring ms-n1"></span>
                     							<span class="form-check-label text-gray-600 fs-7">' . $menuItem['label'] . '</span>
                     						</label>

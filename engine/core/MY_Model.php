@@ -40,6 +40,18 @@ class MY_Model extends CI_Model
     {
         return $this->login_type == 'admin';
     }
+    function isRole(){
+        return $this->login_type == 'role_user';
+    }
+    function permissions(){
+        if($this->isRole()){
+            $chk = $this->db->where('id',$this->session->userdata('role_id'))->get('role_categories');
+            if($chk->num_rows()){
+                return json_decode($chk->row('permissions'),true);
+            }
+        }
+        return [];
+    }
     // function isUser($type = 'user')
     // {
     //     return $this->login_type == $type;

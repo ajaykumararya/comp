@@ -4,7 +4,7 @@ $config['dashboard'] = array(
         array('label' => 'Dashboard', 'type' => 'dashboard', 'url' => 'admin')
     )
 );
-$config['academics'] = array(
+$config['academic_area'] = array(
     'title' => 'Academics',
     'condition' => OnlyForAdmin(),
     'menu' => array(

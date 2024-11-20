@@ -57,6 +57,12 @@ class Center_model extends MY_Model
             $this->myWhere('cc', $condition);
         return $this->db->get();
     }
+    function roleUsers(){
+        return $this->db->select('c.*,rc.*')
+                ->from('centers as c')
+                ->join('role_categories as rc','rc.id = c.role_id')
+                ->get();
+    }
     function get_center($id = 0, $type = 'center', $isDeleted = 0)
     {
         if ($id)

@@ -430,5 +430,52 @@ $config = array(
                 'percentage_check' => 'Percentage should be between 0 and 100'
             )
         ),
+    ),
+    'add_role_category' => array(
+        array(
+            'field' => 'title',
+            'label' => 'Category Name',
+            'rules' => 'required|is_unique[role_categories.role_category_title]',
+            'errors' => array(
+                'required' => 'Please enter category name',
+                'is_unique' => 'This Category name already exists..'
+            )
+        )
+    ),
+
+    'add_role_user' => array(
+        array(
+            'field' => 'name',
+            'label' => 'Name',
+            'rules' => 'required',
+            'errors' => array(
+                'required' => 'Please enter name',
+            )
+        ),
+        array(
+            'field' => 'role_id',
+            'label' => 'Role Category',
+            'rules' => 'required',
+            'errors' => array(
+                'required' => 'Please select a role category',
+            )
+        ),
+        array(
+            'field' => 'password',
+            'label' => 'Password',
+            'rules' => 'required',
+            'errors' => array(
+                'required' => 'Please enter password',
+            )
+        ),
+        array(
+            'field' => 'email',
+            'label' => 'Email',
+            'rules' => 'required|is_unique[centers.email]',
+            'errors' => array(
+                'required' => 'Please enter Email',
+                'is_unique' => 'This Email already exists..'
+            )
+        )
     )
 );

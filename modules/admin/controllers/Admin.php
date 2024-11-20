@@ -63,6 +63,9 @@ class Admin extends MY_Controller
     {
         $this->view('manage-role-category');
     }
+    function manage_role_account(){
+        $this->view('manage-role-account');
+    }
     function test()
     {
         echo $this->ki_theme->wallet_balance();
