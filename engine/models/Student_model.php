@@ -170,7 +170,7 @@ class Student_model extends MY_Model
                 $this->myWhere('s', $condition);
                 break;
             case 'active_student':
-                $this->db->join('student_certificates as sce', 'sce.student_id = s.id', 'left'); //AND sce.course_id = s.course_id
+                $this->db->join('student_certificates as sce', 'sce.student_id = s.id AND sce.course_id = s.course_id', 'left'); //AND sce.course_id = s.course_id
 
                 $this->db->where('sce.student_id IS NULL');
                 if(isset($condition['session_id'])){
