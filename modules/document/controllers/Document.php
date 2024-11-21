@@ -389,7 +389,12 @@ class Document extends MY_Controller
                     $data['serial_no'] = $year.str_pad($data['id'],3,0,STR_PAD_LEFT);
                     $data['state'] = $this->SiteModel->state($data['state_id']);
                     $data['city'] = $this->SiteModel->city($data['city_id']);
+                    if(in_array(PATH,['skycrownworld'])){
+                        $data['certificate_issue_date'] = date('d M Y',strtotime($data['certificate_issue_date']));
+                        $data['valid_upto'] = date('d M Y',strtotime($data['valid_upto']));
+                    }
                     $output = $this->parse('franchise_certificate', $data);
+                    
                     if (in_array(PATH, ['techno', 'haptronworld','beautyguru', 'sewaedu','softworldedu'])) {
                         $this->mypdf->addPage('L');
                     }
