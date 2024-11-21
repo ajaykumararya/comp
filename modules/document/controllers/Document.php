@@ -94,7 +94,7 @@ class Document extends MY_Controller
             }
             $this->ki_theme->generate_qr($get->row('student_id'), 'id_card', current_url());
             $pdfContent = $this->parse('id-card');
-            if (in_array(PATH, ['beautyguru'])) {
+            if (in_array(PATH, ['beautyguru','skycrownworld'])) {
                 // $certificate['serial_no'] = (50000 + $this->id);
                 $this->mypdf->addPage('L');
             }
@@ -390,7 +390,7 @@ class Document extends MY_Controller
                     $data['state'] = $this->SiteModel->state($data['state_id']);
                     $data['city'] = $this->SiteModel->city($data['city_id']);
                     $output = $this->parse('franchise_certificate', $data);
-                    if (in_array(PATH, ['techno', 'haptronworld','beautyguru', 'sewaedu','skycrownworld','softworldedu'])) {
+                    if (in_array(PATH, ['techno', 'haptronworld','beautyguru', 'sewaedu','softworldedu'])) {
                         $this->mypdf->addPage('L');
                     }
                     $this->pdf($output);

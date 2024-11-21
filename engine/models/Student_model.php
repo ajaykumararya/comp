@@ -37,6 +37,7 @@ class Student_model extends MY_Model
                 c.duration_type,
                 ce.institute_name as center_name,
                 ce.id as institute_id,
+                ce.email as center_email,
                 ce.center_full_address,
                 ce.center_number as center_code,
                 ce.signature as center_signature,
