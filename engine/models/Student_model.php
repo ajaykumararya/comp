@@ -53,8 +53,8 @@ class Student_model extends MY_Model
             ->join('district', 'district.DISTRICT_ID = s.city_id and district.STATE_ID = state.STATE_ID')
 
             ->join('batch as b', "b.id = s.batch_id", 'left');
-        if(CHECK_PERMISSION('ADMISSION_WITH_SESSION'))
-            $this->db->select('s.session_id,ses.title as session')->join('session as ses','ses.id =  s.session_id','left');
+        if (CHECK_PERMISSION('ADMISSION_WITH_SESSION'))
+            $this->db->select('s.session_id,ses.title as session')->join('session as ses', 'ses.id =  s.session_id', 'left');
         if (!isset($without_admission_status))
             $this->db->where('s.admission_status', isset($admission_status) ? $admission_status : 1);
         if (($this->isCenter() and $withCenter) or ($case == 'center' and isset($center_id)))
@@ -65,6 +65,10 @@ class Student_model extends MY_Model
             $this->db->select('ce.logo as centre_logo');
         }
         switch ($case) {
+            case 'placement_students':
+                $this->db->select('ps.*');
+                $this->db->join('placement_students as ps', 'ps.student_id = s.id');
+                break;
             case 'get_student_study_material':
                 $this->db->select('sm.title as material_title,sm.file as material_file,sm.description as material_description');
                 $this->db->join('study_material as sm', 'sm.course_id = s.course_id');
@@ -158,23 +162,33 @@ class Student_model extends MY_Model
                 $this->db->where('s.admission_type', 'online');
                 break;
             case 'passout':
+                if (isset($search)) {
+                    $this->db->select('s.id');
+                    $this->db->group_start()->like('s.name', $search);
+                    $this->db->or_like('s.roll_no', $search);
+                    $this->db->or_like('s.contact_number', $search);
+                    $this->db->or_like('s.alternative_mobile', $search)
+                        ->group_end();
+                } else {
+                    if (isset($record_limit)) {
+                        $this->db->limit($record_limit);
+                        unset($condition['record_limit']);
+                    }
+                    if (isset($condition['limit'])) {
+                        unset($condition['limit']);
+                    }
+                    $this->myWhere('s', $condition);
+                }
                 $this->db->join('student_certificates as sce', 'sce.student_id = s.id AND sce.course_id = s.course_id');
                 $this->db->group_by('sce.student_id');
                 $this->db->order_by('s.id', 'DESC');
-                if (isset($record_limit)) {
-                    $this->db->limit($record_limit);
-                    unset($condition['record_limit']);
-                }
-                if (isset($condition['limit'])) {
-                    unset($condition['limit']);
-                }
-                $this->myWhere('s', $condition);
+
                 break;
             case 'active_student':
                 $this->db->join('student_certificates as sce', 'sce.student_id = s.id AND sce.course_id = s.course_id', 'left'); //AND sce.course_id = s.course_id
 
                 $this->db->where('sce.student_id IS NULL');
-                if(isset($condition['session_id'])){
+                if (isset($condition['session_id'])) {
                     $this->db->where('s.session_id', $condition['session_id']);
                     unset($condition['session_id']);
                 }
@@ -487,5 +501,20 @@ class Student_model extends MY_Model
     function remaining_emis($std_id)
     {
 
+    }
+    function add_palcement_student($data)
+    {
+        if (table_exists('placement_students'))
+            return $this->db->insert('placement_students', $data);
+    }
+    function list_placement_student($limit = false)
+    {
+        if ($limit)
+            $this->db->order_by('ps.timestamp', 'DESC')->limit($limit);
+        return $this->get_switch('placement_students');
+    }
+    function delete_placement_student($id)
+    {
+        return $this->db->where('id', $id)->delete('placement_students');
     }
 }

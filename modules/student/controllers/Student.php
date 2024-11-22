@@ -257,5 +257,10 @@ class Student extends MY_Controller
         } else
             $this->student_view('study-material');
     }
+    function placements(){
+        if(table_exists('placement_students')){
+            $this->view('placements',['isValid' => true]);
+        }
+    }
 }
 ?>

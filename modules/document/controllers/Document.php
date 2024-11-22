@@ -57,6 +57,7 @@ class Document extends MY_Controller
     {
         $get = $this->student_model->admit_card(['id' => $this->id]);
         if ($get->num_rows()) {
+            // pre($get->row(),true);
             $dob = strtotime($get->row('dob'));
             $this->set_data($get->row_array());
             $this->set_data('dob_day',date('d',$dob));

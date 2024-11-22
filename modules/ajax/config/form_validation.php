@@ -477,5 +477,32 @@ $config = array(
                 'is_unique' => 'This Email already exists..'
             )
         )
+    ),
+    'placement_status' => array(
+        array(
+            'field' => 'student_id',
+            'label' => 'Student',
+            'rules' => 'required|is_unique[placement_students.student_id]',
+            'errors' => array(
+                'required' => 'Please Select Student',
+                'is_unique' => 'This Student already exists..'
+            )
+        ),
+        array(
+            'field' => 'designation',
+            'label' => 'Designation',
+            'rules' => 'required',
+            'errors' => array(
+                'required' => 'Please enter designation',
+            )
+        ),
+        array(
+            'field' => 'company_name',
+            'label' => 'Company Name',
+            'rules' => 'required',
+            'errors' => array(
+                'required' => 'Please enter company name',
+            )
+        )
     )
 );

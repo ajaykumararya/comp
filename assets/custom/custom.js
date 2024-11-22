@@ -273,6 +273,29 @@ const select2Student = (element) => {
         }
     });
 }
+const passoutStudentSelect2 = (element) => {
+    $(element).select2({
+        templateSelection: optionsAjaxStudents,
+        templateResult: optionsAjaxStudents,
+        ajax: {
+            url: ajax_url + 'student/filter-passout-for-select',
+            type: 'POST',
+            dataType: 'json',
+            delay: 250,
+            processResults: function (data) {
+                // log(data);
+                return data;
+            },
+            error: function (x, v, c) {
+                log(x.responseText, v, c);
+            },
+            cache: false,
+            minimumInputLength: 3, // Set the minimum number of characters before making a request
+            placeholder: 'Search for Students...',
+            escapeMarkup: function (markup) { return markup; } // Allows markup for formatting results
+        }
+    });
+}
 const handleImageError = (element) => {
     element.src = `${base_url}assets/dark-placeholder.png`; // Replace with the path to your placeholder image
     element.alt = 'Deleted File';

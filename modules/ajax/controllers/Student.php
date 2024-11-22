@@ -554,6 +554,20 @@ class Student extends Ajax_Controller
             $results = $get->result_array();
         $this->response('results', $results);
     }
+    function filter_passout_for_select()
+    {
+        $this->response($this->post());
+        $query = $this->post('q') ? $this->post('q') : '';
+        $results[] = array(
+            'id' => '',
+            'student_name' => 'No matching records found',
+            'disabled' => true
+        );
+        $get = $this->student_model->get_switch('passout', ['search' => $query]);
+        if ($get->num_rows())
+            $results = $get->result_array();
+        $this->response('results', $results);
+    }
     function genrate_certificate()
     {
         // $this->response($this->post());
@@ -739,5 +753,21 @@ class Student extends Ajax_Controller
             'url' => base_url('id-card/' . $this->ki_theme->encrypt($this->post('student_id')))
         ]);
     }
-
+    function add_palcement_student()
+    {
+        if ($this->validation('placement_status')) {
+            $this->response('status', $this->student_model->add_palcement_student([
+                'student_id' => $_POST['student_id'],
+                'designation' => $_POST['designation'],
+                'company_name' => $_POST['company_name']
+            ]));
+        }
+    }
+    function list_placement_students()
+    {
+        $this->response('data', $this->student_model->list_placement_student()->result_array());
+    }
+    function delete_placement_student($id){
+        $this->response('status', $this->student_model->delete_placement_student($id));
+    }
 }
