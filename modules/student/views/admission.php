@@ -73,7 +73,7 @@
                                 }
                                 $rolCol = 2;
                                 $courseCol = 3;
-                                if (CHECK_PERMISSION('NOT_TIMETABLE') && !CHECK_PERMISSION('ADMISSION_WITH_SESSION')) {
+                                if (CHECK_PERMISSION('NOT_TIMETABLE') && !CHECK_PERMISSION('ADMISSION_WITH_SESSION') && !CHECK_PERMISSION('ADMISSION_WITH_COURSE_CATEGORY')) {
                                     $rolCol = $courseCol = 4;
                                 }
                                 ?>
@@ -97,6 +97,19 @@
                                 <label class="form-label required">Roll No.</label>
                                 <input type="text" name="roll_no" class="form-control" placeholder="Enter Roll NO.">
                             </div>
+                            <?php
+                            if (CHECK_PERMISSION('ADMISSION_WITH_COURSE_CATEGORY')) {
+                                ?>
+                                <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                    <label for="course_category_id" class="form-label">Course Category</label>
+                                    <select class="form-select" id="course_category_id" 
+                                        data-control="select2" data-placeholder="Select a Course Category">
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <?php
+                            }
+                            ?>
                             <div class="form-group mb-4 col-lg-<?= $courseCol ?> col-xs-12 col-sm-12">
                                 <label class="form-label required">Course</label>
                                 <select class="form-select" name="course_id" data-control="select2"
@@ -135,7 +148,7 @@
                                         data-placeholder="Select a Session" required>
                                         <option></option>
                                         <?php
-                                        $listBatch = $this->db->where('status',1)->get('session');
+                                        $listBatch = $this->db->where('status', 1)->get('session');
                                         foreach ($listBatch->result() as $row) {
                                             echo '<option value="' . $row->id . '">' . $row->title . '</option>';
                                         }
@@ -205,6 +218,44 @@
                                 <label class="form-label">Family ID</label>
                                 <input type="text" name="family_id" class="form-control" placeholder="Enter family ID">
                             </div>
+
+                            <!-- Marital Status -->
+                            <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
+                                <label for="marital_status" class="form-label">Marital Status:</label>
+                                <select name="marital_status" data-allow-clear="true" data-control="select2"
+                                    data-placeholder="Select Marital Status" id="marital_status" class="form-control"
+                                    required>
+                                    <option value="">Select</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Unmarried">Unmarried</option>
+                                </select>
+                            </div>
+
+                            <!-- Category -->
+                            <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
+                                <label for="category" class="form-label">Category:</label>
+                                <select name="category" data-allow-clear="true" data-control="select2"
+                                    data-placeholder="Select Category" id="category" class="form-control" required>
+                                    <option value="">Select Category</option>
+                                    <option value="General">General</option>
+                                    <option value="OBC">OBC</option>
+                                    <option value="SC">SC</option>
+                                    <option value="ST">ST</option>
+                                </select>
+                            </div>
+
+                            <!-- Medium -->
+                            <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
+                                <label for="medium" class="form-label">Medium:</label>
+                                <select name="medium" data-control="select2" data-allow-clear="true"
+                                    data-placeholder="Select Medium" id="medium" class="form-control" required>
+                                    <option value="">Select</option>
+                                    <option value="Hindi">Hindi Medium</option>
+                                    <option value="English">English Medium</option>
+                                </select>
+                            </div>
+
+
                             <div class="form-group mb-4 col-lg-12 col-xs-12 col-sm-12">
                                 <label class="form-label required">Address</label>
                                 <textarea class="form-control" name="address" placeholder="Address"></textarea>
@@ -297,7 +348,8 @@
                                         ?>
                                         <div class="col-md-3 mb-4">
                                             <div class="form-group">
-                                                <label for="<?= $key ?>" class="form-label form-control"><?= $value ?></label>
+                                                <label for="<?= $key ?>"
+                                                    class="form-label form-control"><?= $value ?></label>
                                                 <input type="hidden" name="upload_docs[title][]" class="form-control"
                                                     value="<?= $key ?>">
                                             </div>

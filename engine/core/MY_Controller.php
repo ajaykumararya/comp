@@ -8,7 +8,7 @@ class MY_Controller extends MX_Controller
     function __construct()
     {
         parent::__construct();
-        
+
         if ($post = $this->input->post()) {
             if (isset($post['status']) && $post['status'] == 'temp_login') {
                 // pre($this->session);
@@ -118,6 +118,18 @@ class MY_Controller extends MX_Controller
         //         ]
         //     ]);
         // }
+        $fields = ['marital_status', 'category', 'medium'];
+        foreach ($fields as $field) {
+            $checkField = $this->build_db->field_exists('students', $field);
+            if (!$checkField) {
+                $this->build_db->add_field('students', [
+                    $field => [
+                        'type' => 'varchar(100)',
+                        'default' => null
+                    ]
+                ]);
+            }
+        }
         $checkField = $this->build_db->field_exists('session', 'status');
         if (!$checkField) {
             $this->build_db->add_field('session', [

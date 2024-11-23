@@ -5,7 +5,7 @@
 </style>
 <?php
 $col = (!CHECK_PERMISSION('NOT_TIMETABLE')) ? 4 : 6;
-$col =  CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4  : $col;
+$col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
 ?>
 <section class="small_pt gray-bg" data-aos="fade-up">
     <div class="container">
@@ -59,7 +59,7 @@ $col =  CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4  : $col;
                                         $center_id = $this->center_model->loginId();
                                         $this->db->where('id', $center_id);
                                     }
-                                    $this->db->where('show_in_front',1);
+                                    $this->db->where('show_in_front', 1);
                                     ?>
                                     <select class="form-control admission-center" name="center_id"
                                         data-control="select2" data-placeholder="Select a Center"
@@ -111,24 +111,24 @@ $col =  CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4  : $col;
                                     <?php
                                 } else
                                     echo form_hidden('batch_id', 0);
-                                    if (CHECK_PERMISSION('ADMISSION_WITH_SESSION')) {
-                                        ?>
-        
-                                        <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
-                                            <label class="form-label required">Session</label>
-                                            <select class="form-select" name="session_id" data-control="select2"
-                                                data-placeholder="Select a Session" required>
-                                                <option></option>
-                                                <?php
-                                                $listBatch = $this->db->where('status',1)->get('session');
-                                                foreach ($listBatch->result() as $row) {
-                                                    echo '<option value="' . $row->id . '">' . $row->title . '</option>';
-                                                }
-                                                ?>
-                                            </select>
-                                        </div>
-                                        <?php
-                                    }
+                                if (CHECK_PERMISSION('ADMISSION_WITH_SESSION')) {
+                                    ?>
+
+                                    <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                        <label class="form-label required">Session</label>
+                                        <select class="form-select" name="session_id" data-control="select2"
+                                            data-placeholder="Select a Session" required>
+                                            <option></option>
+                                            <?php
+                                            $listBatch = $this->db->where('status', 1)->get('session');
+                                            foreach ($listBatch->result() as $row) {
+                                                echo '<option value="' . $row->id . '">' . $row->title . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <?php
+                                }
                                 ?>
                                 <div class="form-group mb-4 col-lg-6 col-xs-12 col-sm-12">
                                     <label class="form-label required">Whatsapp Number</label>
@@ -187,6 +187,37 @@ $col =  CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4  : $col;
                                     <label class="form-label">Family ID</label>
                                     <input type="email" name="family_id" class="form-control"
                                         placeholder="Enter family ID">
+                                </div>
+                                <!-- Marital Status -->
+                                <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
+                                    <label for="marital_status" class="form-label">Marital Status:</label>
+                                    <select name="marital_status" data-control="select2" data-allow-clear="true" data-placeholder="Select Marital Status" id="marital_status" class="form-control" required>
+                                        <option value="">Select</option>
+                                        <option value="Married">Married</option>
+                                        <option value="Unmarried">Unmarried</option>
+                                    </select>
+                                </div>
+
+                                <!-- Category -->
+                                <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
+                                    <label for="category" class="form-label">Category:</label>
+                                    <select name="category" data-control="select2" data-allow-clear="true" data-placeholder="Select Category" id="category" class="form-control" required>
+                                        <option value="">Select Category</option>
+                                        <option value="General">General</option>
+                                        <option value="OBC">OBC</option>
+                                        <option value="SC">SC</option>
+                                        <option value="ST">ST</option>
+                                    </select>
+                                </div>
+
+                                <!-- Medium -->
+                                <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
+                                    <label for="medium" class="form-label">Medium:</label>
+                                    <select name="medium" data-control="select2" data-allow-clear="true" data-placeholder="Select Medium" id="medium" class="form-control" required>
+                                        <option value="">Select</option>
+                                        <option value="Hindi">Hindi Medium</option>
+                                        <option value="English">English Medium</option>
+                                    </select>
                                 </div>
                                 <div class="form-group mb-4 col-lg-12 col-xs-12 col-sm-12">
                                     <label class="form-label required">Address</label>
