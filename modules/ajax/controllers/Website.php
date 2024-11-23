@@ -255,6 +255,10 @@ class Website extends Ajax_Controller
             // $data['adhar_back'] = $this->file_up('adhar_back');
             $data['image'] = $this->file_up('image');
             $data['upload_docs'] = json_encode($upload_docs_data);
+
+            $data['marital_status'] = $this->post('marital_status');
+            $data['medium'] = $this->post('medium');
+            $data['category'] = $this->post('category');
             $chk = $this->db->insert('students', $data);
             $this->response('status', $chk);
             $this->session->set_userdata([

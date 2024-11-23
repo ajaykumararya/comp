@@ -141,6 +141,9 @@ class Student extends Ajax_Controller
         $data['image'] = $this->file_up('image');
         $data['upload_docs'] = json_encode($upload_docs_data);
         $data['status'] = true;
+        $data['marital_status'] = $this->post('marital_status');
+        $data['medium'] = $this->post('medium');
+        $data['category'] = $this->post('category');
         $data['admission_status'] = true;
         if ($this->form_validation->run()) {
             $this->db->insert('students', $data);
