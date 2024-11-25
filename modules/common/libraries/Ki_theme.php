@@ -1194,7 +1194,7 @@ class Ki_theme
     function get_student_menu()
     {
         $adminMenu = $this->CI->load->config('student/menu', true);
-        $this->adminMenu = $adminMenu;
+        // $this->adminMenu = $adminMenu;
         // $this->current_method = recursiveArraySearchReturnValue($this->uri_string(),$adminMenu['ui_setting']['menu'],'type');
         $html = '';
         foreach ($adminMenu as $menuType => $menus) {
