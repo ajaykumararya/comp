@@ -1213,7 +1213,7 @@ class Ki_theme
     {
         if ($this->CI->center_model->isCoordinator())
             $adminMenu = $this->CI->load->config('coordinate/menu', true);
-        else if ($this->login_type == 'student')
+        else if ($this->CI->student_model->isStudent())
             $adminMenu = $this->CI->load->config('student/menu', true);
         else
             $adminMenu = $this->CI->load->config('admin/menu', true);
