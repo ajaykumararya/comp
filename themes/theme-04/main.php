@@ -65,7 +65,7 @@ function closeForm() {
                                                 <a class="home-link" href="{base_url}" title="{title}"
                                                     rel="home">
                                                     <img id="logo-img" class="img-center lazyload" src="{assets}{logo}"
-                                                        alt="logo">
+                                                        alt="logo" style="width:105px">
                                                 </a>
                                                 <!-- site-branding end -->
                                             </div>
