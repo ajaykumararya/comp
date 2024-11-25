@@ -1193,7 +1193,7 @@ class Ki_theme
     }
     function get_student_menu()
     {
-        $adminMenu = $this->CI->load->config('student/menu', true);
+        $adminMenu = $this->adminMenu;// $this->CI->load->config('student/menu', true);
         // $this->adminMenu = $adminMenu;
         // $this->current_method = recursiveArraySearchReturnValue($this->uri_string(),$adminMenu['ui_setting']['menu'],'type');
         $html = '';
@@ -1213,9 +1213,12 @@ class Ki_theme
     {
         if ($this->CI->center_model->isCoordinator())
             $adminMenu = $this->CI->load->config('coordinate/menu', true);
+        else if ($this->login_type == 'student')
+            $adminMenu = $this->CI->load->config('student/menu', true);
         else
             $adminMenu = $this->CI->load->config('admin/menu', true);
         // pre($adminMenu,true);
+
         $this->adminMenu = $adminMenu;
         if ($this->login_type == 'role_user') {
             $this->adminMenu = $adminMenu = $this->filterByAllowedTypes($this->adminMenu, $this->rolePermissions);
