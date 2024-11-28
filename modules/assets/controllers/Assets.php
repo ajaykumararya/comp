@@ -50,9 +50,6 @@ class Assets extends MY_Controller
     function student_study()
     {
         $file = ($this->uri->segment(3, 0));
-        if($file = $this->input->get('file')){
-            $file = urldecode($file);
-        }
         if($this->student_model->isStudent() or $this->center_model->isAdminOrCenter()){
             $this->_view('study-mat/'.$file);
         }

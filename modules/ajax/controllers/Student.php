@@ -696,6 +696,18 @@ class Student extends Ajax_Controller
             $this->db->insert('study_material', $data);
         }
     }
+    function delete_study_material($material_id){
+        //delete-study-material
+        $get = $this->student_model->get_study_material($material_id);
+        if($get->num_rows()){
+            $file = 'upload/study-mat/'.$get->row('material_file');
+            if(file_exists($file)){
+                @unlink($file);
+            }
+            $this->db->where('id', $material_id)->delete('study_material');
+            $this->response('status',true);
+        }
+    }
 
     function list_study_material()
     {

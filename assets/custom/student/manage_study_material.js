@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
     });
     validation.addField('course_id', {
         validators: {
-            notEmpty: { message: 'Please Select a course' }
+            notEmpty: { message: 'Please Select a course' },
         }
     });
     validation.addField('file', {
@@ -32,37 +32,37 @@ document.addEventListener('DOMContentLoaded', function (e) {
         }
     });
     study_table.DataTable({
-        ajax : {
-            url : ajax_url + 'student/list-study-material'
+        ajax: {
+            url: ajax_url + 'student/list-study-material'
         },
-        column : [
-            {'data':null},
-            {'data':null},
-            {'data':null},
-            {'data':null}
+        column: [
+            { 'data': null },
+            { 'data': null },
+            { 'data': null },
+            { 'data': null }
         ],
-        columnDefs : [
+        columnDefs: [
             {
-                targets : 0,
-                render : function(data,type,row){
-                    return `${row.course_name} ${ (login_type  =='admin' ? `<div class="d-flex"><label class="badge badge-info ">${row.institute_name}</label></div>` : `` )} `;
+                targets: 0,
+                render: function (data, type, row) {
+                    return `${row.course_name} ${(login_type == 'admin' ? `<div class="d-flex"><label class="badge badge-info ">${row.institute_name}</label></div>` : ``)} `;
                 }
             },
             {
-                targets : 1,
-                render : function(data,type,row){
+                targets: 1,
+                render: function (data, type, row) {
                     return row.title;
                 }
             },
             {
-                targets : 2,
-                render : function(data,type,row){
+                targets: 2,
+                render: function (data, type, row) {
                     return `<button class="btn btn-info btn-xs btn-sm btn-action"><i class="fa fa-eye"></i> File</button>`;
                 }
             },
             {
-                targets : -1,
-                render : function(data,type,row){
+                targets: -1,
+                render: function (data, type, row) {
                     return `
                             <div class="btn-group">
                                 <button class="btn btn-sm btn-xs btn-info assign">
@@ -74,29 +74,29 @@ document.addEventListener('DOMContentLoaded', function (e) {
                                     Assign To Students
                                 </button>
                             </div>
-                            ${deleteBtnRender(1,row.material_id,'Study Material')}
+                            ${deleteBtnRender(1, row.material_id, 'Study Material')}
                             `;
                 }
             },
         ]
-    }).on('draw',function(r){
+    }).on('draw', function (r) {
         handleDeleteRows('student/delete-study-material');
         // study_table.find('.btn-action');
 
-        study_table.find('.btn-action').on('click',function(){
+        study_table.find('.btn-action').on('click', function () {
             var rowData = study_table.DataTable().row($(this).closest('tr')).data();
 
-                var id = rowData.material_id;//$(this).data('id');
-                // alert(id);
-                // alert(3);
-                $.AryaAjax({
-                    url : 'website/study_material_link',
-                    data: {id,'status' : 'ISADMIN'}
-                }).then((tt) => {
-                    // log(tt);
-                    window.open(`${base_url}student/study-material/${tt.token}`, "_blank");
-                });
-            })
+            var id = rowData.material_id;//$(this).data('id');
+            // alert(id);
+            // alert(3);
+            $.AryaAjax({
+                url: 'website/study_material_link',
+                data: { id, 'status': 'ISADMIN' }
+            }).then((tt) => {
+                // log(tt);
+                window.open(`${base_url}student/study-material/${tt.token}`, "_blank");
+            });
+        })
         study_table.find('.assign').on('click', function () {
             var rowData = study_table.DataTable().row($(this).closest('tr')).data();
             //    log(rowData);
@@ -124,21 +124,21 @@ document.addEventListener('DOMContentLoaded', function (e) {
                                 student_id: $(this).val(),
                                 material_id: rowData.material_id,
                                 center_id: $(this).data('center_id'),
-                                check_status : checkStatus
+                                check_status: checkStatus
                             }
                         }).then((e) => {
                             log(e);
                             toastr.clear();
-                            if(e.status)
+                            if (e.status)
                                 toastr.success(`Study Material ${checkStatus ? 'Assigned' : 'Removed'} Successfully..`);
                             else
                                 toastr.error('Something Went Wrong!');
                         });
                     })
                 }
-                else{
+                else {
                     // alert(4);
-                    SwalWarning('Alert','Students are not found on this Institute..');
+                    SwalWarning('Alert', 'Students are not found on this Institute..');
                 }
             })
         })
@@ -146,12 +146,17 @@ document.addEventListener('DOMContentLoaded', function (e) {
     form.addEventListener('submit', (r) => {
         r.preventDefault();
         var file = $('#file')[0].files[0];
+        const regex = /^[a-zA-Z0-9_.-]+$/;
+        if(!regex.test(file.name)){
+            SwalWarning('Notice','File names cannot contain special characters or spaces.');
+            return  // Return true if valid
+        }
         $.AryaAjax({
             url: 'student/upload-study-material',
-            file : file,
+            file: file,
             data: new FormData(form),
             validation: validation,
-            
+
         }).then((s) => {
             log(s);
             showResponseError(s);
