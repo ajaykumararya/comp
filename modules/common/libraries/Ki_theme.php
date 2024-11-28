@@ -208,9 +208,9 @@ class Ki_theme
         $lastDate = $endOfWeek->format('d-m-Y');
         $currentDate = new DateTime();
         $currentDate = $currentDate->format('d-m-Y');
-        // return $firstDate.' '.$lastDate;
+        // return $firstDate.' '.$lastDate.' '.$currentDate;
         // Check if the current date is within the week range
-        return ($currentDate >= $firstDate && $currentDate <= $lastDate);
+        return ($currentDate <= $firstDate && $currentDate <= $lastDate);
 
     }
     function findEvent($eventTitle)

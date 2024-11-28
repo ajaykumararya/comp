@@ -13,6 +13,9 @@
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 <link href='https://fonts.googleapis.com/css?family=Reem Kufi' rel='stylesheet'>
 <style>
+    :root{
+        --my-theme-color : <?=ES('theme_color_value','#762051')?>
+    }
     body,
     li,
     .title {

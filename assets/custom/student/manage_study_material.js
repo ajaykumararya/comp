@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             {
                 targets : 2,
                 render : function(data,type,row){
-                    return `<a href="${base_url}assets/student-study/${row.file}" target="_blank" class="btn btn-info btn-xs btn-sm"><i class="fa fa-eye"></i> File</a>`;
+                    return `<button class="btn btn-info btn-xs btn-sm btn-action"><i class="fa fa-eye"></i> File</button>`;
                 }
             },
             {
@@ -81,6 +81,22 @@ document.addEventListener('DOMContentLoaded', function (e) {
         ]
     }).on('draw',function(r){
         handleDeleteRows('student/delete-study-material');
+        // study_table.find('.btn-action');
+
+        study_table.find('.btn-action').on('click',function(){
+            var rowData = study_table.DataTable().row($(this).closest('tr')).data();
+
+                var id = rowData.material_id;//$(this).data('id');
+                // alert(id);
+                // alert(3);
+                $.AryaAjax({
+                    url : 'website/study_material_link',
+                    data: {id,'status' : 'ISADMIN'}
+                }).then((tt) => {
+                    // log(tt);
+                    window.open(`${base_url}student/study-material/${tt.token}`, "_blank");
+                });
+            })
         study_table.find('.assign').on('click', function () {
             var rowData = study_table.DataTable().row($(this).closest('tr')).data();
             //    log(rowData);

@@ -524,7 +524,7 @@ ul.ttm-recent-post-list>li>a:hover,
 .testimonials.style1 .testimonial-img:before,
 .ttm-border-seperator:after,
 .featured-imagebox-services.style4 .ttm-bgcolor-darkgrey .ttm-icon.ttm-icon_element-size-xs.ttm-bgcolor-white:hover{
-    background-color: #762051; 
+    background-color: var(--my-theme-color)!important; 
 }
 
 
@@ -588,7 +588,7 @@ article.ttm-blog-classic:hover .ttm-blogbox-footer-readmore,
 .widget-author .team-media-block ul li a:hover,
 .ttm-btn.ttm-btn-bgcolor-skincolor:not(.btn-inline):before,
 .featured-imagebox-services.style4 .ttm-bgcolor-skincolor .ttm-icon.ttm-icon_element-size-xs.ttm-bgcolor-white:hover{
-  background-color: #762051;
+  background-color: var(--my-theme-color)!important;
 }
 
 a.rev-border-button,

@@ -517,4 +517,10 @@ class Student_model extends MY_Model
     {
         return $this->db->where('id', $id)->delete('placement_students');
     }
+    function get_study_material($material_id){
+        $this->db->select('file as material_file');
+        $this->db->where('material_id', $material_id);
+       return $this->db->get('study_material');
+
+    }
 }

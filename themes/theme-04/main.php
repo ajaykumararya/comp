@@ -1,5 +1,12 @@
 
-
+<style>.footer{background:black!important}
+    @media only screen and (min-width: 1200px) {
+    #site-header-menu #site-navigation .menu ul > li ul li > a:hover,
+    .ttm-header-style-01 .ttm-topbar-wrapper{
+        background: var(--my-theme-color);
+    }
+}
+</style>
 <script>
 function openForm() {
   document.getElementById("myForm").style.display = "block";
@@ -303,7 +310,7 @@ function closeForm() {
                     <div class="row copyright">
                         <div class="col-md-9">
                             <div class="ttm-textcolor-white">
-                                <span>Copyright &copy;&nbsp;<a class="ttm-textcolor-skincolor" href="{base_url}">{title}</a> All rights reserved.</span>
+                                <span>Copyright &copy; <script>document.write(new Date().getFullYear())</script> &nbsp;<a class="ttm-textcolor-skincolor" href="{base_url}">{title}</a> {copyright}</span>
                             </div>
                         </div>
                         <div class="col-md-3">

@@ -58,7 +58,7 @@ class Website extends Ajax_Controller
     }
     function study_material_link()
     {
-        if ($this->student_model->isStudent()) {
+        if ($this->student_model->isStudent() or $this->input->post('status') == 'ISADMIN') {
             $data = $this->post();
             $this->response('status', true);
             $this->response('token', $this->token->withExpire('+30 minutes')->encode($data));

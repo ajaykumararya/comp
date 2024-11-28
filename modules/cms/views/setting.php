@@ -74,6 +74,16 @@
                         </div>
                         <?php
                     }
+                    
+                    if(THEME == 'theme-04'){
+                        ?>
+                        <div class="form-group mb-4">
+                            <lable class="form-label required">Select Theme Color</lable>
+                            <input type="color" name="theme_color_value" value="<?=ES('theme_color_value','#762051')?>" class="form-control">
+                        </div>
+                        <?php
+                    }
+                        
                     ?>
                 </div>
                 <div class="card-footer">

@@ -95,7 +95,7 @@ class Student extends MY_Controller
     }
     function search_fees_payment()
     {
-        $this->ki_theme->breadcrumb_action_html('filter_fee_record',true);
+        $this->ki_theme->breadcrumb_action_html('filter_fee_record', true);
         $this->view('search-fees-payment');
     }
     function generate_certificate()
@@ -182,7 +182,8 @@ class Student extends MY_Controller
                 $this->student_view('index');
         }
     }
-    function your_attendance(){
+    function your_attendance()
+    {
         $this->student_view('your_attendance');
     }
     function id_card()
@@ -242,24 +243,28 @@ class Student extends MY_Controller
                 // throw new Exception('HELLO');
                 $this->token->decode($view);
                 $id = ($this->token->data('id'));
-                $get = $this->student_model->get_student_study(['material_id' => $id]);
+                if ($this->token->data('status') == 'ISADMIN')
+                    $get = $this->student_model->get_study_material($id);
+                else
+                    $get = $this->student_model->get_student_study(['material_id' => $id]);
 
                 if (!$get->num_rows())
                     throw new Exception('Not Found..');
                 // echo $this->token->expiredOn();
                 $row = $get->row();
-                $file = $row->material_file;
+                $file = urlencode($row->material_file);
                 $this->load->view('panel/study', ['url' => base_url('assets/student-study/' . $file)]);
 
             } catch (Exception $e) {
-
+                // urlencode()
             }
         } else
             $this->student_view('study-material');
     }
-    function placements(){
-        if(table_exists('placement_students')){
-            $this->view('placements',['isValid' => true]);
+    function placements()
+    {
+        if (table_exists('placement_students')) {
+            $this->view('placements', ['isValid' => true]);
         }
     }
 }
