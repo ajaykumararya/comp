@@ -94,6 +94,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 data: { id, 'status': 'ISADMIN' }
             }).then((tt) => {
                 // log(tt);
+                SwalHideLoading();
                 window.open(`${base_url}student/study-material/${tt.token}`, "_blank");
             });
         })
