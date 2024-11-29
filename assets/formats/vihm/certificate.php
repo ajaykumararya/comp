@@ -76,6 +76,7 @@
     <div class="position-absolute" id="photo1">
         <img src="upload/{image}" style="width:69px;height:85px">
     </div>
+    <p class="position-absolute text-center" style="top:36.5%;left:10%;width:80%;font-size:2rem;color:red">{course_name}</p>
     
 
     <p class="position-absolute" style="top:48.9%;left:47%;">{course_name}</p>
