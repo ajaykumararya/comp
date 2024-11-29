@@ -47,7 +47,7 @@
 <?php
 $examDate = date('d-m-Y',strtotime($exam_date));
 $examTime = date('h:i A',strtotime($exam_date));
-
+ 
 ?>
 <body class="position-relative">
     <img id="back-image" class="position-relative" src="{document_path}/admit-card.jpg">

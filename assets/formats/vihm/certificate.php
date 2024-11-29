@@ -90,7 +90,7 @@
     
     <p class="position-absolute text-center" style="left:73%;top:18%;">{enrollment_no}</p>
     <p class="position-absolute " style="left:24%;top:18%;width:150px">{roll_no}</p>
-    
+     
     <!-- <p class="position-absolute text-center" style="left:54%;top:56.1%;width:130px">{percentage}%</p> -->
     <!-- <p class="position-absolute text-center" style="left:76%;top:67.1%;">{from_date}</p> -->
     <p class="position-absolute text-center" style="left:45%;top:54.5%;">{session}</p>

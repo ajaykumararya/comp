@@ -31,7 +31,7 @@
         }
         .text-center{
             text-align: center;
-        }
+        } 
         #photo {
             z-index: 999;
             top: 25.3%;
