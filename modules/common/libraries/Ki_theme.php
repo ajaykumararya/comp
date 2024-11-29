@@ -246,6 +246,14 @@ class Ki_theme
     }
     function grade($score)
     {
+        if(PATH == 'vihm'){
+            if($score >= 70)
+                return 'A';
+            elseif($score >= 55)
+                return 'B';
+            else
+                return 'C';
+        }
         if (PATH == 'skycrownworld') {
             if ($score >= 85)
                 return 'A+ (Excellent)';
