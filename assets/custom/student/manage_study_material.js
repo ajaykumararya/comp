@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             url: ajax_url + 'student/list-study-material'
         },
         column: [
-            { 'data': null },
+            { 'data': null }, 
             { 'data': null },
             { 'data': null },
             { 'data': null }
