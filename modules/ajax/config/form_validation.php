@@ -185,14 +185,14 @@ $config = array(
             'field' => 'contact_number',
             'rules' => 'required'
         ),
-        array(
-            'label' => 'Email',
-            'field' => 'email',
-            'rules' => 'required|is_unique[students.email]',
-            'errors' => [
-                'is_unique' => 'This %s is already exists.'
-            ]
-        ),
+        // array(
+        //     'label' => 'Email',
+        //     'field' => 'email',
+        //     'rules' => 'required|is_unique[students.email]',
+        //     'errors' => [
+        //         'is_unique' => 'This %s is already exists.'
+        //     ]
+        // ),
         array(
             'label' => 'Father Name',
             'field' => 'father_name',
