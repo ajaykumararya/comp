@@ -40,8 +40,8 @@
 
         #photo1 {
             z-index: 999;
-            top: 21.14rem;
-            right: 98px;
+            top: 23rem;
+            left: 81.2%;
             width: 120px !important;
             height: 95px;
         }
@@ -71,22 +71,22 @@
 <body class="position-relative">
     <img id="back-image" class="position-relative" src="{document_path}/franchise-certificate.jpg">
     <?php
-    $this->ki_theme->generate_qr($id, 'franchise_certificate', current_url());
+    // $this->ki_theme->generate_qr($id, 'franchise_certificate', current_url());
     ?>
-    <div class="position-absolute" id="photo">
+    <!-- <div class="position-absolute" id="photo">
         <img src="upload/images/franchise_certificate_{id}.png">
-    </div>
+    </div> -->
     <div class="position-absolute" id="photo1">
-        <img src="upload/{image}" style="width:115px;height:148px">
+        <img src="upload/{image}" class="" style="width:110px;height:130px">
     </div>
-    <div class="position-absolute" style="top:45.4%;left:10%;width:76%;text-align:center;text-transform:capitalize">{institute_name}</div>
+    <div class="position-absolute" style="top:47%;left:10%;width:76%;text-align:center;text-transform:capitalize">{institute_name}</div>
 
-    <div class="position-absolute" style="top:58.5%;left:27%;">{center_number}</div>
-    <div class="position-absolute" style="top:54.5%;left:27%;">{city}, &nbsp;{state}</div>
-    <div class="position-absolute" style="top:50.4%;left:27%;">{name}</div>
+    <div class="position-absolute" style="top:27.6%;left:83%;">{center_number}</div>
+    <div class="position-absolute" style="top:57.7%;left:27%;">{city}, &nbsp;{state}</div>
+    <div class="position-absolute" style="top:52.4%;left:27%;">{name}</div>
     
-    <div class="position-absolute" style="top:62.5%;left: 27%">{certificate_issue_date}</div>
-    <div class="position-absolute" style="top:66.6%;left:27%">{valid_upto}</div>
+    <div class="position-absolute" style="top:67.3%;left: 27%">{certificate_issue_date}</div>
+    <div class="position-absolute" style="top:73%;left:27%">{valid_upto}</div>
     <div class="position-absolute" id="center_signature">
         <img src="upload/{signature}" style="width:200px;height:80px">
     </div>

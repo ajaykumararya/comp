@@ -364,7 +364,7 @@ class Document extends MY_Controller
             ]);
 
             $this->ki_theme->generate_qr($this->id, 'student_certificate', current_url());
-            if (in_array(PATH, ['haptronworld', 'sewaedu','beautyguru'])) {
+            if (in_array(PATH, ['haptronworld', 'sewaedu','beautyguru','pces'])) {
                 $certificate['serial_no'] = (50000 + $this->id);
                 $this->mypdf->addPage('L');
             }
@@ -399,7 +399,7 @@ class Document extends MY_Controller
                     }
                     $output = $this->parse('franchise_certificate', $data);
                     
-                    if (in_array(PATH, ['techno', 'haptronworld','beautyguru', 'sewaedu','softworldedu'])) {
+                    if (in_array(PATH, ['techno', 'haptronworld','beautyguru', 'sewaedu','softworldedu','nbeat'])) {
                         $this->mypdf->addPage('L');
                     }
                     $this->pdf($output);
