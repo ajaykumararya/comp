@@ -67,9 +67,9 @@ class Document extends MY_Controller
             $this->set_data('time', date('h:i A', strtotime($get->row('exam_date'))));
             $pdfContent = $this->parse('admit-card');
             // $this->mypdf->setTitle('Hii');
-            if ($this->ki_theme->config('admit_card_full') OR in_array(PATH,['iedct','softworldedu']))
+            if ($this->ki_theme->config('admit_card_full') OR in_array(PATH,['iedct','softworldedu','nbeat']))
                 $this->mypdf->addPage('L');
-            $this->pdf($pdfContent);
+            $this->pdf($pdfContent,$get->row('student_name').'-'.$get->row('roll_no').'-Admit Card.pdf');
         } else {
             $this->not_found("Admit Card Not Found..");
         }
@@ -81,8 +81,10 @@ class Document extends MY_Controller
         if ($get->num_rows()) {
             // pre($get->row(), true);
             $this->set_data($get->row_array());
-            if (PATH == 'techno') {
+            
                 $row = $get->row();
+            // pre($row,true);
+            if (PATH == 'techno') {
                 $admissionTime = strtotime($row->admission_date);
                 $duration = $row->duration;
                 if ($row->duration_type == 'month') {
@@ -99,7 +101,7 @@ class Document extends MY_Controller
                 // $certificate['serial_no'] = (50000 + $this->id);
                 $this->mypdf->addPage('L');
             }
-            $this->pdf($pdfContent);
+            $this->pdf($pdfContent,$row->student_name.'-'.$row->roll_no.'-Id Card.pdf');
         } else {
             $this->not_found("ID Card Not Found..");
         }
@@ -235,7 +237,7 @@ class Document extends MY_Controller
             $rowArray['duration_type'] = (humnize($rowArray['duration'], $rowArray['duration_type']));
             $pdfContent = $this->parse($file, $rowArray);
             // echo $pdfContent;
-            $this->pdf($pdfContent);
+            $this->pdf($pdfContent,$rowArray['student_name'].'-'.$rowArray['roll_no'].'-'.humnize_duration_with_ordinal($rowArray['marksheet_duration'],$rowArray['duration_type']).' Result.pdf');
         } else {
             $this->not_found("Marksheet Not Found..");
         }
@@ -370,8 +372,9 @@ class Document extends MY_Controller
             $this->set_data($certificate);
 
             $output = $this->parse($this->get_multi_path($certificate['course_id'], 'certificate'), $certificate);
-
-            $this->pdf($output);
+            // $this->mypdf->setTitle('certificate');
+            // pre($certificate,true);
+            $this->pdf($output,$certificate['student_name'].' '.$certificate['roll_no'].'-Certificate.pdf');
         } else {
             $this->not_found("Certificate Not Found..");
         }

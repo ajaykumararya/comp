@@ -147,7 +147,11 @@ document.addEventListener('DOMContentLoaded', function (e) {
     form.addEventListener('submit', (r) => {
         r.preventDefault();
         var file = $('#file')[0].files[0];
-        const regex = /^[a-zA-Z0-9_.-]+$/;
+        var fileName = file.name;
+        const invalidCharsRegex = /[^a-zA-Z0-9._-]/;
+                
+        log(invalidCharsRegex.test(fileName));
+        return false;
         if(!regex.test(file.name)){
             SwalWarning('Notice','File names cannot contain special characters or spaces.');
             return  // Return true if valid

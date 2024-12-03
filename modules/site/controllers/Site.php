@@ -150,10 +150,11 @@ class Site extends Site_Controller
             echo 'Users not found...';
         }
     }
-    function update(){
-        $checkField = $this->checkField('students','fee_emi');
-        if(!$checkField){
-            $this->build_db->add_field('students',[
+    function update()
+    {
+        $checkField = $this->checkField('students', 'fee_emi');
+        if (!$checkField) {
+            $this->build_db->add_field('students', [
                 'fee_emi' => [
                     'type' => 'varchar(100)',
                     'default' => null
@@ -168,7 +169,13 @@ class Site extends Site_Controller
     }
     function test()
     {
-        echo $this->ki_theme->isDiwali();
+        // echo $this->ki_theme->isDiwali();
+        $fileName = "example_file123&";
+
+        // Regular expression to check for invalid characters
+        $invalidCharsRegex = '/[^a-zA-Z0-9_ ]/';
+
+        echo (preg_match($invalidCharsRegex, $fileName)) ? 'YES' : 'NO';
         exit;
 
         // echo $this->center_model->roleUsers()->num_rows();
@@ -177,7 +184,7 @@ class Site extends Site_Controller
         $leftamount = 278000;
         $rightAmount = 300000;
         $gold = 0;
-        while($leftamount >= 100000 && $rightAmount >= 100000){
+        while ($leftamount >= 100000 && $rightAmount >= 100000) {
             $gold += 2;
             $leftamount -= 100000;
             $rightAmount -= 100000;

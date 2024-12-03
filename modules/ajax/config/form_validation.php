@@ -1,14 +1,14 @@
 <?php
 $config = array(
     'student/add' => array(
-        array(
-            'field' => 'email_id',
-            'label' => 'Email',
-            'rules' => 'is_unique[students.email]',
-            'errors' => [
-                'is_unique' => 'This %s is already exists.'
-            ]
-        ),
+        // array(
+        //     'field' => 'email_id',
+        //     'label' => 'Email',
+        //     'rules' => 'is_unique[students.email]',
+        //     'errors' => [
+        //         'is_unique' => 'This %s is already exists.'
+        //     ]
+        // ),
         array(
             'field' => 'contact_number',
             'label' => 'Contact Number',

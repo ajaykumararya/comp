@@ -246,10 +246,24 @@ class Ki_theme
     }
     function grade($score)
     {
-        if(PATH == 'vihm'){
-            if($score >= 70)
+        if (PATH == 'nbeat') {
+            if ($score >= 80)
+                return 'A+';
+            else if ($score >= 70)
                 return 'A';
-            elseif($score >= 55)
+            else if ($score >= 60)
+                return 'B';
+            else if ($score >= 50)
+                return 'C';
+            else if ($score >= 40)
+                return 'D';
+            else
+                return 'Fail';
+        }
+        if (PATH == 'vihm') {
+            if ($score >= 70)
+                return 'A';
+            elseif ($score >= 55)
                 return 'B';
             else
                 return 'C';

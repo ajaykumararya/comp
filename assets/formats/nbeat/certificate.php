@@ -46,8 +46,8 @@
         }
 
         #photo1 {
-            top: 28.39%;
-            left: 22.87rem;
+            top: 33%;
+            left: 74.3%;
         }
 
         p {
@@ -76,39 +76,40 @@
 
         #center_signature {
             z-index: 999;
-            top: 43rem;
-            left: 22rem;
+            bottom: 11%;
+            left: 65%;
         }
     </style>
 </head>
 
 <body class="position-relative">
     <img id="back-image" class="position-relative" src="{document_path}/certificate.jpg">
-    <div class="position-absolute" id="photo">
+    <!-- <div class="position-absolute" id="photo">
         <img src="upload/images/student_certificate_{certiticate_id}.png" style="width: 93px;
             height: 93px;">
-    </div>
-    <!-- <div class="position-absolute" id="photo1">
-        <img src="upload/{image}" style="width:120.5px;height:155.5px">
     </div> -->
+    <div class="position-absolute" id="photo1">
+        <img src="upload/{image}" style="width:91px;height:106px">
+    </div>
 
 
-    <p class="position-absolute text-center" style="top:3.6%;left:32%;width:120px">{serial_no}</p>
-    <p class="position-absolute text-center" style="top:3.6%;left:85%;width:122px">{enrollment_no}</p>
+    <p class="position-absolute " style="top:18%;left:24%;width:120px">{enrollment_no}</p>
+    <p class="position-absolute" style="top:18%;left:76.6%;width:122px">{roll_no}</p>
 
-    <div class="position-absolute " style="left:48%;top:41%;">{student_name}</div>
-    <div class="position-absolute " style="width:340px;top:45.3%;left:40%">{father_name}</div>
+    <div class="position-absolute " style="left:48%;top:44.5%;">{student_name}</div>
+    <div class="position-absolute " style="width:340px;top:48.3%;left:40%">{father_name}</div>
+    <div class="position-absolute " style="top:52%;left:30%">{dob}</div>
 
     <!-- <div class="position-absolute text-center" style="width:450px;left:20%;top:56.5%;">{enrollment_no}</div> -->
-    <!-- <div class="position-absolute text-center t-c" style="left:60%;top:59%;">{duration} {duration_type}</div> -->
-    <div class="position-absolute " style="width:680px;left:33%;top:49.5%;">{course_name}</div>
+    <div class="position-absolute" style="width:680px;left:15%;top:55.4%;">{course_name}</div>
+    <div class="position-absolute text-center t-c" style="left:18%;top:62.6%;">{duration} {duration_type}</div>
 
-    <div class="position-absolute text-center" style="width:160px;left:38%;top:54%;">{from_date}</div>
-    <div class="position-absolute text-center" style="width:140px;left:54.5%;top:54%;">{to_date}</div>
+    <div class="position-absolute text-center" style="width:160px;left:38%;top:62.6%;">{from_date}</div>
+    <div class="position-absolute text-center" style="width:140px;left:64%;top:62.6%;">{to_date}</div>
 
-    <div class="position-absolute text-center" style="left:78%;top:67.3%;width:150px">{grade}</div>
-    <div class="position-absolute text-center" style="left:58.5%;top:73.5%;width:150px">{createdOn}</div>
-    <div class="position-absolute" style="width:580px;left:42%;top:58.5%;">{center_name}</div>
+    <div class="position-absolute text-center" style="left:24%;top:69.6%;width:150px">{grade}</div>
+    <div class="position-absolute text-center" style="left:21.5%;top:75.5%;width:150px">{createdOn}</div>
+    <div class="position-absolute" style="width:580px;left:21.5%;top:58.8%;">{center_name}</div>
     <!-- createdOn -->
     <?php
     if (file_exists('upload/' . $center_signature)) {

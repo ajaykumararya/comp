@@ -165,7 +165,7 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                     </div>
                                 </div>
                                 <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
-                                    <label class="form-label required">E-Mail ID</label>
+                                    <label class="form-label">E-Mail ID</label>
                                     <input type="email" name="email" class="form-control" placeholder="Enter E-Mail ID">
                                 </div>
                                 <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
