@@ -191,7 +191,7 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                 <!-- Marital Status -->
                                 <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
                                     <label for="marital_status" class="form-label">Marital Status:</label>
-                                    <select name="marital_status" data-control="select2" data-allow-clear="true" data-placeholder="Select Marital Status" id="marital_status" class="form-control" required>
+                                    <select name="marital_status" data-control="select2" data-allow-clear="true" data-placeholder="Select Marital Status" id="marital_status" class="form-control" >
                                         <option value="">Select</option>
                                         <option value="Married">Married</option>
                                         <option value="Unmarried">Unmarried</option>
@@ -201,7 +201,7 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                 <!-- Category -->
                                 <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
                                     <label for="category" class="form-label">Category:</label>
-                                    <select name="category" data-control="select2" data-allow-clear="true" data-placeholder="Select Category" id="category" class="form-control" required>
+                                    <select name="category" data-control="select2" data-allow-clear="true" data-placeholder="Select Category" id="category" class="form-control" >
                                         <option value="">Select Category</option>
                                         <option value="General">General</option>
                                         <option value="OBC">OBC</option>
@@ -213,7 +213,7 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                 <!-- Medium -->
                                 <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
                                     <label for="medium" class="form-label">Medium:</label>
-                                    <select name="medium" data-control="select2" data-allow-clear="true" data-placeholder="Select Medium" id="medium" class="form-control" required>
+                                    <select name="medium" data-control="select2" data-allow-clear="true" data-placeholder="Select Medium" id="medium" class="form-control" >
                                         <option value="">Select</option>
                                         <option value="Hindi">Hindi Medium</option>
                                         <option value="English">English Medium</option>

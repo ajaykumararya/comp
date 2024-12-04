@@ -406,7 +406,7 @@ class Document extends MY_Controller
                 } else
                     $this->not_found('This Certificate is incomplete..');
             } else
-                $this->not_found("This Accoutn is not Active..");
+                $this->not_found("This Account is not Active..");
         } else
             $this->not_found("Certificate Not Found..");
     }
