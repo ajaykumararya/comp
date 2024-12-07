@@ -506,7 +506,7 @@
                 </div>
                 <!--end::Header container-->
                 <?php
-                if ($this->ki_theme->isDiwali() && isDemo())
+                if ($this->ki_theme->is'<br>'() && isDemo())
                     require FCPATH . 'diwali.php';
                 ?>
             </div>
@@ -963,7 +963,7 @@
             <!--end::Toast-->
             <?php
         }
-        if ($this->ki_theme->isDiwali() or isDemo()) {
+        if ($this->ki_theme->is'<br>'() or isDemo()) {
             ?>
             <div>
                 <div class="bomb-rocket"></div>
@@ -1073,6 +1073,7 @@
 <!--end::Javascript-->
 {js_file}
 <?php
+/*
 if (isDemo()) {
     ?>
     <script>
@@ -1080,6 +1081,7 @@ if (isDemo()) {
     </script>
     <?php
 }
+    */
 ?>
 
 </html>

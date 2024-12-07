@@ -180,38 +180,56 @@ class Ki_theme
     function isDiwali()
     {
         $get_festival = $this->findEvent('Diwali');
+        return $this->isDateWithinWeek($get_festival['date']);
+        // $givenDateString = date('d-m-Y', strtotime($get_festival['date']));
 
-        $givenDateString = date('d-m-Y', strtotime($get_festival['date']));
+        // // Create a DateTime object from the given date
+        // $givenDate = DateTime::createFromFormat('d-m-Y', $givenDateString);
 
-        // Create a DateTime object from the given date
-        $givenDate = DateTime::createFromFormat('d-m-Y', $givenDateString);
+        // // Check if the date creation was successful
+        // if (!$givenDate) {
+        //     return false;
+        //     // die("Invalid date format. Please use 'dd-mm-yyyy'.");
+        // }
 
-        // Check if the date creation was successful
-        if (!$givenDate) {
-            return false;
-            // die("Invalid date format. Please use 'dd-mm-yyyy'.");
-        }
+        // // Get the day of the week for the given date (0 = Sunday, 6 = Saturday)
+        // $dayOfWeek = $givenDate->format('w'); // 0 (for Sunday) through 6 (for Saturday)
 
-        // Get the day of the week for the given date (0 = Sunday, 6 = Saturday)
-        $dayOfWeek = $givenDate->format('w'); // 0 (for Sunday) through 6 (for Saturday)
+        // // Calculate the start of the week (Monday)
+        // $startOfWeek = clone $givenDate;
+        // $startOfWeek->modify('-' . ($dayOfWeek + 5) . ' days');
 
-        // Calculate the start of the week (Monday)
-        $startOfWeek = clone $givenDate;
-        $startOfWeek->modify('-' . ($dayOfWeek + 5) . ' days');
+        // // Calculate the end of the week (Sunday)
+        // $endOfWeek = clone $givenDate;
+        // $endOfWeek->modify('+' . (2 - $dayOfWeek) . ' days');
 
-        // Calculate the end of the week (Sunday)
-        $endOfWeek = clone $givenDate;
-        $endOfWeek->modify('+' . (2 - $dayOfWeek) . ' days');
-
-        // Get the first and last dates
-        $firstDate = $startOfWeek->format('d-m-Y'); // First date of the week
-        $lastDate = $endOfWeek->format('d-m-Y');
-        $currentDate = new DateTime();
-        $currentDate = $currentDate->format('d-m-Y');
+        // // Get the first and last dates
+        // $firstDate = $startOfWeek->format('d-m-Y'); // First date of the week
+        // $lastDate = $endOfWeek->format('d-m-Y');
+        // $currentDate = new DateTime();
+        // $currentDate = $currentDate->format('d-m-Y');
         // return $firstDate.' '.$lastDate.' '.$currentDate;
-        // Check if the current date is within the week range
-        return ($currentDate <= $firstDate && $currentDate <= $lastDate);
+        // // Check if the current date is within the week range
+        // return ($currentDate <= $firstDate && $currentDate <= $lastDate);
 
+    }
+    function isDateWithinWeek($dateInput) {
+        $date = new DateTime($dateInput); // Create DateTime object for the input date
+        
+        // Clone the date to avoid modification
+        $startOfWeek = clone $date;
+        $endOfWeek = clone $date;
+        
+        // Calculate the start and end of the week (Sunday to Saturday)
+        $startOfWeek->modify('last Sunday');
+        $endOfWeek->modify('next Saturday');
+        $currentDate = new DateTime();
+
+        echo $startOfWeek->format('d-m-Y').'<br>';
+        echo $endOfWeek->format('d-m-Y').'<br>';
+        echo $currentDate->format('d-m-Y').'<br>';
+        // Check if the date lies within the range
+        return ($currentDate >= $startOfWeek && $currentDate <= $endOfWeek);
     }
     function findEvent($eventTitle)
     {

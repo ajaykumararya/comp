@@ -169,29 +169,31 @@ class Site extends Site_Controller
     }
     function test()
     {
+
+        echo $this->ki_theme->isDiwali() ? 'YES' : 'NO';
         // echo $this->ki_theme->isDiwali();
-        $fileName = "example_file123&";
+        // $fileName = "example_file123&";
 
-        // Regular expression to check for invalid characters
-        $invalidCharsRegex = '/[^a-zA-Z0-9_ ]/';
+        // // Regular expression to check for invalid characters
+        // $invalidCharsRegex = '/[^a-zA-Z0-9_ ]/';
 
-        echo (preg_match($invalidCharsRegex, $fileName)) ? 'YES' : 'NO';
-        exit;
+        // echo (preg_match($invalidCharsRegex, $fileName)) ? 'YES' : 'NO';
+        // exit;
 
-        // echo $this->center_model->roleUsers()->num_rows();
+        // // echo $this->center_model->roleUsers()->num_rows();
 
-        // echo $this->db->last_query();
-        $leftamount = 278000;
-        $rightAmount = 300000;
-        $gold = 0;
-        while ($leftamount >= 100000 && $rightAmount >= 100000) {
-            $gold += 2;
-            $leftamount -= 100000;
-            $rightAmount -= 100000;
-        }
-        echo "Gold = $gold<br>";
-        echo "Left Amount = $leftamount<br>";
-        echo "Right Amount = $rightAmount<br>";
+        // // echo $this->db->last_query();
+        // $leftamount = 278000;
+        // $rightAmount = 300000;
+        // $gold = 0;
+        // while ($leftamount >= 100000 && $rightAmount >= 100000) {
+        //     $gold += 2;
+        //     $leftamount -= 100000;
+        //     $rightAmount -= 100000;
+        // }
+        // echo "Gold = $gold<br>";
+        // echo "Left Amount = $leftamount<br>";
+        // echo "Right Amount = $rightAmount<br>";
         // echo $amount % 2;
         // echo ($this->ki_theme->isDiwali()) ? 'YES' : 'NO';
         // pre($this->ki_theme->get_festival());
