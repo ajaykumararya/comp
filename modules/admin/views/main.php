@@ -1082,5 +1082,5 @@ if (isDemo()) {
     <?php
 }*/
 ?>
-
+<!-- Admin Panel -->
 </html>
