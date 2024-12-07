@@ -225,9 +225,9 @@ class Ki_theme
         $endOfWeek->modify('next Saturday');
         $currentDate = new DateTime();
 
-        echo $startOfWeek->format('d-m-Y').'<br>';
-        echo $endOfWeek->format('d-m-Y').'<br>';
-        echo $currentDate->format('d-m-Y').'<br>';
+        // echo $startOfWeek->format('d-m-Y').'<br>';
+        // echo $endOfWeek->format('d-m-Y').'<br>';
+        // echo $currentDate->format('d-m-Y').'<br>';
         // Check if the date lies within the range
         return ($currentDate >= $startOfWeek && $currentDate <= $endOfWeek);
     }
