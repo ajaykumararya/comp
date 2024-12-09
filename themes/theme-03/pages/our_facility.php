@@ -1,4 +1,4 @@
-<div class="clearfix title-wrap text-center">
+<div class="clearfix title-wrap text-center  mt-5 mb-0">
     <h2 class="secTitle">
         <?= ES("{$type}_title", 'Our Facilities') ?>
     </h2>
