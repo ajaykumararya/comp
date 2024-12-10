@@ -176,12 +176,16 @@ class Center extends Ajax_Controller
     function update_dates()
     {
         if ($this->validation('check_center_dates')) {
+            $data = [
+                'valid_upto' => $this->post('valid_upto'),
+                'certificate_issue_date' => $this->post('certificate_issue_date')
+            ];
+            if(PATH == 'nbeat'){
+                $data['authorized_courses'] = $this->post('authorized_courses');
+            }
             $this->response(
                 'status',
-                $this->db->where('id', $this->post('id'))->update('centers', [
-                    'valid_upto' => $this->post('valid_upto'),
-                    'certificate_issue_date' => $this->post('certificate_issue_date')
-                ])
+                $this->db->where('id', $this->post('id'))->update('centers', $data)
             );
         }
     }

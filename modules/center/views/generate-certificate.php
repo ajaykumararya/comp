@@ -38,4 +38,14 @@
         <label class="form-label required">Valid Upto</label>
         <input type="text" name="valid_upto" class="form-control selectdate" value="{{valid_upto}}">
     </div>
+    <?php
+    if(PATH == 'nbeat'){
+        ?>
+        <div class="form-group mb-4">
+        <label class="form-label required">Authorized Courses</label>
+        <textarea name="authorized_courses" placeholder="Authorized Courses" class="form-control">{{authorized_courses}}</textarea>
+    </div>
+        <?php
+    }
+    ?>
 </script>

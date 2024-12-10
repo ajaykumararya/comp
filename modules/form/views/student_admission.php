@@ -164,11 +164,17 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                         </span>
                                     </div>
                                 </div>
-                                <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                <?php
+                            $upload_ducuments = $this->ki_theme->project_config('upload_ducuments');
+                            $isFamilyId = isset($upload_ducuments['family_id_document']);
+                            $col = $isFamilyId ? 3 : 4;
+                            $familyClass = $isFamilyId ? '' : '';
+                            ?>
+                                <div class="form-group mb-4 col-lg-<?=$col?> col-xs-12 col-sm-12">
                                     <label class="form-label">E-Mail ID</label>
                                     <input type="email" name="email" class="form-control" placeholder="Enter E-Mail ID">
                                 </div>
-                                <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                <div class="form-group mb-4 col-lg-<?=$col?> col-xs-12 col-sm-12">
                                     <label class="form-label required">Father Name</label>
                                     <input type="text" name="father_name" class="form-control"
                                         placeholder="Enter Father Name">
@@ -178,12 +184,12 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                 <input type="text" name="father_mobile" class="form-control"
                                     placeholder="Enter Father MObile">
                             </div> -->
-                                <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                <div class="form-group mb-4 col-lg-<?=$col?> col-xs-12 col-sm-12">
                                     <label class="form-label required">Mother Name</label>
                                     <input type="text" name="mother_name" id="aadhar_number" class="form-control"
                                         placeholder="Enter Mothe Name">
                                 </div>
-                                <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12 <?=($isFamilyId ? '' : 'd-none')?>">
                                     <label class="form-label">Family ID</label>
                                     <input type="email" name="family_id" class="form-control"
                                         placeholder="Enter family ID">

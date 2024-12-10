@@ -191,7 +191,7 @@ class MY_Controller extends MX_Controller
     }
     function file_up($file)
     {
-        if (!empty($_FILES[$file]['name'])) {
+        if (isset($_FILES[$file]['name']) && !empty($_FILES[$file]['name'])) {
             $filename = $_FILES[$file]['name'];
             $ext = pathinfo($filename, PATHINFO_EXTENSION);
             $x = getRadomNumber(10) . '.' . $ext;

@@ -185,7 +185,9 @@
                                 </div>
                             </div>
 
-
+                            <?php
+                            if(!$this->ki_theme->project_config('remove_centre_signature')){
+                            ?>            
                             <div class="col-md-3 mb-4">
                                 <div class="form-control">
                                     <label for="signature" class="form-label required">Signature</label>
@@ -197,11 +199,12 @@
                                 </div>
                             </div>
                             <?php
+                            }
                             if (CHECK_PERMISSION('CENTRE_LOGO')) {
                                 ?>
                                 <div class="col-md-3 mb-2">
                                     <div class="form-control">
-                                        <label for="centre_logo" class="form-label required">Logo</label>
+                                        <label for="centre_logo" class="form-label required">Centre Logo</label>
                                     </div>
                                 </div>
                                 <div class="col-md-9 mb-2">
