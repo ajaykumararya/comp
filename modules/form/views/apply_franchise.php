@@ -237,7 +237,7 @@
                                     </div>
                                     <div class="col-md-3 mb-2">
                                         <div class="form-control">
-                                            <label for="agreement" class="form-label">Agreement</label>
+                                            <label for="agreement" class="form-label"><?=PATH == 'nbeat' ? 'Other Document' : 'Agreement'?></label>
                                         </div>
                                     </div>
                                     <div class="col-md-9 mb-2">
