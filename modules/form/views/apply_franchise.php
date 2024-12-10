@@ -34,7 +34,7 @@
                                             class="form-control" placeholder="Enter Qualification of institute head">
                                     </div>
                                     <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
-                                        <label class="form-label required"> Series No.</label>
+                                        <label class="form-label required">Student Series</label>
                                         <input type="text" required name="rollno_prefix" class="form-control"
                                             placeholder="Enter Prefix Roll No." readonly>
                                     </div>

@@ -87,9 +87,9 @@
     
     <div class="position-absolute" style="top:67.3%;left: 27%">{certificate_issue_date}</div>
     <div class="position-absolute" style="top:73%;left:27%">{valid_upto}</div>
-    <div class="position-absolute" id="center_signature">
+    <!-- <div class="position-absolute" id="center_signature">
         <img src="upload/{signature}" style="width:200px;height:80px">
-    </div>
+    </div> -->
     <!-- <div class="position-absolute w-100" style="top:28.5%;padding-left:0px;z-index:9999">
 
         <div class="middle-div" style="">{center_number}</div>
