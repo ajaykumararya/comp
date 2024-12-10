@@ -247,7 +247,7 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                     </select>
                                 </div>
                                 <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12 form-group-city">
-                                    <label class="form-label required">Select Distric <span id="load"></span></label>
+                                    <label class="form-label required">Select District <span id="load"></span></label>
                                     <select class="form-control list-cities" name="city_id" data-control="select2"
                                         data-placeholder="Select a City">
                                         <option></option>
