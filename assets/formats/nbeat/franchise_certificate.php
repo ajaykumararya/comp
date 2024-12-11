@@ -82,7 +82,8 @@
     <div class="position-absolute" style="top:47%;left:10%;width:76%;text-align:center;text-transform:capitalize">{institute_name}</div>
 
     <div class="position-absolute" style="top:27.6%;left:83%;">{center_number}</div>
-    <div class="position-absolute" style="top:57.7%;left:27%;">{city}, &nbsp;{state}</div>
+    <!-- <div class="position-absolute" style="top:57.7%;left:27%;">{city}, &nbsp;{state}</div> -->
+    <div class="position-absolute" style="top:57.7%;left:27%;">{center_full_address}</div>
     <div class="position-absolute " style="top:62.5%;left:27%;width:570px">{authorized_courses}</div>
     <div class="position-absolute" style="top:52.4%;left:27%;">{name}</div>
     

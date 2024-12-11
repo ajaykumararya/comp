@@ -4,6 +4,15 @@ class Admin extends MY_Controller
 {
     function index()
     {
+        if($this->center_model->isCenter()){
+            // pre($this->public_data,true);
+            if(isset($this->public_data['center_data']['valid_upto']) && isset($this->public_data['center_data']['certificate_issue_date'])){
+                // pre($this->public_data['center_data'],true);
+                $this->ki_theme->breadcrumb_action_html(
+                    $this->ki_theme->set_attribute('target','_blank')->with_icon('tablet-text-down text-warning', 4)->with_pulse('warning')->outline_dashed_style('warning')->set_class('text-warning')->add_action('View Certificate', ('franchise-certificate/'.$this->encode($this->public_data['center_data']['id'])))
+                );
+            }
+        }
         $this->view('index');
     }
     function switch_back()
