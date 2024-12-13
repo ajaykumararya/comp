@@ -60,16 +60,16 @@ class Document extends MY_Controller
             // pre($get->row(),true);
             $dob = strtotime($get->row('dob'));
             $this->set_data($get->row_array());
-            $this->set_data('dob_day',date('d',$dob));
-            $this->set_data('dob_month',date('m',$dob));
-            $this->set_data('dob_year',date('Y',$dob));
+            $this->set_data('dob_day', date('d', $dob));
+            $this->set_data('dob_month', date('m', $dob));
+            $this->set_data('dob_year', date('Y', $dob));
             $this->set_data('date', date('d-m-Y', strtotime($get->row('exam_date'))));
             $this->set_data('time', date('h:i A', strtotime($get->row('exam_date'))));
             $pdfContent = $this->parse('admit-card');
             // $this->mypdf->setTitle('Hii');
-            if ($this->ki_theme->config('admit_card_full') OR in_array(PATH,['iedct','softworldedu','nbeat']))
+            if ($this->ki_theme->config('admit_card_full') or in_array(PATH, ['iedct', 'softworldedu', 'nbeat']))
                 $this->mypdf->addPage('L');
-            $this->pdf($pdfContent,$get->row('student_name').'-'.$get->row('roll_no').'-Admit Card.pdf');
+            $this->pdf($pdfContent, $get->row('student_name') . '-' . $get->row('roll_no') . '-Admit Card.pdf');
         } else {
             $this->not_found("Admit Card Not Found..");
         }
@@ -81,8 +81,8 @@ class Document extends MY_Controller
         if ($get->num_rows()) {
             // pre($get->row(), true);
             $this->set_data($get->row_array());
-            
-                $row = $get->row();
+
+            $row = $get->row();
             // pre($row,true);
             if (PATH == 'techno') {
                 $admissionTime = strtotime($row->admission_date);
@@ -97,11 +97,11 @@ class Document extends MY_Controller
             }
             $this->ki_theme->generate_qr($get->row('student_id'), 'id_card', current_url());
             $pdfContent = $this->parse('id-card');
-            if (in_array(PATH, ['beautyguru','skycrownworld'])) {
+            if (in_array(PATH, ['beautyguru', 'skycrownworld'])) {
                 // $certificate['serial_no'] = (50000 + $this->id);
                 $this->mypdf->addPage('L');
             }
-            $this->pdf($pdfContent,$row->student_name.'-'.$row->roll_no.'-Id Card.pdf');
+            $this->pdf($pdfContent, $row->student_name . '-' . $row->roll_no . '-Id Card.pdf');
         } else {
             $this->not_found("ID Card Not Found..");
         }
@@ -148,7 +148,7 @@ class Document extends MY_Controller
                 $toDateString = strtotime('-1 month', $toDateString);
                 $this->set_data('to_date', date('M Y', $toDateString));
             }
-            if (in_array(PATH, ['iedct', 'techno','softworldedu'])):
+            if (in_array(PATH, ['iedct', 'techno', 'softworldedu', 'upstate'])):
                 $admissionTime = strtotime($get->row('admission_date'));
                 // $this->set_data('from_date', date('M Y', $admissionTime));
                 $this->set_data('serial_no', date("Y", $admissionTime) . str_pad($get->row('student_id'), 3, '0', STR_PAD_LEFT));
@@ -234,10 +234,11 @@ class Document extends MY_Controller
             // pre($get->row(),true);
             $this->set_data($main);
             $rowArray = $get->row_array();
-            $rowArray['duration_type'] = (humnize($rowArray['duration'], $rowArray['duration_type']));
+            $rowArray['duration_type'] = (humnize($rowArray['marksheet_duration'], $rowArray['duration_type']));
+            // $rowArray['marksheet_duration_type'] = $rowArray['duration_type'];
             $pdfContent = $this->parse($file, $rowArray);
             // echo $pdfContent;
-            $this->pdf($pdfContent,$rowArray['student_name'].'-'.$rowArray['roll_no'].'-'.humnize_duration_with_ordinal($rowArray['marksheet_duration'],$rowArray['duration_type']).' Result.pdf');
+            $this->pdf($pdfContent, $rowArray['student_name'] . '-' . $rowArray['roll_no'] . '-' . humnize_duration_with_ordinal($rowArray['marksheet_duration'], $rowArray['duration_type']) . ' Result.pdf');
         } else {
             $this->not_found("Marksheet Not Found..");
         }
@@ -313,14 +314,18 @@ class Document extends MY_Controller
                 }
             }
             try {
-                $per = number_format((($ob_ttl / ($ttltmaxm + $ttlpmaxm)) * 100), 2);
+                if ($ob_ttl) {
+                    $percentage = ($ob_ttl / ($ttltmaxm + $ttlpmaxm));
+                    $per = number_format(($percentage * 100), 2);
+                } else
+                    throw new Exception(100);
             } catch (Exception $e) {
                 $per = 100;
             }
 
             $main = [
                 'subjects' => $subjects,
-                'subject_html' => implode(',',$subjects),
+                'subject_html' => implode(',', $subjects),
                 'total' => $ttl,
                 'obtain_total' => $ob_ttl,
                 'marks' => $subject_marks,
@@ -364,7 +369,7 @@ class Document extends MY_Controller
             ]);
 
             $this->ki_theme->generate_qr($this->id, 'student_certificate', current_url());
-            if (in_array(PATH, ['haptronworld', 'sewaedu','beautyguru','pces'])) {
+            if (in_array(PATH, ['haptronworld', 'sewaedu', 'beautyguru', 'pces'])) {
                 $certificate['serial_no'] = (50000 + $this->id);
                 $this->mypdf->addPage('L');
             }
@@ -374,7 +379,7 @@ class Document extends MY_Controller
             $output = $this->parse($this->get_multi_path($certificate['course_id'], 'certificate'), $certificate);
             // $this->mypdf->setTitle('certificate');
             // pre($certificate,true);
-            $this->pdf($output,$certificate['student_name'].' '.$certificate['roll_no'].'-Certificate.pdf');
+            $this->pdf($output, $certificate['student_name'] . ' ' . $certificate['roll_no'] . '-Certificate.pdf');
         } else {
             $this->not_found("Certificate Not Found..");
         }
@@ -389,17 +394,17 @@ class Document extends MY_Controller
             if ($data['status'] && $data['isPending'] == 0 && $data['isDeleted'] == 0) {
                 if ($data['valid_upto'] && $data['certificate_issue_date']) {
                     // pre($data,true);
-                    $year = date('Y',strtotime($data['certificate_issue_date']));
-                    $data['serial_no'] = $year.str_pad($data['id'],3,0,STR_PAD_LEFT);
+                    $year = date('Y', strtotime($data['certificate_issue_date']));
+                    $data['serial_no'] = $year . str_pad($data['id'], 3, 0, STR_PAD_LEFT);
                     $data['state'] = $this->SiteModel->state($data['state_id']);
                     $data['city'] = $this->SiteModel->city($data['city_id']);
-                    if(in_array(PATH,['skycrownworld'])){
-                        $data['certificate_issue_date'] = date('d M Y',strtotime($data['certificate_issue_date']));
-                        $data['valid_upto'] = date('d M Y',strtotime($data['valid_upto']));
+                    if (in_array(PATH, ['skycrownworld'])) {
+                        $data['certificate_issue_date'] = date('d M Y', strtotime($data['certificate_issue_date']));
+                        $data['valid_upto'] = date('d M Y', strtotime($data['valid_upto']));
                     }
                     $output = $this->parse('franchise_certificate', $data);
-                    
-                    if (in_array(PATH, ['techno', 'haptronworld','beautyguru', 'sewaedu','softworldedu','nbeat'])) {
+
+                    if (in_array(PATH, ['techno', 'haptronworld', 'beautyguru', 'sewaedu', 'softworldedu', 'nbeat'])) {
                         $this->mypdf->addPage('L');
                     }
                     $this->pdf($output);

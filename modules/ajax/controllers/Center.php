@@ -180,7 +180,7 @@ class Center extends Ajax_Controller
                 'valid_upto' => $this->post('valid_upto'),
                 'certificate_issue_date' => $this->post('certificate_issue_date')
             ];
-            if(PATH == 'nbeat'){
+            if (PATH == 'nbeat') {
                 $data['authorized_courses'] = $this->post('authorized_courses');
             }
             $this->response(
@@ -366,10 +366,10 @@ class Center extends Ajax_Controller
                     $this->db->update('transactions', [
                         'payment_status' => 1,
                         'responseData' => json_encode([
-                                    'razorpay_payment_id' => $razorpay_payment_id,
-                                    'razorpay_order_id' => $razorpay_order_id,
-                                    'razorpay_signature' => $razorpay_signature
-                                ])
+                            'razorpay_payment_id' => $razorpay_payment_id,
+                            'razorpay_order_id' => $razorpay_order_id,
+                            'razorpay_signature' => $razorpay_signature
+                        ])
                     ], ['id' => $merchant_order_id]);
                     $this->response('status', true);
                 }
@@ -424,10 +424,10 @@ class Center extends Ajax_Controller
                     'description' => 'Computer Institute',
                     'image' => logo(),
                     'prefill' => [
-                            'name' => $this->get_data('owner_name'),
-                            'email' => $this->get_data('owner_email'),
-                            'contact' => $this->get_data('owner_phone')
-                        ],
+                        'name' => $this->get_data('owner_name'),
+                        'email' => $this->get_data('owner_email'),
+                        'contact' => $this->get_data('owner_phone')
+                    ],
                     'notes' => [
                         'merchant_order_id' => $row->id,
                         'center_id' => $this->get_data('owner_id')
@@ -464,5 +464,25 @@ class Center extends Ajax_Controller
 
         $this->response('data', $monthlyTotals);
         // $this->isDemo();
+    }
+    function add_exam_centre()
+    {
+        if ($this->validation('centre_exam')) {
+            $this->response('status', $this->db->insert('exam_centres',$this->post()));
+        }
+    }
+    function list_exam_centre()
+    {
+        $this->response('data', $this->db->get('exam_centres')->result_array());
+    }
+    function delete_exam_centre($id){
+        $this->response('status',$this->db->where('id',$id)->delete('exam_centres'));
+    }
+    function update_centre_exam(){
+        $this->response('status',$this->db->where('id',$this->post('id'))->update('exam_centres',[
+            'centre_name' => $this->post('centre_name'),
+            'centre_code' => $this->post('centre_code'),
+            'centre_address' => $this->post('centre_address'),
+        ]));
     }
 }

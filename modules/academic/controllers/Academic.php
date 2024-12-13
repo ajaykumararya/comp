@@ -16,5 +16,9 @@ class Academic extends MY_Controller
         $this->view('occupation');
     }
 
+    function session_schedule(){
+        $this->view('session-schedule');
+    }
+
 }
 ?>

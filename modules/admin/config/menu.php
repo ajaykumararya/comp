@@ -75,6 +75,24 @@ $config['academic_area'] = array(
         )
     )
 );
+$config['exam_slot'] = array(
+    'title' => 'Exam Slot',
+    'condition' => CHECK_PERMISSION('EXAM_SLOT_SYSTEM'),
+    'menu' => array(
+        array(
+            'label' => 'Exam Centre',
+            'type' => 'exam_centre',
+            'icon' => ['profile-user',5],
+            'url' => 'center/exam-centre'          
+        ),
+        array(
+            'label' => 'Exam Schedule',
+            'type' => 'exam_schedule',
+            'icon' => ['time',5],
+            'url' => 'academic/session-schedule'          
+        )
+    )
+);
 
 $config['coupon_menu'] = array(
     'title' => 'Coupons',

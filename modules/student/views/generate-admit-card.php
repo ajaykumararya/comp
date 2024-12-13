@@ -77,11 +77,16 @@
                                 <label for="" class="form-label required">Enrollment No</label>
                                 <input type="text" name="enrollment_no" placeholder="Enter Enrollment No" class="form-control">
                             </div>
+                            <?php
+                            if(!CHECK_PERMISSION('EXAM_SLOT_SYSTEM')):
+                                ?>
                             <div class="form-group col-md-4">
                                 <label for="" class="form-label required">Exam Date & Time</label>
                                 <input name="exam_date" class="form-control date-with-time" placeholder="Select Exam Date & Time">
                             </div>
-
+                            <?php
+                            endif;
+                            ?>
                         </div>
 
                     </div>

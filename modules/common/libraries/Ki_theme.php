@@ -278,6 +278,24 @@ class Ki_theme
             else
                 return 'Fail';
         }
+        if(PATH == 'upstate'){
+            if($score >= 90)
+                return 'A+';
+            else if($score >= 80)
+                return 'A';
+            else if($score >= 70)
+                return 'B+';
+            else if($score >= 60)
+                return 'B';
+            else if($score >= 50)
+                return 'C';
+            else if($score >= 40)
+                return 'D';
+            else if($score >= 30)
+                return 'E';
+            else 
+                return 'F';
+        }
         if (PATH == 'vihm') {
             if ($score >= 70)
                 return 'A';

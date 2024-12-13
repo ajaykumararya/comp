@@ -442,7 +442,33 @@ $config = array(
             )
         )
     ),
-
+    'centre_exam' => array(
+        array(
+            'field' => 'centre_name',
+            'label' => 'Name',
+            'rules' => 'required',
+            'errors' => array(
+                'required' => 'Please enter name',
+            )
+        ),
+        array(
+            'field' => 'centre_code',
+            'label' => 'Code',
+            'rules' => 'required|is_unique[exam_centres.centre_code]',
+            'errors' => array(
+                'required' => 'Please enter Code',
+                'is_unique' => 'This code already exists..'
+            )
+        ),
+        array(
+            'field' => 'centre_address',
+            'label' => 'Address',
+            'rules' => 'required',
+            'errors' => array(
+                'required' => 'Please enter Address',
+            )
+        ),
+    ),
     'add_role_user' => array(
         array(
             'field' => 'name',
