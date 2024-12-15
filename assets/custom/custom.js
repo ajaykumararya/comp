@@ -774,6 +774,18 @@ const loadSomeFuncation = () => {
                 dateFormat: dateFormat
             });
         }
+        if($('.future-date').length){
+            $('.future-date').flatpickr({
+                minDate: 'today',
+                dateFormat : dateFormat,
+                disable: [
+                    function (date) {
+                        // Return true to disable Sundays (getDay() === 0 means Sunday)
+                        return date.getDay() === 0;
+                    }
+                ],
+            });
+        }
         $(".single-year").flatpickr({
             enableTime: false, // Disable time selection
             dateFormat: "Y",   // Format to show only the year

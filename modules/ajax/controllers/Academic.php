@@ -125,5 +125,102 @@ class Academic extends Ajax_Controller
             $this->response('html', 'Action id undefined');
         // $this->response('html',$batch_id);
     }
+    function get_course_session_schedule_form()
+    {
+        $get = $this->db->where($this->post())->get('admit_cards_with_session');
+        $subjectsArray = [];
+        $admit_card_with_session_id = 0;
+        if ($get->num_rows()) {
+            $row = $get->row();
+            $admit_card_with_session_id = $row->id;
+            $savedTimes = $this->db->where('admit_session_id', $admit_card_with_session_id)
+                ->get('admit_cards_subjects');
+            if ($savedTimes->num_rows()) {
+                foreach ($savedTimes->result() as $row) {
+                    $subjectsArray[$row->subject_id] = (array)$row;
+                }
+            }
+        }
+
+        $subjects = $this->db->where([
+            'course_id' => $this->post('course_id'),
+            'duration' => $this->post('duration'),
+            'duration_type' => $this->post('duration_type'),
+        ])->get('subjects');
+        // $this->response('data', $subjects->result());
+        if ($subjects->num_rows()) {
+            $this->response('status', true);
+            $html = '<table class="table table-striped table-bordered">
+            
+                        <thead>
+                            <tr>
+                                <th>Subject Name</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>';
+            foreach ($subjects->result() as $row) {
+                $rr = isset($subjectsArray[$row->id]) ? $subjectsArray[$row->id] : [
+                    'date' => date('d-m-Y'),
+                    'time' => '10:00'
+                ];
+                extract($rr);
+                $html .= '<tr>
+                        <td>' . $row->subject_name . '  ' . label(humnize_duration_with_ordinal($row->duration, $row->duration_type)) . '</td>
+                        <td>
+                            <input type="text" value="' . $date . '" required name="date[' . $row->id . ']" class="future-date form-control">
+                        </td>
+                        <td>
+                            <input type="text" value="' . $time . '" required name="time[' . $row->id . ']" class="timer form-control">
+                        </td>
+                    
+                    </tr>';
+            }
+            $html .= '</tbody>
+            
+            </table>';
+            $this->response('button', $this->ki_theme->publish_button());
+            $this->response('html', $html);
+        }
+    }
+    function save_session_schedule()
+    {
+        // $this->response('data', $this->post());
+        $where = [
+            'center_id' => $this->post('center_id'),
+            'course_id' => $this->post('course_id'),
+            'duration' => $this->post('duration'),
+            'duration_type' => $this->post('duration_type'),
+            'session_id' => $this->post("session_id"),
+            'exam_centre_id' => $this->post('exam_centre_id')
+        ];
+        $get = $this->db->where($where)->get('admit_cards_with_session');
+        $subjectsArray = [];
+        $admit_card_with_session_id = 0;
+        if ($get->num_rows()) {
+            $row = $get->row();
+            $admit_card_with_session_id = $row->id;
+        } else {
+            $this->db->insert('admit_cards_with_session', $where);
+            $admit_card_with_session_id = $this->db->insert_id();
+        }
+
+        foreach ($_POST['date'] as $subject_id => $date) {
+            $time = $_POST['time'][$subject_id];
+            $get = $this->db->where('subject_id', $subject_id)->get('admit_cards_subjects');
+            $data = [
+                'date' => $date,
+                'admit_session_id' => $admit_card_with_session_id,
+                'time' => $time,
+                'subject_id' => $subject_id
+            ];
+            if ($get->num_rows())
+                $this->db->update('admit_cards_subjects', $data, ['id' => $get->row('id')]);
+            else
+                $this->db->insert('admit_cards_subjects', $data);
+        }
+        $this->response('status', true);
+    }
 }
 ?>

@@ -77,7 +77,7 @@ $config['academic_area'] = array(
 );
 $config['exam_slot'] = array(
     'title' => 'Exam Slot',
-    'condition' => CHECK_PERMISSION('EXAM_SLOT_SYSTEM'),
+    'condition' => CHECK_PERMISSION('EXAM_SLOT_SYSTEM') && OnlyForAdmin(),
     'menu' => array(
         array(
             'label' => 'Exam Centre',

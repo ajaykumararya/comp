@@ -65,6 +65,20 @@ class Student_model extends MY_Model
             $this->db->select('ce.logo as centre_logo');
         }
         switch ($case) {
+            case 'admit_card_schedule':
+                    $this->db->select('acws.id as admit_session_id,ecs.centre_name,
+                                        ecs.centre_code,
+                                        ecs.centre_address,
+                                        ses.title as session')
+                    ->join('admit_cards_with_session as acws','acws.course_id = s.course_id AND acws.center_id = s.center_id');
+                    $this->db->join('exam_centres as ecs','ecs.id = acws.exam_centre_id');    
+                    $this->db->join('session as ses','ses.id = acws.session_id'); 
+                    if(isset($student_id)){
+                        unset($condition['student_id']);
+                        $this->db->where('s.id', $student_id);
+                    } 
+                    $this->myWhere('acws',$condition);  
+                break;
             case 'placement_students':
                 $this->db->select('ps.*');
                 $this->db->join('placement_students as ps', 'ps.student_id = s.id');

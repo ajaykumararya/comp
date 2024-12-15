@@ -169,8 +169,33 @@ class Site extends Site_Controller
     }
     function test()
     {
+        try {
+            $config = ($this->config->item('project'));
+            // exit;
+            // pre($config,true);
+            $this->load->library('common/airpay', $config['airpay']);
+            // pre($this->airpay);
+            $paymentData = [
+                'amount' => '100.00',
+                'order_id' => '123456',
+                'currency' => 'INR',
+                'return_url' => base_url('payment/callback'),
+                'customer_name' => 'John Doe',
+                'customer_email' => 'johndoe@example.com',
+                'customer_phone' => '9876543210',
+            ];
 
-        echo $this->ki_theme->isDiwali() ? 'YES' : 'NO';
+            $response = $this->airpay->initiatePayment($paymentData);
+            // pre($response);
+            if (isset($response['error']) && $response['error']) {
+                echo "Error: " . $response['message'];
+            } else {
+                print_r($response); // Handle success response
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+        // echo $this->ki_theme->isDiwali() ? 'YES' : 'NO';
         // echo $this->ki_theme->isDiwali();
         // $fileName = "example_file123&";
 
