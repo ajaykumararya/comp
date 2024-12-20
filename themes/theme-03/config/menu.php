@@ -7,7 +7,7 @@ $menu = array(
         array(
             'label' => 'List All Courses',
             'type' => 'list-all-courses',
-            'icon' => array('file',4),
+            'icon' => array('file', 4),
             'url' => 'cms/static-page/list-all-courses'
         ),
         array(
@@ -57,7 +57,13 @@ $menu = array(
             'label' => 'Our facility',
             'type' => 'our_facility',
             'url' => 'cms/static-page/our_facility',
-            'icon' => array('file',4)
-        )
+            'icon' => array('file', 4)
+        ),
+        array(
+            'label' => 'Our Syllabus',
+            'type' => 'our_syllabus',
+            'icon' => array('file', 4),
+            'url' => 'cms/static-page/our_syllabus',
+        ),
     )
 );

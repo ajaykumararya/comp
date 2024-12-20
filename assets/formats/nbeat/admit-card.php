@@ -65,11 +65,11 @@
     <p class="position-absolute" style="top:74.5%;left:22%">{date}</p>
     <p class="position-absolute" style="top:78.5%;left:18%">{center_name}</p>
     <?php
-    // $this->ki_theme->generate_qr($admit_card_id, 'admit_card', current_url());
+    $this->ki_theme->generate_qr($admit_card_id, 'admit_card', current_url());
     ?>
-    <!-- <div class="position-absolute" style="top:76.7%;left:44.55%">
-        <img style="width:115px;height:117px" src="upload/images/admit_card_{admit_card_id}.png" alt="">
-    </div> -->
+    <div class="position-absolute" style="top:30%;left:78.7%">
+        <img style="width:90px;height:90px;border:1px solid black;padding:1px" src="upload/images/admit_card_{admit_card_id}.png" alt="">
+    </div>
 </body>
 
 </html>

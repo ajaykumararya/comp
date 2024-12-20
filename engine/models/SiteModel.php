@@ -86,6 +86,10 @@ class SiteModel extends MY_Model
             'event_id' => $this->db->insert_id()
         ]);
     }
+    function get_page($where){
+        $this->db->where($where);
+        return $this->db->get('his_pages');
+    }
     function get_page_content($url)
     {
         return $this->db->select('*,hpc.id as content_id')

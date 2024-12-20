@@ -1,3 +1,27 @@
+function subModal(e){
+    var subjectModal = new bootstrap.Modal(document.getElementById('subjectsModal'));
+    // alert(4);
+    document.getElementById("subjectList").innerHTML = '';
+        document.getElementById('smTitle').innerHTML = e.dataset.course_name + ' Subjects';
+        e.dataset.course_subjects.split("?").forEach(function (sub) {
+            if (sub)
+                document.getElementById("subjectList").innerHTML += '<li class="list-group-item">' + sub + '</li>';
+        });
+    subjectModal.show();
+}
+// if (document.getElementById('subjectsModal').length) {
+    // var subjectModal = new bootstrap.Modal(document.getElementById('subjectsModal'));
+
+    // function subModal(e) {
+    //     document.getElementById("subjectList").innerHTML = '';
+    //     document.getElementById('smTitle').innerHTML = e.dataset.course_name + ' Subjects';
+    //     e.dataset.course_subjects.split("?").forEach(function (sub) {
+    //         if (sub)
+    //             document.getElementById("subjectList").innerHTML += '<li class="list-group-item">' + sub + '</li>';
+    //     });
+    //     subjectModal.show();
+    // }
+// }
 $(document).on('ready', function () {
 
     //log($('.student-verification-form'));
@@ -459,10 +483,6 @@ $(document).on('ready', function () {
           },
         });*/
     });
-
-
-
-
     const myDataTable = $('.my-data-table');
     if (myDataTable) {
         myDataTable.DataTable({

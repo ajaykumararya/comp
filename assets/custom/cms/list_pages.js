@@ -29,20 +29,23 @@ document.addEventListener('DOMContentLoaded', async function (e) {
                 render: function (data, type, row, meta) {
                     // log(row);
                     var myObj = jsonToObj(data);
-                    return `${ (isLink(myObj.link)) ? ``: `
-                            <a href="${base_url}cms/manage-page-schema/${myObj.link}" class="btn btn-light-warning btn-sm">Manage Schema</a>
+                    return `<div class="btn-group">${ (isLink(myObj.link)) ? ``: `
+                            <a href="${base_url}cms/manage-page-schema/${myObj.link}" class="btn btn-icon btn-light-warning btn-sm" title="Manage Schema"><i class="fa fa-database"></i></a>
                             `}
                             <a href="${myObj.url}" class="btn btn-icon btn-light-info btn-sm" target="_blank">
                                 <i class="ki-outline ki-eye"></i>
                             </a>
                             ${ !isLink(myObj.link) ? 
                             `<a href="${base_url}cms/manage-page-content/${myObj.link}" class="btn btn-sm btn-icon btn-light-primary">
+                                <i class="fa fa-edit"></i>
+                            </a>` : ``}                            
+                            <a href="${base_url}cms/manage-page/${myObj.id}" class="btn btn-light-dark btn-icon btn-sm " data-id="${myObj.id}" data-isprimary="${row[3]}">
                                 <i class="ki-outline ki-pencil"></i>
-                            </a>` : ``}
+                            </a>
                             <button class="btn btn-light-danger btn-icon btn-sm delete-page" data-id="${myObj.id}" data-isprimary="${row[3]}">
                                 <i class="ki-outline ki-trash"></i>
                             </button>
-                            `;
+                            </div>`;
                 }
             }
         ]

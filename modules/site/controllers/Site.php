@@ -48,6 +48,7 @@ class Site extends Site_Controller
                             ], true);
                         break;
                     case 'page':
+                        // $html .= json_encode($page);
                         if (file_exists(THEME_PATH . 'pages/' . $page->event_id . EXT))
                             $html .= $this->parse('pages/' . $page->event_id, [
                                 'type' => $page->event_id

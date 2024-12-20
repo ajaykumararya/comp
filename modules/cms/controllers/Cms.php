@@ -75,5 +75,15 @@ class Cms extends MY_Controller
         $this->set_data('list',$this->SiteModel->list_enquiries()->result_array());
         $this->view('enquiry-data');
     }
-
+    function manage_page(){
+        $link = $this->uri->segment(3,0);
+        // exit($link); 
+        $get = $this->SiteModel->get_page(['id' => $link]);
+        if($get->num_rows()){
+            pre($get->row(),true);
+        }
+        $this->view('manage-page',[
+            'isValid' => true
+        ]);
+    }
 }

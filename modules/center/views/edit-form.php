@@ -3,6 +3,7 @@ if($valid_upto){
     $valid_upto = date('Y-m-d', strtotime($valid_upto));
 }
 ?>
+
 <form action="center/update">
     <input type="hidden" name="id" value="{id}">
     <div class="row">
@@ -28,7 +29,7 @@ if($valid_upto){
         </div>
         <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
             <label class="form-label required required">Date of birth</label>
-            <input type="date" name="dob" value="<?=date('Y-m-d',strtotime($dob))?>" class="form-control" placeholder="Select date of birth">
+            <input type="text" name="dob" value="<?=date('Y-m-d',strtotime($dob))?>" class="form-control" placeholder="Select date of birth">
         </div>
         <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
             <label class="form-label required">Pan Number</label>
@@ -143,7 +144,7 @@ if($valid_upto){
         </div>
         <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
             <label class="form-label required">Valid Upto</label>
-            <input type="date" name="valid_upto" value="<?=$valid_upto?>" class="form-control selectdate"
+            <input type="date" name="valid_upto" value="<?=$valid_upto?>" class="form-control"
                 placeholder="Select A Date">
         </div>
 
