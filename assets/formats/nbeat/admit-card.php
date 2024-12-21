@@ -42,6 +42,9 @@
             width: 120px !important;;
             height: 95px;
         }
+        .test{
+            border:1px solid red
+        }
     </style>
 </head>
 
@@ -63,7 +66,7 @@
     <p class="position-absolute" style="top:70%;left:15%">{course_name}</p>
     <p class="position-absolute" style="top:74.5%;left:54%">{time}</p>
     <p class="position-absolute" style="top:74.5%;left:22%">{date}</p>
-    <p class="position-absolute" style="top:78.5%;left:18%">{center_name}</p>
+    <p class="position-absolute" style="top:79.5%;left:18%;width:54%;line-height:1;text-align:left">{center_name}</p>
     <?php
     $this->ki_theme->generate_qr($admit_card_id, 'admit_card', current_url());
     ?>
