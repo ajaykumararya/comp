@@ -9,13 +9,13 @@
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
-
+            text-transform: uppercase;
             font-weight: bold;
             font-size: 19px;
         }
 
         .text-capitlize {
-            text-transform: capitalize;
+            text-transform: uppercase;
         }
 
         .position-relative {
@@ -81,7 +81,7 @@
     <div class="position-absolute" id="photo1">
         <img src="upload/{image}" class="" style="width:110px;height:130px">
     </div>
-    <div class="position-absolute" style="top:47%;left:10%;width:76%;text-align:center;text-transform:capitalize">{institute_name}</div>
+    <div class="position-absolute" style="top:47%;left:10%;width:76%;text-align:center;text-transform:uppercase">{institute_name}</div>
 
     <div class="position-absolute" style="top:27.6%;left:83%;">{center_number}</div>
     <!-- <div class="position-absolute" style="top:57.7%;left:27%;">{city}, &nbsp;{state}</div> -->

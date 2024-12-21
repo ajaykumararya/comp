@@ -9,10 +9,11 @@
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
+            text-transform: uppercase;
         }
 
         .text-capitlize {
-            text-transform: capitalize;
+            text-transform: uppercase;
         }
 
         .position-relative {
@@ -110,26 +111,32 @@
         <img src="upload/images/marksheet_{result_id}.png" style="width:90px;height:110px;" alt="">
     </div> -->
     <div class="position-absolute " style="top:50%;left:8%;width:84%">
-        <table id="first" border="0" style="width:100%">
+        <table id="first" border="1" style="width:100%">
             <thead>
                 <tr>
-                    <th class="primary" rowspan="2" width="50%" style="text-align:left;padding-left:35px">SUBJECTS</th>
-                    <th class="primary" colspan="2" style="font-size:11px;padding:4px">MAXIMUM MARKS</th>
-                    <th class="primary lb" colspan="2" style="font-size:11px;padding:4px">MINIMUM MARKS</th>
-                    <th class="primary lb" colspan="3" style="font-size:11px;padding:4px">OBTAINED MARKS</th>
-                </tr>
-                <tr>
-                    <th class="primary b-tb" style="font-size:11px">THEORY</th>
-                    <th class="primary b-tb" style="font-size:11px">PRACTICAL</th>
-                    <th class="primary b-tb lb" style="font-size:11px">THEORY</th>
-                    <th class="primary b-tb" style="font-size:11px">PRACTICAL</th>
-                    <th class="primary b-tb lb" style="font-size:11px">TH.</th>
-                    <th class="primary b-tb" style="font-size:11px">PR.</th>
-                    <th class="primary b-tb" style="font-size:11px">TOTAL</th>
+                    <th class="primary" width="15%" style="text-align:left;padding-left:35px">SR.No</th>
+                    <th class="primary" width="55%" style="text-align:left;padding-left:35px">Subject</th>
+                    <th class="primary lb" >Full Marks</th>
+                    <th class="primary lb" >Mark Secured</th>
                 </tr>
             </thead>
             <tbody>
-                {marks}
+                <?php
+                foreach($marks as $i => $mark){
+                    $num1 = (int) ($mark['theory_max_marks']);
+                    $num2 = (int) ($mark['practical_max_marks']);
+                    
+                    $num11 = (int) ($mark['theory_total']);
+                    $num22 = (int) ($mark['practical_total']);
+                    echo '<tr>
+                            <td>'.($i + 1).'.</td>
+                            <td style="text-align:left;padding-left:10px">'.$mark['subject_name'].'</td>
+                            <td>'.($num1 + $num2).'</td>
+                            <td>'.($num11 + $num22).'</td>                    
+                        </tr>';
+                }
+                ?>
+                <!-- {marks}
                 <tr>
                     <td class="primary lb" style="text-align:left;padding-left:2px;font-size:12.81px">{subject_name}
                     </td>
@@ -141,17 +148,12 @@
                     <td class="fw" style="font-size:12.81px">{practical_total}</td>
                     <td class="fw" style="font-size:12.81px">{total}</td>
                 </tr>
-                {/marks}
+                {/marks} -->
             </tbody>
             <tfoot>
                 <tr class="fw">
-                    <td class="primary fw" style="font-size:12.81px">TOTAL</td>
-                    <td class="primary lb fw" style="font-size:12.81px">{total_max_theory}</td>
-                    <td class="primary fw" style="font-size:12.81px">{total_max_practical}</td>
-                    <td class="primary fw lb" style="font-size:12.81px">{total_min_theory}</td>
-                    <td class="primary fw" style="font-size:12.81px">{total_min_practical}</td>
+                    <td colspan="2" class="primary fw" style="font-size:12.81px">TOTAL</td>
                     <td class="fw lb" style="font-size:12.81px"></td>
-                    <td></td>
                     <td class="fw" style="font-size:12.81px">{obtain_total}</td>
                 </tr>
             </tfoot>

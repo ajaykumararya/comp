@@ -10,12 +10,12 @@
     {basic_header_link}
     <style>
         body{
-            font-family: Arial, Helvetica, sans-serif;
-        
+            font-family: Arial, Helvetica, sans-serif;        
+            text-transform: uppercase;
             font-weight: bold;
         }
         .text-capitlize{
-            text-transform: capitalize;
+            text-transform: uppercase;
         }
         .position-relative{
             position: relative;

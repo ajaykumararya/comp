@@ -8,10 +8,12 @@
     <style>
         * {
             font-weight: bold;
+            text-transform: uppercase;
+
         }
 
         .text-capitlize {
-            text-transform: capitalize;
+            text-transform: uppercase;
         }
 
         .position-relative {
@@ -66,8 +68,8 @@
             text-align: center;
         }
 
-        .t-c {
-            text-transform: capitalize;
+        div{
+            text-transform: uppercase!important;
         }
 
         .test {

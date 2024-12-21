@@ -394,6 +394,7 @@ class Document extends MY_Controller
             if ($data['status'] && $data['isPending'] == 0 && $data['isDeleted'] == 0) {
                 if ($data['valid_upto'] && $data['certificate_issue_date']) {
                     // pre($data,true);
+                    $data['valid_upto'] = date('d-m-Y', strtotime($data['valid_upto']));
                     $year = date('Y', strtotime($data['certificate_issue_date']));
                     $data['serial_no'] = $year . str_pad($data['id'], 3, 0, STR_PAD_LEFT);
                     $data['state'] = $this->SiteModel->state($data['state_id']);

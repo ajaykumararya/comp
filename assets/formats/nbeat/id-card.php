@@ -9,10 +9,11 @@
     <style>
     body {
         font-family: Arial, Helvetica, sans-serif;
+        text-transform: uppercase;
     }
 
     .text-capitlize {
-        text-transform: capitalize;
+        text-transform: uppercase;
     }
 
     .position-relative {
