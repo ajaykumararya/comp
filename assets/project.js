@@ -9,6 +9,7 @@ function subModal(e){
         });
     subjectModal.show();
 }
+
 // if (document.getElementById('subjectsModal').length) {
     // var subjectModal = new bootstrap.Modal(document.getElementById('subjectsModal'));
 
@@ -23,6 +24,7 @@ function subModal(e){
     // }
 // }
 $(document).on('ready', function () {
+   
 
     //log($('.student-verification-form'));
     $(document).on('submit', '.student-verification-form', function (e) {

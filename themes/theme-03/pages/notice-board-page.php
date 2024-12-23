@@ -19,8 +19,8 @@
                         <span><?=date('d',$time)?></span>
                         <?=date('M-Y',$time)?>
                     </div>
-                    <h5><a href="<?=$row->field3?>"
-                            target="_blank"><?=$this->ki_theme->parse_string($row->field2)?></a></h5>
+                    <h6><a href="<?=$row->field3?>"
+                            target="_blank"><?=$this->ki_theme->parse_string($row->field2)?></a></h6>
                     <!--<h5><a href="">WBSU UG SEMESTER - I (NEP SYSTEM) FINAL EXAMINATION FORM FILL UP NOTICE 2023-24</a></h5>-->
                     <!--<p></p>-->
                 </div>
@@ -30,7 +30,7 @@
     }
     ?>
 </div>
-<div class="clearfix text-right">
+<!-- <div class="clearfix text-right">
     <a href="site/notice.html" class="btn btn-default"><span><span class="hvr-bounce-to-right">View
                 All</span></span></a>
-</div>
+</div> -->
