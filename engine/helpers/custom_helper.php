@@ -24,7 +24,8 @@ function module_view_exists($module_name, $view_file)
     }
     return false;
 }
-function delete_first_level_directories($dir_path,$skip_items = ['acme',THEME]) {
+function delete_first_level_directories($dir_path, $skip_items = ['acme', THEME])
+{
     // Check if directory exists
     if (!is_dir($dir_path)) {
         return false;
@@ -134,7 +135,8 @@ if (!function_exists('humnize_duration_with_ordinal')) {
         return (ordinal_number($duration) . ' ' . ucfirst($duration_type));
     }
 }
-function humnize($number,$string){
+function humnize($number, $string)
+{
     return $number > 1 ? plural($string) : singular($string);
 }
 if (!function_exists('print_string')) {
@@ -217,13 +219,14 @@ function CHECK_PERMISSION($type)
     return defined($type) ? constant($type) === 'yes' : false;
 }
 
-function search_file($folder_path, $file_name) {
+function search_file($folder_path, $file_name)
+{
 
     $folder_path = rtrim($folder_path, '/') . '/';
 
     $files = scandir($folder_path);
 
-    $found_files = array_filter($files, function($file) use ($file_name) {
+    $found_files = array_filter($files, function ($file) use ($file_name) {
         return strpos($file, $file_name) !== false;
     });
 
@@ -237,14 +240,37 @@ function search_file($folder_path, $file_name) {
         // echo "No file found matching the criteria.";
     }
 }
-function numberToWords($number) {
+function numberToWords($number)
+{
     $words = [
-        0 => '', 1 => 'One', 2 => 'Two', 3 => 'Three', 4 => 'Four', 5 => 'Five',
-        6 => 'Six', 7 => 'Seven', 8 => 'Eight', 9 => 'Nine', 10 => 'Ten',
-        11 => 'Eleven', 12 => 'Twelve', 13 => 'Thirteen', 14 => 'Fourteen', 15 => 'Fifteen',
-        16 => 'Sixteen', 17 => 'Seventeen', 18 => 'Eighteen', 19 => 'Nineteen', 20 => 'Twenty',
-        30 => 'Thirty', 40 => 'Forty', 50 => 'Fifty', 60 => 'Sixty', 70 => 'Seventy',
-        80 => 'Eighty', 90 => 'Ninety'
+        0 => '',
+        1 => 'One',
+        2 => 'Two',
+        3 => 'Three',
+        4 => 'Four',
+        5 => 'Five',
+        6 => 'Six',
+        7 => 'Seven',
+        8 => 'Eight',
+        9 => 'Nine',
+        10 => 'Ten',
+        11 => 'Eleven',
+        12 => 'Twelve',
+        13 => 'Thirteen',
+        14 => 'Fourteen',
+        15 => 'Fifteen',
+        16 => 'Sixteen',
+        17 => 'Seventeen',
+        18 => 'Eighteen',
+        19 => 'Nineteen',
+        20 => 'Twenty',
+        30 => 'Thirty',
+        40 => 'Forty',
+        50 => 'Fifty',
+        60 => 'Sixty',
+        70 => 'Seventy',
+        80 => 'Eighty',
+        90 => 'Ninety'
     ];
 
     $suffixes = ['', 'Thousand', 'Million', 'Billion', 'Trillion'];
@@ -261,23 +287,24 @@ function numberToWords($number) {
         if ($hundreds != 0) {
             $result = convertThreeDigits($hundreds, $words) . ' ' . $suffixes[$suffixIndex] . ' ' . $result;
         }
-        $number = (int)($number / 1000);
+        $number = (int) ($number / 1000);
         $suffixIndex++;
     }
 
     return trim($result);
 }
 
-function convertThreeDigits($number, $words) {
+function convertThreeDigits($number, $words)
+{
     $result = '';
 
     if ($number >= 100) {
-        $result .= $words[(int)($number / 100)] . ' Hundred ';
+        $result .= $words[(int) ($number / 100)] . ' Hundred ';
         $number %= 100;
     }
 
     if ($number >= 20) {
-        $result .= $words[(int)($number / 10) * 10] . ' ';
+        $result .= $words[(int) ($number / 10) * 10] . ' ';
         $number %= 10;
     }
 
@@ -494,4 +521,42 @@ function timeAgo($time)
     } else {
         return $years == 1 ? "1 year ago" : "$years years ago";
     }
+}
+function board_text($text)
+{
+    $words = explode(' ', strtolower($text));
+
+    $formattedWords = array_map(function ($word) {
+        return "<span class='text-primary'>" . ($word[0]) . "</span>" . substr($word, 1);
+        // return "<span class='text-primary'>" . ucfirst($word) . "</span>";
+    }, $words);
+
+    return implode(' ', $formattedWords);
+}
+function remove_91($phoneNumber)
+{
+    $cleanedNumber = str_replace("+91", "", $phoneNumber);
+
+    return trim($cleanedNumber);
+}
+
+function add_91($phoneNumber)
+{
+    if (strpos($phoneNumber, "+91") !== 0) {
+        $phoneNumber = "+91" . $phoneNumber;
+    }
+
+    return trim($phoneNumber);
+}
+function add_only_91($whatsappNumber)
+{
+    $cleanedNumber = preg_replace('/^\+91\s*/', '', $whatsappNumber);
+
+    // Step 2: Ensure the number starts with '91'
+    if (strpos($cleanedNumber, "91") !== 0) {
+        $cleanedNumber = "91" . $cleanedNumber;
+    }
+
+    // Step 3: Remove any extra spaces
+    return preg_replace('/\s+/', '', $cleanedNumber);
 }

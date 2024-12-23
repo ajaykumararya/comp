@@ -1,5 +1,96 @@
+<?php
+if ($isPrimary) {
+    $sliders = $this->SiteModel->slider();
+    if ($sliders->num_rows()) {
+        ?>
+        <style>
+            @media (min-width: 1024px) {
+                .slick-slide img {
+                    height: 477px !important;
+                }
+            }
+        </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
 
-{content}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+        }
+
+
+        .carousel {
+            position: relative;
+        }
+
+        .carousel img {
+            width: 100%;
+            /* border-radius: 10px; */
+        }
+
+        .slick-dots {
+            bottom: 10px!important;
+        }
+        .slick-dotted.slick-slider{
+            margin-bottom:0!important
+        }
+        /* .slick-prev, .slick-next {
+            z-index: 1;
+            color: #000;
+        } */
+    </style>
+        <section class="clearfix bannerWrap os-animation" data-os-animation="fadeIn" data-os-animation-delay=".5s">
+            <div id="homeBanner" class="carousel slide carousel-fade" data-ride="carousel">
+                <?php
+                // $i = 0;
+                // echo '<ol class="carousel-indicators">';
+                // foreach ($sliders->result() as $slider) {
+                //     $active = !$i ? 'class="active"' : '';
+                //     echo '<li data-target="#homeBanner" data-slide-to="' . $i++ . '" ' . $active . '></li>';
+                // }
+                // echo '</ol>';
+                ?>
+                <!-- <div class="carousel-inner"> -->
+                    <?php
+                    $i = 1;
+                    foreach ($sliders->result() as $slider) {
+                        $active = $i == 1 ? 'active' : '';
+                        $i++;
+                        ?>
+                        <div>
+                            <img class="d-block w-100" src="{base_url}upload/<?= $slider->image ?>" alt="First slide">
+                      </div>
+                        <?php
+                    }
+                    ?>
+                <!-- </div> -->
+        </section>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#homeBanner').slick({
+                dots: true, // Enable navigation dots
+                arrows: false, // Enable previous/next arrows
+                infinite: true, // Loop through slides
+                speed: 500, // Transition speed
+                slidesToShow: 1, // Show one slide at a time
+                slidesToScroll: 1, // Scroll one slide at a time
+                autoplay: true, // Enable auto-play
+                autoplaySpeed: 3000, // Auto-play speed in milliseconds
+            });
+        });
+    </script>
+        <?php
+    }
+}
+?>
+
+
+<div class="container-fluid home-tile">{content}</div>
 <?php
 /*
  <!-- Main landing page image -->
@@ -806,4 +897,4 @@
 
 
     */
-    ?>
+?>

@@ -103,15 +103,19 @@
                 <div class="col-10 col-lg-9">
                     <div class=" d-flex justify-content-evenly align-items-center text-center">
                         <div class="mx-2">
-                            <img src="{logo}" class="nceb_logo" alt="NCEB LOGO">
+                            <img src="{base_url}upload/{logo}" class="nceb_logo" alt="{title}">
                         </div>
                         <div class="mx-2">
-                            <h4 class="nceb-title m-0 p-0 hindi tricolor"><span>राष्ट्रीय कंप्यूटर</span> <span>शिक्षा
-                                    बोर्ड</span> <span>कौशल विकास</span></h4>
-                            <h4 class="nceb-title m-0 p-0 mt-1"><span class="text-primary">N</span>ATIONAL <span
+                            <h4 class="nceb-title m-0 p-0 hindi tricolor" style="color:#0b0f34">
+                                राष्ट्रीय कंप्यूटर शिक्षा
+                                बोर्ड कौशल विकास
+                            </h4>
+                            <h4 class="nceb-title m-0 p-0 mt-1">
+                                <?= board_text('AJAY KUMAR ARYA') ?>
+                                <!-- <span class="text-primary">N</span>ATIONAL <span
                                     class="text-primary">C</span>OMPUTER <span
                                     class="text-primary">E</span>DUCATION<br><span class="text-primary">B</span>OARD
-                                SKILL DEVELOPMENT</h4>
+                                SKILL DEVELOPMENT</h4> -->
                         </div>
                     </div>
                 </div>
@@ -226,35 +230,38 @@
             </div>
         </div>
     </nav>
-    <div class="container-fluid home-tile">{output}</div>
+    {output}
     <br>
     <div class="container-fluid bg-secondary text-white">
         <div class="row g-4">
             <div class="col-md-5 ps-5 pt-2">
-                <h6 class="nceb-heading-warning">Why NCEB ?</h6>
-                <p class="text-justify">Brilliantly it will be your decision to make a difference between the
-                    institutions of other kind and like us as of quality education assumed and as we are certified as
-                    quality research education organisations and AN ISO 9001:2015 certified Computer Education Board.
-                    We do not work for the sole purpose of the peculier kind but we decided to resolve around the goal
-                    of quality education ...</p>
-                <a href="why-nceb.html" class="text-white">Read more...</a>
+                <h6 class="nceb-heading-warning"> <?=$this->ki_theme->parse_string($footer_note_title)?></h6>
+                <p class="text-justify">{footer_note_description}</p>
+                <!-- <a href="why-nceb.html" class="text-white">Read more...</a> -->
+                <?php
+                if(isset($footer_note_button_link) && $footer_note_button_link){
+                    echo '<a href="'.$footer_note_button_link.'" class="text-white">'.$footer_note_button_text.'</a>';
+                }
+                ?>
             </div>
 
             <div class="col-md-3 ps-5 pt-2 footer-section-border-top">
-                <h6 class="nceb-heading-warning">Usefull Links</h6>
-                <ul class="list-unstyled">
-                    <li class="py-1"><a href="nceb-faq.html" class="text-decoration-none text-white">FAQ</a></li>
-                    <li class="py-1"><a href="nceb-course-list.html" class="text-decoration-none text-white">Courses</a>
-                    </li>
-                    <li class="py-1"><a href="contact-nceb.html" class="text-decoration-none text-white">Feedback</a>
-                    </li>
-                    <li class="py-1"><a href="nceb-free-test.html" class="text-decoration-none text-white">Free Exam
-                            Preparation</a></li>
-                    <li class="py-1"><a href="register-with-nceb.html" class="text-decoration-none text-white"><span
-                                class="text-warning">Free</span> Franchise Registeration</a></li>
-                    <li class="py-1"><a href="https://www.nxrtech.in/" target="_blank"
-                            class="text-decoration-none text-white">Powered by NXR Technologies</a></li>
-                </ul>
+                <?php
+                $myTitle = $this->SiteModel->get_setting('footer_first_text', $title);
+                echo '
+                        <h6 class="nceb-heading-warning">' . $myTitle . '</h6>
+                        <ul class="list-unstyled">';
+                $fields = $this->SiteModel->get_setting('footer_first_links', '', true);
+                if ($fields) {
+                    foreach ($fields as $value) {
+                        $my_index = $value->title;
+                        $value = $value->link;
+                        echo "<li class='py-1'><a href='$value' class='text-decoration-none text-white'>$my_index</a></li>";
+                    }
+                }
+                echo '</ul>';
+
+                ?>
             </div>
 
             <div class="col-md-4 ps-5 pe-5 pt-2 footer-section-border-top">

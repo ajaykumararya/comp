@@ -74,16 +74,17 @@
                         </div>
                         <?php
                     }
-                    
-                    if(THEME == 'theme-04'){
+
+                    if (THEME == 'theme-04') {
                         ?>
                         <div class="form-group mb-4">
                             <lable class="form-label required">Select Theme Color</lable>
-                            <input type="color" name="theme_color_value" value="<?=ES('theme_color_value','#762051')?>" class="form-control">
+                            <input type="color" name="theme_color_value" value="<?= ES('theme_color_value', '#762051') ?>"
+                                class="form-control">
                         </div>
                         <?php
                     }
-                        
+
                     ?>
                 </div>
                 <div class="card-footer">
@@ -246,6 +247,8 @@ if ($header_sections) {
             <?php
         }
         ?>
+
+
     </div>
     <?php
 }
@@ -282,6 +285,40 @@ if ($footer_sections) {
             <h1 class="anchor fw-bold mb-5">Footer Section</h1>
         </div>
         <?php
+
+
+        if (THEME == 'board'):
+            ?>
+            <div class="col-md-6">
+                <form action="" class="extra-setting" enctype="multipart/form-data" data-page_load="true">
+
+                    <div class="{card_class}">
+                        <div class="card-header">
+                            <h3 class="card-title">Footer Note</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="" class="form-label">Title</label>
+                                <input type="text" value="<?=ES('footer_note_title')?>" name="footer_note_title" required class="form-control" placeholder="Title">
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="form-label">Description</label>
+                                <textarea type="text" name="footer_note_description" required class="form-control"
+                                    placeholder="Description"><?=ES('footer_note_description')?></textarea>
+                            </div>
+                            <?php
+                            echo $this->ki_theme->extra_setting_button_input("footer_note_button", "Footer Note Button");
+
+                            ?>
+                        </div>
+                        <div class="card-footer">
+                            {publish_button}
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <?php
+        endif;
         foreach ($footer_sections as $index => $title) {
             $data_index = $index . '_links';
             ?>
