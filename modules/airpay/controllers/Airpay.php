@@ -110,6 +110,9 @@ class Airpay extends MY_Controller
         // pre($data,true);
         $this->load->view('request-send',$data);
     }
+    function wallet_response(){
+        pre($_POST);
+    }
 }
 
 ?>
