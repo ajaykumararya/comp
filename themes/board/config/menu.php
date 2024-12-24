@@ -34,6 +34,13 @@ $menu = array(
             'icon' => array('file', 4),
             'url' => 'cms/static-page/our_syllabus',
         ),
+        
+        array(
+            'label' => 'Testimonial',
+            'type' => 'testimonial',
+            'icon' => array('file',4),
+            'url' => 'cms/static-page/testimonial'
+        )
     )
 );
 //OL_fC^HODQP,

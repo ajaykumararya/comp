@@ -4,28 +4,35 @@
             <div class="card bg-white shadow-sm border-0 rounded-0 w-100">
                 <div class="card-body">
                     <div class="row g-0">
-                        <div class="col-md-4 align-self-center">
-                            <h4 class="nceb-heading-primary">About NCEB</h4>
+                        <div class="col-md-12">
+                            <h4 class="nceb-heading-primary">
+                                <?= $this->SiteModel->get_setting('about_us_page_title', 'About Us') ?>
+                            </h4>
                             <hr class="w-50">
+                        </div>
+                        <div class="col-md-4 align-self-center p-5 pt-0">
+
                             <div class="p-2">
-                                <img class="card-3d img-fluid" alt="NCEB logo" title="NCEB final Logo"
-                                    src="./assets/images/main-logo.png"
-                                    style="transform: perspective(405px) rotateX(0deg) rotateY(0deg);">
+                                <img class="card-3d img-fluid" alt="NCEB logo" title="{title}"
+                                    src="{base_url}upload/{about_us_image}"
+                                    style="transform: perspective(405px) rotateX(0deg) rotateY(0deg);border-radius: 5px;box-shadow: 0 0 10px 0 gray;">
                             </div>
                         </div>
                         <div class="col-md-8">
-                            <p class="text-justify">National Computer Education Board is successfully running many
-                                centres all over India which focuses on success of the candidate with the updated
-                                Technology and fertility in India and therefore National Computer Education Board is
-                                successfully running many centres all over India and its franchises. National
-                                Computer Education Board build teaching environment that response to future
-                                challenges to provide quality education in both theoretical and applied courses of
-                                computer education and to train students to effective apply research based
-                                education. National Computer Education Board is staying one step ahead in providing
-                                the latest information in technology education make the institutions student
-                                friendly and deliver services to the society the mission of providing best quality.
+                            <p class="text-justify">
+                                {about_us_content}
                             </p>
-                            <a href="about-nceb.php" class="btn btn-secondary">Read more...</a>
+                            <!-- <a href="about-nceb.php" class="btn btn-secondary">Read more...</a> -->
+                            <?php
+                            if ($button = $this->SiteModel->get_setting('about_us_page_button_text')) {
+                                $buttonLink = $this->SiteModel->get_setting('about_us_page_button_link', '#');
+                                echo '
+                                        <a href="' . $buttonLink . '" class="btn pull-right btn-secondary">
+                                        ' . $button . '
+                                        </a>
+                             ';
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>

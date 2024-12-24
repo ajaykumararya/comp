@@ -372,9 +372,12 @@
             </div>
         </div>
     </div>
-
-    <!-- <script src="{theme_url}assets/js/nxr-home.min.js"></script> -->
-    <script src="{theme_url}assets/js/bootstrap.bundle.min.js"></script>
+    <?php
+    // if(isset($isPrimary) && $isPrimary)
+     echo '<script src="{theme_url}assets/js/nxr-home.min.js"></script>';
+    // else
+    // echo '<script src="{theme_url}assets/js/bootstrap.bundle.min.js"></script>';
+                ?>
     <script>
         // var successModal = new bootstrap.Modal(document.getElementById('successModal'));
 
