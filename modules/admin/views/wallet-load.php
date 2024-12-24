@@ -1,56 +1,57 @@
 <div class="row">
     <div class="col-md-6">
-        <form action="" class="submit-load-request">
-            <div class="{card_class} card-image">
-                <div class="card-header">
-                    <h3 class="card-title">Add Money Wallet</h3>
-                </div>
-                <div class="card-body">
-                    <div class="d-flex flex-column mb-8 fv-row">
-                        <!--begin::Label-->
-                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                            <span class="required">Options</span>
+        <?php
+        if (CHECK_PERMISSION('AIRPAY_GETWAY'))
+            echo '<form action="{base_url}airpay/load-wallet-balance" method="POST">';
+        else
+            echo '<form action="" class="submit-load-request">';
+        ?>
+        <div class="{card_class} card-image">
+            <div class="card-header">
+                <h3 class="card-title">Add Money Wallet</h3>
+            </div>
+            <div class="card-body">
+                <div class="d-flex flex-column mb-8 fv-row">
+                    <!--begin::Label-->
+                    <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                        <span class="required">Options</span>
 
-                            <span class="ms-1" data-bs-toggle="tooltip" title="Select an option.">
-                                <i class="ki-duotone ki-information text-gray-500 fs-7"><span class="path1"></span><span
-                                        class="path2"></span><span class="path3"></span></i>
-                            </span>
-                        </label>
-                        <!--end::Label-->
+                        <span class="ms-1" data-bs-toggle="tooltip" title="Select an option.">
+                            <i class="ki-duotone ki-information text-gray-500 fs-7"><span class="path1"></span><span
+                                    class="path2"></span><span class="path3"></span></i>
+                        </span>
+                    </label>
+                    <!--end::Label-->
 
-                        <!--begin::Buttons-->
-                        <div class="d-flex flex-stack gap-5 mb-3">
-                            <button type="button"
-                                class="btn btn-light-primary border border-primary border-dashed w-100"
-                                data-kt-docs-advanced-forms="interactive">100</button>
-                            <button type="button"
-                                class="btn btn-light-primary border border-primary border-dashed w-100"
-                                data-kt-docs-advanced-forms="interactive">500</button>
-                            <button type="button"
-                                class="btn btn-light-primary border border-primary border-dashed w-100"
-                                data-kt-docs-advanced-forms="interactive">1000</button>
-                        </div>
-                        <!--begin::Buttons-->
-
-                        <input type="number" class="form-control amount" placeholder="Enter Amount" name="amount"
-                            required>
+                    <!--begin::Buttons-->
+                    <div class="d-flex flex-stack gap-5 mb-3">
+                        <button type="button" class="btn btn-light-primary border border-primary border-dashed w-100"
+                            data-kt-docs-advanced-forms="interactive">100</button>
+                        <button type="button" class="btn btn-light-primary border border-primary border-dashed w-100"
+                            data-kt-docs-advanced-forms="interactive">500</button>
+                        <button type="button" class="btn btn-light-primary border border-primary border-dashed w-100"
+                            data-kt-docs-advanced-forms="interactive">1000</button>
                     </div>
-                    <div class="form-group">
-                        <label for="" class="form-label">Note</label>
-                        <textarea name="note" id="" class="form-control"></textarea>
-                    </div>
+                    <!--begin::Buttons-->
+
+                    <input type="number" class="form-control amount" placeholder="Enter Amount" name="amount" required>
                 </div>
-                <div class="card-footer">
-                    <?php
-                    echo $this->ki_theme->with_icon('plus')->save_button('Load Wallet', '');
-                    echo $this->ki_theme->
-                        with_icon('eye', 3)
-                        ->set_class('hover-rotate-start m-3')
-                        ->outline_dashed_style('danger')
-                        ->add_action('History', 'admin/wallet-history');
-                    ?>
+                <div class="form-group">
+                    <label for="" class="form-label">Note</label>
+                    <textarea name="note" id="" class="form-control"></textarea>
                 </div>
             </div>
+            <div class="card-footer">
+                <?php
+                echo $this->ki_theme->with_icon('plus')->save_button('Load Wallet', '');
+                echo $this->ki_theme->
+                    with_icon('eye', 3)
+                    ->set_class('hover-rotate-start m-3')
+                    ->outline_dashed_style('danger')
+                    ->add_action('History', 'admin/wallet-history');
+                ?>
+            </div>
+        </div>
         </form>
     </div>
     <div class="col-md-6">
