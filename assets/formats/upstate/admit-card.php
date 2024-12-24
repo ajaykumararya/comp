@@ -111,7 +111,7 @@
     <p class="position-absolute" style="top:28%;left:24.4%">{mother_name}</p>
     <p class="position-absolute" style="top:30.5%;left:24.4%">{dob}</p>
     <p class="position-absolute text-capitlize" style="top:30.5%;left:64%">{gender}</p>
-    <p class="position-absolute" style="top:32.8%;left:24.4%">{center_name} center name</p>
+    <p class="position-absolute" style="top:32.8%;left:24.4%">{center_name}</p>
     <?php
     $where = [
         'course_id' => $course_id,
