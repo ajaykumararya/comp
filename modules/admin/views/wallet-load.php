@@ -1,9 +1,16 @@
 <div class="row">
     <div class="col-md-6">
         <?php
-        if (CHECK_PERMISSION('AIRPAY_GETWAY'))
+        if (CHECK_PERMISSION('AIRPAY_GETWAY')) {
             echo '<form action="{base_url}airpay/load-wallet-balance" method="POST">';
-        else
+            // $getwayData = [
+            //     'buyerEmail' => trim($owner_email),
+            //     'buyerPhone' => trim($owner_phone),
+            //     'buyerFirstName' => trim($owner_name),
+            //     'buyerLastName' => trim($owner_name)
+            // ];
+            // echo form_hidden($getwayData);
+        } else
             echo '<form action="" class="submit-load-request">';
         ?>
         <div class="{card_class} card-image">

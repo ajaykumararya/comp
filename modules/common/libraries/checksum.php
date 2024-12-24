@@ -36,9 +36,9 @@ Class Checksum {
 */
     public static function outputForm($checksum) {
 		//ksort($_POST);
-		foreach($_POST as $key => $value) {
-				echo '<input type="hidden" name="'.$key.'" value="'.$value.'" />'."\n";
-		}
+		// foreach($_POST as $key => $value) {
+		// 		echo '<input type="hidden" name="'.$key.'" value="'.$value.'" />'."\n";
+		// }
 		echo '<input type="hidden" name="checksum" value="'.$checksum.'" />'."\n";
 	}
 
