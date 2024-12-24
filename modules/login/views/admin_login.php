@@ -10,9 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="{title}" />
+    <meta property="og:title" content="<?=ES('title')?>" />
     <meta property="og:url" content="{base_url}" />
-    <meta property="og:site_name" content="{title}" />
+    <meta property="og:site_name" content="<?=ES('title')?>" />
     <link rel="canonical" href="{base_url}" />
     <link rel="shortcut icon" href="<?= logo() ?>" />
 
