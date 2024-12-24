@@ -5,7 +5,7 @@
 <head>
     <title>Admin Login</title>
     <meta charset="utf-8" />
-    <meta name="description" content="Login Form of {tite}" />
+    <meta name="description" content="Login Form of <?=ES('title')?>" />
     <meta name="keywords" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:locale" content="en_US" />
