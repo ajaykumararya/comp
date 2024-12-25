@@ -1,4 +1,4 @@
-<section class="sec_padd" style="padding:0">
+<section class="sec_padd" >
     <div class="" style="    padding: 0 20px;">
         <div class="row">
             <div class="col-md-3 mb-3">
