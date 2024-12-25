@@ -17,12 +17,8 @@
                         placeholder="Enter Description"></textarea>
                 </div>
                 <div class="form-group mt-4">
-                    <label for="field1" class="form-label">Button Text</label>
-                    <input type="text" name="field3" id="field1" value="" class="form-control"
-                        placeholder="Enter Button Text">
-                    <label for="field2" class="form-label">Button link</label>
-                    <textarea type="text" name="field4" id="field2" value="" class="form-control"
-                        placeholder="Enter Url"></textarea>
+                    <label for="field1" class="form-label required">Image</label>
+                    <input type="file" name="field3" id="field1" class="form-control" required>
                 </div>
             </div>
             <div class="card-footer">
