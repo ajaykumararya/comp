@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             if (r.status) {
                 view_logo.attr('src', r.file);
             }
+            showResponseError(r);
         })
     });
     const setting_form = $('.setting-update');

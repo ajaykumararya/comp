@@ -40,6 +40,12 @@ $menu = array(
             'type' => 'testimonial',
             'icon' => array('file',4),
             'url' => 'cms/static-page/testimonial'
+        ),
+        array(
+            'label' => 'Recent Center List',
+            'type' => 'recentcenters',
+            'icon' => array('file',2),
+            'url' => 'cms/static-page/recentcenters'
         )
     )
 );
