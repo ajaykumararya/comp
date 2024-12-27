@@ -46,6 +46,12 @@ $menu = array(
             'type' => 'recentcenters',
             'icon' => array('file',2),
             'url' => 'cms/static-page/recentcenters'
+        ),
+        array(
+            'label' => 'Verification, News & Stats Section',
+            'type' => 'verification-and-news-and-stats-section',
+            'icon' => array('file',2),
+            'url' => 'cms/static-page/verification-and-news-and-stats-section',
         )
     )
 );

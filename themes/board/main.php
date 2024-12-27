@@ -107,11 +107,11 @@
                         </div>
                         <div class="mx-2">
                             <h4 class="nceb-title m-0 p-0 hindi tricolor" style="color:#0b0f34">
-                                राष्ट्रीय कंप्यूटर शिक्षा
-                                बोर्ड कौशल विकास
+                                <?= ES('page_hindi_title') ?>
                             </h4>
                             <h4 class="nceb-title m-0 p-0 mt-1">
-                                <?= board_text('AJAY KUMAR ARYA') ?>
+                                <?= board_text(ES('page_title_description')) ?><br>
+                                <?= ES('page_title_sub_description') ?>
                                 <!-- <span class="text-primary">N</span>ATIONAL <span
                                     class="text-primary">C</span>OMPUTER <span
                                     class="text-primary">E</span>DUCATION<br><span class="text-primary">B</span>OARD
@@ -120,10 +120,26 @@
                     </div>
                 </div>
                 <div class="col-lg-3 text-end align-self-center d-none d-lg-block">
-                    <a href="https://www.nceb.in/dashboard/" class="btn btn-warning rounded-0 mb-1"><i
-                            class="nxr-fingerprint"></i> <span class="idvd">|</span> <b>CENTER LOGIN</b></a><br>
-                    <a href="https://www.nceb.in/dashboard/" class="btn btn-primary rounded-0"><i
-                            class="nxr-fingerprint"></i> <span class="idvd">|</span> <b>STUDENT LOGIN</b></a>
+                    <?php
+                    $header_first_button_title = ES('header_first_button_title');
+                    if ($header_first_button_title) {
+                        $header_first_button_link = ES('header_first_button_link');
+                        $header_first_button_class = ES('header_first_button_class','success');
+                        ?>
+                        <a href="<?=$header_first_button_link?>" class="btn btn-<?=$header_first_button_class?> rounded-0 mb-1"><i
+                                class="nxr-fingerprint"></i> <span class="idvd">|</span> <b><?=$header_first_button_title?></b></a><br>
+                        <?php
+                    }
+                    $header_second_button_title = ES('header_second_button_title');
+                    if ($header_second_button_title) {
+                        $header_second_button_link = ES('header_second_button_link');
+                        $header_second_button_class = ES('header_second_button_class','success');
+                        ?>
+                        <a href="<?=$header_second_button_link?>" class="btn btn-<?=$header_second_button_class?> rounded-0 mb-1"><i
+                                class="nxr-fingerprint"></i> <span class="idvd">|</span> <b><?=$header_second_button_title?></b></a><br>
+                        <?php
+                    }
+                    ?>
                 </div>
 
                 <div class="col-2 d-flex justify-content-end align-items-center d-lg-none">
@@ -235,12 +251,12 @@
     <div class="container-fluid bg-secondary text-white">
         <div class="row g-4">
             <div class="col-md-5 ps-5 pt-2">
-                <h6 class="nceb-heading-warning"> <?=$this->ki_theme->parse_string($footer_note_title)?></h6>
+                <h6 class="nceb-heading-warning"> <?= $this->ki_theme->parse_string($footer_note_title) ?></h6>
                 <p class="text-justify">{footer_note_description}</p>
                 <!-- <a href="why-nceb.html" class="text-white">Read more...</a> -->
                 <?php
-                if(isset($footer_note_button_link) && $footer_note_button_link){
-                    echo '<a href="'.$footer_note_button_link.'" class="text-white">'.$footer_note_button_text.'</a>';
+                if (isset($footer_note_button_link) && $footer_note_button_link) {
+                    echo '<a href="' . $footer_note_button_link . '" class="text-white">' . $footer_note_button_text . '</a>';
                 }
                 ?>
             </div>
@@ -374,10 +390,10 @@
     </div>
     <?php
     // if(isset($isPrimary) && $isPrimary)
-     echo '<script src="{theme_url}assets/js/nxr-home.min.js"></script>';
+    echo '<script src="{theme_url}assets/js/nxr-home.min.js"></script>';
     // else
     // echo '<script src="{theme_url}assets/js/bootstrap.bundle.min.js"></script>';
-                ?>
+    ?>
     <script>
         // var successModal = new bootstrap.Modal(document.getElementById('successModal'));
 

@@ -408,7 +408,7 @@
                                             <div class="d-flex flex-column">
                                                 <div class="fw-bold d-flex align-items-center fs-5">
                                                     {owner_name} <span
-                                                        class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">{type}</span>
+                                                        class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">{owner_type}</span>
                                                 </div>
                                                 <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">
                                                     {owner_email} </a>
@@ -532,7 +532,7 @@
                             <a href="{base_url}admin/profile" style="line-height:1"
                                 class="text-white text-hover-primary fs-4 fw-bold ms-3 app-sidebar-minimize-d-none profile-title">
                                 {owner_name} <span
-                                    class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">{type}</span>
+                                    class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">{owner_type}</span>
                             </a>
                             <!--end::User account menu-->
                         </div>

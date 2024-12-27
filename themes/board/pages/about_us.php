@@ -13,9 +13,9 @@
                         <div class="col-md-4 align-self-center p-5 pt-0">
 
                             <div class="p-2">
-                                <img class="card-3d img-fluid" alt="NCEB logo" title="{title}"
+                                <img class="card-3d img-fluid" alt="logo" title="{title}"
                                     src="{base_url}upload/{about_us_image}"
-                                    style="transform: perspective(405px) rotateX(0deg) rotateY(0deg);border-radius: 5px;box-shadow: 0 0 10px 0 gray;">
+                                    style="transform: perspective(405px) rotateX(0deg) rotateY(0deg);border-radius: 5px;">
                             </div>
                         </div>
                         <div class="col-md-8">

@@ -69,13 +69,15 @@ class MY_Controller extends MX_Controller
             $centreRow = $getCentre->row();
             $this->public_data['center_data'] = $getCentre->row_array();
             $this->set_data('profile_image', (file_exists('upload/' . $centreRow->image) ? base_url('upload/' . $centreRow->image) : base_url('assets/media/avatars/300-3.jpg')));
+            $type = ucwords(str_replace('_', '-', $this->center_model->login_type()));
             $this->set_data([
                 'owner_name' => $centreRow->name,
                 'owner_email' => $centreRow->email,
                 'owner_phone' => $centreRow->contact_number,
                 'owner_address' => $centreRow->center_full_address,
                 'owner_id' => $centreRow->id,
-                'type' => ucwords(str_replace('_', '-', $this->center_model->login_type())),
+                'owner_type' => $type,
+                'type' => $type,
                 'wallet' => @$centreRow->wallet
             ]);
             // pre($centreRow,true);
