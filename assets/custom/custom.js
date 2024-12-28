@@ -1170,7 +1170,7 @@ var handleDeleteRows = (url) => {
 function DataTableEmptyMessage(table, message = 0) {
     if (message == 0)
         message = 'No data available in table';
-    table.find('.dataTables_empty').html(message);
+    // table.find('.dataTables_empty').html(message);
 }
 $(document).on('click', '.click-to-view-link', function (r) {
     r.preventDefault();
