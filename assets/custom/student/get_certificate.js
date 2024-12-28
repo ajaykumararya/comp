@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded',function(){
             'url': ajax_url + 'student/list-certificate',
             'type': 'GET',
             success: function (d) {
-                // console.log(d);
+                console.log(d);
                 if (d.data && d.data.length) {
                     table.clear();
                     table.rows.add(d.data).draw();
