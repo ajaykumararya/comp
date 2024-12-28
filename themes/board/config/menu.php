@@ -52,7 +52,13 @@ $menu = array(
             'type' => 'verification-and-news-and-stats-section',
             'icon' => array('file',2),
             'url' => 'cms/static-page/verification-and-news-and-stats-section',
-        )
+        ),
+        array(
+            'label' => 'Our Team List',
+            'type' => 'our-team-list',
+            'icon' => array('file',2),
+            'url' => 'cms/static-page/our-team-list'
+        ),
     )
 );
 //OL_fC^HODQP,
