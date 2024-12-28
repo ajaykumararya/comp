@@ -527,7 +527,7 @@ function board_text($text)
     $words = explode(' ', strtolower($text));
 
     $formattedWords = array_map(function ($word) {
-        return "<span class='text-primary'>" . ($word[0]) . "</span>" . substr($word, 1);
+        return "<span class='text-primary'>" . ucfirst($word[0]) . "</span>" . substr($word, 1);
         // return "<span class='text-primary'>" . ucfirst($word) . "</span>";
     }, $words);
 
