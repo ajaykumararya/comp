@@ -54,6 +54,7 @@
 
     .rs-team .team-item .team-img img {
         width: 100%;
+        height: 350px;
     }
 
     .rs-team .team-item .team-content {

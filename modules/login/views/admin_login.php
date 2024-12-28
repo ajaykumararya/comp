@@ -13,6 +13,7 @@
     <meta property="og:title" content="<?=ES('title')?>" />
     <meta property="og:url" content="{base_url}" />
     <meta property="og:site_name" content="<?=ES('title')?>" />
+    <meta property="og:image:url" content="<?=logo()?>" />
     <link rel="canonical" href="{base_url}" />
     <link rel="shortcut icon" href="<?= logo() ?>" />
 
