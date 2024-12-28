@@ -23,7 +23,7 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
         <div class="row">
             <div class="col-md-12 mb-4 mt-4">
                 <form action="" class="student-admission-form animation animated fadeInLeft">
-                    <div class="card">
+                    <div class="card border-dark">
                         <div class="card-body ">
                             <div class="row">
                                 <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
@@ -165,16 +165,16 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                     </div>
                                 </div>
                                 <?php
-                            $upload_ducuments = $this->ki_theme->project_config('upload_ducuments');
-                            $isFamilyId = isset($upload_ducuments['family_id_document']);
-                            $col = $isFamilyId ? 3 : 4;
-                            $familyClass = $isFamilyId ? '' : '';
-                            ?>
-                                <div class="form-group mb-4 col-lg-<?=$col?> col-xs-12 col-sm-12">
+                                $upload_ducuments = $this->ki_theme->project_config('upload_ducuments');
+                                $isFamilyId = isset($upload_ducuments['family_id_document']);
+                                $col = $isFamilyId ? 3 : 4;
+                                $familyClass = $isFamilyId ? '' : '';
+                                ?>
+                                <div class="form-group mb-4 col-lg-<?= $col ?> col-xs-12 col-sm-12">
                                     <label class="form-label">E-Mail ID</label>
                                     <input type="email" name="email" class="form-control" placeholder="Enter E-Mail ID">
                                 </div>
-                                <div class="form-group mb-4 col-lg-<?=$col?> col-xs-12 col-sm-12">
+                                <div class="form-group mb-4 col-lg-<?= $col ?> col-xs-12 col-sm-12">
                                     <label class="form-label required">Father Name</label>
                                     <input type="text" name="father_name" class="form-control"
                                         placeholder="Enter Father Name">
@@ -184,12 +184,13 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                 <input type="text" name="father_mobile" class="form-control"
                                     placeholder="Enter Father MObile">
                             </div> -->
-                                <div class="form-group mb-4 col-lg-<?=$col?> col-xs-12 col-sm-12">
+                                <div class="form-group mb-4 col-lg-<?= $col ?> col-xs-12 col-sm-12">
                                     <label class="form-label required">Mother Name</label>
                                     <input type="text" name="mother_name" id="aadhar_number" class="form-control"
                                         placeholder="Enter Mothe Name">
                                 </div>
-                                <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12 <?=($isFamilyId ? '' : 'd-none')?>">
+                                <div
+                                    class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12 <?= ($isFamilyId ? '' : 'd-none') ?>">
                                     <label class="form-label">Family ID</label>
                                     <input type="email" name="family_id" class="form-control"
                                         placeholder="Enter family ID">
@@ -197,7 +198,9 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                 <!-- Marital Status -->
                                 <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
                                     <label for="marital_status" class="form-label">Marital Status:</label>
-                                    <select name="marital_status" data-control="select2" data-allow-clear="true" data-placeholder="Select Marital Status" id="marital_status" class="form-control" >
+                                    <select name="marital_status" data-control="select2" data-allow-clear="true"
+                                        data-placeholder="Select Marital Status" id="marital_status"
+                                        class="form-control">
                                         <option value="">Select</option>
                                         <option value="Married">Married</option>
                                         <option value="Unmarried">Unmarried</option>
@@ -207,7 +210,8 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                 <!-- Category -->
                                 <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
                                     <label for="category" class="form-label">Category:</label>
-                                    <select name="category" data-control="select2" data-allow-clear="true" data-placeholder="Select Category" id="category" class="form-control" >
+                                    <select name="category" data-control="select2" data-allow-clear="true"
+                                        data-placeholder="Select Category" id="category" class="form-control">
                                         <option value="">Select Category</option>
                                         <option value="General">General</option>
                                         <option value="OBC">OBC</option>
@@ -219,7 +223,8 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                 <!-- Medium -->
                                 <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
                                     <label for="medium" class="form-label">Medium:</label>
-                                    <select name="medium" data-control="select2" data-allow-clear="true" data-placeholder="Select Medium" id="medium" class="form-control" >
+                                    <select name="medium" data-control="select2" data-allow-clear="true"
+                                        data-placeholder="Select Medium" id="medium" class="form-control">
                                         <option value="">Select</option>
                                         <option value="Hindi">Hindi Medium</option>
                                         <option value="English">English Medium</option>
@@ -286,22 +291,27 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                     <input type="text" name="passing_year" class="form-control single-year"
                                         placeholder="Enter Passing Year">
                                 </div>
-                                <div class="card card-body">
-                                    <h4>Upload Documents</h4>
-                                    <div class="row">
-                                        <div class="col-md-3 mb-4">
-                                            <div class="form-control">
-                                                <label for="adhar_card" class="form-label required">Aadhar Card
-                                                    Card</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-9 mb-4">
-                                            <div class="form-group">
-                                                <input type="file" class="form-control" name="adhar_card"
-                                                    id="adhar_card">
-                                            </div>
-                                        </div>
-                                        <!-- <div class="col-md-3 mb-4">
+                            </div>
+
+                        </div>
+                        <div class="card-header bg-dark">
+                            <h3 class="card-title text-white"><i class="fa fa-file"></i> Upload Documents</h3>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 mb-4">
+                                    <div class="form-control">
+                                        <label for="adhar_card" class="form-label required">Aadhar Card
+                                            Card</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-9 mb-4">
+                                    <div class="form-group">
+                                        <input type="file" class="form-control" name="adhar_card" id="adhar_card">
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-3 mb-4">
                                             <div class="form-control">
                                                 <label for="adhar_back" class="form-label required">Aadhar Card
                                                     Back</label>
@@ -313,31 +323,28 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                                     id="adhar_back">
                                             </div>
                                         </div> -->
-                                    </div>
-                                    <div class="row">
-                                        <?php
-                                        $uploadDocuments = $this->ki_theme->project_config('upload_ducuments');
-                                        foreach ($uploadDocuments as $key => $value) {
-                                            ?>
-                                            <div class="col-md-3 mb-4">
-                                                <div class="form-group">
-                                                    <label for="" class="form-label form-control"><?= $value ?></label>
-                                                    <input type="hidden" name="upload_docs[title][]" class="form-control"
-                                                        value="<?= $key ?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-9 mb-4">
-                                                <div class="form-group">
-                                                    <input type="file" class="form-control" name="upload_docs[file][]">
-                                                </div>
-                                            </div>
-                                            <?php
-                                        }
-                                        ?>
-                                    </div>
-                                </div>
                             </div>
-
+                            <div class="row">
+                                <?php
+                                $uploadDocuments = $this->ki_theme->project_config('upload_ducuments');
+                                foreach ($uploadDocuments as $key => $value) {
+                                    ?>
+                                    <div class="col-md-3 mb-4">
+                                        <div class="form-group">
+                                            <label for="" class="form-label form-control"><?= $value ?></label>
+                                            <input type="hidden" name="upload_docs[title][]" class="form-control"
+                                                value="<?= $key ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9 mb-4">
+                                        <div class="form-group">
+                                            <input type="file" class="form-control" name="upload_docs[file][]">
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+                            </div>
                         </div>
                         <div class="card-footer">
                             <div class="btn-wrapper btn-wrapper2">

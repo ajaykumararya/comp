@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-md-12">
                 <form id="add_center_form" action="" class="p-0" method="POST" autocomplete="off">
-                    <div class="{card_class}">
+                    <div class="{card_class} border-dark">
                         <div id="kt_docs_card_collapsible" class="collapse show">
                             <div class="card-body">
                                 <div class="row">
@@ -175,8 +175,8 @@
                                     </div> -->
                                 </div>
                             </div>
-                            <div class="card-header">
-                                <h4 class="card-title">Upload Documents</h4>
+                            <div class="card-header bg-dark">
+                                <h4 class="card-title text-white"> <i class="fa fa-file"></i> Upload Documents</h4>
                             </div>
                             <div class="card card-body">
                                 <div class="row">
