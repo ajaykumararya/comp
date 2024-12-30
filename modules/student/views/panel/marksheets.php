@@ -78,7 +78,7 @@ if ($get->num_rows()) {
                             <div class="fs-6 text-gray-800 fw-bold">
                                 <?= $row->roll_no ?>
                             </div>
-                            <div class="fw-semibold text-gray-500">Roll No</div>
+                            <div class="fw-semibold text-gray-500">{rollno_text}</div>
                         </div>
                         <!--end::Budget-->
                     </div>

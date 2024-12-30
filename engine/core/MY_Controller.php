@@ -90,6 +90,7 @@ class MY_Controller extends MX_Controller
         defined('PROJECT_RAND_NUM') or define('PROJECT_RAND_NUM', mt_rand(0, 999) . strtoupper(PATH) . mt_rand(0, 999));
         // if(PATH == 'iedct')
         //     exit;
+        $this->set_data('rollno_text',CHECK_PERMISSION('ROLLNO_AS_ENROLLMENT') ? 'Enrollment No' : 'Roll No');
     }
     public function percentage_check($value)
     {
@@ -120,7 +121,7 @@ class MY_Controller extends MX_Controller
         //         ]
         //     ]);
         // }
-        $fields = ['marital_status', 'category', 'medium'];
+        $fields = ['marital_status', 'category', 'medium','adhar_card_no'];
         foreach ($fields as $field) {
             $checkField = $this->build_db->field_exists('students', $field);
             if (!$checkField) {

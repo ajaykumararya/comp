@@ -74,8 +74,8 @@
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label for="" class="form-label required">Enrollment No</label>
-                                <input type="text" name="enrollment_no" placeholder="Enter Enrollment No" class="form-control">
+                                <label for="" class="form-label required"><?=CHECK_PERMISSION('ROLLNO_AS_ENROLLMENT') ? 'Roll No.' : 'Enrollment No.'?></label>
+                                <input type="text" name="enrollment_no" placeholder="Enter <?=CHECK_PERMISSION('ROLLNO_AS_ENROLLMENT') ? 'Roll No.' : 'Enrollment No.'?>" class="form-control">
                             </div>
                             <?php
                             if(!CHECK_PERMISSION('EXAM_SLOT_SYSTEM')):
@@ -114,7 +114,7 @@
                             <thead>
                                 <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
 
-                                    <th>Roll No</th>
+                                    <th>{rollno_text}</th>
                                     <th>Student Name</th>
                                     <th>Course</th>
                                     <th>Duration</th>

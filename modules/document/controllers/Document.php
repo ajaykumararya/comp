@@ -24,6 +24,18 @@ class Document extends MY_Controller
         $this->return = $return;
         return $this;
     }
+    function registration_form()
+    {
+        $this->db->select('category,marital_status,adhar_card_no');
+        $get = $this->student_model->get_switch('all', [
+            'id' => $this->id,
+            'without_admission_status' => true
+        ]);
+        $this->set_data($get->row_array());
+        $pdfContent = $this->parse('registration-form');
+
+        $this->pdf($pdfContent, $get->row('student_name') . '-' . $get->row('roll_no') . '-Registration-form.pdf');
+    }
     private function get_multi_path($course_id, $file, $page = 'P')
     {
         if (CHECK_PERMISSION('SHOW_MULTIPLE_CERTIFICATES')) {

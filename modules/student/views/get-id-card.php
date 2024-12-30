@@ -25,7 +25,7 @@
 
                             </select>
                             <ol class="mt-3" type="l">
-                                <li>Roll No</li>
+                                <li>{rollno_text}</li>
                                 <li>Name</li>
                                 <li>Mobile</li>
                             </ol>

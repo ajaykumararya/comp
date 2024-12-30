@@ -229,6 +229,11 @@ class Website extends Ajax_Controller
             $this->response('roll_no', $roll_no);
             // $this->response($this->post());
             $data = $this->post();
+            $examination = [];
+            if (isset($data['examination'])) {
+                $examination = $data['examination'];
+                unset($data['examination']);
+            }
             $data['status'] = 0;
             $data['roll_no'] = $roll_no;
             $data['added_by'] = isset($data['added_by']) ? $data['added_by'] : 'web';
@@ -261,9 +266,36 @@ class Website extends Ajax_Controller
             $data['category'] = $this->post('category');
             $chk = $this->db->insert('students', $data);
             $this->response('status', $chk);
+            $this->response('message', json_encode($examination));
+            $student_id = $this->db->insert_id();
+            if (CHECK_PERMISSION('STUDENT_EXAMINATION_FORM') && table_exists('student_examiniation_passed')) {
+                foreach ($examination['passed'] as $index => $passed) {
+                    if (
+                        !empty($passed) || !empty($examination['name_of_stream'][$index]) ||
+                        !empty($examination['board_or_university'][$index]) ||
+                        !empty($examination['year_of_passing'][$index]) ||
+                        !empty($examination['marks_obtained'][$index]) ||
+                        !empty($examination['percentage_marks'][$index])
+                    ) {
+                        $newData = [
+                            'student_id' => $student_id,
+                            'passed' => $passed,
+                            'name_of_stream' => $examination['name_of_stream'][$index],
+                            'board_or_university' => $examination['board_or_university'][$index],
+                            'year_of_passing' => $examination['year_of_passing'][$index],
+                            'marks_obtained' => $examination['marks_obtained'][$index],
+                            'percentage_marks' => $examination['percentage_marks'][$index],
+                        ];
+                        $this->db->insert('student_examiniation_passed', $newData);
+                    }
+                }
+            }
+            $this->response('url',base_url('student-details/').$this->token->encode([
+                'student_id' => $student_id
+            ]));
             $this->session->set_userdata([
                 'student_login' => true,
-                'student_id' => $this->db->insert_id()
+                'student_id' => $student_id
             ]);
         }
     }

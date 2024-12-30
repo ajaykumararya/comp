@@ -15,7 +15,7 @@
                             <thead>
                                 <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
 
-                                    <th>Roll No</th>
+                                    <th>{rollno_text}</th>
                                     <th>Student Name</th>
                                     <th>Course</th>
                                     <th>Duration</th>

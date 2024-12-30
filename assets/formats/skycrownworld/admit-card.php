@@ -55,11 +55,11 @@
     <p class="position-absolute" style="top:16.5%;left:17%">{admit_card_id}</p>
     <p class="position-absolute" style="top:1.5%;left:16%">{session}</p>
 
-    <p class="position-absolute " style="top:34.8%;left:35%;">{enrollment_no}</p>
+    <p class="position-absolute " style="top:34.8%;left:35%;width:60%;text-align:left">{roll_no}</p>
     <p class="position-absolute" style="top:38%;left:35%">{student_name}</p>
     <p class="position-absolute" style="top:41%;left:35%">{father_name}</p>
     <p class="position-absolute" style="top:44%;left:35%">{mother_name}</p>
-    <p class="position-absolute" style="top:47.1%;left:35%;width:300px;text-align:left">{roll_no}</p>
+    <p class="position-absolute" style="top:47.1%;left:35%;width:300px;text-align:left">{enrollment_no}</p>
     <!-- <p class="position-absolute" style="top:45.8%;left:15%">{dob}</p> -->
 
     <p class="position-absolute" style="top:50%;left:35%">{course_name}</p>

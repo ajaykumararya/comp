@@ -45,7 +45,7 @@ $IsPassout = $this->student_model->get_switch('passout', ['id' => $student_id])-
                     <div class="card-body bg-transparent p-0">
                         <table class="table table-bordered pb-0 mb-0">
                             <tr>
-                                <th>Roll No.</th>
+                                <th>{rollno_text}.</th>
                                 <td>{roll_no}</td>
                             </tr>
                             <tr>

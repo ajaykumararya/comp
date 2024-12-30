@@ -93,7 +93,7 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                     </select>
                                 </div>
                                 <?php
-                                if ($col == 4) {
+                                if ($col == 4 && !CHECK_PERMISSION('NOT_TIMETABLE')) {
                                     ?>
                                     <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
                                         <label class="form-label required">Time Table</label>
@@ -114,7 +114,7 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                 if (CHECK_PERMISSION('ADMISSION_WITH_SESSION')) {
                                     ?>
 
-                                    <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                    <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
                                         <label class="form-label required">Session</label>
                                         <select class="form-select" name="session_id" data-control="select2"
                                             data-placeholder="Select a Session" required>
@@ -272,28 +272,75 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                 <label class="form-label required">Password</label>
                                 <input type="text" name="password" class="form-control" placeholder="Enter">
                             </div> -->
-                                <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
-                                    <label class="form-label"> Passed Exam</label>
-                                    <input type="text" name="passed_exam" class="form-control"
-                                        placeholder="Enter Passed Exam">
-                                </div>
-                                <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
-                                    <label class="form-label">Marks(%) / Grade</label>
-                                    <input type="text" name="marks" class="form-control"
-                                        placeholder="Enter Marks/Grade">
-                                </div>
-                                <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
-                                    <label class="form-label">Board</label>
-                                    <input type="text" name="board" class="form-control" placeholder="Enter Board">
-                                </div>
-                                <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
-                                    <label class="form-label ">Passing Year</label>
-                                    <input type="text" name="passing_year" class="form-control single-year"
-                                        placeholder="Enter Passing Year">
-                                </div>
+                                <?php
+                                if (!CHECK_PERMISSION('STUDENT_EXAMINATION_FORM')):
+                                    ?>
+                                    <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                        <label class="form-label"> Passed Exam</label>
+                                        <input type="text" name="passed_exam" class="form-control"
+                                            placeholder="Enter Passed Exam">
+                                    </div>
+                                    <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                        <label class="form-label">Marks(%) / Grade</label>
+                                        <input type="text" name="marks" class="form-control"
+                                            placeholder="Enter Marks/Grade">
+                                    </div>
+                                    <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                        <label class="form-label">Board</label>
+                                        <input type="text" name="board" class="form-control" placeholder="Enter Board">
+                                    </div>
+                                    <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                        <label class="form-label ">Passing Year</label>
+                                        <input type="text" name="passing_year" class="form-control single-year"
+                                            placeholder="Enter Passing Year">
+                                    </div>
+                                    <?php
+                                endif;
+                                ?>
                             </div>
 
                         </div>
+                        
+                        <?php
+                        if (CHECK_PERMISSION('STUDENT_EXAMINATION_FORM')):
+                            ?>
+                            <div class="card-header bg-dark">
+                                <h3 class="card-title text-white">Examination Passed</h3>
+                            </div>
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="bg-primary text-white">Examination Passed</th>
+                                            <th class="bg-primary text-white">Name of Stream</th>
+                                            <th class="bg-primary text-white">Board/University</th>
+                                            <th class="bg-primary text-white">Year of Passing</th>
+                                            <th class="bg-primary text-white">Marks Obtained</th>
+                                            <th class="bg-primary text-white">% Marks</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        for($fieldIndex = 1; $fieldIndex <= 2; $fieldIndex++){
+                                        ?>
+                                        <tr>
+                                            <td><input type="text" name="examination[passed][]" class="form-control" placeholder="Examination Passed"></td>
+                                            <td><input type="text" name="examination[name_of_stream][]" class="form-control" placeholder="Name of Stream"></td>
+                                            <td><input type="text" name="examination[board_or_university][]" class="form-control" placeholder="Board/University"></td>
+                                            <td><input type="text" name="examination[year_of_passing][]" class="form-control" placeholder="Year of Passing"></td>
+                                            <td><input type="text" name="examination[marks_obtained][]" class="form-control" placeholder="Marks Obtained"></td>
+                                            <td><input type="text" name="examination[percentage_marks][]" class="form-control" placeholder="% Marks"></td>
+
+                                        </tr>
+                                        <?php
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <?php
+                        endif;
+                        ?>
                         <div class="card-header bg-dark">
                             <h3 class="card-title text-white"><i class="fa fa-file"></i> Upload Documents</h3>
                         </div>
@@ -303,12 +350,17 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                 <div class="col-md-3 mb-4">
                                     <div class="form-control">
                                         <label for="adhar_card" class="form-label required">Aadhar Card
-                                            Card</label>
+                                            </label>
                                     </div>
                                 </div>
-                                <div class="col-md-9 mb-4">
+                                <div class="col-md-5 mb-4">
                                     <div class="form-group">
                                         <input type="file" class="form-control" name="adhar_card" id="adhar_card">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="form-group">
+                                        <input type="number" name="adhar_card_no" required placeholder="Enter Aadhar No." class="form-control">
                                     </div>
                                 </div>
                                 <!-- <div class="col-md-3 mb-4">
@@ -345,6 +397,7 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                 }
                                 ?>
                             </div>
+
                         </div>
                         <div class="card-footer">
                             <div class="btn-wrapper btn-wrapper2">

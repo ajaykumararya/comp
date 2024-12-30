@@ -1270,11 +1270,11 @@ class Ki_theme
     function process_menu()
     {
         if ($this->CI->center_model->isCoordinator())
-            $adminMenu = $this->CI->load->config('coordinate/menu', true);
+            $adminMenu = $this->CI->load->config('coordinate/menu', true);        
+        else if($this->isAdmin() || $this->isCenter())
+            $adminMenu = $this->CI->load->config('admin/menu', true);
         else if ($this->CI->student_model->isStudent())
             $adminMenu = $this->CI->load->config('student/menu', true);
-        else
-            $adminMenu = $this->CI->load->config('admin/menu', true);
         // pre($adminMenu,true);
 
         $this->adminMenu = $adminMenu;

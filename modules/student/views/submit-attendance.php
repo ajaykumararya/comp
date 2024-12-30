@@ -16,7 +16,7 @@
                                 <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
 
                                     <th>#.</th>
-                                    <th>Roll No.</th>
+                                    <th>{rollno_text}.</th>
                                     <th>Name</th>
                                     <th>Attendance</th>
                                     <th class="text-end min-w-100px">Remark</th>

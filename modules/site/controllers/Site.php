@@ -97,6 +97,7 @@ class Site extends Site_Controller
         $token = $this->uri->segment(2);
         try {
             $this->token->decode($token);
+            // pre($this->token->data());
             $id = $this->token->data('id');
             $get = $this->student_model->marksheet(['id' => $id]);
             if (!$get->num_rows())
@@ -106,13 +107,41 @@ class Site extends Site_Controller
             $this->set_data('marksheet_id', $data['result_id']);
             $this->set_data($data);
             $this->set_data('isPrimary', false);
-            $this->load->module('document');
+            // $this->load->module('document');
             $html = '<div class="container pt-3">' . $this->template('marksheet-view') . '</div>';
             // $this->render($html, 'content');
             $this->render(
                 'schema',
                 ['content' => $html]
             );
+        } catch (Exception $e) {
+            $this->error_404();
+        }
+    }
+    function student_details()
+    {
+        $token = $this->uri->segment(2);
+        try {
+            $this->token->decode($token);
+            // echo $this->token->data('student_id');
+            $this->db->select('category');
+            $get = $this->student_model->get_switch('all', ['id' => $this->token->data('student_id'), 'without_admission_status' => true]);
+            if (!$get->num_rows())
+                throw new Exception('Not Found.');
+            $data = $get->row_array();
+            // pre($data,true)  ;
+            $this->set_data('page_name', $data['student_name'] . ' Details');
+            $this->set_data($data);
+            $this->set_data('isPrimary', false);
+            if (PATH != 'upstate') {
+                $this->render('schema', [
+                    'content' => $this->template('student-details')
+                ]);
+            } else {
+                $this->load->module('document');
+                // echo $this->token->data('student_id');
+                echo $this->document->id($this->token->data('student_id'))->registration_form();
+            }
         } catch (Exception $e) {
             $this->error_404();
         }

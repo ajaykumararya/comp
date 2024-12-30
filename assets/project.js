@@ -106,13 +106,15 @@ $(document).on('ready', function () {
             url: 'website/student-admission',
             data: new FormData(this),
         }).then((r) => {
+            // log(r);
             if (r.status) {
                 mySwal('Admission Successfully..', `
-                    Your Roll No. is <b>${r.roll_no}</b>
+                    Your Registration No. is <b>${r.roll_no}</b>
                 `).then((res) => {
+                    // log(res);
                     if (res.isConfirmed) {
-                        location.reload();
-                        // location.href = base_url + 'student';
+                        // location.reload();
+                        location.href = r.url;
                     }
                 });
                 // location.href = r.url;

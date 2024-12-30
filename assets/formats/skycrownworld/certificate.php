@@ -103,7 +103,7 @@
     <!-- <div class="position-absolute text-center t-c" style="left:60%;top:59%;">{duration} {duration_type}</div> -->
     <div class="position-absolute " style="left:40%;top:44.1%;">{course_name}</div>
     <div class="position-absolute " style="left:40%;top:47.1%;">{center_name}</div>
-    <div class="position-absolute text-center" style="left:40%;top:50.3%;">{subject_html}</div>
+    <div class="position-absolute text-center" style="left:40%;top:50.3%;line-height:1">{subject_html}</div>
     <div class="position-absolute text-center" style="left:40%;top:53.3%;">{total}</div>
     <div class="position-absolute text-center" style="left:40%;top:56.3%;">{grade}</div>
 

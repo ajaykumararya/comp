@@ -222,7 +222,7 @@
 
                                 <div class="form-group d-grid mb-1">
                                     <label for="" class="form-label mt-2 required">Roll Number</label>
-                                    <input value="<?=isDemo() ? 'SC240001' : ''?>" type="text" name="roll_no" placeholder="Enter Roll No." class="form-control">
+                                    <input value="<?=isDemo() ? 'SC240001' : ''?>" type="text" name="roll_no" placeholder="Enter {rollno_text}." class="form-control">
                                 </div>
                                 <div class="form-group d-grid mb-8">
                                     <label for="" class="form-label required mt-3">Password</label>
@@ -285,7 +285,7 @@
                                                     <th colspan="2">Demo Login Details</th>
                                                 </tr>
                                                 <tr>
-                                                    <th>Roll No.</th><td>SC240001</td>
+                                                    <th>{rollno_text}.</th><td>SC240001</td>
                                                 </tr>
                                                 
                                                 <tr>

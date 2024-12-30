@@ -17,8 +17,8 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="" class="form-label mt-2 required">Roll Number</label>
-                                <input type="text" name="roll_no" placeholder="Enter Roll No." class="form-control">
+                                <label for="" class="form-label mt-2 required">{rollno_text}</label>
+                                <input type="text" name="roll_no" placeholder="Enter {rollno_text}." class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="" class="form-label required">Password</label>

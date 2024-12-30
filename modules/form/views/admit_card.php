@@ -17,8 +17,8 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="" class="form-label mt-2">Roll Number</label>
-                                <input type="text" name="roll_no" placeholder="Enter Roll No." class="form-control">
+                                <label for="" class="form-label mt-2">{rollno_text}</label>
+                                <input type="text" name="roll_no" placeholder="Enter {rollno_text}." class="form-control">
                             </div>
                         </div>
                         <div class="card-footer">

@@ -375,7 +375,7 @@ if ($this->student_model->get_fee_transcations(['type' => 'admission_fee'] + $wh
                                 </td>
                             </tr>
                             <tr>
-                                <th>Roll No. With Name</th>
+                                <th>{rollno_text}. With Name</th>
                                 <td><label class="badge badge-info">{roll_no}</label></td>
                                 <td class="text-capitalize" colspan="2"> <b>{student_name}</b> </td>
                             </tr>
