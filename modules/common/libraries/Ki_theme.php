@@ -1269,6 +1269,7 @@ class Ki_theme
     }
     function process_menu()
     {
+        $adminMenu = [];
         if ($this->CI->center_model->isCoordinator())
             $adminMenu = $this->CI->load->config('coordinate/menu', true);        
         else if($this->isAdmin() || $this->isCenter())
