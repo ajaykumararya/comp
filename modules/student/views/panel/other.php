@@ -49,9 +49,9 @@
                         ?>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="roll_no" class="form-label required">Session</label>
-                                <select class="form-select" name="batch_id" data-control="select2"
-                                    data-placeholder="Select a Session">
+                                <label for="session_id" class="form-label required">Session</label>
+                                <select class="form-select" name="session_id" data-control="select2"
+                                    data-placeholder="Select a Session" id="session_id">
                                     <option></option>
                                     <?php
                                     $listBatch = $this->db->where('status',1)->get('session');

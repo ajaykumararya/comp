@@ -95,15 +95,16 @@
 
                             <div class="form-group mb-4 col-lg-<?= $rolCol ?> col-xs-12 col-sm-12">
                                 <label class="form-label required">{rollno_text}.</label>
-                                <input type="text" name="roll_no" class="form-control" placeholder="Enter {rollno_text}.">
+                                <input type="text" name="roll_no" class="form-control"
+                                    placeholder="Enter {rollno_text}.">
                             </div>
                             <?php
                             if (CHECK_PERMISSION('ADMISSION_WITH_COURSE_CATEGORY')) {
                                 ?>
                                 <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
                                     <label for="course_category_id" class="form-label">Course Category</label>
-                                    <select class="form-select" id="course_category_id" 
-                                        data-control="select2" data-placeholder="Select a Course Category">
+                                    <select class="form-select" id="course_category_id" data-control="select2"
+                                        data-placeholder="Select a Course Category">
                                         <option></option>
                                     </select>
                                 </div>
@@ -139,10 +140,11 @@
                                 <?php
                             } else
                                 echo form_hidden('batch_id', 0);
+                            $col = 6;
                             if (CHECK_PERMISSION('ADMISSION_WITH_SESSION')) {
                                 ?>
 
-                                <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
                                     <label class="form-label required">Session</label>
                                     <select class="form-select" name="session_id" data-control="select2"
                                         data-placeholder="Select a Session" required>
@@ -156,12 +158,13 @@
                                     </select>
                                 </div>
                                 <?php
+                                $col = 4;
                             }
                             ?>
 
 
 
-                            <div class="form-group mb-4 col-lg-6 col-xs-12 col-sm-12">
+                            <div class="form-group mb-4 col-lg-<?= $col ?> col-xs-12 col-sm-12">
                                 <label class="form-label required">Whatsapp Number</label>
                                 <div class="input-group">
                                     <input type="text" name="contact_number" class="form-control"
@@ -178,7 +181,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="form-group mb-4 col-lg-6 col-xs-12 col-sm-12">
+                            <div class="form-group mb-4 col-lg-<?= $col ?> col-xs-12 col-sm-12">
                                 <label class="form-label">Alternative Mobile</label>
                                 <div class="input-group">
                                     <input type="text" name="alternative_mobile" class="form-control"
@@ -201,11 +204,11 @@
                             $col = $isFamilyId ? 3 : 4;
                             $familyClass = $isFamilyId ? '' : '';
                             ?>
-                            <div class="form-group mb-4 col-lg-<?=$col?> col-xs-12 col-sm-12">
+                            <div class="form-group mb-4 col-lg-<?= $col ?> col-xs-12 col-sm-12">
                                 <label class="form-label">E-Mail ID</label>
                                 <input type="email" name="email_id" class="form-control" placeholder="Enter E-Mail ID">
                             </div>
-                            <div class="form-group mb-4 col-lg-<?=$col?> col-xs-12 col-sm-12">
+                            <div class="form-group mb-4 col-lg-<?= $col ?> col-xs-12 col-sm-12">
                                 <label class="form-label required">Father Name</label>
                                 <input type="text" name="father_name" class="form-control"
                                     placeholder="Enter Father Name">
@@ -215,12 +218,12 @@
                                 <input type="text" name="father_mobile" class="form-control"
                                     placeholder="Enter Father MObile">
                             </div> -->
-                            <div class="form-group mb-4 col-lg-<?=$col?> col-xs-12 col-sm-12">
+                            <div class="form-group mb-4 col-lg-<?= $col ?> col-xs-12 col-sm-12">
                                 <label class="form-label required">Mother Name</label>
                                 <input type="text" name="mother_name" id="aadhar_number" class="form-control"
                                     placeholder="Enter Mothe Name">
                             </div>
-                            <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12 <?=($isFamilyId ? '' : 'hide')?>">
+                            <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12 <?= ($isFamilyId ? '' : 'hide') ?>">
                                 <label class="form-label">Family ID</label>
                                 <input type="text" name="family_id" class="form-control" placeholder="Enter family ID">
                             </div>
@@ -229,8 +232,7 @@
                             <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
                                 <label for="marital_status" class="form-label">Marital Status:</label>
                                 <select name="marital_status" data-allow-clear="true" data-control="select2"
-                                    data-placeholder="Select Marital Status" id="marital_status" class="form-control"
-                                    >
+                                    data-placeholder="Select Marital Status" id="marital_status" class="form-control">
                                     <option value="">Select</option>
                                     <option value="Married">Married</option>
                                     <option value="Unmarried">Unmarried</option>
@@ -241,7 +243,7 @@
                             <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
                                 <label for="category" class="form-label">Category:</label>
                                 <select name="category" data-allow-clear="true" data-control="select2"
-                                    data-placeholder="Select Category" id="category" class="form-control" >
+                                    data-placeholder="Select Category" id="category" class="form-control">
                                     <option value="">Select Category</option>
                                     <option value="General">General</option>
                                     <option value="OBC">OBC</option>
@@ -254,7 +256,7 @@
                             <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
                                 <label for="medium" class="form-label">Medium:</label>
                                 <select name="medium" data-control="select2" data-allow-clear="true"
-                                    data-placeholder="Select Medium" id="medium" class="form-control" >
+                                    data-placeholder="Select Medium" id="medium" class="form-control">
                                     <option value="">Select</option>
                                     <option value="Hindi">Hindi Medium</option>
                                     <option value="English">English Medium</option>
@@ -304,24 +306,78 @@
                                 <label class="form-label required">Password</label>
                                 <input type="text" name="password" class="form-control" placeholder="Enter">
                             </div> -->
-                            <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
-                                <label class="form-label"> Passed Exam</label>
-                                <input type="text" name="passed_exam" class="form-control"
-                                    placeholder="Enter Passed Exam">
-                            </div>
-                            <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
-                                <label class="form-label">Marks(%) / Grade</label>
-                                <input type="text" name="marks" class="form-control" placeholder="Enter Marks/Grade">
-                            </div>
-                            <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
-                                <label class="form-label">Board</label>
-                                <input type="text" name="board" class="form-control" placeholder="Enter Board">
-                            </div>
-                            <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
-                                <label class="form-label ">Passing Year</label>
-                                <input type="text" name="passing_year" class="form-control single-year"
-                                    placeholder="Enter Passing Year">
-                            </div>
+                            <?php
+                            if (!CHECK_PERMISSION('STUDENT_EXAMINATION_FORM')):
+                                ?>
+                                <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                    <label class="form-label"> Passed Exam</label>
+                                    <input type="text" name="passed_exam" class="form-control"
+                                        placeholder="Enter Passed Exam">
+                                </div>
+                                <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                    <label class="form-label">Marks(%) / Grade</label>
+                                    <input type="text" name="marks" class="form-control" placeholder="Enter Marks/Grade">
+                                </div>
+                                <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                    <label class="form-label">Board</label>
+                                    <input type="text" name="board" class="form-control" placeholder="Enter Board">
+                                </div>
+                                <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                    <label class="form-label ">Passing Year</label>
+                                    <input type="text" name="passing_year" class="form-control single-year"
+                                        placeholder="Enter Passing Year">
+                                </div>
+                                <?php
+                            endif;
+                            ?>
+                            <?php
+                            if (CHECK_PERMISSION('STUDENT_EXAMINATION_FORM')):
+                                ?>
+                                <div class="card mb-2">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Examination Passed</h3>
+                                    </div>
+                                    <div class="card-body p-1">
+                                        <table class="table table-bordered">
+                                            <thead class="bg-primary">
+                                                <tr>
+                                                    <th class="bg-primary text-white">Examination Passed</th>
+                                                    <th class="bg-primary text-white">Name of Stream</th>
+                                                    <th class="bg-primary text-white">Board/University</th>
+                                                    <th class="bg-primary text-white">Year of Passing</th>
+                                                    <th class="bg-primary text-white">Marks Obtained</th>
+                                                    <th class="bg-primary text-white">% Marks</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                for ($fieldIndex = 1; $fieldIndex <= 2; $fieldIndex++) {
+                                                    ?>
+                                                    <tr>
+                                                        <td><input type="text" name="examination[passed][]" class="form-control"
+                                                                placeholder="Examination Passed"></td>
+                                                        <td><input type="text" name="examination[name_of_stream][]"
+                                                                class="form-control" placeholder="Name of Stream"></td>
+                                                        <td><input type="text" name="examination[board_or_university][]"
+                                                                class="form-control" placeholder="Board/University"></td>
+                                                        <td><input type="text" name="examination[year_of_passing][]"
+                                                                class="form-control" placeholder="Year of Passing"></td>
+                                                        <td><input type="text" name="examination[marks_obtained][]"
+                                                                class="form-control" placeholder="Marks Obtained"></td>
+                                                        <td><input type="text" name="examination[percentage_marks][]"
+                                                                class="form-control" placeholder="% Marks"></td>
+
+                                                    </tr>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <?php
+                            endif;
+                            ?>
                             <div class="card card-body">
                                 <h4>Upload Documents</h4>
                                 <div class="row">

@@ -33,8 +33,24 @@ class Document extends MY_Controller
         ]);
         $this->set_data($get->row_array());
         $pdfContent = $this->parse('registration-form');
-
+        // echo 'yes';
         $this->pdf($pdfContent, $get->row('student_name') . '-' . $get->row('roll_no') . '-Registration-form.pdf');
+    }
+
+    function registration_certificate(){
+        // echo $this->id;
+        $this->db->select('examination_body');
+        $get = $this->student_model->get_switch('all',[
+            'id' => $this->id
+        ]);
+        if($get->num_rows()){
+            $row = $get->row();
+            $this->set_data($get->row_array());
+            $this->set_data('serial_no',$row->student_id);
+            $this->set_data('studentEncodeId',$this->encode($row->student_id));
+            $pdfContent = $this->parse('registration-certificate');
+            $this->pdf($pdfContent, $get->row('student_name') . '- Registation Certificate.pdf');
+        }
     }
     private function get_multi_path($course_id, $file, $page = 'P')
     {

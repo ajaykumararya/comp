@@ -56,11 +56,14 @@ $route['student'] = 'student/index';
 $route['admin'] = $route['Admin'] = 'admin/index';
 $route['admit-card/(:any)'] = 'document/admit_card';
 $route['marksheet/(:any)'] = 'document/marksheet';
-$route['certificate/(:any)'] = 'document/certificate';
+$route['registration-certificate/(:any)'] = 'document/registration_certificate';
 $route['id-card/(:any)'] = 'document/id_card';
+$route['registration/(:any)'] = 'document/registration';
+
 $route['franchise-certificate/(:any)'] = 'document/franchise_certificate';
 $route['marksheet-verification/(:any)'] = 'site/marksheet_print/$1';
 $route['student-details/(:any)'] = 'site/student_details/$1';
+$route['registration-form/(:any)'] = 'site/registration_certificate/$1';
 $route['(:any)'] = 'site/index';
 $route['co-ordinate/(:any)'] = 'Coordinate/$1';
 $route['co-ordinate/(:any)/(:any)'] = 'Coordinate/$1/$2';

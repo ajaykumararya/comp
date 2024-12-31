@@ -267,5 +267,9 @@ class Student extends MY_Controller
             $this->view('placements', ['isValid' => true]);
         }
     }
+    function registration_certificate(){
+        // echo 'YES';
+        $this->view('registration-certificate');
+    }
 }
 ?>

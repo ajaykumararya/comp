@@ -413,6 +413,13 @@ if (CHECK_PERMISSION('CENTRE_ONLY_ADD_STUDENT') && OnlyForCentre()) {
                         'url' => 'student/get-certificate',
                     )
                 )
+            ),            
+            array(
+                'label' => 'Registration Certificate',
+                'type' => 'stduent_registration_certificate',
+                'icon' => array('notepad', 5),
+                'condition' => CHECK_PERMISSION('REGISTRATION_CERTIFICATE'),
+                'url' => 'student/registration-certificate'
             ),
             array(
                 'label' => 'Study Material',

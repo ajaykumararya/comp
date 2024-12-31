@@ -213,13 +213,14 @@ class Ki_theme
         // return ($currentDate <= $firstDate && $currentDate <= $lastDate);
 
     }
-    function isDateWithinWeek($dateInput) {
+    function isDateWithinWeek($dateInput)
+    {
         $date = new DateTime($dateInput); // Create DateTime object for the input date
-        
+
         // Clone the date to avoid modification
         $startOfWeek = clone $date;
         $endOfWeek = clone $date;
-        
+
         // Calculate the start and end of the week (Sunday to Saturday)
         $startOfWeek->modify('last Sunday');
         $endOfWeek->modify('next Saturday');
@@ -278,22 +279,22 @@ class Ki_theme
             else
                 return 'Fail';
         }
-        if(PATH == 'upstate'){
-            if($score >= 90)
+        if (PATH == 'upstate') {
+            if ($score >= 90)
                 return 'A+';
-            else if($score >= 80)
+            else if ($score >= 80)
                 return 'A';
-            else if($score >= 70)
+            else if ($score >= 70)
                 return 'B+';
-            else if($score >= 60)
+            else if ($score >= 60)
                 return 'B';
-            else if($score >= 50)
+            else if ($score >= 50)
                 return 'C';
-            else if($score >= 40)
+            else if ($score >= 40)
                 return 'D';
-            else if($score >= 30)
+            else if ($score >= 30)
                 return 'E';
-            else 
+            else
                 return 'F';
         }
         if (PATH == 'vihm') {
@@ -402,7 +403,7 @@ class Ki_theme
             return $this->CI->db->where('seen', $seen)->where($where)->get('manual_notifications')->num_rows();
         return;
     }
-    function generate_qr($id = 0, $type = '', $data = '')
+    function generate_qr($id = 0, $type = '', $data = '', $return = false)
     {
         $png = "upload/images/{$type}_{$id}.png";
         if (file_exists($png))
@@ -414,7 +415,7 @@ class Ki_theme
             'version' => 5,  // QR code version (adjust as needed)
             'outputType' => QRCode::OUTPUT_IMAGE_PNG,
             'eccLevel' => QRCode::ECC_L,
-            'imageBase64' => false,
+            'imageBase64' => $return,
             'margin' => 0,
             'imageTransparent' => true
         ]);
@@ -422,6 +423,8 @@ class Ki_theme
         $qrCode = new QRCode($options);
         $image = $qrCode->render($data);
         // Save the QR code image to a file
+        if ($return)
+            return $image;
         file_put_contents($png, $image);
         return $png;
     }
@@ -1271,8 +1274,8 @@ class Ki_theme
     {
         $adminMenu = [];
         if ($this->CI->center_model->isCoordinator())
-            $adminMenu = $this->CI->load->config('coordinate/menu', true);        
-        else if($this->isAdmin() || $this->isCenter())
+            $adminMenu = $this->CI->load->config('coordinate/menu', true);
+        else if ($this->isAdmin() || $this->isCenter())
             $adminMenu = $this->CI->load->config('admin/menu', true);
         else if ($this->CI->student_model->isStudent())
             $adminMenu = $this->CI->load->config('student/menu', true);

@@ -290,7 +290,7 @@ class Website extends Ajax_Controller
                     }
                 }
             }
-            $this->response('url',base_url('student-details/').$this->token->encode([
+            $this->response('url', base_url('student-details/') . $this->token->encode([
                 'student_id' => $student_id
             ]));
             $this->session->set_userdata([
@@ -451,9 +451,10 @@ class Website extends Ajax_Controller
             $data = [
                 'roll_no' => $this->post('roll_no'),
                 // 'batch_id' => $this->post('batch_id'),
-                'course_id' => $this->post('course_id'),
                 'admission_date' => $this->post('admission_date')
             ];
+            if (!empty($_POST['course_id']))
+                $data['course_id'] = $this->post('course_id');
             if (isset($_POST['batch_id']))
                 $data['batch_id'] = $this->post('batch_id');
             if (isset($_POST['session_id']))

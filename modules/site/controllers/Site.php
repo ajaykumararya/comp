@@ -92,6 +92,29 @@ class Site extends Site_Controller
         $this->render($content, 'content');
         // pre($this->public_data,true);
     }
+    function registration_certificate()
+    {
+        $token = $this->uri->segment(2);
+        $id = ($this->decode($token));
+        // echo $id;
+        $this->db->select('examination_body');
+        $get = $this->student_model->get_switch('all', [
+            'id' => $id
+        ]);
+        if ($get->num_rows()) {
+            // pre($row);
+            $data = $get->row_array();
+            // pre($data,true)  ;
+            $this->set_data('page_name', $data['student_name'] . ' Details');
+            $this->set_data($data);
+            $this->set_data('isPrimary', false);
+
+            $this->render('schema', [
+                'content' => $this->template('student-registration-form')
+            ]);
+        } else
+            $this->error_404();
+    }
     function marksheet_print()
     {
         $token = $this->uri->segment(2);
@@ -199,6 +222,12 @@ class Site extends Site_Controller
     }
     function test()
     {
+        $get = $this->student_model->get_switch('all', [
+            'examination_body !=' => null
+        ]);
+        echo $this->db->last_query();
+
+        exit;
         try {
             $config = ($this->config->item('project'));
             // exit;

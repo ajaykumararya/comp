@@ -106,6 +106,11 @@ class Student extends Ajax_Controller
         }
 
         $data = $this->post();
+        $examination = [];
+        if (isset($data['examination'])) {
+            $examination = $data['examination'];
+            unset($data['examination']);
+        }
         if (isset($data['referral_id'])) {
             $referral_id = $data['referral_id'];
             unset($data['referral_id']);
@@ -148,6 +153,28 @@ class Student extends Ajax_Controller
         if ($this->form_validation->run()) {
             $this->db->insert('students', $data);
             $student_id = $this->db->insert_id();
+            if (CHECK_PERMISSION('STUDENT_EXAMINATION_FORM') && table_exists('student_examiniation_passed')) {
+                foreach ($examination['passed'] as $index => $passed) {
+                    if (
+                        !empty($passed) || !empty($examination['name_of_stream'][$index]) ||
+                        !empty($examination['board_or_university'][$index]) ||
+                        !empty($examination['year_of_passing'][$index]) ||
+                        !empty($examination['marks_obtained'][$index]) ||
+                        !empty($examination['percentage_marks'][$index])
+                    ) {
+                        $newData = [
+                            'student_id' => $student_id,
+                            'passed' => $passed,
+                            'name_of_stream' => $examination['name_of_stream'][$index],
+                            'board_or_university' => $examination['board_or_university'][$index],
+                            'year_of_passing' => $examination['year_of_passing'][$index],
+                            'marks_obtained' => $examination['marks_obtained'][$index],
+                            'percentage_marks' => $examination['percentage_marks'][$index],
+                        ];
+                        $this->db->insert('student_examiniation_passed', $newData);
+                    }
+                }
+            }
             if ($walletSystem) {
                 $data = [
                     'center_id' => $this->center_model->loginId(),
@@ -543,6 +570,41 @@ class Student extends Ajax_Controller
             $data
         );
     }
+    function fetch_examination_body()
+    {
+        $get = $this->db->select('examination_body')->where('id', $this->post('student_id'))->get('students');
+        if ($get->num_rows()) {
+            $this->response('examination_body', $get->row()->examination_body);
+            $this->response('status', true);
+        }
+    }
+    function update_examination_body()
+    {
+        $this->db->where('id', $this->post('student_id'))->update(
+            'students',
+            [
+                'examination_body' => $this->post('examination_body')
+            ]
+        );
+        $this->response('status', true);
+    }
+    function list_registration_certificates()
+    {
+        $data = [];
+        $get = $this->student_model->get_switch('all', [
+            'examination_body !=' => null
+        ]);
+        if ($get->num_rows()) {
+            foreach ($get->result_array() as $ad) {
+                $ad['registration_id'] = ($ad['student_id']);
+                array_push($data, $ad);
+            }
+        }
+        $this->response(
+            'data',
+            $data
+        );
+    }
     function filter_for_select()
     {
         $this->response($this->post());
@@ -696,16 +758,17 @@ class Student extends Ajax_Controller
             $this->db->insert('study_material', $data);
         }
     }
-    function delete_study_material($material_id){
+    function delete_study_material($material_id)
+    {
         //delete-study-material
         $get = $this->student_model->get_study_material($material_id);
-        if($get->num_rows()){
-            $file = 'upload/study-mat/'.$get->row('material_file');
-            if(file_exists($file)){
+        if ($get->num_rows()) {
+            $file = 'upload/study-mat/' . $get->row('material_file');
+            if (file_exists($file)) {
                 @unlink($file);
             }
             $this->db->where('id', $material_id)->delete('study_material');
-            $this->response('status',true);
+            $this->response('status', true);
         }
     }
 
@@ -782,7 +845,8 @@ class Student extends Ajax_Controller
     {
         $this->response('data', $this->student_model->list_placement_student()->result_array());
     }
-    function delete_placement_student($id){
+    function delete_placement_student($id)
+    {
         $this->response('status', $this->student_model->delete_placement_student($id));
     }
 }
