@@ -13,9 +13,11 @@
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 <link href='https://fonts.googleapis.com/css?family=Reem Kufi' rel='stylesheet'>
 <style>
-    :root{
-        --my-theme-color : <?=ES('theme_color_value','#762051')?>
+    :root {
+        --my-theme-color:
+            <?= ES('theme_color_value', '#762051') ?>
     }
+
     body,
     li,
     .title {
@@ -36,8 +38,8 @@
         #printableContent {
             width: 98%;
             position: absolute;
-            left:2%;
-            top:2%
+            left: 2%;
+            top: 2%
         }
     }
 </style>
@@ -57,6 +59,25 @@
     })
 </script>
 <style>
+    .float {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        bottom: 90px;
+        right: 15px;
+        background-color: #25d366;
+        color: #fff;
+        border-radius: 50px;
+        text-align: center;
+        font-size: 30px;
+        box-shadow: 2px 2px 3px #565656;
+        z-index: 100;
+    }
+
+    .my-float {
+        margin-top: 16px
+    }
+
     .form-label.required::after {
         content: '*';
         color: red;
