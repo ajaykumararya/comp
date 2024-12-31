@@ -10,7 +10,13 @@
                 <div class="card-body" id="printableContent">
                     <table class="table-responsive">
                         <table class="table table-bordered">
-
+                        <?php
+                        if (PATH == 'upstate'):
+                            echo '<tr >
+                                <td colspan="3"><img src="{base_url}{document_path}/header-img.jpg" style="width:100%"></td>
+                            </tr>';
+                        endif;
+                        ?>
                             <tr>
                                 <th>Course Name</th>
                                 <td>{course_name}</td>
