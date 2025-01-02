@@ -11,3 +11,4 @@ modules/document/views
 asstes/formats
 modules/api/config/*
 test
+assets/fas/*
