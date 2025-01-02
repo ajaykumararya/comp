@@ -180,7 +180,8 @@ class Ki_theme
     function isDiwali()
     {
         $get_festival = $this->findEvent('Diwali');
-        return $this->isDateWithinWeek($get_festival['date']);
+        if (isset($get_festival['data']))
+            return $this->isDateWithinWeek($get_festival['date']);
         // $givenDateString = date('d-m-Y', strtotime($get_festival['date']));
 
         // // Create a DateTime object from the given date
