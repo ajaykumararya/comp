@@ -56,6 +56,7 @@ $route['student'] = 'student/index';
 $route['admin'] = $route['Admin'] = 'admin/index';
 $route['admit-card/(:any)'] = 'document/admit_card';
 $route['marksheet/(:any)'] = 'document/marksheet';
+$route['certificate/(:any)'] = 'document/certificate';
 $route['registration-certificate/(:any)'] = 'document/registration_certificate';
 $route['id-card/(:any)'] = 'document/id_card';
 $route['registration/(:any)'] = 'document/registration';
