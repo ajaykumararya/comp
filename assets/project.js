@@ -1,30 +1,30 @@
-function subModal(e){
+function subModal(e) {
     var subjectModal = new bootstrap.Modal(document.getElementById('subjectsModal'));
     // alert(4);
     document.getElementById("subjectList").innerHTML = '';
-        document.getElementById('smTitle').innerHTML = e.dataset.course_name + ' Subjects';
-        e.dataset.course_subjects.split("?").forEach(function (sub) {
-            if (sub)
-                document.getElementById("subjectList").innerHTML += '<li class="list-group-item">' + sub + '</li>';
-        });
+    document.getElementById('smTitle').innerHTML = e.dataset.course_name + ' Subjects';
+    e.dataset.course_subjects.split("?").forEach(function (sub) {
+        if (sub)
+            document.getElementById("subjectList").innerHTML += '<li class="list-group-item">' + sub + '</li>';
+    });
     subjectModal.show();
 }
 
 // if (document.getElementById('subjectsModal').length) {
-    // var subjectModal = new bootstrap.Modal(document.getElementById('subjectsModal'));
+// var subjectModal = new bootstrap.Modal(document.getElementById('subjectsModal'));
 
-    // function subModal(e) {
-    //     document.getElementById("subjectList").innerHTML = '';
-    //     document.getElementById('smTitle').innerHTML = e.dataset.course_name + ' Subjects';
-    //     e.dataset.course_subjects.split("?").forEach(function (sub) {
-    //         if (sub)
-    //             document.getElementById("subjectList").innerHTML += '<li class="list-group-item">' + sub + '</li>';
-    //     });
-    //     subjectModal.show();
-    // }
+// function subModal(e) {
+//     document.getElementById("subjectList").innerHTML = '';
+//     document.getElementById('smTitle').innerHTML = e.dataset.course_name + ' Subjects';
+//     e.dataset.course_subjects.split("?").forEach(function (sub) {
+//         if (sub)
+//             document.getElementById("subjectList").innerHTML += '<li class="list-group-item">' + sub + '</li>';
+//     });
+//     subjectModal.show();
+// }
 // }
 $(document).on('ready', function () {
-   
+
 
     //log($('.student-verification-form'));
     $(document).on('submit', '.student-verification-form', function (e) {
@@ -65,6 +65,20 @@ $(document).on('ready', function () {
 
         });
     });
+    $(document).on('submit', '.student-registration-form-verification', function (e) {
+        e.preventDefault();
+        // alert(2);
+        var data = new FormData(this);
+        $.AryaAjax({
+            url: 'website/student-registration-form-verification',
+            data: data
+        }).then((res) => {
+            if (res.status)
+                window.open(res.url, '_blank');
+            else
+                SwalWarning('Notice!', res.message);
+        });
+    })
     $(document).on('change', '.admission-center', function () {
         var center_id = $(this).val();
         var roll_no_box = $(this).closest('form').find('[name="roll_no"]');
@@ -99,6 +113,21 @@ $(document).on('ready', function () {
     $(document).on('click', '.print-btn', function (e) {
         e.preventDefault();
         window.print();
+    })
+    $(document).on('submit', '.student-registration-certificate-form', function (e) {
+        e.preventDefault();
+        var that = this;
+        $.AryaAjax({
+            url: 'website/student-registration-certificate',
+            data: new FormData(that),
+        }).then((res) => {
+            // log(res);
+            if (res.status) {
+                SwalSuccess(`Registration No. is ${res.registration_no}`, 'Your data submitted Successfully');
+                that.reset();
+            }
+            showResponseError(res);
+        });
     })
     $(document).on('submit', '.student-admission-form', function (e) {
         e.preventDefault();

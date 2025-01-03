@@ -271,5 +271,8 @@ class Student extends MY_Controller
         // echo 'YES';
         $this->view('registration-certificate');
     }
+    function registration_verification(){
+        $this->view('registration-verification');
+    }
 }
 ?>

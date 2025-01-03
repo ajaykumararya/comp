@@ -849,4 +849,14 @@ class Student extends Ajax_Controller
     {
         $this->response('status', $this->student_model->delete_placement_student($id));
     }
+    function registration_verification(){
+        $this->response('data',$this->db->get('students_registeration_data')->result_array());
+    }
+    function update_registration_verification_status(){
+        $this->response('status',$this->db->where('id',$this->post('id'))->update('students_registeration_data',[
+            'status' => (int)$this->post('status')
+        ]));
+        $this->response('data',$this->post());
+        // $this->response('currentStatus',$this->post('status') == 1 ? 'Verified' : 'Unverified');
+    }
 }

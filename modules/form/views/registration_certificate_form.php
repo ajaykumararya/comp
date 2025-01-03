@@ -5,7 +5,7 @@
                 <div class="text-center animation animated fadeInUp" data-aos="fade-up" data-animation="fadeInUp"
                     data-animation-delay="0.01s" style="animation-delay: 0.01s; opacity: 1;">
                     <div class="heading_s1 text-center">
-                        <h2 class="main-heading center-heading"><i class="fa fa-list-alt"></i> <?=PATH == 'upstate' ? 'Result' : 'Marksheet'?> Verification</h2>
+                        <h2 class="main-heading center-heading"><i class="fa fa-list-alt"></i> Registration Verification</h2>
                     </div>
                 </div>
             </div>
@@ -13,17 +13,12 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6 col-md-offset-3 mb-4 mt-4">
-                <form action="" class="student-result-verification-form animation animated fadeInLeft">
+                <form action="" class="student-registration-form-verification animation animated fadeInLeft">
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="" class="form-label mt-2">{rollno_text}</label>
-                                <input type="text" placeholder="Enter {rollno_text}." name="roll_no" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="form-label mt-2">Date Of Birth</label>
-                                <input value="<?= date('1999-01-01') ?>" type="date" name="dob"
-                                    class="form-control select-dob">
+                                <label for="" class="form-label mt-2">Registration Number</label>
+                                <input type="number" placeholder="Enter Registration Number" name="registration_no" class="form-control">
                             </div>
                         </div>
                         <div class="card-footer">
@@ -35,6 +30,6 @@
                 </form>
             </div>
         </div>
-        <div class="row show-student-details"></div>
+        <div class="row student-registration-data-response"></div>
     </div>
 </section>

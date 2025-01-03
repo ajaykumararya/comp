@@ -222,6 +222,8 @@ class Site extends Site_Controller
     }
     function test()
     {
+        echo time();//generateNumericString(8);
+        exit;
         $get = $this->student_model->get_switch('all', [
             'examination_body !=' => null
         ]);

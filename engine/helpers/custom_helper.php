@@ -13,6 +13,11 @@ function start_with($haystack, $needle)
 {
     return substr($haystack, 0, strlen($needle)) === $needle;
 }
+function append_items($config,$items){
+    $ci = &get_instance();
+    $custom_config = $ci->config->item($config) ?? [];
+    $ci->config->set_item($config, array_merge($custom_config,$items));
+}
 function module_view_exists($module_name, $view_file)
 {
     // Path to the module's views folder
@@ -418,7 +423,13 @@ function generate_otp()
     $otp = generate_hotp($secret, $time, 6); // generate a 6-digit HOTP
     return $otp;
 }
-
+function generateNumericString($length = 10) {
+    $numericString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $numericString .= rand(0, 9);
+    }
+    return $numericString;
+}
 function generate_hotp($secret, $time, $digits)
 {
     $hash = hash_hmac('sha1', $time, $secret, true); // generate a HMAC-SHA1 hash

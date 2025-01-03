@@ -68,6 +68,9 @@
                         </table>
                     </table>
                 </div>
+                <div class="card-footer" align="center">
+                    <button type="button" class="btn btn-primary btn-xs btn-sm print-btn"><i class="fa fa-print"></i> Print</button>
+                </div>
             </div>
         </div>
     </div>

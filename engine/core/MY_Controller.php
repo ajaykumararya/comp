@@ -26,6 +26,12 @@ class MY_Controller extends MX_Controller
         $this->load->library('common/database_manager', '', 'build_db');
         $this->load->library('common/ki_theme');
         $this->load->config('form/forms');
+        if (CHECK_PERMISSION('REGISTRATION_CERTIFICATE')) {
+            append_items('forms', [
+                'registration_form' => 'Registration Form',
+                'registration_certificate_form' => 'Registration Certificate Form'
+            ]);
+        }
         $this->checkUpdate();
         // if (!defined('DIWALI')) {
         //     define('DIWALI', true);
@@ -90,7 +96,7 @@ class MY_Controller extends MX_Controller
         defined('PROJECT_RAND_NUM') or define('PROJECT_RAND_NUM', mt_rand(0, 999) . strtoupper(PATH) . mt_rand(0, 999));
         // if(PATH == 'iedct')
         //     exit;
-        $this->set_data('rollno_text',CHECK_PERMISSION('ROLLNO_AS_ENROLLMENT') ? 'Enrollment No' : 'Roll No');
+        $this->set_data('rollno_text', CHECK_PERMISSION('ROLLNO_AS_ENROLLMENT') ? 'Enrollment No' : 'Roll No');
     }
     public function percentage_check($value)
     {
@@ -121,7 +127,7 @@ class MY_Controller extends MX_Controller
         //         ]
         //     ]);
         // }
-        $fields = ['marital_status', 'category', 'medium','adhar_card_no','session_id','examination_body'];
+        $fields = ['marital_status', 'category', 'medium', 'adhar_card_no', 'session_id', 'examination_body'];
         foreach ($fields as $field) {
             $checkField = $this->build_db->field_exists('students', $field);
             if (!$checkField) {
