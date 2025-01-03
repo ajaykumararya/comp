@@ -27,7 +27,7 @@
                             </tr>
                             <tr>
                                 <th>Registration No.</th>
-                                <td>{roll_no}</td>
+                                <td>{registration_no}</td>
                             </tr>
                             <tr>
                                 <th>Registration Date</th>
@@ -67,6 +67,16 @@
                             </tr>
                         </table>
                     </table>
+                    <?php
+                    if(PATH == 'upstate'){
+                        echo '<b class="text-primary">
+                            UPSTATE PARAMEDICAL COUNCIL Has The Right To Cancel The Certificate If Any Infirmation Is Found To Be Wrong Of False
+                        </b>';
+
+                        echo '<center><p class="text-primary">This is a computer generated copy, does\'nt require signature or stamp.</p></center>';
+                    }
+
+                    ?>
                 </div>
                 <div class="card-footer" align="center">
                     <button type="button" class="btn btn-primary btn-xs btn-sm print-btn"><i class="fa fa-print"></i> Print</button>

@@ -45,6 +45,13 @@ class Document extends MY_Controller
         ]);
         if($get->num_rows()){
             $row = $get->row();
+            $registration_no = '';
+            $getRegistration = $this->db->where("enrollment_no",$row->roll_no)->get('students_registeration_data');
+            if($getRegistration->num_rows()){
+                $rowd = $getRegistration->row();
+                $registration_no = $rowd->registration_no;
+            }
+            $this->set_data('registration_no',$registration_no);
             $this->set_data($get->row_array());
             $this->set_data('serial_no',$row->student_id);
             $this->set_data('studentEncodeId',$this->encode($row->student_id));

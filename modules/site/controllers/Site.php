@@ -104,6 +104,14 @@ class Site extends Site_Controller
         if ($get->num_rows()) {
             // pre($row);
             $data = $get->row_array();
+            $registration_no = '';
+            $getRegistration = $this->db->where("enrollment_no", $data['roll_no'])->get('students_registeration_data');
+            if ($getRegistration->num_rows()) {
+                $rowd = $getRegistration->row();
+                $registration_no = $rowd->registration_no;
+            }
+            $this->set_data('registration_no', $registration_no);
+
             // pre($data,true)  ;
             $this->set_data('page_name', $data['student_name'] . ' Details');
             $this->set_data($data);

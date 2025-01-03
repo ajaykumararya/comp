@@ -18,9 +18,16 @@ document.addEventListener('DOMContentLoaded', function () {
             { 'data': 'exam_centre_name' },
             { 'data': 'year' },
             { 'data': 'pass_or_fail' },
+            { 'data': 'status' },
             { 'data': null },
         ],
         columnDefs: [
+            {
+                targets : -2,
+                render:function(data){
+                    return `${ data == '1' ? badge('Verified','success') : badge('Unverified','warning')}`;
+                }
+            },
             {
                 targets: -1,
                 orderable: false,

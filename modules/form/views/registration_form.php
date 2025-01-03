@@ -43,18 +43,18 @@
 
                                 <div class="col-md-6 form-group mb-4">
                                     <label for="" class="form-label required">Exam / Course</label>
-                                    <textarea type="text" name="exam_or_course" placeholder="Enter Exam / Course"
-                                        class="form-control" required></textarea>
+                                    <input type="text" name="exam_or_course" placeholder="Enter Exam / Course"
+                                        class="form-control" required>
                                 </div>
                                 <div class="col-md-6 form-group mb-4">
                                     <label for="" class="form-label required">College / Institute Name</label>
-                                    <textarea type="text" name="institute_name"
-                                        placeholder="Enter College / Institute Name" required class="form-control"></textarea>
+                                    <input type="text" name="institute_name"
+                                        placeholder="Enter College / Institute Name" required class="form-control">
                                 </div>
                                 <div class="col-md-6 form-group mb-4">
                                     <label for="" class="form-label required">Exam Centre Name</label>
-                                    <textarea name="exam_centre" class="form-control" required
-                                        placeholder="Exam Centre Name"></textarea>
+                                    <input name="exam_centre" class="form-control" required
+                                        placeholder="Exam Centre Name">
                                 </div>
                                 <div class="col-md-3 form-group mb-4">
                                     <label for="" class="form-label required">Year of Passing</label>

@@ -19,6 +19,7 @@
                             <th>Exam Centre Name</th>
                             <th>Passing of Year</th>
                             <th>Pass / Fail</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>

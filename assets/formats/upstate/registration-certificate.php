@@ -108,8 +108,8 @@ $this->ki_theme->generate_qr($student_id, 'registration_form', base_url('registr
         <img src="upload/images/registration_form_{student_id}.png" style="width:100px;height:100px">
     </div>
     <p class="position-absolute" style="top:2.6%;left:14%;width:120px">{serial_no}</p>
-    <p class="position-absolute " style="top:31.9%;left:35%;line-height:1;">{course_name}</p>
-    <p class="position-absolute" style="top:34.8%;left:35%;width:200px">{roll_no}</p>
+    <p class="position-absolute " style="top:31.9%;left:35%;line-height:1;width:45%">{course_name}</p>
+    <p class="position-absolute" style="top:34.8%;left:35%;width:200px">{registration_no}</p>
     <p class="position-absolute " style="top:38.6%;left:35%;width:120px">{admission_date}</p>
     <p class="position-absolute" style="top:42%;left:35%;width:255px">{student_name}</p>
     <p class="position-absolute" style="top:45.4%;left:35%;width:255px">{father_name}</p>
