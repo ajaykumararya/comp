@@ -28,7 +28,7 @@ class MY_Controller extends MX_Controller
         $this->load->config('form/forms');
         if (CHECK_PERMISSION('REGISTRATION_CERTIFICATE')) {
             append_items('forms', [
-                'registration_form' => 'Registration Form',
+                'registration_form' => 'Registration Verification Form',
                 'registration_certificate_form' => 'Registration Certificate Form'
             ]);
         }
