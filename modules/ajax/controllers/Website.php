@@ -759,7 +759,7 @@ class Website extends Ajax_Controller
                         'url' => base_url('registration-form/' . $this->encode($row->student_id))
                     ]);
                 } else {
-                    $this->response('message', 'Your documents and data has been verified but certificate is not create, please contact you administrator.');
+                    $this->response('message', 'Your documents and data has been verified but certificate is not create, please contact your administrator.');
                 }
             } else
                 $this->response('message', 'Your documents and data are pending for verification..');

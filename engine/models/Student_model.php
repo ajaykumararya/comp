@@ -9,6 +9,7 @@ class Student_model extends MY_Model
                 s.status as admission_status,
                 s.image,
                 s.dob,
+                s.adhar_card_no,
                 s.gender,
                 s.admission_date,
                 s.admission_type,
@@ -72,7 +73,7 @@ class Student_model extends MY_Model
                                         ses.title as session')
                     ->join('admit_cards_with_session as acws','acws.course_id = s.course_id AND acws.center_id = s.center_id');
                     $this->db->join('exam_centres as ecs','ecs.id = acws.exam_centre_id');    
-                    $this->db->join('session as ses','ses.id = acws.session_id'); 
+                    $this->db->join('session as ss','ss.id = acws.session_id'); 
                     if(isset($student_id)){
                         unset($condition['student_id']);
                         $this->db->where('s.id', $student_id);

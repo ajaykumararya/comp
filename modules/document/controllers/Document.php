@@ -183,7 +183,7 @@ class Document extends MY_Controller
                 $toDateString = strtotime('-1 month', $toDateString);
                 $this->set_data('to_date', date('M Y', $toDateString));
             }
-            if (in_array(PATH, ['iedct', 'techno', 'softworldedu', 'upstate'])):
+            if (in_array(PATH, ['iedct', 'techno', 'softworldedu', 'upstate','ncvetskill'])):
                 $admissionTime = strtotime($get->row('admission_date'));
                 // $this->set_data('from_date', date('M Y', $admissionTime));
                 $this->set_data('serial_no', date("Y", $admissionTime) . str_pad($get->row('student_id'), 3, '0', STR_PAD_LEFT));
@@ -404,7 +404,7 @@ class Document extends MY_Controller
             ]);
 
             $this->ki_theme->generate_qr($this->id, 'student_certificate', current_url());
-            if (in_array(PATH, ['haptronworld', 'sewaedu', 'beautyguru', 'pces'])) {
+            if (in_array(PATH, ['haptronworld', 'sewaedu', 'beautyguru', 'pces','ncvetskill'])) {
                 $certificate['serial_no'] = (50000 + $this->id);
                 $this->mypdf->addPage('L');
             }
