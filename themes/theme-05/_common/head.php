@@ -28,3 +28,120 @@
 <!-- Responsive CSS -->
 <link rel="stylesheet" href="{theme_url}assets/css/theme-responsive.css" type="text/css" />
 <link rel="stylesheet" href="{theme_url}assets/style.css" type="text/css" />
+<style>
+    .input-group {
+        display: flex;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .input-group-addon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem 1rem;
+        background-color: #f7f7f7;
+        border: 1px solid #ced4da;
+        border-right: none;
+        color: #495057;
+    }
+
+    .input-group .form-control {
+        flex: 1 1 auto;
+        padding: 0.5rem 1rem;
+        border: 1px solid #ced4da;
+        outline: none;
+    }
+
+    .select2 {
+        height: 34px;
+    }
+
+    .mt-3 {
+        margin-top: 10px
+    }
+
+    .card-header {
+        padding: 17px;
+    }
+
+    .card-header .card-title {
+        font-size: 25px;
+    }
+
+    .card-footer {
+        border-top: 1px solid #efe2e2;
+        padding: 17px
+    }
+
+    /* Outline Success Style */
+    .btn-outline-success {
+        display: inline-block;
+        font-weight: 400;
+        color: #28a745;
+        /* Green text */
+        background-color: transparent;
+        border: 2px solid #28a745;
+        /* Green border */
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: 0.25rem;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn-outline-success:hover {
+        color: #fff;
+        /* White text */
+        background-color: #28a745;
+        /* Green background */
+        border-color: #28a745;
+        /* Same border */
+    }
+
+    .btn-outline-success:focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+        /* Green focus ring */
+    }
+
+    .btn-outline-success:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+        background-color: transparent;
+        color: #28a745;
+        border-color: #28a745;
+    }
+
+    .bg-dark {
+        background: #212135;
+        padding: 10px;
+    }
+
+    .main-heading.center-heading {
+        padding: 20px;
+        font-size: 32px;
+    }
+
+    section.small_pb,
+    section.sec_padd,
+    section.small_pt,
+    section.gray-bg {
+        background: white;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    li.active-menu {
+        background: rgba(0, 0, 0, .3);
+    }
+
+    @media (min-width: 992px) {
+        .col-md-offset-3 {
+            margin-left: 0%;
+        }
+    }
+</style>

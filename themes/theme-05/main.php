@@ -224,7 +224,7 @@
                                 {
                                     $html = "<ul class=\"" . $class . "\" id=\"" . $boxID . "\" $attr>";
                                     foreach ($items as $key => $value) {
-                                        $activeCss = $value['isActive'] ? 'active' : ''; //getActiveMenu($value['page_id'],'active');
+                                        $activeCss = $value['isActive'] ? 'active-menu' : ''; //getActiveMenu($value['page_id'],'active');
                                         $link = $value['link'];
                                         $iconWithTExt = $value['label'];
                                         if (array_key_exists('child', $value)) {
@@ -328,6 +328,7 @@
 
     {output}
 
+
     <!--
     ============================================
     CONTACT INFORMATION
@@ -350,16 +351,18 @@
                         <h3 style="color:#fff;">
                             <strong class="flex"> <img src="{theme_url}assets/img/icon/whatsapp.png"
                                     style="margin-left: 4px;" alt="" class="img-responsive" />
-                                +91-<?=remove_91($whatsapp_number)?></strong> <br>
+                                +91-<?= remove_91($whatsapp_number) ?></strong> <br>
                             <strong class="flex"> <i class="fa fa-phone-square"></i> +91-{number} </strong>
                         </h3>
-                        <p class="margin-tp-30"><strong>CAREER POINT LTD -</strong> <br /><em><strong>Providing Quality
-                                    Education Since 1993</strong></em> </p>
-                        <p style="text-align:justify; margin-right:5px; font-size:11px;">Career Point Institute of Skill
-                            Development was setup to fulfill the growing need in India for skilled manpower across
-                            sectors
-                            and narrow the existing gap between the demand and supply of employment.</p>
-                        <p style="margin-top:20px;">
+                        <p class="margin-tp-30"><strong><?= ES('footer_note_title', '') ?></strong></p>
+                        <p style="text-align:justify; margin-right:5px; font-size:11px;">
+                            <?= ES('footer_note_description') ?></p>
+                        <?php
+                        if (isset($footer_note_button_link) && $footer_note_button_link) {
+                            echo '<a href="' . $footer_note_button_link . '" class="text-white">' . $footer_note_button_text . '</a>';
+                        }
+                        ?>
+                        <!-- <p style="margin-top:20px;">
                             <a href="https://www.facebook.com/careerpointskills" target="_blank"><img
                                     src="../careerpoint.ac.in/old/images/new_img/facebook.html" alt="IIT" width="22"
                                     height="22" style="margin:5px;" /></a>
@@ -369,7 +372,7 @@
                             <a href="https://www.youtube.com/channel/UC_YsgFYUTWiXozTyGsEGLsw" target="_blank"><img
                                     src="../careerpoint.ac.in/old/images/new_img/youtube.html" alt="IIT" width="22"
                                     height="22" style="margin:5px;" /></a>
-                        </p>
+                        </p> -->
                     </div>
 
 
@@ -378,17 +381,14 @@
                 <div class="col-sm-3">
                     <div class="footer-widget contact-details1">
                         <div class="media-body">
-                            <h4 class="media-heading1"> Our Collaboration</h4>
+                            <h4 class="media-heading1"><?= ES('footer_first_text', '') ?></h4>
                         </div>
                         <ul class="media-list">
-                            <li><a href="http://www.cpisd.in/collaboration/pmkvy.asp"><i
-                                        class="fa fa-angle-double-right text-danger"></i> PMKVY</a></li>
-                            <li><a href="http://www.cpisd.in/collaboration/nsdc.asp"><i
-                                        class="fa fa-angle-double-right text-danger"></i> NSDC</a></li>
-                            <li><a href="http://www.cpisd.in/collaboration/rsldc.asp"><i
-                                        class="fa fa-angle-double-right text-danger"></i> RSLDC</a></li>
-                            <li><a href="http://www.cpisd.in/collaboration/ddu-gky.asp"><i
-                                        class="fa fa-angle-double-right text-danger"></i> DDU-GKY</a></li>
+                            <?php
+                            foreach ($this->ki_theme->config('footer_first_links') as $linkRow) {
+                                echo '<li><a href="' . $linkRow->link . '"><i class="fa fa-angle-double-right text-danger"></i> ' . $linkRow->title . '</a></li>';
+                            }
+                            ?>
                         </ul>
 
                     </div>
@@ -396,16 +396,14 @@
                 <div class="col-sm-3">
                     <div class="footer-widget contact-details1">
                         <div class="media-body">
-                            <h4 class="media-heading1 margin-tp-10">Franchise</h4>
+                            <h4 class="media-heading1 margin-tp-10"><?= ES('footer_second_text', '') ?></h4>
                         </div>
                         <ul class="media-list">
-                            <li><a href="franchise/franchise.html"><i class="fa fa-angle-double-right text-danger"></i>
-                                    Set Up Requirment</a></li>
-                            <li><a href="#" data-toggle="modal" data-target="#popupcp2016"><i
-                                        class="fa fa-angle-double-right text-danger"></i> Franchisee Enquiry Form</a>
-                            </li>
-                            <li><a href="http://www.cpisd.in/franchise/nsdc-centres.aspx"><i
-                                        class="fa fa-angle-double-right text-danger"></i> Our Training Partners</a></li>
+                            <?php
+                            foreach ($this->ki_theme->config('footer_second_links') as $linkRow) {
+                                echo '<li><a href="' . $linkRow->link . '"><i class="fa fa-angle-double-right text-danger"></i> ' . $linkRow->title . '</a></li>';
+                            }
+                            ?>
                         </ul>
 
                     </div>

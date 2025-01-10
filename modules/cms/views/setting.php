@@ -285,11 +285,9 @@ if ($footer_sections) {
             <h1 class="anchor fw-bold mb-5">Footer Section</h1>
         </div>
         <?php
-
-
-        if (THEME == 'board'):
+        if (in_array(THEME,['board','theme-05'])):
             ?>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <form action="" class="extra-setting" enctype="multipart/form-data" data-page_load="true">
 
                     <div class="{card_class}">
