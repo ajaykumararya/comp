@@ -67,7 +67,7 @@ class MY_Controller extends MX_Controller
             'admission_button' => $this->ki_theme->save_button('Admission Now', ' fa fa-plus'),
             'assets' => base_url('assets/file/')
         ];
-        $this->ki_theme->set_config_item('newicon', img(base_url('themes/newicon.gif')));
+        $this->ki_theme->set_config_item('newicon', img(base_url('themes/newicon'.(THEME == 'theme-05' ? 1 : '').'.gif')));
         $this->set_data('basic_header_link', $this->parse('site/common-header', [], true));
         // pre($this->public_data,true);
         if ($this->center_model->isAdminOrCenter() || $this->center_model->isCoordinator() || $this->center_model->isRole()) {

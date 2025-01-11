@@ -114,7 +114,7 @@
         if (check) {
             $('#preloader').css('display', 'block');
             $.ajax({
-                url: "http://cpisd.in/rgs_form/saveEnquiry.php",
+                url: "",
                 type: "POST",
                 dataType: 'json',
                 data: $("#enq_form").serialize(),
@@ -169,38 +169,40 @@
             <div class="row">
                 <div id="header" class="clearfix" style="padding: 15px 0px;">
                     <div class="col-md-2">
-                        <a href="index.html">
+                        <a href="">
                             <center>
                                 <img style="height:89px" src="{base_url}upload/{logo}" alt="{title}"
                                     class="img-responsive" />
                             </center>
                         </a>
                     </div>
-                    <div class="col-md-1">
-                        <center><img src="asset/images/NSDC-logo-2022-12.png" alt="NSDC"
-                                class="img-responsive img_size" /></center>
-                    </div>
-                    <div class="col-md-1">
-                        <center><img src="asset/images/skill-india-header-logo.jpg" alt="Skill India"
-                                class="img-responsive" /></center>
-                    </div>
-                    <div class="col-md-1">
-                        <center><img src="asset/images/telecom-sector-logo.png" alt="telecom sector"
-                                class="img-responsive" /></center>
-                    </div>
+                    <?php
+                    for ($i = 1; $i <= 3; $i++) {
+                        $name = 'header_logo_' . $i;
+                        $file = ES($name);
+                        $isExist = file_exists(('upload/' . $file));
+                        echo '<div class="col-md-1">
+                            <center>
+                                ' . img(base_url('upload/' . $file), false, [
+                                'class' => 'img-responsive img_size'
+                            ]) . '
+                            </center>
+                        </div>';
+                    }
+                    ?>
                     <div class="col-md-7">
                         <div class="row- header-top text-right">
-                            <a href="application_form/index.html" class="btn btn-danger btn-sm"
-                                style="margin-bottom:5px;">Partner With Us</a>
-                            <a href="#" data-toggle="modal" data-target="#popupcp2016" class="btn btn-danger btn-sm"
-                                style="margin-bottom:5px;">Get a Call</a>
+                            <?php
+                            $fields = $this->SiteModel->get_setting('header_hightlight_btn_links', [], true);
+                            if ($fields) {
+                                foreach ($fields as $value) {
+                                    $my_index = $value->title;
+                                    $value = $value->link;
+                                    echo '<a href="'.$value.'" class="btn btn-danger btn-sm" style="margin-bottom:5px;">'.$my_index.'</a>';
+                                }
+                            }
 
-                            <a href="http://www.cpisd.in/training-partner/registration-form"
-                                class="btn btn-danger btn-sm" style="margin-bottom:5px;">Student Registration
-                            </a>
-
-                            <a href="training-partner/login.html" class="btn btn-danger btn-sm"
-                                style="margin-bottom:5px;"> Franchise Panel </a>
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -356,7 +358,8 @@
                         </h3>
                         <p class="margin-tp-30"><strong><?= ES('footer_note_title', '') ?></strong></p>
                         <p style="text-align:justify; margin-right:5px; font-size:11px;">
-                            <?= ES('footer_note_description') ?></p>
+                            <?= ES('footer_note_description') ?>
+                        </p>
                         <?php
                         if (isset($footer_note_button_link) && $footer_note_button_link) {
                             echo '<a href="' . $footer_note_button_link . '" class="text-white">' . $footer_note_button_text . '</a>';

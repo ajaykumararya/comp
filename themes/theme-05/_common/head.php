@@ -144,4 +144,9 @@
             margin-left: 0%;
         }
     }
+
+    #syllabus-table-front thead {
+        color: white;
+        background: #074cd5;
+    }
 </style>

@@ -12,6 +12,12 @@ if ($isPrimary) {
             overflow: hidden;
         }
 
+        @media (max-width: 480px) {
+            .nivoSlider {
+                height: 200px !important;
+            }
+        }
+
         /* Ensure images fill the container properly */
         .nivoSlider img {
             width: 100%;
@@ -50,8 +56,7 @@ if ($isPrimary) {
                 <div class="panel with-nav-tabs panel-primary">
                     <div class="panel-heading">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tab1primary" data-toggle="tab" class="text-center"><strong>Latest
-                                        News</strong></a></li>
+                            <li class="active"><a href="#tab1primary" data-toggle="tab" class="text-center"><strong><?=ES('notice-board_title')?></strong></a></li>
 
                         </ul>
                     </div>
@@ -61,50 +66,22 @@ if ($isPrimary) {
                                 <div class="widget-body1 latest-post">
                                     <div class="scroll" style="overflow: auto; height: 292px; margin-right: -15px;">
                                         <ul>
-
-                                            <li><a href="http://www.cpisd.in/download/Public-Notice.pdf"
-                                                    target="_blank"><span class="text-danger"><strong>Public
-                                                            Notice</strong>
-                                                    </span> <img src="{theme_url}assets/images/New_icons_43.gif"></a>
-                                            </li>
-                                            <li><a href="https://www.youtube.com/channel/UC_YsgFYUTWiXozTyGsEGLsw"
-                                                    target="_blank"><span class="text-danger"><strong>Subscribe our
-                                                            Youtube Channel</strong> </span></a></li>
-                                            <li><a href="https://www.youtube.com/embed/Lo9-NWGRVKc?rel=0"
-                                                    target="_blank"><span class="text-danger"><strong>Get NSDC approved
-                                                            training center with in 7 days</strong> </span> <img
-                                                        src="{theme_url}assets/images/New_icons_43.gif"></a></li>
-                                            <li><a href="http://www.cpisd.in/download/telecom-sector-skill-council-membership.pdf"
-                                                    target="_blank">Associated With Telecom Sector Skill Council</a>
-                                                <img src="{theme_url}assets/images/New_icons_43.gif">
-                                            </li>
-                                            <li><a href="#" data-toggle="modal" data-target="#popupimg">Franchise
-                                                    Promotional Scheme</a> <img
-                                                    src="{theme_url}assets/images/New_icons_43.gif"></li>
-                                            <li><a href="download/general-notice.pdf" target="_blank"><span
-                                                        class="text-danger"><strong>General
-                                                            Notice</strong> </span> <img
-                                                        src="{theme_url}assets/images/New_icons_43.gif"></a></li>
-
-                                            <li><a href="nsdc/NSDC-Skills-Certification.html" target="_blank"><span
-                                                        class="text-danger"><strong>Admission
-                                                            Open</strong></span> <span class="text-black">for Health
-                                                        Care Courses</span></a> <img
-                                                    src="{theme_url}assets/images/New_icons_43.gif"></li>
-                                            <li><a href="#" data-toggle="modal" data-target="#popupcp2016"><span
-                                                        class="text-black"><strong>NSDC Franchise</strong></span> for
-                                                    Business Opportunities </a> <img
-                                                    src="{theme_url}assets/images/New_icons_43.gif"></li>
-                                            <li><a href="http://www.cpisd.in/download/PMKVY-candidates-conveyance.pdf"
-                                                    target="_blank"><span class="text-danger"><strong>PMKVY Students
-                                                            Reward Amount</strong> </span></a> <img
-                                                    src="{theme_url}assets/images/New_icons_43.gif"></li>
-                                            <li><a href="franchise/franchise.html" target="_blank"><span
-                                                        class="text-black"><strong>PMKVY Franchise</strong></span> for
-                                                    Business Opportunities</a> <img
-                                                    src="{theme_url}assets/images/New_icons_43.gif"></li>
-
-
+                                            <?php
+                                            $this->db->order_by('field1', 'DESC');
+                                            $data = $this->SiteModel->get_contents('notice-board');
+                                            if ($data->num_rows()) {
+                                                foreach ($data->result() as $row) {
+                                                    $time = strtotime($row->field1);
+                                                    $time = $time ? $time : time();
+                                                    ?>
+                                                    <li><a href="<?= $row->field3 ?>"
+                                                            target="_blank">
+                                                            <span class="text-<?=$row->field4 == 1 ? 'danger' : 'black'?>"><?= $this->ki_theme->parse_string($row->field2) ?></span></a>
+                                                    </li>
+                                                    <?php
+                                                }
+                                            }
+                                            ?>
                                         </ul>
                                     </div>
                                 </div>
