@@ -49,7 +49,7 @@ class Ajax extends Ajax_Controller
         if ($table->num_rows()) {
 
             $row = $table->row();
-            if (($row->status && $row->type == 'center') or in_array($row->type,['admin','co_ordinator','role_user'])) {
+            if (($row->status && $row->type == 'center') or in_array($row->type, ['admin', 'co_ordinator', 'role_user'])) {
                 if ($row->password == $password) {
                     $this->load->library('session');
                     $sessionData = [
@@ -57,7 +57,7 @@ class Ajax extends Ajax_Controller
                         'admin_type' => $row->type,
                         'admin_id' => $row->id
                     ];
-                    if($row->type == 'role_user'){
+                    if ($row->type == 'role_user') {
                         $sessionData['role_id'] = $row->role_id;
                     }
                     $this->session->set_userdata($sessionData);
@@ -100,41 +100,46 @@ class Ajax extends Ajax_Controller
         $this->response('status', true);
     }
 
-    function add_role_category(){
-        if($this->validation('add_role_category')){
+    function add_role_category()
+    {
+        if ($this->validation('add_role_category')) {
             $perimissions = json_encode($_POST['permission']);
             $title = $_POST['title'];
-            $this->db->insert('role_categories',[
+            $this->db->insert('role_categories', [
                 'role_category_title' => $title,
                 'permissions' => $perimissions,
                 'note' => $_POST['note']
             ]);
-            $this->response('status',true);
+            $this->response('status', true);
         }
     }
-    function list_role_categories(){
-        $this->response('data',$this->db->get('role_categories')->result_array());
+    function list_role_categories()
+    {
+        $this->response('data', $this->db->get('role_categories')->result_array());
     }
-    function list_role_users(){
-        $this->response('data',$this->center_model->roleUsers()->result_array());
+    function list_role_users()
+    {
+        $this->response('data', $this->center_model->roleUsers()->result_array());
     }
-    function delete_role_user($id){
-        $this->response('status',$this->db->where('id',$id)->where('type','role_user')->delete('centers'));
+    function delete_role_user($id)
+    {
+        $this->response('status', $this->db->where('id', $id)->where('type', 'role_user')->delete('centers'));
     }
-    function delete_role_cat($id){
-        $chk = $this->db->where('role_id',$id)->get('centers')->num_rows();
-        if($chk){
-            $this->response('html',$chk.' account(s) are/is opened through it, either update its role or delete that account,then this category will be removed.');
+    function delete_role_cat($id)
+    {
+        $chk = $this->db->where('role_id', $id)->get('centers')->num_rows();
+        if ($chk) {
+            $this->response('html', $chk . ' account(s) are/is opened through it, either update its role or delete that account,then this category will be removed.');
+        } else {
+            $this->db->where('role_id', $id)->delete('role_categories');
+            $this->response('status', true);
         }
-        else{
-            $this->db->where('role_id',$id)->delete('role_categories');
-            $this->response('status',true);
-        }
     }
-    function add_role_user(){
-        if($this->validation('add_role_user')){
-            $this->db->insert('centers',[
-                'role_id'=>$_POST['role_id'],
+    function add_role_user()
+    {
+        if ($this->validation('add_role_user')) {
+            $this->db->insert('centers', [
+                'role_id' => $_POST['role_id'],
                 'name' => $_POST['name'],
                 'email' => $_POST['email'],
                 'password' => sha1($_POST['password']),
@@ -142,26 +147,32 @@ class Ajax extends Ajax_Controller
                 'added_by' => $this->center_model->isAdmin() ? 'admin' : 'center',
                 'added_by_id' => $this->center_model->loginId()
             ]);
-            $this->response('status',true);
+            $this->response('status', true);
         }
     }
-    function view_permissions(){
-        $this->response('status',true);
+    function view_permissions()
+    {
+        $this->response('status', true);
         $titles = $this->ki_theme->createTitleArrayByType();
-        $permissions =json_decode($_POST['permissions'],true);
+        $permissions = json_decode($_POST['permissions'], true);
         $html = '<table class="table">
             <tr>
                 <th>#</th><th>Method</th>
             </tr>';
         $i = 1;
-        foreach($permissions as $index){
+        foreach ($permissions as $index) {
             $html .= '<tr>
-                <td>'.$i++.'.</td>
-                <td>'.($titles[$index]).'</td>
+                <td>' . $i++ . '.</td>
+                <td>' . ($titles[$index]) . '</td>
             </tr>';
         }
-        
+
         $html .= '</table>';
-        $this->response('html',$html);
+        $this->response('html', $html);
+    }
+    function remove_setting()
+    {
+        $this->db->where($_POST['key_type'], $_POST['key'])->delete('settings');
+        $this->response('status', true);
     }
 }

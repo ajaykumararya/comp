@@ -145,8 +145,16 @@
         }
     }
 
-    #syllabus-table-front thead {
+    #syllabus-table-front thead,
+    .padding_third_all thead {
         color: white;
         background: #074cd5;
+    }
+
+    .padding_third_all center>.form-group {
+        float: right
+    }
+    .heading_s1.text-center{
+        text-align: left!important;
     }
 </style>

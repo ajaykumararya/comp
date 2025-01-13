@@ -13,10 +13,11 @@ function start_with($haystack, $needle)
 {
     return substr($haystack, 0, strlen($needle)) === $needle;
 }
-function append_items($config,$items){
+function append_items($config, $items)
+{
     $ci = &get_instance();
     $custom_config = $ci->config->item($config) ?? [];
-    $ci->config->set_item($config, array_merge($custom_config,$items));
+    $ci->config->set_item($config, array_merge($custom_config, $items));
 }
 function module_view_exists($module_name, $view_file)
 {
@@ -397,6 +398,21 @@ function inconPickerInput($inputName = '', $value = '')
                 <button type="button" class="arya-icon-picker btn btn-primary btn-rounded btn-sm" id="GetIconPicker" data-iconpicker-input="input#IconInput_' . $inputName . '" data-iconpicker-preview="i#IconPreview_' . $inputName . '">Select Icon</button>
             <input id="IconInput_' . $inputName . '" name="' . $inputName . '" type="hidden" value="' . $value . '">';
 }
+function sortEmptyLast($array)
+{
+    usort($array, function ($a, $b) {
+        // Check if $a is empty and $b is not
+        if (empty($a) && !empty($b)) {
+            return 1; // Move $a after $b
+        }
+        // Check if $b is empty and $a is not
+        if (!empty($a) && empty($b)) {
+            return -1; // Move $a before $b
+        }
+        return 0; // Keep the same order if both are empty or both are not empty
+    });
+    return $array;
+}
 function get_month_number($date)
 {
     return date('n', strtotime($date));
@@ -423,7 +439,8 @@ function generate_otp()
     $otp = generate_hotp($secret, $time, 6); // generate a 6-digit HOTP
     return $otp;
 }
-function generateNumericString($length = 10) {
+function generateNumericString($length = 10)
+{
     $numericString = '';
     for ($i = 0; $i < $length; $i++) {
         $numericString .= rand(0, 9);

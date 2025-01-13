@@ -11,6 +11,7 @@
                             <th>#</th>
                             <th>Logo</th>
                             <th>Update</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,6 +38,9 @@
                                             </span>
                                         </div>
                                         </form>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger btn-sm remove-setting" data-key_type="type" data-key="'.$name.'"><i class="fa fa-trash"></i></button>
                                         </td>
                                     </tr>';
                         }

@@ -2572,6 +2572,22 @@ $(document).on('click', '.delete-notitication', function () {
         }
     })
 })
+$(document).on('click','.remove-setting',function(r){
+    r.preventDefault();
+    var tr = $(this);
+    var key_type = tr.data('key_type');
+    var key = tr.data('key');
+    SwalWarning('Confirmation!', 'Are you sure for delete this setting.', true, 'Delete It').then( (ok) => {
+        if(ok.isConfirmed){
+            $.AryaAjax({
+                url : 'remove-setting',
+                data : {key_type:key_type,key:key},
+                success_message : 'Setting deleted successfully.',
+                page_reload : true
+            });
+        }
+    })
+})
 $(document).on("click", '.view-notification', function () {
     // alert(6);
     var tr = $(this).closest('tr');

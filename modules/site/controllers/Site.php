@@ -230,12 +230,17 @@ class Site extends Site_Controller
     }
     function test()
     {
-        echo time();//generateNumericString(8);
+        $data = ['','d','a'];
+        // sort($data);
+        
+        pre(($data));
+        pre(($data));
+        // echo time();//generateNumericString(8);
         exit;
-        $get = $this->student_model->get_switch('all', [
-            'examination_body !=' => null
-        ]);
-        echo $this->db->last_query();
+        // $get = $this->student_model->get_switch('all', [
+        //     'examination_body !=' => null
+        // ]);
+        // echo $this->db->last_query();
 
         exit;
         try {

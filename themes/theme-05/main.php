@@ -177,18 +177,30 @@
                         </a>
                     </div>
                     <?php
+                    $logoData = [];
                     for ($i = 1; $i <= 3; $i++) {
                         $name = 'header_logo_' . $i;
-                        $file = ES($name);
-                        $isExist = file_exists(('upload/' . $file));
-                        echo '<div class="col-md-1">
-                            <center>
-                                ' . img(base_url('upload/' . $file), false, [
-                                'class' => 'img-responsive img_size'
-                            ]) . '
-                            </center>
-                        </div>';
+                        $file = ES($name, '');
+                        $logoData[] = $file;
                     }
+
+                    $fressLogoData = sortEmptyLast($logoData);
+                    // pre($fressLogoData);
+                    foreach ($fressLogoData as $logo) {
+                        $isExist = file_exists(('upload/' . $logo));
+                        // echo $logo;
+                        echo '<div class="col-md-1"><center>';
+                    
+                            echo '
+                                ' . img(base_url('upload/' . $logo), false, [
+                                    'class' => 'img-responsive img_size'
+                                ]) . '
+                            ';
+                        
+
+                        echo '</center></div>';
+                    }
+
                     ?>
                     <div class="col-md-7">
                         <div class="row- header-top text-right">
@@ -198,7 +210,7 @@
                                 foreach ($fields as $value) {
                                     $my_index = $value->title;
                                     $value = $value->link;
-                                    echo '<a href="'.$value.'" class="btn btn-danger btn-sm" style="margin-bottom:5px;">'.$my_index.'</a>';
+                                    echo '<a href="' . $value . '" style="margin-left:3px" class="btn btn-danger btn-sm" style="margin-bottom:5px;">' . $my_index . '</a>';
                                 }
                             }
 
