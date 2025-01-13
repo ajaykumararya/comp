@@ -168,10 +168,10 @@
         <div class="container">
             <div class="row">
                 <div id="header" class="clearfix" style="padding: 15px 0px;">
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <a href="">
                             <center>
-                                <img style="height:89px" src="{base_url}upload/{logo}" alt="{title}"
+                                <img style="height:89px;width:283px" src="{base_url}upload/{logo}" alt="{title}"
                                     class="img-responsive" />
                             </center>
                         </a>
@@ -202,7 +202,7 @@
                     }
 
                     ?>
-                    <div class="col-md-7">
+                    <div class="col-md-6">
                         <div class="row- header-top text-right">
                             <?php
                             $fields = $this->SiteModel->get_setting('header_hightlight_btn_links', [], true);
