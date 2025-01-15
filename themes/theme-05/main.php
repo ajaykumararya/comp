@@ -227,7 +227,7 @@
                                 foreach ($fields as $value) {
                                     $my_index = $value->title;
                                     $value = $value->link;
-                                    echo '<a href="' . $value . '" style="margin-left:3px" class="btn btn-danger btn-sm" style="margin-bottom:5px;">' . $my_index . '</a>';
+                                    echo '<a href="' . $value . '" style="margin-left:3px" class="btn btn-primary btn-sm" style="margin-bottom:5px;">' . $my_index . '</a>';
                                 }
                             }
 
@@ -417,9 +417,6 @@
         }
 
         /* Floating Social Media Bar Style Starts Here */
-        .fl-fl:hover {
-            border: 1px solid var(--secondary-color)
-        }
 
         .fl-fl {
             background: var(--primary-color);
@@ -428,7 +425,7 @@
             width: 195px;
             position: fixed;
             right: -150px;
-            z-index: 9900;
+            z-index: 990;
             font: normal normal 10px Arial;
             -webkit-transition: all .25s ease;
             -moz-transition: all .25s ease;
@@ -502,7 +499,7 @@
             <div class="row">
                 <div class="col-sm-3">
                     <div class="footer-widget">
-                        <h3 style="color:#fff;">
+                        <h3 style="color:black;">
                             <strong class="flex"> <img src="{theme_url}assets/img/icon/whatsapp.png"
                                     style="margin-left: 4px;" alt="" class="img-responsive" />
                                 +91-<?= remove_91($whatsapp_number) ?></strong> <br>
@@ -591,7 +588,7 @@
                                 </a>
                                 <div class="media-body">
                                     <h4 class="media-heading">Email Address</h4>
-                                    <p>Mail : <a href="mailto:{email}" style="color:#FFFFFF;">{email}</a></p>
+                                    <p>Mail : <a href="mailto:{email}" style="color:black;">{email}</a></p>
 
                                 </div>
 
@@ -626,7 +623,7 @@
         <div class="container">
             <div class="row">
                 <div class="copyright">
-                    Copyright &copy {YEAR} {title}. All Right Reserved
+                    Copyright &copy {YEAR} {title} {copyright}
                 </div>
             </div>
         </div>

@@ -4,7 +4,8 @@
         border-radius: 22px;
         overflow: hidden;
         text-align: center;
-        background-color: #011d42;
+        border: 1px solid var(--primary-color);
+        background-color: var(--primary-color);
     }
 
     .skill__development .courses_box_cont {

@@ -44,8 +44,15 @@
         color: #ffffff;
         background-color: var(--primary-color);
         border-color: var(--primary-color);
+        transition: 0.3s ;
     }
-
+    .btn-primary:hover{        
+        color: var(--primary-color);
+        background-color: var(--secondary-color);
+        border-color: var(--secondary-color);
+        border:1px solid var(--primary-color);
+        transition: 0.3s ;
+    }
     .nav-wrapper li.dropdown>ul.dropdown-menu {
         background: none repeat scroll 0 0 var(--secondary-color) !important;
     }
