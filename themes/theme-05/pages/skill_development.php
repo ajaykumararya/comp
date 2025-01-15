@@ -20,7 +20,7 @@
         width: 60px;
         height: 60px;
         background-color: #f2f2f2;
-        color: #011d42;
+        color: var(--primary-color);
         line-height: 60px;
         margin: 15px auto !important;
         font-size: 32px;
