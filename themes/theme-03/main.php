@@ -140,16 +140,6 @@
         </div>
     </nav>
     {output}
-    <?php
-    if (in_array(PATH, ['upstate'])) {
-        ?>
-
-        <a href="https://wa.me/<?= $this->ki_theme->config('whatsapp_number') ?>" class="float" target="_blank">
-            <i class="fab fa-whatsapp  my-float"></i>
-        </a>
-        <?php
-    }
-    ?>
     <footer class="footer clearfix spacer">
         <div class="container">
             <div class="clearfix row">

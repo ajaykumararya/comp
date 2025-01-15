@@ -1,10 +1,10 @@
 <?php
-if (in_array(PATH, ['haptronworld'])) {
+if (in_array(PATH, ['haptronworld', 'upstate','sct'])) {
     ?>
     <link rel="stylesheet" href="{base_url}assets/float-icons.css">
     <style>
-        #button-contact-vr img{
-            border : 0 !important
+        #button-contact-vr img {
+            border: 0 !important
         }
     </style>
     <div id="button-contact-vr" class="" style="right:0">
@@ -15,8 +15,7 @@ if (in_array(PATH, ['haptronworld'])) {
                     <div class="phone-vr-circle-fill"></div>
                     <div class="phone-vr-img-circle">
                         <a target="_blank" href=" https://wa.me/{whatsapp_number}">
-                            <img alt="Whatsapp"
-                                src="{base_url}assets/whatsapp.png">
+                            <img alt="Whatsapp" src="{base_url}assets/whatsapp.png">
                         </a>
                     </div>
                 </div>
@@ -33,8 +32,7 @@ if (in_array(PATH, ['haptronworld'])) {
                     <div class="phone-vr-circle-fill"></div>
                     <div class="phone-vr-img-circle">
                         <a href="tel:{number}">
-                            <img alt="Phone"
-                                src="{base_url}assets/phone.png">
+                            <img alt="Phone" src="{base_url}assets/phone.png">
                         </a>
                     </div>
                 </div>

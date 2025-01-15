@@ -276,71 +276,6 @@
                                 }
                                 echo get_menu($menus, 'nav navbar-nav nav-main');
                                 ?>
-                                <ul class="nav navbar-nav nav-main" style="display:none">
-                                    <li><a href="">Home</a></li>
-                                    <li><a href="about/about.html">About Us</a></li>
-
-                                    <li class="dropdown">
-                                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">Our Programs</a>
-                                        <ul class="dropdown-menu normalmenu">
-                                            <li><a href="http://www.cpisd.in/collaboration/pmkvy.asp"><i
-                                                        class="fa fa-file-text"></i> PMKVY</a></li>
-                                            <li><a href="http://www.cpisd.in/collaboration/nsdc.asp"><i
-                                                        class="fa fa-file-text"></i> NSDC</a></li>
-                                            <li><a href="http://www.cpisd.in/collaboration/rsldc.asp"><i
-                                                        class="fa fa-file-text"></i> RSLDC</a></li>
-                                            <li><a href="http://www.cpisd.in/collaboration/ddu-gky.asp"><i
-                                                        class="fa fa-file-text"></i> DDU-GKY</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="dropdown">
-                                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">Business
-                                            Associate</a>
-                                        <ul class="dropdown-menu normalmenu">
-                                            <li><a href="franchise/franchise.html">Centre Requirment</a>
-                                            </li>
-                                            <li><a href="http://www.cpisd.in/franchise/our-training-partners.asp">PMKVY
-                                                    Training Partners</a></li>
-                                            <li><a href="http://www.cpisd.in/franchise/nsdc-centres.aspx">NSDC Training
-                                                    Partners</a></li>
-                                            <li><a href="http://www.cpisd.in/franchise/nsdc-regional-partners.asp">NSDC
-                                                    Regional Partners</a></li>
-                                            <li><a href="http://www.cpisd.in/franchise/documents.asp">Business Associate
-                                                    Documents</a></li>
-                                            <li><a href="nsdc/courses.html">Course Curriculum</a></li>
-                                            <!-- <li><a href="http://cpisd.in/nsdc/study-material.asp">Course Curriculum</a></li> -->
-                                            <!--<li><a href="http://www.cpisd.in/franchise/medical-record-data-management.asp">Medical Record Data Management</a></li>-->
-                                        </ul>
-                                    </li>
-
-                                    <li class="dropdown">
-                                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">News-Media</a>
-                                        <ul class="dropdown-menu normalmenu">
-
-                                            <li><a href="gallery/news.html">News</a></li>
-                                            <li><a href="gallery/testimonial.html">Testimonial</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="gallery/placement.html">Placement</a></li>
-                                    <li class="dropdown">
-                                        <a class="dropdown-toggle" href="#"
-                                            data-toggle="dropdown"><strong>DDU-GKY</strong></a>
-                                        <ul class="dropdown-menu normalmenu">
-                                            <li><a href="http://www.cpisd.in/collaboration/ddu-gky.asp"><i
-                                                        class="fa fa-file-text"></i> About DDU-GKY</a></li>
-                                            <li><a href="#"><i class="fa fa-file-text"></i> Our Centres</a></li>
-                                            <li><a href="#"><i class="fa fa-file-text"></i> Courses</a></li>
-                                            <li><a href="#"><i class="fa fa-file-text"></i> Placement</a></li>
-                                            <li><a href="gallery/photo-gallery.html"><i
-                                                        class="fa fa-file-text"></i>Photo Gallery</a></li>
-                                            <li><a href="#"><i class="fa fa-file-text"></i> Conatct Us</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="http://www.cpisd.in/student/nsdc.aspx">NSDC Student Detail</a></li>
-                                    <li><a href="gallery/photo-gallery.html">Photo Gallery</a></li>
-                                    <li><a href="contact/contact.html">Contact Us</a></li>
-                                </ul>
                             </div>
                         </nav>
                     </div>
@@ -358,8 +293,196 @@
     </div>
 
     {output}
+    <!-- Modal 3 -->
+    <div id="popupcp2016" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: var(--primary-color); color: #fff;">
+                    <a href="#" class="fancybox-item fancybox-close" data-dismiss="modal"></a>
+                    <h2 class="modal-title">
+                        <strong>Enquiry Form</strong>
+                    </h2>
 
+                </div>
+                <div class="modal-body">
+                    <form id="submitGETINTOUCH">
+                        <div class="form-group">
+                            <label>Are You a</label>
+                            <select class="form-control" name="subject" id="areYouA">
+                                <option value="">Select Are you a</option>
+                                <option value="Training Center">
+                                    Training Center</option>
+                                <option value="Student">
+                                    Student
+                                </option>
+                                <option value="Employer">Employer</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input class="form-control" type="text" placeholder="Full Name" name="name" id="fullName" />
+                        </div>
+                        <div class="form-group">
+                            <label>Mobile Number</label>
+                            <input class="form-control" type="text" placeholder="97XXXXXXXX" name="mobile"
+                                id="mobileNumber" />
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input class="form-control" type="email" placeholder="example@<?= $_SERVER['HTTP_HOST'] ?>"
+                                name="email" id="email" />
+                        </div>
+                        <div class="form-group">
+                            <label>State</label>
+                            <input class="form-control" type="text" placeholder="State" name="state" id="state" />
+                        </div>
+                        <div class="form-group">
+                            <label>District</label>
+                            <input class="form-control" type="text" placeholder="District" name="city" id="district" />
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea class="form-control" id="message" name="message"></textarea>
 
+                        </div>
+                        <div class="form-group text-center">
+                            <button class="btn btn-primary" type="submit">Submit</button>
+
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Modal 3 -->
+
+    <div class="float-sm">
+        <div class="fl-fl float-fb">
+            <i class="fab fa fa-facebook"></i>
+            <a href="{facebook}" target="_blank"> Like us!</a>
+        </div>
+        <div class="fl-fl float-tw">
+            <i class="fa fab fa-twitter"></i>
+            <a href="{twitter}" target="_blank">Follow us!</a>
+        </div>
+        <div class="fl-fl float-gp">
+            <i class="fa fab fa-youtube"></i>
+            <a href="{youtube}" target="_blank">Recommend us!</a>
+        </div>
+        <div class="fl-fl float-link">
+            <i class="fa fab fa-linkedin"></i>
+            <a href="{linkedin}" target="_blank">Follow us!</a>
+        </div>
+        <div class="fl-fl float-ig">
+            <i class="fa fab fa-instagram"></i>
+            <a href="{instagram}" target="_blank">Follow us!</a>
+        </div>
+        <div class="fl-fl float-pn">
+            <i class="fa fa-question-circle"></i>
+            <a href="#" data-target="#popupcp2016" data-toggle="modal" target="_blank">Enquiry Now!</a>
+        </div>
+    </div>
+    <!-- Floating Social Media bar Ends -->
+
+    <style>
+        .text {
+            margin: 0 60px;
+        }
+
+        .twitter {
+            font: normal normal 10px Arial;
+            text-align: center;
+            color: #998578;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .twitter {
+            color: #72898b;
+            text-decoration: none;
+            display: block;
+            padding: 14px;
+            -webkit-transition: all .25s ease;
+            -moz-transition: all .25s ease;
+            -ms-transition: all .25s ease;
+            -o-transition: all .25s ease;
+            transition: all .25s ease;
+        }
+
+        .twitter:hover {
+            color: #FF7D6D;
+            text-decoration: none;
+        }
+
+        /* Floating Social Media Bar Style Starts Here */
+        .fl-fl:hover {
+            border: 1px solid var(--secondary-color)
+        }
+
+        .fl-fl {
+            background: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            width: 195px;
+            position: fixed;
+            right: -150px;
+            z-index: 9900;
+            font: normal normal 10px Arial;
+            -webkit-transition: all .25s ease;
+            -moz-transition: all .25s ease;
+            -ms-transition: all .25s ease;
+            -o-transition: all .25s ease;
+            transition: all .25s ease;
+        }
+
+        .float-sm .fa {
+            font-size: 20px;
+            color: #fff;
+            padding: 10px 0;
+            width: 40px;
+            margin-left: 8px;
+        }
+
+        .fl-fl:hover {
+            right: 0;
+        }
+
+        .fl-fl a {
+            color: #fff !important;
+            text-decoration: none;
+            text-align: center;
+            line-height: 43px !important;
+            vertical-align: top !important;
+        }
+
+        .float-fb {
+            top: 160px;
+        }
+
+        .float-tw {
+            top: 215px;
+        }
+
+        .float-gp {
+            top: 270px;
+        }
+
+        .float-link {
+            top: 325px;
+        }
+
+        .float-ig {
+            top: 380px;
+        }
+
+        .float-pn {
+            top: 435px;
+        }
+
+        /* Floating Social Media Bar Style Ends Here */
+    </style>
     <!--
     ============================================
     CONTACT INFORMATION
@@ -586,81 +709,5 @@
             $("#popupimg").modal('show');
             // $("#popupimg").modal('show');
         })
-        $(document).on('click', '#sendEnquiry', function () {
-            $.ajax({
-                type: "POST",
-                url: "https://cpisd.in/enquiry",
-                dataType: 'json',
-                data: $("#enquiryForm").serialize(),
-                error: function (response) {
-                    // console.log(response);
-                    $('.has-error').removeClass('has-error');
-                    $(".help-block").remove();
-                    var erroJson = JSON.parse(response.responseText);
-                    for (var err in erroJson) {
-                        for (var errstr of erroJson[err])
-                            $("#" + err + "").parent('.form-group').addClass('has-error');
-                        $("#" + err + "").after(
-                            "<div class='help-block'>" +
-                            errstr + "</div>");
-                    }
-                },
-                success: function (response) {
-                    if (response.status) {
-                        $('.has-error').removeClass('has-error');
-                        $(".help-block").remove();
-                        $("#popupcp2016").modal('hide');
-                        $("#enquiryForm").trigger('reset');
-                        window.alert(response.message);
-                    } else {
-                        $('.has-error').removeClass('has-error');
-                        $(".help-block").remove();
-                        $("#popupcp2016").modal('hide');
-                        $("#enquiryForm").trigger('reset');
-                        window.alert(response.message);
-                    }
-
-
-                }
-            });
-        });
-        $(document).on('click', '#submitEnquiry', function () {
-            $.ajax({
-                type: "POST",
-                url: "https://cpisd.in/student-enquiry",
-                dataType: 'json',
-                data: $("#studentEnquiry").serialize(),
-                error: function (response) {
-                    // console.log(response);
-                    $('.has-error').removeClass('has-error');
-                    $(".help-block").remove();
-                    var erroJson = JSON.parse(response.responseText);
-                    for (var err in erroJson) {
-                        for (var errstr of erroJson[err])
-                            $("#" + err + "").parent('.form-group').addClass('has-error');
-                        $("#" + err + "").after(
-                            "<div class='help-block'>" +
-                            errstr + "</div>");
-                    }
-                },
-                success: function (response) {
-                    if (response.status) {
-                        $('.has-error').removeClass('has-error');
-                        $(".help-block").remove();
-                        $("#Enquiry").modal('hide');
-                        $("#studentEnquiry").trigger('reset');
-                        window.alert(response.message);
-                    } else {
-                        $('.has-error').removeClass('has-error');
-                        $(".help-block").remove();
-                        $("#Enquiry").modal('hide');
-                        $("#studentEnquiry").trigger('reset');
-                        window.alert(response.message);
-                    }
-
-
-                }
-            });
-        });
     </script>
 </body>
