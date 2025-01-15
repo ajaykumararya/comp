@@ -160,6 +160,23 @@
                     <i class="fa fa-envelope text-danger"></i> <a href="mailto:{email}"><strong>{email}</strong></a>
                 </div>
             </div>
+            <div class="navbar-collapse collapse" id="navbar-brand-centered" style="height: 1px;">
+
+                <ul class="nav navbar-nav navbar-right top-header-pd" style="margin:7.5px -4px">
+                    <?php
+                    $fields = $this->SiteModel->get_setting('top_btn_links', [], true);
+                    if ($fields) {
+                        foreach ($fields as $value) {
+                            $my_index = $value->title;
+                            $value = $value->link;
+                            echo '<li><a href="' . $value . '"  class="text-white"><strong>' . $my_index . '</strong></a></li>';
+                        }
+                    }
+
+                    ?>
+
+                </ul>
+            </div>
 
         </div><!-- /.container-fluid -->
     </nav>
@@ -190,13 +207,13 @@
                         $isExist = file_exists(('upload/' . $logo));
                         // echo $logo;
                         echo '<div class="col-md-1"><center>';
-                    
-                            echo '
+
+                        echo '
                                 ' . img(base_url('upload/' . $logo), false, [
-                                    'class' => 'img-responsive img_size'
-                                ]) . '
+                                'class' => 'img-responsive img_size'
+                            ]) . '
                             ';
-                        
+
 
                         echo '</center></div>';
                     }
@@ -531,9 +548,9 @@
 
     <script src="{theme_url}assets/js/jQuery-mediaElement/build/mediaelement-and-player.min.js"></script>
 
-    <script src="{theme_url}assets/vendor/jQuery-autoComplete/jquery.autocomplete.min.js"></script>
+    <!-- <script src="{theme_url}assets/vendor/jQuery-autoComplete/jquery.autocomplete.min.js"></script> -->
 
-    <script src="{theme_url}assets/vendor/jQuery-autoComplete/currency-autocomplete.js"></script>
+    <!-- <script src="{theme_url}assets/vendor/jQuery-autoComplete/currency-autocomplete.js"></script> -->
 
     <!-- Theme Initializer -->
 
@@ -541,6 +558,19 @@
 
     <script src="{theme_url}assets/js/plugins.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
+    <script>
+        // Initialize Fancybox (optional; Fancybox auto-binds with the attribute `data-fancybox`)
+        Fancybox.bind("[data-fancybox]", {
+            // Customize options here (optional)
+            Thumbs: {
+                autoStart: true, // Display thumbnails on open
+            },
+            Toolbar: {
+                display: ["close"], // Display close button
+            }
+        });
+    </script>
     <!--<script src="{theme_url}assets/js/wow.min.js"></script>-->
     <script>
 

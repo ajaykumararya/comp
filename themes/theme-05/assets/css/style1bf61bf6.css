@@ -187,11 +187,11 @@ header#header .header-social .social-icon a:hover {color: #606060;}
 
 /*  Navigation
 -----------------------------------------------------------  */
-.nav-wrapper {background: none repeat scroll 0 0 #074cd5;position: relative;border-bottom: 3px solid #ffcc00;}
+.nav-wrapper {background: none repeat scroll 0 0 var(--primary-color);position: relative;border-bottom: 3px solid #ffcc00;}
 /*.nav-wrapper:before {background: none repeat scroll 0 0 #221918;position: absolute;content: '';width: 50%;height: 100%;top: 0;right: 0;z-index: 298;}*/
 .nav-wrapper .slogan {text-align:center;color: #FFFFFF;line-height: 50px;background: none repeat scroll 0 0 #3d566e;}
 .nav-wrapper .navbar-collapse {border: medium none;}
-.nav-wrapper .navbar-default {background: none repeat scroll 0 0 #074cd5;border-radius: 0 0 0 0;box-shadow: none;border: medium none;margin: 0 0 0 0;z-index: 300;}
+.nav-wrapper .navbar-default {background: none repeat scroll 0 0 var(--primary-color);border-radius: 0 0 0 0;box-shadow: none;border: medium none;margin: 0 0 0 0;z-index: 300;}
 .nav-wrapper .navbar-default .navbar-toggle {border: medium none;color: #FFFFFF;font-size: 34px;padding: 0 10px;border-radius: 0 0 0 0;}
 .nav-wrapper .navbar-default .navbar-toggle:hover,
 .nav-wrapper .navbar-default .navbar-toggle:focus {background-color: rgba(0,0,0,0);}

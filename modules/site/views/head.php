@@ -8,7 +8,14 @@
     <meta content="Ajay Kumar Arya" name="author" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- SITE TITLE -->
-    <title>{page_name} - {title}</title>
+    <title>
+    <?php
+    if(isset($isPrimary) && $isPrimary)
+        echo $title;
+    else
+        echo "{page_name} - {title}";
+    ?>    
+    </title>
     <!-- Favicon Icon -->
     <link rel="shortcut icon" type="image/x-icon" href="{base_url}upload/{logo}" />
 

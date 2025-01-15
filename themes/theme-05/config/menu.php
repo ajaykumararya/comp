@@ -5,6 +5,12 @@ $menu = array(
     'icon' => array('file', 3),
     'submenu' => array(
         array(
+            'label' => 'Category Image(s)',
+            'type' => 'category-image',
+            'icon' => array('file', 4),
+            'url' => 'cms/static-page/category-image',
+        ),
+        array(
             'label' => 'Our Header',
             'type' => 'header',
             'icon' => array('file', 4),

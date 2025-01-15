@@ -1,4 +1,11 @@
 <!-- Web Fonts -->
+<style>
+    :root {
+        --primary-color: #94020b;
+        --secondary-color: #ebbf51;
+    }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css">
 <link rel="stylesheet" href="{theme_url}assets/css/font-awesome.min.css" />
 <link rel="stylesheet" href="{theme_url}assets/css/custom-font.css" />
 <link rel="stylesheet" href="{theme_url}assets/css/header-v8.css" />
@@ -29,6 +36,41 @@
 <link rel="stylesheet" href="{theme_url}assets/css/theme-responsive.css" type="text/css" />
 <link rel="stylesheet" href="{theme_url}assets/style.css" type="text/css" />
 <style>
+    .panel-primary {
+        border-color: var(--primary-color);
+    }
+
+    .panel-primary>.panel-heading,.btn-primary{
+        color: #ffffff;
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    .nav-wrapper li.dropdown>ul.dropdown-menu {
+        background: none repeat scroll 0 0 var(--secondary-color) !important;
+    }
+
+    .nav-wrapper li.dropdown>ul.dropdown-menu>li a {
+        color: black;
+    }
+
+    .pagination>.active>a,
+    .pagination>.active>span,
+    .pagination>.active>a:hover,
+    .pagination>.active>span:hover,
+    .pagination>.active>a:focus,
+    .pagination>.active>span:focus {
+        z-index: 2;
+        color: #ffffff;
+        background-color: var(--primary-color) !important;
+        border-color: var(--primary-color) !important;
+        cursor: default;
+    }
+
+    a {
+        color: black
+    }
+
     .input-group {
         display: flex;
         align-items: stretch;
@@ -78,10 +120,10 @@
     .btn-outline-success {
         display: inline-block;
         font-weight: 400;
-        color: #28a745;
+        color: var(--primary-color);
         /* Green text */
         background-color: transparent;
-        border: 2px solid #28a745;
+        border: 2px solid var(--primary-color);
         /* Green border */
         padding: 0.375rem 0.75rem;
         font-size: 1rem;
@@ -96,9 +138,9 @@
     .btn-outline-success:hover {
         color: #fff;
         /* White text */
-        background-color: #28a745;
+        background-color: var(--primary-color);
         /* Green background */
-        border-color: #28a745;
+        border-color: var(--primary-color);
         /* Same border */
     }
 
@@ -148,13 +190,14 @@
     #syllabus-table-front thead,
     .padding_third_all thead {
         color: white;
-        background: #074cd5;
+        background: var(--primary-color);
     }
 
     .padding_third_all center>.form-group {
         float: right
     }
-    .heading_s1.text-center{
-        text-align: left!important;
+
+    .heading_s1.text-center {
+        text-align: left !important;
     }
 </style>
