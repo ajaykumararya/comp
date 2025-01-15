@@ -197,9 +197,9 @@ header#header .header-social .social-icon a:hover {color: #606060;}
 .nav-wrapper .navbar-default .navbar-toggle:focus {background-color: rgba(0,0,0,0);}
 
 
-.nav-wrapper ul.nav-main > li {padding: 0 15px 0 15px;border-left: 1px solid #7aa8d0;}
-.nav-wrapper ul.nav-main > li:first-child {border-left: 1px solid #7aa8d0;}
-.nav-wrapper ul.nav-main > li:last-child {border-right: 1px solid #7aa8d0;}
+.nav-wrapper ul.nav-main > li {padding: 0 15px 0 15px;/*border-left: 1px solid #7aa8d0;*/}
+/* .nav-wrapper ul.nav-main > li:first-child {border-left: 1px solid #7aa8d0;}
+.nav-wrapper ul.nav-main > li:last-child {border-right: 1px solid #7aa8d0;} */
 .nav-wrapper ul.nav-main > li a {padding: 0 0 0;background: none repeat scroll 0 0 transparent;border-radius: 0 0 0;color: #FFFFFF;line-height: 50px;box-shadow: none;text-shadow: none;transition: all .2s ease-in-out;}
 .nav-wrapper ul.nav-main > li a:hover,
 .nav-wrapper ul.nav-main > li a:focus {color: #FFFFFF;}

@@ -37,102 +37,6 @@
         // Tool tips
         $('[data-toggle="tooltip"]').tooltip();
     });
-    function saveEnquiry() {
-        check = true;
-        if ($('#e_name').val() == "") {
-            check = false;
-            $('#e_name').addClass('error');
-            $('#e_name').focus();
-        } else {
-            $('#e_name').removeClass('error');
-
-        }
-
-        if ($('#e_email').val() == "") {
-            check = false;
-            $('#e_email').addClass('error');
-            $('#e_email').focus();
-        } else {
-            $('#e_email').removeClass('error');
-
-        }
-
-        if ($('#e_mobile').val() == "") {
-            check = false;
-            $('#e_mobile').addClass('error');
-            $('#e_mobile').focus();
-        } else {
-            $('#e_mobile').removeClass('error');
-
-        }
-
-        if ($('#e_category').val() == "") {
-            check = false;
-            $('#e_category').addClass('error');
-            $('#e_category').focus();
-        } else {
-            $('#e_category').removeClass('error');
-
-        }
-
-        if ($('#e_qualification').val() == "") {
-            check = false;
-            $('#e_qualification').addClass('error');
-            $('#e_qualification').focus();
-        } else {
-            $('#e_qualification').removeClass('error');
-
-        }
-
-        if ($('#e_gender').val() == "") {
-            check = false;
-            $('#e_gender').addClass('error');
-            $('#e_gender').focus();
-        } else {
-            $('#e_gender').removeClass('error');
-
-        }
-
-        if ($('#e_district').val() == "") {
-            check = false;
-            $('#e_district').addClass('error');
-            $('#e_district').focus();
-        } else {
-            $('#e_district').removeClass('error');
-
-        }
-
-        if ($('#e_state').val() == "") {
-            check = false;
-            $('#e_state').addClass('error');
-            $('#e_state').focus();
-        } else {
-            $('#e_state').removeClass('error');
-
-        }
-
-        if (check) {
-            $('#preloader').css('display', 'block');
-            $.ajax({
-                url: "",
-                type: "POST",
-                dataType: 'json',
-                data: $("#enq_form").serialize(),
-                success: function (response) {
-                    $('#preloader').css('display', 'none');
-                    if (response.status == true) {
-                        alert(response.message);
-                        setTimeout(function () {
-                            window.location.reload()
-                        }, 1500);
-                    } else {
-                        alert(response.message);
-                        return false;
-                    }
-                }
-            });
-        }
-    }
 </script>
 
 
@@ -146,7 +50,7 @@
 
 
 
-    <nav class="navbar navbar-default" role="navigation" style='margin-bottom: 0px;'>
+    <nav class="navbar " role="navigation" style='margin-bottom: 0px;background:var(--secondary-color)'>
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -380,7 +284,7 @@
             <a href="{instagram}" target="_blank">Follow us!</a>
         </div>
         <div class="fl-fl float-pn">
-            <i class="fa fa-question-circle"></i>
+            <i class="fab fa fa-wpforms"></i>
             <a href="#" data-target="#popupcp2016" data-toggle="modal" target="_blank">Enquiry Now!</a>
         </div>
     </div>

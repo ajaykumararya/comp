@@ -29,7 +29,7 @@
     }
 
     .courses_box_cont h4 {
-        color: #011d42;
+        color: var(--primary-color);;
         font-size: 22px;
         font-weight: 700;
         margin-bottom: 10px;
