@@ -9,18 +9,24 @@ $menu = array(
             'type' => 'header',
             'icon' => array('file', 4),
             'url' => 'cms/static-page/header',
-        ),        
+        ),
         array(
             'label' => 'Our Three Buttons',
             'type' => 'three_buttons',
             'icon' => array('file', 4),
             'url' => 'cms/static-page/three_buttons',
-        ),    
+        ),
         array(
             'label' => 'Our Counter',
             'type' => 'our_counter_box',
             'icon' => array('file', 4),
             'url' => 'cms/static-page/our_counter_box',
+        ),
+        array(
+            'label' => 'Our Syllabus',
+            'type' => 'our_syllabus',
+            'icon' => array('file', 4),
+            'url' => 'cms/static-page/our_syllabus',
         ),
         array(
             'label' => 'Our Portfolio',
