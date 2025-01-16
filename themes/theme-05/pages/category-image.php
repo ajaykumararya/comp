@@ -15,7 +15,7 @@
                 foreach ($data->result() as $row):
                     ?>
                     <div class="col-lg-4 col-md-6 mb-3">
-                        <div class="product_box">
+                        <div class="product_box" style="margin-bottom:13px">
                             <a href="<?= $row->field3 ?>" target="_blank">
                                 <img src="{assets}<?= $row->field1 ?>" class="img-responsive" alt="cpisd">
                             </a>
