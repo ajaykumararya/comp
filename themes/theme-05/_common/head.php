@@ -2,7 +2,7 @@
 <style>
     :root {
         --primary-color: #94020b;
-        --secondary-color: #ebbf51;
+        --secondary-color: #ff922f;
     }
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css">
