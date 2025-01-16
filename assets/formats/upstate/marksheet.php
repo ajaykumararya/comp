@@ -121,7 +121,7 @@
     <p class="position-absolute" style="top:37.9%;left:30%;width:60%;line-height:1;text-align:left">{center_name}</p>
     <!-- <p class="position-absolute " style="top:31.1%;left:36.5%">{mother_name}</p> -->
     <!-- <p class="position-absolute " style="top:35.3%;left:36.5%">{center_name}</p> -->
-    <p class="position-absolute" style="top:36%;left:72%;width:120px"><?= $myduration ?></p>
+    <p class="position-absolute" style="top:36%;left:76%;width:120px;text-align:left"><?= $myduration ?></p>
     <!-- <p class="position-absolute " style="top:39.6%;left:36.5%">{dob}</p> -->
     <div class="position-absolute" style="top:25.96%;left:86.1%;">
         <img src="upload/{image}" style="width:48.1px;height:57px;" alt="">
@@ -130,7 +130,7 @@
         <table id="first" border="0" style="width:100%">
             <thead>
                 <tr>
-                    <th class="primary" rowspan="2">CODE</th>
+                    <th class="primary" rowspan="2" width="12%">CODE</th>
                     <th class="primary lb b-tb" rowspan="2" width="45%" style="text-align:left;padding-left:35px">
                         SUBJECTS</th>
                     <th class="primary lb" colspan="2" style="font-size:11px;padding:4px">MAXIMUM MARKS</th>
@@ -155,7 +155,7 @@
                 ?>
                 <tr>
                     <td class="primary lb"><?=getMark($mark['subject_code'])?></td>
-                    <td class="primary lb" style="text-align:left;padding-left:2px;font-size:12.81px"><?=getMark($mark['subject_name'])?>
+                    <td class="primary lb" style="text-align:left;padding-left:6px;font-size:12.81px"><?=getMark($mark['subject_name'])?>
                     </td>
                     <td class="primary lb" style="font-size:12.81px"><?=getMark($mark['theory_max_marks'])?></td>
                     <td class="primary lb" style="font-size:12.81px"><?=getMark($mark['practical_max_marks'])?></td>
@@ -182,7 +182,7 @@
                 </tr>
             </tfoot>
         </table>
-    </div>/
+    </div>
 
     <?php
     function getMark($num)

@@ -632,11 +632,15 @@ const frontCourseOptions = (item) => {
     var subtitleClass = 'text-dark';
     if (item.element.hasAttribute('data-subtitle-class'))
         subtitleClass = item.element.getAttribute("data-subtitle-class")
+    var fee_html = '';
+    if (typeof front_admission_course_fees == undefined) {
+        fee_html = ' <b>Total Fee ' + item.element.getAttribute('data-fee') + ' ₹</b>';
+    }
     template += '<div class="d-flex align-items-center">';
     template += imageTemplate;
     template += '<div class="d-flex flex-column">'
     template += '<span class="fs-4 fw-bold lh-1 text-capitalize">' + item.text + '</span>';
-    template += '<span class=" fs-5 text-capitalize ' + subtitleClass + '">' + item.element.getAttribute('data-kt-rich-content-subcontent') + ' <b>Total Fee ' + item.element.getAttribute('data-fee') + ' ₹</b></span>';
+    template += '<span class=" fs-5 text-capitalize ' + subtitleClass + '">&nbsp;' + item.element.getAttribute('data-kt-rich-content-subcontent') + fee_html + '</span>';
     template += '</div>';
     template += '</div>';
     span.innerHTML = template;
@@ -774,10 +778,10 @@ const loadSomeFuncation = () => {
                 dateFormat: dateFormat
             });
         }
-        if($('.future-date').length){
+        if ($('.future-date').length) {
             $('.future-date').flatpickr({
                 minDate: 'today',
-                dateFormat : dateFormat,
+                dateFormat: dateFormat,
                 disable: [
                     function (date) {
                         // Return true to disable Sundays (getDay() === 0 means Sunday)
@@ -2572,18 +2576,18 @@ $(document).on('click', '.delete-notitication', function () {
         }
     })
 })
-$(document).on('click','.remove-setting',function(r){
+$(document).on('click', '.remove-setting', function (r) {
     r.preventDefault();
     var tr = $(this);
     var key_type = tr.data('key_type');
     var key = tr.data('key');
-    SwalWarning('Confirmation!', 'Are you sure for delete this setting.', true, 'Delete It').then( (ok) => {
-        if(ok.isConfirmed){
+    SwalWarning('Confirmation!', 'Are you sure for delete this setting.', true, 'Delete It').then((ok) => {
+        if (ok.isConfirmed) {
             $.AryaAjax({
-                url : 'remove-setting',
-                data : {key_type:key_type,key:key},
-                success_message : 'Setting deleted successfully.',
-                page_reload : true
+                url: 'remove-setting',
+                data: { key_type: key_type, key: key },
+                success_message: 'Setting deleted successfully.',
+                page_reload: true
             });
         }
     })

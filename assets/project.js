@@ -79,6 +79,7 @@ $(document).on('ready', function () {
                 SwalWarning('Notice!', res.message);
         });
     })
+    // alert();
     $(document).on('change', '.admission-center', function () {
         var center_id = $(this).val();
         var roll_no_box = $(this).closest('form').find('[name="roll_no"]');
