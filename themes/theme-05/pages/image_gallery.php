@@ -57,38 +57,40 @@
         width: 100%;
         height: 100%;
     }
-
-
+    .grid-padding{
+        margin-bottom:20px
+    }
 </style>
 <section class="small_pb">
-<div class="container">
-    <div class="row">
-        <?php
-        $list = $this->db->get('gallery_images');
-        if ($list->num_rows()):
-            foreach ($list->result() as $image):
-                $img = base_url('upload/' . $image->image);
-                ?>
-                <div class="grid-padding col-xs-12 col-sm-12 col-md-3">
-                    <a data-fancybox="gallery" href="<?= $img ?>" data-thumbnail="<?= $img ?>" class="galpic img-responsive"
-                        data-caption="<?= $image->title ?>">
-                        <img src="<?= $img ?>">
-                        <div class="galpic-hover d-flex align-items-center justify-content-center"><?= $image->title ?></div>
-                    </a>
-                    <?php
-                    if ($image->title != ''):
-                        ?>
-                        <div class="card text-center">
-                            <div class="card-body"><?= $image->title ?></div>
-                        </div>
-                        <?php
-                    endif;
+    <div class="container">
+        <div class="row">
+            <?php
+            $list = $this->db->get('gallery_images');
+            if ($list->num_rows()):
+                foreach ($list->result() as $image):
+                    $img = base_url('upload/' . $image->image);
                     ?>
-                </div>
-                <?php
-            endforeach;
-        endif;
-        ?>
+                    <div class="grid-padding col-xs-12 col-sm-12 col-md-3">
+                        <a data-fancybox="gallery" href="<?= $img ?>" data-thumbnail="<?= $img ?>" class="galpic img-responsive"
+                            data-caption="<?= $image->title ?>">
+                            <img src="<?= $img ?>">
+                            <div class="galpic-hover d-flex align-items-center justify-content-center"><?= $image->title ?>
+                            </div>
+                        </a>
+                        <?php
+                        if ($image->title != ''):
+                            ?>
+                            <!-- <div class="card text-center">
+                            <div class="card-body"><?= $image->title ?></div>
+                        </div> -->
+                            <?php
+                        endif;
+                        ?>
+                    </div>
+                    <?php
+                endforeach;
+            endif;
+            ?>
+        </div>
     </div>
-</div>
 </section>
