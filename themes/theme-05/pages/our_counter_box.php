@@ -7,14 +7,16 @@
             <h3> <?= ES('our_counter_box_title') ?> </h3>
         </div>
 
-        <div class="count-box">
+        <!-- <div class="count-box"> -->
+        <div class="row">
             <?php
             $data = $this->SiteModel->get_contents($type);
             if ($data->num_rows()):
                 $index = 1;
                 foreach ($data->result() as $row):
                     ?>
-                    <div class="col">
+                    <!-- <div class="col"> -->
+                    <div class="col-md-2">
                         <div class="item-box">
                             <div class="icon_box">
                                 <img src="{base_url}upload/<?= $row->field2 ?>" class="img_icom" alt="">
