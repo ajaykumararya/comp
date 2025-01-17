@@ -137,9 +137,17 @@ function dash_box($array)
 if (!function_exists('humnize_duration_with_ordinal')) {
     function humnize_duration_with_ordinal($duration, $duration_type)
     {
-        $duration_type = ($duration_type);
+        $duration_type = removeLastS($duration_type);
         return (ordinal_number($duration) . ' ' . ucfirst($duration_type));
     }
+}
+function removeLastS($string) {
+    // Check if the last character is 's' or 'S'
+    if (substr($string, -1) === 's' || substr($string, -1) === 'S') {
+        // Remove the last character
+        return substr($string, 0, -1);
+    }
+    return $string; // Return the original string if no 's' is found
 }
 function humnize($number, $string)
 {
@@ -464,6 +472,10 @@ function sup($i)
 function table_exists($table)
 {
     return get_instance()->db->table_exists($table);
+}
+function checkField($table,$field){
+    $ci = &get_instance();
+    return $ci->build_db->field_exists($table,$field);
 }
 function get_route($id, $table)
 {

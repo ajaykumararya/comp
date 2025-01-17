@@ -74,8 +74,8 @@
     <div class="position-absolute" id="photo1">
         <img src="upload/images/student_certificate_{certiticate_id}.png" style="width:96px;height:96px">
     </div>
-    <p class="position-absolute" style="top:34.2%;left:28%;width:210px">{enrollment_no}</p>
-    <p class="position-absolute " style="top:34%;left:70%;width:300px">{roll_no}</p>
+    <p class="position-absolute" style="top:34.2%;left:28%;width:210px">{roll_no}</p>
+    <p class="position-absolute " style="top:34%;left:70%;width:300px">{enrollment_no}</p>
     <p class="position-absolute" style="top:2.5%;font-size:12px;left:110px">{serial_no}</p>
     <div class="position-absolute" style="top:28%;left:44%">{student_name}</div>
     <div class="position-absolute" style="top:32%;left:40%">{father_name}</div>
@@ -93,7 +93,7 @@
     <div class="position-absolute" style="top:48.1%;left:24%;width:60px">{grade}</div>
 
     <div class="position-absolute" style="top:51.8%;left:20%">Lacknow</div>
-    <div class="position-absolute" style="top:39%;left:22.5%">{session}</div>
+    <div class="position-absolute" style="top:39%;left:22.5%">{cert_session}</div>
     <div class="position-absolute" style="top:55.3%;left:27%">{createdOn}</div>
 
     <!-- <div class="position-absolute w-100" style="top:44.4%;padding-left:7px;z-index:9999">

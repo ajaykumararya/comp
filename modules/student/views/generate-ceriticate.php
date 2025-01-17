@@ -23,7 +23,7 @@
                             }
 
                             ?>
-                            <div class="form-group mb-4 col-md-4 <?=$boxClass?>">
+                            <div class="form-group mb-4 col-md-4 <?= $boxClass ?>">
                                 <label class="form-label required">Center</label>
 
                                 <select class="form-select" name="center_id" data-control="select2"
@@ -32,8 +32,8 @@
                                     <option></option>
                                     <?php
                                     // $list = $this->db->where('type', 'center')->get('centers')->result();
-                                    $list = $this->center_model->get_center(0,'center')->result();
-                                    
+                                    $list = $this->center_model->get_center(0, 'center')->result();
+
                                     foreach ($list as $row) {
                                         $selected = $center_id == $row->id ? 'selected' : '';
                                         echo '<option value="' . $row->id . '" ' . $selected . ' data-kt-rich-content-subcontent="' . $row->institute_name . '"
@@ -44,8 +44,8 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="form-label required">Select Student</label>
-                                <select name="student_id" id="" data-control="select2"
-                                    data-placeholder="Select Stduent" class="form-select">
+                                <select name="student_id" id="" data-control="select2" data-placeholder="Select Stduent"
+                                    class="form-select">
                                     <option></option>
                                     ?>
                                 </select>
@@ -53,19 +53,29 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="form-label required">Select Issue Date</label>
-                                <input value="<?=date('d-m-Y')?>" name="issue_date" class="form-control current-date">
+                                <input value="<?= date('d-m-Y') ?>" name="issue_date" class="form-control current-date">
                                 <!-- <input type="text" name="batch_name" class="form-control" placeholder="Enter batch name"> -->
                             </div>
                             <?php
-                            if(PATH == 'zcc' || CHECK_PERMISSION('CERTIFICATE_EXAM_CONDUCTED')):
+                            if (PATH == 'zcc' || CHECK_PERMISSION('CERTIFICATE_EXAM_CONDUCTED')):
                                 ?>
-                            <div class="form-group col-md-4">
-                                <label for="" class="form-label">Examination Conducted Date</label>
-                                <input type="text" placeholder="Examination Conducted Date" name="exam_conduct_date" class="form-control select-date-month-year">
-                            </div>
-                           <?php
+                                <div class="form-group col-md-4">
+                                    <label for="" class="form-label">Examination Conducted Date</label>
+                                    <input type="text" placeholder="Examination Conducted Date" name="exam_conduct_date"
+                                        class="form-control select-date-month-year">
+                                </div>
+                                <?php
                             endif;
-                           ?>
+                            if (checkField('student_certificates', 'cert_session')):
+                                ?>
+                                <div class="form-group col-md-4">
+                                    <label for="" class="form-label required">Session</label>
+                                    <input type="text" placeholder="Session" name="cert_session"
+                                        class="form-control" required>
+                                </div>
+                                <?php
+                            endif;
+                            ?>
                         </div>
                         <div class="col-md-12 message mt-3"></div>
 

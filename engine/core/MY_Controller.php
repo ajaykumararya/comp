@@ -108,7 +108,7 @@ class MY_Controller extends MX_Controller
     }
     function checkField($table, $field)
     {
-        $checkField = $this->build_db->field_exists('session', 'status');
+        $checkField = $this->build_db->field_exists($table,$field);
         return $checkField;
 
     }

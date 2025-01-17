@@ -37,24 +37,25 @@ class Document extends MY_Controller
         $this->pdf($pdfContent, $get->row('student_name') . '-' . $get->row('roll_no') . '-Registration-form.pdf');
     }
 
-    function registration_certificate(){
+    function registration_certificate()
+    {
         // echo $this->id;
         $this->db->select('examination_body');
-        $get = $this->student_model->get_switch('all',[
+        $get = $this->student_model->get_switch('all', [
             'id' => $this->id
         ]);
-        if($get->num_rows()){
+        if ($get->num_rows()) {
             $row = $get->row();
             $registration_no = '';
-            $getRegistration = $this->db->where("enrollment_no",$row->roll_no)->get('students_registeration_data');
-            if($getRegistration->num_rows()){
+            $getRegistration = $this->db->where("enrollment_no", $row->roll_no)->get('students_registeration_data');
+            if ($getRegistration->num_rows()) {
                 $rowd = $getRegistration->row();
                 $registration_no = $rowd->registration_no;
             }
-            $this->set_data('registration_no',$registration_no);
+            $this->set_data('registration_no', $registration_no);
             $this->set_data($get->row_array());
-            $this->set_data('serial_no',$row->student_id);
-            $this->set_data('studentEncodeId',$this->encode($row->student_id));
+            $this->set_data('serial_no', $row->student_id);
+            $this->set_data('studentEncodeId', $this->encode($row->student_id));
             $pdfContent = $this->parse('registration-certificate');
             $this->pdf($pdfContent, $get->row('student_name') . '- Registation Certificate.pdf');
         }
@@ -183,10 +184,10 @@ class Document extends MY_Controller
                 $toDateString = strtotime('-1 month', $toDateString);
                 $this->set_data('to_date', date('M Y', $toDateString));
             }
-            if (in_array(PATH, ['iedct', 'techno', 'softworldedu', 'upstate','ncvetskill'])):
+            if (in_array(PATH, ['iedct', 'techno', 'softworldedu', 'upstate', 'ncvetskill'])):
                 $admissionTime = strtotime($get->row('admission_date'));
                 // $this->set_data('from_date', date('M Y', $admissionTime));
-                $this->set_data('serial_no', date("Y", $admissionTime) . str_pad($get->row('student_id'), 3, '0', STR_PAD_LEFT));
+                $this->set_data('serial_no', date("Y", $admissionTime) . str_pad($this->id, 3, '0', STR_PAD_LEFT));
             elseif (in_array(PATH, ['haptronworld'])):
                 $this->set_data('serial_no', 'IN' . (100 + $result_id));
             endif;
@@ -376,10 +377,11 @@ class Document extends MY_Controller
     }
     function certificate()
     {
+        if (checkField('student_certificates', 'cert_session'))
+            $this->db->select('sc.cert_session');
         $get = $this->student_model->student_certificates(['id' => $this->id]);
         if ($get->num_rows()) {
             $certificate = ($get->row_array());
-            // pre($certificate,true);
             $admissionTime = strtotime($certificate['admission_date']);
             $this->set_data('from_date', date('M Y', $admissionTime));
             $this->set_data('serial_no', date("Y", $admissionTime) . str_pad($certificate['student_id'], 3, '0', STR_PAD_LEFT));
@@ -404,7 +406,7 @@ class Document extends MY_Controller
             ]);
 
             $this->ki_theme->generate_qr($this->id, 'student_certificate', current_url());
-            if (in_array(PATH, ['haptronworld', 'sewaedu', 'beautyguru', 'pces','ncvetskill'])) {
+            if (in_array(PATH, ['haptronworld', 'sewaedu', 'beautyguru', 'pces', 'ncvetskill'])) {
                 $certificate['serial_no'] = (50000 + $this->id);
                 $this->mypdf->addPage('L');
             }
