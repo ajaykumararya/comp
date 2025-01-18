@@ -457,14 +457,11 @@ class Document extends MY_Controller
     {
         // $this->mypdf->load();
         // $this->mypdf->setPaper('A4', 'portrait');
-        if ($pdfContent == false) {
-            echo alert('ok');
-        }
-        else{            
+                   
             $this->mypdf->WriteHTML($pdfContent);
             $filename = str_replace('.pdf', '', $filename);
             $pdfData = $this->mypdf->Output("{$filename}.pdf", 'I');
-        }
+        
 
         // Get the PDF content as a string
         // $pdfData = $this->mypdf->OutputFile('asd.pdf'); // 'S' option for return as string
