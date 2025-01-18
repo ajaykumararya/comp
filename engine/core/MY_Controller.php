@@ -330,9 +330,9 @@ class MY_Controller extends MX_Controller
     function parse($file, $data = [], $return = false)
     {
         $this->set_data($data);
-        if (!file_exists(DOCUMENT_PATH . '/' . $file) && !strpos($file, '/') && $this->router->fetch_class() == 'document') {
-            return false;
-        } else
+        // if (!file_exists(DOCUMENT_PATH . '/' . $file) && !strpos($file, '/') && $this->router->fetch_class() == 'document') {
+        //     return false;
+        // } else
             return $this->parser->parse($file, $this->public_data, $return);
     }
     function student_view($view, $data = [])
