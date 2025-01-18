@@ -70,7 +70,7 @@ class Student_model extends MY_Model
                     $this->db->select('acws.id as admit_session_id,ecs.centre_name,
                                         ecs.centre_code,
                                         ecs.centre_address,
-                                        ses.title as session')
+                                        ss.title as session')
                     ->join('admit_cards_with_session as acws','acws.course_id = s.course_id AND acws.center_id = s.center_id');
                     $this->db->join('exam_centres as ecs','ecs.id = acws.exam_centre_id');    
                     $this->db->join('session as ss','ss.id = acws.session_id'); 
