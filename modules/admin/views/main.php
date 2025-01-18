@@ -1012,9 +1012,15 @@
     const all_templates = '';
     const wallet_system = Boolean(`<?= CHECK_PERMISSION('WALLET_SYSTEM') or CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE') ?>`);
     const wallet_balance = <?= $this->ki_theme->wallet_balance() ?? 0 ?>;
+    var DeletePermissionForCenter = true;
     // console.log(content_css);
     // Default vars of this project
     <?php
+    if (CHECK_PERMISSION('CENTRE_ONLY_ADD_STUDENT') && OnlyForCentre()) {
+        ?>
+        DeletePermissionForCenter = false;
+        <?php
+    }
     foreach ($this->ki_theme->default_vars() as $var => $var_value) {
         ?>const <?= $var ?> = `<?= $var_value ?>`;
         <?php
@@ -1083,4 +1089,5 @@ if (isDemo()) {
 }*/
 ?>
 <!-- Admin Panel -->
+
 </html>

@@ -1042,7 +1042,10 @@ function SwalUpdateLoading(message) {
     })
 }
 var deleteBtnRender = (td = 0, id = 0, message = '') => {
-    return `<buton class="btn btn-danger btn-sm" data-message="${message}" data-table-filter="delete_row" data-target="${td}" data-id="${id}"><i class="ki-outline ki-trash"></i> Delete</buton>`;
+    if (DeletePermissionForCenter == false)
+        return ``;
+    else
+        return `<buton class="btn btn-danger btn-sm" data-message="${message}" data-table-filter="delete_row" data-target="${td}" data-id="${id}"><i class="ki-outline ki-trash"></i> Delete</buton>`;
 }
 const generate_link_btn = (id, type) => {
     return `<button data-id="${id}" data-type="${type}" class="btn click-to-view-link btn-light-primary pulse btn-sm">
