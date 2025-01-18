@@ -106,14 +106,14 @@
                     <!--end::Title-->
 
                     <!--begin::Text-->
-                    <div class="text-gray-600 fs-base text-center fw-semibold">
+                    <!-- <div class="text-gray-600 fs-base text-center fw-semibold">
                         In this kind of post, <a href="#" class="opacity-75-hover text-primary me-1">the blogger</a>
 
                         introduces a person they’ve interviewed <br /> and provides some background information about
 
                         <a href="#" class="opacity-75-hover text-primary me-1">the interviewee</a>
                         and their <br /> work following this is a transcript of the interview.
-                    </div>
+                    </div> -->
                     <!--- end::Text-->
                 </div>
                 <!--end::Content-->
