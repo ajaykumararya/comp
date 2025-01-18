@@ -403,12 +403,12 @@
             <div class="row">
                 <div class="col-sm-3">
                     <div class="footer-widget">
-                        <h3 style="color:black;">
+                        <!-- <h3 style="color:black;">
                             <strong class="flex"> <img src="{theme_url}assets/img/icon/whatsapp.png"
                                     style="margin-left: 4px;" alt="" class="img-responsive" />
                                 +91-<?= remove_91($whatsapp_number) ?></strong> <br>
                             <strong class="flex"> <i class="fa fa-phone-square"></i> +91-{number} </strong>
-                        </h3>
+                        </h3> -->
                         <img style="height: 72px;width: 225px;" src="{base_url}upload/{logo}" alt="{title}"
                             class="img-responsive" />
                         <p class="margin-tp-30"><strong><?= ES('footer_note_title', '') ?></strong></p>
