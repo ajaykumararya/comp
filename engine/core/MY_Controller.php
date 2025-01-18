@@ -67,7 +67,7 @@ class MY_Controller extends MX_Controller
             'admission_button' => $this->ki_theme->save_button('Admission Now', ' fa fa-plus'),
             'assets' => base_url('assets/file/')
         ];
-        $this->ki_theme->set_config_item('newicon', img(base_url('themes/newicon'.(THEME == 'theme-05' ? 1 : '').'.gif')));
+        $this->ki_theme->set_config_item('newicon', img(base_url('themes/newicon' . (THEME == 'theme-05' ? 1 : '') . '.gif')));
         $this->set_data('basic_header_link', $this->parse('site/common-header', [], true));
         // pre($this->public_data,true);
         if ($this->center_model->isAdminOrCenter() || $this->center_model->isCoordinator() || $this->center_model->isRole()) {
@@ -108,7 +108,7 @@ class MY_Controller extends MX_Controller
     }
     function checkField($table, $field)
     {
-        $checkField = $this->build_db->field_exists($table,$field);
+        $checkField = $this->build_db->field_exists($table, $field);
         return $checkField;
 
     }
@@ -330,7 +330,10 @@ class MY_Controller extends MX_Controller
     function parse($file, $data = [], $return = false)
     {
         $this->set_data($data);
-        return $this->parser->parse($file, $this->public_data, $return);
+        if (!file_exists(DOCUMENT_PATH . '/' . $file) && !strpos($file, '/') && $this->router->fetch_class() == 'document') {
+            return false;
+        } else
+            return $this->parser->parse($file, $this->public_data, $return);
     }
     function student_view($view, $data = [])
     {

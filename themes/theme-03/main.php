@@ -227,7 +227,7 @@
                             <p>{address} </p>
                             <p>{number} </p>
                             <p>{email} </p>
-                            <iframe src="<?= ES('google_map_url') ?>" width="100%" height="150" frameborder="0"
+                            <iframe src="<?= ES('google_map_url') ?>" style="width:100%" height="150" frameborder="0"
                                 style="border:0" allowfullscreen></iframe>
                         </div>
                     </div>

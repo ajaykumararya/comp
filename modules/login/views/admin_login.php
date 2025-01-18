@@ -70,12 +70,16 @@
     <div class="d-flex flex-column flex-root" id="kt_app_root">
         <!--begin::Page bg image-->
         <style>
+            <?php
+            $light = getLightBack(); //base_url('assets/media/auth/bg10.jpg');
+            $dark = getDarkBack(); //base_url('assets/media/auth/bg10-dark.jpg');
+            ?>
             body {
-                background-image: url('{base_url}/assets/media/auth/bg10.jpg');
+                background-image: url('<?=$light?>');
             }
 
             [data-bs-theme="dark"] body {
-                background-image: url('{base_url}/assets/media/auth/bg10-dark.jpg');
+                background-image: url('<?=$dark?>');
             }
         </style>
         <!--end::Page bg image-->

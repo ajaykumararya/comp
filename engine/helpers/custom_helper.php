@@ -160,6 +160,16 @@ if (!function_exists('print_string')) {
         return get_instance()->parser->parse_string($string, $data, true);
     }
 }
+function getLightBack(){
+    if(file_exists(DOCUMENT_PATH .'/light-back.jpg'))
+        return base_url(DOCUMENT_PATH .'/light-back.jpg');
+    return  base_url('assets/media/auth/bg10.jpg');
+}
+function getDarkBack(){
+    // if(file_exists(DOCUMENT_PATH .'/dark-back.jpg'))
+    //     return base_url(DOCUMENT_PATH .'/dark-back.jpg');
+    return  base_url('assets/media/auth/bg10-dark.jpg');
+}
 if (!function_exists('theme_url')) {
     function theme_url()
     {
