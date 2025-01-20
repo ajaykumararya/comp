@@ -110,7 +110,7 @@
     <p class="position-absolute" style="top:33%;left:30%;width:255px;text-align:left">{student_name}</p>
     <p class="position-absolute" style="top:34.7%;left:30%;width:255px;text-align:left">{father_name}</p>
     <p class="position-absolute" style="top:36.3%;left:30%;width:255px;text-align:left">{mother_name}</p>
-    <p class="position-absolute " style="top:28%;left:20%;width:500px;line-height:1;font-size:20px">{course_name}</p>
+    <p class="position-absolute" style="top:28%;left:17%;width:540px;line-height:1;font-size:20px">{course_name}</p>
     <?php
     $myduration = humnize_duration_with_ordinal($marksheet_duration, $duration_type);
     ?>
