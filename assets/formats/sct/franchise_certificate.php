@@ -49,9 +49,9 @@
 
         #photo {
             z-index: 999;
-            bottom: 14%;
-            left: 6rem;
-            width: 70px;
+            bottom: 10.7%;
+            left: 6.5%;
+            width: 170px;
         }
 
         .middle-div {
@@ -70,7 +70,7 @@
     $this->ki_theme->generate_qr($id, 'franchise_certificate', current_url());
     ?>
     <div class="position-absolute" id="photo">
-        <img src="upload/images/franchise_certificate_{id}.png">
+        <img src="upload/images/franchise_certificate_{id}.png" style="width:115px">
     </div>
     <!-- <div class="position-absolute" id="photo1">
         <img src="upload/{image}" style="width:129px;height:166px;">

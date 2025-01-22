@@ -105,7 +105,7 @@
     <div class="position-absolute text-center" style="width:980px;left:7%;top:54.5%;">{course_name}</div>
     <p class="position-absolute text-center" style="top:59.5%;left:41.5%;width:120px">{roll_no}</p>
     <p class="position-absolute text-center" style="left:58.1%;top:59.5%;width:82px;font-size:14px">{createdOn}</p>
-    <p class="position-absolute text-center" style="left:69.5%;top:59.5%;width:60px">{grade}</p> 
+    <p class="position-absolute text-center" style="left:69.5%;top:59.5%;width:60px"><?=$percentage >= 35 ? 'PASS' : 'FAIL'?></p> 
     <p class="position-absolute" style="top:63%;left:46%;width:720px">{center_name}</p>
 
     <!-- <div class="position-absolute text-center t-c" style="left:18%;top:62.6%;">{duration} {duration_type}</div> -->
@@ -118,13 +118,14 @@
     <!-- <div class="position-absolute" style="width:580px;left:21.5%;top:58.8%;">{center_name}</div> -->
     <!-- createdOn -->
     <?php
+    /*
     if (file_exists('upload/' . $center_signature)) {
         ?>
         <div class="position-absolute" id="center_signature">
             <img src="upload/{center_signature}" style="width:200px;height:80px">
         </div>
         <?php
-    }
+    }*/
     ?>
 
 </body>
