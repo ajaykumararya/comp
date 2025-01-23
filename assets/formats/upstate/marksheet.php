@@ -104,13 +104,17 @@
     <div class="position-absolute" id="photo">
         <img src="upload/images/marksheet_{result_id}.png" style="width:75px;height:75px">
     </div>
+    <?php
+    $course_name = 'Diploma in Community Medical Service & Essential Drugs';
+    $fontSize = strlen($course_name) > 50 ? 18 : 20;
+    ?>
     <p class="position-absolute" style="top:2.6%;left:10%;width:120px">{serial_no}</p>
     <p class="position-absolute" style="top:34.5%;left:76%;width:120px;text-align:left">{enrollment_no}</p>
     <p class="position-absolute " style="top:33%;left:76%;width:120px;text-align:left">{roll_no}</p>
     <p class="position-absolute" style="top:33%;left:30%;width:255px;text-align:left">{student_name}</p>
     <p class="position-absolute" style="top:34.7%;left:30%;width:255px;text-align:left">{father_name}</p>
     <p class="position-absolute" style="top:36.3%;left:30%;width:255px;text-align:left">{mother_name}</p>
-    <p class="position-absolute" style="top:28%;left:17%;width:540px;line-height:1;font-size:20px">{course_name}</p>
+    <p class="position-absolute" style="top:28%;left:17%;width:540px;line-height:1;font-size:<?=$fontSize?>px">{course_name}</p>
     <?php
     $myduration = humnize_duration_with_ordinal($marksheet_duration, $duration_type);
     ?>

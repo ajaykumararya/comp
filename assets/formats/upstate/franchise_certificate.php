@@ -39,10 +39,10 @@
 
         #photo1 {
             z-index: 999;
-            top: 39.7%;
-            left: 41.7%;
-            width: 120px !important;
-            height: 95px;
+            top: 23.2%;
+            left: 79.5%;
+            width: 150px !important;
+            height: 195px;
         }
 
         #photo {
@@ -68,20 +68,20 @@
         <img src="upload/images/franchise_certificate{certiticate_id}.png">
     </div> -->
     <div class="position-absolute" id="photo1">
-        <img src="upload/{image}" style="width:129px;height:166px;">
+        <img src="upload/{image}" style="width:115px;height:143px;">
     </div>
-    <div class="position-absolute" style="top:33%;left:28%;width:60%;text-align:left;text-transform:uppercase">{institute_name}</div>
-    <div class="position-absolute" style="top:27.3%;left:28%;width:60%;text-align:left;text-transform:uppercase">{name}</div>
-    <div class="position-absolute" style="top:30.1%;left:28%;width:60%;text-align:left;text-transform:uppercase">Director</div>
+    <div class="position-absolute" style="top:39.7%;left:28%;width:60%;text-align:left;text-transform:uppercase">{institute_name}</div>
+    <div class="position-absolute" style="top:30.9%;left:28%;width:60%;text-align:left;text-transform:uppercase">{name}</div>
+    <div class="position-absolute" style="top:35.5%;left:28%;width:60%;text-align:left;text-transform:uppercase">Director</div>
 
-    <div class="position-absolute" style="top:13.8%;left:73%;text-transform: uppercase;">{center_number}</div>
-    <div class="position-absolute " style="top:35.7%;left:28%;text-transform:uppercase;width:65%">{center_full_address}</div>
-    <div class="position-absolute" style="top:56.4%;left:57%;text-transform:uppercase">{city},&nbsp;{state}</div>
-    <div class="position-absolute" style="top:60.1%;left:27%;text-transform:uppercase">UP STATE PARAMEDICAL COUNCIL</div>
+    <div class="position-absolute" style="bottom:10%;left:17%;text-transform: uppercase;">{center_number}</div>
+    <div class="position-absolute " style="top:44%;left:28%;text-transform:uppercase;width:65%;line-height:1">{center_full_address}</div>
+    <div class="position-absolute" style="top:52%;left:57%;text-transform:uppercase">{city},&nbsp;{state}</div>
+    <div class="position-absolute" style="top:56.5%;left:10%;text-transform:uppercase;width:80%;text-align:center">UP STATE PARAMEDICAL COUNCIL</div>
 
     
-    <div class="position-absolute" style="bottom:19.6%;left: 32%;font-size:12px">{certificate_issue_date}</div>
-    <div class="position-absolute" style="bottom:19.6%;left:64%;font-size:12px">{valid_upto}</div>
+    <div class="position-absolute" style="bottom:18.2%;left: 32%;font-size:12px">{certificate_issue_date}</div>
+    <div class="position-absolute" style="bottom:18.2%;left:73%;font-size:12px">{valid_upto}</div>
 
     <!-- <div class="position-absolute w-100" style="top:28.5%;padding-left:0px;z-index:9999">
 

@@ -39,7 +39,7 @@
                             </button>
                             <?php
                         } else {
-                            echo badge('Adhar Not Found.', 'danger');
+                            echo badge('Profile Image Not Found.', 'danger');
                         }
                         ?>
                     </div>
