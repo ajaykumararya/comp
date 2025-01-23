@@ -63,7 +63,7 @@
 </head>
 
 <body class="position-relative">
-    <img id="back-image" class="position-relative" src="{document_path}/franchise-certificate.jpg">
+    <img id="back-image" class="position-relative" src="{document_path}/franchise_certificate.jpg">
     <!-- <div class="position-absolute" id="photo">
         <img src="upload/images/franchise_certificate{certiticate_id}.png">
     </div> -->

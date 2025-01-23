@@ -106,7 +106,7 @@
     </div>
     <?php
     $course_name = 'Diploma in Community Medical Service & Essential Drugs';
-    $fontSize = strlen($course_name) > 50 ? 18 : 20;
+    $fontSize = strlen($course_name) > 50 ? 18 : 20; 
     ?>
     <p class="position-absolute" style="top:2.6%;left:10%;width:120px">{serial_no}</p>
     <p class="position-absolute" style="top:34.5%;left:76%;width:120px;text-align:left">{enrollment_no}</p>
