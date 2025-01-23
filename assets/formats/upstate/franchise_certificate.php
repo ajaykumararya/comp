@@ -68,7 +68,7 @@
         <img src="upload/images/franchise_certificate{certiticate_id}.png">
     </div> -->
     <div class="position-absolute" id="photo1">
-        <img src="upload/{image}" style="width:115px;height:143px;">
+        <img src="upload/{image}" style="width:114px;height:143px;">
     </div>
     <div class="position-absolute" style="top:39.7%;left:28%;width:60%;text-align:left;text-transform:uppercase">{institute_name}</div>
     <div class="position-absolute" style="top:30.9%;left:28%;width:60%;text-align:left;text-transform:uppercase">{name}</div>
