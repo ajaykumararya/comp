@@ -41,7 +41,7 @@
                         continue;
                     }
                     echo '<div class="child">
-                        <a href="' . $value . '" class="btn theme-btn theme-back"><i class="fa fa-arrow-up"></i> &nbsp;' . $title . '</a>
+                        <a href="' . $value . '" class="btn theme-btn theme-back">&nbsp;' . $title . '</a>
                     </div>';
                 }
                 ?>

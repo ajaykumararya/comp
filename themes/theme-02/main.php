@@ -52,7 +52,8 @@
 
         <?php
     } else if (in_array(PATH, ['zcc','skycrownworld'])) {
-        $primaryC = PATH == 'skycrownworld' ? '002448' :'E22B2B';
+        // $primaryC = PATH == 'skycrownworld' ? '002448' :'E22B2B';
+        $primaryC = 'E22B2B';
         ?>
             :root {
                 --primary: #<?=$primaryC?>;
