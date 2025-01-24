@@ -60,22 +60,22 @@ class Student extends Ajax_Controller
     function add()
     {
         $owner_id = $this->get_data('owner_id');
-        if ($walletSystem = ((CHECK_PERMISSION('WALLET_SYSTEM') && $this->center_model->isCenter()))) {
-            $deduction_amount = $this->ki_theme->get_wallet_amount('student_admission_fees');
-            $close_balance = $this->ki_theme->wallet_balance();
-            if ($close_balance < 0) {
-                $this->response('html', 'Your Wallet Balance is Low..' . $close_balance);
-                exit;
-            }
-        } elseif ($walletSystem = (CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE') && $this->center_model->isCenter())) {
+        if ($walletSystem = (CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE') && $this->center_model->isCenter())) {
             $deduction_amount = $this->center_model->get_assign_courses(
                 $this->post('center_id'),
                 ['course_id' => $this->post('course_id')]
-            )->row('course_fee');
+            )->row('com_course_fee');
             $close_balance = $this->ki_theme->wallet_balance();
             $close_balance = $close_balance - $deduction_amount;
             if ($close_balance < 0 or $close_balance < 0) {
                 $this->response('html', 'Wallet Balance is Low..');
+                exit;
+            }
+        } elseif ($walletSystem = ((CHECK_PERMISSION('WALLET_SYSTEM') && $this->center_model->isCenter()))) {
+            $deduction_amount = $this->ki_theme->get_wallet_amount('student_admission_fees');
+            $close_balance = $this->ki_theme->wallet_balance();
+            if ($close_balance < 0) {
+                $this->response('html', 'Your Wallet Balance is Low..' . $close_balance);
                 exit;
             }
         }
@@ -231,7 +231,24 @@ class Student extends Ajax_Controller
     function genrate_a_new_rollno_with_center_courses()
     {
         $this->genrate_a_new_rollno();
-        $this->get_center_courses();
+        if (CHECK_PERMISSION('ADMISSION_WITH_COURSE_CATEGORY')) {
+
+            $this->response('courses', 0);
+            $getCats = $this->center_model->center_course_categories($this->post('center_id'));
+            $this->response('categories', $getCats->result_array());
+
+        } else
+            $this->get_center_courses();
+    }
+    function get_category_courses()
+    {
+        $center_id = $this->post('center_id');
+        $category_id = $this->post('category_id');
+        $data = $this->center_model->get_assign_courses($center_id, [
+            'category_id' => $category_id
+        ]);
+        $this->response('courses', $data->result_array());
+        $this->response('category_id', $category_id);
     }
     function online_list()
     {
@@ -849,14 +866,16 @@ class Student extends Ajax_Controller
     {
         $this->response('status', $this->student_model->delete_placement_student($id));
     }
-    function registration_verification(){
-        $this->response('data',$this->db->get('students_registeration_data')->result_array());
+    function registration_verification()
+    {
+        $this->response('data', $this->db->get('students_registeration_data')->result_array());
     }
-    function update_registration_verification_status(){
-        $this->response('status',$this->db->where('id',$this->post('id'))->update('students_registeration_data',[
-            'status' => (int)$this->post('status')
+    function update_registration_verification_status()
+    {
+        $this->response('status', $this->db->where('id', $this->post('id'))->update('students_registeration_data', [
+            'status' => (int) $this->post('status')
         ]));
-        $this->response('data',$this->post());
+        $this->response('data', $this->post());
         // $this->response('currentStatus',$this->post('status') == 1 ? 'Verified' : 'Unverified');
     }
 }

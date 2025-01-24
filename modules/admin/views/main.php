@@ -1013,6 +1013,7 @@
     const wallet_system = Boolean(`<?= CHECK_PERMISSION('WALLET_SYSTEM') or CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE') ?>`);
     const wallet_balance = <?= $this->ki_theme->wallet_balance() ?? 0 ?>;
     var DeletePermissionForCenter = true;
+    const ADMISSION_WITH_COURSE_CATEGORY = <?=CHECK_PERMISSION('ADMISSION_WITH_COURSE_CATEGORY') ? 1 : 0?>;
     // console.log(content_css);
     // Default vars of this project
     <?php

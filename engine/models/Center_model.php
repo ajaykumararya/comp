@@ -21,6 +21,14 @@ class Center_model extends MY_Model
             $this->myWhere('cc', $condition);
         return $this->db->get();
     }
+    function center_course_categories($id)
+    {
+        $this->db->select('cat.*')
+            ->from('centers as c');
+        $this->db->join('center_course_category as cc', "cc.user_id = c.id and c.id = '$id' AND cc.user_type = 'center'");
+        $this->db->join('course_category as cat', "cat.id = cc.category_id");
+        return $this->db->get();
+    }
     function get_assign_courses($id, $condition = false, $userType = 'center')
     {
         $this->db->select('c.*,co.course_name,co.id as course_id,co.fees,co.duration,co.duration_type')
@@ -35,8 +43,9 @@ class Center_model extends MY_Model
         } else if (CHECK_PERMISSION('ADMISSION_WITH_SESSION') && PATH == 'sewaedu') {
             $this->db->join('center_course_category as cc', "cc.user_id = c.id and c.id = '$id' AND cc.user_type = '$userType'");
             // $this->db->select('co.fees,cc.percentage,(co.fees * (cc.percentage / 100)) as commission ,(co.fees - (co.fees * (cc.percentage / 100))) as course_fee')
-            $this->db->select('co.fees,cc.percentage,(co.fees * (cc.percentage / 100)) as commission ,co.fees as course_fee')
+            $this->db->select('co.fees,cc.percentage,(co.fees * (cc.percentage / 100)) as commission ,co.fees as course_fee, (co.fees - (co.fees * (cc.percentage / 100))) as com_course_fee')
                 ->join('course as co', 'co.category_id = cc.category_id');
+            
             if (isset($condition['course_id'])) {
                 $this->db->where('co.id', $condition['course_id']);
                 unset($condition['course_id']);

@@ -110,12 +110,17 @@
                                 </div>
                                 <?php
                             }
+                            // echo $owner_id;
+                            
+
+                            // echo $this->db->last_query();
                             ?>
                             <div class="form-group mb-4 col-lg-<?= $courseCol ?> col-xs-12 col-sm-12">
                                 <label class="form-label required">Course</label>
                                 <select class="form-select" name="course_id" data-control="select2"
                                     data-placeholder="Select a Course" data-allow-clear="true">
                                     <option></option>
+
                                 </select>
                             </div>
 
@@ -223,7 +228,8 @@
                                 <input type="text" name="mother_name" id="aadhar_number" class="form-control"
                                     placeholder="Enter Mothe Name">
                             </div>
-                            <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12 <?= ($isFamilyId ? '' : 'hide') ?>">
+                            <div
+                                class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12 <?= ($isFamilyId ? '' : 'hide') ?>">
                                 <label class="form-label">Family ID</label>
                                 <input type="text" name="family_id" class="form-control" placeholder="Enter family ID">
                             </div>

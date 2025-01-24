@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
     const institue_box = $('select[name="center_id"]');
     const roll_no_box = $('input[name="roll_no"]');
     const course_box = $('select[name="course_id"]');
+    const course_category_idBox = $('#course_category_id');
     // const input_center = $('input[name="center_id"]');
     const referral_id = $('[name="referral_id"]');
     if (referral_id)
@@ -343,14 +344,22 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 data: { center_id },
                 dataType: 'json'
             }).then(function (res) {
-                // log(res);
+                log(res);
                 if (res.status) {
                     roll_no_box.val(res.roll_no);
                     var options = '<option value=""></option>';
-                    if (res.courses.length) {
+                    var catoptions = '<option value=""></option>';
+                    if(res.categories.length){
+                        $.each(res.categories, function (index, value) {
+                            catoptions += '<option value="' + value.id + '">' + value.title + '</option>';
+                        });
+                        course_category_idBox.html(catoptions);
+                    }
+                    if (typeof res.courses !== undefined && res.courses.length) {
                         // log(res.courses);
                         $.each(res.courses, function (index, course) {
-                            options += `<option data-price_show="${show}" value="${course.course_id}" data-course_fee="${course.course_fee}" data-kt-rich-content-subcontent="${course.duration} ${course.duration_type}">${course.course_name}</option>`;
+                            var html = (typeof course.com_course_fee === undefined ? '' : `data-commission_fee="${course.com_course_fee}"`);
+                            options += `<option data-price_show="${show}" value="${course.course_id}" data-course_fee="${course.course_fee}" ${html} data-kt-rich-content-subcontent="${course.duration} ${course.duration_type}">${course.course_name}</option>`;
                         });
                     }
                     course_box.html(options).select2({
@@ -374,12 +383,17 @@ document.addEventListener('DOMContentLoaded', function (e) {
         if ($('#wallet_system_course_wise').length) {
             course_box.change(function () {
                 var course_fee = $(this).find('option:selected').data('course_fee');
+                var yes = '';
+                // alert(course_fee);
+                if (yes = $(this).find('option:selected').data('commission_fee')) {
+                    course_fee = yes;
+                }
                 var btn = $('#form').find('button');
                 var price = $('#centre_id').find('option:selected').data('wallet');
                 // alert(price)
                 if (price < course_fee) {
                     SwalWarning(`Wallet Balance is Low...\n
-                                <b class="text-success">Course Fee : ${inr} ${course_fee}</b>\n
+                                <b class="text-success">Dedcut Course Fee : ${inr} ${course_fee}</b>\n
                                 <b class="text-danger">Wallet Balance : ${inr} ${price}</b>
                                 `);
                     btn.prop("disabled", true);
@@ -392,6 +406,34 @@ document.addEventListener('DOMContentLoaded', function (e) {
 
         if (login_type == 'center') {
             institue_box.trigger("change");
+        }
+
+        if (ADMISSION_WITH_COURSE_CATEGORY == 1) {
+            course_category_idBox.on('change', function () {
+                var category_id = $(this).val();
+                var center_id = institue_box.val();
+                var show = $('#wallet_system_course_wise').length;
+                // alert(course_category_id)
+                $.AryaAjax({
+                    url: 'student/get-category-courses',
+                    data: { center_id, category_id }
+                }).then((res) => {
+                    log(res)
+                    var options = '<option value=""></option>';
+                    if (typeof res.courses !== undefined && res.courses.length) {
+                        // log(res.courses);
+                        $.each(res.courses, function (index, course) {
+                            var html = (typeof course.com_course_fee === undefined ? '' : `data-commission_fee="${course.com_course_fee}"`);
+                            options += `<option data-price_show="${show}" value="${course.course_id}" data-course_fee="${course.course_fee}" ${html} data-kt-rich-content-subcontent="${course.duration} ${course.duration_type}">${course.course_name}</option>`;
+                        });
+                    }
+                    course_box.html(options).select2({
+                        placeholder: "Select a Course",
+                        templateSelection: optionFormatSecond,
+                        templateResult: optionFormatSecond,
+                    });
+                })
+            })
         }
 
     }

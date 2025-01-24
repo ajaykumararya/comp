@@ -230,11 +230,14 @@ class Site extends Site_Controller
     }
     function test()
     {
-        $data = ['','d','a'];
-        // sort($data);
+        $get = $this->center_model->get_assign_courses(4,['category_id' => 3]);
+        echo $get->num_rows();
+        echo $this->db->last_query();
+        // $data = ['','d','a'];
+        // // sort($data);
         
-        pre(($data));
-        pre(($data));
+        // pre(($data));
+        // pre(($data));
         // echo time();//generateNumericString(8);
         exit;
         // $get = $this->student_model->get_switch('all', [
