@@ -7,6 +7,20 @@ class Center_model extends MY_Model
         $this->db->select($select);
         return $this->db->where('center_id', $id)->get('center_fees');
     }
+    function sewa_commission_course($id, $condition = false, $userType = 'center')
+    {
+        $this->db->join('center_course_category as cc', "cc.user_id = c.id and c.id = '$id' AND cc.user_type = '$userType'");
+        $this->db->select('co.fees,cc.percentage,(co.fees * (cc.percentage / 100)) as commission ,(co.fees - (co.fees * (cc.percentage / 100))) as course_fee')
+            // $this->db->select('co.fees,cc.percentage,(co.fees * (cc.percentage / 100)) as commission ,co.fees as course_fee')
+            ->join('course as co', 'co.category_id = cc.category_id');
+        if (isset($condition['course_id'])) {
+            $this->db->where('co.id', $condition['course_id']);
+            unset($condition['course_id']);
+        }
+        if (is_array($condition))
+            $this->myWhere('cc', $condition);
+        return $this->db->get();
+    }
     function get_assign_courses($id, $condition = false, $userType = 'center')
     {
         $this->db->select('c.*,co.course_name,co.id as course_id,co.fees,co.duration,co.duration_type')
@@ -18,18 +32,16 @@ class Center_model extends MY_Model
                 $this->db->where('co.id', $condition['course_id']);
                 unset($condition['course_id']);
             }
-        } 
-        else if(CHECK_PERMISSION('ADMISSION_WITH_SESSION') && PATH == 'sewaedu'){
+        } else if (CHECK_PERMISSION('ADMISSION_WITH_SESSION') && PATH == 'sewaedu') {
             $this->db->join('center_course_category as cc', "cc.user_id = c.id and c.id = '$id' AND cc.user_type = '$userType'");
             // $this->db->select('co.fees,cc.percentage,(co.fees * (cc.percentage / 100)) as commission ,(co.fees - (co.fees * (cc.percentage / 100))) as course_fee')
             $this->db->select('co.fees,cc.percentage,(co.fees * (cc.percentage / 100)) as commission ,co.fees as course_fee')
-            ->join('course as co', 'co.category_id = cc.category_id');
+                ->join('course as co', 'co.category_id = cc.category_id');
             if (isset($condition['course_id'])) {
                 $this->db->where('co.id', $condition['course_id']);
                 unset($condition['course_id']);
             }
-        }
-        else {
+        } else {
             $this->db->select('cc.course_fee,cc.status as course_status');
             $this->db->join('center_courses as cc', "cc.center_id = c.id and c.id = '$id' and cc.isDeleted = '0' ");
             $this->db->join('course as co', 'co.id = cc.course_id');
@@ -59,11 +71,12 @@ class Center_model extends MY_Model
             $this->myWhere('cc', $condition);
         return $this->db->get();
     }
-    function roleUsers(){
+    function roleUsers()
+    {
         return $this->db->select('c.*,rc.*')
-                ->from('centers as c')
-                ->join('role_categories as rc','rc.id = c.role_id')
-                ->get();
+            ->from('centers as c')
+            ->join('role_categories as rc', 'rc.id = c.role_id')
+            ->get();
     }
     function get_center($id = 0, $type = 'center', $isDeleted = 0)
     {

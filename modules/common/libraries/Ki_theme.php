@@ -446,7 +446,7 @@ class Ki_theme
         if (CHECK_PERMISSION('WALLET_SYSTEM') or $flag) {
             if ($flag)
                 $this->CI->db->where('status', 1);
-            $getFees = $this->CI->db->where('onlyFor', 'center')->get('student_fix_payment');
+            $getFees = $this->CI->db->where('onlyFor', 'center')->where('status',1)->get('student_fix_payment');
             if ($getFees->num_rows()) {
                 foreach ($getFees->result() as $row) {
                     $array[$row->key] = $row->amount;

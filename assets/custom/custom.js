@@ -2332,7 +2332,7 @@ const list_students = (admission_status = 0, center_id = 0) => {
                     button_html += `<a href="${base_url}student/profile/${student_id}" target="_blank" class="btn btn-light-primary btn-sm">
                                         <i class="fa fa-eye"></i> View
                                     </a>`;
-                    if (admission_status != 'all') {
+                    if (admission_status != 'all' && DeletePermissionForCenter) {
                         if (admission_status == 1) {
                             button_html += `
                             <button class="btn btn-light-warning btn-sm pending change-status">
