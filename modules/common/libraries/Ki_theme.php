@@ -1647,10 +1647,11 @@ class Ki_theme
                 if ($this->wallet_balance < 0)
                     $html .= $this->parse('wallet/low-balance', [], true);
                 if ($this->wallet_message_type) {
+                    $return = $this->center_fix_fees();
                     $html .= $this->parse('wallet/message', [
                         'type' => $this->wallet_message_type,
                         'wallet_balance' => $this->wallet_balance,
-                        'fee' => $this->center_fix_fees()[$this->wallet_message_type]
+                        'fee' => isset($return[$this->wallet_message_type]) ? $return[$this->wallet_message_type] : 0
                     ], true);
                 }
             }
