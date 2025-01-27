@@ -128,14 +128,14 @@ class MY_Controller extends MX_Controller
         //     ]);
         // }
         $checkField = $this->build_db->field_exists('study_material', 'file_type');
-            if (!$checkField) {
-                $this->build_db->add_field('study_material', [
-                    'file_type' => [
-                        'type' => 'varchar(100)',
-                        'default' => 'file'
-                    ]
-                ]);
-            }
+        if (!$checkField) {
+            $this->build_db->add_field('study_material', [
+                'file_type' => [
+                    'type' => 'varchar(100)',
+                    'default' => 'file'
+                ]
+            ]);
+        }
         $fields = ['marital_status', 'category', 'medium', 'adhar_card_no', 'session_id', 'examination_body'];
         foreach ($fields as $field) {
             $checkField = $this->build_db->field_exists('students', $field);
@@ -342,7 +342,7 @@ class MY_Controller extends MX_Controller
         // if (!file_exists(DOCUMENT_PATH . '/' . $file) && !strpos($file, '/') && $this->router->fetch_class() == 'document') {
         //     return false;
         // } else
-            return $this->parser->parse($file, $this->public_data, $return);
+        return $this->parser->parse($file, $this->public_data, $return);
     }
     function student_view($view, $data = [])
     {
@@ -441,10 +441,7 @@ class Site_Controller extends MY_Controller
         $this->set_data('link_css', $this->parse('_common/head', [], true));
         $this->set_data('YEAR', date('Y'));
         $this->set_data('copyright', ' All right reserved designed by
-        <img src="' . base_url('assets') . '/second.gif" style="height:23px">
-        <span><a style="color:#ffffff;" href="https://hyperprowebtech.com/" target="_blank"
-                rel="noopener noreferrer"> Hyper Pro
-                Webtech .</a></span>');
+        '.$this->company_name());
         $items = $this->SiteModel->print_menu_items([], true);
         $this->set_data('menus', $items['menus']);
         $index = uri_string() == '' ? base_url() : base_url(uri_string());
@@ -457,6 +454,16 @@ class Site_Controller extends MY_Controller
         }
         $this->init_setting();
         $this->set_data('head', $this->parse('head', [], true));
+    }
+    function company_name()
+    {
+        $html = '<img src="' . base_url('assets') . '/second.gif" style="height:23px">
+        <span><a style="color:#ffffff;" href="https://hyperprowebtech.com/" target="_blank"
+                rel="noopener noreferrer"> Hyper Pro
+                Webtech .</a></span>';
+        if (PATH == 'zcc')
+            return '<img src="' . base_url('assets') . '/second.gif" style="height:23px">'.ES('title');
+        return $html;
     }
     function render($view = '', $data = [], $return = false)
     {
