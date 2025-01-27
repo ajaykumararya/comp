@@ -11,7 +11,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                    <div class="col-md-6">
+                        <div class="col-md-6">
                             <div class="form-group mb-4 ">
                                 <label class="form-label required">Center</label>
                                 <?php
@@ -48,29 +48,15 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group mb-4">
-                                <label for="title" class="form-label required">Title</label>
+                            <div class="form-group">
+                                <label for="title" class="form-label required mt-4">Title</label>
                                 <input type="text" class="form-control" name="title" placeholder="Enter Title">
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group mb-4 ">
-                                <label class="form-label required">File Type</label>
-                                <select class="form-select" name="file_type" data-control="select2"
-                                    data-placeholder="Select a File Type">
-                                    <option value="file">PDF File</option>
-                                    <option value="youtube">Youtube Link</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group mb-4 file">
-                                <label for="file" class="form-label required">File</label>
-                                <input type="file" class="form-control" id="file" accept="application/pdf">
-                            </div>
-                            <div class="form-group mb-4 youtube d-none">
-                                <label for="" class="form-label required">Youtube Link</label>
-                                <input type="text" class="form-control" placeholder="Enter Youtube Link" name="youtube_link">
+                            <div class="form-group">
+                                <label for="file" class="form-label required mt-4">File</label>
+                                <input type="file" class="form-control" id="file">
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -110,5 +96,3 @@
         </div>
     </div>
 </div>
-
-

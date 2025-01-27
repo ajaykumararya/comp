@@ -236,6 +236,61 @@ class Student extends MY_Controller
     {
         $this->view('list-by-session');
     }
+    function course_study_material()
+    {
+        if ($view = $this->uri->segment(3, 0)) {
+            // echo $view;
+            try {
+                $this->token->decode($view);
+                // pre($this->token->data(),true);
+                $this->student_view('course-study-material', [
+                    'isValid' => true,
+                    'course_id' => $this->token->data('course_id'),
+                    'student_id' => $this->token->data('student_id'),
+                    'file_type' => $this->token->data('file_type'),
+                ]);
+            } catch (Exception $e) {
+                echo $e->getMessage();
+            }
+        }
+    }
+    function study_material()
+    {
+        if ($view = $this->uri->segment(3, 0)) {
+            try {
+                // throw new Exception('HELLO');
+                $this->token->decode($view);
+                $id = ($this->token->data('id'));
+                $student_id = ($this->token->data('student_id'));
+                if ($student_id == $this->session->userdata('student_id')) {
+                    $get = $this->db->where(['material_id' => $id])->get('study_material');
+
+                    if (!$get->num_rows())
+                        throw new Exception('Material Not Found..');
+                    // echo $this->token->expiredOn();
+                    $row = $get->row();
+                    if ($row->file_type == 'file') {
+                        $file = $row->file;
+                        $this->load->view('panel/study', ['url' => base_url('assets/student-study/' . $file)]);
+                    } else if ($row->file_type == 'youtube') {
+                        if ($videoId = getYouTubeId($row->file)) {
+                            // echo $videoId;
+                            $this->load->view('panel/youtube-study', ['id' => $videoId, 'title' => $row->title]);
+
+                        } else
+                            throw new Exception('Invalid File..');
+                    } else
+                        throw new Exception('Something went wrong.');
+                } else
+                    throw new Exception('This link not available..');
+
+            } catch (Exception $e) {
+                echo $e->getMessage();
+            }
+        } else
+            $this->student_view('study-material', ['isValid' => true]);
+    }
+    /*
     function study_material()
     {
         if ($view = $this->uri->segment(3, 0)) {
@@ -261,17 +316,20 @@ class Student extends MY_Controller
         } else
             $this->student_view('study-material');
     }
+            */
     function placements()
     {
         if (table_exists('placement_students')) {
             $this->view('placements', ['isValid' => true]);
         }
     }
-    function registration_certificate(){
+    function registration_certificate()
+    {
         // echo 'YES';
         $this->view('registration-certificate');
     }
-    function registration_verification(){
+    function registration_verification()
+    {
         $this->view('registration-verification');
     }
 }

@@ -230,6 +230,18 @@ const hourConvert = (timeString) => {
     }
     return output;
 }
+$(document).on('keyup','#search-study',function(){
+    var searchText = $(this).val().toLowerCase();
+    // alert(search)
+    $(this).closest('.card').find('.card').each(function(){
+        let cardText = $(this).data('text').toLowerCase();
+        if (cardText.includes(searchText)) {
+            $(this).closest('.col-md-4').removeClass('d-none');
+        } else {
+            $(this).closest('.col-md-4').addClass('d-none');
+        }
+    })
+})
 const my_template = (selectorId, Data = false) => {
     var deferred = $.Deferred();
     var templateSource = document.getElementById(selectorId);

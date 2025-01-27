@@ -610,3 +610,34 @@ function add_only_91($whatsappNumber)
     // Step 3: Remove any extra spaces
     return preg_replace('/\s+/', '', $cleanedNumber);
 }
+function getYouTubeId($url)
+{
+    // Regular expression for YouTube URL
+    $regex = '/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/';
+
+    // Match the URL against the regex
+    if (preg_match($regex, $url, $matches)) {
+        // Return the YouTube video ID
+        return $matches[1];
+    } else {
+        return false; // Not a valid YouTube URL
+    }
+}
+function getYouTubeThumbnail($videoID, $quality = 'maxresdefault') {
+    // YouTube thumbnail base URL
+    $baseUrl = "https://img.youtube.com/vi/";
+
+    // Thumbnail URL
+    $thumbnailUrl = $baseUrl . $videoID . "/" . $quality . ".jpg";
+    // return $thumbnailUrl;
+    // Check if the thumbnail exists
+    // $headers = get_headers($thumbnailUrl, 1);
+
+    // // Return thumbnail URL if valid
+    if (file_exists($thumbnailUrl)) {
+        return $thumbnailUrl;
+    } else {
+        // Fallback to a lower resolution if maxresdefault is not available
+        return $baseUrl . $videoID . "/hqdefault.jpg";
+    }
+}

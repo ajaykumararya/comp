@@ -766,13 +766,34 @@ class Student extends Ajax_Controller
         //     $data['upload_by'] = $this->student_model->login_type();
         //     $this->db->insert('study_material', $data);
         // }
-        if ($file = $this->chunkUpload('study-mat')) {
-            $this->response('status', true);
-            $data = $this->post();
-            $data['file'] = $this->post('_file_name');
-            unset($data['_file_name']);
+        // if ($file = $this->chunkUpload('study-mat')) {
+        //     $this->response('status', true);
+        //     $data = $this->post();
+        //     $data['file'] = $this->post('_file_name');
+        //     unset($data['_file_name']);
+        //     $data['upload_by'] = $this->student_model->login_type();
+        //     $this->db->insert('study_material', $data);
+        // }
+        if ($post = $this->input->post()) {
+            $data = [
+                'file_type' => $post['file_type'],
+                'course_id' => $post['course_id'],
+                'title' => $post['title'],
+                'description' => $post['description'],
+                'material_id' => time()
+            ];
+            if ($post['file_type'] == 'file') {
+                $this->chunkUpload('study-mat');
+                $data['file'] = $this->post('_file_name');
+                if (isset($data['_file_name']))
+                    unset($data['_file_name']);
+            } else {
+                $data['file'] = $this->post('youtube_link');
+                unset($data['youtube_link']);
+            }
             $data['upload_by'] = $this->student_model->login_type();
-            $this->db->insert('study_material', $data);
+            if (isset($data['file']) and !empty($data['file']))
+                $this->response('status', $this->db->insert('study_material', $data));
         }
     }
     function delete_study_material($material_id)

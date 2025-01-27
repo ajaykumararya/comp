@@ -4,19 +4,6 @@ document.addEventListener('DOMContentLoaded', function (e) {
     const institue_box = $('select[name="center_id"]');
     const course_box = $('select[name="course_id"]');
     const validation = MyFormValidation(form);
-    const file_type = $('select[name="file_type"]');
-
-    file_type.on('change', function () {
-        // alert(this.value);
-        if (this.value == 'file') {
-            $('.file').removeClass('d-none').find('input').attr('required', 'required');
-            $('.youtube').addClass('d-none').find('input').removeAttr('required');;
-        }
-        else {
-            $('.youtube').removeClass('d-none').find('input').attr('required', 'required');
-            $('.file').addClass('d-none').find('input').removeAttr('required');
-        }
-    })
     // select2Student('select[name="student_id"]');
     validation.addField('title', {
         validators: {
@@ -30,7 +17,18 @@ document.addEventListener('DOMContentLoaded', function (e) {
     });
     validation.addField('course_id', {
         validators: {
-            notEmpty: { message: 'Please Select a course' }
+            notEmpty: { message: 'Please Select a course' },
+        }
+    });
+    validation.addField('file', {
+        validators: {
+            notEmpty: { message: 'Please Select A File' },
+            file: {
+                extension: 'jpg,jpeg,png,gif,pdf',
+                type: 'image/jpeg,image/png,image/gif,application/pdf',
+                maxSize: 10485760, // 5 MB
+                message: 'The selected file is not valid. Allowed types: jpg, jpeg, png, gif and pdf. Maximum size: 10 MB.'
+            }
         }
     });
     study_table.DataTable({
@@ -38,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             url: ajax_url + 'student/list-study-material'
         },
         column: [
-            { 'data': null },
+            { 'data': null }, 
             { 'data': null },
             { 'data': null },
             { 'data': null }
@@ -47,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             {
                 targets: 0,
                 render: function (data, type, row) {
-                    return `${row.course_name} `;
+                    return `${row.course_name} ${(login_type == 'admin' ? `<div class="d-flex"><label class="badge badge-info ">${row.institute_name}</label></div>` : ``)} `;
                 }
             },
             {
@@ -59,27 +57,23 @@ document.addEventListener('DOMContentLoaded', function (e) {
             {
                 targets: 2,
                 render: function (data, type, row) {
-                    if (row.file_type == 'youtube') {
-                        var url = row.file;
-                        const youtubeRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
-
-                        const match = url.match(youtubeRegex);
-
-                        // If URL matches the regex, extract the video ID and filter it
-                        if (match) {
-                            const videoId = match[1];
-                            return `<a href="${base_url}assets/youtube/${videoId}" target="_blank" class="btn btn-info btn-xs btn-sm"><i class="fa fa-eye"></i> File</a>`;
-
-                        }
-                    }
-                    else
-                        return `<a href="${base_url}assets/student-study/${row.file}/preview" target="_blank" class="btn btn-info btn-xs btn-sm"><i class="fa fa-eye"></i> File</a>`;
+                    return `<button class="btn btn-info btn-xs btn-sm btn-action"><i class="fa fa-eye"></i> File</button>`;
                 }
             },
             {
                 targets: -1,
                 render: function (data, type, row) {
                     return `
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-xs btn-info assign">
+                                    <i class="ki-duotone fs-2 ki-user-tick ">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                        <span class="path3"></span>
+                                    </i>
+                                    Assign To Students
+                                </button>
+                            </div>
                             ${deleteBtnRender(1, row.material_id, 'Study Material')}
                             `;
                 }
@@ -87,6 +81,23 @@ document.addEventListener('DOMContentLoaded', function (e) {
         ]
     }).on('draw', function (r) {
         handleDeleteRows('student/delete-study-material');
+        // study_table.find('.btn-action');
+
+        study_table.find('.btn-action').on('click', function () {
+            var rowData = study_table.DataTable().row($(this).closest('tr')).data();
+
+            var id = rowData.material_id;//$(this).data('id');
+            // alert(id);
+            // alert(3);
+            $.AryaAjax({
+                url: 'website/study_material_link',
+                data: { id, 'status': 'ISADMIN' }
+            }).then((tt) => {
+                // log(tt);
+                SwalHideLoading();
+                window.open(`${base_url}student/study-material/${tt.token}`, "_blank");
+            });
+        })
         study_table.find('.assign').on('click', function () {
             var rowData = study_table.DataTable().row($(this).closest('tr')).data();
             //    log(rowData);
@@ -136,12 +147,21 @@ document.addEventListener('DOMContentLoaded', function (e) {
     form.addEventListener('submit', (r) => {
         r.preventDefault();
         var file = $('#file')[0].files[0];
-        file = file_type.val() == 'file' ? file : null;
+        var fileName = file.name;
+        const invalidCharsRegex = /[^a-zA-Z0-9._-]/;
+                
+        log(invalidCharsRegex.test(fileName));
+        return false;
+        if(!regex.test(file.name)){
+            SwalWarning('Notice','File names cannot contain special characters or spaces.');
+            return  // Return true if valid
+        }
         $.AryaAjax({
             url: 'student/upload-study-material',
             file: file,
             data: new FormData(form),
             validation: validation,
+
         }).then((s) => {
             log(s);
             showResponseError(s);
@@ -187,6 +207,4 @@ document.addEventListener('DOMContentLoaded', function (e) {
         institue_box.trigger("change");
     }
     // study_table.DataTable();
-
-
 });

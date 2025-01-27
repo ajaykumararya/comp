@@ -78,13 +78,13 @@ class Site extends Site_Controller
         }
         return array_merge($this->public_data, $return);
     }
-    function error_404()
+    function error_404($pageName = '404',$title = 'Page Not Found',$data = [])
     {
         $error_file = 'error_404';
-        $this->set_data('title', 'Page Not Found');
-        $this->set_data('page_name', '404');
+        $this->set_data('title', $title);
+        $this->set_data('page_name', $pageName);
         $file = (file_exists(THEME_PATH . $error_file . EXT)) ? '' : 'default_'; //error_404';
-        $this->render("{$file}{$error_file}");
+        $this->render("{$file}{$error_file}",        $data      );
     }
     function page_view($content, $data = [])
     {
@@ -230,9 +230,10 @@ class Site extends Site_Controller
     }
     function test()
     {
-        $get = $this->center_model->get_assign_courses(4,['category_id' => 3]);
+        $get = $this->center_model->get_assign_courses(5);
         echo $get->num_rows();
-        echo $this->db->last_query();
+        // pre($this->session->userdata());
+        // echo $this->db->last_query();
         // $data = ['','d','a'];
         // // sort($data);
         

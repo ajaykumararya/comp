@@ -127,6 +127,15 @@ class MY_Controller extends MX_Controller
         //         ]
         //     ]);
         // }
+        $checkField = $this->build_db->field_exists('study_material', 'file_type');
+            if (!$checkField) {
+                $this->build_db->add_field('study_material', [
+                    'file_type' => [
+                        'type' => 'varchar(100)',
+                        'default' => 'file'
+                    ]
+                ]);
+            }
         $fields = ['marital_status', 'category', 'medium', 'adhar_card_no', 'session_id', 'examination_body'];
         foreach ($fields as $field) {
             $checkField = $this->build_db->field_exists('students', $field);
