@@ -109,7 +109,7 @@ $this->ki_theme->generate_qr($student_id, 'registration_form', base_url('registr
     </div>
     <p class="position-absolute" style="top:2.6%;left:14%;width:120px">{serial_no}</p>
     <p class="position-absolute " style="top:31.9%;left:35%;line-height:1;width:45%">{course_name}</p>
-    <p class="position-absolute" style="top:34.8%;left:35%;width:200px">{registration_no}</p>
+    <p class="position-absolute" style="top:34.8%;left:35%;width:200px">{roll_no}</p>
     <p class="position-absolute " style="top:38.6%;left:35%;width:120px">{admission_date}</p>
     <p class="position-absolute" style="top:42%;left:35%;width:255px">{student_name}</p>
     <p class="position-absolute" style="top:45.4%;left:35%;width:255px">{father_name}</p>
@@ -117,7 +117,7 @@ $this->ki_theme->generate_qr($student_id, 'registration_form', base_url('registr
     <p class="position-absolute" style="top:52.4%;left:35%;width:255px">{dob}</p>
     <p class="position-absolute " style="top:55.9%;left:35%;width:455px;line-height:1">{address}</p>
     <p class="position-absolute " style="top:59.4%;left:35%;width:60%;line-height:1;text-align:left">{center_name}</p>
-    <p class="position-absolute text-capitlize" style="top:62.6%;left:35%">{duration} {duration_type}</p>
+    <p class="position-absolute text-capitlize" style="top:62.6%;left:35%"><?=humnize_duration($duration,$duration_type)?></p>
     <p class="position-absolute " style="top:66%;left:35%;width:330px;line-height:1">{examination_body}</p>
 
     <!-- <p class="position-absolute " style="top:35.3%;left:36.5%">{center_name}</p> -->
