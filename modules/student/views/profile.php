@@ -7,7 +7,7 @@ if (PATH == 'zcc' && isset($student_docs) && $student_docs) {
         $data = [];
         foreach ($docs as $key => $link) {
             if (!array_key_exists($key, $r))
-                $key = ($key == '') ? 'family_id_document' : $Events[$key];
+                $key = ($key == '') ? 'family_id_document' : @$Events[$key];
             $data[$key] = $link;
         }
         // pre($data);

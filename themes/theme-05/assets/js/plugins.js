@@ -106,7 +106,30 @@ $(document).ready(function() {
 
 
     // Recent Works Carousel
-    
+    $('#category-images').owlCarousel({
+      items:                  4,
+      loop:                   true,
+      margin:                 20,
+      stagePadding:           0,
+      merge:                  false,
+      mergeFit:               false,
+      autoplayHoverPause:     true,
+      autoplay:               true,
+      autoplayTimeout:        4000,
+      lazyLoad:               true,
+      dots:                   false,
+      autoplaySpeed:          500,
+      naviSpeed:              500,
+      dotsSpeed:              500,
+      responsive:{
+      768:{
+        items:4
+      },
+      992:{
+        items:4
+      }
+      }
+  });
     $("#recentWorks").owlCarousel({
         items:                  1,
         loop:                   true,

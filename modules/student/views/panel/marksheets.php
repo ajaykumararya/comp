@@ -85,6 +85,16 @@ if ($get->num_rows()) {
                     <!--end::Info-->
                 </div>
                 <!--end:: Card body-->
+                <?php
+                if(CHECK_PERMISSION('SHOW_STUDENT_DOCUMENT_BUTTONS')):
+                ?>
+                <!--end:: Card body-->
+                <div class="card-footer text-end">
+                    <button class="btn btn-primary"><i class="fa fa-eye"></i> View Marksheet</button>
+                </div>
+                <?php
+                endif;
+                ?>
             </a>
         </div>
         <?php

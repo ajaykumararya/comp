@@ -3,6 +3,7 @@ $get = $this->student_model->admit_card(['student_id' => $student_id]);
 if ($get->num_rows()) {
     echo '<div class="row">';
     foreach ($get->result() as $row) {
+        // pre($row);
         ?>
         <div class="col-md-6">
             <a href="{base_url}admit-card/<?= $this->ki_theme->encrypt( $row->admit_card_id) ?>" target="_blank"
@@ -82,7 +83,16 @@ if ($get->num_rows()) {
                     </div>
                     <!--end::Info-->
                 </div>
+                <?php
+                if(CHECK_PERMISSION('SHOW_STUDENT_DOCUMENT_BUTTONS')):
+                ?>
                 <!--end:: Card body-->
+                <div class="card-footer text-end">
+                    <button class="btn btn-primary"><i class="fa fa-eye"></i> View Admit card</button>
+                </div>
+                <?php
+                endif;
+                ?>
             </a>
         </div>
         <?php
