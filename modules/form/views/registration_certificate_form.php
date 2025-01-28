@@ -18,7 +18,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="" class="form-label mt-2">Registration Number</label>
-                                <input type="number" placeholder="Enter Registration Number" name="registration_no" class="form-control">
+                                <input type="text" placeholder="Enter Registration Number" name="registration_no" class="form-control">
                             </div>
                         </div>
                         <div class="card-footer">
