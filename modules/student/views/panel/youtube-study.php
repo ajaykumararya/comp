@@ -48,22 +48,20 @@
             padding: 10px;
             font-size: 16px;
             display: inline-block;
-            background: #f0f0f0;
-            color: #444;
-            line-height: 30px;
+            background: rgba(0, 0, 0.2);
+            color: #ffffff;
             margin: 3px;
             border: none;
             border-radius: 10px;
             cursor: pointer;
+            box-shadow: 0 0 10px 0 black;
+            border: 1px solid white;
+            text-shadow: 0 0 2px white;
         }
 
-        button:focus {
-            outline: none;
-        }
-
-        .mb_YTPUrl.ytpicon {
-            /* display: none!important; */
-        }
+            .mb_YTPUrl.ytpicon {
+                /* display: none!important; */
+            }
     </style>
 
     <script>
@@ -75,21 +73,25 @@
                 playOnlyIfVisible: false
             };
 
-            myPlayer = jQuery(".player").YTPlayer();
+            myPlayer = jQuery(".player").YTPlayer(options);
+            myPlayer.on("YTPData", function (e) {
+                alert(3);
+                    window.title = (e.prop.title + " @ " + e.prop.channelTitle);
+            });
         });
     </script>
 </head>
 
 <body>
     <div id="wrapper">
-        <div id="hyper" style="background: #000; height: 600px; width: 100%; position: relative; "></div>
-        <div id="customElement" class="player"
-            data-property="{showYTLogo:false,videoURL:'<?= $id ?>',containment:'#hyper', showControls:true,mute:false, autoPlay:false, loop:false, unmute:true, startAt:0, opacity:1, addRaster:false, quality:'large'}">
+        <!-- <div id="hyper" style="background: #000; height: 500px; width: 600px; position: relative; "></div> -->
+        <div id="ES" class="player"
+            data-property="{showYTLogo:false,videoURL:'<?= $id ?>',containment:'self',optimizeDisplay:false, showControls:true,mute:false, autoPlay:false, loop:false, unmute:true, startAt:0, opacity:1,ratio:'4/3',addRaster:true}">
 
         </div>
         <div style="padding: 20px; text-align: center">
-            <button onclick="jQuery('.player').YTPFullscreen()">go fullscreen</button>
-            <button onclick="jQuery('.player').YTPTogglePlay()">Play/Pause</button>            
+            <button onclick="jQuery('.player').YTPFullscreen()">Fullscreen</button>
+            <button onclick="jQuery('.player').YTPTogglePlay()">Play/Pause</button>
             <button onclick="window.close()">Close</button>
         </div>
 
