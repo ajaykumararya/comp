@@ -349,18 +349,22 @@ document.addEventListener('DOMContentLoaded', function (e) {
                     roll_no_box.val(res.roll_no);
                     var options = '<option value=""></option>';
                     var catoptions = '<option value=""></option>';
-                    if(typeof res.categories !== undefined && res.categories.length){
-                        $.each(res.categories, function (index, value) {
-                            catoptions += '<option value="' + value.id + '">' + value.title + '</option>';
-                        });
-                        course_category_idBox.html(catoptions);
+                    if (typeof res.categories !== undefined) {
+                        if (res.categories.length) {
+                            $.each(res.categories, function (index, value) {
+                                catoptions += '<option value="' + value.id + '">' + value.title + '</option>';
+                            });
+                            course_category_idBox.html(catoptions);
+                        }
                     }
-                    if (typeof res.courses !== undefined && res.courses.length) {
+                    if (typeof res.courses !== undefined) {
                         // log(res.courses);
-                        $.each(res.courses, function (index, course) {
-                            var html = (typeof course.com_course_fee === undefined ? '' : `data-commission_fee="${course.com_course_fee}"`);
-                            options += `<option data-price_show="${show}" value="${course.course_id}" data-course_fee="${course.course_fee}" ${html} data-kt-rich-content-subcontent="${course.duration} ${course.duration_type}">${course.course_name}</option>`;
-                        });
+                        if (res.courses.length) {
+                            $.each(res.courses, function (index, course) {
+                                var html = (typeof course.com_course_fee === undefined ? '' : `data-commission_fee="${course.com_course_fee}"`);
+                                options += `<option data-price_show="${show}" value="${course.course_id}" data-course_fee="${course.course_fee}" ${html} data-kt-rich-content-subcontent="${course.duration} ${course.duration_type}">${course.course_name}</option>`;
+                            });
+                        }
                     }
                     course_box.html(options).select2({
                         placeholder: "Select a Course",
