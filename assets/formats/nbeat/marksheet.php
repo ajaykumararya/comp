@@ -87,16 +87,25 @@
         .test {
             border: 1px solid red
         }
+        #center_signature{
+            bottom:11%;
+            left:67%;
+            padding:0;
+            width:210px
+        }
     </style>
 </head>
 
 <body class="position-relative">
     <img id="back-image" class="position-relative" src="{document_path}/marksheet.jpg">
     <div class="position-absolute" id="photo">
-        <img src="upload/{image}" style="width:73.3px;height:96px">
+        <img src="upload/{image}" style="width:96px;border:1px solid #014f85">
     </div>
-    <p class="position-absolute" style="top:16.4%;left:76.4%;width:120px">{roll_no}</p>
-    <p class="position-absolute " style="top:16.4%;left:21.9%;width:120px">{enrollment_no}</p>
+    <div class="position-absolute" style="top:21.68%;left:10%;">
+        <img src="upload/images/marksheet_{result_id}.png" style="width:90px;border:1px solid #014f85" alt="">
+    </div>
+    <p class="position-absolute" style="top:16.4%;left:76.4%;width:120px">{enrollment_no}</p>
+    <p class="position-absolute " style="top:16.4%;left:21.9%;width:120px">{roll_no}</p>
     <p class="position-absolute" style="top:30.4%;left:45%;width:240px">{student_name}</p>
     <p class="position-absolute" style="top:33.4%;left:34.9%;width:238px">{father_name}</p>
     <p class="position-absolute" style="top:36.5%;left:15%;width:77%;line-height:1">{course_name}</p>
@@ -107,10 +116,8 @@
     <!-- <p class="position-absolute " style="top:35.3%;left:36.5%">{center_name}</p> -->
     <!-- <p class="position-absolute text-capitlize" style="top:68.5%;left: 51.3%;width:140px">{marksheet_duration} {duration_type}</p> -->
     <!-- <p class="position-absolute " style="top:39.6%;left:36.5%">{dob}</p> -->
-    <!-- <div class="position-absolute" style="bottom:3.75%;left:44.1%;">
-        <img src="upload/images/marksheet_{result_id}.png" style="width:90px;height:110px;" alt="">
-    </div> -->
-    <div class="position-absolute " style="top:50%;left:8%;width:84%">
+    
+    <div class="position-absolute " style="top:49%;left:8%;width:84%">
         <table id="first" border="1" style="width:100%">
             <thead>
                 <tr>
@@ -153,7 +160,7 @@
             <tfoot>
                 <tr class="fw">
                     <td colspan="2" class="primary fw" style="font-size:12.81px">TOTAL</td>
-                    <td class="fw lb" style="font-size:12.81px"></td>
+                    <td class="fw lb" style="font-size:12.81px">{total}</td>
                     <td class="fw" style="font-size:12.81px">{obtain_total}</td>
                 </tr>
             </tfoot>
@@ -165,7 +172,15 @@
     <!-- <p class="position-absolute " style="bottom:20.3%;left:18.5%;font-size:15px;width:467px;line-height:1">{center_name}</p> -->
     <!-- <p class="position-absolute " style="bottom:27%;left:86%;font-size:15px;width:70px">{obtain_total}</p> -->
     <p class="position-absolute" style="bottom:15.6%;left:20%;font-size:15px;width:138px">{issue_date}</p>
-
+    <?php
+    if (file_exists('upload/' . $center_signature)) {
+        ?>
+        <div class="position-absolute" id="center_signature">
+            <img src="upload/{center_signature}" style="width:100%;height:80px">
+        </div>
+        <?php
+    }
+    ?>
 </body>
 
 </html>

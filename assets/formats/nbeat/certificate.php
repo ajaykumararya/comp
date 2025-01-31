@@ -43,13 +43,15 @@
 
         #photo {
             z-index: 999;
-            top: 78.9%;
-            left: 55.1%;
+            top: 33%;
+            left: 10%;
+            padding: 0;
+            border:1px solid #014f85;
         }
 
         #photo1 {
             top: 33%;
-            left: 74.3%;
+            left: 74.8%;
         }
 
         p {
@@ -76,27 +78,32 @@
             border: 1px solid red
         }
 
-        #center_signature {
+        /* #center_signature {
             z-index: 999;
-            bottom: 11%;
+            bottom: 10%;
             left: 65%;
+        } */
+        #center_signature{
+            bottom:11.3%;
+            left:67%;
+            padding:0;
+            width:210px
         }
     </style>
 </head>
 
 <body class="position-relative">
     <img id="back-image" class="position-relative" src="{document_path}/certificate.jpg">
-    <!-- <div class="position-absolute" id="photo">
-        <img src="upload/images/student_certificate_{certiticate_id}.png" style="width: 93px;
-            height: 93px;">
-    </div> -->
+    <div class="position-absolute" id="photo">
+        <img src="upload/images/student_certificate_{certiticate_id}.png" style="width: 80px">
+    </div>
     <div class="position-absolute" id="photo1">
         <img src="upload/{image}" style="width:91px;height:106px">
     </div>
 
 
-    <p class="position-absolute " style="top:18%;left:24%;width:120px">{enrollment_no}</p>
-    <p class="position-absolute" style="top:18%;left:76.6%;width:122px">{roll_no}</p>
+    <p class="position-absolute " style="top:18%;left:24.4%;width:120px">{roll_no}</p>
+    <p class="position-absolute" style="top:18%;left:76.8%;width:122px">{enrollment_no}</p>
 
     <div class="position-absolute " style="left:48%;top:44.5%;">{student_name}</div>
     <div class="position-absolute " style="width:340px;top:48.3%;left:40%">{father_name}</div>
@@ -117,7 +124,7 @@
     if (file_exists('upload/' . $center_signature)) {
         ?>
         <div class="position-absolute" id="center_signature">
-            <img src="upload/{center_signature}" style="width:200px;height:80px">
+            <img src="upload/{center_signature}" style="width:100%;height:80px">
         </div>
         <?php
     }

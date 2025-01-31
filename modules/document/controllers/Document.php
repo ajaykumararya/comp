@@ -103,7 +103,7 @@ class Document extends MY_Controller
             $this->set_data('time', date('h:i A', strtotime($get->row('exam_date'))));
             $pdfContent = $this->parse('admit-card');
             // $this->mypdf->setTitle('Hii');
-            if ($this->ki_theme->config('admit_card_full') or in_array(PATH, ['iedct', 'softworldedu', 'nbeat']))
+            if ($this->ki_theme->config('admit_card_full') or in_array(PATH, ['iedct', 'softworldedu']))
                 $this->mypdf->addPage('L');
             $this->pdf($pdfContent, $get->row('student_name') . '-' . $get->row('roll_no') . '-Admit Card.pdf');
         } else {
@@ -208,7 +208,7 @@ class Document extends MY_Controller
                     $pmm = $this->isMark($mark->practical_max_marks);
                     $tmim = $this->isMark($mark->theory_min_marks);
                     $pmim = $this->isMark($mark->practical_min_marks);
-                    $ttl += $this->mark_total($tmm, $tmim) + $this->mark_total($pmm, $pmim);
+                    $ttl += $this->mark_total($tmm, 0) + $this->mark_total($pmm, 0);
                     $ttltminm += $tmim;
                     $ttltmaxm += $tmm;
                     $ttlpminm += $pmim;
@@ -328,7 +328,7 @@ class Document extends MY_Controller
                             $pmm = $this->isMark($mark->practical_max_marks);
                             $tmim = $this->isMark($mark->theory_min_marks);
                             $pmim = $this->isMark($mark->practical_min_marks);
-                            $ttl += $this->mark_total($tmm, $tmim) + $this->mark_total($pmm, $pmim);
+                            $ttl += $this->mark_total($tmm, 0) + $this->mark_total($pmm, 0);
                             $ttltminm += $tmim;
                             $ttltmaxm += $tmm;
                             $ttlpminm += $pmim;

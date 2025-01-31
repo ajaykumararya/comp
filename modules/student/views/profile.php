@@ -62,7 +62,7 @@ if(isset($fee_emi) && $fee_emi){
                         </div>
                         <div class="d-flex">
                             <ol class="mt-3" type="l">
-                                <li>Roll No</li>
+                                <li>{rollno_text}</li>
                                 <li>Name</li>
                                 <li>Mobile</li>
                             </ol>
@@ -220,7 +220,7 @@ if(isset($fee_emi) && $fee_emi){
                                     <!--end::Number-->
                                     <!--begin::Label-->
                                     <div class="fw-semibold fs-6 text-gray-500 align-items-center flex-wrap w-100">
-                                        Roll No
+                                        {rollno_text}
                                     </div>
                                     <!--end::Label-->
                                 </div>
