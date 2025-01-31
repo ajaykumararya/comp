@@ -350,12 +350,12 @@ document.addEventListener('DOMContentLoaded', function (e) {
                     var options = '<option value=""></option>';
                     var catoptions = '<option value=""></option>';
                     if (typeof res.categories !== undefined) {
-                        if (res.categories.length) {
+                        
                             $.each(res.categories, function (index, value) {
                                 catoptions += '<option value="' + value.id + '">' + value.title + '</option>';
                             });
                             course_category_idBox.html(catoptions);
-                        }
+                        
                     }
                     if (typeof res.courses !== undefined) {
                         // log(res.courses);
