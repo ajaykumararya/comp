@@ -349,7 +349,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                     roll_no_box.val(res.roll_no);
                     var options = '<option value=""></option>';
                     var catoptions = '<option value=""></option>';
-                    if(res.categories.length){
+                    if(typeof res.categories !== undefined && res.categories.length){
                         $.each(res.categories, function (index, value) {
                             catoptions += '<option value="' + value.id + '">' + value.title + '</option>';
                         });

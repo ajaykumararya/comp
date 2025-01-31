@@ -74,10 +74,6 @@
             };
 
             myPlayer = jQuery(".player").YTPlayer(options);
-            myPlayer.on("YTPData", function (e) {
-                alert(3);
-                    window.title = (e.prop.title + " @ " + e.prop.channelTitle);
-            });
         });
     </script>
 </head>
