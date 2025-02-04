@@ -66,7 +66,7 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                         data-allow-clear="<?= $this->center_model->isAdmin() ?>">
                                         <option></option>
                                         <?php
-                                        $list = $this->db->where('type', 'center')->get('centers')->result();
+                                        $list = $this->db->where('type', 'center')->order_by('institute_name','ASC')->get('centers')->result();
                                         foreach ($list as $row) {
                                             $selected = $center_id == $row->id ? 'selected' : '';
                                             echo '<option value="' . $row->id . '" ' . $selected . ' data-kt-rich-content-subcontent="' . $row->institute_name . '"
