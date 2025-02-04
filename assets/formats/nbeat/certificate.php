@@ -8,12 +8,12 @@
     <style>
         * {
             font-weight: bold;
-            text-transform: uppercase;
+            /*text-transform: capitalize;*/
 
         }
 
         .text-capitlize {
-            text-transform: uppercase;
+            /*text-transform: capitalize;*/
         }
 
         .position-relative {
@@ -71,7 +71,7 @@
         }
 
         div{
-            text-transform: uppercase!important;
+            /*text-transform: uppercase!important;*/
         }
 
         .test {
@@ -84,7 +84,7 @@
             left: 65%;
         } */
         #center_signature{
-            bottom:11.3%;
+            bottom:8.7%;
             left:67%;
             padding:0;
             width:210px
@@ -106,7 +106,7 @@
     <p class="position-absolute" style="top:18%;left:76.8%;width:122px">{enrollment_no}</p>
 
     <div class="position-absolute " style="left:48%;top:44.5%;">{student_name}</div>
-    <div class="position-absolute " style="width:340px;top:48.3%;left:40%">{father_name}</div>
+    <div class="position-absolute " style="width:340px;top:48.3%;left:40%;">{father_name}</div>
     <div class="position-absolute " style="top:52%;left:30%">{dob}</div>
 
     <!-- <div class="position-absolute text-center" style="width:450px;left:20%;top:56.5%;">{enrollment_no}</div> -->
