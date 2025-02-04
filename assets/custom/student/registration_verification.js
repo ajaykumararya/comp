@@ -57,7 +57,8 @@ document.addEventListener('DOMContentLoaded', function () {
             r.preventDefault();
             var data = $(this).data();
             // log(data);
-            var id = data.id;
+            var id = $(this).data('id')
+            // alert(id);
             delete data.id;
             data = Object.keys(data).sort().reduce((result, key) => {
                 result[key] = data[key];
@@ -91,6 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var data = $(this).data();
         data.status = $(this).is(':checked') ? '1' : '0';
         // alert(data.status);
+        log(data);
         $.AryaAjax({
             url: 'student/update-registration-verification-status',
             data: data

@@ -1,7 +1,6 @@
 <?php
 class Ajax extends Ajax_Controller
 {
-
     function generate_link()
     {
         $allLinks = $this->ki_theme->project_config('open_links');

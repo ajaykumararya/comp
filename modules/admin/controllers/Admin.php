@@ -2,6 +2,28 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 class Admin extends MY_Controller
 {
+    function upload_editor_file() {
+        header("Content-Type: application/json");
+
+        if (isset($_FILES['file']['name'])) {
+            $config['upload_path']   = './upload/';
+            $config['allowed_types'] = 'jpg|jpeg|png|gif';
+            $config['max_size']      = 2048; // 2MB
+            $config['encrypt_name']  = TRUE;
+
+            $this->load->library('upload', $config);
+
+            if (!$this->upload->do_upload('file')) {
+                echo json_encode(['error' => $this->upload->display_errors()]);
+            } else {
+                $upload_data = $this->upload->data();
+                $image_url = base_url('upload/' . $upload_data['file_name']);
+                echo json_encode(['location' => $image_url]);
+            }
+        } else {
+            echo json_encode(['error' => 'No file uploaded.']);
+        }
+    }
     function index()
     {
         if($this->center_model->isCenter()){

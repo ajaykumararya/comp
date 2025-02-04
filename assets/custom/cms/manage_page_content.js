@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
         var ed = tinyMCE.get('aryaeditor');
         var content = ed.getContent();
         var id = $('#content_id').val();
+        
         // alert(id);
         // log(data);
         $.AryaAjax({
