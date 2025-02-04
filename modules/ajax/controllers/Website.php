@@ -725,7 +725,10 @@ class Website extends Ajax_Controller
                 'exam_centre_name' => $this->post('exam_centre'),
                 'year' => $this->post('year_of_passing'),
                 'pass_or_fail' => $this->post('pass_or_fail'),
-                'registration_no' => time()
+                'registration_no' => time(),
+                'dob' => $this->post('dob'),
+                'address' => $this->post("address"),
+                'training_period' => $this->post('training_period')
             ];
             $data['photo'] = $this->file_up('photo');
             $data['10th_marksheet'] = $this->file_up('10th_marksheet');

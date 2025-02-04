@@ -40,24 +40,21 @@ class Document extends MY_Controller
     function registration_certificate()
     {
         // echo $this->id;
-        $this->db->select('examination_body');
-        $get = $this->student_model->get_switch('all', [
-            'id' => $this->id
-        ]);
+        $registration_no = '';
+        $get = $this->db->where("id", $this->id)->where('status',1)->get('students_registeration_data');
         if ($get->num_rows()) {
             $row = $get->row();
-            $registration_no = '';
-            $getRegistration = $this->db->where("enrollment_no", $row->roll_no)->get('students_registeration_data');
-            if ($getRegistration->num_rows()) {
-                $rowd = $getRegistration->row();
-                $registration_no = $rowd->registration_no;
-            }
+            $registration_no = $row->registration_no;
+
             $this->set_data('registration_no', $registration_no);
             $this->set_data($get->row_array());
-            $this->set_data('serial_no', $row->student_id);
-            $this->set_data('studentEncodeId', $this->encode($row->student_id));
+            $this->set_data('serial_no', $row->id);
+            $this->set_data('studentEncodeId', $this->encode($row->id));
             $pdfContent = $this->parse('registration-certificate');
-            $this->pdf($pdfContent, $get->row('student_name') . '- Registation Certificate.pdf');
+            $this->pdf($pdfContent, $get->row('name') . '- Registation Certificate.pdf');
+        }
+        else {
+            // $this->not_found("Registration Certificate Not Found..");
         }
     }
     private function get_multi_path($course_id, $file, $page = 'P')
@@ -406,7 +403,7 @@ class Document extends MY_Controller
             ]);
 
             $this->ki_theme->generate_qr($this->id, 'student_certificate', current_url());
-            if (in_array(PATH, ['haptronworld', 'sewaedu', 'beautyguru', 'pces', 'ncvetskill','sct'])) {
+            if (in_array(PATH, ['haptronworld', 'sewaedu', 'beautyguru', 'pces', 'ncvetskill', 'sct'])) {
                 $certificate['serial_no'] = (50000 + $this->id);
                 $this->mypdf->addPage('L');
             }
@@ -442,7 +439,7 @@ class Document extends MY_Controller
                     }
                     $output = $this->parse('franchise_certificate', $data);
 
-                    if (in_array(PATH, ['techno', 'haptronworld', 'beautyguru', 'sewaedu', 'softworldedu', 'nbeat','sct'])) {
+                    if (in_array(PATH, ['techno', 'haptronworld', 'beautyguru', 'sewaedu', 'softworldedu', 'nbeat', 'sct'])) {
                         $this->mypdf->addPage('L');
                     }
                     $this->pdf($output);
@@ -457,11 +454,11 @@ class Document extends MY_Controller
     {
         // $this->mypdf->load();
         // $this->mypdf->setPaper('A4', 'portrait');
-                   
-            $this->mypdf->WriteHTML($pdfContent);
-            $filename = str_replace('.pdf', '', $filename);
-            $pdfData = $this->mypdf->Output("{$filename}.pdf", 'I');
-        
+
+        $this->mypdf->WriteHTML($pdfContent);
+        $filename = str_replace('.pdf', '', $filename);
+        $pdfData = $this->mypdf->Output("{$filename}.pdf", 'I');
+
 
         // Get the PDF content as a string
         // $pdfData = $this->mypdf->OutputFile('asd.pdf'); // 'S' option for return as string

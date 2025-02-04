@@ -16,16 +16,20 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="form-group mb-4 col-md-4">
+                                <div class="form-group mb-4 col-md-3">
                                     <label for="" class="form-label required">Name</label>
                                     <input type="text" name="name" required placeholder="Enter Name" class="form-control">
                                 </div>
-                                <div class="form-group mb-4 col-md-4">
+                                <div class="form-group mb-4 col-md-3">
+                                    <label for="" class="form-label required">Date of birth</label>
+                                    <input type="date" name="dob" required class="form-control">
+                                </div>
+                                <div class="form-group mb-4 col-md-3">
                                     <label for="" class="form-label required">Father's Name</label>
                                     <input type="text" class="form-control" placeholder="Enter Father's Name"
                                         name="father_name" required>
                                 </div>
-                                <div class="form-group mb-4 col-md-4">
+                                <div class="form-group mb-4 col-md-3">
                                     <label for="" class="form-label required">Mother's Name</label>
                                     <input type="text" class="form-control" placeholder="Enter Mother's Name"
                                         name="mother_name" required>
@@ -43,8 +47,14 @@
 
                                 <div class="col-md-6 form-group mb-4">
                                     <label for="" class="form-label required">Exam / Course</label>
+                                    <div class="input-group">
                                     <input type="text" name="exam_or_course" placeholder="Enter Exam / Course"
                                         class="form-control" required>
+                                        <span class="input-group-text" id="basic-addon2"
+                                            style="width:350px;padding:0px!important">
+                                            <input type="text" name="training_period" placeholder="Training Peroid, Ex- 2 Year" class="form-control">
+                                        </span>
+                                    </div>
                                 </div>
                                 <div class="col-md-6 form-group mb-4">
                                     <label for="" class="form-label required">College / Institute Name</label>
@@ -65,6 +75,10 @@
                                     <label for="" class="form-label required">Pass / Fail</label>
                                     <input required type="text" name="pass_or_fail" placeholder="Enter Pass / Fail"
                                         class="form-control">
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <label for="" class="form-label required">Address</label>
+                                    <textarea name="address" placeholder="Enter  Address" id="" class="form-control"></textarea>
                                 </div>
                             </div>
                         </div>
