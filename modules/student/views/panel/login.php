@@ -221,7 +221,7 @@
 
 
                                 <div class="form-group d-grid mb-1">
-                                    <label for="" class="form-label mt-2 required">Roll Number</label>
+                                    <label for="" class="form-label mt-2 required">{rollno_text}</label>
                                     <input value="<?=isDemo() ? 'SC240001' : ''?>" type="text" name="roll_no" placeholder="Enter {rollno_text}." class="form-control">
                                 </div>
                                 <div class="form-group d-grid mb-8">
