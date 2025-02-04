@@ -192,6 +192,21 @@ class MY_Controller extends MX_Controller
             // $this->db->where('payment_date IS NOT NULL', NULL, FALSE);
             $this->db->update('student_fee_transactions');
         }
+        if (CHECK_PERMISSION('CENTRE_STUDENT_CERTIFICATE_PERMISSION')) {
+            $checkField = $this->build_db->field_exists('centers', 'certificate_create_from');
+            if (!$checkField) {
+                $this->build_db->add_field('centers', [
+                    'certificate_create_from' => [
+                        'type' => 'VARCHAR(100)',
+                        'default' => null
+                    ],
+                    'certificate_create_to' => [
+                        'type' => 'VARCHAR(100)',
+                        'default' => null
+                    ]
+                ]);
+            }
+        }
     }
 
     function encode($id = 0)
@@ -441,7 +456,7 @@ class Site_Controller extends MY_Controller
         $this->set_data('link_css', $this->parse('_common/head', [], true));
         $this->set_data('YEAR', date('Y'));
         $this->set_data('copyright', ' All right reserved designed by
-        '.$this->company_name());
+        ' . $this->company_name());
         $items = $this->SiteModel->print_menu_items([], true);
         $this->set_data('menus', $items['menus']);
         $index = uri_string() == '' ? base_url() : base_url(uri_string());
@@ -462,7 +477,7 @@ class Site_Controller extends MY_Controller
                 rel="noopener noreferrer"> Hyper Pro
                 Webtech .</a></span>';
         if (PATH == 'zcc')
-            return '<img src="' . base_url('assets') . '/second.gif" style="height:23px">'.ES('title');
+            return '<img src="' . base_url('assets') . '/second.gif" style="height:23px">' . ES('title');
         return $html;
     }
     function render($view = '', $data = [], $return = false)

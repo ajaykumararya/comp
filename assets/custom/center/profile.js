@@ -8,7 +8,16 @@ document.addEventListener('DOMContentLoaded', function () {
             page_reload: true
         }).then((r) => showResponseError(r));
     });
-
+    $(document).on('submit','.change-center-setting',function(re){
+        re.preventDefault();
+        // alert(3);
+        $.AryaAjax({
+            url: 'center/update-centre-setting',
+            data: new FormData(this),
+            success_message: 'setting Updated Successfully.',
+            page_reload: true
+        }).then((r) => showResponseError(r));
+    })
     $(document).on('change', '.upload-center-docs', function () {
         var id = $(this).closest('table').data('id');
         var fileInput = this;

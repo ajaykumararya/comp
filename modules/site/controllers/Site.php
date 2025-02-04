@@ -230,8 +230,26 @@ class Site extends Site_Controller
     }
     function test()
     {
-        $get = $this->center_model->get_assign_courses(5);
-        echo $get->num_rows();
+        $details = $this->center_model->get_center(5);
+            if($details->num_rows()){
+                $rowDetails = $details->row();
+                $issueDate = date('Y-m-d',strtotime('07-02-2025'));
+                // if($rowDetails->certificate_create_from && $rowDetails->certificate_create_to &&
+                // $rowDetails->certificate_create_from <= $issueData &&
+                // $rowDetails->certificate_create_to >= $issueData){
+
+                // }
+                if($rowDetails->certificate_create_from == null Or $rowDetails->certificate_create_from == null){
+                    echo (alert('You don`\t have permission to create certificate','danger'));
+                    exit;
+                }
+                if($rowDetails->certificate_create_from > $issueDate OR $rowDetails->certificate_create_to < $issueDate){
+                    echo (alert('You don`\t have permission to create certificate','danger'));
+                    exit;
+                }
+            }
+        // $get = $this->center_model->get_assign_courses(5);
+        // echo $get->num_rows();
         // pre($this->session->userdata());
         // echo $this->db->last_query();
         // $data = ['','d','a'];

@@ -68,6 +68,13 @@ class Center extends MY_Controller
                 'url' => 'change-password'
             ]
         ];
+        if(CHECK_PERMISSION('CENTRE_STUDENT_CERTIFICATE_PERMISSION')){
+            $tabs['setting'] = [
+                'title' => 'Setting',
+                'icon' => array('setting-2', 3),
+                'url' => 'setting'
+            ];
+        }
         if (!$this->center_model->isCoordinator()) {
             if (CHECK_PERMISSION('CENTRE_WISE_WALLET_SYSTEM') and $this->center_model->isAdmin()) {
                 $tabs['fee-system'] = [

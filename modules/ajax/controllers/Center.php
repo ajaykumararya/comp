@@ -10,6 +10,13 @@ class Center extends Ajax_Controller
             ->update('centers');
         $this->response('status', true);
     }
+    function update_centre_setting(){
+        $data = $this->post();
+        $id = $data['center_id'];
+        unset($data['center_id']);
+        $this->db->where('id', $id)->update('centers', $data);
+        $this->response('status',true);
+    }
     function add()
     {
         if ($this->form_validation->run('add_center')) {

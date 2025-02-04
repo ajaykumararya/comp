@@ -688,6 +688,22 @@ class Student extends Ajax_Controller
     {
         // $this->response($this->post());
         $data = $this->post();
+        if (CHECK_PERMISSION('CENTRE_STUDENT_CERTIFICATE_PERMISSION') && $this->center_model->isCenter()) {
+            $details = $this->center_model->get_center($this->get_data('owner_id'));
+            if($details->num_rows()){
+                $rowDetails = $details->row();
+                $issueDate = date('Y-m-d',strtotime($data['issue_date']));
+                
+                if($rowDetails->certificate_create_from == null Or $rowDetails->certificate_create_from == null){
+                    $this->response('html', alert('You don`\t have permission to create certificate','danger'));
+                    exit;
+                }
+                if($rowDetails->certificate_create_from > $issueDate OR $rowDetails->certificate_create_to < $issueDate){
+                    $this->response('html', alert('You don`\t have permission to create certificate','danger'));
+                    exit;
+                }
+            }
+        }
         if ($walletSystem = (CHECK_PERMISSION('WALLET_SYSTEM') && $this->center_model->isCenter())) {
             $deduction_amount = $this->ki_theme->get_wallet_amount('student_certificate_fees');
             $close_balance = $this->ki_theme->wallet_balance();
