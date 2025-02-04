@@ -43,7 +43,7 @@
 
         #photo {
             z-index: 999;
-            top: 33%;
+            top: 23%;
             left: 10%;
             padding: 0;
             border:1px solid #014f85;

@@ -88,7 +88,7 @@
             border: 1px solid red
         }
         #center_signature{
-            bottom:11%;
+            bottom:8.7%;
             left:67%;
             padding:0;
             width:210px

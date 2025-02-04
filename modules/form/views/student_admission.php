@@ -101,7 +101,7 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                             data-placeholder="Select a Course">
                                             <option></option>
                                             <?php
-                                            $listBatch = $this->db->get('batch');
+                                            $listBatch = $this->db->order_by('batch_name','ASC')->get('batch');
                                             foreach ($listBatch->result() as $row) {
                                                 echo '<option value="' . $row->id . '">' . $row->batch_name . '</option>';
                                             }
