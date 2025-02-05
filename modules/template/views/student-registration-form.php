@@ -3,7 +3,7 @@
         <div class="col-md-12 mt-3 mb-3">
             <div class="card">
                 <div class="card-header bg-dark">
-                    <h3 class="card-title text-white"><i class="fa fa-eye"></i> {student_name}`s Registration Details
+                    <h3 class="card-title text-white"><i class="fa fa-eye"></i> {name}`s Registration Details
                     </h3>
 
                 </div>
@@ -19,9 +19,9 @@
                         ?>
                             <tr>
                                 <th>Course Name</th>
-                                <td>{course_name}</td>
+                                <td>{exam_or_course}</td>
                                 <td rowspan="4" style="width:100px">
-                                    <img src="{base_url}upload/{image}" alt="{name} Photo"
+                                    <img src="{base_url}upload/{photo}" alt="{name} Photo"
                                         style="width: 113px;    height: 147px;">
                                 </td>
                             </tr>
@@ -31,11 +31,11 @@
                             </tr>
                             <tr>
                                 <th>Registration Date</th>
-                                <td>{admission_date}</td>
+                                <td>{registration_date}</td>
                             </tr>
                             <tr>
                                 <th>Student Name</th>
-                                <td>{student_name}</td>
+                                <td>{name}</td>
                             </tr>
                             <tr>
                                 <th>Father`s Name</th>
@@ -51,15 +51,15 @@
                             </tr>
                             <tr>
                                 <th>Address</th>
-                                <td colspan="2">{address}</td>
+                                <td colspan="2">{student_address}</td>
                             </tr>
                             <tr>
                                 <th>Training Centre</th>
-                                <td colspan="2">{center_name}</td>
+                                <td colspan="2">{institute_name}</td>
                             </tr>
                             <tr>
                                 <th>Training Period</th>
-                                <td colspan="2">{duration} {duration_type}</td>
+                                <td colspan="2">{training_period}</td>
                             </tr>
                             <tr>
                                 <th>Examination Body</th>

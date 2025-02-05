@@ -92,7 +92,7 @@
     <!-- <div class="position-absolute" style="top:63.83%;left:54%;width:100%">{obtain_total}</div> -->
     <div class="position-absolute" style="top:48.1%;left:24%;width:60px">{grade}</div>
 
-    <div class="position-absolute" style="top:51.8%;left:20%">Lacknow</div>
+    <div class="position-absolute" style="top:51.8%;left:20%">Lucknow</div>
     <div class="position-absolute" style="top:39%;left:22.5%">{cert_session}</div>
     <div class="position-absolute" style="top:55.3%;left:27%">{createdOn}</div>
 

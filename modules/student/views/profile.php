@@ -14,6 +14,9 @@ if (PATH == 'zcc' && isset($student_docs) && $student_docs) {
         $this->db->update('students', ['upload_docs' => json_encode($data)], ['id' => $student_id]);
     }
 }
+$profile_url = base_url('student-details/') . $this->token->encode([
+    'student_id' => $student_id
+]);
 if(isset($fee_emi) && $fee_emi){
     // echo $admission_date;
     // echo ''; 
@@ -172,11 +175,12 @@ if(isset($fee_emi) && $fee_emi){
                         <div class="d-flex flex-column">
                             <!--begin::Name-->
                             <div class="d-flex align-items-center mb-2">
-                                <a href="#"
+                                <a href="<?=$profile_url?>" target="_blank" data-bs-custom-class="tooltip-inverse" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-original-title="View Profile Details"
                                     class="text-gray-900 text-hover-primary fs-2 fw-bold me-1 student-name">{student_name}</a>
-                                <a href="#" class="student-status <?= ($student_profile_status) ? '' : 'd-none' ?>"><i
+                                <a href="<?=$profile_url?>" target="_blank" data-bs-custom-class="tooltip-inverse" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-original-title="View Profile Details" class="student-status <?= ($student_profile_status) ? '' : 'd-none' ?>"><i
                                         class="ki-outline ki-verify fs-1 text-primary"></i></a>
-
+                                <a href="<?=$profile_url?>" target="_blank" data-bs-custom-class="tooltip-inverse" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-original-title="View Profile Details"><i
+                                class="ki-outline ki-eye fs-1 text-success"></i></a>
                             </div>
                             <!--end::Name-->
                             <!--begin::Info-->
@@ -213,7 +217,7 @@ if(isset($fee_emi) && $fee_emi){
                                     <!--begin::Number-->
                                     <div class="d-flex align-items-center flex-wrap">
                                         <div class="fs-2 fw-bold me-5" id="roll_no">{roll_no}</div>
-                                        <button class="btn btn-icon btn-sm btn-light" data-clipboard-target="#roll_no">
+                                        <button class="btn btn-icon btn-sm btn-light" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-original-title="Copy" data-bs-custom-class="tooltip-inverse" data-clipboard-target="#roll_no">
                                             <i class="ki-duotone ki-copy fs-2 text-muted"></i>
                                         </button>
                                     </div>

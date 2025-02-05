@@ -41,7 +41,7 @@ class Document extends MY_Controller
     {
         // echo $this->id;
         $registration_no = '';
-        $get = $this->db->where("id", $this->id)->where('status',1)->get('students_registeration_data');
+        $get = $this->db->where("id", $this->id)->where('status', 1)->get('students_registeration_data');
         if ($get->num_rows()) {
             $row = $get->row();
             $registration_no = $row->registration_no;
@@ -52,8 +52,7 @@ class Document extends MY_Controller
             $this->set_data('studentEncodeId', $this->encode($row->id));
             $pdfContent = $this->parse('registration-certificate');
             $this->pdf($pdfContent, $get->row('name') . '- Registation Certificate.pdf');
-        }
-        else {
+        } else {
             // $this->not_found("Registration Certificate Not Found..");
         }
     }
@@ -181,12 +180,14 @@ class Document extends MY_Controller
                 $toDateString = strtotime('-1 month', $toDateString);
                 $this->set_data('to_date', date('M Y', $toDateString));
             }
-            if (in_array(PATH, ['iedct', 'techno', 'softworldedu', 'upstate', 'ncvetskill'])):
+            if (in_array(PATH, ['iedct', 'techno', 'softworldedu', 'ncvetskill'])):
                 $admissionTime = strtotime($get->row('admission_date'));
                 // $this->set_data('from_date', date('M Y', $admissionTime));
                 $this->set_data('serial_no', date("Y", $admissionTime) . str_pad($this->id, 3, '0', STR_PAD_LEFT));
             elseif (in_array(PATH, ['haptronworld'])):
                 $this->set_data('serial_no', 'IN' . (100 + $result_id));
+            elseif (in_array(PATH, ['upstate'])):
+                $this->set_data('serial_no', '1' . str_pad($this->id, 5, 0, STR_PAD_LEFT));
             endif;
             // echo $get->row('result_id');
             // pre($get_subect_numers->result_array(),true);
@@ -406,6 +407,8 @@ class Document extends MY_Controller
             if (in_array(PATH, ['haptronworld', 'sewaedu', 'beautyguru', 'pces', 'ncvetskill', 'sct'])) {
                 $certificate['serial_no'] = (50000 + $this->id);
                 $this->mypdf->addPage('L');
+            } elseif (in_array(PATH, ['upstate'])) {
+                $this->set_data('serial_no', '1' . str_pad($certificate['student_id'], 5, 0, STR_PAD_LEFT));
             }
             // $getLastExam = $this->student_model->last_marksheet($certificate['course_id']);
             $this->set_data($certificate);

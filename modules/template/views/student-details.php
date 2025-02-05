@@ -30,7 +30,7 @@
                             </tr>
                             <tr>
                                 <th>Address</th>
-                                <td colspan="2">{address}</td>
+                                <td colspan="2">{student_address}</td>
                             </tr>
                         </table>
                     </table>

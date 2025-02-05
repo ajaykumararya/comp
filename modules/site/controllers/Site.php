@@ -96,32 +96,52 @@ class Site extends Site_Controller
     {
         $token = $this->uri->segment(2);
         $id = ($this->decode($token));
-        // echo $id;
-        $this->db->select('examination_body');
-        $get = $this->student_model->get_switch('all', [
-            'id' => $id
-        ]);
-        if ($get->num_rows()) {
-            // pre($row);
-            $data = $get->row_array();
-            $registration_no = '';
-            $getRegistration = $this->db->where("enrollment_no", $data['roll_no'])->get('students_registeration_data');
+        $getRegistration = $this->db->where(['id' => $id,'status' => 1])->get('students_registeration_data');
             if ($getRegistration->num_rows()) {
-                $rowd = $getRegistration->row();
-                $registration_no = $rowd->registration_no;
-            }
+                $data = $getRegistration->row_array();
+                $registration_no = $data['registration_no'];
+            
             $this->set_data('registration_no', $registration_no);
 
             // pre($data,true)  ;
-            $this->set_data('page_name', $data['student_name'] . ' Details');
+            $this->set_data('page_name', $data['name'] . ' Details');
             $this->set_data($data);
+            $this->set_data('student_address',$data['address']);
+            $this->set_data('registration_date',date('d-m-Y',strtotime($data['timestamp'])));
             $this->set_data('isPrimary', false);
 
             $this->render('schema', [
                 'content' => $this->template('student-registration-form')
             ]);
-        } else
+        }
+        else
             $this->error_404();
+        // echo $id;
+        // $this->db->select('examination_body');
+        // $get = $this->student_model->get_switch('all', [
+        //     'id' => $id
+        // ]);
+        // if ($get->num_rows()) {
+        //     // pre($row);
+        //     $data = $get->row_array();
+        //     $registration_no = '';
+        //     $getRegistration = $this->db->where("enrollment_no", $data['roll_no'])->get('students_registeration_data');
+        //     if ($getRegistration->num_rows()) {
+        //         $rowd = $getRegistration->row();
+        //         $registration_no = $rowd->registration_no;
+        //     }
+        //     $this->set_data('registration_no', $registration_no);
+
+        //     // pre($data,true)  ;
+        //     $this->set_data('page_name', $data['student_name'] . ' Details');
+        //     $this->set_data($data);
+        //     $this->set_data('isPrimary', false);
+
+        //     $this->render('schema', [
+        //         'content' => $this->template('student-registration-form')
+        //     ]);
+        // } else
+        //     $this->error_404();
     }
     function marksheet_print()
     {
@@ -163,6 +183,7 @@ class Site extends Site_Controller
             // pre($data,true)  ;
             $this->set_data('page_name', $data['student_name'] . ' Details');
             $this->set_data($data);
+            $this->set_data('student_address',$data['address']);
             $this->set_data('isPrimary', false);
             if (PATH != 'upstate') {
                 $this->render('schema', [

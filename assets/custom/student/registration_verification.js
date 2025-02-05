@@ -18,14 +18,17 @@ document.addEventListener('DOMContentLoaded', function () {
             { 'data': 'exam_centre_name' },
             { 'data': 'year' },
             { 'data': 'pass_or_fail' },
+            { 'data': 'dob' },
+            { 'data': 'training_period' },
+            { 'data': 'address' },
             { 'data': 'status' },
             { 'data': null },
         ],
         columnDefs: [
             {
                 targets : -2,
-                render:function(data){
-                    return `${ data == '1' ? badge('Verified','success') : badge('Unverified','warning')}`;
+                render:function(data,type,row){
+                    return `${ data == '1' ? badge('Verified','success')+generate_link_btn(row.id, 'registeration_certificate') : badge('Unverified','warning')}`;
                 }
             },
             {
@@ -44,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             data-aadhar_card="${row['aadhar_card']}"
                             data-id="${row.id}"
                             data-status="${row.status}"
+                            data-examinationbody="${row.examination_body}"
                         >
                         Docs
                         </button>
@@ -56,10 +60,12 @@ document.addEventListener('DOMContentLoaded', function () {
         $(document).on('click', '.check-docs', function (r) {
             r.preventDefault();
             var data = $(this).data();
-            // log(data);
+            log(data);
             var id = $(this).data('id')
-            // alert(id);
+            var examinationBody = $(this).data('examinationbody');
+            // alert(examinationBody);
             delete data.id;
+            // delete data.examinationBody;
             data = Object.keys(data).sort().reduce((result, key) => {
                 result[key] = data[key];
                 return result;
@@ -81,12 +87,31 @@ document.addEventListener('DOMContentLoaded', function () {
                                 `)}</td>
                         </tr>`;
             });
+            html += `<tr>
+                        <th>
+                            <div class="form-group">
+                                <textarea class="form-control examaination-body" placeholder="Examination Body">${examinationBody}</textarea>
+                            </div>
+                        </th>
+                        <td><button class="btn btn-xs btn-sm btn-success examaination-body-button" data-id="${id}"><i class="fa fa-save"></i></button></td>
+                    </tr>`;
             html += `</table>`;
             body.html(html);
         })
     });
 
-
+    $(document).on('click','.examaination-body-button',function(){
+        var id = $(this).data('id');
+        var examination = $(this).closest('tr').find('.examaination-body').val();
+        // alert(examination);
+        $.AryaAjax({
+            url : 'student/update-registration-data',
+            data : {id,examination},
+            success_message : 'Data update successfully..'
+        }).then((res) => {
+            $('#registrationVerificationData').DataTable().ajax.reload();
+        });
+    })
     $(document).on('change', '.change-status', function () {
         // alert(3);
         var data = $(this).data();

@@ -426,12 +426,12 @@ if (CHECK_PERMISSION('CENTRE_ONLY_ADD_STUDENT') && OnlyForCentre()) {
                         'icon' => array('add-notepad', 4),
                         'url' => 'student/registration-verification',
                     ),           
-                    array(
-                        'label' => 'Regi.. Certificate',
-                        'type' => 'stduent_registration_certificate',
-                        'icon' => array('notepad', 5),
-                        'url' => 'student/registration-certificate'
-                    ),
+                    // array(
+                    //     'label' => 'Regi.. Certificate',
+                    //     'type' => 'stduent_registration_certificate',
+                    //     'icon' => array('notepad', 5),
+                    //     'url' => 'student/registration-certificate'
+                    // ),
                 )
             ), 
             array(

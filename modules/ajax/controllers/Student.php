@@ -915,4 +915,9 @@ class Student extends Ajax_Controller
         $this->response('data', $this->post());
         // $this->response('currentStatus',$this->post('status') == 1 ? 'Verified' : 'Unverified');
     }
+    function update_registration_data(){
+        $this->response('status',$this->db->where('id',$this->post('id'))->update('students_registeration_data',[
+            'examination_body' => $this->post("examination")
+        ]));
+    }
 }

@@ -68,13 +68,16 @@ $(document).on('ready', function () {
     $(document).on('submit', '.student-registration-form-verification', function (e) {
         e.preventDefault();
         // alert(2);
+        var form = $(this)[0];
         var data = new FormData(this);
         $.AryaAjax({
             url: 'website/student-registration-form-verification',
             data: data
         }).then((res) => {
-            if (res.status)
+            if (res.status){
+                form.reset();
                 window.open(res.url, '_blank');
+            }
             else
                 SwalWarning('Notice!', res.message);
         });

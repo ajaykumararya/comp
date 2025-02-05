@@ -730,14 +730,14 @@ class Website extends Ajax_Controller
                 'address' => $this->post("address"),
                 'training_period' => $this->post('training_period')
             ];
-            $data['photo'] = $this->file_up('photo');
-            $data['10th_marksheet'] = $this->file_up('10th_marksheet');
-            $data['12th_marksheet'] = $this->file_up('12th_marksheet');
-            $data['1st_year_marksheet'] = $this->file_up('1st_year_marksheet');
-            $data['2nd_year_marksheet'] = $this->file_up('2nd_year_marksheet');
-            $data['diploma'] = $this->file_up('diploma');
-            $data['college_no_due_slip'] = $this->file_up('college_no_due_slip');
-            $data['aadhar_card'] = $this->file_up('aadhar_card');
+            $data['photo'] = $this->file_up('file_photo');
+            $data['10th_marksheet'] = $this->file_up('file_10th');
+            $data['12th_marksheet'] = $this->file_up('file_12th');
+            $data['1st_year_marksheet'] = $this->file_up('file_1st_year');
+            $data['2nd_year_marksheet'] = $this->file_up('file_2nd_year');
+            $data['diploma'] = $this->file_up('file_diploma');
+            $data['college_no_due_slip'] = $this->file_up('file_no_due_slip');
+            $data['aadhar_card'] = $this->file_up('file_aadhar');
             $this->db->insert("students_registeration_data", $data);
             $this->response('status', true);
             $this->response('registration_no', $data['registration_no']);
@@ -749,21 +749,13 @@ class Website extends Ajax_Controller
         if ($result->num_rows()) {
             $row = $result->row();
             if ($row->status == 1) {
-                $enrollmentNo = $row->enrollment_no;
-                // $this->db->where('roll_no',$enrollmentNo)->where('examination_body!=',null)->get('studenets')
-                $this->db->select('examination_body');
-                $get = $this->student_model->get_switch('all', [
-                    'roll_no' => $enrollmentNo
-                ]);
-                if ($get->num_rows()) {
-                    $row = $get->row();
                     $this->response([
                         'status' => true,
-                        'url' => base_url('registration-form/' . $this->encode($row->student_id))
+                        'url' => base_url('registration-form/' . $this->encode($row->id))
                     ]);
-                } else {
-                    $this->response('message', 'Your documents and data has been verified but certificate is not create, please contact your administrator.');
-                }
+                // } else {
+                //     $this->response('message', 'Your documents and data has been verified but certificate is not create, please contact your administrator.');
+                // }
             } else
                 $this->response('message', 'Your documents and data are pending for verification..');
         } else
