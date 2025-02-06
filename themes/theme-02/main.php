@@ -192,7 +192,7 @@ if (PATH == 'sewaedu') {
     <!-- START HEADER -->
     <header class="header_wrap dark_skin">
         <div class="top-header light_skin bg_blue_dark">
-            <div <?=PATH == 'sewaeducation' ? '' : 'class="container"'?>>
+            <div class="container">
                 <div class="row align-items-center">
                     <div class="col-md-6">
                         <div class="alertbox_content">
@@ -228,7 +228,7 @@ if (PATH == 'sewaedu') {
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div <?=PATH == 'sewaeducation' ? '' : 'class="container"'?>>
             <nav class="navbar navbar-expand-lg">
                 <a class="navbar-brand" href="#"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
