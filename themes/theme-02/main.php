@@ -192,7 +192,7 @@ if (PATH == 'sewaedu') {
     <!-- START HEADER -->
     <header class="header_wrap dark_skin">
         <div class="top-header light_skin bg_blue_dark">
-            <div class="container">
+            <div <?=PATH == 'sewaeducation' ? '' : 'class="container"'?>>
                 <div class="row align-items-center">
                     <div class="col-md-6">
                         <div class="alertbox_content">
