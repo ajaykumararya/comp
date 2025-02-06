@@ -134,7 +134,7 @@
         <table id="first" border="0" style="width:100%">
             <thead>
                 <tr>
-                    <th class="primary" rowspan="2" width="12%">CODE</th>
+                    <th class="primary" rowspan="2">CODE</th>
                     <th class="primary lb b-tb" rowspan="2" width="41%" style="text-align:left;padding-left:35px">
                         SUBJECTS</th>
                     <th class="primary lb" colspan="2" style="font-size:11px;padding:4px">MAXIMUM MARKS</th>
