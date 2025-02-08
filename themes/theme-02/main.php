@@ -1,6 +1,6 @@
 <style>
     <?php
-    if (in_array(PATH, ['sewaedu','softworldedu'])) {
+    if (in_array(PATH, ['sewaedu','softworldedu','sewaeducation'])) {
         ?>
         :root {
             --primary: #E22B2B;
@@ -228,7 +228,7 @@ if (PATH == 'sewaedu') {
                 </div>
             </div>
         </div>
-        <div <?=PATH == 'sewaeducation' ? '' : 'class="container"'?>>
+        <div class="container">
             <nav class="navbar navbar-expand-lg">
                 <a class="navbar-brand" href="#"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -526,8 +526,7 @@ if (PATH == 'sewaedu') {
                             } 
                             else if(PATH == 'sewaeducation'){
                                 echo 'Copyrights@ All Right Reserved . SKILL EDUCATION AND WELFARE ASSOCIATION';
-                                echo '<br>
-                            <p>Copyright@All Right Reserved . Jamai Urdu Aligarh</p>';
+                                
                             }else {
                                 ?>
                             <p> Copyright @
