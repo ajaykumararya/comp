@@ -58,6 +58,9 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         ]
     }).on('draw', function () {
+        handleDeleteRows('student/delete-registration-upstate').then((res) => {
+            $('#registrationVerificationData').DataTable().ajax.reload();
+        })
         $(document).on('click', '.check-docs', function (r) {
             r.preventDefault();
             var data = $(this).data();
@@ -126,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }).then((res) => {
             // log(res);
             SwalSuccess('Updated!', `Registration Status Updated Successfully...`);
-            registrationVerificationData.DataTable().ajax.reload();
+            $('#registrationVerificationData').DataTable().ajax.reload();
         });
     })
 

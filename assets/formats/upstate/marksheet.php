@@ -135,7 +135,7 @@
             <thead>
                 <tr>
                     <th class="primary" rowspan="2" width="18%">CODE</th>
-                    <th class="primary lb b-tb" rowspan="2" width="41%" style="text-align:left;padding-left:35px">
+                    <th class="primary lb b-tb" rowspan="2" width="36%" style="text-align:left;padding-left:35px">
                         SUBJECTS</th>
                     <th class="primary lb" colspan="2" style="font-size:11px;padding:4px">MAXIMUM MARKS</th>
                     <th class="primary lb" colspan="2" style="font-size:11px;padding:4px">MINIMUM MARKS</th>
