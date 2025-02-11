@@ -332,5 +332,37 @@ class Student extends MY_Controller
     {
         $this->view('registration-verification');
     }
+    function add_registration_student(){
+        $this->view('add-registration-student');
+    }
+    function registration_edit(){
+        if($post = $this->input->post()){
+            $id = base64_decode($this->uri->segment(3,0));
+            $data = [
+                'name' => $this->input->post('name'),
+                'father_name' => $this->input->post('father_name'),
+                'mother_name' => $this->input->post('mother_name'),
+                'exam_roll_no' => $this->input->post('exam_roll_no'),
+                'enrollment_no' => $this->input->post('enrollment_no'),
+                'exam_or_course' => $this->input->post('exam_or_course'),
+                'institute_name' => $this->input->post('institute_name'),
+                'exam_centre_name' => $this->input->post('exam_centre'),
+                'year' => $this->input->post('year_of_passing'),
+                'pass_or_fail' => $this->input->post('pass_or_fail'),
+                'dob' => $this->input->post('dob'),
+                'address' => $this->input->post("address"),
+                'training_period' => $this->input->post('training_period'),
+                'examination_body' => $this->input->post('examination_body')
+            ];
+            $this->db->where('id',$id)->update('students_registeration_data',$data);
+            $this->session->set_flashdata('success','Data Updated Successfully..');
+            redirect(current_url());
+        }
+        else{
+            $this->view('registration-edit',[
+                'isValid' => $this->uri->segment(3,0),
+            ]);
+        }
+    }
 }
 ?>

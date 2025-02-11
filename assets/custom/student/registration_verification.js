@@ -26,9 +26,9 @@ document.addEventListener('DOMContentLoaded', function () {
         ],
         columnDefs: [
             {
-                targets : -2,
-                render:function(data,type,row){
-                    return `${ data == '1' ? badge('Verified','success')+generate_link_btn(row.id, 'registeration_certificate') : badge('Unverified','warning')}`;
+                targets: -2,
+                render: function (data, type, row) {
+                    return `${data == '1' ? badge('Verified', 'success') + generate_link_btn(row.id, 'registeration_certificate') : badge('Unverified', 'warning')}`;
                 }
             },
             {
@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         >
                         Docs
                         </button>
+                        <a  class="btn btn-sm btn-xs btn-primary" href="${base_url}student/registration-edit/${btoa(row.id)}"><i class="fa fa-edit"></i></a>
                         ${deleteBtnRender(1, row.id)}
                     </div>`;
                 }
@@ -65,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var examinationBody = $(this).data('examinationbody');
             // alert(examinationBody);
             delete data.id;
-            // delete data.examinationBody;
+            delete data.examinationbody;
             data = Object.keys(data).sort().reduce((result, key) => {
                 result[key] = data[key];
                 return result;
@@ -86,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     <a class="btn btn-xs btn-sm btn-primary" href="${base_url}upload/${value}" target="_blank">View</a>         
                                 `)}</td>
                         </tr>`;
+
             });
             html += `<tr>
                         <th>
@@ -100,14 +102,14 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     });
 
-    $(document).on('click','.examaination-body-button',function(){
+    $(document).on('click', '.examaination-body-button', function () {
         var id = $(this).data('id');
         var examination = $(this).closest('tr').find('.examaination-body').val();
         // alert(examination);
         $.AryaAjax({
-            url : 'student/update-registration-data',
-            data : {id,examination},
-            success_message : 'Data update successfully..'
+            url: 'student/update-registration-data',
+            data: { id, examination },
+            success_message: 'Data update successfully..'
         }).then((res) => {
             $('#registrationVerificationData').DataTable().ajax.reload();
         });
@@ -128,5 +130,5 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     })
 
-    
+
 })

@@ -82,6 +82,19 @@
 
         <?php
     }
+    if(PATH =='sewaeducation'){
+        ?>
+        .bottom_footer.bg_black{
+            background-color: white!important;
+        }
+        .bottom_footer.bg_black .copyright  {
+            color:black!important;
+        }
+        .social_white.social_style1 li a{
+            background-color: rgb(17 68 107)!important
+        }
+        <?php
+    }
     ?>
     .bg_blue_dark {
         background-color: var(--theme-primary) !important;
@@ -514,7 +527,7 @@ if (PATH == 'sewaedu') {
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-md-6">
-                        <p class="copyright  text-center text-md-left">
+                        <p class="copyright  text-center text-md-left" style="margin-top:16px">
                             <!-- ©
                             <script>document.write(new Date().getFullYear())</script> All Rights Reserved by RGYCSM.
                             ||
@@ -525,7 +538,7 @@ if (PATH == 'sewaedu') {
                                 echo '<p>Copyrights@ All Right Reserved. This is the official Website of Skill Education & Welfare Association (SEWA) Council of Skill and Vocational Studies Designed by Sewa Tech</p>';
                             } 
                             else if(PATH == 'sewaeducation'){
-                                echo 'Copyrights@ All Right Reserved . SKILL EDUCATION AND WELFARE ASSOCIATION';
+                                echo 'Copyrights@ All Right Reserved . SKILL EDUCATION AND WELFARE ASSOCIATION (SEWA)';
                                 
                             }else {
                                 ?>

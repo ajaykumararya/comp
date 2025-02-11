@@ -105,21 +105,21 @@
     <p class="position-absolute" style="top:1%;left:16%">{admit_card_id}</p> -->
 
     <p class="position-absolute" style="top:20.5%;left:50%">{center_code}</p>
-    <p class="position-absolute " style="top:20.6%;left:20.6%;width:100px">{roll_no}</p>
+    <p class="position-absolute " style="top:20.6%;left:20.6%;">{roll_no}</p>
     <p class="position-absolute" style="top:31%;left:33.5%">{course_name}</p>
     <p class="position-absolute" style="top:23.4%;left:33.5%">{student_name}</p>
     <p class="position-absolute" style="top:25.9%;left:33.5%">{father_name}</p>
     <p class="position-absolute" style="top:28.5%;left:33.5%">{mother_name}</p>    
     <p class="position-absolute text-capitlize" style="top:33.7%;left:33.5%">{duration} {duration_type}</p>
-    <p class="position-absolute text-capitlize" style="top:33.7%;left:70%">{adhar_card_no}</p>
+    <p class="position-absolute text-capitlize" style="top:33.7%;left:63%">{adhar_card_no}876567876765</p>
 
     <p class="position-absolute text-capitlize" style="top:36.4%;left:33.5%">{gender}</p>
-    <p class="position-absolute text-capitlize" style="top:36.4%;left:70%">{marital_status}</p>
+    <p class="position-absolute text-capitlize" style="top:36.4%;left:63%">{marital_status}</p>
     <p class="position-absolute" style="top:39%;left:33.5%">{dob}</p>
-    <p class="position-absolute" style="top:39%;left:70%">{category}</p>
+    <p class="position-absolute" style="top:39%;left:62%">{category}</p>
     
     <p class="position-absolute" style="top:41.6%;left:33.5%">{contact_number}</p>
-    <p class="position-absolute" style="top:41.6%;left:70%;width:200px">{email}</p>
+    <p class="position-absolute" style="top:41.6%;left:61%;width:300px">{email}</p>
 
     <p class="position-absolute" style="top:48.8%;left:16%;width:80%">{address}</p>
     <p class="position-absolute text-center" style="top:51.3%;left:16%;width:230px">{STATE_NAME}</p>

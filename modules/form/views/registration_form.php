@@ -22,7 +22,7 @@
                                 </div>
                                 <div class="form-group mb-4 col-md-3">
                                     <label for="" class="form-label required">Date of birth</label>
-                                    <input type="date" name="dob" required class="form-control">
+                                    <input type="date" name="dob" required placeholder="Date of Birth" class="form-control">
                                 </div>
                                 <div class="form-group mb-4 col-md-3">
                                     <label for="" class="form-label required">Father's Name</label>

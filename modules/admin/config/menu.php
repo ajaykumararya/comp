@@ -421,6 +421,12 @@ if (CHECK_PERMISSION('CENTRE_ONLY_ADD_STUDENT') && OnlyForCentre()) {
                 'condition' => CHECK_PERMISSION('REGISTRATION_CERTIFICATE'),
                 'submenu' => array(
                     array(
+                        'label' => 'Add Student',
+                        'type' => 'add_registration_student',
+                        'icon' => array('add-notepad', 4),
+                        'url' => 'student/add-registration-student',
+                    ),
+                    array(
                         'label' => 'Regi.. Verification',
                         'type' => 'student_registration_verification',
                         'icon' => array('add-notepad', 4),
