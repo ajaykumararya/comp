@@ -443,7 +443,15 @@ $(document).on('ready', function () {
     const syllabusTable = $('#syllabus-table-front');
     if (syllabusTable.length) {
         syllabusTable.DataTable({
-            dom: small_dom,
+            dom: "<'row'" +
+                    "<'col-sm-6 d-flex align-items-center justify-conten-start'>" +
+                    "<'col-sm-6 d-flex align-items-center justify-content-end'f>" +
+                    ">" +
+                    "<tr>" +
+                    "<'row'" +
+                    "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'>" +
+                    "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
+                    ">",
             ajax: {
                 url: ajax_url + 'website/list-syllabus'
             },

@@ -9,4 +9,5 @@
     <link rel="stylesheet" type="text/css" href="{theme_url}assets/css/owl.theme.css">
     <link rel="stylesheet" type="text/css" href="{theme_url}assets/css/owl.transitions.css">
     <link href="{theme_url}assets/style.css" rel="stylesheet">
+    <link href="{theme_url}assets/custom.css" rel="stylesheet">
     <script src="{theme_url}assets/js/jquery.js"></script>
