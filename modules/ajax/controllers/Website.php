@@ -725,6 +725,7 @@ class Website extends Ajax_Controller
                 'institute_name' => $this->post('institute_name'),
                 'exam_centre_name' => $this->post('exam_centre'),
                 'year' => $this->post('year_of_passing'),
+                'date' => date('Y'),
                 'pass_or_fail' => $this->post('pass_or_fail'),
                 'registration_no' => $registration_no,
                 'dob' => $this->post('dob'),
