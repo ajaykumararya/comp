@@ -352,7 +352,9 @@ class Student extends MY_Controller
                 'dob' => $this->input->post('dob'),
                 'address' => $this->input->post("address"),
                 'training_period' => $this->input->post('training_period'),
-                'examination_body' => $this->input->post('examination_body')
+                'examination_body' => $this->input->post('examination_body'),
+                'registration_no' => $this->input->post('registration_no'),
+                'date' => $this->input->post('date')
             ];
             $this->db->where('id',$id)->update('students_registeration_data',$data);
             $this->session->set_flashdata('success','Data Updated Successfully..');

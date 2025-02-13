@@ -21,6 +21,14 @@ if ($id) {
                 </div>
                 <div class="card-body">
                     <div class="row">
+                        <div class="col-md-6 form-group mb-4">
+                            <label for="" class="form-label required">Registration No</label>
+                            <input type="text" value="<?=$row->registration_no?>" name="registration_no" required placeholder="Enter Registration No." class="form-control">
+                        </div>
+                        <div class="col-md-6 form-group mb-4">
+                            <label for="" class="form-label required">Date</label>
+                            <input type="date" value="<?=$row->date?>" name="date" required placeholder="Enter Date" class="form-control">
+                        </div>
                         <div class="form-group mb-4 col-md-3">
                             <label for="" class="form-label required">Name</label>
                             <input type="text" value="<?=$row->name?>" name="name" required placeholder="Enter Name" class="form-control">

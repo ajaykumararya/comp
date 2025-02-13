@@ -187,7 +187,7 @@ class Document extends MY_Controller
             elseif (in_array(PATH, ['haptronworld'])):
                 $this->set_data('serial_no', 'IN' . (100 + $result_id));
             elseif (in_array(PATH, ['upstate'])):
-                $this->set_data('serial_no', '1' . str_pad($this->id, 5, 0, STR_PAD_LEFT));
+                $this->set_data('serial_no', '100' . date('Y', strtotime($row->issue_date)) . $this->id);
             endif;
             // echo $get->row('result_id');
             // pre($get_subect_numers->result_array(),true);
@@ -408,8 +408,7 @@ class Document extends MY_Controller
                 $certificate['serial_no'] = (50000 + $this->id);
                 $this->mypdf->addPage('L');
             } elseif (in_array(PATH, ['upstate'])) {
-                $this->set_data('serial_no', '1' . str_pad($certificate['student_id'], 5, 0, STR_PAD_LEFT));
-            }
+                $this->set_data('serial_no', '1'.date('Y',strtotime($certificate['createdOn'])).'00'.$certificate['student_id']);        }
             // $getLastExam = $this->student_model->last_marksheet($certificate['course_id']);
             $this->set_data($certificate);
 

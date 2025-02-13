@@ -714,6 +714,7 @@ class Website extends Ajax_Controller
     function student_registration_certificate()
     {
         if ($this->validation('registration_certificate')) {
+            $registration_no = '10'.date('Y').mt_rand(111,999);
             $data = [
                 'name' => $this->post('name'),
                 'father_name' => $this->post('father_name'),
@@ -725,7 +726,7 @@ class Website extends Ajax_Controller
                 'exam_centre_name' => $this->post('exam_centre'),
                 'year' => $this->post('year_of_passing'),
                 'pass_or_fail' => $this->post('pass_or_fail'),
-                'registration_no' => time(),
+                'registration_no' => $registration_no,
                 'dob' => $this->post('dob'),
                 'address' => $this->post("address"),
                 'training_period' => $this->post('training_period')

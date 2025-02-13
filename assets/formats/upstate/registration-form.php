@@ -111,7 +111,7 @@
     <p class="position-absolute" style="top:25.9%;left:33.5%">{father_name}</p>
     <p class="position-absolute" style="top:28.5%;left:33.5%">{mother_name}</p>    
     <p class="position-absolute text-capitlize" style="top:33.7%;left:33.5%">{duration} {duration_type}</p>
-    <p class="position-absolute text-capitlize" style="top:33.7%;left:63%">{adhar_card_no}876567876765</p>
+    <p class="position-absolute text-capitlize" style="top:33.7%;left:63%">{adhar_card_no}</p>
 
     <p class="position-absolute text-capitlize" style="top:36.4%;left:33.5%">{gender}</p>
     <p class="position-absolute text-capitlize" style="top:36.4%;left:63%">{marital_status}</p>

@@ -110,7 +110,7 @@ $this->ki_theme->generate_qr($id, 'registration_form', base_url('registration-fo
     <p class="position-absolute" style="top:2.6%;left:14%;width:120px">1000{serial_no}</p>
     <p class="position-absolute " style="top:31.9%;left:35%;line-height:1;width:45%">{exam_or_course}</p>
     <p class="position-absolute" style="top:34.8%;left:35%;width:200px">{registration_no}</p>
-    <p class="position-absolute " style="top:38.6%;left:35%;width:120px"><?=date('d-m-Y',strtotime($timestamp))?></p>
+    <p class="position-absolute " style="top:38.6%;left:35%;width:120px"><?=date('d-m-Y',strtotime($date))?></p>
     <p class="position-absolute" style="top:42%;left:35%;width:255px">{name}</p>
     <p class="position-absolute" style="top:45.4%;left:35%;width:255px">{father_name}</p>
     <p class="position-absolute" style="top:48.9%;left:35%;width:255px">{mother_name}</p>
