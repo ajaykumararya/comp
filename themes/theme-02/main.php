@@ -241,7 +241,7 @@ if (PATH == 'sewaedu') {
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div <?=PATH == 'sewaeducation' ? '' : 'class="container"'?>>
             <nav class="navbar navbar-expand-lg">
                 <a class="navbar-brand" href="#"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
