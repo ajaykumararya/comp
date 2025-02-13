@@ -87,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function (r) {
                 url: 'exam/list-assign-students',
                 data: rowData
             }).then((r) => {
+                log(r);
                 if (r.status) {
                     var drawer = mydrawer('Exam');
                     drawer.find('.card-body').html(r.html).css({
@@ -108,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function (r) {
                             }
                         }).then((e) => {
                             toastr.clear();
+                            log(e);
                             if(e.status)
                                 toastr.success(`Student ${checkStatus ? 'Added' : 'Removed'} Successfully..`);
                             else
