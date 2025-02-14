@@ -29,6 +29,14 @@ if ($id) {
                             <label for="" class="form-label required">Date</label>
                             <input type="date" value="<?=$row->date?>" name="date" required placeholder="Enter Date" class="form-control">
                         </div>
+                        <div class="col-md-6 form-group mb-4">
+                            <label for="" class="form-label required">Email</label>
+                            <input type="email" value="<?=$row->email?>" name="email" required placeholder="Enter Email" class="form-control">
+                        </div>
+                        <div class="col-md-6 form-group mb-4">
+                            <label for="" class="form-label required">Mobile</label>
+                            <input type="number" value="<?=$row->mobile?>" name="mobile" required placeholder="Enter Mobile" class="form-control">
+                        </div>
                         <div class="form-group mb-4 col-md-3">
                             <label for="" class="form-label required">Name</label>
                             <input type="text" value="<?=$row->name?>" name="name" required placeholder="Enter Name" class="form-control">

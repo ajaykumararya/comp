@@ -35,6 +35,16 @@
                                         name="mother_name" required>
                                 </div>
                                 <div class="col-md-6 form-group mb-4">
+                                    <label for="" class="form-label required">Email</label>
+                                    <input type="text" name="email" placeholder="Enter Email."
+                                        class="form-control" required>
+                                </div>
+                                <div class="col-md-6 form-group mb-4">
+                                    <label for="" class="form-label required">Mobile No.</label>
+                                    <input type="text" name="mobile" placeholder="Enter Mobile"
+                                        class="form-control" required>
+                                </div>
+                                <div class="col-md-6 form-group mb-4">
                                     <label for="" class="form-label required">Exam Roll No.</label>
                                     <input type="text" name="exam_roll_no" placeholder="Enter Exam Roll No."
                                         class="form-control" required>

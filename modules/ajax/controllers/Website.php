@@ -714,7 +714,7 @@ class Website extends Ajax_Controller
     function student_registration_certificate()
     {
         if ($this->validation('registration_certificate')) {
-            $registration_no = '10'.date('Y').mt_rand(111,999);
+            $registration_no = '10' . date('Y') . mt_rand(111, 999);
             $data = [
                 'name' => $this->post('name'),
                 'father_name' => $this->post('father_name'),
@@ -724,6 +724,8 @@ class Website extends Ajax_Controller
                 'exam_or_course' => $this->post('exam_or_course'),
                 'institute_name' => $this->post('institute_name'),
                 'exam_centre_name' => $this->post('exam_centre'),
+                'email' => $this->post('email'),
+                'mobile' => $this->post('mobile'),
                 'year' => $this->post('year_of_passing'),
                 'date' => date('Y'),
                 'pass_or_fail' => $this->post('pass_or_fail'),
@@ -751,10 +753,10 @@ class Website extends Ajax_Controller
         if ($result->num_rows()) {
             $row = $result->row();
             if ($row->status == 1) {
-                    $this->response([
-                        'status' => true,
-                        'url' => base_url('registration-form/' . $this->encode($row->id))
-                    ]);
+                $this->response([
+                    'status' => true,
+                    'url' => base_url('registration-form/' . $this->encode($row->id))
+                ]);
                 // } else {
                 //     $this->response('message', 'Your documents and data has been verified but certificate is not create, please contact your administrator.');
                 // }

@@ -10,6 +10,8 @@
                         <tr>
                             <th>#</th>
                             <th>Name</th>
+                            <th>Email</th>
+                            <th>Mobile</th>
                             <th>Father Name</th>
                             <th>Mother Name</th>
                             <th>Exam Roll No.</th>

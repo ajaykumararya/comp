@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', function () {
         columns: [
             { 'data': 'registration_no' },
             { 'data': 'name' },
+            { 'data': 'email' },
+            { 'data': 'mobile' },
             { 'data': 'father_name' },
             { 'data': 'mother_name' },
             { 'data': 'exam_roll_no' },

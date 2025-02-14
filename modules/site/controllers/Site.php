@@ -20,7 +20,7 @@ class Site extends Site_Controller
             'name' => 'Ajay Kumar Arya',
             'mobile' => '456789'
         ]);
-        echo $this->do_email('ajaykumararya963983@gmail.com', 'New Demo Checklist', $this->template('email/demo-query'));
+        echo $this->do_email('sitejeannie@gmail.com', 'New Demo Checklist', $this->template('email/demo-query'));
     }
 
     function container()

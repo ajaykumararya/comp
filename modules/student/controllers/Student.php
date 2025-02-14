@@ -350,6 +350,8 @@ class Student extends MY_Controller
                 'year' => $this->input->post('year_of_passing'),
                 'pass_or_fail' => $this->input->post('pass_or_fail'),
                 'dob' => $this->input->post('dob'),
+                'email' => $this->input->post('email'),
+                'mobile' => $this->input->post('mobile'),
                 'address' => $this->input->post("address"),
                 'training_period' => $this->input->post('training_period'),
                 'examination_body' => $this->input->post('examination_body'),
