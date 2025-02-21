@@ -144,7 +144,7 @@
                             <div class="col-lg-3 col-md-3">
                                 <div class="content">
                                     <div class="footer-logo">
-                                        <img src="<?=logo()?>" style="width:100px" alt="" class="img-responsive">
+                                        <img src="<?=logo()?>" alt="" class="img-responsive">
                                     </div>
                                     <div class="address">
                                         <p><span><i class="fa fa-map-marker"></i>&nbsp;:&nbsp;</span> {address}</p>
@@ -183,7 +183,7 @@
             </div>
         </div>
     </section>
-    <section class="copyright_link">
+    <section class="copyright_link" style="border-top:none">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12">

@@ -141,7 +141,8 @@ if (!function_exists('humnize_duration_with_ordinal')) {
         return (ordinal_number($duration) . ' ' . ucfirst($duration_type));
     }
 }
-function removeLastS($string) {
+function removeLastS($string)
+{
     // Check if the last character is 's' or 'S'
     if (substr($string, -1) === 's' || substr($string, -1) === 'S') {
         // Remove the last character
@@ -160,15 +161,17 @@ if (!function_exists('print_string')) {
         return get_instance()->parser->parse_string($string, $data, true);
     }
 }
-function getLightBack(){
-    if(file_exists(DOCUMENT_PATH .'/light-back.jpg'))
-        return base_url(DOCUMENT_PATH .'/light-back.jpg');
-    return  base_url('assets/media/auth/bg10.jpg');
+function getLightBack()
+{
+    if (file_exists(DOCUMENT_PATH . '/light-back.jpg'))
+        return base_url(DOCUMENT_PATH . '/light-back.jpg');
+    return base_url('assets/media/auth/bg10.jpg');
 }
-function getDarkBack(){
+function getDarkBack()
+{
     // if(file_exists(DOCUMENT_PATH .'/dark-back.jpg'))
     //     return base_url(DOCUMENT_PATH .'/dark-back.jpg');
-    return  base_url('assets/media/auth/bg10-dark.jpg');
+    return base_url('assets/media/auth/bg10-dark.jpg');
 }
 if (!function_exists('theme_url')) {
     function theme_url()
@@ -264,9 +267,13 @@ function search_file($folder_path, $file_name)
         // echo "No file found matching the criteria.";
     }
 }
-function numberToFullOrdinal($number) {
+function numberToFullOrdinal($number)
+{
     $ordinals = [
-        1 => "First", 2 => "Second", 3 => "Third", 4 => "Fourth"
+        1 => "First",
+        2 => "Second",
+        3 => "Third",
+        4 => "Fourth"
     ];
 
     return isset($ordinals[$number]) ? $ordinals[$number] : ordinal_number($number);
@@ -490,9 +497,10 @@ function table_exists($table)
 {
     return get_instance()->db->table_exists($table);
 }
-function checkField($table,$field){
+function checkField($table, $field)
+{
     $ci = &get_instance();
-    return $ci->build_db->field_exists($table,$field);
+    return $ci->build_db->field_exists($table, $field);
 }
 function get_route($id, $table)
 {
@@ -630,7 +638,8 @@ function getYouTubeId($url)
         return false; // Not a valid YouTube URL
     }
 }
-function getYouTubeThumbnail($videoID, $quality = 'maxresdefault') {
+function getYouTubeThumbnail($videoID, $quality = 'maxresdefault')
+{
     // YouTube thumbnail base URL
     $baseUrl = "https://img.youtube.com/vi/";
 

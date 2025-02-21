@@ -132,8 +132,8 @@
                     $mark['inword'] = numberToWords($markTotal);
                     echo $this->parser->parse_string('
                                     <tr>
-                                        <td style="width:60px;">{subject_code}</td>
-                                        <td class="primary lb" style="text-align:center;padding-left:5px;font-size:12.81px;width:198px;">{subject_name}
+                                        <td style="width:60px;font-size:12.81px">{subject_code}</td>
+                                        <td class="primary lb" style="text-align:center;padding-left:5px;font-size:12.81px;width:198px;line-height:1">{subject_name}
                                         </td>
                                         <td class="primary lb" style="font-size:12.81px;width:60px">{total_max_marks}</td>
                                         <td class="primary lb" style="font-size:12.81px;width:35px">{theory_total}</td>
