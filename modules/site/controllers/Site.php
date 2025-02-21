@@ -78,13 +78,13 @@ class Site extends Site_Controller
         }
         return array_merge($this->public_data, $return);
     }
-    function error_404($pageName = '404',$title = 'Page Not Found',$data = [])
+    function error_404($pageName = '404', $title = 'Page Not Found', $data = [])
     {
         $error_file = 'error_404';
         $this->set_data('title', $title);
         $this->set_data('page_name', $pageName);
         $file = (file_exists(THEME_PATH . $error_file . EXT)) ? '' : 'default_'; //error_404';
-        $this->render("{$file}{$error_file}",        $data      );
+        $this->render("{$file}{$error_file}", $data);
     }
     function page_view($content, $data = [])
     {
@@ -96,25 +96,24 @@ class Site extends Site_Controller
     {
         $token = $this->uri->segment(2);
         $id = ($this->decode($token));
-        $getRegistration = $this->db->where(['id' => $id,'status' => 1])->get('students_registeration_data');
-            if ($getRegistration->num_rows()) {
-                $data = $getRegistration->row_array();
-                $registration_no = $data['registration_no'];
-            
+        $getRegistration = $this->db->where(['id' => $id, 'status' => 1])->get('students_registeration_data');
+        if ($getRegistration->num_rows()) {
+            $data = $getRegistration->row_array();
+            $registration_no = $data['registration_no'];
+
             $this->set_data('registration_no', $registration_no);
 
             // pre($data,true)  ;
             $this->set_data('page_name', $data['name'] . ' Details');
             $this->set_data($data);
-            $this->set_data('student_address',$data['address']);
-            $this->set_data('registration_date',date('d-m-Y',strtotime($data['timestamp'])));
+            $this->set_data('student_address', $data['address']);
+            $this->set_data('registration_date', date('d-m-Y', strtotime($data['timestamp'])));
             $this->set_data('isPrimary', false);
 
             $this->render('schema', [
                 'content' => $this->template('student-registration-form')
             ]);
-        }
-        else
+        } else
             $this->error_404();
         // echo $id;
         // $this->db->select('examination_body');
@@ -183,7 +182,7 @@ class Site extends Site_Controller
             // pre($data,true)  ;
             $this->set_data('page_name', $data['student_name'] . ' Details');
             $this->set_data($data);
-            $this->set_data('student_address',$data['address']);
+            $this->set_data('student_address', $data['address']);
             $this->set_data('isPrimary', false);
             if (PATH != 'upstate') {
                 $this->render('schema', [
@@ -251,222 +250,15 @@ class Site extends Site_Controller
     }
     function test()
     {
-        $details = $this->center_model->get_center(5);
-            if($details->num_rows()){
-                $rowDetails = $details->row();
-                $issueDate = date('Y-m-d',strtotime('07-02-2025'));
-                // if($rowDetails->certificate_create_from && $rowDetails->certificate_create_to &&
-                // $rowDetails->certificate_create_from <= $issueData &&
-                // $rowDetails->certificate_create_to >= $issueData){
+        $data = [
+            'id' => 1,
+            'hindi_name' => '',
+            'hindi_father_name' => '',
+            'hindi_mother_name' => ''
+        ];
+        // echo implode('', array_filter($data, fn($v, $k) => strpos($k, 'hindi') === false, ARRAY_FILTER_USE_BOTH));
+        $data = array_diff_key($data, array_flip(preg_grep('/^hindi/', array_keys($data))));
 
-                // }
-                if($rowDetails->certificate_create_from == null Or $rowDetails->certificate_create_from == null){
-                    echo (alert('You don`\t have permission to create certificate','danger'));
-                    exit;
-                }
-                if($rowDetails->certificate_create_from > $issueDate OR $rowDetails->certificate_create_to < $issueDate){
-                    echo (alert('You don`\t have permission to create certificate','danger'));
-                    exit;
-                }
-            }
-        // $get = $this->center_model->get_assign_courses(5);
-        // echo $get->num_rows();
-        // pre($this->session->userdata());
-        // echo $this->db->last_query();
-        // $data = ['','d','a'];
-        // // sort($data);
-        
-        // pre(($data));
-        // pre(($data));
-        // echo time();//generateNumericString(8);
-        exit;
-        // $get = $this->student_model->get_switch('all', [
-        //     'examination_body !=' => null
-        // ]);
-        // echo $this->db->last_query();
-
-        exit;
-        try {
-            $config = ($this->config->item('project'));
-            // exit;
-            // pre($config,true);
-            $this->load->library('common/airpay', $config['airpay']);
-            // pre($this->airpay);
-            $paymentData = [
-                'amount' => '100.00',
-                'order_id' => '123456',
-                'currency' => 'INR',
-                'return_url' => base_url('payment/callback'),
-                'customer_name' => 'John Doe',
-                'customer_email' => 'johndoe@example.com',
-                'customer_phone' => '9876543210',
-            ];
-
-            $response = $this->airpay->initiatePayment($paymentData);
-            // pre($response);
-            if (isset($response['error']) && $response['error']) {
-                echo "Error: " . $response['message'];
-            } else {
-                print_r($response); // Handle success response
-            }
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
-        // echo $this->ki_theme->isDiwali() ? 'YES' : 'NO';
-        // echo $this->ki_theme->isDiwali();
-        // $fileName = "example_file123&";
-
-        // // Regular expression to check for invalid characters
-        // $invalidCharsRegex = '/[^a-zA-Z0-9_ ]/';
-
-        // echo (preg_match($invalidCharsRegex, $fileName)) ? 'YES' : 'NO';
-        // exit;
-
-        // // echo $this->center_model->roleUsers()->num_rows();
-
-        // // echo $this->db->last_query();
-        // $leftamount = 278000;
-        // $rightAmount = 300000;
-        // $gold = 0;
-        // while ($leftamount >= 100000 && $rightAmount >= 100000) {
-        //     $gold += 2;
-        //     $leftamount -= 100000;
-        //     $rightAmount -= 100000;
-        // }
-        // echo "Gold = $gold<br>";
-        // echo "Left Amount = $leftamount<br>";
-        // echo "Right Amount = $rightAmount<br>";
-        // echo $amount % 2;
-        // echo ($this->ki_theme->isDiwali()) ? 'YES' : 'NO';
-        // pre($this->ki_theme->get_festival());
-        // pre(search_file(FCPATH.UPLOAD,'23322'));
-        // $year = 2023;
-        // $i = 1;
-        // $N = 125;
-        // do{
-        //     print $N * $i.'<br>';
-        //     $i++;
-        // }
-        // while($i <= 10);
-        // // for($i = 1; $i <= 10; $i++){
-        // //     echo $N * $i.'<br>';
-        // // }
-        // // while($i <= 10){ // 1 <= 10 // 2 <=10 // 11 <= 10
-        // //     echo $N * $i.'<br>';
-        // //     $i++;
-        // // }
-        // exit;
-        // // echo chr(97); // ASCCII CODE
-        // echo '<table border="1" style="width:10%">
-        //     <tr>
-        //         <th>ASCCI VALUE</th>
-        //         <th>VALUE</th>
-        //         </tr>
-        // ';
-        // for($i = 1; $i <= 126; $i++){
-        //     echo '<tr>
-        //             <td>'.$i.'</td>    
-        //             <td>'.chr($i).'</td>    
-        //     </tr>';
-        // }
-        // echo '</table>';
-        // return 12;
-        // for($a = 1; $a <= 26;$a++)
-        //     echo '<h1 style="margin:0">'.chr($a).'</h1>';
-
-
-        // $this->load->driver('cache', array('adapter' => 'file'));
-        //   $cached_data = ['name' => 'ajay','name1' => 'fff'];
-        // $this->cache->save('cache_key', $cached_data, 60);
-        // $cached_data = $this->cache->get('cache_key');
-        // foreach($this->cache->get_metadata('cache_key') as $key => $value){
-        //     echo "$key = ".date('d-m-Y h:i A',$value).'<br>';
-        // }
-        // if ($cached_data === FALSE) {
-        //     // Cache miss: Compute and cache the data
-        //     $cached_data = ['name' => 'ajay'];
-        //     $this->cache->save('cache_key', $cached_data, 60);
-        // }
-        // $this->cache->delete('cache_key');
-        // pre( $cached_data);
-        // $token['id'] = 1; //From here
-        // $token['username'] = 'ajay';
-        // $date = new DateTime();
-        // $token['iat'] = $date->getTimestamp();
-        // $token['exp'] = $date->getTimestamp() + 60 * 30;
-        // $this->load->library('common/token');
-        // echo $this->token->encode($token);
-
-
-        // $templates = $this->load->config('api/sms',true);
-        // // pre($templates);
-        // if(isset($templates['login_with_otp'])){
-        //     $message = $templates['login_with_otp']['content'];
-        //     $message = str_replace('{#var#}',random_int(100000, 999999),$message);
-        //     // echo $message;
-        //     $this->load->module('api/whatsapp');
-        //     $res = $this->whatsapp->send('918533898539',$message);
-        //     pre($res);
-        // }
-        // $get = $this->student_model->get_student([
-        //     'contact_number' => '8533898539'
-        // ]);
-        // if($get->num_rows()){
-        //     pre($get->row());
-        // }
-
-        //    echo $this->gen_roll_no(5);
-        // echo $this->center_model->wallet_history()->num_rows();
-        // $test = $this->ki_theme->center_fix_fees();
-        // pre($test);
-/*
-        $data = [];
-        $list = $this->center_model->wallet_history();
-        if ($list->num_rows()) {
-            foreach ($list->result() as $row) {
-                $tempData = [
-                    'date' => $row->date,
-                    'amount' => $row->amount,
-                    'type' => $row->type,
-                    'description' => $row->description,
-                    'status' => $row->wallet_status,
-                    'url' => 0
-                ];
-                if ($row->type_id) {
-                    switch ($row->type) {
-                        case 'admission':
-                            $student = $this->student_model->get_all_student([
-                                'id' => $row->type_id
-                            ]);
-                            $tempData['student_name'] = @$student[0]->student_name . ' ' . label('Admission');
-                            $tempData['url'] = base_url('student/profile/'.$row->type_id);
-                            break;
-                        case 'marksheet':
-                            $marksheet = $this->student_model->marksheet(['id' => $row->type_id]);
-                            $student = '';
-                            if ($marksheet->num_rows()) {
-                                $drow = $marksheet->row();
-                                $tempData['url'] = base_url('marksheet/'.$this->encode($row->type_id));
-
-                                $student = $drow->student_name . ' ' . label(humnize_duration_with_ordinal($drow->marksheet_duration, $drow->duration_type) . ' Marksheet');
-                            }
-                            $tempData['student_name'] = $student;
-                            break;
-                        case 'certificate':
-                            $student_certificates = $this->student_model->student_certificates([
-                                'id' => $row->type_id
-                            ]);
-                            $tempData['url'] = base_url('certificate/'.$this->encode(($row->type_id)));
-                            $tempData['student_name'] = $student_certificates->row('student_name') . ' ' . label('Certificate');
-                            break;
-                    }
-                } else
-                    $tempData['student_name'] = label(ucfirst(str_replace('_', ' ', $row->type)));
-
-                $data[] = $tempData;
-            }
-        }
-        pre($data);
-        */
+print_r($data);
     }
 }

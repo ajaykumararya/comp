@@ -712,7 +712,8 @@ class Student extends Ajax_Controller
                 exit;
             }
         }
-        $checkCertificate = $this->student_model->student_certificates($data);
+        $where = array_diff_key($data, array_flip(preg_grep('/^hindi/', array_keys($data))));
+        $checkCertificate = $this->student_model->student_certificates($where);
         $this->response('html', 'Something went wrong.');
         if (!$checkCertificate->num_rows()) {
 

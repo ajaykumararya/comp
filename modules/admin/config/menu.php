@@ -82,14 +82,14 @@ $config['exam_slot'] = array(
         array(
             'label' => 'Exam Centre',
             'type' => 'exam_centre',
-            'icon' => ['profile-user',5],
-            'url' => 'center/exam-centre'          
+            'icon' => ['profile-user', 5],
+            'url' => 'center/exam-centre'
         ),
         array(
             'label' => 'Exam Schedule',
             'type' => 'exam_schedule',
-            'icon' => ['time',5],
-            'url' => 'academic/session-schedule'          
+            'icon' => ['time', 5],
+            'url' => 'academic/session-schedule'
         )
     )
 );
@@ -413,7 +413,7 @@ if (CHECK_PERMISSION('CENTRE_ONLY_ADD_STUDENT') && OnlyForCentre()) {
                         'url' => 'student/get-certificate',
                     )
                 )
-            ),        
+            ),
             array(
                 'label' => 'Registration Form',
                 'type' => 'stduent_certificate',
@@ -431,7 +431,7 @@ if (CHECK_PERMISSION('CENTRE_ONLY_ADD_STUDENT') && OnlyForCentre()) {
                         'type' => 'student_registration_verification',
                         'icon' => array('add-notepad', 4),
                         'url' => 'student/registration-verification',
-                    ),           
+                    ),
                     // array(
                     //     'label' => 'Regi.. Certificate',
                     //     'type' => 'stduent_registration_certificate',
@@ -439,7 +439,7 @@ if (CHECK_PERMISSION('CENTRE_ONLY_ADD_STUDENT') && OnlyForCentre()) {
                     //     'url' => 'student/registration-certificate'
                     // ),
                 )
-            ), 
+            ),
             array(
                 'label' => 'Study Material',
                 'type' => 'study_material',
@@ -448,6 +448,18 @@ if (CHECK_PERMISSION('CENTRE_ONLY_ADD_STUDENT') && OnlyForCentre()) {
             )
         )
     );
+    // $config['other_docs'] = array(
+    //     'title' => 'Other Document(s)',
+    //     'condition' => PATH == 'sctnew',
+    //     'menu' => array(
+    //         array(
+    //             'label' => 'NOC Certificate(s)',
+    //             'type' => 'noc_certificate',
+    //             'icon' => array('file', 4),
+    //             'url' => 'student/add-other-document',
+    //         ),
+    //     )
+    // );
     $config['center_exam_menu'] = array(
         'title' => 'Online Exam Area',
         'condition' => !OnlyForAdmin() && CHECK_PERMISSION("EXAM"),

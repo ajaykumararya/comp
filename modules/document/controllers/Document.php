@@ -186,7 +186,7 @@ class Document extends MY_Controller
                 $this->set_data('serial_no', date("Y", $admissionTime) . str_pad($this->id, 3, '0', STR_PAD_LEFT));
             elseif (in_array(PATH, ['haptronworld'])):
                 $this->set_data('serial_no', 'IN' . (100 + $result_id));
-            elseif (in_array(PATH, ['upstate','sctnew'])):
+            elseif (in_array(PATH, ['upstate', 'sctnew'])):
                 $this->set_data('serial_no', '100' . date('Y', strtotime($row->issue_date)) . $this->id);
             endif;
             // echo $get->row('result_id');
@@ -377,6 +377,8 @@ class Document extends MY_Controller
     {
         if (checkField('student_certificates', 'cert_session'))
             $this->db->select('sc.cert_session');
+        if (PATH == 'sctnew')
+            $this->db->select('sc.hindi_name,sc.hindi_mother_name,sc.hindi_father_name');
         $get = $this->student_model->student_certificates(['id' => $this->id]);
         if ($get->num_rows()) {
             $certificate = ($get->row_array());
@@ -408,7 +410,8 @@ class Document extends MY_Controller
                 $certificate['serial_no'] = (50000 + $this->id);
                 $this->mypdf->addPage('L');
             } elseif (in_array(PATH, ['upstate'])) {
-                $this->set_data('serial_no', '1'.date('Y',strtotime($certificate['createdOn'])).'00'.$certificate['student_id']);        }
+                $this->set_data('serial_no', '1' . date('Y', strtotime($certificate['createdOn'])) . '00' . $certificate['student_id']);
+            }
             // $getLastExam = $this->student_model->last_marksheet($certificate['course_id']);
             $this->set_data($certificate);
 
@@ -454,9 +457,14 @@ class Document extends MY_Controller
     }
     function pdf($pdfContent, $filename = 'my-pdf.pdf')
     {
-        // $this->mypdf->load();
-        // $this->mypdf->setPaper('A4', 'portrait');
+        header('Content-Type: text/html; charset=utf-8');
 
+        // $this->mypdf->SetFont('Noto Sans Devanagari');
+        // // pre($this->mypdf,true);
+        // $this->mypdf->SetFontSize(50,true);
+        // $this->mypdf->autoScriptToLang = true;
+        // $this->mypdf->autoLangToFont = true;
+        // pre($this->mypdf,true);
         $this->mypdf->WriteHTML($pdfContent);
         $filename = str_replace('.pdf', '', $filename);
         $pdfData = $this->mypdf->Output("{$filename}.pdf", 'I');

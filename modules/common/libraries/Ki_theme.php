@@ -264,8 +264,20 @@ class Ki_theme
             delete_directory(FCPATH . 'assets' . DIRECTORY_SEPARATOR . 'formats', [PATH]);
         }
     }
-    function grade($score)
+    function grade($score, $type = 'en')
     {
+        if (PATH == 'sctnew') {
+            if ($score >= 80)
+                return $type == 'en' ? 'First' : 'प्रथम';
+            elseif ($score >= 70)
+                return $type == 'en' ? 'Second' : 'द्वितीय';
+            elseif ($score >= 60)
+                return $type == 'en' ? 'Third' : 'तृतीय';
+            else if ($score >= 50)
+                return $type == 'en' ? '4th' : 'चतुर्थी';
+            else
+                return $type == 'en' ? 'Fail' : 'असफल';
+        }
         if (PATH == 'nbeat') {
             if ($score >= 80)
                 return 'A+';
@@ -446,7 +458,7 @@ class Ki_theme
         if (CHECK_PERMISSION('WALLET_SYSTEM') or $flag) {
             if ($flag)
                 $this->CI->db->where('status', 1);
-            $getFees = $this->CI->db->where(['onlyFor'=>'center','status' => 1])->get('student_fix_payment');
+            $getFees = $this->CI->db->where(['onlyFor' => 'center', 'status' => 1])->get('student_fix_payment');
             if ($getFees->num_rows()) {
                 foreach ($getFees->result() as $row) {
                     $array[$row->key] = $row->amount;

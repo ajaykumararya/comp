@@ -70,15 +70,43 @@
                                 ?>
                                 <div class="form-group col-md-4">
                                     <label for="" class="form-label required">Session</label>
-                                    <input type="text" placeholder="Session" name="cert_session"
-                                        class="form-control" required>
+                                    <input type="text" placeholder="Session" name="cert_session" class="form-control"
+                                        required>
                                 </div>
                                 <?php
                             endif;
                             ?>
-                        </div>
-                        <div class="col-md-12 message mt-3"></div>
+                            <div class="col-md-12 message mt-3"></div>
+                            <?php
+                            if (PATH == 'sctnew') {
+                                // echo "YES";
+                                ?>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="" class="form-label required">स्टूडेंट नाम हिंदी में </label>
+                                        <input type="text" placeholder="स्टूडेंट नाम हिंदी में" name="hindi_name"
+                                            class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="" class="form-label required">पिता का नाम हिंदी में </label>
+                                        <input type="text" placeholder="पिता का नाम हिंदी में " name="hindi_father_name"
+                                            class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="" class="form-label required">माता का नाम हिंदी में </label>
+                                        <input type="text" placeholder="माता का नाम हिंदी में " name="hindi_mother_name"
+                                            class="form-control" required>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                            ?>
 
+                        </div>
                     </div>
                     <div class="card-footer">
                         {publish_button}
