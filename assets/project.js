@@ -45,7 +45,24 @@ $(document).on('ready', function () {
             showResponseError(r);
         });
     })
+    $(document).on('submit', '.student-examination-form', function (e) {
+        e.preventDefault();
+        var box = $(this).closest('section').find('.student-examination-data-response');
 
+        // alert(3);
+        $.AryaAjax({
+            url: 'website/student_examination_form_verification',
+            data: new FormData(this),
+        }).then((res) => {
+            log(res);
+            if (res.status) {
+                // var box = $('.show-student-details');
+                box.html(res.html);
+                scrollToDiv(box);
+            }
+            showResponseError(res)
+        });
+    })
     $(document).on('submit', '.student-result-verification-form', function (e) {
         var box = $(this).closest('section').find('.show-student-details');
         box.html('');
@@ -74,7 +91,7 @@ $(document).on('ready', function () {
             url: 'website/student-registration-form-verification',
             data: data
         }).then((res) => {
-            if (res.status){
+            if (res.status) {
                 form.reset();
                 window.open(res.url, '_blank');
             }
@@ -133,6 +150,7 @@ $(document).on('ready', function () {
             showResponseError(res);
         });
     })
+
     $(document).on('submit', '.student-admission-form', function (e) {
         e.preventDefault();
         $.AryaAjax({
@@ -444,14 +462,14 @@ $(document).on('ready', function () {
     if (syllabusTable.length) {
         syllabusTable.DataTable({
             dom: "<'row'" +
-                    "<'col-sm-6 d-flex align-items-center justify-conten-start'>" +
-                    "<'col-sm-6 d-flex align-items-center justify-content-end'f>" +
-                    ">" +
-                    "<tr>" +
-                    "<'row'" +
-                    "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'>" +
-                    "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
-                    ">",
+                "<'col-sm-6 d-flex align-items-center justify-conten-start'>" +
+                "<'col-sm-6 d-flex align-items-center justify-content-end'f>" +
+                ">" +
+                "<tr>" +
+                "<'row'" +
+                "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'>" +
+                "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
+                ">",
             ajax: {
                 url: ajax_url + 'website/list-syllabus'
             },

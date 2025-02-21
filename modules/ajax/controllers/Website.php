@@ -765,5 +765,84 @@ class Website extends Ajax_Controller
         } else
             $this->response('message', 'This Registration No does not exists...');
     }
+
+
+    /*
+
+
+
+    */
+    function student_examination_form_verification()
+    {
+        $this->form_validation->set_rules('roll_no', $this->get_data('rollno_text'), 'required');
+        $this->form_validation->set_rules('dob', 'DOB', 'required');
+        if ($this->validation()) {
+            try {
+                // throw new Exception($this->post('roll_no'));
+                $roll_no = $this->post('roll_no');
+                $dob = $this->post("dob");
+                $status = 1;
+                $get = $this->student_model->student_result_verification([
+                    'roll_no' => $roll_no,
+                    'dob' => date('d-m-Y', strtotime($dob)),
+                    'status' => $status
+                ]);
+                if (!$get->num_rows())
+                    throw new Exception('Details not match..');
+                $row = $get->row();
+                $checkisPassout = $this->student_model->get_switch('passout', [
+                    'id' => $row->student_id
+                ]);
+                if ($checkisPassout->num_rows()) {
+                    throw new Exception('This student has completed the course.');
+                }
+                $this->response('status', true);
+                $dType = $row->duration_type;//$this->post('duration_type');
+                $d = $row->duration;//$this->post('duration');
+                $duration = $dType == 'month' ? 1 : $d;
+                $where = ['duration_type' => $dType, 'course_id' => $this->post("course_id"), 'student_id' => $this->post("student_id")];
+                $options = [];
+                $examDone = false;
+                $label = '';
+                for ($i = 1; $i <= $duration; $i++) {
+                    $where['duration'] = ($dType == 'month') ? $d : $i;
+                    $chk = $this->student_model->check_admit_card($where);
+                    $sub_label = $this->post('course_name') . ' <b>Admit Card </b>';
+                    if ($chk->num_rows()) {
+                        $sub_label .= ' Created on  <b>' . ($chk->row('session')) . '</b>';
+                    } elseif ($examDone) {
+                        $sub_label .= "<label class='badge badge-danger'>$label Exam's is not create.</label>";
+                    } else {
+                        $sub_label .= "<label class='badge badge-info'>Ready to create.</label>";
+                    }
+                    $label = $dType == 'month' ? $d . ' ' . ucfirst($dType) : humnize_duration_with_ordinal($i, $dType);
+                    $options[] = [
+                        'id' => $dType == 'month' ? $d : $i,
+                        'label' => $label,
+                        'sub_label' => $sub_label, //$this->post('course_name') . ' <b>Admit Card </b>' . ($chk->num_rows() ? ' Created on  <b>' . ($chk->row('session')) . '</b>' : ''),
+                        'isCreated' => $examDone ? true : $chk->num_rows()
+                    ];
+                    if (!$chk->num_rows() || $examDone) {
+                        break;
+                    } else {
+                        $admitCardExam = $this->student_model->get_marksheet_using_admit_card($chk->row('id'));
+                        $examDone = $admitCardExam->num_rows() == 1;
+                    }
+                }
+                $this->response('options', $options);
+
+
+                $data = $get->row_array();
+                $this->set_data($data);
+                $this->set_data('contact_number', maskMobileNumber($data['contact_number']));
+
+                $this->set_data('admission_status', $data['admission_status'] ? label($this->ki_theme->keen_icon('verify text-white') . ' Verified Student') : label('Un-verified Student', 'danger'));
+                $this->set_data('student_profile', $data['image'] ? base_url('upload/' . $data['image']) : base_url('assets/media/student.png'));
+                $this->response('html', $this->template('student-examination-form'));
+            } catch (Exception $e) {
+                $this->response('error', alert($e->getMessage(), 'danger'));
+            }
+        }
+    }
 }
 ?>

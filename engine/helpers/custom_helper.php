@@ -264,6 +264,13 @@ function search_file($folder_path, $file_name)
         // echo "No file found matching the criteria.";
     }
 }
+function numberToFullOrdinal($number) {
+    $ordinals = [
+        1 => "First", 2 => "Second", 3 => "Third", 4 => "Fourth"
+    ];
+
+    return isset($ordinals[$number]) ? $ordinals[$number] : ordinal_number($number);
+}
 function numberToWords($number)
 {
     $words = [

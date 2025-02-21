@@ -32,6 +32,11 @@ class MY_Controller extends MX_Controller
                 'registration_certificate_form' => 'Registration Certificate Form'
             ]);
         }
+        if (CHECK_PERMISSION('EXAMINATION_FORM')){
+            append_items('forms', [
+                'examination_form' => 'Examination Form',
+            ]);
+        }
         $this->checkUpdate();
         // if (!defined('DIWALI')) {
         //     define('DIWALI', true);
