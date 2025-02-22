@@ -1,6 +1,6 @@
 <style>
     <?php
-    if (in_array(PATH, ['sewaedu','softworldedu','sewaeducation'])) {
+    if (in_array(PATH, ['sewaedu', 'softworldedu', 'sewaeducation'])) {
         ?>
         :root {
             --primary: #E22B2B;
@@ -51,13 +51,13 @@
         }
 
         <?php
-    } else if (in_array(PATH, ['zcc','skycrownworld'])) {
+    } else if (in_array(PATH, ['zcc', 'skycrownworld'])) {
         // $primaryC = PATH == 'skycrownworld' ? '002448' :'E22B2B';
         $primaryC = 'E22B2B';
         ?>
             :root {
-                --primary: #<?=$primaryC?>;
-                --theme-primary: #<?=$primaryC?>
+                --primary: #<?= $primaryC ?>;
+                --theme-primary: #<?= $primaryC ?>
             }
 
             .bg_light_green {
@@ -82,17 +82,20 @@
 
         <?php
     }
-    if(PATH =='sewaeducation'){
+    if (PATH == 'sewaeducation') {
         ?>
-        .bottom_footer.bg_black{
-            background-color: white!important;
+        .bottom_footer.bg_black {
+            background-color: white !important;
         }
-        .bottom_footer.bg_black .copyright  {
-            color:black!important;
+
+        .bottom_footer.bg_black .copyright {
+            color: black !important;
         }
-        .social_white.social_style1 li a{
-            background-color: rgb(17 68 107)!important
+
+        .social_white.social_style1 li a {
+            background-color: rgb(17 68 107) !important
         }
+
         <?php
     }
     ?>
@@ -241,7 +244,7 @@ if (PATH == 'sewaedu') {
                 </div>
             </div>
         </div>
-        <div <?=PATH == 'sewaeducation' ? '' : 'class="container"'?>>
+        <div <?= PATH == 'sewaeducation' ? '' : 'class="container"' ?>>
             <nav class="navbar navbar-expand-lg">
                 <a class="navbar-brand" href="#"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -419,60 +422,85 @@ if (PATH == 'sewaedu') {
 <i class="fa fa-phone getin-call"></i>
 </a>-->
     <!-- START FOOTER -->
-    <footer class="bg-black footer_dark" style="background:<?=(PATH == 'skycrownworld') ? 'var(--primary)' : 'black'?>">
+    <footer class="bg-black footer_dark"
+        style="background:<?= (PATH == 'skycrownworld') ? 'var(--primary)' : 'black' ?>">
         <div class="top_footer">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3 col-sm-3 mb-4 mb-lg-0">
-                        <div class="footer_logo mt-3">
-                            <?php
-                            if (PATH != 'sewaedu') {
-                                ?>
-                                <a href="{base_url}"><img alt="logo" style="width:150px"
-                                        src="{base_url}<?= UPLOAD . $this->ki_theme->config('logo') ?>" /></a>
-                                <?php
-                            }
-                            ?>
-                            <div>&nbsp;</div>
+                    <?php
 
-                            <ul class="contact_info contact_info_light list_none mb-3">
-                                <li>
-                                    <i class="fa fa-map-marker-alt"></i>
-                                    <address style="text-align: justify;">
-                                        <?= $this->ki_theme->config('address') ?>
-                                    </address>
-                                </li>
+                    if (PATH == 'sewaeducation'):
+                        $index = 'footer_forth';
+                        $myTitle = $this->SiteModel->get_setting($index . '_text', $title);
+                        echo '<div class="col-lg col-sm mb-4 mb-lg-0">
+                                <h6 class="widget_title">' . $myTitle . '</h6>
+                                <ul  class="list_none widget_links links_style1">';
+                        $fields = $this->SiteModel->get_setting($index . '_links', '', true);
+                        if ($fields) {
+                            foreach ($fields as $value) {
+                                $my_index = $value->title;
+                                $value = $value->link;
+                                echo "<li><a href='$value'><span>$my_index</span></a></li>";
+                            }
+                        }
+                        echo '</ul></div>';
+                    else:
+                        ?>
+                        <div class="col-lg-3 col-sm-3 mb-4 mb-lg-0">
+                            <div class="footer_logo mt-3">
                                 <?php
-                                if (PATH == 'sewaedu') {
+                                if (PATH != 'sewaedu') {
                                     ?>
-                                    <li>
-                                        <i class="fa fa-map-marker-alt"></i>
-                                        <address style="text-align: justify;">
-                                            <?= $this->ki_theme->config('alternate_address') ?>
-                                        </address>
-                                    </li>
+                                    <a href="{base_url}"><img alt="logo" style="width:150px"
+                                            src="{base_url}<?= UPLOAD . $this->ki_theme->config('logo') ?>" /></a>
                                     <?php
                                 }
                                 ?>
-                                <li>
-                                    <i class="fa fa-envelope"></i>
-                                    <a href="mailto:<?= $this->ki_theme->config('email') ?>">
-                                        <?= $this->ki_theme->config('email') ?>
-                                    </a>
-                                </li>
-                                <li>
-                                    <i class="fa fa-mobile-alt"></i>
-                                    <p>
-                                        <?= $this->ki_theme->config('number') ?>
-                                    </p>
-                                </li>
-                            </ul>
+                                <div>&nbsp;</div>
+
+                                <ul class="contact_info contact_info_light list_none mb-3">
+                                    <li>
+                                        <i class="fa fa-map-marker-alt"></i>
+                                        <address style="text-align: justify;">
+                                            <?= $this->ki_theme->config('address') ?>
+                                        </address>
+                                    </li>
+                                    <?php
+                                    if (PATH == 'sewaedu') {
+                                        ?>
+                                        <li>
+                                            <i class="fa fa-map-marker-alt"></i>
+                                            <address style="text-align: justify;">
+                                                <?= $this->ki_theme->config('alternate_address') ?>
+                                            </address>
+                                        </li>
+                                        <?php
+                                    }
+                                    ?>
+                                    <li>
+                                        <i class="fa fa-envelope"></i>
+                                        <a href="mailto:<?= $this->ki_theme->config('email') ?>">
+                                            <?= $this->ki_theme->config('email') ?>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-mobile-alt"></i>
+                                        <p>
+                                            <?= $this->ki_theme->config('number') ?>
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    <?php
+                        <?php
+
+
+                    endif;
                     $footer_sections = $this->ki_theme->config('footer_sections');
                     if ($footer_sections) {
                         foreach ($footer_sections as $index => $title) {
+                            if ($index == 'footer_forth' && PATH == 'sewaeducation')
+                                continue;
                             $myTitle = $this->SiteModel->get_setting($index . '_text', $title);
                             echo '<div class="col-lg col-sm mb-4 mb-lg-0">
                                 <h6 class="widget_title">' . $myTitle . '</h6>
@@ -488,7 +516,6 @@ if (PATH == 'sewaedu') {
                             echo '</ul></div>';
                         }
                     }
-
                     ?>
                     <!-- <div class="col-lg-5 col-sm-5 mb-4 mb-lg-0">
                         <h6 class="widget_title">Computer Course</h6>
@@ -536,15 +563,14 @@ if (PATH == 'sewaedu') {
 
                             if (PATH == 'sewaedu') {
                                 echo '<p>Copyrights@ All Right Reserved. This is the official Website of Skill Education & Welfare Association (SEWA) Council of Skill and Vocational Studies Designed by Sewa Tech</p>';
-                            } 
-                            else if(PATH == 'sewaeducation'){
+                            } else if (PATH == 'sewaeducation') {
                                 echo 'Copyrights@ All Right Reserved . SKILL EDUCATION AND WELFARE ASSOCIATION (SEWA)';
-                                
-                            }else {
+
+                            } else {
                                 ?>
-                            <p> Copyright @
-                                <script>document.write(new Date().getFullYear())</script> {copyright}
-                            </p>
+                                <p> Copyright @
+                                    <script>document.write(new Date().getFullYear())</script> {copyright}
+                                </p>
                             <?php
                             }
                             ?>
