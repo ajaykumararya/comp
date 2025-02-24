@@ -429,22 +429,7 @@ if (PATH == 'sewaedu') {
                 <div class="row">
                     <?php
 
-                    if (PATH == 'sewaeducation'):
-                        $index = 'footer_forth';
-                        $myTitle = $this->SiteModel->get_setting($index . '_text', $title);
-                        echo '<div class="col-lg col-sm mb-4 mb-lg-0">
-                                <h6 class="widget_title">' . $myTitle . '</h6>
-                                <ul  class="list_none widget_links links_style1">';
-                        $fields = $this->SiteModel->get_setting($index . '_links', '', true);
-                        if ($fields) {
-                            foreach ($fields as $value) {
-                                $my_index = $value->title;
-                                $value = $value->link;
-                                echo "<li><a href='$value'><span>$my_index</span></a></li>";
-                            }
-                        }
-                        echo '</ul></div>';
-                    else:
+                    if (PATH != 'sewaeducation'):
                         ?>
                         <div class="col-lg-3 col-sm-3 mb-4 mb-lg-0">
                             <div class="footer_logo mt-3">
@@ -499,8 +484,6 @@ if (PATH == 'sewaedu') {
                     $footer_sections = $this->ki_theme->config('footer_sections');
                     if ($footer_sections) {
                         foreach ($footer_sections as $index => $title) {
-                            if ($index == 'footer_forth' && PATH == 'sewaeducation')
-                                continue;
                             $myTitle = $this->SiteModel->get_setting($index . '_text', $title);
                             echo '<div class="col-lg col-sm mb-4 mb-lg-0">
                                 <h6 class="widget_title">' . $myTitle . '</h6>

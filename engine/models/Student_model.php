@@ -67,18 +67,18 @@ class Student_model extends MY_Model
         }
         switch ($case) {
             case 'admit_card_schedule':
-                    $this->db->select('acws.id as admit_session_id,ecs.centre_name,
+                $this->db->select('acws.id as admit_session_id,ecs.centre_name,
                                         ecs.centre_code,
                                         ecs.centre_address,
                                         ss.title as session')
-                    ->join('admit_cards_with_session as acws','acws.course_id = s.course_id AND acws.center_id = s.center_id');
-                    $this->db->join('exam_centres as ecs','ecs.id = acws.exam_centre_id');    
-                    $this->db->join('session as ss','ss.id = acws.session_id'); 
-                    if(isset($student_id)){
-                        unset($condition['student_id']);
-                        $this->db->where('s.id', $student_id);
-                    } 
-                    $this->myWhere('acws',$condition);  
+                    ->join('admit_cards_with_session as acws', 'acws.course_id = s.course_id AND acws.center_id = s.center_id');
+                $this->db->join('exam_centres as ecs', 'ecs.id = acws.exam_centre_id');
+                $this->db->join('session as ss', 'ss.id = acws.session_id');
+                if (isset($student_id)) {
+                    unset($condition['student_id']);
+                    $this->db->where('s.id', $student_id);
+                }
+                $this->myWhere('acws', $condition);
                 break;
             case 'placement_students':
                 $this->db->select('ps.*');
@@ -141,7 +141,9 @@ class Student_model extends MY_Model
                 // $this->not_passout();
                 $this->db->join('student_certificates as sce', 'sce.student_id != s.id');
                 $this->db->group_by('s.id');
-                $this->db->order_by('s.id', 'DESC')->limit($limit);
+                $this->db->order_by('s.id', 'DESC');
+                if (isset($limit))
+                    $this->db->limit($condition['limit']);
                 break;
             case 'all':
                 if (isset($condition['without_admission_status']))
@@ -532,10 +534,11 @@ class Student_model extends MY_Model
     {
         return $this->db->where('id', $id)->delete('placement_students');
     }
-    function get_study_material($material_id){
+    function get_study_material($material_id)
+    {
         $this->db->select('file as material_file');
         $this->db->where('material_id', $material_id);
-       return $this->db->get('study_material');
+        return $this->db->get('study_material');
 
     }
 }

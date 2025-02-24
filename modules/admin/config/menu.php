@@ -448,6 +448,33 @@ if (CHECK_PERMISSION('CENTRE_ONLY_ADD_STUDENT') && OnlyForCentre()) {
             )
         )
     );
+    $config['other_documents'] = array(
+        'title' => 'Other Documents',
+        'condition' => (OnlyForAdmin() && (CHECK_PERMISSION('NON_OBJECTION_CERTIFICATE') or CHECK_PERMISSION('MIGRATION_CERTIFICATE') or CHECK_PERMISSION('PROVISIONAL_CERTIFICATE'))),
+        'menu' => array(
+            array(
+                'label' => 'No Objection Certificate',
+                'type' => 'non_objection_certificate',
+                'condition' => CHECK_PERMISSION('NON_OBJECTION_CERTIFICATE'),
+                'icon' => array('notepad', 5),
+                'url' => 'other/non-objection-certificate',
+            ),
+            array(
+                'label' => 'Migration Certificate',
+                'type' => 'migration_certificate',
+                'icon' => array('notepad', 5),
+                'url' => 'other/migration-certificate',
+                'condition' => CHECK_PERMISSION('MIGRATION_CERTIFICATE')
+            ),
+            array(
+                'label' => 'Provisional Certificate',
+                'type' => 'provisional_certificate',
+                'icon' => array('notepad', 5),
+                'url' => 'other/provisional-certificate',
+                'condition' => CHECK_PERMISSION('PROVISIONAL_CERTIFICATE')
+            ),
+        )
+    );
     // $config['other_docs'] = array(
     //     'title' => 'Other Document(s)',
     //     'condition' => PATH == 'sctnew',
