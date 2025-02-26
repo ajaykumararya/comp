@@ -125,7 +125,7 @@
     <?php
     $subjects = $this->db->where([
         'course_id' => $course_id,
-        'duration' =>$duration,
+        'duration' =>$admit_card_duration,
         'duration_type' => $duration_type
     ])->get('subjects');
     ?>
