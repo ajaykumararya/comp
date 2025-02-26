@@ -768,6 +768,9 @@ const loadSomeFuncation = () => {
         $('.select-date-month-year').flatpickr({
             dateFormat: 'M Y'
         })
+        $('.select-date-full-month-year').flatpickr({
+            dateFormat: 'F-Y'
+        })
         var x = $('input[name="dob"],.select-dob').flatpickr({
             dateFormat: dateFormat,
             // $("#kt_datepicker_4").flatpickr({

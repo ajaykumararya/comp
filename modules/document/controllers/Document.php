@@ -496,6 +496,55 @@ class Document extends MY_Controller
         echo "*<br>";
         echo "&nbsp;*";
     }
+    private function get_other_doc($id, $table)
+    {
+        $data = $this->db->select('s.name,s.roll_no,s.father_name,table.*,c.course_name,s.image,
+                ce.institute_name
+            ')
+            ->from('students as s')
+            ->join($table . ' as table', 'table.student_id = s.id')
+            ->join('course as c', 'c.id = s.course_id')
+            ->join('centers as ce', 'ce.id = s.center_id')
+            ->where('table.id', $id)
+            ->get();
+        return $data;
+    }
+    function provisional_certificate()
+    {
+        $get = $this->get_other_doc($this->id, __FUNCTION__);
+        if ($get->num_rows()) {
+            // pre($get->row());?
+            $this->set_data($get->row_array());
+            $output = $this->parse(__FUNCTION__);
+            $this->mypdf->addPage('L');
+            $this->pdf($output);
+        } else
+            $this->not_found();
+    }
+    function no_objection_certificate()
+    {
+        $get = $this->get_other_doc($this->id, __FUNCTION__);
+        if ($get->num_rows()) {
+            // pre($get->row(),true);
+            $this->set_data($get->row_array());
+            $output = $this->parse(__FUNCTION__);
+            // $this->mypdf->addPage('L');
+            $this->pdf($output);
+        } else
+            $this->not_found();
+    }
+    function migration_certificate()
+    {
+        $get = $this->get_other_doc($this->id, __FUNCTION__);
+        if ($get->num_rows()) {
+            // pre($get->row(),true);
+            $this->set_data($get->row_array());
+            $output = $this->parse(__FUNCTION__);
+            // $this->mypdf->addPage('L');
+            $this->pdf($output);
+        } else
+            $this->not_found();
+    }
 }
 
 
