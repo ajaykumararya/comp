@@ -70,10 +70,10 @@ class Other extends Ajax_Controller
 
     function submit_provisional_certificate()
     {
-        $this->form_validation->set_rules('student_id', 'Student', 'required|is_unique[previsional_certificate.student_id]', [
+        $this->form_validation->set_rules('student_id', 'Student', 'required|is_unique[provisional_certificate.student_id]', [
             'is_unique' => 'This %s is already exists in Certificate'
         ]);
-        $this->form_validation->set_rules('sr_no', 'Disposal No', 'required|is_unique[previsional_certificate.sr_no]', [
+        $this->form_validation->set_rules('sr_no', 'Disposal No', 'required|is_unique[provisional_certificate.sr_no]', [
             'is_unique' => 'This %s is already exists in Certificate'
         ]);
         $this->form_validation->set_rules('examination_held', 'Examination Held in', 'required');
@@ -81,7 +81,7 @@ class Other extends Ajax_Controller
         //
 
         if ($this->validation()) {
-            $this->db->insert('previsional_certificate', $this->post());
+            $this->db->insert('provisional_certificate', $this->post());
             $this->response('status', true);
         }
     }
@@ -89,13 +89,13 @@ class Other extends Ajax_Controller
     {
         $data = $this->db->select('s.name,s.roll_no,mc.*')
             ->from('students as s')
-            ->join('previsional_certificate as mc', 'mc.student_id = s.id')
+            ->join('provisional_certificate as mc', 'mc.student_id = s.id')
             ->get();
         $this->response('data', $data->result_array());
     }
     function delete_provisional_certificate($id)
     {
-        $this->response('status', $this->db->where('id', $id)->delete('previsional_certificate'));
+        $this->response('status', $this->db->where('id', $id)->delete('provisional_certificate'));
     }
 
     //END PROVISIONAL
