@@ -3,9 +3,11 @@
         .annocement {
             display: flex;
         }
-        #student-details{
-            margin-top:241px!important
+
+        #student-details {
+            margin-top: 241px !important
         }
+
         .annocement span {
             color: white;
             font-weight: bold;
@@ -18,6 +20,12 @@
         li,
         .title {
             font-family: 'Cambay', sans-serif !important;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
         }
     </style>
     <section class="top-bar">
@@ -150,7 +158,7 @@
                             <div class="col-lg-3 col-md-3">
                                 <div class="content">
                                     <div class="footer-logo">
-                                        <img src="<?= logo() ?>" alt="" class="img-responsive" >
+                                        <img src="<?= logo() ?>" alt="" class="img-responsive">
                                     </div>
                                     <div class="address">
                                         <p><span><i class="fa fa-map-marker"></i></span> &nbsp;:&nbsp;&nbsp;{address}

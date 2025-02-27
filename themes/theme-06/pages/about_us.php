@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="box">
+                <div class="box mb-3" style="padding-bottom:28px">
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
                             <h3 class="main-heading-text-per"><?= ES('about_us_page_title') ?></h3>

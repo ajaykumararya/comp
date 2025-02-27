@@ -20,7 +20,7 @@
                                 <div class="card-body text-center">
                                     <h5 class="card-title">' . $title . '</h5>
                                     <br>
-                                    <a href="' . $row->button_link . '" class="btn btn-primary btn-sm">' . $row->button_text . '</a>
+                                    <a href="' . $row->button_link . '" class="btn btn-primary btn-sm"><i class="fa fa-arrow-right"></i> ' . $row->button_text . '</a>
                                 </div>
                             </div>
                         </div>';
