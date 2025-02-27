@@ -157,6 +157,7 @@ input:focus {
   margin-top: 30px;
   margin-bottom: 30px;
   border-right: 1px solid #ccc;
+  font-weight: bold;
 }
 .main-header .navbar-default .navbar-nav > li:last-child > a {
   border-right: none;
@@ -929,6 +930,7 @@ input:focus {
   color: black;
   font-size: 14px;
   text-transform: capitalize;
+  font-weight: bold;
 }
 .aiu-tab-dropdown li a:hover {
   color: var(--secondary-color);

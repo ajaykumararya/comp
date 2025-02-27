@@ -12,7 +12,7 @@ $menu = array(
         ),
         array(
             'label' => 'Explore Certificate',
-            'type' => 'explore-certification',
+            'type' => 'explore-certificate',
             'icon' => array('file',4),
             'url' => 'cms/static-page/explore-certificate',
         ),
