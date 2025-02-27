@@ -19,8 +19,3 @@
 <script src="{theme_url}assets/js/jquery.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cambay:wght@400;700&display=swap" rel="stylesheet">
 
-<style>
-    body {
-        font-family: 'Cambay', sans-serif!important;
-    }
-</style>

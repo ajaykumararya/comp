@@ -3,13 +3,21 @@
         .annocement {
             display: flex;
         }
-
+        #student-details{
+            margin-top:241px!important
+        }
         .annocement span {
             color: white;
             font-weight: bold;
             background: var(--secondary-color);
             padding: 12px 20px;
             text-transform: uppercase;
+        }
+
+        body,
+        li,
+        .title {
+            font-family: 'Cambay', sans-serif !important;
         }
     </style>
     <section class="top-bar">

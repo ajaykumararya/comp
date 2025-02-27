@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" id="student-details">
     <div class="row">
         <div class="col-md-12 mt-3 mb-3">
             <div class="card">

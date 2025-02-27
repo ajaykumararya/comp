@@ -1,5 +1,5 @@
 <section class="page-content">
-    <div class="container">
+    <div class="container" style="width:100%">
         <div class="row">
             <?php
             if (strlen($content)) {
@@ -7,9 +7,15 @@
 
                 <div class="col-lg-12">
                     <div class="new-box">
-                        <div class="page-main-heading">
-                            <h2 class="heading"><span style="">{page_name}</span></h2>
-                        </div>
+                        <?php
+                        if (!$isPrimary):
+                            ?>
+                            <div class="page-main-heading">
+                                <h2 class="heading"><span style="">{page_name}</span></h2>
+                            </div>
+                            <?php
+                        endif;
+                        ?>
                         <div class="box">
                             {content}
                         </div>
