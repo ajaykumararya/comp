@@ -7,7 +7,7 @@
         .annocement span {
             color: white;
             font-weight: bold;
-            background: #f4a024;
+            background: var(--secondary-color);
             padding: 12px 20px;
             text-transform: uppercase;
         }
@@ -20,16 +20,12 @@
                         <div class="row">
 
                             <div class="col-lg-7 col-md-7 text-left">
-                                <!-- <ul>
-                                        <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;(+91) 9289456781 | (+91) 9289456781</a></li>
-                                        <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;info@sikkimskilluniversity.com</a></li>
-                                        <li><a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;Opening: 09:00am - 4:00pm</a></li>
-                                    </ul> -->
                                 <div class="annocement">
                                     <span><?= ES('header_marquee_title', 'ANNOUNCEMENT') ?></span>
                                     <marquee behavior="scroll" direction="left" id="" scrollamount="5"
                                         class="top-marquee" onmouseover="this.stop();" onmouseout="this.start();">
-                                        <?= ES('header_marquee', '') ?></marquee>
+                                        <?= ES('header_marquee', '') ?>
+                                    </marquee>
                                 </div>
                             </div>
                             <div class="col-lg-5 col-md-5 text-right">
@@ -123,7 +119,7 @@
                 <div class="col-lg-12 col-md-12">
                     <style type="text/css">
                         .footer-two .content .footer-logo {
-                            margin-bottom: 10px;
+                            margin-bottom: 24px;
                             width: 250px;
                         }
 
@@ -133,7 +129,7 @@
                         }
 
                         .footer-two .content p span i {
-                            background: #f4a024;
+                            background: var(--secondary-color);
                             /* padding: 3px 4px; */
                             border-radius: 50%;
                             height: 20px;
@@ -150,9 +146,10 @@
                                         <img src="<?= logo() ?>" alt="" class="img-responsive">
                                     </div>
                                     <div class="address">
-                                        <p><span><i class="fa fa-map-marker"></i>&nbsp;:&nbsp;</span> {address}</p>
-                                        <p><span><i class="fa fa-phone"></i>&nbsp;:&nbsp;</span>{number}</p>
-                                        <p><span><i class="fa fa-envelope-o"></i>&nbsp;:&nbsp;</span> {email}
+                                        <p><span><i class="fa fa-map-marker"></i></span> &nbsp;:&nbsp;&nbsp;{address}
+                                        </p>
+                                        <p><span><i class="fa fa-phone"></i></span>&nbsp;:&nbsp;&nbsp;{number}</p>
+                                        <p><span><i class="fa fa-envelope-o"></i></span>&nbsp;:&nbsp;&nbsp; {email}
                                         </p>
                                     </div>
                                 </div>

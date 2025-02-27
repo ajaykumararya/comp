@@ -81,8 +81,9 @@
             bottom: 11%;
             left: 65%;
         }
+
         .hindi-text {
-             font-size: 25pt!important;
+            font-size: 25pt !important;
             font-family: "Noto Sans Devanagari", sans-serif;
         }
     </style>
@@ -101,15 +102,17 @@
     <p class="position-absolute " style="top:4.3%;left:70%;width:135px;text-align:center">{enrollment_no}</p>
     <p class="position-absolute " style="top:4%;left:10%;width:135px;text-align:center">{serial_no}</p>
     <p class="position-absolute text-center" style="top:41.8%;left:10%;width:80%;">
-        <p class="big-text" style="text-align:center;font-weight:600;font-family:freeserif;font-size:22px;text-indent: 120px; text-align:justify;">
-            प्रमाणित किया जाता है कि <b>{hindi_name}</b> <br>
+    <p class="big-text"
+        style="text-align:center;font-weight:600;font-family:freeserif;font-size:22px;text-indent: 120px; text-align:justify;">
+        प्रमाणित किया जाता है कि <b>{hindi_name}</b> <br>
         आत्मज / आत्मजा श्री <b>{hindi_father_name}</b> एवं श्रीमती <b>{hindi_mother_name}</b> को
         विद्यापीठ से सन् <b>2019</b> की पाठ्यक्रम परीक्षा में <b>{course_name}</b>
-        की उपाधि <b><?=$this->ki_theme->grade($percentage,'hi')?></b> श्रेणी में प्रदत्त की गयी है।
-        </p>
-        <br>
-        <p style="text-align:center;font-weight:600;font-family:freeserif;font-size:22px;text-indent: 120px; text-align:justify;">
-            This is to Certify that <b>{student_name}</b> <br>
+        की उपाधि <b><?= $this->ki_theme->grade($percentage, 'hi') ?></b> श्रेणी में प्रदत्त की गयी है।
+    </p>
+    <br>
+    <p
+        style="text-align:center;font-weight:600;font-family:freeserif;font-size:22px;text-indent: 120px; text-align:justify;">
+        This is to Certify that <b>{student_name}</b> <br>
         Son /Daughter of Shri <b>{father_name}</b> and Smt. <b>{mother_name}</b>
         has been conferred the Degree of <b>{course_name}</b> in the
         Examination of <b>2019</b> of this Vidyapeeth in <b>{grade}</b> Division.</p>
