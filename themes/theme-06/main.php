@@ -150,12 +150,7 @@
                             <div class="col-lg-3 col-md-3">
                                 <div class="content">
                                     <div class="footer-logo">
-                                        <img src="<?= logo() ?>" alt="" class="img-responsive" style="
-    background: white;
-    padding: 9px;
-    border-radius: 6px;
-    box-shadow: inset 0 0 8px 2px #0c54a0;
-">
+                                        <img src="<?= logo() ?>" alt="" class="img-responsive" >
                                     </div>
                                     <div class="address">
                                         <p><span><i class="fa fa-map-marker"></i></span> &nbsp;:&nbsp;&nbsp;{address}
