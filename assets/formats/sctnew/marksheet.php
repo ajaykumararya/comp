@@ -96,8 +96,8 @@
         <img src="upload/{image}" style="width:73.3px;height:96px">
     </div> -->
     <p class="position-absolute" style="top:3.8%;left:80.3%;width:120px">{serial_no}</p>
-    <p class="position-absolute " style="top:33%;left:82.5%;width:110px;text-align:left">{roll_no}</p>
-    <p class="position-absolute " style="top:36%;left:82.5%;width:110px;text-align:left">{enrollment_no}</p>
+    <p class="position-absolute " style="top:33%;left:82.5%;width:110px;text-align:left">{enrollment_no}</p>
+    <p class="position-absolute " style="top:36%;left:82.5%;width:110px;text-align:left">{roll_no}</p>
 
     <!-- <p class="position-absolute" style="top:26.7%;left:50%;width:175px">{center_code}</p>-->
     <p class="position-absolute " style="top:82%;left:12%;width:175px">{issue_date}</p> 

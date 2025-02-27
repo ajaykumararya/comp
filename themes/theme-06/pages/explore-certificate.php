@@ -17,9 +17,9 @@
                                             foreach ($data->result() as $row):
                                                 ?>
                                                 <div class="slide-marquee">
-                                                    <div class="content-box" style="height:500px;border:none;border-radius:20px">
+                                                    <div class="content-box" style="height:400px;border:none;border-radius:10px">
                                                         <img src="{base_url}upload/<?= $row->field2 ?>" class="img-responsive"
-                                                            style="height:100%;width:100%;border-radius:20px" alt="<?= $row->field1 ?>">
+                                                            style="height:100%;width:100%;border-radius:10px" alt="<?= $row->field1 ?>">
 
                                                     </div>
                                                 </div>

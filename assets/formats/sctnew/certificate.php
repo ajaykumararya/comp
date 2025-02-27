@@ -97,7 +97,7 @@
         <img src="upload/{image}" style="width:110.8px;height:130px">
     </div>
 
-    <p class="position-absolute text-center" style="top:39.7%;left:51%;width:120px">{roll_no}</p>
+    <p class="position-absolute text-center" style="top:39.7%;left:55%;width:120px">{roll_no}</p>
     <p class="position-absolute " style="top:4.3%;left:70%;width:135px;text-align:center">{enrollment_no}</p>
     <p class="position-absolute " style="top:4%;left:10%;width:135px;text-align:center">{serial_no}</p>
     <p class="position-absolute text-center" style="top:41.8%;left:10%;width:80%;">
