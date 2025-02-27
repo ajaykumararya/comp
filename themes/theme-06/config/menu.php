@@ -11,6 +11,12 @@ $menu = array(
             'url' => 'cms/static-page/about_us',
         ),
         array(
+            'label' => 'Explore Certificate',
+            'type' => 'explore-certification',
+            'icon' => array('file',4),
+            'url' => 'cms/static-page/explore-certificate',
+        ),
+        array(
             'label' => 'Our Program(s)',
             'type' => 'our-program',
             'icon' => array('file', 4),

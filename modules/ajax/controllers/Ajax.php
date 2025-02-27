@@ -1,6 +1,32 @@
 <?php
 class Ajax extends Ajax_Controller
 {
+    function change_password()
+    {
+        try {
+            $this->form_validation->set_rules('current_password', 'Current Password', 'required');
+            $this->form_validation->set_rules('password', 'Password', 'required');
+            $this->form_validation->set_rules('confirm-password', 'Confirm Password', 'required|matches[password]');
+            if ($this->validation()) {
+                $loginId = $this->center_model->loginId();
+                $get = $this->db->select('password')->where('id', $loginId)->get('centers');
+                if ($get->num_rows()) {
+                    $row = $get->row();
+                    $myPass = sha1($this->post('current_password'));
+                    if ($myPass == $row->password) {
+                        $this->db->where('id', $loginId)->update('centers', [
+                            'password' => sha1($this->post('password'))
+                        ]);
+                        $this->response('status', true);
+                    } else
+                        throw new Exception('Current Password is not matched.');
+                } else
+                    throw new Exception('');
+            }
+        } catch (Exception $e) {
+            $this->response('html', $e->getMessage());
+        }
+    }
     function generate_link()
     {
         $allLinks = $this->ki_theme->project_config('open_links');

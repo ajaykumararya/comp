@@ -8,10 +8,10 @@ $title = 'Our Importent Link';
             <div class="{card_class}">
                 <div class="card-header">
                     <h3 class="card-title">
-                        
+
                         <input name="<?= $data_index ?>_title" class="custom_setting_input"
-                                    value="<?= $this->SiteModel->get_setting($data_index . '_title', $title) ?>">
-                                
+                            value="<?= $this->SiteModel->get_setting($data_index . '_title', $title) ?>">
+
                     </h3>
                 </div>
                 <div class="card-body field-area p-3" data-index="<?= $data_index ?>">

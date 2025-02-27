@@ -1,4 +1,3 @@
-
 <body>
     <style type="text/css">
         .annocement {
@@ -27,22 +26,27 @@
                                         <li><a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;Opening: 09:00am - 4:00pm</a></li>
                                     </ul> -->
                                 <div class="annocement">
-                                    <span>Announcement</span>
+                                    <span><?= ES('header_marquee_title', 'ANNOUNCEMENT') ?></span>
                                     <marquee behavior="scroll" direction="left" id="" scrollamount="5"
                                         class="top-marquee" onmouseover="this.stop();" onmouseout="this.start();">
-                                        Admissions Open: 2025-26 : B.Com | B.Sc| BCA | B.Tech | D.Pharm | B.Pharm | LLB
-                                        | Diploma | MBA | MCA | MA</marquee>
+                                        <?= ES('header_marquee', '') ?></marquee>
                                 </div>
                             </div>
                             <div class="col-lg-5 col-md-5 text-right">
                                 <ul>
-                                    <li><a href="#" style="color:white;margin-right: 10px;">Call us : +91 9599123451</a>
-                                    </li>
-                                    <li><a href="#" class="top-btn"><i
-                                                class="fa fa-lock" aria-hidden="true"></i>&nbsp;&nbsp;Student Login</a>
-                                    </li>
-                                    <li style=""><a href="#" class="top-btn"><span><i class="fa fa-forumbee"
-                                                    aria-hidden="true"></i>&nbsp;&nbsp;Apply Now</span></a></li>
+                                    <?php
+                                    $data = $this->SiteModel->get_contents('our-header-button');
+                                    if ($data->num_rows()):
+                                        $index = 1;
+                                        foreach ($data->result() as $row):
+
+                                            $html = '<i class="' . $row->field1 . '" aria-hidden="true"></i> &nbsp;&nbsp;' . $row->field2;
+
+                                            echo '<li><a href="' . $row->field3 . '" ' . ($row->field4 == 'button' ? ' class="top-btn"' : 'style="color:white;margin-right: 10px;"') . '>' . $html . '</a></li>';
+                                        endforeach;
+                                    endif;
+                                    ?>
+                                    ?>
                                 </ul>
                             </div>
                         </div>
@@ -64,39 +68,38 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="" href="{base_url}">
-                        <img src="<?=logo()?>" alt="{title}"
-                            class="navbar-brand img-responsive">
+                        <img src="<?= logo() ?>" alt="{title}" class="navbar-brand img-responsive">
                     </a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-                <?php
-                $pageCount = 0;
-                function get_menu($items, $class = '', $liClass = '', $linkClass = 'nav-link', $boxID = '', $attr = '')
-                {
-                    $html = "<ul class=\"" . $class . "\" id=\"" . $boxID . "\" $attr>";
-                    foreach ($items as $key => $value) {
-                        $activeCss = $value['isActive'] ? 'active-menu' : ''; //getActiveMenu($value['page_id'],'active');
-                        $link = $value['link'];
-                        $iconWithTExt = $value['label'];
-                        if (array_key_exists('child', $value)) {
-                            $ex = $class == 'aiu-tab-dropdown' ? '' : ' hover-aiu-tab';
-                            $ex1 = $class == 'aiu-tab-dropdown' ? 'dropdown-item' : 'nav-link dropdown-toggle';
-                            $html .= '<li class="' . $activeCss . ' ' . $ex . '"><a href="#" ' . $value['target'] . ' class="menu-css ' . $linkClass . ' ' . $ex1 . '" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' . $iconWithTExt . '</a>';
-                        } else
-                            $html .= '<li class="' . $activeCss . ' hover-aiu-tab"><a href="' . $link . '" ' . $value['target'] . ' class="menu-css ' . $linkClass . '">' . $iconWithTExt . '</a>';
-                        if (array_key_exists('child', $value)) {
-                            // $html .= '<div class="dropdown-menu">';
-                            $html .= get_menu($value['child'], 'aiu-tab-dropdown', '', '');
-                            // $html .= '</div>';
+                    <?php
+                    $pageCount = 0;
+                    function get_menu($items, $class = '', $liClass = '', $linkClass = 'nav-link', $boxID = '', $attr = '')
+                    {
+                        $html = "<ul class=\"" . $class . "\" id=\"" . $boxID . "\" $attr>";
+                        foreach ($items as $key => $value) {
+                            $activeCss = $value['isActive'] ? 'active-menu' : ''; //getActiveMenu($value['page_id'],'active');
+                            $link = $value['link'];
+                            $iconWithTExt = $value['label'];
+                            if (array_key_exists('child', $value)) {
+                                $ex = $class == 'aiu-tab-dropdown' ? '' : ' hover-aiu-tab';
+                                $ex1 = $class == 'aiu-tab-dropdown' ? 'dropdown-item' : 'nav-link dropdown-toggle';
+                                $html .= '<li class="' . $activeCss . ' ' . $ex . '"><a href="#" ' . $value['target'] . ' class="menu-css ' . $linkClass . ' ' . $ex1 . '" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' . $iconWithTExt . '</a>';
+                            } else
+                                $html .= '<li class="' . $activeCss . ' hover-aiu-tab"><a href="' . $link . '" ' . $value['target'] . ' class="menu-css ' . $linkClass . '">' . $iconWithTExt . '</a>';
+                            if (array_key_exists('child', $value)) {
+                                // $html .= '<div class="dropdown-menu">';
+                                $html .= get_menu($value['child'], 'aiu-tab-dropdown', '', '');
+                                // $html .= '</div>';
+                            }
+                            $html .= "</li>";
                         }
-                        $html .= "</li>";
+                        $html .= "</ul>";
+                        return $html;
                     }
-                    $html .= "</ul>";
-                    return $html;
-                }
-                echo get_menu($menus, 'nav navbar-nav');
-                ?>    
+                    echo get_menu($menus, 'nav navbar-nav');
+                    ?>
 
 
                 </div><!-- /.navbar-collapse -->
@@ -113,7 +116,7 @@
     <!-- <button type="button" class="btn btn-toll-free" >Toll Free No. : 18001204883</button> -->
     <!-- <a type="button" class="btn admission-open" href="apply_now_admission.php"> --><!-- <i class="fa fa-phone box-shadow" aria-hidden="true"></i>&nbsp; --><!-- <span>Admission Open 2022-23</span></a> -->
 
-  
+
     <section class="footer">
         <div class="container">
             <div class="row">
@@ -144,13 +147,12 @@
                             <div class="col-lg-3 col-md-3">
                                 <div class="content">
                                     <div class="footer-logo">
-                                        <img src="<?=logo()?>" alt="" class="img-responsive">
+                                        <img src="<?= logo() ?>" alt="" class="img-responsive">
                                     </div>
                                     <div class="address">
                                         <p><span><i class="fa fa-map-marker"></i>&nbsp;:&nbsp;</span> {address}</p>
                                         <p><span><i class="fa fa-phone"></i>&nbsp;:&nbsp;</span>{number}</p>
-                                        <p><span><i
-                                                    class="fa fa-envelope-o"></i>&nbsp;:&nbsp;</span> {email}
+                                        <p><span><i class="fa fa-envelope-o"></i>&nbsp;:&nbsp;</span> {email}
                                         </p>
                                     </div>
                                 </div>
