@@ -1,4 +1,4 @@
-<section class="page-content">
+<section class="page-content" <?=$isPrimary ? 'style="margin-top:0"' : ''?>>
     <div class="container" style="width:100%">
         <div class="row">
             <?php
