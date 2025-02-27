@@ -36,7 +36,7 @@ class Site extends Site_Controller
                         $get = $this->SiteModel->page_content($page->page_id);
                         if ($get->num_rows()) {
                             if (file_exists(THEME_PATH . 'content.php'))
-                                $html .= $this->parse('content', ['content' => $get->row('content')], true);
+                                $html .= $this->parse('content', ['content' => $get->row('content')]+$return, true);
                             else
                                 $html .= $get->row('content');
                         }
