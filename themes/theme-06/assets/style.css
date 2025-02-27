@@ -702,7 +702,7 @@
     .footer{
         color: white;
         background-color: var(--primary-color);
-        padding: 50px 0 0;
+        padding: 14px 0 0;
         border-bottom: 7px solid var(--secondary-color); 
     }
     .footer .footer-one .content{
