@@ -85,6 +85,9 @@
              font-size: 25pt!important;
             font-family: "Noto Sans Devanagari", sans-serif;
         }
+        .t-u{
+            text-transform: uppercase
+        }
     </style>
 </head>
 
@@ -95,16 +98,16 @@
         <img src="upload/{image}" style="width:92px;height:86px">
     </div>
 
-    <p class="position-absolute" style="top:38.3%;left:36%;width:350px">{name}</p>
-    <p class="position-absolute" style="top:43%;left:36%;width:350px">{father_name}</p>
+    <p class="position-absolute t-u" style="top:38.3%;left:36%;width:350px">{name}</p>
+    <p class="position-absolute t-u" style="top:43%;left:36%;width:350px">{father_name}</p>
     <p class="position-absolute " style="top:3.6%;left:16%;width:135px;">{sr_no}</p>
-    <p class="position-absolute " style="top:4%;left:70%;width:200px;">{roll_no}</p>
+    <p class="position-absolute" style="top:4%;left:70%;width:150px;text-align:center">{roll_no}</p>
     <p class="position-absolute" style="top:48.5%;left:20%;width:600px;line-height:1">MAHTMA GANDHI COLLEGE OF MEDICAL SCIENCE, NAGAR MAHARASHTRA</p>
-    <p class="position-absolute" style="top:58.5%;left:11%;width:505px;line-height:1">{course_name}</p>
-    <p class="position-absolute" style="top:54%;left:60%;width:305px;line-height:1">{course_category}</p>
+    <p class="position-absolute t-u" style="top:58.5%;left:11%;width:505px;line-height:1">{course_name}</p>
+    <p class="position-absolute t-u" style="top:54%;left:60%;width:305px;line-height:1">{course_category}</p>
     <!-- <p class="position-absolute" style="top:52%;left:49%;width:398px;line-height:1">{institute_name}</p> -->
     
-    <!-- <p class="position-absolute " style="top:24.4%;left:85%;width:135px;">{date}</p> -->
+    <p class="position-absolute " style="top:86%;left:16%;width:135px;">{date}</p>
     <!-- <p class="position-absolute " style="top:50%;left:31%;width:135px;font-size:12px">{examination_held}</p>
     <p class="position-absolute " style="top:50%;left:85.6%;width:135px;font-size:12px">{internship}</p> -->
         
