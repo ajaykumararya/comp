@@ -398,7 +398,7 @@
     ============================================
     FOOTER
     ============================================= -->
-    <footer id="footer">
+    <footer id="footer" <?=PATH == 'boardofpara' ? 'style="background:white!important"' : ''?>>
         <div class="container">
             <div class="row">
                 <div class="col-sm-3">
