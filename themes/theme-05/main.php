@@ -92,7 +92,7 @@
                     <div class="col-md-3">
                         <a href="">
                             <center>
-                                <img style="height:89px;<?=PATH == 'boardofpara' ? '' : 'width:283px'?>" src="{base_url}upload/{logo}" alt="{title}"
+                                <img style="<?=PATH == 'boardofpara' ? '' : 'height:89px;width:283px'?>" src="{base_url}upload/{logo}" alt="{title}"
                                     class="img-responsive" />
                             </center>
                         </a>
