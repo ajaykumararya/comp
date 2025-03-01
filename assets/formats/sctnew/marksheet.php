@@ -134,7 +134,7 @@
                     $total += $markTotal;
                     $maxTotal += (float) $mark['theory_max_marks'];
                     $minTotal += (float) $mark['practical_max_marks'];
-                    $mark['total_max_marks'] = $maxTotal + $minTotal;
+                    $mark['total_max_marks'] = (float) $mark['theory_max_marks'] + (float) $mark['practical_max_marks'];
                     $mark['inword'] = numberToWords($markTotal);
                     echo $this->parser->parse_string('
                                     <tr>
