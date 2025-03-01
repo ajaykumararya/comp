@@ -113,7 +113,8 @@
     <p class="position-absolute" style="top:41.6%;left:40%;line-height:1">{course_name}</p>
     <!-- <p class="position-absolute " style="top:35.3%;left:36.5%">{center_name}</p> -->
     <p class="position-absolute text-capitlize" style="top:38.5%;left: 82.5%;width:110px;text-align:left">
-        <?= numberToFullOrdinal($marksheet_duration) ?> {duration_type}</p>
+        <?= numberToFullOrdinal($marksheet_duration) ?> {duration_type}
+    </p>
     <!-- <p class="position-absolute " style="top:39.6%;left:36.5%">{dob}</p> -->
     <div class="position-absolute" style="top:3.1%;left:3.8%;">
         <img src="upload/images/marksheet_{result_id}.png" style="width:90px;height:90px;" alt="">
@@ -139,7 +140,7 @@
                     echo $this->parser->parse_string('
                                     <tr>
                                         <td style="width:60px;font-size:12.81px">{subject_code}</td>
-                                        <td class="primary lb" style="text-align:left;padding-left:5px;font-size:12.81px;width:178px;line-height:1">{subject_name}
+                                        <td class="primary lb" style="text-align:left;padding-left:5px;font-size:12.81px;width:190px;line-height:1">{subject_name}
                                         </td>
                                         <td class="primary lb" style="font-size:12.81px;width:60px">{total_max_marks}</td>
                                         <td class="primary lb" style="font-size:12.81px;width:35px">{theory_total}</td>
@@ -155,7 +156,8 @@
     <!-- <p class="position-absolute" style="bottom:17.5%;left:23%;font-size:15px;width:50px"><?= $minTotal ?></p> -->
     <!-- <p class="position-absolute" style="bottom:17.5%;left:50%;font-size:15px;width:50px"><?= $maxTotal ?></p> -->
     <p class="position-absolute " style="font-weight:300;top:74.3%;left:67%;font-size:18px;width:200px;line-height:1">
-        <?= numberToWords($total) ?></p>
+        <?= numberToWords($total) ?>
+    </p>
     <p class="position-absolute" style="font-weight:300;top:74.3%;left:17%;font-size:18px;width:210px;line-height:1"><?php
     $percentage = (($total / ($minTotal + $maxTotal)) * 100);
     echo $percentage > 35 ? 'PASSED IN FIRST DIVISION' : 'FAIL';
