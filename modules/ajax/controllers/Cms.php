@@ -117,6 +117,14 @@ class Cms extends Ajax_Controller
             $this->response('file', base_url('upload/' . $file));
         }
     }
+    function update_favicon()
+    {
+        if ($file = $this->file_up('image')) {
+            $this->SiteModel->update_setting('favicon', $file);
+            $this->response('status', true);
+            $this->response('file', base_url('upload/' . $file));
+        }
+    }
     function update_setting()
     {
         foreach ($_POST as $index => $value) {

@@ -14,7 +14,7 @@
                                     foreach ($data->result() as $row):
                                         ?>
                                         <div class="col-lg-2 col-md-2 col-xs-12">
-                                            <div class="company-logo box-shadow box-border">
+                                            <div class="company-logo box-shadow box-border" align="center">
                                                 <img src="{base_url}upload/<?=$row->field2?>"
                                                     class="img-responsive" alt="<?=$row->field1?>">
                                             </div>

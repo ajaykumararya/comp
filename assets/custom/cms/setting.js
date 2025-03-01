@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function (e) {
     const logo_form = document.getElementById("update-logo");
+    const favicon_form = document.getElementById('update-favicon');
     const view_logo = $('#logo');
+    const favicon = $('#favicon');
 
     const list_slider = $('#list-slider');
     var validation = MyFormValidation(logo_form);
@@ -27,6 +29,27 @@ document.addEventListener('DOMContentLoaded', function (e) {
         }).then((r) => {
             if (r.status) {
                 view_logo.attr('src', r.file);
+            }
+            showResponseError(r);
+        })
+    });
+    favicon_form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        // log(formDataToObject(new FormData(this)));
+        var fromdata = new FormData();
+        const fileInput = $('#fv_image')[0];
+        const file = fileInput.files[0];
+        fromdata.append('image', file);
+        $.AryaAjax({
+            validation: validation,
+            url: 'cms/update-favicon',
+            data: (fromdata),
+            success_message: 'Favicon Uploaded Successfully.',
+            formData : true
+            // page_reload: true
+        }).then((r) => {
+            if (r.status) {
+                favicon.attr('src', r.file);
             }
             showResponseError(r);
         })

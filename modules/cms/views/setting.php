@@ -22,6 +22,29 @@
                 </div>
             </div>
         </form>
+        <form action="" id="update-favicon" class="mt-3">
+            <div class="{card_class}">
+                <div class="card-header">
+                    <h3 class="card-title">Update Favicon</h3>
+                </div>
+                <div class="card-body p-3">
+                    <div class="form-group">
+                        <label for="image" class="form-label mb-4 required">Favicon Icon</label>
+                        <input type="file" name="image" id="fv_image" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label align="center" for="image">
+
+                            <img src="<?= base_url('upload/') . $this->SiteModel->get_setting('favicon') ?>" alt=""
+                                id="favicon" class="img-fluid h-20px">
+                        </label>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    {publish_button}
+                </div>
+            </div>
+        </form>
     </div>
     <div class="col-md-4">
         <form action="" class="setting-update">

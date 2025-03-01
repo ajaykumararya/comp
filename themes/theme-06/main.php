@@ -27,6 +27,16 @@
             background-color: var(--primary-color) !important;
             border-color: var(--primary-color) !important;
         }
+
+        .dropdown-toggle::after {
+            content: "\f107"; /* Unicode for FontAwesome Bars (☰) */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            /* position: absolute; */
+            /* right: 10px; */
+            /* top: 50%; */
+            transform: translateY(-50%);
+        }
     </style>
     <section class="top-bar">
         <div class="container">
@@ -96,7 +106,7 @@
                             if (array_key_exists('child', $value)) {
                                 $ex = $class == 'aiu-tab-dropdown' ? '' : ' hover-aiu-tab';
                                 $ex1 = $class == 'aiu-tab-dropdown' ? 'dropdown-item' : 'nav-link dropdown-toggle';
-                                $html .= '<li class="' . $activeCss . ' ' . $ex . '"><a href="#" ' . $value['target'] . ' class="menu-css ' . $linkClass . ' ' . $ex1 . '" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' . $iconWithTExt . '</a>';
+                                $html .= '<li class="' . $activeCss . ' ' . $ex . '"><a href="#" ' . $value['target'] . ' class="menu-css ' . $linkClass . ' ' . $ex1 . '" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' . $iconWithTExt . ' </a>';
                             } else
                                 $html .= '<li class="' . $activeCss . ' hover-aiu-tab"><a href="' . $link . '" ' . $value['target'] . ' class="menu-css ' . $linkClass . '">' . $iconWithTExt . '</a>';
                             if (array_key_exists('child', $value)) {
