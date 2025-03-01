@@ -105,7 +105,7 @@
                                             placeholder="Enter Total Computers">
                                     </div>
                                     <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
-                                        <label class="form-label required">Space of Computer Center</label>
+                                        <label class="form-label required">Space of  Centre</label>
                                         <input type="text" required name="space_of_computer_center" class="form-control"
                                             placeholder="Enter Space of  Computer Center">
                                     </div>

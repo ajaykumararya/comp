@@ -92,7 +92,7 @@
                     <div class="col-md-3">
                         <a href="">
                             <center>
-                                <img style="height:89px;width:283px" src="{base_url}upload/{logo}" alt="{title}"
+                                <img style="height:89px;<?=PATH == 'boardofpara' ? '' : 'width:283px'?>" src="{base_url}upload/{logo}" alt="{title}"
                                     class="img-responsive" />
                             </center>
                         </a>
@@ -409,7 +409,7 @@
                                 +91-<?= remove_91($whatsapp_number) ?></strong> <br>
                             <strong class="flex"> <i class="fa fa-phone-square"></i> +91-{number} </strong>
                         </h3> -->
-                        <img style="height: 72px;width: 225px;" src="{base_url}upload/{logo}" alt="{title}"
+                        <img style="height: 72px;<?=PATH == 'boardofpara' ? '' : 'width: 225px;'?>" src="{base_url}upload/{logo}" alt="{title}"
                             class="img-responsive" />
                         <p class="margin-tp-30"><strong><?= ES('footer_note_title', '') ?></strong></p>
                         <p style="text-align:justify; margin-right:5px; font-size:11px;">
