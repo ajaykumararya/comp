@@ -356,12 +356,13 @@ if (CHECK_PERMISSION('CENTRE_ONLY_ADD_STUDENT') && OnlyForCentre()) {
                         'icon' => array('add-notepad', 4),
                         'url' => 'student/generate-admit-card',
                     ),
-                    // array(
-                    //     'label' => 'Get Admit Card',
-                    //     'type' => 'get_student_admit_card',
-                    //     'icon' => array('tablet-text-up', 3),
-                    //     'url' => 'student/get-admit-card',
-                    // ),
+                    array(
+                        'label' => 'Examination Data',
+                        'condition' => CHECK_PERMISSION('STUDENT_EXAMINATION_FORM'),
+                        'type' => 'examination_data',
+                        'icon' => array('tablet-text-up', 3),
+                        'url' => 'student/examination-data',
+                    ),
                     array(
                         'label' => 'List Admit Card(s)',
                         'type' => 'list_student_admit_cards',

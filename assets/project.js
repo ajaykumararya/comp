@@ -58,9 +58,24 @@ $(document).on('ready', function () {
             if (res.status) {
                 // var box = $('.show-student-details');
                 box.html(res.html);
+                box.find('select').mySelect2()
                 scrollToDiv(box);
             }
             showResponseError(res)
+        });
+    })
+    $(document).on('submit','.submit-examination-form',function(ee){
+        ee.preventDefault();
+        var box = $(this).closest('section').find('.student-examination-data-response');
+        $.AryaAjax({
+            url:'website/student_examination_form_submit',
+            data:new FormData(this),
+        }).then((res) => {
+            // log(res)
+            if(res.status){
+                box.html(`<div class="alert alert-success">${res.html}</div>`);
+            }
+            showResponseError(res);
         });
     })
     $(document).on('submit', '.student-result-verification-form', function (e) {

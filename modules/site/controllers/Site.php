@@ -256,9 +256,10 @@ class Site extends Site_Controller
             'hindi_father_name' => '',
             'hindi_mother_name' => ''
         ];
+        echo $this->token->encode($data);
         // echo implode('', array_filter($data, fn($v, $k) => strpos($k, 'hindi') === false, ARRAY_FILTER_USE_BOTH));
-        $data = array_diff_key($data, array_flip(preg_grep('/^hindi/', array_keys($data))));
+        // $data = array_diff_key($data, array_flip(preg_grep('/^hindi/', array_keys($data))));
 
-print_r($data);
+// print_r($data);
     }
 }

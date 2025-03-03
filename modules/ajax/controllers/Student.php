@@ -425,6 +425,7 @@ class Student extends Ajax_Controller
         $examDone = false;
         $label = '';
         for ($i = 1; $i <= $duration; $i++) {
+            $status = 0;
             $where['duration'] = ($dType == 'month') ? $d : $i;
             $chk = $this->student_model->check_admit_card($where);
             $sub_label = $this->post('course_name') . ' <b>Admit Card </b>';
@@ -436,13 +437,31 @@ class Student extends Ajax_Controller
                 $sub_label .= "<label class='badge badge-info'>Ready to create.</label>";
             }
             $label = $dType == 'month' ? $d . ' ' . ucfirst($dType) : humnize_duration_with_ordinal($i, $dType);
+            if ($chk->num_rows()) {
+                if (CHECK_PERMISSION('STUDENT_EXAMINATION_FORM')) {
+                    $status = $chk->row('status');
+                    // $sub_label = $status;
+                    if ($chk->row('status') == 0)
+                        $sub_label = "\n<label class='badge badge-info'>Your admit card is under review..</label>";
+
+                }
+                else
+                    $status = 1;
+                if ($status) {
+                    $admitCardExam = $this->student_model->get_marksheet_using_admit_card($chk->row('admit_card_id'));
+                    $status = $admitCardExam->num_rows();
+                    if (!$admitCardExam->num_rows()) {
+                        $sub_label .= "\n<label class='badge badge-info'>$label Exam's is not create.</label>";
+                    }
+                }
+            }
             $options[] = [
                 'id' => $dType == 'month' ? $d : $i,
                 'label' => $label,
                 'sub_label' => $sub_label, //$this->post('course_name') . ' <b>Admit Card </b>' . ($chk->num_rows() ? ' Created on  <b>' . ($chk->row('session')) . '</b>' : ''),
                 'isCreated' => $examDone ? true : $chk->num_rows()
             ];
-            if (!$chk->num_rows() || $examDone) {
+            if (!$chk->num_rows() || $examDone || $status == 0) {
                 break;
             } else {
                 $admitCardExam = $this->student_model->get_marksheet_using_admit_card($chk->row('id'));

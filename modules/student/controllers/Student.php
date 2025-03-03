@@ -6,6 +6,9 @@ class Student extends MY_Controller
         redirect('student/profile');
 
     }
+    function examination_data(){
+        $this->view('examination-data');
+    }
     function my_exam()
     {
         $this->student_view('my-exam');

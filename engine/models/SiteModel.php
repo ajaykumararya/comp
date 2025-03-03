@@ -173,7 +173,9 @@ class SiteModel extends MY_Model
         }
         return $return;
     }
-
+    function get_session(){
+        return $this->db->where('status',1)->get('session');
+    }
     function get_theme_templates()
     {
         return $this->db->where('theme_id', THEME_ID)->get('theme_templates');

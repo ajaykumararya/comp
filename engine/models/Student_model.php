@@ -320,6 +320,9 @@ class Student_model extends MY_Model
     }
     function admit_card($where = [])
     {
+        if(CHECK_PERMISSION('STUDENT_EXAMINATION_FORM')){
+            $this->db->where('ac.status',isset($_GET['status']) ? $_GET['status'] : 1);
+        }
         return $this->get_switch('get_admit_card', $where);
     }
     function fetch_student_center_wise($id)

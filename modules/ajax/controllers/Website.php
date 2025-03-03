@@ -772,6 +772,67 @@ class Website extends Ajax_Controller
 
 
     */
+    function student_examination_form_submit()
+    {
+        $this->form_validation->set_rules('duration', 'Course Duration', 'required');
+        $this->form_validation->set_rules('session_id', 'Session', 'required');
+        if ($this->validation()) {
+            try {
+                $token = $this->post('token');
+                $data = $this->token->decode($token);
+                $data['status'] = 0;
+                $data['enrollment_no'] = date('Y') . '0' . mt_rand(1111, 9999);
+                $data['added_by'] = 'web';
+                $data['session_id'] = $this->post("session_id");
+                $data['duration'] = $this->post('duration');
+                $this->response('status', $this->db->insert('admit_cards', $data));
+                $this->response('html', 'Admit card request submitted successfully...');
+            } catch (Exception $e) {
+                $this->response('html', $e->getMessage());
+            }
+        }
+    }
+    function update_examination_data()
+    {
+        $this->response('status', true);
+        // $this->response('data',$this->post());
+        $this->db->where('id', $this->post('id'))
+            ->update('admit_cards', [
+                'enrollment_no' => $this->post('enrollment_no'),
+                'session_id' => $this->post('session_id'),
+                'status' => 1
+            ]);
+    }
+    function verify_examination_data()
+    {
+        $get = $this->db->where('id', $this->post('admit_card_id'))->where('status', 0)->get('admit_cards');
+        if ($get->num_rows()) {
+            $row = $get->row();
+            $this->response('status', true);
+            $session = '';
+            $ses = $this->SiteModel->get_session();
+            if ($ses->num_rows()) {
+                foreach ($ses->result() as $srow) {
+                    // if{
+                    $session .= '<option value="' . $srow->id . '" ' . ($srow->id == $row->session_id ? 'selected' : '') . '>' . $srow->title . '</option>';
+                }
+            }
+            $this->response('html', form_hidden('id', $row->id) . '
+            <div class="form-group mb-3">
+                <lable>' . $this->get_data('rollno_text') . '</lable>
+                <input required type="text" value="' . $row->enrollment_no . '" name="enrollment_no" class="form-control" placeholder="Enter ' . $this->get_data('rollno_text') . '">
+            </div>
+            <div class="form-group">
+                <lable>Session</lable>
+                <select class="form-select" name="session_id" required data-control="select2" data-placeholder="Select Session">
+                    <option></option>
+                    ' . $session . '
+                </select>
+            </div>
+        
+        ');
+        }
+    }
     function student_examination_form_verification()
     {
         $this->form_validation->set_rules('roll_no', $this->get_data('rollno_text'), 'required');
@@ -782,7 +843,7 @@ class Website extends Ajax_Controller
                 $roll_no = $this->post('roll_no');
                 $dob = $this->post("dob");
                 $status = 1;
-                $get = $this->student_model->student_result_verification([
+                $get = $this->student_model->get_student([
                     'roll_no' => $roll_no,
                     'dob' => date('d-m-Y', strtotime($dob)),
                     'status' => $status
@@ -794,42 +855,64 @@ class Website extends Ajax_Controller
                     'id' => $row->student_id
                 ]);
                 if ($checkisPassout->num_rows()) {
-                    throw new Exception('This student has completed the course.');
+                    throw new Exception('You have completed the course.');
                 }
                 $this->response('status', true);
                 $dType = $row->duration_type;//$this->post('duration_type');
                 $d = $row->duration;//$this->post('duration');
+                $course_id = $row->course_id;
+                $student_id = $row->student_id;
                 $duration = $dType == 'month' ? 1 : $d;
-                $where = ['duration_type' => $dType, 'course_id' => $this->post("course_id"), 'student_id' => $this->post("student_id")];
+                $where = ['duration_type' => $dType, 'course_id' => $course_id, 'student_id' => $student_id];
                 $options = [];
                 $examDone = false;
                 $label = '';
+                $admitCardID = 0;
                 for ($i = 1; $i <= $duration; $i++) {
+
+                    $status = 0;
                     $where['duration'] = ($dType == 'month') ? $d : $i;
+                    $this->db->select('ac.status');
                     $chk = $this->student_model->check_admit_card($where);
-                    $sub_label = $this->post('course_name') . ' <b>Admit Card </b>';
+                    $sub_label = $row->course_name . ' <b>Admit Card </b>';
                     if ($chk->num_rows()) {
                         $sub_label .= ' Created on  <b>' . ($chk->row('session')) . '</b>';
                     } elseif ($examDone) {
                         $sub_label .= "<label class='badge badge-danger'>$label Exam's is not create.</label>";
                     } else {
-                        $sub_label .= "<label class='badge badge-info'>Ready to create.</label>";
+                        $sub_label .= "<label class='badge badge-info'> Ready to create.</label>";
                     }
                     $label = $dType == 'month' ? $d . ' ' . ucfirst($dType) : humnize_duration_with_ordinal($i, $dType);
+
+                    if ($chk->num_rows()) {
+                        $status = $chk->row('status');
+                        // $sub_label = $status;
+                        if ($chk->row('status') == 0)
+                            $sub_label = "\n<label class='badge badge-info'>Your admit card is under review..</label>";
+                        else {
+                            $admitCardExam = $this->student_model->get_marksheet_using_admit_card($chk->row('admit_card_id'));
+                            $status = $admitCardExam->num_rows();
+                            if (!$admitCardExam->num_rows()) {
+                                $sub_label .= "\n<label class='badge badge-info'>$label Exam's is not create.</label>";
+                            }
+                        }
+                    }
                     $options[] = [
                         'id' => $dType == 'month' ? $d : $i,
                         'label' => $label,
                         'sub_label' => $sub_label, //$this->post('course_name') . ' <b>Admit Card </b>' . ($chk->num_rows() ? ' Created on  <b>' . ($chk->row('session')) . '</b>' : ''),
                         'isCreated' => $examDone ? true : $chk->num_rows()
                     ];
-                    if (!$chk->num_rows() || $examDone) {
+                    if (!$chk->num_rows() || $examDone || $status == 0) {
                         break;
                     } else {
-                        $admitCardExam = $this->student_model->get_marksheet_using_admit_card($chk->row('id'));
+                        $admitCardExam = $this->student_model->get_marksheet_using_admit_card($chk->row('admit_card_id'));
+
                         $examDone = $admitCardExam->num_rows() == 1;
                     }
                 }
                 $this->response('options', $options);
+                $this->set_data('options', $options);
 
 
                 $data = $get->row_array();
