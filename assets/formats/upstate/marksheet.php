@@ -138,17 +138,14 @@
                     <th class="primary lb b-tb" rowspan="2" width="36%" style="text-align:left;padding-left:35px">
                         SUBJECTS</th>
                     <th class="primary lb" colspan="2" style="font-size:11px;padding:4px">MAXIMUM MARKS</th>
-                    <th class="primary lb" colspan="2" style="font-size:11px;padding:4px">MINIMUM MARKS</th>
-                    <th class="primary lb" colspan="3" style="font-size:11px;padding:4px">OBTAINED MARKS</th>
+                    <th class="primary lb" colspan="2" style="font-size:11px;padding:4px">OBTAINED MARKS</th>
+                    <th class="primary lb b-tb" rowspan="2" style="font-size:11px;padding:4px">TOTAL </th>
                 </tr>
                 <tr>
                     <th class="primary b-tb lb" style="font-size:11px">THEORY</th>
                     <th class="primary b-tb" style="font-size:11px">PRACTICAL</th>
                     <th class="primary b-tb lb" style="font-size:11px">THEORY</th>
                     <th class="primary b-tb" style="font-size:11px">PRACTICAL</th>
-                    <th class="primary b-tb lb" style="font-size:11px">TH.</th>
-                    <th class="primary b-tb" style="font-size:11px">PR.</th>
-                    <th class="primary b-tb" style="font-size:11px">TOTAL</th>
                 </tr>
             </thead>
             <tbody>
@@ -163,11 +160,9 @@
                     </td>
                     <td class="primary lb" style="font-size:12.81px"><?=getMark($mark['theory_max_marks'])?></td>
                     <td class="primary lb" style="font-size:12.81px"><?=getMark($mark['practical_max_marks'])?></td>
-                    <td class="primary lb" style="font-size:12.81px"><?=getMark($mark['theory_min_marks'])?></td>
-                    <td class="primary lb" style="font-size:12.81px"><?=getMark($mark['practical_min_marks'])?></td>
-                    <td class="lb fw" style="font-size:12.819px"><?=getMark($mark['theory_total'])?></td>
-                    <td class="fw" style="font-size:12.81px"><?=getMark($mark['practical_total'])?></td>
-                    <td class="fw" style="font-size:12.81px"><?=getMark($mark['total'])?></td>
+                    <td class="primary lb" style="font-size:12.81px"><?=getMark($mark['theory_total'])?></td>
+                    <td class="primary lb" style="font-size:12.81px"><?=getMark($mark['practical_total'])?></td>
+                    <td class="fw lb" style="font-size:12.81px"><?=getMark($mark['total'])?></td>
                 </tr>
                 <?php
                 endforeach;
@@ -176,10 +171,10 @@
             <tfoot>
                 <tr class="fw">
                     <td class="primary fw" colspan="2" style="font-size:12.81px">TOTAL</td>
-                    <td class="primary lb fw" style="font-size:12.81px">{total_max_theory}</td>
-                    <td class="primary fw" style="font-size:12.81px">{total_max_practical}</td>
-                    <td class="primary fw lb" style="font-size:12.81px">{total_min_theory}</td>
-                    <td class="primary fw" style="font-size:12.81px">{total_min_practical}</td>
+                    <!-- <td class="primary lb fw" style="font-size:12.81px">{total_max_theory}</td>                    
+                    <td class="primary lb fw" style="font-size:12.81px">{total_max_theory}</td> -->
+                    <!-- <td class="primary lb fw" style="font-size:12.81px"></td>                     -->
+                    <td class="primary lb fw" colspan="2" style="font-size:12.81px">{total}</td>
                     <td class="fw lb" style="font-size:12.81px"></td>
                     <td></td>
                     <td class="fw" style="font-size:12.81px">{obtain_total}</td>
