@@ -102,8 +102,8 @@
     <!-- <p class="position-absolute" style="top:1%;left:80%">{createdOn}</p>
     <p class="position-absolute" style="top:1%;left:16%">{admit_card_id}</p> -->
 
-    <p class="position-absolute" style="top:18.1%;left:61.6%">{enrollment_no}</p>
-    <p class="position-absolute " style="top:18.1%;left:24.5%;width:130px">{roll_no}</p>
+    <p class="position-absolute" style="top:18.1%;left:61.6%">{roll_no}</p>
+    <p class="position-absolute " style="top:18.1%;left:24.5%;width:130px">{enrollment_no}</p>
     <p class="position-absolute " style="top:18.1%;left:82%;width:130px"><?=humnize_duration_with_ordinal($admit_card_duration,$duration_type)?></p>
     <p class="position-absolute" style="top:20.5%;left:24.4%">{course_name}</p>
     <p class="position-absolute" style="top:23%;left:24.4%">{student_name}</p>
