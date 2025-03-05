@@ -243,6 +243,8 @@ class Student_model extends MY_Model
                 $this->myWhere('sft', $condition);
                 break;
             case 'get_admit_card':
+                if(CHECK_PERMISSION('STUDENT_EXAMINATION_FORM'))
+                    $this->db->select('ac.status');
                 $this->db->select('
                                 DATE_FORMAT(ac.timestamp,"%d-%m-%Y") as createdOn,
                                 ss.title as session,

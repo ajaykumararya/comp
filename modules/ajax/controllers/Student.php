@@ -441,7 +441,7 @@ class Student extends Ajax_Controller
                 if (CHECK_PERMISSION('STUDENT_EXAMINATION_FORM')) {
                     $status = $chk->row('status');
                     // $sub_label = $status;
-                    if ($chk->row('status') == 0)
+                    if ($status == 0)
                         $sub_label = "\n<label class='badge badge-info'>Your admit card is under review..</label>";
 
                 }
