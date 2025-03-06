@@ -126,7 +126,7 @@ table thead, table tbody tr {
     </style>
 </head>
 
-<body class="position-relative">
+<body class="position-relative"> 
     <img id="back-image" class="position-relative" src="{document_path}/marksheet.jpg">
     <!-- <div class="position-absolute" id="photo">
         <img src="upload/{image}" style="width:120.3px;height:155.6px">
