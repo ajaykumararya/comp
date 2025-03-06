@@ -34,7 +34,7 @@
 <div class="student-profile py-4">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-4">
                 <div class="card shadow-sm bg-transparent border-dark">
                     <div class="card-header bg-transparent text-center">
                         <img class="profile_img" src="{student_profile}" alt="">
@@ -73,7 +73,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-8">
                 <form action="" class="submit-examination-form">
                     <?php
                     echo form_hidden(
@@ -93,7 +93,7 @@
                                 Your Form
                             </h3>
                         </div>
-                        <div class="card-body pt-0 p-0">
+                        <div class="card-body pt-0">
                             <h4 class="text-success"
                                 style="    border: 1px solid green;    border-left: 12px solid;    padding: 4px;    border-right: 12px solid;    text-align: center;    border-radius: 6px;">
                                 {course_name} - {duration} {duration_type}</h4>

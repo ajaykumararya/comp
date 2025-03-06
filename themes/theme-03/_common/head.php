@@ -15,3 +15,8 @@
 <!-- Custom styles for this template -->
 <link href="{theme_url}assets/css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="{theme_url}assets/site/css/customSlider.css">
+<style>
+    .select2-results__option.select2-results__option--highlighted .text-mute{
+        color: white!important;
+    }
+</style>

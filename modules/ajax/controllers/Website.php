@@ -878,7 +878,7 @@ class Website extends Ajax_Controller
                     if ($chk->num_rows()) {
                         $sub_label .= ' Created on  <b>' . ($chk->row('session')) . '</b>';
                     } elseif ($examDone) {
-                        $sub_label .= "<label class='badge badge-danger'>$label Exam's is not create.</label>";
+                        $sub_label .= "<label class='badge badge-danger'>$label Exam's is not create.</label>".$chk->row('id');;
                     } else {
                         $sub_label .= "<label class='badge badge-info'> Ready to create.</label>";
                     }
@@ -905,11 +905,13 @@ class Website extends Ajax_Controller
                     ];
                     if (!$chk->num_rows() || $examDone || $status == 0) {
                         break;
-                    } else {
+                    } 
+                    /*else {
                         $admitCardExam = $this->student_model->get_marksheet_using_admit_card($chk->row('admit_card_id'));
 
                         $examDone = $admitCardExam->num_rows() == 1;
                     }
+                        */
                 }
                 $this->response('options', $options);
                 $this->set_data('options', $options);
