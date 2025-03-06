@@ -6,7 +6,8 @@ class Student extends MY_Controller
         redirect('student/profile');
 
     }
-    function examination_data(){
+    function examination_data()
+    {
         $this->view('examination-data');
     }
     function my_exam()
@@ -130,9 +131,10 @@ class Student extends MY_Controller
         $tabs = [
             'overview' => ['title' => 'Account Overview', 'icon' => array('people', 2), 'url' => ''],
             'setting' => ['title' => 'Update', 'icon' => array('pencil', 3), 'url' => 'setting'],
-            'fee-record' => ['title' => 'Account Fees Record', 'icon' => array('two-credit-cart', 3), 'url' => 'fee-record'],
-            'change-password' => ['title' => 'Account Change Password', 'icon' => array('key', 2), 'url' => 'change-password']
+            'fee-record' => ['title' => 'Account Fees Record', 'icon' => array('two-credit-cart', 3), 'url' => 'fee-record']
         ];
+
+
         if ($this->center_model->isAdminOrCenter()) {
             $tabs['documents'] = [
                 'title' => 'Document(s)',
@@ -140,6 +142,16 @@ class Student extends MY_Controller
                 'url' => 'documents'
             ];
         }
+        else{
+            $tabs['fee-emis'] = [
+                'title' => 'Fee EMIs Record',
+                'icon' => ['two-credit-cart',3],
+                'url' => 'fee-emis'
+            ];
+        }
+       
+        $tabs['change-password'] = ['title' => 'Account Change Password', 'icon' => array('key', 2), 'url' => 'change-password'];
+       
         if (table_exists('manual_notifications')) {
             $tabs['notification'] = [
                 'title' => 'Notification(s)',
@@ -335,12 +347,14 @@ class Student extends MY_Controller
     {
         $this->view('registration-verification');
     }
-    function add_registration_student(){
+    function add_registration_student()
+    {
         $this->view('add-registration-student');
     }
-    function registration_edit(){
-        if($post = $this->input->post()){
-            $id = base64_decode($this->uri->segment(3,0));
+    function registration_edit()
+    {
+        if ($post = $this->input->post()) {
+            $id = base64_decode($this->uri->segment(3, 0));
             $data = [
                 'name' => $this->input->post('name'),
                 'father_name' => $this->input->post('father_name'),
@@ -361,13 +375,12 @@ class Student extends MY_Controller
                 'registration_no' => $this->input->post('registration_no'),
                 'date' => $this->input->post('date')
             ];
-            $this->db->where('id',$id)->update('students_registeration_data',$data);
-            $this->session->set_flashdata('success','Data Updated Successfully..');
+            $this->db->where('id', $id)->update('students_registeration_data', $data);
+            $this->session->set_flashdata('success', 'Data Updated Successfully..');
             redirect(current_url());
-        }
-        else{
-            $this->view('registration-edit',[
-                'isValid' => $this->uri->segment(3,0),
+        } else {
+            $this->view('registration-edit', [
+                'isValid' => $this->uri->segment(3, 0),
             ]);
         }
     }

@@ -17,10 +17,15 @@ if (PATH == 'zcc' && isset($student_docs) && $student_docs) {
 $profile_url = base_url('student-details/') . $this->token->encode([
     'student_id' => $student_id
 ]);
-if(isset($fee_emi) && $fee_emi){
-    // echo $admission_date;
-    // echo ''; 
+$remaining_fee = 0;
+if (!CHECK_PERMISSION('CO_ORDINATE_SYSTEM')) {
+    $remaining_fee = $this->student_model->remaining_course_fees([
+        'student_id' => $student_id,
+        'center_id' => $institute_id,
+        'course_id' => $course_id
+    ]);
 }
+
 ?>
 <!--begin::Navbar-->
 <div class="overflow-hidden position-relative card-rounded">
@@ -175,12 +180,19 @@ if(isset($fee_emi) && $fee_emi){
                         <div class="d-flex flex-column">
                             <!--begin::Name-->
                             <div class="d-flex align-items-center mb-2">
-                                <a href="<?=$profile_url?>" target="_blank" data-bs-custom-class="tooltip-inverse" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-original-title="View Profile Details"
+                                <a href="<?= $profile_url ?>" target="_blank" data-bs-custom-class="tooltip-inverse"
+                                    data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                    data-bs-original-title="View Profile Details"
                                     class="text-gray-900 text-hover-primary fs-2 fw-bold me-1 student-name">{student_name}</a>
-                                <a href="<?=$profile_url?>" target="_blank" data-bs-custom-class="tooltip-inverse" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-original-title="View Profile Details" class="student-status <?= ($student_profile_status) ? '' : 'd-none' ?>"><i
+                                <a href="<?= $profile_url ?>" target="_blank" data-bs-custom-class="tooltip-inverse"
+                                    data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                    data-bs-original-title="View Profile Details"
+                                    class="student-status <?= ($student_profile_status) ? '' : 'd-none' ?>"><i
                                         class="ki-outline ki-verify fs-1 text-primary"></i></a>
-                                <a href="<?=$profile_url?>" target="_blank" data-bs-custom-class="tooltip-inverse" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-original-title="View Profile Details"><i
-                                class="ki-outline ki-eye fs-1 text-success"></i></a>
+                                <a href="<?= $profile_url ?>" target="_blank" data-bs-custom-class="tooltip-inverse"
+                                    data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                    data-bs-original-title="View Profile Details"><i
+                                        class="ki-outline ki-eye fs-1 text-success"></i></a>
                             </div>
                             <!--end::Name-->
                             <!--begin::Info-->
@@ -217,7 +229,9 @@ if(isset($fee_emi) && $fee_emi){
                                     <!--begin::Number-->
                                     <div class="d-flex align-items-center flex-wrap">
                                         <div class="fs-2 fw-bold me-5" id="roll_no">{roll_no}</div>
-                                        <button class="btn btn-icon btn-sm btn-light" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-original-title="Copy" data-bs-custom-class="tooltip-inverse" data-clipboard-target="#roll_no">
+                                        <button class="btn btn-icon btn-sm btn-light" data-bs-toggle="tooltip"
+                                            data-bs-trigger="hover" data-bs-original-title="Copy"
+                                            data-bs-custom-class="tooltip-inverse" data-clipboard-target="#roll_no">
                                             <i class="ki-duotone ki-copy fs-2 text-muted"></i>
                                         </button>
                                     </div>
@@ -292,11 +306,7 @@ if(isset($fee_emi) && $fee_emi){
                                         <div class="d-flex align-items-center flex-wrap">
                                             <?= $this->ki_theme->keen_icon('bank', 5, 1, 'outline text-danger') ?>
                                             <div class="fs-2 fw-bold me-5 text-danger" data-kt-countup="true"
-                                                data-kt-countup-value="<?= $this->student_model->remaining_course_fees([
-                                                    'student_id' => $student_id,
-                                                    'center_id' => $institute_id,
-                                                    'course_id' => $course_id
-                                                ]) ?>">
+                                                data-kt-countup-value="<?= $remaining_fee ?>">
                                                 0</div>
                                         </div>
                                         <!--end::Number-->

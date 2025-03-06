@@ -1,5 +1,7 @@
 <?php
 use chillerlan\QRCode\Data\Number;
+use Picqer\Barcode\BarcodeGeneratorPNG; // PNG के लिए
+use Picqer\Barcode\BarcodeGeneratorSVG; // SVG के लिए
 
 defined('BASEPATH') or exit('No direct script access allowed');
 class Site extends Site_Controller
@@ -36,7 +38,7 @@ class Site extends Site_Controller
                         $get = $this->SiteModel->page_content($page->page_id);
                         if ($get->num_rows()) {
                             if (file_exists(THEME_PATH . 'content.php'))
-                                $html .= $this->parse('content', ['content' => $get->row('content')]+$return, true);
+                                $html .= $this->parse('content', ['content' => $get->row('content')] + $return, true);
                             else
                                 $html .= $get->row('content');
                         }
@@ -248,18 +250,40 @@ class Site extends Site_Controller
         }
         echo $checkField ? 'Done' : 'NO';
     }
+    function bar()
+    {
+
+        if ($this->uri->segment(3, 0)) {
+            $code = $this->uri->segment(3, 0);
+            $generator = new BarcodeGeneratorPNG();
+            $barcode = $generator->getBarcode($code, $generator::TYPE_CODE_128);
+
+            // Output as image
+            header('Content-Type: image/png');
+            echo $barcode;
+        } else
+            throw new Exception('Invalid Data');
+
+    }
     function test()
     {
-        $data = [
-            'id' => 1,
-            'hindi_name' => '',
-            'hindi_father_name' => '',
-            'hindi_mother_name' => ''
-        ];
-        echo $this->token->encode($data);
+        $code = '1233';
+        $generator = new BarcodeGeneratorPNG();
+        $barcode = $generator->getBarcode($code, $generator::TYPE_CODE_128);
+
+        // Output as image
+        header('Content-Type: image/png');
+        echo $barcode;
+        // $data = [
+        //     'id' => 1,
+        //     'hindi_name' => '',
+        //     'hindi_father_name' => '',
+        //     'hindi_mother_name' => ''
+        // ];
+        // echo $this->token->encode($data);
         // echo implode('', array_filter($data, fn($v, $k) => strpos($k, 'hindi') === false, ARRAY_FILTER_USE_BOTH));
         // $data = array_diff_key($data, array_flip(preg_grep('/^hindi/', array_keys($data))));
 
-// print_r($data);
+        // print_r($data);
     }
 }

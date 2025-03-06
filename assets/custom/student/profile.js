@@ -334,7 +334,11 @@ document.addEventListener('DOMContentLoaded', function (d) {
             });
         });
     });
-
+    $(document).on('click','.paynow-emi',function(e){
+        e.preventDefault();
+        var myToken = $(this).data('token');
+        alert(myToken);
+    })
     course_box.select2({
         placeholder: "Select a Course",
         templateSelection: optionFormatSecond,

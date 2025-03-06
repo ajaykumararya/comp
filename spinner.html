@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Spinner</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: radial-gradient(circle, #1a1a1a, #000000);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+        .spinner-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            overflow: hidden;
+        }
+        .pointer {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 50px solid red;
+            z-index: 10;
+            filter: drop-shadow(0 0 10px rgba(255, 0, 0, 1));
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffcc00;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ff9900, #ff3300);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(255, 102, 0, 0.8);
+        }
+        button:hover {
+            background: linear-gradient(135deg, #ffdb4d, #ff8533);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="spinner-container">
+        <div class="pointer"></div>
+        <canvas id="wheelCanvas"></canvas>
+    </div>
+    <button id="spinBtn">Spin</button>
+    <div class="result" id="resultText"></div>
+    <script>
+        const canvas = document.getElementById("wheelCanvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = 300;
+        canvas.height = 300;
+
+        let sections = ["Gold", "Silver", "Diamond", "Car", "Bike", "Gift Card","AJAY"];
+        let numSections = sections.length;
+        let angle = 0;
+        let isSpinning = false;
+
+        function drawWheel(rotationAngle = 0) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let arc = (2 * Math.PI) / numSections;
+            let startAngle = rotationAngle;
+
+            for (let i = 0; i < numSections; i++) {
+                ctx.beginPath();
+                ctx.moveTo(150, 150);
+                ctx.arc(150, 150, 130, startAngle, startAngle + arc);
+                ctx.fillStyle = i % 2 === 0 ? "#FFD700" : "#B8860B";
+                ctx.fill();
+                ctx.strokeStyle = "white";
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.closePath();
+
+                ctx.fillStyle = "white";
+                ctx.font = "16px Poppins, sans-serif";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                let textAngle = startAngle + arc / 2;
+                let x = 150 + Math.cos(textAngle) * 90;
+                let y = 150 + Math.sin(textAngle) * 90;
+                ctx.fillText(sections[i], x, y);
+                startAngle += arc;
+            }
+        }
+
+        function spinWheel() {
+            if (isSpinning) return;
+            isSpinning = true;
+            document.getElementById("resultText").innerText = "";
+
+            let randomStop = Math.floor(Math.random() * numSections);
+            let totalRotations = 5;
+            let finalAngle = totalRotations * 2 * Math.PI + (randomStop * (2 * Math.PI / numSections));
+
+            let duration = 4000;
+            let start = null;
+
+            function animateWheel(timestamp) {
+                if (!start) start = timestamp;
+                let progress = timestamp - start;
+                let easeOutRotation = finalAngle * (1 - Math.pow(1 - progress / duration, 3));
+
+                drawWheel(easeOutRotation);
+
+                if (progress < duration) {
+                    requestAnimationFrame(animateWheel);
+                } else {
+                    isSpinning = false;
+                    let sectionSize = (2 * Math.PI) / numSections;
+                    let winningIndex = Math.floor(((2 * Math.PI - (easeOutRotation % (2 * Math.PI))) / sectionSize) % numSections);
+                    // alert(winningIndex);
+                    document.getElementById("resultText").innerText = `You won: ${sections[winningIndex -1 ]}! 🎉`;
+                }
+            }
+            requestAnimationFrame(animateWheel);
+        }
+        spinBtn.addEventListener("click", spinWheel);
+        drawWheel();
+    </script>
+</body>
+</html>

@@ -110,7 +110,9 @@
     <p class="position-absolute " style="top:86%;left:16%;width:135px;">{date}</p>
     <!-- <p class="position-absolute " style="top:50%;left:31%;width:135px;font-size:12px">{examination_held}</p>
     <p class="position-absolute " style="top:50%;left:85.6%;width:135px;font-size:12px">{internship}</p> -->
-        
+    <div class="position-absolute " style="top:73.6%;left:10%;width:292px;height:40px;text-align:center" align="center">
+        <img src="{base_url}site/bar/{sr_no}" alt="" style="width:100%;height:100%">
+    </div>
 
 
 </body>

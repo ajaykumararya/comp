@@ -162,6 +162,9 @@
     $percentage = (($total / ($minTotal + $maxTotal)) * 100);
     echo $percentage > 35 ? 'PASSED IN FIRST DIVISION' : 'FAIL';
     ?></p>
+    <div class="position-absolute" style="top:91.5%;left:6.4%;width:265px;height:30px">
+        <img src="{base_url}site/bar/{serial_no}" alt="" style="width:100%;height:100%">
+    </div>
 
 
 </body>

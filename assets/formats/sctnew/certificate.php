@@ -120,7 +120,9 @@
 
     <p class="position-absolute text-center" style="left:17%;top:86%;width:82px;font-size:14px">{createdOn}</p>
 
-
+    <div class="position-absolute " style="top:93%;left:37%;width:200px;height:25px;text-align:center" align="center">
+        <img src="{base_url}site/bar/{serial_no}" alt="" style="width:100%;height:100%">
+    </div>
 </body>
 
 </html>
