@@ -161,6 +161,7 @@
         $obtain_total += $mark['total'];
     }
     $per = ($obtain_total / $total * 100);
+    $passorfail = $per >= 30 ? 'PASS' : 'FAIL';
     $grade = $this->ki_theme->grade($per);
     ?>
     <div class="position-absolute " style="top:43%;left:5%;width:90%">
@@ -169,12 +170,12 @@
                 <tr>
                     <th class="primary" rowspan="2" colspan="2" style="text-align:center;width:300px">
                         PAPERS</th>
-                    <th class="primary " colspan="2" style="padding:4px">SCHEME OF MARKS</th>
-                    <th class="primary rb" rowspan="2" style="">MARKS OBTAINED </th>
+                    <th class="primary " colspan="3" style="padding:4px"> MARKS</th>
                 </tr>
                 <tr>
                     <th class="primary b-tb " style="">MAX.</th>
                     <th class="primary b-tb " style="">MIN.</th>
+                    <th class="primary b-tb " style="">OBTAINED</th>
                 </tr>
             </thead>
             <tbody>
@@ -193,30 +194,10 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <th rowspan="2">Grade <br>
-                        {grade}
-                    </th>
-                    <th rowspan="2">Percentage <br> <?= number_format($per, 2) ?>%</th>
-                    <td>{total_max_theory}</td>
-                    <td>{total_min_theory}</td>
-                    <td><b class="fw">TOTAL</b> {obtain_total}</td>
-                </tr>
-                <tr>
-                    <td colspan="2"><b>RESULT</b>
-
-                        <?php
-
-                        $divisions = ['A' => '1ST', 'B' => '2ND', 'C' => '3RD', 'D' => '4TH'];
-                        echo isset($divisions[$grade]) ? 'PASS' : 'FAIL';
-
-                        ?>
+                    <td>Result : <b><?= $passorfail ?></b>
                     </td>
-                    <td><b class="fw">DIVISION</b>
-                        <?php
-
-                        echo isset($divisions[$grade]) ? $divisions[$grade] : 'FAIL';
-                        ?>
-                    </td>
+                    <td>Grade : <b>{grade}</b></td>
+                    <td colspan="3">Obtained Marks : <b class="fw">{obtain_total} / {total_max_theory}</b> </td>
                 </tr>
             </tfoot>
             <!-- <tfoot>

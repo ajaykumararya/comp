@@ -444,7 +444,7 @@ class Document extends MY_Controller
                     }
                     $output = $this->parse('franchise_certificate', $data);
 
-                    if (in_array(PATH, ['techno', 'haptronworld', 'beautyguru', 'sewaedu', 'softworldedu', 'nbeat', 'sct'])) {
+                    if (in_array(PATH, ['techno', 'haptronworld', 'beautyguru', 'sewaedu', 'softworldedu', 'nbeat', 'sct','iisdit'])) {
                         $this->mypdf->addPage('L');
                     }
                     $this->pdf($output);
