@@ -44,9 +44,8 @@
         #photo {
             z-index: 999;
             top: 22.1%;
-            left: 75.5%;
+            left: 78.8%;
             width: 120px !important;
-            ;
             height: 95px;
         }
 
@@ -97,15 +96,15 @@
 </head>
 
 <body class="position-relative">
-    <img id="back-image" class="position-relative" src="{document_path}/registration-form.jpg">
-    <div class="position-absolute" id="photo">
-        <img src="upload/{image}" style="width:80px;height:104px;">
+    <img id="back-image" class="position-relative" src="{document_path}/registration-form1.jpg">
+    <div class="position-absolute " id="photo">
+        <img src="upload/{image}" class="" style="width:80px;height:104px;">
     </div>
     <!-- <p class="position-absolute" style="top:1%;left:80%">{createdOn}</p>
     <p class="position-absolute" style="top:1%;left:16%">{admit_card_id}</p> -->
 
-    <p class="position-absolute" style="top:20.5%;left:50%">{center_code}</p>
-    <p class="position-absolute " style="top:20.6%;left:20.6%;">{roll_no}</p>
+    <p class="position-absolute " style="top:20.5%;left:53.5%;width:165px">{center_code}</p>
+    <p class="position-absolute " style="top:20.6%;left:20.6%;width:160px">{roll_no}</p>
     <p class="position-absolute" style="top:31%;left:33.5%">{course_name}</p>
     <p class="position-absolute" style="top:23.4%;left:33.5%">{student_name}</p>
     <p class="position-absolute" style="top:25.9%;left:33.5%">{father_name}</p>
@@ -114,12 +113,12 @@
     <p class="position-absolute text-capitlize" style="top:33.7%;left:63%">{adhar_card_no}</p>
 
     <p class="position-absolute text-capitlize" style="top:36.4%;left:33.5%">{gender}</p>
-    <p class="position-absolute text-capitlize" style="top:36.4%;left:63%">{marital_status}</p>
+    <p class="position-absolute text-capitlize " style="top:36.4%;left:62%">{marital_status}</p>
     <p class="position-absolute" style="top:39%;left:33.5%">{dob}</p>
-    <p class="position-absolute" style="top:39%;left:62%">{category}</p>
+    <p class="position-absolute " style="top:39%;left:62%">{category}</p>
     
     <p class="position-absolute" style="top:41.6%;left:33.5%">{contact_number}</p>
-    <p class="position-absolute" style="top:41.6%;left:61%;width:300px">{email}</p>
+    <p class="position-absolute " style="top:41.6%;left:61.5%;width:250px;">{email}</p>
 
     <p class="position-absolute" style="top:48.8%;left:16%;width:80%">{address}</p>
     <p class="position-absolute text-center" style="top:51.3%;left:16%;width:230px">{STATE_NAME}</p>

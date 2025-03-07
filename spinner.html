@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +17,7 @@
             font-family: 'Poppins', sans-serif;
             overflow: hidden;
         }
+
         .spinner-container {
             position: relative;
             display: flex;
@@ -29,6 +31,7 @@
             backdrop-filter: blur(8px);
             overflow: hidden;
         }
+
         .pointer {
             position: absolute;
             top: -15px;
@@ -42,12 +45,14 @@
             z-index: 10;
             filter: drop-shadow(0 0 10px rgba(255, 0, 0, 1));
         }
+
         .result {
             margin-top: 20px;
             font-size: 20px;
             font-weight: bold;
             color: #ffcc00;
         }
+
         button {
             margin-top: 20px;
             padding: 10px 25px;
@@ -61,12 +66,14 @@
             transition: 0.3s;
             box-shadow: 0 4px 10px rgba(255, 102, 0, 0.8);
         }
+
         button:hover {
             background: linear-gradient(135deg, #ffdb4d, #ff8533);
             transform: scale(1.05);
         }
     </style>
 </head>
+
 <body>
     <div class="spinner-container">
         <div class="pointer"></div>
@@ -80,14 +87,22 @@
         canvas.width = 300;
         canvas.height = 300;
 
-        let sections = ["Gold", "Silver", "Diamond", "Car", "Bike", "Gift Card","AJAY"];
+        let sections = [
+            { name: "Gold", icon: "gold.png" },
+            { name: "Silver", icon: "silver.png" },
+            { name: "Diamond", icon: "diamond.png" },
+            { name: "Car", icon: "car.png" },
+            { name: "Bike", icon: "bike.png" },
+            { name: "Watch", icon: "watch.png" }
+        ];
+        
         let numSections = sections.length;
-        let angle = 0;
         let isSpinning = false;
+        let arc = (2 * Math.PI) / numSections;
+        let allowedWinningSections = ["Gold", "Bike", "Watch"];
 
         function drawWheel(rotationAngle = 0) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            let arc = (2 * Math.PI) / numSections;
             let startAngle = rotationAngle;
 
             for (let i = 0; i < numSections; i++) {
@@ -100,7 +115,7 @@
                 ctx.lineWidth = 2;
                 ctx.stroke();
                 ctx.closePath();
-
+              
                 ctx.fillStyle = "white";
                 ctx.font = "16px Poppins, sans-serif";
                 ctx.textAlign = "center";
@@ -108,7 +123,14 @@
                 let textAngle = startAngle + arc / 2;
                 let x = 150 + Math.cos(textAngle) * 90;
                 let y = 150 + Math.sin(textAngle) * 90;
-                ctx.fillText(sections[i], x, y);
+                ctx.fillText(sections[i].name, x, y);
+              
+                let img = new Image();
+                img.src = sections[i].icon;
+                img.onload = function () {
+                   ctx.drawImage(img, x - 15, y - 15, 30, 30);
+                };
+                
                 startAngle += arc;
             }
         }
@@ -118,17 +140,19 @@
             isSpinning = true;
             document.getElementById("resultText").innerText = "";
 
-            let randomStop = Math.floor(Math.random() * numSections);
-            let totalRotations = 5;
-            let finalAngle = totalRotations * 2 * Math.PI + (randomStop * (2 * Math.PI / numSections));
+            let chosenWinningSection = allowedWinningSections[Math.floor(Math.random() * allowedWinningSections.length)];
+            let winningIndex = sections.findIndex(section => section.name === chosenWinningSection);
+            let finalAngle = (3 * Math.PI / 2) - (winningIndex * arc) - (arc / 2);
+            let totalRotations = 15;
+            let finalRotation = totalRotations * 2 * Math.PI + finalAngle;
 
-            let duration = 4000;
+            let duration = 7000;
             let start = null;
 
             function animateWheel(timestamp) {
                 if (!start) start = timestamp;
                 let progress = timestamp - start;
-                let easeOutRotation = finalAngle * (1 - Math.pow(1 - progress / duration, 3));
+                let easeOutRotation = finalRotation * (1 - Math.pow(1 - progress / duration, 3));
 
                 drawWheel(easeOutRotation);
 
@@ -136,14 +160,12 @@
                     requestAnimationFrame(animateWheel);
                 } else {
                     isSpinning = false;
-                    let sectionSize = (2 * Math.PI) / numSections;
-                    let winningIndex = Math.floor(((2 * Math.PI - (easeOutRotation % (2 * Math.PI))) / sectionSize) % numSections);
-                    // alert(winningIndex);
-                    document.getElementById("resultText").innerText = `You won: ${sections[winningIndex -1 ]}! 🎉`;
+                    document.getElementById("resultText").innerText = `You won: ${sections[winningIndex].name}! 🎉`;
                 }
             }
             requestAnimationFrame(animateWheel);
         }
+        
         spinBtn.addEventListener("click", spinWheel);
         drawWheel();
     </script>
