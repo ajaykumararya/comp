@@ -137,7 +137,7 @@ class Academic extends Ajax_Controller
                 ->get('admit_cards_subjects');
             if ($savedTimes->num_rows()) {
                 foreach ($savedTimes->result() as $row) {
-                    $subjectsArray[$row->subject_id] = (array)$row;
+                    $subjectsArray[$row->subject_id] = (array) $row;
                 }
             }
         }
@@ -187,7 +187,7 @@ class Academic extends Ajax_Controller
     function save_session_schedule()
     {
         // $this->response('data', $this->post());
-        $where = [
+        $mdata = [
             'center_id' => $this->post('center_id'),
             'course_id' => $this->post('course_id'),
             'duration' => $this->post('duration'),
@@ -195,14 +195,20 @@ class Academic extends Ajax_Controller
             'session_id' => $this->post("session_id"),
             'exam_centre_id' => $this->post('exam_centre_id')
         ];
-        $get = $this->db->where($where)->get('admit_cards_with_session');
+        $get = $this->db->where([
+            'center_id' => $mdata['center_id'],
+            'course_id' => $mdata['course_id'],
+            'duration' => $mdata['duration'],
+            'duration_type' => $mdata['duration_type']
+        ])->get('admit_cards_with_session');
         $subjectsArray = [];
         $admit_card_with_session_id = 0;
         if ($get->num_rows()) {
             $row = $get->row();
+            $this->db->where('id', $row->id)->update('admit_cards_with_session', $mdata);
             $admit_card_with_session_id = $row->id;
         } else {
-            $this->db->insert('admit_cards_with_session', $where);
+            $this->db->insert('admit_cards_with_session', $mdata);
             $admit_card_with_session_id = $this->db->insert_id();
         }
 

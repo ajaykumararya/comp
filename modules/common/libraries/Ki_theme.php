@@ -292,7 +292,7 @@ class Ki_theme
             else
                 return 'Fail';
         }
-        if (PATH == 'upstate') {
+        if (PATH == 'upstate' or PATH == 'iisdit') {
             if ($score >= 90)
                 return 'A+';
             else if ($score >= 80)

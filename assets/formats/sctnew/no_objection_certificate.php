@@ -97,8 +97,8 @@
 
     <p class="position-absolute" style="top:42.3%;left:36%;width:350px">{name}</p>
     <p class="position-absolute " style="top:45.5%;left:36%;width:200px;">{roll_no}</p>
-    <p class="position-absolute" style="top:48.5%;left:31%;width:505px;line-height:1">{course_name}</p>
-    <p class="position-absolute" style="top:52%;left:49%;width:398px;line-height:1">{institute_name}</p>
+    <p class="position-absolute " style="top:48.5%;left:31%;width:525px;line-height:1">{attained_to} to {attained_from}</p>
+    <p class="position-absolute" style="top:52%;left:49%;width:398px;line-height:1">{passing_year}</p>
     <p class="position-absolute " style="top:24.4%;left:16%;width:135px;">{sr_no}</p>
     <p class="position-absolute " style="top:24.4%;left:85%;width:135px;">{date}</p>
     <!-- <p class="position-absolute " style="top:50%;left:31%;width:135px;font-size:12px">{examination_held}</p>

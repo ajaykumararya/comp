@@ -112,21 +112,23 @@
         .test {
             border: 1px solid red
         }
-        table tbody {
-  display: block;
-  max-height: 300px;
-  overflow-y: scroll;
-}
 
-table thead, table tbody tr {
-  display: table;
-  width: 100%;
-  table-layout: fixed;
-}
+        table tbody {
+            display: block;
+            max-height: 300px;
+            overflow-y: scroll;
+        }
+
+        table thead,
+        table tbody tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
     </style>
 </head>
 
-<body class="position-relative"> 
+<body class="position-relative">
     <img id="back-image" class="position-relative" src="{document_path}/marksheet.jpg">
     <!-- <div class="position-absolute" id="photo">
         <img src="upload/{image}" style="width:120.3px;height:155.6px">
@@ -135,29 +137,30 @@ table thead, table tbody tr {
     <p class="position-absolute" style="top:2.6%;left:80%;">{issue_date}</p> -->
 
 
-    <!-- <p class="position-absolute" style="top:17%;right:15%;font-size:12px">{enrollment_no}</p> -->
-    <p class="position-absolute" style="top:18.8%;left:23.5%">{student_name}</p>
-    <p class="position-absolute" style="top:21.3%;left:23.5%">{father_name}</p>
-    <p class="position-absolute " style="top:23.6%;left:23.5%">{course_name}</p>
-    <p class="position-absolute " style="top:25.8%;left:23.5%">{center_name}</p>
+    <p class="position-absolute" style="top:31.7%;left:23.5%">{student_name}</p>
+    <p class="position-absolute" style="top:33.8%;left:23.5%">{father_name}</p>
+    <p class="position-absolute " style="top:35.9%;left:23.5%">{mother_name}</p>
+    <p class="position-absolute " style="top:37.9%;left:23.5%;width:250px;line-height:1.2">{course_name}</p>
 
-    <p class="position-absolute " style="top:18.8%;left:68.5%;width:200px">{roll_no}</p>
+    <p class="position-absolute" style="top:31.7%;left:71%;">{enrollment_no}</p>
+    <p class="position-absolute " style="top:33.8%;left:71%;width:200px">{roll_no}</p>
 
-    <p class="position-absolute " style="top:21.3%;left:68.5%">{center_code}</p>
-    <div class="position-absolute" style="bottom:7.3%;left:17%;">
-        <img src="upload/images/marksheet_{result_id}.png" style="width:90px;" alt="">
+    <p class="position-absolute text-capitlize" style="top:35.9%;left:71%">{marksheet_duration} {duration_type}</p>
+    
+    <div class="position-absolute" style="top:20%;left:7%;background:white;border:1px solid black">
+        <img src="upload/images/marksheet_{result_id}.png" style="width:100px;" alt="">
     </div>
     <?php
     $obtain_total = 0;
     $total = 0;
-    foreach($marks as $mark){
+    foreach ($marks as $mark) {
         $total += $mark['theory_max_marks'];
         $obtain_total += $mark['total'];
     }
-    $per = ($obtain_total / $total * 100 ) ;
+    $per = ($obtain_total / $total * 100);
     $grade = $this->ki_theme->grade($per);
     ?>
-    <div class="position-absolute " style="top:30%;left:10%;width:80%">
+    <div class="position-absolute " style="top:43%;left:5%;width:90%">
         <table id="first" border="0" style="width:100%;">
             <thead>
                 <tr>
@@ -167,8 +170,8 @@ table thead, table tbody tr {
                     <th class="primary rb" rowspan="2" style="">MARKS OBTAINED </th>
                 </tr>
                 <tr>
-                    <th class="primary b-tb " style="">MIN.</th>
                     <th class="primary b-tb " style="">MAX.</th>
+                    <th class="primary b-tb " style="">MIN.</th>
                 </tr>
             </thead>
             <tbody>
@@ -179,27 +182,27 @@ table thead, table tbody tr {
                     </td>
                     <td class="primary lb" style="text-align:left;padding-left:2px;font-size:12.81px">{subject_name}
                     </td>
-                    <td class="primary lb" style="font-size:12.81px">{theory_min_marks}</td>
                     <td class="primary lb" style="font-size:12.81px">{theory_max_marks}</td>
+                    <td class="primary lb" style="font-size:12.81px">{theory_min_marks}</td>
                     <td class="fw lb" style="font-size:12.81px">{total}</td>
                 </tr>
                 {/marks}
             </tbody>
             <tfoot>
                 <tr>
-                    <th>Grade</th>
-                    <th>Percentage</th>
-                    <td>{total_min_theory}</td>
+                    <th rowspan="2">Grade <br>
+                        {grade}
+                    </th>
+                    <th rowspan="2">Percentage <br> <?= number_format($per, 2) ?>%</th>
                     <td>{total_max_theory}</td>
+                    <td>{total_min_theory}</td>
                     <td><b class="fw">TOTAL</b> {obtain_total}</td>
                 </tr>
                 <tr>
-                    <td>{grade}</td>
-                    <td><?=number_format($per,2)?>%</td>
-                    <th>RESULT</th>
-                    <td>
+                    <td colspan="2"><b>RESULT</b>
+
                         <?php
-                        
+
                         $divisions = ['A' => '1ST', 'B' => '2ND', 'C' => '3RD', 'D' => '4TH'];
                         echo isset($divisions[$grade]) ? 'PASS' : 'FAIL';
 
@@ -227,9 +230,9 @@ table thead, table tbody tr {
             </tfoot> -->
         </table>
     </div>
-    <p class="position-absolute" style="bottom:22.3%;left:32%;font-size:18px">{dob}</p>
-    <p class="position-absolute" style="bottom:22.3%;left:77%;font-size:18px">{issue_date}</p>
-   <!--  <p class="position-absolute" style="bottom:23.5%;left:70%;font-size:15px;width:100px">{obtain_total}</p>
+    <!-- <p class="position-absolute" style="bottom:22.3%;left:32%;font-size:18px">{dob}</p> -->
+    <p class="position-absolute" style="bottom:15%;left:40%;">{issue_date}</p>
+    <!--  <p class="position-absolute" style="bottom:23.5%;left:70%;font-size:15px;width:100px">{obtain_total}</p>
     <p class="position-absolute" style="bottom:20.35%;left:70%;font-size:15px">{percentage} %</p> -->
 
 </body>
