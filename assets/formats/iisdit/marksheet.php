@@ -136,7 +136,7 @@
     <!-- <p class="position-absolute" style="top:2.6%;left:15%;">{result_id}</p>
     <p class="position-absolute" style="top:2.6%;left:80%;">{issue_date}</p> -->
 
-
+    <p class="position-absolute" style="top:25.3%;left:49%;">{serial_no}</p>
     <p class="position-absolute" style="top:31.7%;left:23.5%">{student_name}</p>
     <p class="position-absolute" style="top:33.8%;left:23.5%">{father_name}</p>
     <p class="position-absolute " style="top:35.9%;left:23.5%">{mother_name}</p>
@@ -146,7 +146,10 @@
     <p class="position-absolute " style="top:33.8%;left:71%;width:200px">{roll_no}</p>
 
     <p class="position-absolute text-capitlize" style="top:35.9%;left:71%">{marksheet_duration} {duration_type}</p>
-    
+    <p class="position-absolute " style="top:37.9%;left:71%;text-transform:uppercase">
+        <?= date('F Y', strtotime($from_date)) . ' - ' . date('F Y', strtotime($to_date)) ?>
+    </p>
+
     <div class="position-absolute" style="top:20%;left:7%;background:white;border:1px solid black">
         <img src="upload/images/marksheet_{result_id}.png" style="width:100px;" alt="">
     </div>

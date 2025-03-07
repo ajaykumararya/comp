@@ -165,7 +165,7 @@ class Document extends MY_Controller
                 $this->ki_theme->generate_qr($result_id, 'marksheet', current_url());
             $get_subect_numers = $this->student_model->marksheet_marks($result_id);
 
-            if (PATH == 'isdmedu') {
+            if (PATH == 'isdmedu' or PATH == 'iisdit') {
                 $certificate = $get->row_array();
                 // pre($certificate,true);
                 $admissionTime = strtotime($certificate['admission_date']);
@@ -180,7 +180,7 @@ class Document extends MY_Controller
                 $toDateString = strtotime('-1 month', $toDateString);
                 $this->set_data('to_date', date('M Y', $toDateString));
             }
-            if (in_array(PATH, ['iedct', 'techno', 'softworldedu', 'ncvetskill'])):
+            if (in_array(PATH, ['iedct', 'techno', 'softworldedu', 'ncvetskill','iisdit'])):
                 $admissionTime = strtotime($get->row('admission_date'));
                 // $this->set_data('from_date', date('M Y', $admissionTime));
                 $this->set_data('serial_no', date("Y", $admissionTime) . str_pad($this->id, 3, '0', STR_PAD_LEFT));
