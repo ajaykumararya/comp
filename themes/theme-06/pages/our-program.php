@@ -1,3 +1,12 @@
+<style>
+    .our-program .slick-track{
+        padding: 30px 0 !important;
+    }
+    .our-program .content-box{
+        border-color: white!important;
+        box-shadow: 0 0 10px 0 gray!important;
+    }
+</style>
 <section class="academic">
     <div class="container">
         <div class="row">
@@ -9,7 +18,7 @@
                         <div class="col-lg-12 col-md-12">
                             <div class="slider-box">
                                 <div class="tslider">
-                                    <div class="responsive">
+                                    <div class="responsive our-program">
                                         <?php
                                         $data = $this->SiteModel->get_contents($type);
                                         if ($data->num_rows()):
@@ -17,11 +26,11 @@
                                             foreach ($data->result() as $row):
                                                 ?>
                                                 <div class="slide-marquee">
-                                                    <div class="content-box">
+                                                    <div class="content-box" style="border-radius:200px / 20px">
                                                         <img src="{base_url}upload/<?=$row->field2?>"
-                                                            class="img-responsive" style="height:150px;width:100%" alt="<?=$row->field1?>">
-                                                        <div class="heading text-center" id="request_call">
-                                                            <h4><a href="#"><?=$row->field1?></a></h4>
+                                                            class="img-responsive" style="height:200px;width:100%;border-radius:200px / 20px" alt="<?=$row->field1?>">
+                                                        <div class="heading text-center" id="request_call" style="margin:0">
+                                                            <h4 style="    font-size: 15px;    font-weight: bold;    text-transform: uppercase;"><a href="#"><?=$row->field1?></a></h4>
                                                         </div>
                                                     </div>
                                                 </div>

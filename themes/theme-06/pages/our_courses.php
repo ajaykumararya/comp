@@ -14,13 +14,24 @@
                 $title = $row->title;
 
                 echo '<div class="col-md-3 mb-20">
-                            <div class="card">
+                            <div class="card" style="border:2px solid var(--primary-color)">
                                 <img class="card-img-top img-responsive" src="{base_url}upload/' . $row->image . '"
                                     alt="' . $title . '" style="height:200px">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">' . $title . '</h5>
-                                    <br>
-                                    <a href="' . $row->button_link . '" class="btn btn-primary btn-sm"><i class="fa fa-arrow-right"></i> ' . $row->button_text . '</a>
+                                <div class="card-body text-center" style="padding:0;position: relative;padding-top: 19px;">
+                                    <h5 class="card-title" style="background: var(--primary-color);margin: 0;color: white;padding: 9px;font-size: 15px;position: absolute;top: -21%;z-index: 999;width: 98%;border-radius: 0 2px 2px 0;">' . $title . '</h5>
+                                    <div class="row" style="margin:10px 0;padding:0">
+                                        <div class="col-md-6">
+                                            <b> <i class="fa fa-graduation-cap"></i> Eligibility</b>
+                                            <div>'.$row->description.'</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <b> <i class="fa fa-clock"></i> Duration</b>
+                                            <div>'.$row->duration.'</div>
+                                        </div>
+                                        <div class="col-md-12" style="margin-top:5px">
+                                                <a href="' . $row->button_link . '" class="btn btn-warning btn-sm"><i class="fa fa-arrow-right"></i> ' . $row->button_text . '</a>
+                                        </div>                                    
+                                    </div>
                                 </div>
                             </div>
                         </div>';

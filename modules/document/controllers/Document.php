@@ -161,8 +161,14 @@ class Document extends MY_Controller
             $course_id = $row->course_id;
             // pre($get->row(),true);
             $result_id = $row->result_id;
-            if (!$this->return)
-                $this->ki_theme->generate_qr($result_id, 'marksheet', current_url());
+            if (!$this->return) {
+                if (CHECK_PERMISSION('FRONT_MARKSHEET_QR')) {
+                    $this->ki_theme->generate_qr($result_id, 'front_marksheet', base_url('marksheet-verification/' . $this->token->encode([
+                        'id' => $result_id
+                    ])));
+                } else
+                    $this->ki_theme->generate_qr($result_id, 'marksheet', current_url());
+            }
             $get_subect_numers = $this->student_model->marksheet_marks($result_id);
 
             if (PATH == 'isdmedu' or PATH == 'iisdit') {
@@ -180,7 +186,7 @@ class Document extends MY_Controller
                 $toDateString = strtotime('-1 month', $toDateString);
                 $this->set_data('to_date', date('M Y', $toDateString));
             }
-            if (in_array(PATH, ['iedct', 'techno', 'softworldedu', 'ncvetskill','iisdit'])):
+            if (in_array(PATH, ['iedct', 'techno', 'softworldedu', 'ncvetskill', 'iisdit'])):
                 $admissionTime = strtotime($get->row('admission_date'));
                 // $this->set_data('from_date', date('M Y', $admissionTime));
                 $this->set_data('serial_no', date("Y", $admissionTime) . str_pad($this->id, 3, '0', STR_PAD_LEFT));
@@ -444,7 +450,7 @@ class Document extends MY_Controller
                     }
                     $output = $this->parse('franchise_certificate', $data);
 
-                    if (in_array(PATH, ['techno', 'haptronworld', 'beautyguru', 'sewaedu', 'softworldedu', 'nbeat', 'sct','iisdit'])) {
+                    if (in_array(PATH, ['techno', 'haptronworld', 'beautyguru', 'sewaedu', 'softworldedu', 'nbeat', 'sct', 'iisdit'])) {
                         $this->mypdf->addPage('L');
                     }
                     $this->pdf($output);
@@ -505,8 +511,8 @@ class Document extends MY_Controller
             ->from('students as s')
             ->join($table . ' as table', 'table.student_id = s.id')
             ->join('course as c', 'c.id = s.course_id')
-            ->join('centers as ce', 'ce.id = s.center_id','left')
-            ->join('course_category as cc', 'cc.id = c.category_id','left')
+            ->join('centers as ce', 'ce.id = s.center_id', 'left')
+            ->join('course_category as cc', 'cc.id = c.category_id', 'left')
             ->where('table.id', $id)
             ->get();
         return $data;

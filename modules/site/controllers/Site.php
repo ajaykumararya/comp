@@ -267,13 +267,19 @@ class Site extends Site_Controller
     }
     function test()
     {
-        $code = '1233';
-        $generator = new BarcodeGeneratorPNG();
-        $barcode = $generator->getBarcode($code, $generator::TYPE_CODE_128);
 
-        // Output as image
-        header('Content-Type: image/png');
-        echo $barcode;
+        
+        $url = base_url('marksheet_print/'.$this->token->encode(['id' => 2]));
+        echo $this->ki_theme->generate_qr(2,'front_marksheet',$url);
+
+
+        // $code = '1233';
+        // $generator = new BarcodeGeneratorPNG();
+        // $barcode = $generator->getBarcode($code, $generator::TYPE_CODE_128);
+
+        // // Output as image
+        // header('Content-Type: image/png');
+        // echo $barcode;
         // $data = [
         //     'id' => 1,
         //     'hindi_name' => '',

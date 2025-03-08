@@ -425,7 +425,7 @@ class Ki_theme
             throw new Exception('Please Enter Data to generate QR.');
         }
         $options = new QROptions([
-            'version' => 5,  // QR code version (adjust as needed)
+            'version' => 10,  // QR code version (adjust as needed)
             'outputType' => QRCode::OUTPUT_IMAGE_PNG,
             'eccLevel' => QRCode::ECC_L,
             'imageBase64' => $return,
