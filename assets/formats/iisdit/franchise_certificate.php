@@ -63,7 +63,9 @@
         }
     </style>
 </head>
-
+<?php
+$this->ki_theme->generate_qr($certificate_id, 'franchise_certificate', current_url());
+?>
 <body class="position-relative">
     <img id="back-image" class="position-relative" src="{document_path}/franchise-certificate.jpg">
     <div class="position-absolute" id="photo" style="background:white;border:1px solid black">
