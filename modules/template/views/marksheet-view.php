@@ -12,7 +12,7 @@
                 ?>
                 <tr>
                     <td rowspan="3" width="150px">
-                        <img src="{assets}{image}" style="width:100%;height:150px">
+                        <img src="{assets}{image}" style="width:150px;height:150px">
                     </td>
                     <th colspan="2">Institute Name</th>
                     <td colspan="6">{center_name}</td>
