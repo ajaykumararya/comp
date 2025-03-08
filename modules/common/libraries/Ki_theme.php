@@ -416,7 +416,7 @@ class Ki_theme
             return $this->CI->db->where('seen', $seen)->where($where)->get('manual_notifications')->num_rows();
         return;
     }
-    function generate_qr($id = 0, $type = '', $data = '', $return = false)
+    function generate_qr($id = 0, $type = '', $data = '', $return = false,$version = 5)
     {
         $png = "upload/images/{$type}_{$id}.png";
         if (file_exists($png))
@@ -425,7 +425,7 @@ class Ki_theme
             throw new Exception('Please Enter Data to generate QR.');
         }
         $options = new QROptions([
-            'version' => 10,  // QR code version (adjust as needed)
+            'version' => $version,  // QR code version (adjust as needed)
             'outputType' => QRCode::OUTPUT_IMAGE_PNG,
             'eccLevel' => QRCode::ECC_L,
             'imageBase64' => $return,
