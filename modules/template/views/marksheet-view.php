@@ -1,12 +1,4 @@
-<div class="row mb-3">
-    <div class="col-md-8"></div>
-    <div class="col-md-4 btn-wrapper btn-wrapper2">
-
-        <button class="btn btn-primary print-btn" style="width:150px"><span><i class="fa fa-print"></i>
-                Print</span></button>
-    </div>
-</div>
-<div id="printableContent">
+<div id="printableContent" class="mb-3">
 
     <div class="col-md-12 p-0 row">
         <div class="table-responsive">
@@ -19,8 +11,8 @@
                 endif;
                 ?>
                 <tr>
-                    <td rowspan="3" width="200px">
-                        <img src="{assets}{image}" style="width:100%;height:100%">
+                    <td rowspan="3" width="150px">
+                        <img src="{assets}{image}" style="width:100%;height:150px">
                     </td>
                     <th colspan="2">Institute Name</th>
                     <td colspan="6">{center_name}</td>
@@ -110,5 +102,14 @@
                 </tr>
             </table>
         </div>
+    </div>
+</div>
+
+<div class="row" style="margin-bottom:10px">
+    <div class="col-md-8"></div>
+    <div class="col-md-4 btn-wrapper btn-wrapper2">
+
+        <button class="btn btn-primary print-btn" style="width:150px"><span><i class="fa fa-print"></i>
+                Print</span></button>
     </div>
 </div>

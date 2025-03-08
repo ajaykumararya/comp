@@ -160,7 +160,7 @@ class Site extends Site_Controller
             $this->set_data($data);
             $this->set_data('isPrimary', false);
             // $this->load->module('document');
-            $html = '<div class="container pt-3">' . $this->template('marksheet-view') . '</div>';
+            $html = '<div class="container pt-3" style="'.(THEME == 'theme-06' ? 'margin-top:160px':'').'">' . $this->template('marksheet-view') . '</div>';
             // $this->render($html, 'content');
             $this->render(
                 'schema',
