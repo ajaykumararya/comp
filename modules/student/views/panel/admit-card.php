@@ -6,8 +6,8 @@ if ($get->num_rows()) {
         // pre($row);
         ?>
         <div class="col-md-6">
-            <a href="{base_url}admit-card/<?= $this->ki_theme->encrypt( $row->admit_card_id) ?>" target="_blank"
-                class="card card-image border-hover-primary ">
+            <a href="{base_url}admit-card/<?= $this->ki_theme->encrypt($row->admit_card_id) ?>" target="_blank"
+                class="card card-image border-hover-primary mb-4">
                 <!--begin::Card header-->
                 <div class="card-header border-0 pt-9 ">
                     <!--begin::Card Title-->
@@ -56,6 +56,9 @@ if ($get->num_rows()) {
                     <!--end::Description-->
                     <!--begin::Info-->
                     <div class="d-flex flex-wrap mb-5">
+                        <?php
+                        if(!empty($exam_date)):
+                        ?>
                         <!--begin::Due-->
                         <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3">
                             <div class="fs-6 text-gray-800 fw-bold">
@@ -64,6 +67,9 @@ if ($get->num_rows()) {
                             <div class="fw-semibold text-gray-500">Exam Date & Time</div>
                         </div>
                         <!--end::Due-->
+                        <?php
+                        endif;
+                        ?>
                         <!--begin::Budget-->
                         <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3 me-7">
                             <div class="fs-6 text-gray-800 fw-bold">
@@ -84,15 +90,18 @@ if ($get->num_rows()) {
                     <!--end::Info-->
                 </div>
                 <?php
-                if(CHECK_PERMISSION('SHOW_STUDENT_DOCUMENT_BUTTONS')):
-                ?>
-                <!--end:: Card body-->
-                <div class="card-footer text-end">
-                    <button class="btn btn-primary"><i class="fa fa-eye"></i> View Admit card</button>
-                </div>
-                <?php
+                if (CHECK_PERMISSION('SHOW_STUDENT_DOCUMENT_BUTTONS')):
+                    ?>
+                    <!--end:: Card body-->
+                    <div class="card-footer text-end">
+                        <button class="btn btn-primary"><i class="fa fa-eye"></i> View Admit card</button>
+                    </div>
+                    <?php
                 endif;
                 ?>
+                <div class="card-footer p-3" align="center">
+                    {view_button}
+                </div>
             </a>
         </div>
         <?php

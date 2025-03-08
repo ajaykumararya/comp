@@ -384,5 +384,8 @@ class Student extends MY_Controller
             ]);
         }
     }
+    function other_document(){
+        $this->student_view('other_documents');
+    }
 }
 ?>

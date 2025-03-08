@@ -243,7 +243,7 @@ class Student_model extends MY_Model
                 $this->myWhere('sft', $condition);
                 break;
             case 'get_admit_card':
-                if(CHECK_PERMISSION('STUDENT_EXAMINATION_FORM'))
+                if (CHECK_PERMISSION('STUDENT_EXAMINATION_FORM'))
                     $this->db->select('ac.status');
                 $this->db->select('
                                 DATE_FORMAT(ac.timestamp,"%d-%m-%Y") as createdOn,
@@ -289,6 +289,11 @@ class Student_model extends MY_Model
                 } else
                     $this->myWhere('sc', $condition);
                 break;
+            case 'other_certificate':
+                $this->db->select('o_cert.id as cert_id,o_cert.*');
+                $this->db->join($certificate.' as o_cert', 'o_cert.student_id = s.id');
+                $this->db->where('s.id', $student_id);
+                break;
         }
         return $this->db->get();
     }
@@ -322,8 +327,8 @@ class Student_model extends MY_Model
     }
     function admit_card($where = [])
     {
-        if(CHECK_PERMISSION('STUDENT_EXAMINATION_FORM')){
-            $this->db->where('ac.status',isset($_GET['status']) ? $_GET['status'] : 1);
+        if (CHECK_PERMISSION('STUDENT_EXAMINATION_FORM')) {
+            $this->db->where('ac.status', isset($_GET['status']) ? $_GET['status'] : 1);
         }
         return $this->get_switch('get_admit_card', $where);
     }

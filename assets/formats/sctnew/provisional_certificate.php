@@ -106,7 +106,7 @@
     <!-- <p class="position-absolute " style="top:50%;left:31%;width:135px;font-size:12px">{examination_held}</p>
     <p class="position-absolute " style="top:50%;left:85.6%;width:135px;font-size:12px">{internship}</p> -->
     <p class="position-absolute"
-        style="left:10%;width:80%;top:41%;font-size:17px;text-indent: 70px; text-align:justify;">
+        style="left:10%;width:80%;top:41%;font-size:17px;text-indent: 70px; text-align:center;">
         <i>This is Certify that Mr./Ms. </i><strong
             style="font-size:19px;font-weight:bold;display:inline">{name}&nbsp;&nbsp;&nbsp;&nbsp;{father_name}</strong>
         <i>has<br><br> qualified For The

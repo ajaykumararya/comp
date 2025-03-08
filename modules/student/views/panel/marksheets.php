@@ -7,7 +7,7 @@ if ($get->num_rows()) {
 
         ?>
         <div class="col-md-6">
-            <a href="{base_url}marksheet/<?= $this->ki_theme->encrypt( $row->result_id ) ?>" target="_blank" class="card card-image border-hover-primary ">
+            <a href="{base_url}marksheet/<?= $this->ki_theme->encrypt( $row->result_id ) ?>" target="_blank" class="card card-image border-hover-primary mb-4">
                 <!--begin::Card header-->
                 <div class="card-header border-0 pt-9 ">
                     <!--begin::Card Title-->
@@ -95,6 +95,9 @@ if ($get->num_rows()) {
                 <?php
                 endif;
                 ?>
+                <div class="card-footer p-3" align="center">
+                    {view_button}
+                </div>
             </a>
         </div>
         <?php

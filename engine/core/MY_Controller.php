@@ -61,6 +61,7 @@ class MY_Controller extends MX_Controller
             'current_url' => $this->my_current_url(),
             'publish_button' => $this->ki_theme->publish_button(),
             'search_button' => $this->ki_theme->save_button('Search', 'calendar-search', 4),
+            'view_button' => $this->ki_theme->save_button('View', 'eye', 4),
             'save_button' => $this->ki_theme->set_class('save-btn')->save_button('Save', 'save-2'),
             'update_button' => $this->ki_theme->set_class('save-btn')->save_button('Save Changes', 'save-2'),
             'send_button' => $this->ki_theme->set_class('sen-btn')->save_button('Send', 'send'),

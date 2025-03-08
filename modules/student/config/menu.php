@@ -50,6 +50,13 @@ $config['dashboard'] = array(
             'url' => 'student/study-material',
             'icon' => array('book', 5)
         ),
+        array(
+            'label' => 'Other Document(s)',
+            'type' => 'other_document',
+            'url' => 'student/other-document',
+            'icon' => array('file', 5),
+            'condition' => CHECK_PERMISSION('NON_OBJECTION_CERTIFICATE') OR CHECK_PERMISSION('MIGRATION_CERTIFICATE') OR CHECK_PERMISSION('PROVISIONAL_CERTIFICATE')
+        )
     )
 );
 
