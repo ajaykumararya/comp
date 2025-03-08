@@ -171,7 +171,7 @@
                                         <img src="<?= logo() ?>" alt="" class="img-responsive">
                                     </div>
                                     <div class="address">
-                                        <p><span><i class="fa fa-map-marker"></i></span> &nbsp;:&nbsp;&nbsp;{address}
+                                        <p><span><i class="fa fa-map-marker"></i></span> &nbsp;:&nbsp;&nbsp;<div>{address}</div>
                                         </p>
                                         <p><span><i class="fa fa-phone"></i></span>&nbsp;:&nbsp;&nbsp;{number}</p>
                                         <p><span><i class="fa fa-envelope-o"></i></span>&nbsp;:&nbsp;&nbsp; {email}

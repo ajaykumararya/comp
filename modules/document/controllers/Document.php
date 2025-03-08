@@ -410,8 +410,10 @@ class Document extends MY_Controller
                 'duration' => $certificate['duration'],
                 'duration_type' => $certificate['duration_type'],
             ]);
-
-            $this->ki_theme->generate_qr($this->id, 'student_certificate', current_url());
+            if (CHECK_PERMISSION('FRONT_CERTIFICATE_QR'))
+                $this->ki_theme->generate_qr($this->id, 'front_student_certificate', base_url('en-verification/' . $this->token->encode(['id' => $this->id])));
+            else
+                $this->ki_theme->generate_qr($this->id, 'student_certificate', current_url());
             if (in_array(PATH, ['haptronworld', 'sewaedu', 'beautyguru', 'pces', 'ncvetskill', 'sct'])) {
                 $certificate['serial_no'] = (50000 + $this->id);
                 $this->mypdf->addPage('L');

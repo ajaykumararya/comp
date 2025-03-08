@@ -151,7 +151,7 @@
     </p>
 
     <div class="position-absolute" style="top:20%;left:7%;background:white;border:1px solid black">
-        <img src="upload/images/marksheet_{result_id}.png" style="width:100px;" alt="">
+        <img src="upload/images/front_marksheet_{result_id}.png" style="width:100px;" alt="">
     </div>
     <?php
     $obtain_total = 0;

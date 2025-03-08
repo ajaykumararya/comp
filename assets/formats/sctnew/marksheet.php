@@ -117,7 +117,7 @@
     </p>
     <!-- <p class="position-absolute " style="top:39.6%;left:36.5%">{dob}</p> -->
     <div class="position-absolute" style="top:3.1%;left:3.8%;">
-        <img src="upload/images/front_marksheet_{result_id}.png" style="width:90px;height:90px;" alt="">
+        <img src="upload/images/marksheet_{result_id}.png" style="width:90px;height:90px;" alt="">
     </div>
     <div class="position-absolute " style="top:54%;left:6.5%;width:86.5%">
         <table id="first" style="width:100%">

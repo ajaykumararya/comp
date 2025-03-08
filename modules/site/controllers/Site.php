@@ -144,6 +144,39 @@ class Site extends Site_Controller
         // } else
         //     $this->error_404();
     }
+    function student_varify()
+    {
+        $token = $this->uri->segment(2);
+        try {
+            $this->token->decode($token);
+            // pre($this->token->data());
+            $id = $this->token->data('id');
+            $get = $this->student_model->get_student_via_id($id);
+            if ($get->num_rows()) {
+                $data = $get->row_array();
+                // pre($data, true);
+                $this->set_data($data);
+                $this->set_data('contact_number', maskMobileNumber($data['contact_number']));
+
+                $this->set_data('admission_status', $data['admission_status'] ? label($this->ki_theme->keen_icon('verify text-white') . ' Verified Student') : label('Un-verified Student', 'danger'));
+                $this->set_data('student_profile', $data['image'] ? base_url('upload/' . $data['image']) : base_url('assets/media/student.png'));
+
+                $this->set_data('isPrimary', false);
+                // $this->load->module('document');
+                $html = '<div class="container pt-3" style="' . (THEME == 'theme-06' ? 'margin-top:160px' : '') . '">' . $this->template('student-profile-card') . '</div>';
+                // $this->render($html, 'content');
+                $this->render(
+                    'schema',
+                    ['content' => $html]
+                );
+                // $this->response('html', $this->template('student-profile-card'));
+            } else {
+                throw new Exception('');
+            }
+        } catch (Exception $e) {
+            $this->error_404();
+        }
+    }
     function marksheet_print()
     {
         $token = $this->uri->segment(2);
@@ -160,7 +193,7 @@ class Site extends Site_Controller
             $this->set_data($data);
             $this->set_data('isPrimary', false);
             // $this->load->module('document');
-            $html = '<div class="container pt-3" style="'.(THEME == 'theme-06' ? 'margin-top:160px':'').'">' . $this->template('marksheet-view') . '</div>';
+            $html = '<div class="container pt-3" style="' . (THEME == 'theme-06' ? 'margin-top:160px' : '') . '">' . $this->template('marksheet-view') . '</div>';
             // $this->render($html, 'content');
             $this->render(
                 'schema',
@@ -268,10 +301,12 @@ class Site extends Site_Controller
     function test()
     {
 
-        
-        $url = base_url('marksheet_print/'.$this->token->encode(['id' => 2]));
-        echo $this->ki_theme->generate_qr(2,'front_marksheet',$url);
 
+        // $url = base_url('marksheet_print/' . $this->token->encode(['id' => 2]));
+        // echo $this->ki_theme->generate_qr(2, 'front_marksheet', $url);
+        redirect(base_url('en-verification/' . $this->token->encode([
+            'id' => 20
+        ])));
 
         // $code = '1233';
         // $generator = new BarcodeGeneratorPNG();

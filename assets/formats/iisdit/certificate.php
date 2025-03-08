@@ -95,7 +95,7 @@
 <body class="position-relative">
     <img id="back-image" class="position-relative" src="{document_path}/certificate.jpg">
     <div class="position-absolute" id="photo">
-        <img src="upload/images/student_certificate_{certiticate_id}.png" style="width: 130px;height:130px">
+        <img src="upload/images/front_student_certificate_{certiticate_id}.png" style="width: 130px;height:130px">
     </div>
     <div class="position-absolute" id="photo1">
         <img src="upload/{image}" style="width:110.8px;height:130px">
