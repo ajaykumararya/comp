@@ -165,7 +165,7 @@ class Document extends MY_Controller
                 if (CHECK_PERMISSION('FRONT_MARKSHEET_QR')) {
                     $this->ki_theme->generate_qr($result_id, 'front_marksheet', base_url('marksheet-verification/' . $this->token->encode([
                         'id' => $result_id
-                    ])),false,10);
+                    ])), false, 10);
                 } else
                     $this->ki_theme->generate_qr($result_id, 'marksheet', current_url());
             }
@@ -411,7 +411,7 @@ class Document extends MY_Controller
                 'duration_type' => $certificate['duration_type'],
             ]);
             if (CHECK_PERMISSION('FRONT_CERTIFICATE_QR'))
-                $this->ki_theme->generate_qr($this->id, 'front_student_certificate', base_url('en-verification/' . $this->token->encode(['id' => $certificate['certiticate_id']])),false,10);
+                $this->ki_theme->generate_qr($this->id, 'front_student_certificate', base_url('en-verification/' . $this->token->encode(['id' => $this->id])), false, 10);
             else
                 $this->ki_theme->generate_qr($this->id, 'student_certificate', current_url());
             if (in_array(PATH, ['haptronworld', 'sewaedu', 'beautyguru', 'pces', 'ncvetskill', 'sct'])) {
