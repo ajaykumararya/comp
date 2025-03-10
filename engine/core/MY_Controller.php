@@ -32,7 +32,7 @@ class MY_Controller extends MX_Controller
                 'registration_certificate_form' => 'Registration Certificate Form'
             ]);
         }
-        if (CHECK_PERMISSION('STUDENT_EXAMINATION_FORM')){
+        if (CHECK_PERMISSION('STUDENT_EXAMINATION_FORM')) {
             append_items('forms', [
                 'examination_form' => 'Examination Form',
             ]);
@@ -459,6 +459,11 @@ class Site_Controller extends MY_Controller
     function __construct()
     {
         parent::__construct();
+        $favicon = ES('favicon', false);
+        if (!$favicon) {
+            $favicon = ES('logo');
+        }
+        $this->set_data('favicon_file', $favicon);
         $this->set_data('link_css', $this->parse('_common/head', [], true));
         $this->set_data('YEAR', date('Y'));
         $this->set_data('copyright', ' All right reserved designed by
@@ -474,11 +479,8 @@ class Site_Controller extends MY_Controller
             $this->set_data('page_name', $this->pageData['label']);
         }
         $this->init_setting();
-        $favicon = $this->get_data('favicon');
-        if(!$favicon){
-            $favicon = $this->get_data('logo');
-        $this->set_data('favicon_file',$favicon);
-        }
+
+
         $this->set_data('head', $this->parse('head', [], true));
     }
     function company_name()

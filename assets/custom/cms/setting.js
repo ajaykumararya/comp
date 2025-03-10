@@ -11,6 +11,12 @@ document.addEventListener('DOMContentLoaded', function (e) {
             notEmpty: { message: 'Please Select Image..' }
         }
     })
+    var favvalidation = MyFormValidation(favicon_form);
+    favvalidation.addField('image', {
+        validators: {
+            notEmpty: { message: 'Please Select Image..' }
+        }
+    })
     // log(validation);
     logo_form.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -41,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
         const file = fileInput.files[0];
         fromdata.append('image', file);
         $.AryaAjax({
-            validation: validation,
+            validation: favvalidation,
             url: 'cms/update-favicon',
             data: (fromdata),
             success_message: 'Favicon Uploaded Successfully.',
