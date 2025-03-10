@@ -151,7 +151,7 @@ class Site extends Site_Controller
             $this->token->decode($token);
             // pre($this->token->data());
             $id = $this->token->data('id');
-            $get = $this->student_model->get_student_via_id($id);
+            $get = $this->student_model->student_certificates(['id' => $id]);
             if ($get->num_rows()) {
                 $data = $get->row_array();
                 // pre($data, true);
@@ -163,7 +163,7 @@ class Site extends Site_Controller
 
                 $this->set_data('isPrimary', false);
                 // $this->load->module('document');
-                $html = '<div class="container pt-3" style="' . (THEME == 'theme-06' ? 'margin-top:160px' : '') . '">' . $this->template('student-profile-card') . '</div>';
+                $html = '<div class="container pt-3" style="' . (THEME == 'theme-06' ? 'margin-top:170px;margin-bottom:20px' : '') . '">' . $this->template('student-profile-card') . '</div>';
                 // $this->render($html, 'content');
                 $this->render(
                     'schema',
