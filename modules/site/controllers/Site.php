@@ -163,7 +163,7 @@ class Site extends Site_Controller
 
                 $this->set_data('isPrimary', false);
                 // $this->load->module('document');
-                $html = '<div class="container pt-3" style="' . (THEME == 'theme-06' ? 'margin-top:170px;margin-bottom:20px' : '') . '">' . $this->template('student-profile-card') . '</div>';
+                $html = '<div class="container pt-3" style="' . (THEME == 'theme-06' ? 'margin-top:160px' : 'margin-top:20px;margin-bottom:20px') . '">' . $this->template('student-profile-card') . '</div>';
                 // $this->render($html, 'content');
                 $this->render(
                     'schema',
