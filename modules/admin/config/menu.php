@@ -730,6 +730,12 @@ $config['cms_setting'] = array(
             'type' => 'cms_setting',
             'icon' => array('setting-2', 4),
             'url' => 'cms/setting'
+        ),        
+        array(
+            'label' => 'SEO Setting',
+            'type' => 'seo_setting',
+            'icon' => array('setting-4', 4),
+            'url' => 'cms/seo-setting'
         ),
         array(
             'label' => 'Gallery Image',

@@ -245,7 +245,21 @@ function CHECK_PERMISSION($type)
 {
     return defined($type) ? constant($type) === 'yes' : false;
 }
-
+function meta_keywords()
+{
+    $keywords = '';
+    $keyword_data = ES('meta_keywords', 0);
+    if ($keyword_data) {
+        $data = json_decode($keyword_data, true);
+        if (is_array($data)) {
+            // pre($data);
+            foreach ($data as $keyword)
+                $keywords .= $keyword['value'] . ',';
+            $keywords = rtrim($keywords, ',');
+        }
+    }
+    return $keywords;
+}
 function search_file($folder_path, $file_name)
 {
 

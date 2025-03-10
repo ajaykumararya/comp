@@ -39,6 +39,9 @@ class Cms extends MY_Controller
     function setting(){
         $this->view('setting');    
     }
+    function seo_setting(){
+        $this->view('seo_setting');
+    }
     function slider(){
         $this->view('slider');
     }

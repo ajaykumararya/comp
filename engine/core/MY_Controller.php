@@ -474,6 +474,11 @@ class Site_Controller extends MY_Controller
             $this->set_data('page_name', $this->pageData['label']);
         }
         $this->init_setting();
+        $favicon = $this->get_data('favicon');
+        if(!$favicon){
+            $favicon = $this->get_data('logo');
+        $this->set_data('favicon_file',$favicon);
+        }
         $this->set_data('head', $this->parse('head', [], true));
     }
     function company_name()

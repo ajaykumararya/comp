@@ -40,31 +40,31 @@ if (myeditor.length) {
         var cmsURL = window.location.pathname;     // your URL could look like "/scripts/my_file_browser.php"
         var searchString = window.location.search; // possible parameters
         if (searchString.length < 1) {
-          // add "?" to the URL to include parameters (in other words: create a search string because there wasn't one before)
-          searchString = "?";
+            // add "?" to the URL to include parameters (in other words: create a search string because there wasn't one before)
+            searchString = "?";
         }
         // newer writing style of the TinyMCE developers for tinyMCE.openWindow
         tinyMCE.openWindow({
-          file: cmsURL + searchString + "&type=" + type, // PHP session ID is now included if there is one at all
-          title: "File Browser",
-          width: 420,  // Your dimensions may differ - toy around with them!
-          height: 400,
-          close_previous: "no"
+            file: cmsURL + searchString + "&type=" + type, // PHP session ID is now included if there is one at all
+            title: "File Browser",
+            width: 420,  // Your dimensions may differ - toy around with them!
+            height: 400,
+            close_previous: "no"
         }, {
-          window: win,
-          input: field_name,
-          resizable: "yes",
-          inline: "yes",  // This parameter only has an effect if you use the inlinepopups plugin!
-          editor_id: tinyMCE.selectedInstance.editorId
+            window: win,
+            input: field_name,
+            resizable: "yes",
+            inline: "yes",  // This parameter only has an effect if you use the inlinepopups plugin!
+            editor_id: tinyMCE.selectedInstance.editorId
         });
         return false;
-      }
+    }
     var useDarkMode = KTThemeMode.getMode() == 'dark';
     //powerpaste casechange tinydrive advcode mediaembed checklist
     tinymce.init({
         selector: 'textarea.aryaeditor',
         extended_valid_elements: 'i[class],span[style]',
-        images_upload_url : `${base_url}admin/upload_editor_file`,
+        images_upload_url: `${base_url}admin/upload_editor_file`,
         branding: false,
         plugins: ' importcss preview   importcss  searchreplace autolink autosave save directionality  visualblocks visualchars fullscreen image link media  codesample table charmap pagebreak nonbreaking anchor  insertdatetime advlist lists  wordcount   help    charmap   quickbars  emoticons  ',
         //   tinydrive_token_provider: 'URL_TO_YOUR_TOKEN_PROVIDER',
@@ -230,10 +230,10 @@ const hourConvert = (timeString) => {
     }
     return output;
 }
-$(document).on('keyup','#search-study',function(){
+$(document).on('keyup', '#search-study', function () {
     var searchText = $(this).val().toLowerCase();
     // alert(search)
-    $(this).closest('.card').find('.card').each(function(){
+    $(this).closest('.card').find('.card').each(function () {
         let cardText = $(this).data('text').toLowerCase();
         if (cardText.includes(searchText)) {
             $(this).closest('.col-md-4').removeClass('d-none');
@@ -1399,6 +1399,9 @@ if (filemanager) {
         return deferred.promise();
     }
 }
+document.querySelectorAll("[tagify='arya']").forEach((input) => {
+    new Tagify(input);
+});
 function save_ajax(form, url, validator) {
     var deferred = $.Deferred();
     var returnData = null;
