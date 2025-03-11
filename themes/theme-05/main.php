@@ -390,7 +390,7 @@
     ============================================= -->
     <div class="footer-divider">
         <div class="container">
-            <a href="#">CONTACT INFO</a>
+            <a href="#" <?=PATH == 'boardofpara' ? 'style="color:white!important"' : ''?>>CONTACT INFO</a>
         </div>
     </div>
 

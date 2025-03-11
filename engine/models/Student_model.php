@@ -30,6 +30,7 @@ class Student_model extends MY_Model
                 s.family_id,
                 s.password,
                 s.adhar_front as student_aadhar,
+                s.adhar_back as student_aadhar_back,
                 s.upload_docs as student_docs,
                 c.course_name,
                 c.fees as course_fees,

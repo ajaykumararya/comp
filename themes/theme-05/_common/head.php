@@ -1,8 +1,32 @@
 <!-- Web Fonts -->
 <style>
+    <?php
+    $primaryColor = '#94020b';
+    $secondaryColor = '#ff922f';
+    if(PATH == 'boardofpara'){
+        $primaryColor = '#02713b';
+        $secondaryColor = '#006eb9';
+        ?>
+        .nav-wrapper li.dropdown>ul.dropdown-menu>li a,
+        .navbar-brand.navbar-brand-centered a,
+        .navbar-brand.navbar-brand-centered i{
+                color:white!important
+        }
+        <?php
+    }
+    ?>
     :root {
-        --primary-color: #94020b;
-        --secondary-color: #ff922f;
+        --primary-color: <?=$primaryColor?>;
+        --secondary-color: <?=$secondaryColor?>;
+    }
+    .center-heading{
+        text-align: center;
+    }
+    body{
+        /* background-color: white!important; */
+    }
+    .bg-dark{
+        background-color: var(--primary-color)!important;
     }
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css">

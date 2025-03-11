@@ -66,7 +66,7 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                         data-allow-clear="<?= $this->center_model->isAdmin() ?>">
                                         <option></option>
                                         <?php
-                                        $list = $this->db->where('type', 'center')->order_by('institute_name','ASC')->get('centers')->result();
+                                        $list = $this->db->where('type', 'center')->order_by('institute_name', 'ASC')->get('centers')->result();
                                         foreach ($list as $row) {
                                             $selected = $center_id == $row->id ? 'selected' : '';
                                             echo '<option value="' . $row->id . '" ' . $selected . ' data-kt-rich-content-subcontent="' . $row->institute_name . '"
@@ -300,7 +300,7 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                             </div>
 
                         </div>
-                        
+
                         <?php
                         if (CHECK_PERMISSION('STUDENT_EXAMINATION_FORM')):
                             ?>
@@ -321,18 +321,24 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                     </thead>
                                     <tbody>
                                         <?php
-                                        for($fieldIndex = 1; $fieldIndex <= 2; $fieldIndex++){
-                                        ?>
-                                        <tr>
-                                            <td><input type="text" name="examination[passed][]" class="form-control" placeholder="Examination Passed"></td>
-                                            <td><input type="text" name="examination[name_of_stream][]" class="form-control" placeholder="Name of Stream"></td>
-                                            <td><input type="text" name="examination[board_or_university][]" class="form-control" placeholder="Board/University"></td>
-                                            <td><input type="text" name="examination[year_of_passing][]" class="form-control" placeholder="Year of Passing"></td>
-                                            <td><input type="text" name="examination[marks_obtained][]" class="form-control" placeholder="Marks Obtained"></td>
-                                            <td><input type="text" name="examination[percentage_marks][]" class="form-control" placeholder="% Marks"></td>
+                                        for ($fieldIndex = 1; $fieldIndex <= 2; $fieldIndex++) {
+                                            ?>
+                                            <tr>
+                                                <td><input type="text" name="examination[passed][]" class="form-control"
+                                                        placeholder="Examination Passed"></td>
+                                                <td><input type="text" name="examination[name_of_stream][]" class="form-control"
+                                                        placeholder="Name of Stream"></td>
+                                                <td><input type="text" name="examination[board_or_university][]"
+                                                        class="form-control" placeholder="Board/University"></td>
+                                                <td><input type="text" name="examination[year_of_passing][]"
+                                                        class="form-control" placeholder="Year of Passing"></td>
+                                                <td><input type="text" name="examination[marks_obtained][]" class="form-control"
+                                                        placeholder="Marks Obtained"></td>
+                                                <td><input type="text" name="examination[percentage_marks][]"
+                                                        class="form-control" placeholder="% Marks"></td>
 
-                                        </tr>
-                                        <?php
+                                            </tr>
+                                            <?php
                                         }
                                         ?>
                                     </tbody>
@@ -349,8 +355,8 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                             <div class="row">
                                 <div class="col-md-3 mb-4">
                                     <div class="form-control">
-                                        <label for="adhar_card" class="form-label required">Aadhar Card
-                                            </label>
+                                        <label for="adhar_card" class="form-label required">Aadhar Card <?=CHECK_PERMISSION('STUDENT_ADHAR_BACK') ? 'Front' : ''?>
+                                        </label>
                                     </div>
                                 </div>
                                 <div class="col-md-5 mb-4">
@@ -360,21 +366,28 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <div class="form-group">
-                                        <input type="number" name="adhar_card_no" required placeholder="Enter Aadhar No." class="form-control">
+                                        <input type="number" name="adhar_card_no" required
+                                            placeholder="Enter Aadhar No." class="form-control">
                                     </div>
                                 </div>
-                                <!-- <div class="col-md-3 mb-4">
-                                            <div class="form-control">
-                                                <label for="adhar_back" class="form-label required">Aadhar Card
-                                                    Back</label>
-                                            </div>
+                                <?php
+                                if (CHECK_PERMISSION('STUDENT_ADHAR_BACK')):
+                                    ?>
+                                    <div class="col-md-3 mb-4">
+                                        <div class="form-control">
+                                            <label for="adhar_back" class="form-label required">Aadhar Card
+                                                Back</label>
                                         </div>
-                                        <div class="col-md-9 mb-4">
-                                            <div class="form-group">
-                                                <input type="file" class="form-control" name="adhar_back"
-                                                    id="adhar_back">
-                                            </div>
-                                        </div> -->
+                                    </div>
+                                    <div class="col-md-9 mb-4">
+                                        <div class="form-group">
+                                            <input type="file" class="form-control" required name="adhar_back"
+                                                id="adhar_back">
+                                        </div>
+                                    </div>
+                                    <?php
+                                endif;
+                                ?>
                             </div>
                             <div class="row">
                                 <?php

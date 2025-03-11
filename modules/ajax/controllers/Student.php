@@ -142,6 +142,8 @@ class Student extends Ajax_Controller
         if (isset($_POST['session_id']))
             $data['session_id'] = $_POST['session_id'];
         $data['adhar_front'] = $this->file_up('adhar_card');
+        if (CHECK_PERMISSION('STUDENT_ADHAR_BACK'))
+            $data['adhar_back'] = $this->file_up('adhar_back');
         // $data['adhar_back'] = $this->file_up('adhar_back');
         $data['image'] = $this->file_up('image');
         $data['upload_docs'] = json_encode($upload_docs_data);
@@ -444,8 +446,7 @@ class Student extends Ajax_Controller
                     if ($status == 0)
                         $sub_label = "\n<label class='badge badge-info'>Your admit card is under review..</label>";
 
-                }
-                else
+                } else
                     $status = 1;
                 if ($status) {
                     $admitCardExam = $this->student_model->get_marksheet_using_admit_card($chk->row('admit_card_id'));
@@ -543,9 +544,9 @@ class Student extends Ajax_Controller
             foreach ($post['marks'] as $subject_id => $numbers) {
                 $ttl = 0;
                 $theory_marks = (isset($numbers['theory_marks'])) ?
-                    $numbers['theory_marks'] : 0;
+                $numbers['theory_marks'] : 0;
                 $practical = (isset($numbers['practical'])) ?
-                    $numbers['practical'] : 0;
+                $numbers['practical'] : 0;
                 $num = [
                     'theory_marks' => $theory_marks,
                     'practical' => $practical

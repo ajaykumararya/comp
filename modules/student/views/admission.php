@@ -390,7 +390,7 @@
                                     <div class="col-md-3 mb-4">
                                         <div class="form-control">
                                             <label for="adhar_front" class="form-label required">Aadhar Card
-                                                Card</label>
+                                                <?= CHECK_PERMISSION('STUDENT_ADHAR_BACK') ? 'Front' : '' ?></label>
                                         </div>
                                     </div>
                                     <div class="col-md-9 mb-4">
@@ -398,16 +398,24 @@
                                             <input type="file" class="form-control" name="adhar_card" id="adhar_front">
                                         </div>
                                     </div>
-                                    <!-- <div class="col-md-3 mb-4">
-                                        <div class="form-control">
-                                            <label for="adhar_back" class="form-label required">Aadhar Card Back</label>
+                                    <?php
+                                    if (CHECK_PERMISSION('STUDENT_ADHAR_BACK')):
+                                        ?>
+                                        <div class="col-md-3 mb-4">
+                                            <div class="form-control">
+                                                <label for="adhar_back" class="form-label required">Aadhar Card Back</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-9 mb-4">
-                                        <div class="form-group">
-                                            <input type="file" class="form-control" name="adhar_back" id="adhar_back">
+                                        <div class="col-md-9 mb-4">
+                                            <div class="form-group">
+                                                <input type="file" class="form-control" name="adhar_back" id="adhar_back"
+                                                    required>
+                                            </div>
                                         </div>
-                                    </div> -->
+                                        <?php
+                                    endif;
+                                    ?>
+
                                 </div>
                                 <div class="row">
                                     <?php

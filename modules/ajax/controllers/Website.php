@@ -257,7 +257,8 @@ class Website extends Ajax_Controller
                 }
             }
             $data['adhar_front'] = $this->file_up('adhar_card');
-            // $data['adhar_back'] = $this->file_up('adhar_back');
+            if (CHECK_PERMISSION('STUDENT_ADHAR_BACK'))
+                $data['adhar_back'] = $this->file_up('adhar_back');
             $data['image'] = $this->file_up('image');
             $data['upload_docs'] = json_encode($upload_docs_data);
 
@@ -540,6 +541,9 @@ class Website extends Ajax_Controller
         $data = [];
         if ($this->post('name') == 'adhar_card') {
             $data['adhar_front'] = $this->file_up('file');
+        } 
+        else if ($this->post('name') == 'adhar_back') {
+            $data['adhar_back'] = $this->file_up('file');
         } else {
             $get = $this->db->select('upload_docs')->where('id', $this->post('student_id'))->get('students');
             $uploads_docs = $get->row('upload_docs');
@@ -878,7 +882,8 @@ class Website extends Ajax_Controller
                     if ($chk->num_rows()) {
                         $sub_label .= ' Created on  <b>' . ($chk->row('session')) . '</b>';
                     } elseif ($examDone) {
-                        $sub_label .= "<label class='badge badge-danger'>$label Exam's is not create.</label>".$chk->row('id');;
+                        $sub_label .= "<label class='badge badge-danger'>$label Exam's is not create.</label>" . $chk->row('id');
+                        ;
                     } else {
                         $sub_label .= "<label class='badge badge-info'> Ready to create.</label>";
                     }
@@ -905,7 +910,7 @@ class Website extends Ajax_Controller
                     ];
                     if (!$chk->num_rows() || $examDone || $status == 0) {
                         break;
-                    } 
+                    }
                     /*else {
                         $admitCardExam = $this->student_model->get_marksheet_using_admit_card($chk->row('admit_card_id'));
 

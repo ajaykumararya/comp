@@ -15,7 +15,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th>Adhaar Details</th>
+                            <th>Adhaar <?=CHECK_PERMISSION('STUDENT_ADHAR_BACK') ? 'Front' : ''?> Details</th>
                             <td>
                                 <div class="btn-group">
                                     <label class="btn btn-active-info btn-sm border-info border border-1" for="adhar">
@@ -41,6 +41,36 @@
                             </td>
                         </tr>
                         <?php
+                        if (CHECK_PERMISSION('STUDENT_ADHAR_BACK')){
+                            ?>
+<tr>
+                            <th>Adhaar Card Back</th>
+                            <td>
+                                <div class="btn-group">
+                                    <label class="btn btn-active-info btn-sm border-info border border-1" for="adharback">
+                                        <input type="file" name="adhar_back" class="d-none upload-student-docs"
+                                            accept="image/*,.pdf" id="adharback">
+                                        <i class="fa fa-cloud-upload"></i>
+                                        Change
+                                    </label>
+                                    <?php
+                                    if (file_exists('upload/' . $student_aadhar_back) && $student_aadhar_back) {
+                                        ?>
+                                        <a href="{base_url}upload/{student_aadhar_back}" target="_blank"
+                                            class="btn btn-sm btn-active-primary border-primary border border-1">
+                                            <i class="fa fa-eye"></i>
+                                            View
+                                        </a>
+                                        <?php
+                                    } else {
+                                        echo badge('Adhar Card Not Found.', 'danger');
+                                    }
+                                    ?>
+                                </div>
+                            </td>
+                        </tr>
+                            <?php
+                        }
                         $decodes = [];
                         if ($student_docs != null) {
                             $decodes = json_decode($student_docs, true);
