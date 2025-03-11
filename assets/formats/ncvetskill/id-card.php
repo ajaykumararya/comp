@@ -62,8 +62,8 @@
     <p class="position-absolute" style="top:21.7%;left:33%">{father_name}</p>
     <p class="position-absolute" style="top:24.9%;left:28%;">{adhar_card_no} as</p>
     <p class="position-absolute " style="top:28.5%;left:22%">{dob}</p>
-    <p class="position-absolute" style="top:32%;left:20%">{course_name}</p>
-    <p class="position-absolute " style="top:35.2%;left:20%">{center_name}</p>
+    <p class="position-absolute" style="top:32.5%;left:20%;line-height:1;font-size:15px">{course_name}</p>
+    <p class="position-absolute " style="top:35.8%;left:20%;line-height:1;font-size:15px">{center_name}</p>
     <!-- <p class="position-absolute " style="top:60%;left:45%">{center_email}</p> -->
     <!-- <div class="position-absolute" style="top:59.5%;left:5.2%;">
         <img src="upload/images/id_card_{student_id}.png" style="width:178px;height:165px;" alt="">

@@ -32,15 +32,15 @@
                                 <div class="card-body text-center" style="padding:0;position: relative;padding-top: 42px;">
                                     <h5 class="card-title myy" style="background: var(--primary-color);margin: 0;color: white;padding: 9px;font-size: 15px;position: absolute;top: -21%;z-index: 9;width: 98%;border-radius: 0 2px 2px 0;">' . $title . '</h5>
                                     <div class="row" style="margin:10px 0;padding:0">
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 col-xs-6">
                                             <b> <i class="fa fa-graduation-cap"></i> Eligibility</b>
                                             <div>'.$row->description.'</div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 col-xs-6">
                                             <b> <i class="fa fa-clock"></i> Duration</b>
                                             <div>'.$row->duration.'</div>
                                         </div>
-                                        <div class="col-md-12" style="margin-top:5px">
+                                        <div class="col-md-12 col-xs-12" style="margin-top:5px">
                                                 <a href="' . $row->button_link . '" class="btn btn-warning btn-sm pull-right"><i class="fa fa-arrow-right"></i> ' . $row->button_text . '</a>
                                         </div>                                    
                                     </div>

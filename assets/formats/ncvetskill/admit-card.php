@@ -139,7 +139,7 @@
             <table id="first" border="1" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Sr. No.</th>
+                        <th style="width:50px">Sr. No.</th>
                         <th>Subject</th>
                         <th>Subject Code</th>
                         <th>Date</th>

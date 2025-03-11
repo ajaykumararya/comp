@@ -29,7 +29,8 @@
         }
 
         .dropdown-toggle::after {
-            content: "\f107"; /* Unicode for FontAwesome Bars (☰) */
+            content: "\f107";
+            /* Unicode for FontAwesome Bars (☰) */
             font-family: "Font Awesome 5 Free";
             font-weight: 900;
             /* position: absolute; */
@@ -162,6 +163,16 @@
                             line-height: 1.5;
                             text-align: center;
                         }
+
+                        .address p {
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                            color: white;
+                            font-size: 16px;
+                            font-family: Arial, sans-serif;
+                            margin: 5px 0;
+                        }
                     </style>
                     <div class="footer-two footer-one" style="margin-bottom:14px">
                         <div class="row">
@@ -171,10 +182,10 @@
                                         <img src="<?= logo() ?>" alt="" class="img-responsive">
                                     </div>
                                     <div class="address">
-                                        <p><span><i class="fa fa-map-marker"></i></span> &nbsp;:&nbsp;&nbsp;<div>{address}</div>
+                                        <p><span><i class="fa fa-map-marker"></i></span> {address}
                                         </p>
-                                        <p><span><i class="fa fa-phone"></i></span>&nbsp;:&nbsp;&nbsp;{number}</p>
-                                        <p><span><i class="fa fa-envelope-o"></i></span>&nbsp;:&nbsp;&nbsp; {email}
+                                        <p><span><i class="fa fa-phone"></i></span>{number}</p>
+                                        <p><span><i class="fa fa-envelope-o"></i></span>{email}
                                         </p>
                                     </div>
                                 </div>
