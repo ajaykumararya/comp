@@ -266,6 +266,18 @@ class Ki_theme
     }
     function grade($score, $type = 'en')
     {
+        if (PATH == 'gssrcindia') {
+            if ($score >= 75)
+                return 'A';
+            else if ($score >= 74)
+                return 'B';
+            else if ($score >= 59)
+                return 'C';
+            else if ($score >= 49)
+                return 'D';
+            else
+                return 'E';
+        }
         if (PATH == 'sctnew') {
             if ($score >= 80)
                 return $type == 'en' ? 'First' : 'प्रथम';
@@ -416,7 +428,7 @@ class Ki_theme
             return $this->CI->db->where('seen', $seen)->where($where)->get('manual_notifications')->num_rows();
         return;
     }
-    function generate_qr($id = 0, $type = '', $data = '', $return = false,$version = 5)
+    function generate_qr($id = 0, $type = '', $data = '', $return = false, $version = 5)
     {
         $png = "upload/images/{$type}_{$id}.png";
         if (file_exists($png))
