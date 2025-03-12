@@ -245,6 +245,25 @@ function CHECK_PERMISSION($type)
 {
     return defined($type) ? constant($type) === 'yes' : false;
 }
+function generateCourseShortName($courseName)
+{
+    $ignoreWords = ['IN', 'OF', 'FOR', 'AND', 'THE', 'AT', 'ON', 'WITH', 'BY'];
+
+    $courseName = strtoupper($courseName);
+
+    $courseName = preg_replace('/[^A-Z0-9 ]/', '', $courseName);
+
+    $words = explode(' ', $courseName);
+
+    $shortName = '';
+    foreach ($words as $word) {
+        if (!in_array($word, $ignoreWords)) { // Ignore small words
+            $shortName .= substr($word, 0, 1);
+        }
+    }
+
+    return strtoupper(substr($shortName, 0, 6));
+}
 function meta_keywords()
 {
     $keywords = '';
