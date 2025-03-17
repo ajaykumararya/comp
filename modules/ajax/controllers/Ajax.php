@@ -3,6 +3,7 @@ class Ajax extends Ajax_Controller
 {
     function change_password()
     {
+        //f865b53623b121fd34ee5426c792e5c33af8c227
         try {
             $this->form_validation->set_rules('current_password', 'Current Password', 'required');
             $this->form_validation->set_rules('password', 'Password', 'required');
@@ -17,6 +18,7 @@ class Ajax extends Ajax_Controller
                         $this->db->where('id', $loginId)->update('centers', [
                             'password' => sha1($this->post('password'))
                         ]);
+                        $this->session->sess_destroy();
                         $this->response('status', true);
                     } else
                         throw new Exception('Current Password is not matched.');

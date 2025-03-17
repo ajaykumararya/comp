@@ -53,7 +53,7 @@ class Fees extends Ajax_Controller
                                             ' . $title . '
                                         </label>
                                     </div>
-                                    <h3 class="text-center text-success">Fee Amount : ' . $fee . ' ' . ($inr = $this->get_data('inr') ). '</h3>
+                                    <h3 class="text-center text-success">Fee Amount : ' . $fee . ' ' . ($inr = $this->get_data('inr')) . '</h3>
                                     <div class="input-group input-group-sm">
                                         <input type="text" readonly class="form-control" value="Payment Type">
                                         <span class="input-group-text" id="basic-addon2"
@@ -75,14 +75,15 @@ class Fees extends Ajax_Controller
                                 <div class="form-group col-md-2">
                                     <label class="required form-label">Amount</label>
                                     <input type="number" class="form-control amount" ' . $readonly . ' name="payable_amount[' . $index . ']" value="' . $fee . '" required>
-                                    '.(($penalty) ? '
+                                    ' . (($penalty) ? '
+                                    <input type="hidden" name="panelty_amount[' . $index . ']" value="100">
                                     <div class="form-check form-switch form-check-danger form-check-solid mt-2">
-                                        <input checked class="form-check-input h-20px w-30px penalty-input" type="checkbox" value="" id="'.$index.'"/>
-                                        <label class="form-check-label text-dark" for="'.$index.'">
-                                            Penalty : 100 '.$inr.'
+                                        <input checked name="is_panelty[' . $index . ']" class="form-check-input h-20px w-30px penalty-input" type="checkbox" value="" id="' . $index . '"/>
+                                        <label class="form-check-label text-dark" for="' . $index . '">
+                                            Penalty : 100 ' . $inr . '
                                         </label>
                                     </div>
-                                    ' : '').'
+                                    ' : '') . '
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label class="form-label">Discount</label>
@@ -107,15 +108,17 @@ class Fees extends Ajax_Controller
             foreach ($_POST['key_id'] as $in => $index_key) {
                 $amount = $_POST['payable_amount'][$index_key];
                 $dicsount = $_POST['discount'][$index_key];
+                $lateFee = isset($_POST['is_panelty'][$index_key]) ? $_POST['panelty_amount'][$index_key] : 0;
                 $data[] = [
                     'type' => $index_key,
                     'duration' => is_numeric($index_key) ? $index_key : 0,
                     'type_key' => $_POST['index_key'][$in],
                     'amount' => $amount,
                     'discount' => $dicsount,
-                    'payable_amount' => $amount - $dicsount,
+                    'payable_amount' => ($amount - $dicsount) + $lateFee,
                     'description' => $_POST['note'][$index_key],
                     'payment_type' => $_POST['payment_type'][$index_key],
+                    'late_fee' => $lateFee,
                     'payment_id' => $payment_id,
                     'payment_date' => $_POST['payment_date'][$index_key],
                     'student_id' => $_POST['student_id'],
@@ -484,7 +487,7 @@ class Fees extends Ajax_Controller
                             <!--end::Label-->
                         </div>
                         <!--end::Item-->          
-                        '.($isPenalty ? '              
+                        ' . ($isPenalty ? '              
                         <!--begin::Item-->
                         <div class="d-flex flex-stack mb-3">
                             <!--begin::Code-->
@@ -496,7 +499,7 @@ class Fees extends Ajax_Controller
                                 <b class="penalty-amount">0</b> </div>
                             <!--end::Label-->
                         </div>
-                        <!--end::Item-->' : '').'
+                        <!--end::Item-->' : '') . '
                         <!--begin::Item-->
                         <div class="d-flex flex-stack mb-3">
                             <!--begin::Code-->

@@ -7,9 +7,9 @@ document.addEventListener('DOMContentLoaded', function (d) {
         var box = $(this).closest('.menu');
         box.find('.message').html('');
         var searchValue = $('.get-std-id').val();
-        
-        if(searchValue == ''){
-            box.find('.message').html(badge('Please Select An Student.','danger'));
+
+        if (searchValue == '') {
+            box.find('.message').html(badge('Please Select An Student.', 'danger'));
             return;
         }
         if (searchValue == uri_segment(3, 0)) {
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function (d) {
         }
         SwalShowloading();
         var url = `${base_url}student/profile/${searchValue}/${uri_segment(4)}`;
-        if (box.find('#openNEwTab:checked').val()){
+        if (box.find('#openNEwTab:checked').val()) {
             window.open(url, '_blank');
             SwalHideLoading();
         }
@@ -334,10 +334,39 @@ document.addEventListener('DOMContentLoaded', function (d) {
             });
         });
     });
-    $(document).on('click','.paynow-emi',function(e){
+    $(document).on('click', '.paynow-emi', function (e) {
         e.preventDefault();
         var myToken = $(this).data('token');
-        alert(myToken);
+        // alert(myToken);
+        $.AryaAjax({
+            url: 'website/init_emi_payment',
+            data: { token: myToken }
+        }).then((r) => {
+            // console.log(r);
+            if (r.status) {
+                var options = r.option;
+                options.handler = function (response) {
+                    $.AryaAjax({
+                        url: 'website/update-emi-payment',
+                        data: {
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_order_id: options.order_id,
+                            razorpay_signature: response.razorpay_signature,
+                            merchant_order_id: options.notes.merchant_order_id,
+                            amount: options.amount,
+                            token : myToken
+                        }
+                    }).then((res) => {
+                        showResponseError(res);
+                        if (res.status) {
+                            SwalSuccess('Success!', 'Fully Paid EMI');
+                            location.reload();
+                        }
+                    });
+                };
+                razorpayPOPUP(options);
+            }
+        });
     })
     course_box.select2({
         placeholder: "Select a Course",

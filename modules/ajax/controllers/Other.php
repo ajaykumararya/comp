@@ -24,10 +24,12 @@ class Other extends Ajax_Controller
     }
     function list_non_objection_certificate()
     {
-        $data = $this->db->select('s.name,s.roll_no,noc.*')
+        $this->db->select('s.name,s.roll_no,noc.*')
             ->from('students as s')
-            ->join('no_objection_certificate as noc', 'noc.student_id = s.id')
-            ->get();
+            ->join('no_objection_certificate as noc', 'noc.student_id = s.id');
+        if ($this->center_model->isCenter())
+            $this->db->where('s.center_id', $this->center_model->loginId());
+        $data = $this->db->get();
         $this->response('data', $data->result_array());
     }
     function delete_non_objection_certificate($id)
@@ -53,10 +55,13 @@ class Other extends Ajax_Controller
     }
     function list_migration_certificate()
     {
-        $data = $this->db->select('s.name,s.roll_no,mc.*')
+        $this->db->select('s.name,s.roll_no,mc.*')
             ->from('students as s')
-            ->join('migration_certificate as mc', 'mc.student_id = s.id')
-            ->get();
+            ->join('migration_certificate as mc', 'mc.student_id = s.id');
+
+        if ($this->center_model->isCenter())
+            $this->db->where('s.center_id', $this->center_model->loginId());
+        $data = $this->db->get();
         $this->response('data', $data->result_array());
     }
     function delete_migration_certificate($id)
@@ -87,10 +92,13 @@ class Other extends Ajax_Controller
     }
     function list_provisional_certificate()
     {
-        $data = $this->db->select('s.name,s.roll_no,mc.*')
+        $this->db->select('s.name,s.roll_no,mc.*')
             ->from('students as s')
-            ->join('provisional_certificate as mc', 'mc.student_id = s.id')
-            ->get();
+            ->join('provisional_certificate as mc', 'mc.student_id = s.id');
+
+        if ($this->center_model->isCenter())
+            $this->db->where('s.center_id', $this->center_model->loginId());
+        $data = $this->db->get();
         $this->response('data', $data->result_array());
     }
     function delete_provisional_certificate($id)

@@ -2,6 +2,98 @@
 // 9996763445
 class Website extends Ajax_Controller
 {
+    function init_emi_payment()
+    {
+        try {
+            $token = $this->post('token');
+            $this->token->decode($token);
+            $payable_amount = $this->token->data('payable_amount');
+            $this->load->module('razorpay');
+            $order_id = $this->razorpay->create_order([
+                'receipt' => PATH . mt_rand(00000, 8999999),
+                'amount' => $payable_amount * 100,
+                'currency' => 'INR',
+                'notes' => [
+                    'token' => $token,
+                    'merchant_order_id' => time()
+                ]
+            ]);
+            $studentDetails = $this->db->select('name,contact_number,email')->where('id', $this->token->data('student_id'))->get('students');
+            $name = $mobile = $email = '';
+            if ($studentDetails->num_rows()) {
+                $studentDetails = $studentDetails->row();
+                $name = $studentDetails->name;
+                $mobile = $studentDetails->contact_number;
+                $email = $studentDetails->email;
+            }
+            $data = [
+                'key' => RAZORPAY_KEY_ID,
+                'amount' => $payable_amount * 100,
+                'name' => ES('title'),
+                'description' => 'Computer Institute',
+                'image' => logo(),
+                'prefill' => [
+                    'name' => $name,
+                    'email' => $email,
+                    'contact' => $mobile
+                ],
+                'notes' => [
+                    'merchant_order_id' => time(),
+                ],
+                'order_id' => $order_id
+            ];
+            $this->response('status', true);
+            $this->response('option', $data);
+
+        } catch (Exception $e) {
+            $this->response('html', $e->getMessage());
+        }
+    }
+    function update_emi_payment()
+    {
+        $post = $this->post();
+
+        $razorpay_payment_id = $post['razorpay_payment_id'];
+        $razorpay_order_id = $post['razorpay_order_id'];
+        $razorpay_signature = $post['razorpay_signature'];
+        $merchant_order_id = $post['merchant_order_id'];
+        $token = $post['token'];
+        $this->load->module('razorpay');
+
+        try {
+
+
+            $status = $this->razorpay->fetchOrderStatus($razorpay_order_id);
+            if ($status) {
+                $this->token->decode($this->post('token'));
+                $data = [
+                    'type' => $this->token->data('duration'),
+                    'duration' => $this->token->data('duration'),
+                    'type_key' => $this->token->data('type_key'),
+                    'amount' => $this->token->data('amount'),
+                    'discount' => 0,
+                    'payable_amount' => $this->token->data('payable_amount'),
+                    'description' => 'payment via online Razorpay',
+                    'payment_type' => 'razorpay',
+                    'late_fee' => $this->token->data('late_fee'),
+                    'payment_id' => $razorpay_payment_id,
+                    'payment_date' => date('d-m-Y'),
+                    'student_id' => $this->token->data('student_id'),
+                    'course_id' => $this->token->decode('course_id'),
+                    'roll_no' => $this->token->decode('roll_no'),
+                    'center_id' => $this->token->decode('center_id')
+                ];
+                $this->db->insert('student_fee_transactions', $data);
+                $this->response('status', true);
+            } else
+                throw new Exception('Invalid Transcation.');
+
+
+        } catch (Exception $e) {
+            $this->response('status', false);
+            $this->response('error', $e->getMessage());
+        }
+    }
     function update_student_profile_image()
     {
         $this->_update_profile('students');
@@ -531,8 +623,8 @@ class Website extends Ajax_Controller
     {
         $this->db->where('id', $this->post('center_id'))
             ->update('centers', [
-                $this->post('name') => $this->file_up('file')
-            ]);
+                    $this->post('name') => $this->file_up('file')
+                ]);
         // $this->response('query', $this->db->last_query());
         $this->response('status', true);
     }
@@ -541,8 +633,7 @@ class Website extends Ajax_Controller
         $data = [];
         if ($this->post('name') == 'adhar_card') {
             $data['adhar_front'] = $this->file_up('file');
-        } 
-        else if ($this->post('name') == 'adhar_back') {
+        } else if ($this->post('name') == 'adhar_back') {
             $data['adhar_back'] = $this->file_up('file');
         } else {
             $get = $this->db->select('upload_docs')->where('id', $this->post('student_id'))->get('students');
@@ -596,8 +687,8 @@ class Website extends Ajax_Controller
                     $this->response([
                         'status' => 'success',
                         'url' => base_url('student/create-new-password/' . $this->token->encode([
-                            'student_id' => $row->student_id
-                        ]))
+                                    'student_id' => $row->student_id
+                                ]))
                     ]);
                 }
             }
@@ -709,9 +800,9 @@ class Website extends Ajax_Controller
     {
         $this->db->where('id', $this->post('id'))
             ->update('content', [
-                'field2' => $this->post('title'),
-                'field4' => $this->post('link')
-            ]);
+                    'field2' => $this->post('title'),
+                    'field4' => $this->post('link')
+                ]);
         $this->response('status', true);
     }
 
@@ -802,10 +893,10 @@ class Website extends Ajax_Controller
         // $this->response('data',$this->post());
         $this->db->where('id', $this->post('id'))
             ->update('admit_cards', [
-                'enrollment_no' => $this->post('enrollment_no'),
-                'session_id' => $this->post('session_id'),
-                'status' => 1
-            ]);
+                    'enrollment_no' => $this->post('enrollment_no'),
+                    'session_id' => $this->post('session_id'),
+                    'status' => 1
+                ]);
     }
     function verify_examination_data()
     {

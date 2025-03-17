@@ -41,6 +41,7 @@
     <link rel="stylesheet" href="{base_url}assets/custom/custom.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" rel="stylesheet">
 
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style>
         tr .eye-btn {
             display: none;

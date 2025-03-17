@@ -88,12 +88,13 @@ if (isset($fee_emi) && $fee_emi && $this->student_model->isStudent()) {
             $Html .='
             <td>';
             if (strtotime($emiDate) <= strtotime(date('01-m-Y'))) {
+                $myPenalty = ($penalty && $penalty > 10) ? 100 : 0;
                 $myToken = $this->token->encode($where + [
                     'duration' => $i,
                     'type_key' => 'course_fees',
-                    'late_fee' => ($penalty && $penalty > 10) ? 100 : 0,
+                    'late_fee' => $myPenalty,
                     'amount' => $perMonthFee,
-                    'payable_amount' => $perMonthFee + ($penalty && $penalty > 10) ? 100 : 0,
+                    'payable_amount' => ($perMonthFee + $myPenalty),                  
                 ]);
                 $Html .= '<button class="btn btn-primary btn-xs btn-sm paynow-emi" data-token="'.$myToken.'">Pay Now</button>';
             }
