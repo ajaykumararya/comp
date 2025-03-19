@@ -266,14 +266,24 @@ class Ki_theme
     }
     function grade($score, $type = 'en')
     {
-        if (PATH == 'gssrcindia') {
+        if (PATH == 'svatii') {
+            if ($score >= 90)
+                return 'A+';
+            elseif ($score >= 60)
+                return 'A';
+            elseif ($score >= 40)
+                return 'B';
+            else
+                return 'Fail';
+        }
+        if (PATH == 'gssrcindia' or PATH == 'vimts') {
             if ($score >= 75)
                 return 'A';
-            else if ($score >= 74)
+            else if ($score >= 60)
                 return 'B';
-            else if ($score >= 59)
+            else if ($score >= 50)
                 return 'C';
-            else if ($score >= 49)
+            else if ($score >= 40)
                 return 'D';
             else
                 return 'E';
