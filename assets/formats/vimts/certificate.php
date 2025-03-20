@@ -35,12 +35,6 @@
             display: inline-block;
         }
 
-        #photo {
-            z-index: 999;
-            bottom: 6.8%;
-            left: 16.8%;
-            padding: 2px;   
-        }
         #photo1
         {
             top: 16.2%;
@@ -49,7 +43,8 @@
        
         p{
             font-weight: 700;
-            font-size: 14px!important;
+            font-size: 16px!important;
+            color:#c69029
         }
         .middle-div {
             width: 60%;
@@ -75,13 +70,20 @@
             width: 30%;
             text-align: center;
         }
+        
+        #photo {
+            z-index: 999;
+            top: 74.5%;
+            left: 43.5%;
+            padding: 2px;   
+        }
     </style>
 </head>
 
 <body class="position-relative">
     <img id="back-image" class="position-relative" src="{document_path}/certificate.jpg">
     <div class="position-absolute" id="photo">
-        <img src="upload/images/student_certificate_{certiticate_id}.png" style="width: 37%;height:37%
+        <img src="upload/images/student_certificate_{certiticate_id}.png" style="width: 118px;height:110
           ">
     </div>
     <!-- <div class="position-absolute" id="photo1">
@@ -95,20 +97,18 @@
 
     <p class="position-absolute text-center" style="width:90%;left:5%;top:35.6%;">{student_name}</p>
     
-    <p class="position-absolute text-center text-capitlize" style="left:5%;top:40.8%;width:90%">{father_name}</p><!-- <p class="position-absolute text-center " style="width:330px;top:55%;left:65%">{father_name}</p> -->
+    <p class="position-absolute text-center text-capitlize" style="left:5%;top:41%;width:90%">{father_name}</p><!-- <p class="position-absolute text-center " style="width:330px;top:55%;left:65%">{father_name}</p> -->
     
     <p class="position-absolute text-center" style="width:90%;left:5%;top:46.5%;">{roll_no}</p>
-    <p class="position-absolute text-center" style="width:90%;left:5%;top:32%;">{course_name}</p>
+    <p class="position-absolute text-center " style="width:47%;left:45%;top:48.8%;">{course_name}</p>
     
-    <!-- <p class="position-absolute text-center" style="left:76%;top:67.1%;">{from_date}</p>
-    <p class="position-absolute text-center" style="left:86%;top:67.1%;">{to_date}</p> -->
-    <p class="position-absolute text-center text-capitlize" style="left:5%;top:49.6%;width:90%">INDIAN EDUCATION DEGREE COLLEGE TRAINING</p>
-    <p class="position-absolute text-center " style="left:5%;top:58.1%;width:90%">{grade}</p>
+    <!-- <p class="position-absolute text-center" style="left:76%;top:67.1%;">{from_date}</p> -->
+    <p class="position-absolute text-center" style="left:5%;top:56.7%;width:90%">{to_date}</p>
+    <p class="position-absolute text-center " style="left:5%;top:58.8%;width:90%">{grade}</p>
     
     <!-- <div class="position-absolute text-center" style="left:40%;top:69.5%;width:150px">{obtain_total}</div> -->
-    <p class="position-absolute text-capitlize text-center" style="left:27%;top:65%;width:68%;line-height:1">{center_name}, <?=get_route($center_city,'city')?>,<?=get_route($center_state,'state')?></p>
-    <p class="position-absolute" style="top:72.4%;left:29%;">{dob}</p>    
-    <p class="position-absolute text-center" style="left:77%;top:72.4%;">{createdOn}</p>
+    <p class="position-absolute text-capitlize text-center" style="left:5%;top:63.8%;width:90%;line-height:1">{center_name}</p>
+
 
     
 </body>

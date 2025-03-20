@@ -278,8 +278,8 @@ class Student_model extends MY_Model
             case 'student_certificates':
                 $this->db->select('sc.id as certiticate_id,ss.title as session, sc.issue_date as createdOn,sc.exam_conduct_date');
                 $this->db->join('student_certificates as sc', "sc.student_id = s.id");
-                $this->db->join('admit_cards as ac', "ac.student_id = sc.student_id and c.duration = ac.duration and c.duration_type = ac.duration_type");
-                $this->db->join('session as ss', "ss.id = ac.session_id");
+                $this->db->join('admit_cards as ac', "ac.student_id = sc.student_id and c.duration = ac.duration and c.duration_type = ac.duration_type",'left');
+                $this->db->join('session as ss', "ss.id = ac.session_id",'left');
 
                 if (isset($roll_no)) {
                     unset($condition['roll_no']);
