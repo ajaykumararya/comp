@@ -706,7 +706,6 @@ class Student extends Ajax_Controller
     }
     function create_certificate()
     {
-        // $this->response($this->post());
         $data = $this->post();
         if (CHECK_PERMISSION('CENTRE_STUDENT_CERTIFICATE_PERMISSION') && $this->center_model->isCenter()) {
             $details = $this->center_model->get_center($this->get_data('owner_id'));
