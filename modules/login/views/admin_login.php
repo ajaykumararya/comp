@@ -153,7 +153,7 @@
             <div
                 class="d-flex flex-column-fluid flex-lg-row-auto justify-content-center justify-content-lg-end login-page">
                 <!--begin::Wrapper-->
-                <div class="card bg-body d-flex flex-column flex-center w-md-600px p-10 login-page-c1"
+                <div class="animation animation-slide-in-down card bg-body d-flex flex-column flex-center w-md-600px p-10 login-page-c1"
                     style="background: #9d5b14 !important;box-shadow: inset 0 0 14px 0 black, -6px 6px 0px 0 #3b291f;border:none">
                     <!--begin::Content-->
                     <div class="d-flex flex-center flex-column align-items-stretch w-md-400px"
