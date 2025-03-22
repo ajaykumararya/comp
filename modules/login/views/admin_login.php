@@ -166,7 +166,7 @@
                                     src="<?=logo()?>" alt="" />
                             </a>
 
-                            <h2 class="fw-bold text-center mb-7" style="color:#fff;">
+                            <h2 class="fw-bold text-center " style="color:#fff;">
                                 <?= ES('login_title', ES('title')) ?>
                             </h2>
 
