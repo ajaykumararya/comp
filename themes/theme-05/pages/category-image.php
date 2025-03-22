@@ -1,13 +1,22 @@
 <section class="popular__courses  mp-4">
-<style>
-    .popular__courses .thumbnail{
-        height: 200px!important;
-    }
-    .owl-carousel .owl-item img{
-        width: 100%!important;
-        height: 100%!important;
-    }
-</style>
+    <style>
+        @media screen and (max-width: 1024px) {
+            .popular__courses .thumbnail {
+                height: 200px !important;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .popular__courses .thumbnail {
+                height: 234px !important;
+            }
+        }
+
+        .owl-carousel .owl-item img {
+            width: 100% !important;
+            height: 100% !important;
+        }
+    </style>
     <div class="container">
         <div class="section__heading">
             <h3 class="mb-1">
@@ -22,13 +31,13 @@
                 $index = 1;
                 foreach ($data->result() as $row):
                     ?>
-                        <div class="thumbnail">
-                            <a href="<?= $row->field3 ?>" target="_blank">
+                    <div class="thumbnail">
+                        <a href="<?= $row->field3 ?>" target="_blank">
 
-                                <img src="{assets}<?= $row->field1 ?>" alt="" class="img-responsive" title="<?=$row->field2?>">
-                            </a>
+                            <img src="{assets}<?= $row->field1 ?>" alt="" class="img-responsive" title="<?= $row->field2 ?>">
+                        </a>
 
-                        </div>
+                    </div>
                     <?php
                 endforeach;
             endif;

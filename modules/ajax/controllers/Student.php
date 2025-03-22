@@ -544,9 +544,9 @@ class Student extends Ajax_Controller
             foreach ($post['marks'] as $subject_id => $numbers) {
                 $ttl = 0;
                 $theory_marks = (isset($numbers['theory_marks'])) ?
-                $numbers['theory_marks'] : 0;
+                    $numbers['theory_marks'] : 0;
                 $practical = (isset($numbers['practical'])) ?
-                $numbers['practical'] : 0;
+                    $numbers['practical'] : 0;
                 $num = [
                     'theory_marks' => $theory_marks,
                     'practical' => $practical
@@ -959,5 +959,94 @@ class Student extends Ajax_Controller
             $this->db->where('id', $row['id'])->delete('students_registeration_data');
             $this->response('status', true);
         }
+    }
+    function custom_student_fees()
+    {
+        $getStudent = $this->student_model->get_student_via_id($this->post('student_id'));
+        if ($getStudent->num_rows()) {
+            $row = $getStudent->row_array();
+            $this->response('status', true);
+            if (is_null($row['custom_fee'])) {
+                $this->response('status', 'setfee');
+            } else {
+                $ttlSubmited = $this->db->select('SUM(amount) as ttlAmount')->where('type_key', 'course_fees')->where('student_id', $this->post("student_id"))->get('student_fee_transactions')->row('ttlAmount') ?? 0;
+                $this->set_data('submitted_fee', $ttlSubmited);
+                $remainingFee = $row['custom_fee'] - $ttlSubmited;
+                $this->set_data('remaining_fee', $remainingFee);
+                $this->response('feeInfo', '
+                            <div class="d-flex flex-stack mt-10">
+
+                                <label class="text-color-gray-500 fw-semibold fs-6 me-2">Total Fee</label>                   
+                                
+                                <label class="btn btn-icon btn-sm h-auto text-primary justify-content-end fs-2">
+                                    ' . $this->get_data('inr') . '  ' . $row['custom_fee'] . ' 
+                                </label>                
+                                
+                            </div>
+                            <div class="d-flex flex-stack">
+
+                                <label class="text-color-gray-500 fw-semibold fs-6 me-2">Total Submitted Fee</label>                   
+                                
+                                <label class="btn btn-icon btn-sm h-auto text-success justify-content-end fs-2">
+                                    ' . $this->get_data('inr') . '  ' . $ttlSubmited . '
+                                </label>                
+                                
+                            </div>
+                            <div class="d-flex flex-stack">
+
+                                <label class="text-color-gray-500 fw-semibold fs-6 me-2">Remaining Fee</label>                   
+                                
+                                <label class="btn btn-icon btn-sm h-auto text-danger justify-content-end fs-2">
+                                    ' . $this->get_data('inr') . ' ' . $remainingFee . ' 
+                                </label>                
+                                
+                            </div>
+
+                
+                ' . form_hidden([
+                        'student_id' => $row['student_id'],
+                        'course_id' => $row['course_id'],
+                        'roll_no' => $row['roll_no'],
+                        'center_id' => $row['institute_id'],
+                        'duration' => $row['duration']
+                    ]));
+                if ($remainingFee)
+                    $this->response('html', $this->template('student/custom-fee-get'));
+                else
+                    $this->response('html', alert('No Due Fee Found.', 'success'));
+            }
+        }
+    }
+    function set_student_custom_fee()
+    {
+        $this->db->where('id', $this->post("student_id"))->update('students', [
+            'custom_fee' => $this->post('fee_amount')
+        ]);
+        $this->response('status', true);
+    }
+    function submit_student_custom_fee()
+    {
+        $payment_id = time();
+        $amount = $this->post('payable_amount');
+        $dicsount = $this->post('discount');
+        $lateFee = 0;
+        $data = [
+            'type' => 0,
+            'duration' => 0,
+            'type_key' => 'course_fee',
+            'amount' => $amount,
+            'discount' => $dicsount,
+            'payable_amount' => ($amount - $dicsount) + $lateFee,
+            'description' => $_POST['note'],
+            'payment_type' => $_POST['payment_type'],
+            'late_fee' => 0,
+            'payment_id' => $payment_id,
+            'payment_date' => $_POST['payment_date'],
+            'student_id' => $_POST['student_id'],
+            'course_id' => $_POST['course_id'],
+            'roll_no' => $_POST['roll_no'],
+            'center_id' => $_POST['center_id']
+        ];
+        $this->response('status', $this->db->insert('student_fee_transactions', $data));
     }
 }

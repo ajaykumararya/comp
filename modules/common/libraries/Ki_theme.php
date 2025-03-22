@@ -1682,11 +1682,13 @@ class Ki_theme
                     $html .= $this->parse('wallet/low-balance', [], true);
                 if ($this->wallet_message_type) {
                     $return = $this->center_fix_fees();
-                    $html .= $this->parse('wallet/message', [
-                        'type' => $this->wallet_message_type,
-                        'wallet_balance' => $this->wallet_balance,
-                        'fee' => isset($return[$this->wallet_message_type]) ? $return[$this->wallet_message_type] : 0
-                    ], true);
+                    if ($this->wallet_balance) {
+                        $html .= $this->parse('wallet/message', [
+                            'type' => $this->wallet_message_type,
+                            'wallet_balance' => $this->wallet_balance,
+                            'fee' => isset($return[$this->wallet_message_type]) ? $return[$this->wallet_message_type] : 0
+                        ], true);
+                    }
                 }
             }
         }

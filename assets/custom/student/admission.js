@@ -338,7 +338,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             course_box.html('');
             roll_no_box.val('');
             var show = $('#wallet_system_course_wise').length;
-            // alert(center_id);
+            // alert(show);
             $.AryaAjax({
                 url: 'student/genrate-a-new-rollno-with-center-courses',
                 data: { center_id },
@@ -388,13 +388,13 @@ document.addEventListener('DOMContentLoaded', function (e) {
             course_box.change(function () {
                 var course_fee = $(this).find('option:selected').data('course_fee');
                 var yes = '';
-                // alert(course_fee);
                 if (yes = $(this).find('option:selected').data('commission_fee')) {
-                    course_fee = yes;
+                    if(yes != 'undefined')
+                        course_fee = yes;
                 }
                 var btn = $('#form').find('button');
                 var price = $('#centre_id').find('option:selected').data('wallet');
-                // alert(price)
+                // alert(price+''+course_fee)
                 if (price < course_fee) {
                     SwalWarning(`Wallet Balance is Low...\n
                                 <b class="text-success">Dedcut Course Fee : ${inr} ${course_fee}</b>\n

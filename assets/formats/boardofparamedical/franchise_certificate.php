@@ -72,7 +72,7 @@
         <img src="upload/{image}" style="width:76px;height:95px">
     </div>
     
-    <p class="position-absolute " style="top:40%;left:16%;text-align:center;width:345px">{name}</p>
+    <p class="position-absolute " style="top:40.1%;left:16%;text-align:center;width:345px;font-size:13px">{name}</p>
 
     <p class="position-absolute" style="top:68.2%;left:10%;width:80%;text-align:center">{center_number}</p>
     

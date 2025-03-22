@@ -230,6 +230,7 @@ class Student_model extends MY_Model
                 break;
             case 'fetch_fee_transactions':
                 $this->db->select('sft.*')->join('student_fee_transactions as sft', "sft.student_id = s.id");
+                $this->db->order_by('sft.timestamp','DESC');
                 $this->myWhere('sft', $condition);
                 break;
             case 'fetch_fee_transactions_group_by':
@@ -392,6 +393,8 @@ class Student_model extends MY_Model
     function get_student_via_id($id = 0)
     {
         $this->db->select('s.fee_emi,s.fee_emi_type');
+        if(CHECK_PERMISSION('CUSTOM_STUDENT_FEE'))
+            $this->db->select('s.custom_fee');
         return $this->get_switch('student_id', ['id' => $id]);
     }
     function id_card($id)
@@ -520,6 +523,15 @@ class Student_model extends MY_Model
         extract($where);
         $ttlSubmited = $this->db->select('SUM(amount) as ttlAmount')->where('type_key', 'course_fees')->where('student_id', $student_id)->get('student_fee_transactions')->row('ttlAmount');
         // return $ttlSubmited;
+        if(CHECK_PERMISSION('CUSTOM_STUDENT_FEE')){
+            $this->db->select('s.custom_fee');
+            $getStudent = $this->get_student_via_id($student_id);
+            if($getStudent->num_rows()){
+                $studentFee = $getStudent->row('custom_fee');
+                return $studentFee - $ttlSubmited;
+            }
+            return;
+        }
         $courseFee = $this->db->select('course_fee')->where([
             'course_id' => $course_id,
             'center_id' => $center_id

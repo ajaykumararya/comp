@@ -97,9 +97,14 @@ class Student extends MY_Controller
     {
         $this->view('collect-student-fees');
     }
+    function custom_student_fees()
+    {
+        $this->view('custom-student-fees');
+
+    }
     function search_fees_payment()
     {
-        $this->ki_theme->breadcrumb_action_html('filter_fee_record', true);
+        // $this->ki_theme->breadcrumb_action_html('filter_fee_record', true);
         $this->view('search-fees-payment');
     }
     function generate_certificate()
@@ -141,17 +146,16 @@ class Student extends MY_Controller
                 'icon' => array('tablet-book', 5),
                 'url' => 'documents'
             ];
-        }
-        else{
+        } else {
             $tabs['fee-emis'] = [
                 'title' => 'Fee EMIs Record',
-                'icon' => ['two-credit-cart',3],
+                'icon' => ['two-credit-cart', 3],
                 'url' => 'fee-emis'
             ];
         }
-       
+
         $tabs['change-password'] = ['title' => 'Account Change Password', 'icon' => array('key', 2), 'url' => 'change-password'];
-       
+
         if (table_exists('manual_notifications')) {
             $tabs['notification'] = [
                 'title' => 'Notification(s)',
@@ -384,7 +388,8 @@ class Student extends MY_Controller
             ]);
         }
     }
-    function other_document(){
+    function other_document()
+    {
         $this->student_view('other_documents');
     }
 }
