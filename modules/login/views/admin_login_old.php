@@ -34,50 +34,6 @@
             window.top.location.replace(window.self.location.href);
         }
     </script>
-    <style>
-       
-    .login-page {
-        margin: auto;
-        padding: 1rem !important;
-    }
-    @media (min-width: 768px) {
-        .login-page-c1{
-            padding: 10px 0px 10px 0px;
-        } 
-    }
-    .login-page-c1 {
-        padding: 0px 40px 0px 40px !important;
-        border: 2px solid #144438;
-    }
-    .form-control, .btn-primary {
-        border-radius: 2.475rem !important;
-    }
-    .btn-primary{
-        background-color: #efefef !important;
-        color: #144438 !important;
-    }
-    .btn:hover {
-        background-color: #144438 !important;
-        color: #fff !important;
-    }
-    .input-group-icon .input-group-addon {
-    position: relative;
-    margin-top:12px;
-    border: 0 none;
-    width: 0;
-    z-index: 11;
-    }
-    .input-group-icon {
-        width: 100%;
-        table-layout: fixed;
-    }
-    .input-group i {
-        padding-left:12px;
-    }
-    .form-control{
-        background: #fff !important;
-    }
-    </style>
 </head>
 <!--end::Head-->
 
@@ -86,7 +42,7 @@
 <body id="kt_body" class="app-blank bgi-size-cover bgi-attachment-fixed bgi-position-center">
     <!--begin::Theme mode setup on page load-->
     <script>
-        var defaultThemeMode = "light";
+        var defaultThemeMode = "dark";
         var themeMode;
 
         if (document.documentElement) {
@@ -129,84 +85,82 @@
         <!--end::Page bg image-->
 
         <!--begin::Authentication - Sign-in -->
-        <div class="d-flex flex-column flex-lg-row flex-column-fluid" style="background: #00231a !important;">
+        <div class="d-flex flex-column flex-lg-row flex-column-fluid">
             <!--begin::Aside-->
-            <!--<div class="d-flex flex-lg-row-fluid">
+            <div class="d-flex flex-lg-row-fluid">
+                <!--begin::Content-->
                 <div class="d-flex flex-column flex-center pb-0 pb-lg-10 p-10 w-100">
-                    
+                    <!--begin::Image-->
                     <a href="{base_url}">
                         <img class="mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20" src="<?= logo() ?>" alt="" />
                     </a>
 
+                    <!-- <img class="theme-dark-show mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20"
+                        src="{base_url}/assets/media/auth/agency-dark.png" alt="" /> -->
+                    <!--end::Image-->
+
+                    <!--begin::Title-->
                     <h1 class="text-gray-800 fs-2qx fw-bold text-center mb-7">
                         <?= ES('login_title', ES('title')) ?>
                     </h1>
-                    
+                    <!--end::Title-->
+
+                    <!--begin::Text-->
+                    <!-- <div class="text-gray-600 fs-base text-center fw-semibold">
+                        In this kind of post, <a href="#" class="opacity-75-hover text-primary me-1">the blogger</a>
+
+                        introduces a person they’ve interviewed <br /> and provides some background information about
+
+                        <a href="#" class="opacity-75-hover text-primary me-1">the interviewee</a>
+                        and their <br /> work following this is a transcript of the interview.
+                    </div> -->
+                    <!--- end::Text-->
                 </div>
-            </div>-->
+                <!--end::Content-->
+            </div>
             <!--begin::Aside-->
 
             <!--begin::Body-->
-            <div class="d-flex flex-column-fluid flex-lg-row-auto justify-content-center justify-content-lg-end login-page">
+            <div class="d-flex flex-column-fluid flex-lg-row-auto justify-content-center justify-content-lg-end p-12">
                 <!--begin::Wrapper-->
-                <div class="card bg-body d-flex flex-column flex-center rounded-4 w-md-600px p-10 login-page-c1" style="background: #144438 !important;">
+                <div class="card bg-body d-flex flex-column flex-center rounded-4 w-md-600px p-10">
                     <!--begin::Content-->
-                    <div class="d-flex flex-center flex-column align-items-stretch w-md-400px" style="margin-bottom: -50px;margin-top: 15px;">
+                    <div class="d-flex flex-center flex-column align-items-stretch h-lg-100 w-md-400px">
                         <!--begin::Wrapper-->
                         <div class="d-flex flex-center flex-column flex-column-fluid pb-15 pb-lg-20">
 
-                        <a href="{base_url}">
-                        <img class="mx-auto mw-100" style="padding-bottom:20px; width:150px;" src="https://www.iisdit.org/upload/icon-white.png" alt="" />
-                        </a>
-
-                        <h2 class="fw-bold text-center mb-7" style="color:#fff;">
-                        <?= ES('login_title', ES('title')) ?>
-                        </h2>
-
                             <!--begin::Form-->
                             <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form"
-                                data-kt-redirect-url="{current_url}" action="{base_url}ajax/admin-login" style="width:120% !important;">
+                                data-kt-redirect-url="{current_url}" action="{base_url}ajax/admin-login">
                                 <!--begin::Heading-->
                                 <div class="text-center mb-11">
                                     <!--begin::Title-->
-                                    <!--<h2 class="text-dark fw-bolder mb-3 m-auto">
+                                    <h2 class="text-dark fw-bolder mb-3 m-auto">
                                         Sign In
-                                    </h2>-->
+                                    </h2>
                                     <!--end::Title-->
 
                                     <!--begin::Subtitle-->
                                     <div class="text-gray-500 fw-semibold fs-6">
-                                        Sign to Admin/Center Panel
+                                        Your Admin Panel
                                     </div>
                                     <!--end::Subtitle--->
                                 </div>
                                 <!--begin::Heading-->
 
                                 <!--begin::Input group--->
-                                <div class="fv-row mb-8 input-group input-group-icon">
+                                <div class="fv-row mb-8">
                                     <!--begin::Email-->
-                                    <span class="input-group-addon ">
-                                            <span class="icon icon-group">
-                                                <i class="far fa-user" style="color:#144438;"></i>
-                                            </span>
-                                        </span>
                                     <input type="text" placeholder="Email" name="email" autocomplete="off"
-                                        class="form-control bg-transparent" style="padding-left: 30px;"/>
-                                     </span>
+                                        class="form-control bg-transparent" />
                                     <!--end::Email-->
                                 </div>
 
                                 <!--end::Input group--->
-                                <div class="fv-row mb-3 input-group input-group-icon">
+                                <div class="fv-row mb-3">
                                     <!--begin::Password-->
-                                    <span class="input-group-addon ">
-                                            <span class="icon icon-group">
-                                                <i class="fas fa-unlock-alt" style="color:#144438;"></i>
-                                            </span>
-                                        </span>
                                     <input type="password" placeholder="Password" name="password" autocomplete="off"
-                                        class="form-control bg-transparent" style="padding-left: 30px;"/>
-                                    </span>
+                                        class="form-control bg-transparent" />
                                     <!--end::Password-->
                                 </div>
                                 <!--end::Input group--->
@@ -226,7 +180,7 @@
                                 <!--begin::Submit button-->
                                 <div class="d-grid mb-10">
                                     <button type="submit" id="kt_sign_in_submit" class="btn btn-primary">
-                                    <i class="fas fa-sign-in-alt" style="color:#144438;"></i>
+
                                         <!--begin::Indicator label-->
                                         <span class="indicator-label">
                                             Sign In</span>
@@ -261,10 +215,6 @@
                                 ?>
                             </form>
                             <!--end::Form-->
-
-                            <div style="color:#fff; font-size: 14px; font-family: 'Signika', sans-serif; font-weight: 700; text-align: center;">
-                                    <p>© 2024 International Institute of Skills Development and IT Training</p>
-                                </div>
 
                         </div>
                         <!--end::Wrapper-->
