@@ -87,7 +87,7 @@ $certificate = ($duration_type == 'month' or ($duration_type == 'year' && $durat
     <div class="position-absolute text-center" style="top:54%;left:37%;width:450px">{course_name}</div>
 
     <div class="position-absolute text-center " style="top:51.5%;left:9%;width:440px">{center_name}</div>
-    <div class="position-absolute" style="top:59.5%;left:22%;width:60px">{grade}</div>
+    <div class="position-absolute" style="top:59.3%;left:22%;width:60px">{grade}</div>
 
     <div class="position-absolute" style="top:64.1%;left:18%">Lucknow</div>
     <div class="position-absolute text-center" style="top:49%;left:18.5%;width:112px">{cert_session}</div>
