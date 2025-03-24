@@ -31,8 +31,8 @@
         }
         #photo {
             z-index: 999;
-            top: 3.7%;
-            left:77.4%
+            top: 25.7%;
+            left:85.2%
         }
         /* table#first {
             color: black;
@@ -47,7 +47,7 @@
         table th:nth-child(1),
         table,
         tfoot tr {
-            border: 1px solid #1a4891;
+            border: 1px solid black;
             text-align: center;
             /* font-weight: bold; */
             padding: 0;
@@ -63,8 +63,8 @@
             line-height: 0 !important;
         }
         .b-tb {
-            border-top: 1xp solid #1a4891;
-            border-bottom: 1px solid #1a4891;
+            border-top: 1xp solid black;
+            border-bottom: 1px solid black;
         }
         .rmrb {
             border-right: 0px !important
@@ -73,7 +73,7 @@
             border-left: 0px solid transparent !important;
         }
         .lb {
-            border-left: 1px solid #1a4891;
+            border-left: 1px solid black;
         }
         table head tr th {
             color: #0651a4 !important;
@@ -96,44 +96,39 @@
 <body class="position-relative">
     <img id="back-image" class="position-relative" src="{document_path}/marksheet.jpg">
     <div class="position-absolute" id="photo">
-        <img src="upload/{image}" style="width:127px;height:127px">
+        <img src="upload/{image}" style="width:71px;height:92.5px">
     </div>
-    <p class="position-absolute" style="top:2.2%;left:22%;width:100px">{result_id}</p>
-    <p class="position-absolute" style="top:4.3%;left:15.7%;">{session}</p>
-    <!-- <p class="position-absolute" style="top:2.6%;left:80%;">{issue_date}</p> -->
+    <p class="position-absolute" style="top:4.7%;left:22%;width:400px">UDYAM-BR-37-0039467</p>
+    <p class="position-absolute" style="top:78%;left:43%;width:100px">{issue_date}</p>
+    <p class="position-absolute" style="top:22%;left:78%;">{session}</p>
 
+    <p class="position-absolute" style="top:23.8%;left:22%">{student_name}</p>
+    <p class="position-absolute" style="top:25.8%;left:22%">{father_name}</p>
+    <p class="position-absolute " style="top:27.6%;left:22%">{mother_name}</p>
+    <p class="position-absolute " style="top:29.6%;left:22%">{dob}</p>
+    <p class="position-absolute " style="top:31.3%;left:22%;width:240px">{course_name}</p>
 
-    <!-- <p class="position-absolute" style="top:17%;right:15%;font-size:12px">{enrollment_no}</p> -->
-    <p class="position-absolute" style="top:32.8%;left:18%">{student_name}</p>
-    <p class="position-absolute" style="top:34.2%;left:24%">{father_name}</p>
-    <p class="position-absolute " style="top:35.8%;left:24%">{mother_name}</p>
-    <p class="position-absolute " style="top:37.3%;left:20%">{course_name}</p>
-    <!-- <p class="position-absolute text-capitlize" style="top:35.3%;left:20%">{duration} {duration_type}</p> -->
+    <p class="position-absolute" style="top:23.8%;left:68%">{roll_no}</p>
+    <p class="position-absolute" style="top:25.8%;left:68%">{enrollment_no}</p>
+    <p class="position-absolute " style="top:27.6%;left:68%">{duration} {duration_type}</p>
+    <p class="position-absolute " style="top:29.6%;left:68%">{center_code}</p>
+    <p class="position-absolute text-capitlize" style="top:31.3%;left:68%;">{gender}</p>
+
+    <p class="position-absolute " style="top:35.3%;left:22%;width:580px">{center_name}</p>
     
-    <!-- <p class="position-absolute text-capitlize" style="top:35.3%;left: 40%">{from_date} </p>
-    <p class="position-absolute text-capitlize" style="top:35.3%;left:60%">{to_date} </p> -->
-
-    <p class="position-absolute " style="top:38.8%;left:21%">{center_name}</p>
-
-    <!-- <p class="position-absolute " style="top:32.8%;left:63.5%">{enrollment_no}</p> -->
-    <p class="position-absolute " style="top:32.8%;left:75%;width:200px">{roll_no}</p>
-    <p class="position-absolute " style="top:34.3%;left:76%;width:200px">{dob}</p>
-    <p class="position-absolute text-capitlize" style="top:36%;left:73%;width:200px;">{gender}</p>
-    <p class="position-absolute text-capitlize" style="top:37.3%;left:78%">{duration} {duration_type}</p>
-    
-    <div class="position-absolute" style="bottom:8.2%;right:10%;">
-        <img src="upload/images/marksheet_{result_id}.png" style="width: 78px;" alt="">
+    <div class="position-absolute" style="top:84.8%;left:83%;">
+        <img src="upload/images/marksheet_{result_id}.png" style="width: 92.3px;" alt="">
     </div>
 
     <!-- <div class="position-absolute" style="top:22.4%;left:83%;">
         <img src="upload/{centre_logo}" style="width: 80px;height:73px;" alt="">
     </div> -->
-    <div class="position-absolute " style="top:43%;left:6%;width:88%">
+    <div class="position-absolute " style="top:40%;left:6%;width:88%">
         <table id="first" border="0" style="width:100%">
             <thead>
                 <tr>
                     <th style="font-size:12px;" width="20%">Subject Code</th>
-                    <th class="primary lb b-tb" width="20%" style="font-size:12px;text-align:left;padding-left:35px">SUBJECTS</th>
+                    <th class="primary lb b-tb" width="40%" style="font-size:12px;text-align:left;padding-left:35px">SUBJECTS</th>
                     <th class="primary lb b-tb" width="20%" style="font-size:12px;padding:4px">FULL MARKS</th>
                     <th class="primary lb b-tb" width="20%" style="font-size:12px;padding:4px">PASSING PERCENATGE</th>
                     <th class="primary lb b-tb"  width="20%" style="font-size:12px;padding:4px">MARKS OBTAINED</th>
@@ -163,9 +158,6 @@
             </tfoot>
         </table>
     </div>
-    <!-- <p class="position-absolute" style="bottom:20%;left:27%;font-size:15px">{percentage} %</p>
-    <p class="position-absolute" style="bottom:20%;left:50%;font-size:15px">{session}</p>
-    <p class="position-absolute" style="bottom:20.15%;left:80%;font-size:15px">{issue_date}</p> -->
     
 </body>
 </html>

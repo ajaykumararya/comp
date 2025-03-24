@@ -12,7 +12,6 @@
 
             font-weight: bold;
         }
-
         .text-capitlize {
             text-transform: capitalize;
         }
@@ -23,7 +22,7 @@
 
         .position-absolute {
             position: absolute;
-            font-size: 12px;
+            font-size: 17px;
         }
 
         .w-100 {
@@ -40,23 +39,19 @@
 
         #photo1 {
             z-index: 999;
-            top: 21.3rem;
-            right: 47px;
+            top: 17.5%;
+            left: 43.85%;
             width: 120px !important;
-            ;
             height: 95px;
         }
 
         #photo {
             z-index: 999;
-            bottom: 2%;
-            right: 24px;
-            background-color: white;
+            top: 84.5%;
+            right: 38px;
         }
-        #photo img{
-            
-          
-        }
+
+        #photo img {}
 
         .middle-div {
             margin-left: 14rem;
@@ -65,7 +60,8 @@
         .test {
             border: 1px solid red
         }
-        .m-c{
+
+        .m-c {
             color: #0c3374;
         }
     </style>
@@ -73,27 +69,24 @@
 <?php
 $this->ki_theme->generate_qr($certificate_id, 'franchise_certificate', current_url());
 ?>
+
 <body class="position-relative">
     <img id="back-image" class="position-relative" src="{document_path}/franchise-certificate.jpg">
     <div class="position-absolute" id="photo">
         <img src="upload/images/franchise_certificate_{certificate_id}.png" style="width:100px;padding:0">
     </div>
-    <!-- <div class="position-absolute" id="photo1">
-        <img src="upload/{image}" style="width:94.7px;height:113px">
-    </div> -->
-    
-    <!-- <div class="position-absolute name" style="top:36%;left:9%;font-size:36px;width:80%;text-align:center;font-family:cursive">{name}</div> -->
-    <div class="position-absolute " style="top:20%;left:20%;width:80%;text-align:center;">
-        <p style="text-transform:capitalize;font-size:40px;line-height:1" class="m-c">{institute_name}</p>
-        <p style="font-size:15px;color:#1f54ac">{center_full_address}</p>
-        <p style="font-size:15px">Mr. {name} Assessed and found to comply with</p>
+    <div class="position-absolute" id="photo1">
+        <img src="upload/{image}" style="width:95px;height:124px">
     </div>
 
-    <!-- <div class="position-absolute" style="top:50%;left:27%;width:50%;text-align:right;font-size:16px">{center_full_address}</div> -->
-    <div class="position-absolute" style="top:52.5%;left:63%;font-size:29px;color:#e5002b;"><b>{center_number}</b></div>
-    
-    <div class="position-absolute" style="top:57.8%;left: 42%;font-size:17px">{certificate_issue_date}</div>
-    <div class="position-absolute" style="top:60%;left:42%;font-size:17px">{valid_upto}</div>
+    <p class="position-absolute" style="top:31%;left:5%;width:90%;text-align:center;font-size:16px;">{institute_name}</p>
+    <p class="position-absolute " style="top:33.4%;left:18%;width:75%;text-align:center;font-size:15px;">{center_full_address}</p>
+   
+        <p class="position-absolute" style="top:47%;left:26%;font-size:15px">{center_number}</p>
+        <p class="position-absolute" style="top:49.2%;left:26%;font-size:15px">{name}</p>
+        <p class="position-absolute" style="top:51.3%;left:26%;font-size:15px">{contact_number}</p>
+        <p class="position-absolute" style="top:53.5%;left:26%;font-size:15px">{email}</p>
+        <p class="position-absolute" style="top:55.6%;left:26%;font-size:15px">{valid_upto}</p>
 
 
 </body>

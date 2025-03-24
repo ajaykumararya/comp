@@ -55,6 +55,8 @@ class Student_model extends MY_Model
             ->join('district', 'district.DISTRICT_ID = s.city_id and district.STATE_ID = state.STATE_ID')
 
             ->join('batch as b', "b.id = s.batch_id", 'left');
+        if(PATH === 'skycrownworld')
+            $this->db->select('s.category');
         if (CHECK_PERMISSION('ADMISSION_WITH_SESSION'))
             $this->db->select('s.session_id,ses.title as session')->join('session as ses', 'ses.id =  s.session_id', 'left');
         if (!isset($without_admission_status))
@@ -277,7 +279,7 @@ class Student_model extends MY_Model
                 $this->myWhere('m', $condition);
                 break;
             case 'student_certificates':
-                $this->db->select('sc.id as certiticate_id,ss.title as session, sc.issue_date as createdOn,sc.exam_conduct_date');
+                $this->db->select('sc.id as certiticate_id,ss.title as session, sc.issue_date as createdOn,sc.exam_conduct_date,ac.enrollment_no');
                 $this->db->join('student_certificates as sc', "sc.student_id = s.id");
                 $this->db->join('admit_cards as ac', "ac.student_id = sc.student_id and c.duration = ac.duration and c.duration_type = ac.duration_type",'left');
                 $this->db->join('session as ss', "ss.id = ac.session_id",'left');
