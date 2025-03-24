@@ -48,8 +48,8 @@
         }
 
         #photo1 {
-            top: 33.2%;
-            left: 78.4%;
+            top: 71.2%;
+            left: 8.5%;
         }
 
         p {
@@ -99,7 +99,7 @@
     $this->ki_theme->generate_qr($id, 'migration', current_url());
     ?>
     <div class="position-absolute" id="photo1">
-        <img src="upload/images/migration_{id}.png" style="width:92px;height:86px">
+        <img src="upload/images/migration_{id}.png" style="width:96px;height:96px">
     </div>
 
     <p class="position-absolute t-u" style="top:30%;left:42%;width:350px">{name}</p>
@@ -107,10 +107,21 @@
     <p class="position-absolute " style="top:2.5%;left:13%;width:135px;font-size:12px">{sr_no}</p>
     <!-- <p class="position-absolute" style="top:4%;left:70%;width:150px;text-align:center">{roll_no}</p> -->
     <p class="position-absolute " style="top:42.8%;left:20%;width:580px;line-height:1">{institute_name}</p>
-    <p class="position-absolute t-u test" style="top:49%;left:25%;width:505px;line-height:1">{course_name}</p>
-    <p class="position-absolute t-u" style="top:54%;left:60%;width:305px;line-height:1">{course_category}</p>
+    <p class="position-absolute t-u " style="top:49%;left:25%;width:505px;line-height:1">{course_name}</p>
+    <?php
+    $admissionTime = strtotime($admission_date);
 
-    <p class="position-absolute " style="top:86%;left:16%;width:135px;">{date}</p>
+    if ($duration_type == 'month') {
+        $toDateString = strtotime("+$duration months", $admissionTime);
+    } else if ($duration_type == 'year') {
+        $toDateString = strtotime("+$duration years", $admissionTime);
+    }
+    $toDateString = strtotime('-1 month', $toDateString);
+    echo '<p class="position-absolute" style="top:55.2%;left:21%"> '.date('Y', $toDateString).'</p>';
+    echo '<p class="position-absolute" style="top:55.2%;left:58%"> '.$roll_no.'</p>';
+    ?>
+
+    <p class="position-absolute " style="top:82.2%;left:24%;width:135px;">{date}</p>
    
 
 

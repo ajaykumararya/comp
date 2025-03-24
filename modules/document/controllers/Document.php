@@ -506,9 +506,11 @@ class Document extends MY_Controller
     }
     private function get_other_doc($id, $table)
     {
-        $data = $this->db->select('s.name,s.roll_no,s.father_name,table.*,c.course_name,s.image,
+        $data = $this->db->select('s.admission_date,s.name,s.roll_no,s.father_name,table.*,c.course_name,s.image,
                 ce.institute_name,
-                cc.title as course_category
+                cc.title as course_category,
+                c.duration,
+                c.duration_type
             ')
             ->from('students as s')
             ->join($table . ' as table', 'table.student_id = s.id')
