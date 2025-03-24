@@ -80,7 +80,7 @@ $certificate = ($duration_type == 'month' or ($duration_type == 'year' && $durat
         <img src="upload/images/student_certificate_{certiticate_id}.png" style="width:96px;height:96px">
     </div>
     <p class="position-absolute" style="top:43.2%;left:28%;width:210px">{roll_no}</p>
-    <p class="position-absolute " style="top:43.2%;left:70%;width:300px">{enrollment_no} 23</p>
+    <p class="position-absolute " style="top:43.2%;left:70%;width:300px">{enrollment_no}</p>
     <p class="position-absolute" style="top:2.5%;font-size:12px;left:110px">{serial_no}</p>
     <div class="position-absolute" style="top:35%;left:44%">{student_name}</div>
     <div class="position-absolute" style="top:40%;left:40%">{father_name}</div>
