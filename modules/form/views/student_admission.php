@@ -14,7 +14,8 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                 <div class="text-center animation animated fadeInUp" data-aos="fade-up" data-animation="fadeInUp"
                     data-animation-delay="0.01s" style="animation-delay: 0.01s; opacity: 1;">
                     <div class="heading_s1 text-center">
-                        <h2 class="main-heading center-heading"><i class="fab fa-wpforms"></i> Student Admission Form
+                        <h2 class="main-heading center-heading"><i class="fab fa-wpforms"></i> 
+                        <?=$this->ki_theme->get_form_title('student_admission_form_title','Student Admission Form')?>
                         </h2>
                     </div>
                 </div>

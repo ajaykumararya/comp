@@ -1682,11 +1682,12 @@ class Ki_theme
                     $html .= $this->parse('wallet/low-balance', [], true);
                 if ($this->wallet_message_type) {
                     $return = $this->center_fix_fees();
-                    if ($this->wallet_balance) {
+                    $fee = isset($return[$this->wallet_message_type]) ? $return[$this->wallet_message_type] : 0;
+                    if ($this->wallet_balance && $fee) {
                         $html .= $this->parse('wallet/message', [
                             'type' => $this->wallet_message_type,
                             'wallet_balance' => $this->wallet_balance,
-                            'fee' => isset($return[$this->wallet_message_type]) ? $return[$this->wallet_message_type] : 0
+                            'fee' => $fee
                         ], true);
                     }
                 }
@@ -1703,6 +1704,10 @@ class Ki_theme
                 echo alert('This student is Referred via <a class="text-dark" href="' . base_url('student/profile/' . $check->row('coupon_by')) . '" target="_blank"><i class="fa fa-user text-dark fs-2"></i>' . $coupon_student_name . '</a>', 'danger fs-2');
             }
         }
+    }
+    function get_form_title($type,$default = ''){
+        $configs = $this->config();
+        return isset($configs[$type]) ? $configs[$type] : $default;
     }
 }
 ?>

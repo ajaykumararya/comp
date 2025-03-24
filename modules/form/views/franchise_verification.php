@@ -82,7 +82,7 @@
                 <div class="text-center animation animated fadeInUp" data-aos="fade-up" data-animation="fadeInUp"
                     data-animation-delay="0.01s" style="animation-delay: 0.01s; opacity: 1;">
                     <div class="heading_s1 text-center">
-                        <h2 class="main-heading center-heading"><i class="fas fa-user-check"></i>  <?=PATH == 'sewaedu' ? 'Centre' : 'ranchise'?> Verification</h2>
+                        <h2 class="main-heading center-heading"><i class="fas fa-user-check"></i>  <?=PATH == 'sewaedu' ? 'Centre Verification' : $this->ki_theme->get_form_title('franchise_verification_form_title','Franchise Verification')?></h2>
                     </div>
                 </div>
             </div>

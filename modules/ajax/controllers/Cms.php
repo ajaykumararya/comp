@@ -30,6 +30,59 @@ class Cms extends Ajax_Controller
             }
         }
     }
+    function edit_page_form()
+    {
+        $data = $this->post();
+        $myPage = $this->db->where('id',$this->post('id'))->get('his_pages');
+        if($myPage->num_rows()){
+            $row = $myPage->row();
+            $this->response('status',true);
+            $this->response('html', '
+                    <div class="form-group">
+                        <label class="form-label required">Page Name</label>
+                        <input type="text" value="'.$row->page_name.'" class="form-control" required placeholder="Enter Page Title Here.." name="page_name">
+                    </div>
+                    <div class="form-check form-check-custom form-check-solid form-check-success form-switch mt-5 ml-6">
+                        <input class="form-check-input w-35px h-20px" type="checkbox" name="checkSlug" id="kt_builder_sidebar_fixed_desktop2" checked> 
+                        
+                        <label class="form-check-label text-gray-700 fw-bold fs-6" for="kt_builder_sidebar_fixed_desktop2">
+                        Check if you want to keep the slug as the page name    
+                        </label>
+                       
+                    </div>
+                    <div class="form-group mt-3">
+                        <label class="form-label required">Slug</label>
+                        <input type="text" value="'.$row->link.'" readonly class="form-control" required placeholder="Enter Slug Here.." name="link">
+                    </div>
+                    <div class="form-check form-check-custom form-check-solid form-check-success form-switch mt-5 ml-6">
+                        <input class="form-check-input w-45px h-30px" type="checkbox" name="isMenu" id="kt_builder_sidebar_fixed_desktop1" '.($row->isMenu ? 'checked' : '').'>
+                        <!--begin::Label-->
+                        <label class="form-check-label text-gray-700 fw-bold fs-1" for="kt_builder_sidebar_fixed_desktop1">List in Menu</label>
+                        <!--end::Label-->
+                    </div>
+                    <div class="form-check form-check-custom form-check-solid form-check-success form-switch mt-5 ml-6">
+                        <input class="form-check-input w-45px h-30px" type="checkbox" name="redirection" id="kt_builder_sidebar_fixed_desktop" '.($row->redirection ? 'checked' : '').'> 
+                        <!--begin::Label-->
+                        <label class="form-check-label text-gray-700 fw-bold fs-1" for="kt_builder_sidebar_fixed_desktop">Redirect A
+                            New Page</label>
+                        <!--end::Label-->
+                    </div>
+            ');
+        }
+        else
+            $this->response('html','Something went wrong');
+        
+    }
+    function update_page_slug_data($id){
+        $data = $this->post();
+        $this->db->where('id',$id)->update('his_pages',[
+            'page_name' => $data['page_name'],
+            'link' => $data['link'],
+            'isMenu' => isset($data['isMenu']) ? 1 : 0,
+            'redirection' => isset($data['redirection']) ? 1 : 0
+        ]);
+        $this->response('status', true);
+    }
     function get_menus()
     {
         $menus = $this->SiteModel->print_menu_items();

@@ -5,7 +5,7 @@
                 <div class="text-center animation animated fadeInUp" data-aos="fade-up" data-animation="fadeInUp"
                     data-animation-delay="0.01s" style="animation-delay: 0.01s; opacity: 1;">
                     <div class="heading_s1 text-center">
-                        <h2 class="main-heading center-heading"><i class="fab fa-wpforms"></i> <?=PATH == 'sewaedu' ? 'Centre Apply Form' : 'Franchise Apply Form'?></h2>
+                        <h2 class="main-heading center-heading"><i class="fab fa-wpforms"></i> <?=PATH == 'sewaedu' ? 'Centre Apply Form' : $this->ki_theme->get_form_title('centre_form_title','Franchise Apply Form')?></h2>
                     </div>
                 </div>
             </div>
@@ -208,15 +208,16 @@
                                         <?php
                                     }
                                     if (CHECK_PERMISSION('CENTRE_LOGO')) {
+                                        $required = PATH == 'svatii' ? '' : 'required';
                                         ?>
                                         <div class="col-md-3 mb-2">
                                             <div class="form-control">
-                                                <label for="centre_logo" class="form-label required">Centre <?=PATH == 'nbeat' ? 'Photo' : 'Logo'?></label>
+                                                <label for="centre_logo" class="form-label <?=$required?>">Centre <?=PATH == 'nbeat' ? 'Photo' : 'Logo'?></label>
                                             </div>
                                         </div>
                                         <div class="col-md-9 mb-2">
                                             <div class="form-group">
-                                                <input type="file" required class="form-control" required name="logo"
+                                                <input type="file" <?=$required?> class="form-control" name="logo"
                                                     id="centre_logo">
                                             </div>
                                         </div>

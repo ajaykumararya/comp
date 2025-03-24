@@ -191,7 +191,7 @@
                                 <!--begin::Heading-->
 
                                 <!--begin::Input group--->
-                                <div class="fv-row mb-8 input-group input-group-icon">
+                                <div class="fv-row mb-8 input-group input-group-icon animation animation-slide-in-up">
                                     <!--begin::Email-->
                                     <span class="input-group-addon ">
                                         <span class="icon icon-group">
@@ -205,7 +205,7 @@
                                 </div>
 
                                 <!--end::Input group--->
-                                <div class="fv-row mb-3 input-group input-group-icon">
+                                <div class="fv-row mb-3 input-group input-group-icon animation animation-slide-in-up">
                                     <!--begin::Password-->
                                     <span class="input-group-addon ">
                                         <span class="icon icon-group">
@@ -232,7 +232,7 @@
                                 <!--end::Wrapper-->
 
                                 <!--begin::Submit button-->
-                                <div class="d-grid mb-10">
+                                <div class="d-grid mb-10 animation animation-slide-in-up">
                                     <button type="submit" style="color:white" id="kt_sign_in_submit" class="btn">
                                         <i class="fas fa-sign-in-alt" style="color:white;"></i>
                                         <!--begin::Indicator label-->

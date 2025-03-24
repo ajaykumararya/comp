@@ -354,12 +354,25 @@ const validateAmount = (amount) => {
     // Check if the amount is numeric and matches the regular expression
     return $.isNumeric(amount) && regex.test(amount);
 }
+// const createSlug = (text) => {
+//     return text.toLowerCase()
+//         .trim()
+//         .replace(/[^\w\s-]/g, '') // Remove non-word characters
+//         .replace(/\s+/g, '-')      // Replace spaces with hyphens
+//         .replace(/--+/g, '-');     // Replace multiple hyphens with a single hyphen
+// }
 const createSlug = (text) => {
+    const urlPattern = /^(https?:\/\/[^\s/$.?#].[^\s]*)$/i;
+    if (urlPattern.test(text.trim())) {
+        return text.trim(); // Return the URL as it is
+    }
     return text.toLowerCase()
-        .replace(/[^\w\s-]/g, '') // Remove non-word characters
-        .replace(/\s+/g, '-')      // Replace spaces with hyphens
-        .replace(/--+/g, '-');     // Replace multiple hyphens with a single hyphen
-}
+        .trim()                     // Remove leading & trailing spaces
+        .replace(/[^\w\s-]/g, '')    // Remove special characters except hyphen & space
+        .replace(/\s+/g, '-')        // Replace spaces with hyphens
+        .replace(/--+/g, '-')        // Replace multiple hyphens with a single hyphen
+        .replace(/^-+|-+$/g, '');    // Remove leading & trailing hyphens
+};
 const warn = (message) => {
     MyConsole(message, 'warn');
 }
@@ -417,6 +430,10 @@ $(document).on('click', '[data-view_image]', function () {
         ki_modal.find('.modal-footer').show();
     })
 });
+ki_modal.on('hidden.bs.modal', function () {
+    ki_modal.find('form').off('submit');
+    ki_modal.find('.modal-footer').show();
+})
 const EditForm = (table, url, title = 'Edit Record') => {
     table.EditForm(url, title);
 }

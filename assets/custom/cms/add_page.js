@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
     $(document).on('keyup change blur', '.all-div input', function () {
         checkValidSlug(this.value);
     });
+
     function checkValidSlug(value) {
         var all_methods = $('#all-methods').val();
         all_methods = $.parseJSON(all_methods);
