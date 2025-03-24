@@ -9,13 +9,15 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     });
-    validation.addField("sr_no", {
-        validators: {
-            notEmpty: {
-                message: 'Serial No field is required'
+    if ($('[name="sr_no"]').length) {
+        validation.addField("sr_no", {
+            validators: {
+                notEmpty: {
+                    message: 'Serial No field is required'
+                }
             }
-        }
-    });
+        });
+    }
     validation.addField("date", {
         validators: {
             notEmpty: {
@@ -83,6 +85,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             },
             {
+                targets: 2,
+                render : function(data,type,row){
+                    if (!$('[name="sr_no"]').length) 
+                        return 1020200 + parseInt(row.id);
+                    return data;
+                }
+            },
+            {
                 targets: -1,
                 render: function (data, type, row) {
                     return `<div class="btn-group">
@@ -92,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
         ]
-    }).on('draw',function(){
+    }).on('draw', function () {
         handleDeleteRows('other/delete-migration-certificate').then((r) => {
             table.DataTable().ajax.reload();
         });

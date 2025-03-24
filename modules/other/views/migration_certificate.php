@@ -12,10 +12,16 @@
                             
                         </select>
                     </div>
+                    <?php
+                    if(PATH != 'upstate'):
+                    ?>
                     <div class="col-md-4 form-group mb-3">
                         <label for="" class="form-label required">Serial No.</label>
                         <input type="text" class="form-control" placeholder="Enter Serial No" name="sr_no">
                     </div>
+                    <?php
+                    endif;
+                    ?>
                     <div class="col-md-4 form-group mb-3">
                         <label for="" class="form-label required">Date</label>
                         <input type="text" name="date" class="form-control current-date" value="<?=date('d-m-Y')?>">

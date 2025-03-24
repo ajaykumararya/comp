@@ -104,7 +104,7 @@
 
     <p class="position-absolute t-u" style="top:30%;left:42%;width:350px">{name}</p>
     <p class="position-absolute t-u" style="top:36.3%;left:30%;width:350px">{father_name}</p>
-    <p class="position-absolute " style="top:2.5%;left:13%;width:135px;font-size:12px">{sr_no}</p>
+    <p class="position-absolute " style="top:2.5%;left:13%;width:135px;font-size:12px"><?=(1020200 + $id)?></p>
     <!-- <p class="position-absolute" style="top:4%;left:70%;width:150px;text-align:center">{roll_no}</p> -->
     <p class="position-absolute " style="top:42.8%;left:20%;width:580px;line-height:1">{institute_name}</p>
     <p class="position-absolute t-u " style="top:49%;left:25%;width:505px;line-height:1">{course_name}</p>
