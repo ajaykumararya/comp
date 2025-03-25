@@ -72,6 +72,7 @@
                                 $i = 1;
                                 foreach ($get->result() as $row) {
                                     // pre($row);
+                                    echo '<tr>';
                                     echo '<td>' . $i++ . '</td>';
                                     echo '<td>
                                 
@@ -95,6 +96,7 @@
                                     echo '<td>' . $row->payment_date . '</td>';
                                     echo '<td>' . $row->payment_id . '</td>';
                                     echo '<td>{inr} ' . $row->ttl_amount . '</td>';
+                                    echo '</tr>';
                                 }
                                 ?>
                             </tbody>
