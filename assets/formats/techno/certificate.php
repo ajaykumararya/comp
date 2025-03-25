@@ -84,7 +84,7 @@
         <div class="middle-div" style="margin-top:1.34rem">{roll_no}</div>
 
         <div class="middle-div text-capitlize" style="margin-top:6rem;margin-left:2rem">
-            <?= (humnize($marksheet_duration, $duration_type)) ?>
+            <?= (humnize($duration, $duration_type)) ?>
         </div>
 
 
