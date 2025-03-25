@@ -298,6 +298,9 @@ class Student_model extends MY_Model
                 $this->db->join($certificate.' as o_cert', 'o_cert.student_id = s.id');
                 $this->db->where('s.id', $student_id);
                 break;
+            case 'all_fee_transcations':
+
+                break;
         }
         return $this->db->get();
     }
@@ -565,5 +568,8 @@ class Student_model extends MY_Model
         $this->db->where('material_id', $material_id);
         return $this->db->get('study_material');
 
+    }
+    function fetch_fee_transactions_group_by($where = []){
+        return $this->get_switch('fetch_fee_transactions_group_by',$where);
     }
 }
