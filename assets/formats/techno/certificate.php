@@ -7,11 +7,12 @@
     <title>{student_name} Admit Card</title>
     {basic_header_link}
     <style>
-        body{
+        body {
             font-family: Arial, Helvetica, sans-serif;
-        
+
             font-weight: bold;
         }
+
         .text-capitlize {
             text-transform: capitalize;
         }
@@ -35,7 +36,8 @@
             font-size: 14px;
             display: inline-block;
         }
-        #photo1{
+
+        #photo1 {
             z-index: 999;
             top: 21.3rem;
             right: 47px;
@@ -43,20 +45,23 @@
             ;
             height: 95px;
         }
+
         #photo {
             z-index: 999;
             bottom: 14%;
             left: 6rem;
             width: 70px;
         }
-        .middle-div{
+
+        .middle-div {
             width: 60%;
-            margin-left:7rem;
+            margin-left: 7rem;
             text-align: center;
-            
+
         }
-        .test{
-            border:1px solid red
+
+        .test {
+            border: 1px solid red
         }
     </style>
 </head>
@@ -72,14 +77,16 @@
     </div>
     <div class="position-absolute" style="top:37%;left:17%">{session}</div>
     <div class="position-absolute w-100" style="top:49.98%;padding-left:7px;z-index:9999">
-        
-            <div class="middle-div" style="margin-left:9.2rem">{student_name}</div>
-        
-            <div class="middle-div" style="margin-top:1.2rem;margin-left:9.4rem">{father_name}</div>
-            <div class="middle-div" style="margin-top:1.34rem">{roll_no}</div>
-            
-            <div class="middle-div text-capitlize" style="margin-top:6rem;margin-left:2rem">{duration} {duration_type}</div>
-            
+
+        <div class="middle-div" style="margin-left:9.2rem">{student_name}</div>
+
+        <div class="middle-div" style="margin-top:1.2rem;margin-left:9.4rem">{father_name}</div>
+        <div class="middle-div" style="margin-top:1.34rem">{roll_no}</div>
+
+        <div class="middle-div text-capitlize" style="margin-top:6rem;margin-left:2rem">
+            <?= (humnize($marksheet_duration, $duration_type)) ?>
+        </div>
+
 
     </div>
     <div class="position-absolute w-100" style="top:48.3rem;left:16rem">{course_name}</div>
@@ -87,7 +94,7 @@
     <div class="position-absolute w-100" style="top:66.2%;left:70%">{percentage}%</div>
     <div class="position-absolute w-100" style="top:69.7%;left:33%">{grade}</div>
     <div class="position-absolute" style="bottom:9%;left:18%">{createdOn}</div>
-    
+
 </body>
 
 </html>

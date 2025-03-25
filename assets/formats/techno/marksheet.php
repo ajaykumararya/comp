@@ -89,6 +89,9 @@
     <div class="position-absolute" id="photo">
         <img src="upload/{image}" style="width:95px;height:113px">
     </div>
+    <div class="position-absolute" style="left:79.5%;top:37%">
+        <img src="upload/images/front_marksheet_{result_id}.png" style="width:75px">
+    </div>
 
     <p class="position-absolute" style="top:41.5%;left:27%">{student_name}</p>
     <p class="position-absolute" style="top:43.6%;left:27%">{father_name}</p>
@@ -97,39 +100,7 @@
     <p class="position-absolute" style="top:49.75%;left:27%">{center_name}</p>
     <p class="position-absolute" style="top:51.65%;left:27%">{course_name}</p>
     <p class="position-absolute text-capitlize" style="top:53.55%;left:27%">{duration} {duration_type}</p>
-    <!--
-    <div class="position-absolute w-100" style="top:39.62%;padding-left:9px;z-index:9999">
-
-        <table class="table table-bordered" style="margin-left:20%">
-            <tbody>
-
-                <tr>
-                    <td class="text-capitlize">{student_name}</td>
-                </tr>
-                <tr>
-                    <td class="text-capitlize">{father_name}</td>
-                </tr>
-                <tr>
-                    <td class="text-capitlize">{mother_name}</td>
-                </tr>
-                <tr>
-                    <td>{enrollment_no}</td>
-                </tr>
-                <tr>
-                    <td class="text-capitlize" style="line-height:0.9">{center_name}</td>
-                </tr>
-                <tr>
-                    <td class="text-capitlize" style="line-height:2">{course_name}</td>
-                </tr>
-                <tr>
-                    <td class="text-capitlize" style="line-height:0.6">{duration} {duration_type}</td>
-                </tr>
-            </tbody>
-        </table>
-
-
-    </div>
-    -->
+  
     <div class="position-absolute " style="top:57%;left:8%;width:84%">
         <table id="first" border="0" style="width:100%">
             <thead>
@@ -180,7 +151,7 @@
 
     <p class="position-absolute" style="bottom:14%;left:30%;font-size:15px;width:100px">{grade}</p>
 
-    <p class="position-absolute" style="bottom:14%;left:65%;font-size:15px">{percentage} %</p>
+    <p class="position-absolute" style="bottom:14%;left:65%;font-size:15px"><?=number_format($percentage,2)?> %</p>
     <p class="position-absolute" style="bottom:7.7%;left:20%;font-size:12px">{issue_date}</p>
 
 </body>
