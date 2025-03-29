@@ -100,7 +100,7 @@ $IsPassout = $this->student_model->get_switch('passout', ['id' => $student_id])-
                                 <tr>
                                     <th width="30%">Time Table </th>
                                     <td width="2%">:</td>
-                                    <td>{batch_name} <?= $IsPassout ? label('Passount Student', 'success') : '' ?></td>
+                                    <td>{batch_name} <?= $IsPassout ? label('Passout Student', 'success') : '' ?></td>
                                 </tr>
                                 <?php
                             }
@@ -109,7 +109,7 @@ $IsPassout = $this->student_model->get_switch('passout', ['id' => $student_id])-
                                 <tr>
                                     <th width="30%">Session </th>
                                     <td width="2%">:</td>
-                                    <td>{session} <?= $IsPassout ? label('Passount Student', 'success') : '' ?></td>
+                                    <td>{session} <?= $IsPassout ? label('Passout Student', 'success') : '' ?></td>
                                 </tr>
                                 <?php
                             }
