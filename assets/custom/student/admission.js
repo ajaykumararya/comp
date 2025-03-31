@@ -394,7 +394,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 }
                 var btn = $('#form').find('button');
                 var price = $('#centre_id').find('option:selected').data('wallet');
-                // alert(price+''+course_fee)
+                console.log(price+','+course_fee)
                 if (price < course_fee) {
                     SwalWarning(`Wallet Balance is Low...\n
                                 <b class="text-success">Dedcut Course Fee : ${inr} ${course_fee}</b>\n
