@@ -12,11 +12,12 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3"></div>
+            <?php echo THEME == 'theme-07' ? '' : '<div class="col-md-3"></div>'; ?>
+
             <div class="col-md-6 col-md-offset-3 mb-4 mt-4">
                 <form action="" class="student-login-form animation animated fadeInLeft">
-                    <div class="card">
-                        <div class="card-body">
+                    <div class="<?= themeCard('main', 'panel-primary') ?>">
+                        <div class="<?= themeCard('body') ?>">
                             <div class="form-group">
                                 <label for="" class="form-label mt-2 required">{rollno_text}</label>
                                 <input type="text" name="roll_no" placeholder="Enter {rollno_text}." class="form-control">
@@ -29,7 +30,7 @@
                                 <p><i class="fa fa-bell"></i> If the password has not been created or changed, then enter 2 letters of your name and the year of your date of birth. <br>Password Example : <code> AJ1998</code> </p>
                             </div>
                         </div>
-                        <div class="card-footer">
+                        <div class="<?= themeCard('footer') ?>">
                             <div class="btn-wrapper btn-wrapper2">
                                 <?= $this->ki_theme->set_class('btn btn-outline-success')->button('<span><i class="fa fa-sign-in"></i> Login in</span>','submit') ?>
                             </div>

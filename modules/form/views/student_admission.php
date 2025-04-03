@@ -14,8 +14,8 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                 <div class="text-center animation animated fadeInUp" data-aos="fade-up" data-animation="fadeInUp"
                     data-animation-delay="0.01s" style="animation-delay: 0.01s; opacity: 1;">
                     <div class="heading_s1 text-center">
-                        <h2 class="main-heading center-heading"><i class="fab fa-wpforms"></i> 
-                        <?=$this->ki_theme->get_form_title('student_admission_form_title','Student Admission Form')?>
+                        <h2 class="main-heading center-heading"><i class="fab fa-wpforms"></i>
+                            <?= $this->ki_theme->get_form_title('student_admission_form_title', 'Student Admission Form') ?>
                         </h2>
                     </div>
                 </div>
@@ -24,8 +24,8 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
         <div class="row">
             <div class="col-md-12 mb-4 mt-4">
                 <form action="" class="student-admission-form animation animated fadeInLeft">
-                    <div class="card border-dark">
-                        <div class="card-body ">
+                    <div class="<?= themeCard('main', 'panel-theme') ?> border-dark">
+                        <div class="<?= themeCard('body') ?> ">
                             <div class="row">
                                 <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
                                     <label class="form-label required">Admission Date</label>
@@ -305,10 +305,10 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                         <?php
                         if (CHECK_PERMISSION('STUDENT_EXAMINATION_FORM')):
                             ?>
-                            <div class="card-header bg-dark">
+                            <div class="<?= themeCard('header') ?> bg-dark">
                                 <h3 class="card-title text-white">Examination Passed</h3>
                             </div>
-                            <div class="card-body">
+                            <div class="<?= themeCard('body') ?> ">
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -348,15 +348,16 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                             <?php
                         endif;
                         ?>
-                        <div class="card-header bg-dark">
+                        <div class="<?= themeCard('header') ?>  bg-dark">
                             <h3 class="card-title text-white"><i class="fa fa-file"></i> Upload Documents</h3>
                         </div>
 
-                        <div class="card-body">
+                        <div class="<?= themeCard('body') ?> ">
                             <div class="row">
                                 <div class="col-md-3 mb-4">
                                     <div class="form-control">
-                                        <label for="adhar_card" class="form-label required">Aadhar Card <?=CHECK_PERMISSION('STUDENT_ADHAR_BACK') ? 'Front' : ''?>
+                                        <label for="adhar_card" class="form-label required">Aadhar Card
+                                            <?= CHECK_PERMISSION('STUDENT_ADHAR_BACK') ? 'Front' : '' ?>
                                         </label>
                                     </div>
                                 </div>
@@ -413,7 +414,7 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                             </div>
 
                         </div>
-                        <div class="card-footer">
+                        <div class="<?= themeCard('footer') ?> ">
                             <div class="btn-wrapper btn-wrapper2">
                                 <?= $this->ki_theme->set_class('btn btn-outline-success')->button('<span><i class="fa fa-plus"></i> Admission Now</span>', 'submit') ?>
                             </div>

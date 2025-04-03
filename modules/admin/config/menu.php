@@ -747,7 +747,8 @@ $config['cms_setting'] = array(
             'label' => 'Slider',
             'type' => 'slider_setting',
             'icon' => array('picture', 4),
-            'url' => 'cms/slider'
+            'url' => 'cms/slider',
+            'condition' => !CHECK_PERMISSION('REV_SLIDER'),
         ),
         array(
             'label' => 'Page Area',

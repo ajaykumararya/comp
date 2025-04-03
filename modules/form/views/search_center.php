@@ -12,11 +12,12 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3"></div>
+            <?php echo THEME == 'theme-07' ? '' : '<div class="col-md-3"></div>'; ?>
+
             <div class="col-md-6 col-md-offset-3 mb-4 mt-4">
                 <form action="" class="seach-study-center-form animation animated fadeInLeft">
-                    <div class="card">
-                        <div class="card-body">
+                    <div class="<?=themeCard('main','panel-theme')?>">
+                        <div class="<?=themeCard('body')?>">
                             <div class="form-group mb-4">
                                 <label class="form-label required">Select State </label>
                                 <select class="form-control get_city" name="state_id" data-control="select2"
@@ -40,7 +41,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="card-footer">
+                        <div class="<?=themeCard('footer')?>">
                             <div class="btn-wrapper btn-wrapper2">
                                 <?= $this->ki_theme->set_class('btn btn-outline-success')->button('<span><i class="fa fa-search"></i> Search</span>', 'submit') ?>
                             </div>

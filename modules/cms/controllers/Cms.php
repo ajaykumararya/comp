@@ -52,7 +52,7 @@ class Cms extends MY_Controller
         $id = $this->uri->segment(3,0);       
         $this->set_data('type',$id);
         $this->set_data('form',cms_content_form($id));
-        if(THEME != 'theme=03' AND !in_array($id,['our_certificate','faculty','header'])){
+        if(THEME != 'theme=03' AND !in_array($id,['our_certificate','faculty','header','revosultion_slider'])){
             $this->ki_theme->breadcrumb_action_html(
                 $this->ki_theme->drawer_button('page',$id,humanize($id))
             );

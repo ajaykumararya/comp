@@ -88,18 +88,19 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3"></div>
+        <?php echo THEME == 'theme-07' ? '' : '<div class="col-md-3"></div>'; ?>
+
             <div class="col-md-6 col-md-offset-3 mb-4 mt-4">
                 <form action="" class="center-verification-form animation animated fadeInLeft">
-                    <div class="card">
-                        <div class="card-body">
+                    <div class="<?=themeCard('main','panel-theme')?>">
+                        <div class="<?=themeCard('body')?>">
                             <div class="form-group">
                                 <label for="" class="form-label mt-2">Institute ID</label>
                                 <input type="text" name="center_number" placeholder="Enter Institute ID"
                                     class="form-control">
                             </div>
                         </div>
-                        <div class="card-footer">
+                        <div class="<?=themeCard('footer')?>">
                             <div class="btn-wrapper btn-wrapper2">
                                 <?= $this->ki_theme->set_class('btn btn-outline-success')->button('<span><i class="fa fa-search"></i> Verify</span>', 'submit') ?>
                             </div>

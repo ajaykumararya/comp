@@ -40,7 +40,7 @@
                                         </div>
                                     </center>
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-striped w-100">
+                                        <table class="table table-bordered table-striped w-100 course-table">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
@@ -91,5 +91,16 @@
             $('[data-category_id]').hide();
             $('[data-category_id="' + id + '"]').show(500);
         }
+        reindexTable();
     })
+    function reindexTable() {
+        $('.course-table tbody tr:visible').each(function (index) {
+            $(this).find('td:first').text(index + 1 + '.'); // Update index number
+        });
+    }
+
+    // Initial indexing on page load
+    $(document).ready(function () {
+        reindexTable();
+    });
 </script>

@@ -470,12 +470,15 @@ class Site_Controller extends MY_Controller
         ' . $this->company_name());
         $items = $this->SiteModel->print_menu_items([], true);
         $this->set_data('menus', $items['menus']);
+        $this->set_data('breadcrumb', $items['breadcrumb']);
         $index = uri_string() == '' ? base_url() : base_url(uri_string());
         $this->isOK = (array_key_exists($index, $items['all_pages_link']));
         // echo $index;
         // pre($items,true);
         if ($this->isOK) {
             $this->pageData = $items['all_pages_link'][$index];
+            defined('CURRENT_PAGE_ID') or define('CURRENT_PAGE_ID', $this->pageData['id']);
+            // pre($this->pageData,true);
             $this->set_data('page_name', $this->pageData['label']);
         }
         $this->init_setting();

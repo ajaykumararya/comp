@@ -4,13 +4,13 @@ class SiteModel extends MY_Model
     function ttl_courses()
     {
         if ($this->isAdmin()) {
-            return $this->db->where('isDeleted',0)->get('course')->num_rows();
+            return $this->db->where('isDeleted', 0)->get('course')->num_rows();
         }
         if ($this->isCenter()) {
             return $this->db //->select()
                 ->from('course as c')
                 ->join('center_courses as cc', 'c.id = cc.course_id and cc.center_id = ' . $this->loginId())
-                ->where('c.isDeleted',0)
+                ->where('c.isDeleted', 0)
                 ->get()->num_rows();
         }
         return 0;
@@ -20,16 +20,19 @@ class SiteModel extends MY_Model
         $this->db->where($where);
         return $this->db->get('district');
     }
-    function get_state($where){
+    function get_state($where)
+    {
         $this->db->where($where);
         return $this->db->get('state');
     }
 
-    function city($id){
-        return $this->db->where('DISTRICT_ID',$id)->get('district')->row('DISTRICT_NAME');
+    function city($id)
+    {
+        return $this->db->where('DISTRICT_ID', $id)->get('district')->row('DISTRICT_NAME');
     }
-    function state($id){
-        return $this->db->where('STATE_ID',$id)->get('state')->row('STATE_NAME');
+    function state($id)
+    {
+        return $this->db->where('STATE_ID', $id)->get('state')->row('STATE_NAME');
     }
     function list_page()
     {
@@ -54,12 +57,12 @@ class SiteModel extends MY_Model
             $thisRef['parent'] = $data->parent_id;
             $thisRef['type'] = start_with('http', $data->link) ? 'link' : 'page';
             $thisRef['label'] = $data->page_name;
-            $thisRef['link'] = ((DefaultPage == $data->id) ? base_url() : (start_with($data->link,'http') ? $data->link : base_url($data->link)));
+            $thisRef['link'] = ((DefaultPage == $data->id) ? base_url() : (start_with($data->link, 'http') ? $data->link : base_url($data->link)));
             $thisRef['id'] = $data->id;
             $thisRef['target'] = $data->redirection ? 'target="_blank"' : '';
             $thisRef['isActive'] = (!start_with($data->link, 'http')) ? (uri_string() === $data->link) : false;
             $allPages[$thisRef['link']] = $thisRef;
-            if($data->isMenu){
+            if ($data->isMenu) {
                 if ($data->parent_id == 0)
                     $items[$data->id] = &$thisRef;
                 else
@@ -67,8 +70,25 @@ class SiteModel extends MY_Model
             }
         }
         if ($withPagesArray)
-            return ['menus' => $items, 'all_pages_link' => $allPages];
+            return ['menus' => $items, 'all_pages_link' => $allPages, 'breadcrumb' => $this->getBreadcrumb($items,current_url())];
         return $items;
+    }
+    function getBreadcrumb($menu, $targetUrl, $path = [])
+    {
+        foreach ($menu as $item) {
+            $newPath = array_merge($path, [$item['label']]); 
+
+            if ($item['link'] === $targetUrl) {
+                return $newPath;
+            }
+            if (!empty($item['child'])) {
+                $foundPath = $this->getBreadcrumb($item['child'], $targetUrl, $newPath);
+                if ($foundPath) {
+                    return $foundPath;
+                }
+            }
+        }
+        return null; // URL नहीं मिला
     }
     function add_page($data)
     {
@@ -86,7 +106,8 @@ class SiteModel extends MY_Model
             'event_id' => $this->db->insert_id()
         ]);
     }
-    function get_page($where){
+    function get_page($where)
+    {
         $this->db->where($where);
         return $this->db->get('his_pages');
     }
@@ -173,8 +194,9 @@ class SiteModel extends MY_Model
         }
         return $return;
     }
-    function get_session(){
-        return $this->db->where('status',1)->get('session');
+    function get_session()
+    {
+        return $this->db->where('status', 1)->get('session');
     }
     function get_theme_templates()
     {
@@ -215,17 +237,18 @@ class SiteModel extends MY_Model
     function list_enquiries($type = 0)
     {
         $this->db->select("*,DATE_FORMAT(timestamp,'%d-%m-%Y') as date,UPPER(REPLACE(type,'_', ' ')) AS `type_data`")
-            
+
             ->order_by('id', 'DESC');
-        if($type){
+        if ($type) {
             $this->db->where('type', $type);
         }
         return $this->db->get('contact_us_action');
     }
 
-    function get_contents($type,$where = 0){
-        if($where && is_array($where))
+    function get_contents($type, $where = 0)
+    {
+        if ($where && is_array($where))
             $this->db->where($where);
-        return $this->db->where('type',$type)->get('content');
+        return $this->db->where('type', $type)->get('content');
     }
 }

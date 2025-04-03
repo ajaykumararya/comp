@@ -1705,9 +1705,35 @@ class Ki_theme
             }
         }
     }
-    function get_form_title($type,$default = ''){
+    function get_form_title($type, $default = '')
+    {
         $configs = $this->config();
         return isset($configs[$type]) ? $configs[$type] : $default;
+    }
+
+
+    function panel($class = 'main', $append = '')
+    {
+        $type = THEME == 'theme-07' ? 'panel' : 'card';
+        $boxs = [
+            'card' => [
+                'main' => 'card ' . $append,                
+                'body' => 'card-body ' . $append,
+                'header' => 'card-header ' . $append,
+                'footer' => 'card-footer ' . $append
+            ],
+            'panel' => [
+                'main' => 'panel ' . $append,                
+                'body' => 'panel-body ' . $append,
+                'header' => 'panel-heading ' . $append,
+                'footer' => 'panel-footer ' . $append
+            ],
+        ];
+
+        if (isset($boxs[$type])) {
+            return isset($boxs[$type][$class]) ? $boxs[$type][$class] : '';
+        }
+        return 'dd';
     }
 }
 ?>

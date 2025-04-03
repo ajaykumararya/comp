@@ -1,4 +1,9 @@
 <?php
+function themeCard( $class = 'main', $append = '')
+{
+    $ci = &get_instance();
+    return $ci->ki_theme->panel($class, $append);
+}
 if (!function_exists('alert')) {
     function alert($message = '', $class = 'success')
     {

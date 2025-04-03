@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
             url : 'academic/save-session-schedule',
             data : new FormData(this)
         }).then((res) => {
-            log(res);
+            SwalSuccess('Success','Schedule Updated Successully..');
         });
     })
     institue_box.change(function () {

@@ -13,9 +13,9 @@
         <div class="row">
             <div class="col-md-12">
                 <form id="add_center_form" action="" class="p-0" method="POST" autocomplete="off">
-                    <div class="{card_class} border-dark">
+                    <div class="<?=themeCard('main','panel-theme')?> border-dark">
                         <div id="kt_docs_card_collapsible" class="collapse show">
-                            <div class="card-body">
+                            <div class="<?=themeCard('body')?>">
                                 <div class="row">
                                     <input type="hidden" required name="center_number" value="<?= time() ?>">
                                     <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
@@ -175,10 +175,10 @@
                                     </div> -->
                                 </div>
                             </div>
-                            <div class="card-header bg-dark">
+                            <div class="<?=themeCard('header')?> bg-dark">
                                 <h4 class="card-title text-white"> <i class="fa fa-file"></i> Upload Documents</h4>
                             </div>
-                            <div class="card card-body">
+                            <div class="<?=themeCard('card','card-body')?>">
                                 <div class="row">
                                     <div class="col-md-3 mb-2">
                                         <div class="form-control">
@@ -249,7 +249,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer">
+                        <div class="<?=themeCard('footer')?>">
                             <div class="btn-wrapper btn-wrapper2">
                                 <?= $this->ki_theme->set_class('btn btn-outline-success')->button('<span><i class="fa fa-save"></i> Submit</span>', 'submit') ?>
                             </div>
