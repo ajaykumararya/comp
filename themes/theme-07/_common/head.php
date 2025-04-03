@@ -1,6 +1,6 @@
 <style>
   :root {
-    --primary-color:rgb(160, 12, 12);
+    --primary-color: rgb(160, 12, 12);
     --secondary-color: #d9a648;
   }
 </style>
@@ -57,6 +57,7 @@
     border-color: var(--secondary-color) !important;
   }
 
+  .panel-group.accordion-icon-filled.accordion-icon-left.accordion-icon-filled-theme-colored2 .panel-heading .panel-title a:before,
   .bg-theme-colored2,
   .team-block .team-thumb .styled-icons a:hover,
   .work-gallery .gallery-thumb .styled-icons a:hover,
@@ -75,8 +76,10 @@
   .search-menu,
   .menuzord .menuzord-menu>li.active>a,
   .menuzord .menuzord-menu>li:hover>a,
+  .menuzord .menuzord-menu ul.dropdown li.active>a,
   .menuzord .menuzord-menu ul.dropdown li:hover>a {
-    background-color: var(--primary-color)!important;
+    background-color: var(--primary-color) !important;
+    color:white
   }
 </style>
 <?php

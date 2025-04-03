@@ -310,16 +310,11 @@
     <!-- JS | Custom script for all pages -->
     <script data-cfasync="false" src="{theme_url}assets/js/email-decode.min.js"></script>
     <script src="{theme_url}assets/js/custom.js"></script>
-    <!-- <script src="{theme_url}assets/js/revolution-slider/js/jquery.themepunch.revolution.min.js"></script>
-    <script src="{theme_url}assets/js/revolution-slider/js/jquery.themepunch.tools.min.js"></script> -->
-    <!-- <script src="https://cdn.jsdelivr.net/gh/themepunch/revolution/js/revolution.extension.slideanims.min.js"></script>
-    <script src="{theme_url}assets/js/revolution-slider/js/extensions/revolution.extension.slideanims.min.js"></script> -->
-
-    <!-- SLIDER REVOLUTION 5.0 EXTENSIONS  
-      (Load Extensions only on Local File Systems ! 
-       The following part can be removed on Server for On Demand Loading) -->
-
-
+    <script>
+        $(document).ready(function() {
+            $("li.active").parents('li').addClass("active");
+        });
+    </script>
 </body>
 
 </html>

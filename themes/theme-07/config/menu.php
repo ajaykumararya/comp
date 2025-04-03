@@ -57,6 +57,12 @@ $menu = array(
             'type' => 'contact_us',
             'icon' => array('file', 4),
             'url' => 'cms/static-page/contact_us',
+        ),
+        array(
+            'label' => 'Events & FAQ',
+            'type' => 'events_and_faq',
+            'icon' => array('file', 4),
+            'url' => 'cms/static-page/events_and_faq',
         )
     )
 );
