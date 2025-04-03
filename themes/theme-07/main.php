@@ -33,7 +33,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-md-4 pr-0">
+                        <div class="col-md-3 pr-0">
                             <div class="widget">
                                 <ul class="styled-icons icon-sm pull-right flip sm-pull-none sm-text-center mt-5">
                                     <li><a href="{facebook}"><i class="fab fa-facebook text-white"></i></a></li>
@@ -44,7 +44,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <ul class="list-inline sm-pull-none sm-text-center text-right text-white mb-sm-20 mt-10">
                                 <?php
                                 $data = $this->SiteModel->get_contents('our-header-button');
