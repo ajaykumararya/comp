@@ -122,7 +122,8 @@ class Site extends Site_Controller
                 'student_address' => $data['address'],
                 'institute_name' => $data['institute_name'],
                 'training_period' => $data['training_period'],
-                'examination_body' => $data['examination_body']
+                'examination_body' => $data['examination_body'],
+                'photo' => $data['photo']
             ]);
             // $this->set_data($data);
             // $this->set_data('student_address', $data['address']);
