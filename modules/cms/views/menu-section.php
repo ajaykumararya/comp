@@ -11,7 +11,7 @@
         </div>
     </div>
     <?php
-    if (CHECK_PERMISSION('MENU_RIGHT_BUTTON')) {
+    if (CHECK_PERMISSION('MENU_RIGHT_BUTTON') && !CHECK_PERMISSION('EBOOK')) {
         ?>
         <div class="col-md-5">
             <form action="" class="extra-setting">

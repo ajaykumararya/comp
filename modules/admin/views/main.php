@@ -43,7 +43,25 @@
     <link rel="stylesheet" href="{base_url}assets/custom/custom.css">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <link href="{base_url}/assets/animation.css" rel="stylesheet" type="text/css" />
-
+    <script src="{base_url}assets/plugins/global/plugins.bundle.js"></script>
+<script src="{base_url}assets/js/scripts.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<script src="https://mark-freq32.c9.io/mark3/js/jquery.ui.touch-punch.min.js"></script>
+<!--end::Global Javascript Bundle-->
+<!--begin::Vendors Javascript(used for this page only)-->
+<script src="{base_url}assets/plugins/custom/datatables/datatables.bundle.js"></script>
+<script src="{base_url}assets/plugins/custom/vis-timeline/vis-timeline.bundle.js"></script>
+<script src="{base_url}assets/lib/5/index.js"></script>
+<script src="{base_url}assets/lib/5/xy.js"></script>
+<script src="{base_url}assets/lib/5/percent.js"></script>
+<script src="{base_url}assets/lib/5/radar.js"></script>
+<script src="{base_url}assets/lib/5/themes/Animated.js"></script>
+<!--end::Vendors Javascript-->
+<script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js"></script>
+<!--begin::Custom Javascript(used for this page only)-->
+<script src="{base_url}assets/js/widgets.bundle.js"></script>
+<script src="{base_url}assets/js/custom/widgets.js"></script>
+<script src="{base_url}assets/custom/jquery.nestable.js"></script>
     <style>
         .pulse-ring {
             height: 37px !important;
@@ -1035,38 +1053,7 @@
     ?>   
 </script>
 <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-<script src="{base_url}assets/plugins/global/plugins.bundle.js"></script>
-<script src="{base_url}assets/js/scripts.bundle.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-<script src="https://mark-freq32.c9.io/mark3/js/jquery.ui.touch-punch.min.js"></script>
-<!--end::Global Javascript Bundle-->
-<!--begin::Vendors Javascript(used for this page only)-->
-<script src="{base_url}assets/plugins/custom/datatables/datatables.bundle.js"></script>
-<script src="{base_url}assets/plugins/custom/vis-timeline/vis-timeline.bundle.js"></script>
-<script src="{base_url}assets/lib/5/index.js"></script>
-<script src="{base_url}assets/lib/5/xy.js"></script>
-<script src="{base_url}assets/lib/5/percent.js"></script>
-<script src="{base_url}assets/lib/5/radar.js"></script>
-<script src="{base_url}assets/lib/5/themes/Animated.js"></script>
-<!--end::Vendors Javascript-->
-<script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js"></script>
-<!--begin::Custom Javascript(used for this page only)-->
-<script src="{base_url}assets/js/widgets.bundle.js"></script>
-<script src="{base_url}assets/js/custom/widgets.js"></script>
-<script src="{base_url}assets/js/custom/apps/chat/chat.js"></script>
-<script src="{base_url}assets/js/custom/utilities/modals/upgrade-plan.js"></script>
-<script src="{base_url}assets/js/custom/utilities/modals/create-app.js"></script>
-<script src="{base_url}assets/js/custom/utilities/modals/create-campaign.js"></script>
-<script src="{base_url}assets/js/custom/utilities/modals/create-project/type.js"></script>
-<script src="{base_url}assets/js/custom/utilities/modals/create-project/budget.js"></script>
-<script src="{base_url}assets/js/custom/utilities/modals/create-project/settings.js"></script>
-<script src="{base_url}assets/js/custom/utilities/modals/create-project/team.js"></script>
-<script src="{base_url}assets/js/custom/utilities/modals/create-project/targets.js"></script>
-<script src="{base_url}assets/js/custom/utilities/modals/create-project/files.js"></script>
-<script src="{base_url}assets/js/custom/utilities/modals/create-project/complete.js"></script>
-<script src="{base_url}assets/js/custom/utilities/modals/create-project/main.js"></script>
-<script src="{base_url}assets/js/custom/utilities/modals/users-search.js"></script>
-<script src="{base_url}assets/custom/jquery.nestable.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.2/tinymce.min.js"
     integrity="sha512-6JR4bbn8rCKvrkdoTJd/VFyXAN4CE9XMtgykPWgKiHjou56YDJxWsi90hAeMTYxNwUnKSQu9JPc3SQUg+aGCHw=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>

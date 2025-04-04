@@ -129,7 +129,7 @@
                             // echo uri_string();
                             // pre($menus);
                             echo get_menu($menus, 'menuzord-menu');
-                            if ($rightButtonText = ES('menu_right_button_title', 0)) {
+                            if (($rightButtonText = ES('menu_right_button_title', 0) ) && !CHECK_PERMISSION('EBOOK')) {
                                 ?>
                                 <div class="pull-right sm-pull-none mb-sm-15">
                                     <a class="btn btn-colored btn-theme-colored2 mt-15 mt-sm-10 pt-10 pb-10 ajaxload-popup"

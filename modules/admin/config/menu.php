@@ -4,6 +4,32 @@ $config['dashboard'] = array(
         array('label' => 'Dashboard', 'type' => 'dashboard', 'url' => 'admin')
     )
 );
+$config['ebook'] = array(
+    'title' => 'EBOOK section',
+    'condition' => (OnlyForAdmin() && CHECK_PERMISSION('EBOOK')),
+    'menu' => array(
+        array(
+            'label' => 'E-Book Area',
+            'type' => 'ebook_area',
+            'icon' => array('book', 2),
+            'submenu' => array(
+                array(
+                    'label' => 'Category',
+                    'type' => 'category',
+                    'icon' => array('note-2', 4),
+                    'url' => 'ebook/category',
+                ),
+                array(
+                    'label' => 'Project(s)',
+                    'type' => 'project',
+                    'icon' => array('note-2', 4),
+                    'url' => 'ebook/project',
+                )
+            )
+        ),
+        array('label' => 'Users', 'icon' => ['profile', 2], 'type' => 'users', 'url' => 'ebook/users'),
+    )
+);
 $config['academic_area'] = array(
     'title' => 'Academics',
     'condition' => OnlyForAdmin(),
@@ -730,7 +756,7 @@ $config['cms_setting'] = array(
             'type' => 'cms_setting',
             'icon' => array('setting-2', 4),
             'url' => 'cms/setting'
-        ),        
+        ),
         array(
             'label' => 'SEO Setting',
             'type' => 'seo_setting',

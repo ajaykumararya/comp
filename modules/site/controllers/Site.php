@@ -73,6 +73,12 @@ class Site extends Site_Controller
                         if (!(CHECK_PERMISSION('CO_ORDINATE_SYSTEM') && $page->event_id == 'student_admission'))
                             $html .= $this->parse('form/' . $page->event_id, [], true);
                         break;
+                    case 'ebook':
+                        if (CHECK_PERMISSION('EBOOK')) {
+                            $pageHtml = $this->parse('ebook/project-system', (array) $page, true);
+                            $html .= $this->parse('content', ['content' => $pageHtml], true);
+                        }
+                        break;
                 }
             }
             // exit;
@@ -107,9 +113,22 @@ class Site extends Site_Controller
 
             // pre($data,true)  ;
             $this->set_data('page_name', $data['name'] . ' Details');
-            $this->set_data($data);
-            $this->set_data('student_address', $data['address']);
-            $this->set_data('registration_date', date('d-m-Y', strtotime($data['timestamp'])));
+            $this->set_data([
+                'exam_or_course' => $data['exam_or_course'],
+                'name' => $data['name'],
+                'father_name' => $data['father_name'],
+                'mother_name' => $data['mother_name'],
+                'dob' => $data['dob'],
+                'student_address' => $data['address'],
+                'institute_name' => $data['institute_name'],
+                'training_period' => $data['training_period'],
+                'examination_body' => $data['examination_body']
+            ]);
+            // $this->set_data($data);
+            // $this->set_data('student_address', $data['address']);
+            $this->set_data('registration_date', date('d-m-Y', strtotime($data['date'])));
+
+
             $this->set_data('isPrimary', false);
 
             $this->render('schema', [
