@@ -55,7 +55,7 @@ $noticeBox = isset($notice_board);
                         </div>';
                 }
                 ?>
-                <div class="clearfix entry" style="text-align:justify">
+                <div class="clearfix" style="text-align:justify">
                     {content}
                 </div>
             </div>
