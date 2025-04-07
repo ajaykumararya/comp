@@ -1,7 +1,7 @@
 <style>
     :root {
-        --primary-color: #0c54a0;
-        --secondary-color: #d9a648;
+        --primary-color: <?=ES('primary-color','#0c54a0')?>;
+        --secondary-color: <?=ES('secondary-color','#d9a648')?>;
     }
 </style>
 <link href="{theme_url}assets/css/bootstrap.min.css" rel="stylesheet">
