@@ -12,6 +12,7 @@ class Ajax_Controller extends MY_Controller
                 $this->router->fetch_method() != 'admin_login' and 
                 $this->router->fetch_class() != 'website' and
                 $this->uri->segment(1,0) != 'api' and
+                $this->uri->segment(2,0) != 'ebook' and
                 $this->uri->segment(1,0) != 'site'
             ) {
             $this->response('html', 'Invalid Security Token , Please Re-login Now.');

@@ -15,7 +15,9 @@ class Ebook extends MY_Controller
         );
         $this->view('project');
     }
-    function project_system($type){
-        return $this->parse('ebook/web/project-system',[],true);
+    function my_account(){
+        // echo 'ddd';
+        $this->load->module('site');
+        $this->site->page_view('Hellllo');
     }
 }

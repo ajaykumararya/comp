@@ -77,9 +77,25 @@
   .menuzord .menuzord-menu>li.active>a,
   .menuzord .menuzord-menu>li:hover>a,
   .menuzord .menuzord-menu ul.dropdown li.active>a,
-  .menuzord .menuzord-menu ul.dropdown li:hover>a {
+  .menuzord .menuzord-menu ul.dropdown li:hover>a,
+  .pagination.theme-colored li.active a,
+  .tbl-shopping-cart thead{
     background-color: var(--primary-color) !important;
-    color:white
+    color: white
+  }
+
+  .btn-outline-success:focus {
+    color: white !important
+  }
+
+  .btn-outline-success:focus:hover {
+    color: var(--primary-color) !important
+  }
+
+  .cart-btn {
+    line-height: 3;
+    font-size: 22px;
+    color: var(--primary-color);
   }
 </style>
 <?php

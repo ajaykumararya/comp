@@ -502,7 +502,7 @@ class Site_Controller extends MY_Controller
             $this->set_data($data);
         if (isset($this->public_data['title'])) {
             $this->ki_theme->set_title($this->public_data['title'], true);
-            $this->set_data('head', $this->parse('head', [], true));
+            // $this->set_data('head', $this->parse('head', [], true));
         }
         // pre($this->public_data,true);
         $this->public_data['output'] = is_string($data) ? $view : ($this->parse($view, $this->public_data, true));

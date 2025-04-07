@@ -108,3 +108,7 @@
 
 
 <script src="{base_url}assets/custom/custom.js"></script>
+<?php
+if(CHECK_PERMISSION('EBOOK'))
+   echo '<script src="{base_url}assets/ebook.js"></script>';
+?>

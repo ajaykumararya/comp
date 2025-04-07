@@ -47,17 +47,38 @@
                         <div class="col-md-3">
                             <ul class="list-inline sm-pull-none sm-text-center text-right text-white mb-sm-20 mt-10">
                                 <?php
-                                $data = $this->SiteModel->get_contents('our-header-button');
-                                if ($data->num_rows()):
-                                    $index = 1;
-                                    foreach ($data->result() as $row):
-                                        echo '<li class="m-0 pl-10"> 
-                                                    <a href="' . $row->field3 . '" class="text-white">
-                                                        <i class="' . $row->field1 . ' mr-5 text-white"></i>
-                                                    ' . $row->field2 . '</a> 
-                                            </li>';
-                                    endforeach;
-                                endif;
+                                if(CHECK_PERMISSION("EBOOK")){
+                                    if($this->session->has_userdata("ebook_login")){
+                                        echo '<li class="m-0 pl-10">
+                                                <a href="{base_url}ebook/my-account" class="text-white"><i class="fa fa-home"></i> My Account</a>                                        
+                                              </li>';  
+                                    }
+                                    else{
+                                    echo '<li class="m-0 pl-10"> 
+                                            <a href="#" data-toggle="modal" data-target="#loginModel" class="text-white">
+                                                <i class="far fa-user mr-5 text-white"></i>
+                                            Login</a> 
+                                    </li>
+                                    <li class="m-0 pl-10"> 
+                                        <a href="#" class="text-white"  data-toggle="modal" data-target="#registerModel">
+                                            <i class="fas fa-user-plus mr-5 text-white"></i>
+                                        Register</a> 
+                                    </li>';
+                                    }
+                                }
+                                else{
+                                    $data = $this->SiteModel->get_contents('our-header-button');
+                                    if ($data->num_rows()):
+                                        $index = 1;
+                                        foreach ($data->result() as $row):
+                                            echo '<li class="m-0 pl-10"> 
+                                                        <a href="' . $row->field3 . '" class="text-white">
+                                                            <i class="' . $row->field1 . ' mr-5 text-white"></i>
+                                                        ' . $row->field2 . '</a> 
+                                                </li>';
+                                        endforeach;
+                                    endif;
+                                }
                                 ?>
                                 </li>
                             </ul>
@@ -129,16 +150,26 @@
                             // echo uri_string();
                             // pre($menus);
                             echo get_menu($menus, 'menuzord-menu');
-                            if (($rightButtonText = ES('menu_right_button_title', 0) ) && !CHECK_PERMISSION('EBOOK')) {
+                            echo '<div class="pull-right sm-pull-none mb-sm-15">';
+                            if (CHECK_PERMISSION('EBOOK')) {
+                                $this->load->library('ebook/ebook_cart');
                                 ?>
-                                <div class="pull-right sm-pull-none mb-sm-15">
-                                    <a class="btn btn-colored btn-theme-colored2 mt-15 mt-sm-10 pt-10 pb-10 ajaxload-popup"
-                                        href="<?= ES('menu_right_button_link', '#') ?>"><?= $rightButtonText ?></a>
-                                </div>
+                                <a href="{current_url}?ebook=cart" class="cart-btn">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    <span class="cart-count"><?=$this->ebook_cart->count()?></span>
+                                </a>
+
+                                <?php
+                            } else if (($rightButtonText = ES('menu_right_button_title', 0))) {
+                                ?>
+                                    
+                                        <a class="btn btn-colored btn-theme-colored2 mt-15 mt-sm-10 pt-10 pb-10 ajaxload-popup"
+                                            href="<?= ES('menu_right_button_link', '#') ?>"><?= $rightButtonText ?></a>
+                                    
                                 <?php
                             }
                             ?>
-
+</div>
 
                         </nav>
                     </div>
@@ -149,9 +180,77 @@
         <!-- Start main-content -->
         <div class="main-content">
             {output}
-
-
         </div>
+
+
+        <div class="modal fade" data-backdrop="static" data-keyboard="false" id="loginModel" tabindex="-1" role="dialog" aria-labelledby="loginModel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="loginModel">User Login</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="" id="ebook_userogin">
+                        <div class="form-group">
+                            <label for="username">Mobile</label>
+                            <input type="text" name="mobile" placeholder="Enter Mobile" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="form-label">Password</label>
+                            <input type="text" name="password" placeholder="Enter Password" class="form-control">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="$('#ebook_userogin').submit()" class="btn btn-dark btn-flat">Login</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" data-backdrop="static" data-keyboard="false" id="registerModel" tabindex="-1" role="dialog" aria-labelledby="loginModel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="loginModel">User Registeration</h4>
+                </div>
+                <div class="modal-body">
+                   <form action="" id="ebook_userregisteration">
+                        <div class="form-group">
+                            <label for="" class="form-label">Name</label>
+                            <input type="text" name="name" placeholder="Enter Name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="form-label">Mobile</label>
+                            <input type="number" name="mobile" placeholder="Enter Mobile" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="form-label">Password</label>
+                            <input type="password" name="password" placeholder="Enter Password" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="form-label">Email</label>
+                            <input type="email" name="email" placeholder="Enter Email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="form-label">Address</label>
+                            <textarea name="address" placeholder="Enter Address" class="form-control"></textarea>
+                        </div>
+                   </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-dark btn-flat" onclick="$('#ebook_userregisteration').submit()">Register Now</button>
+                </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
         <!-- Footer -->
         <footer id="footer" class="footer" data-bg-color="#212331">
             <div class="container pt-70 pb-40">
@@ -210,67 +309,7 @@
                         }
                     }
                     ?>
-                    <!-- <div class="col-sm-6 col-md-3">
-                        <div class="widget dark">
-                            <h4 class="widget-title line-bottom-theme-colored-2">Useful Links</h4>
-                            <ul class="angle-double-right list-border">
-                                <li><a href="#">Home Page</a></li>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Our Mission</a></li>
-                                <li><a href="#">Terms and Conditions</a></li>
-                                <li><a href="#">FAQ</a></li>
-                            </ul>
-                        </div>
-                    </div> -->
-                    <!-- <div class="col-sm-6 col-md-3">
-                        <div class="widget dark">
-                            <h4 class="widget-title line-bottom-theme-colored-2">Top News</h4>
-                            <div class="latest-posts">
-                                <article class="post media-post clearfix pb-0 mb-10">
-                                    <a class="post-thumb" href="#"><img src="https://placehold.it/80x55" alt=""></a>
-                                    <div class="post-right">
-                                        <h5 class="post-title mt-0 mb-5"><a href="#">PHP Learning</a></h5>
-                                        <p class="post-date mb-0 font-12">Mar 08, 2015</p>
-                                    </div>
-                                </article>
-                                <article class="post media-post clearfix pb-0 mb-10">
-                                    <a class="post-thumb" href="#"><img src="https://placehold.it/80x55" alt=""></a>
-                                    <div class="post-right">
-                                        <h5 class="post-title mt-0 mb-5"><a href="#">Web Development</a></h5>
-                                        <p class="post-date mb-0 font-12">Mar 08, 2015</p>
-                                    </div>
-                                </article>
-                                <article class="post media-post clearfix pb-0 mb-10">
-                                    <a class="post-thumb" href="#"><img src="https://placehold.it/80x55" alt=""></a>
-                                    <div class="post-right">
-                                        <h5 class="post-title mt-0 mb-5"><a href="#">Spoken English</a></h5>
-                                        <p class="post-date mb-0 font-12">Mar 08, 2015</p>
-                                    </div>
-                                </article>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <div class="widget dark">
-                            <h4 class="widget-title line-bottom-theme-colored-2">Opening Hours</h4>
-                            <div class="opening-hours">
-                                <ul class="list-border">
-                                    <li class="clearfix"> <span> Mon - Tues : </span>
-                                        <div class="value pull-right"> 6.00 am - 10.00 pm </div>
-                                    </li>
-                                    <li class="clearfix"> <span> Wednes - Thurs :</span>
-                                        <div class="value pull-right"> 8.00 am - 6.00 pm </div>
-                                    </li>
-                                    <li class="clearfix"> <span> Fri : </span>
-                                        <div class="value pull-right"> 3.00 pm - 8.00 pm </div>
-                                    </li>
-                                    <li class="clearfix"> <span> Sun : </span>
-                                        <div class="value pull-right bg-theme-colored2 text-white closed"> Closed </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div> -->
+                    
                 </div>
             </div>
             <div class="footer-bottom" data-bg-color="#2b2d3b">
@@ -278,26 +317,9 @@
                     <div class="row">
                         <div class="col-md-12">
                             <p class="font-12 text-black-777 m-0 sm-text-center">
-                            Copyright &copy;  {title} {copyright}
+                                Copyright &copy; {title} {copyright}
                             </p>
                         </div>
-                        <!-- <div class="col-md-6 text-right">
-                            <div class="widget no-border m-0">
-                                <ul class="list-inline sm-text-center mt-5 font-12">
-                                    <li>
-                                        <a href="#">FAQ</a>
-                                    </li>
-                                    <li>|</li>
-                                    <li>
-                                        <a href="#">Help Desk</a>
-                                    </li>
-                                    <li>|</li>
-                                    <li>
-                                        <a href="#">Support</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -308,10 +330,9 @@
 
     <!-- Footer Scripts -->
     <!-- JS | Custom script for all pages -->
-    <script data-cfasync="false" src="{theme_url}assets/js/email-decode.min.js"></script>
     <script src="{theme_url}assets/js/custom.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $("li.active").parents('li').addClass("active");
         });
     </script>

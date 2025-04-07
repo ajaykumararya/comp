@@ -9,7 +9,7 @@ const driverObj = driver();
 const myeditor = $(".aryaeditor");
 const ki_modal = $('#mymodal');
 const defaultStudent = base_url + 'assets/media/student.png';
-
+const CURRENT_URL = window.location.protocol + "//" + window.location.host + window.location.pathname;
 /*
 Handlebars.registerHelper('stripHTML', function(text) {
     const div = document.createElement("div");
@@ -180,6 +180,16 @@ const razorpayPOPUP = (options, reload = false) => {
     };
     var rzp = new Razorpay(options);
     rzp.open();
+}
+function setQueryParam(param, value) {
+    let url = new URL(window.location.href);
+    url.searchParams.set(param, value);
+    window.history.pushState({}, '', url);
+}
+function removeQueryParam(param) {
+    let url = new URL(window.location.href);
+    url.searchParams.delete(param);
+    window.history.pushState({}, '', url);
 }
 const isAdmin = () => {
     return login_type == 'admin';
@@ -1002,16 +1012,18 @@ const duration_badge = (type) => {
     return ($.inArray(type, duration_colors)) ? duration_colors[type] : 'danger';
 }
 const SwalShowloading = (message = '') => {
-    Swal.fire({
-        title: 'Loading....',
-        html: message,
-        allowOutsideClick: false,
-        showCancelButton: false,
-        showConfirmButton: false,
-        didOpen: () => {
-            Swal.showLoading();
-        }
-    });
+    if (message) {
+        Swal.fire({
+            title: 'Loading....',
+            html: message,
+            allowOutsideClick: false,
+            showCancelButton: false,
+            showConfirmButton: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+    }
 }
 const mySwal = (title = '', message, type = 'success', cancelButton = false, confirmButtonText = 'Ok') => {
     return Swal.fire({

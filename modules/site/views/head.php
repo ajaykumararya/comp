@@ -52,5 +52,7 @@
     "logo": "{base_url}upload/{logo}"
     }
     </script>
-
+    <?php
+    
+    ?>
 </head>

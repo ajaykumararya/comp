@@ -32,6 +32,10 @@ class Site extends Site_Controller
         $pageSchema = $this->SiteModel->get_page_schema($data['id']);
         if ($pageSchema->num_rows()) {
             $html = '';
+            if ($this->input->get('ebook') == 'cart' && CHECK_PERMISSION('EBOOK')) {
+                $return['page_name'] = "Shopping Cart";
+                $html = $this->parse('ebook/cart', [], true);
+            }
             foreach ($pageSchema->result() as $page) {
                 switch ($page->event) {
                     case 'content':
@@ -75,8 +79,12 @@ class Site extends Site_Controller
                         break;
                     case 'ebook':
                         if (CHECK_PERMISSION('EBOOK')) {
-                            $pageHtml = $this->parse('ebook/project-system', (array) $page, true);
-                            $html .= $this->parse('content', ['content' => $pageHtml], true);
+                            if ($this->input->get('ebook') != 'cart') {
+                                if (file_exists(THEME_PATH . 'ebook/project-system' . EXT)) {
+                                    $pageHtml = $this->parse('ebook/project-system', (array) $page, true);
+                                    $html .= $this->parse('content', ['content' => $pageHtml], true);
+                                }
+                            }
                         }
                         break;
                 }
@@ -94,6 +102,9 @@ class Site extends Site_Controller
         $file = (file_exists(THEME_PATH . $error_file . EXT)) ? '' : 'default_'; //error_404';
         $this->render("{$file}{$error_file}", $data);
     }
+    // function error_404_page(){
+
+    // }
     function page_view($content, $data = [])
     {
         $this->set_data($data);
