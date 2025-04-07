@@ -396,8 +396,8 @@ input:focus {
 .advantages .box-form .input-group {
   box-shadow: 0 10px 6px 0 #9b9898;
 }
-.advantages .box-form .col-lg-6 .input-group-addon {
-  /*width: 30px;*/
+.advantages .box-form .input-group-addon {
+  width: 30px;
   padding: 5px 8px !important;
 }
 .advantages .box-form .input-group-addon {
@@ -424,7 +424,7 @@ input:focus {
   /*box-shadow: 0 10px 6px 0 #9b9898;*/
   border-radius: 0;
   /*border-color: black;*/
-  height: 40px;
+  /* height: 40px; */
   font-size: 11px;
   font-weight: 700;
   /*color: #939393;*/
@@ -1267,9 +1267,10 @@ hr {
   }
 }
 @media screen and (min-width: 768px) {
-  .advantages .box-form .col-lg-6 .input-group-addon {
+  .advantages .box-form .input-group-addon {
     width: 30px !important;
     padding: 5px !important;
+    line-height: 2;
   }
 }
 
