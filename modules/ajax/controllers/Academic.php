@@ -70,6 +70,7 @@ class Academic extends Ajax_Controller
                 'status',
                 $this->db->insert('session', $this->post())
             );
+            $this->response('html','Session Added Successfully..');
         }
     }
     function list_session()
