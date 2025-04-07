@@ -5,6 +5,12 @@ $menu = array(
     'icon' => array('file', 3),
     'submenu' => array(
         array(
+            'label' => 'List All Course(S) ',
+            'type' => 'list-all-courses',
+            'icon' => array('file', 4),
+            'url' => 'cms/static-page/list-all-courses',
+        ),
+        array(
             'label' => 'About Us',
             'type' => 'about_us',
             'icon' => array('file', 4),
