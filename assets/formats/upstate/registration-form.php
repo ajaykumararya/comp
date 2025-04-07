@@ -115,7 +115,7 @@
     <p class="position-absolute text-capitlize" style="top:36.4%;left:33.5%">{gender}</p>
     <p class="position-absolute text-capitlize " style="top:36.4%;left:62%">{marital_status}</p>
     <p class="position-absolute" style="top:39%;left:33.5%">{dob}</p>
-    <p class="position-absolute " style="top:39%;left:62%">{category}</p>
+    <p class="position-absolute " style="top:39%;left:62%;width:200px">{category}</p>
     
     <p class="position-absolute" style="top:41.6%;left:33.5%">{contact_number}</p>
     <p class="position-absolute " style="top:41.6%;left:61.5%;width:250px;">{email}</p>
