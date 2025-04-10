@@ -89,7 +89,7 @@
         <div class="container">
             <div class="row">
                 <div id="header" class="clearfix" style="padding: 15px 0px;">
-                    <div class="col-md-3">
+                    <div class="col-md-<?=PATH == 'boardofpara' ? 4 : 3?>">
                         <a href="">
                             <center>
                                 <img style="<?=PATH == 'boardofpara' ? '' : 'height:89px;width:283px'?>" src="{base_url}upload/{logo}" alt="{title}"
