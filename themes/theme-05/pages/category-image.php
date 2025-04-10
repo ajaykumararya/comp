@@ -1,15 +1,7 @@
 <section class="popular__courses  mp-4">
     <style>
-        @media screen and (max-width: 1024px) {
-            .popular__courses .thumbnail {
-                height: 200px !important;
-            }
-        }
-
-        @media screen and (max-width: 768px) {
-            .popular__courses .thumbnail {
-                height: 234px !important;
-            }
+        .popular__courses .thumbnail {
+            height: 200px
         }
 
         .owl-carousel .owl-item img {

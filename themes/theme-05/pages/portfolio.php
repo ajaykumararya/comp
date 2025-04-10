@@ -1,5 +1,9 @@
 <section class="section-counter portfolio" style="background:white">
-
+<style>
+    .portfolio .thumbnail{
+        height:100px!important
+    }
+</style>
 
     <div class="container margin-tp-10">
         <div class="row">
