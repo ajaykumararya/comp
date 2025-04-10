@@ -1,5 +1,5 @@
 <?php
-if (in_array(PATH, ['haptronworld', 'upstate','sct'])) {
+if (in_array(PATH, ['haptronworld', 'upstate','sct','boardofpara'])) {
     ?>
     <link rel="stylesheet" href="{base_url}assets/float-icons.css">
     <style>
