@@ -123,7 +123,7 @@
                     }
 
                     ?>
-                    <div class="col-md-6">
+                    <div class="col-md-<?=PATH == 'boardofpara' ? 5 : 6?>">
                         <div class="row- header-top text-right">
                             <?php
                             $fields = $this->SiteModel->get_setting('header_hightlight_btn_links', [], true);
