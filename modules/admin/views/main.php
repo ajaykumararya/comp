@@ -63,6 +63,9 @@
 <script src="{base_url}assets/js/custom/widgets.js"></script>
 <script src="{base_url}assets/custom/jquery.nestable.js"></script>
     <style>
+        .file-btn input{
+            display: none;
+        }
         .pulse-ring {
             height: 37px !important;
             width: 37px !important

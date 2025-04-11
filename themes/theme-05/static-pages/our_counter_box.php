@@ -34,7 +34,8 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="title" class="form-label">Section Title</label>
-                        <textarea name="<?= $type ?>_title" class="form-control" placeholder="Enter Title"><?= ES("{$type}_title", 'Career Point Institute of Skill Development') ?></textarea>
+                        <textarea name="<?= $type ?>_title" class="form-control"
+                            placeholder="Enter Title"><?= ES("{$type}_title", 'Career Point Institute of Skill Development') ?></textarea>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -57,8 +58,9 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Date</th>
                                 <th>Title</th>
+                                <th>Image</th>
+                                <th>Value</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -69,15 +71,23 @@
                                 $index = 1;
                                 foreach ($data->result() as $row):
                                     ?>
-                                    <tr>
+                                    <tr data-id="<?= $row->id ?>">
                                         <td>
                                             <?= $index++ ?>.
                                         </td>
-                                        <td>
+                                        <td contenteditable="true" class="edit" data-column="field1">
                                             <?= $row->field1 ?>
                                         </td>
                                         <td>
-                                            <?= $this->ki_theme->parse_string($row->field2) ?>
+                                            <?= img('upload/' . $this->ki_theme->parse_string($row->field2), true, [
+                                                'style' => 'width:100px',
+                                            ]) ?>
+                                            <label class="btn btn-xs btn-sm btn-info file-btn"  data-column="field2">Change
+                                                <input type="file" accept="image/*">
+                                            </label>
+                                        </td>
+                                        <td contenteditable="true" class="edit" data-column="field3">
+                                            <?= $row->field3 ?>
                                         </td>
                                         <td>
                                             <?= base64_encode($row->id) ?>

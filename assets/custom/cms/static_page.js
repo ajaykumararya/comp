@@ -269,4 +269,43 @@ document.addEventListener('DOMContentLoaded', function (e) {
             log(rr);
         });
     });
+    $(document).on('blur','[contenteditable="true"].edit',function(){
+        // alert(this.value
+        console.log($(this).text().trim());
+        var id = $(this).closest('tr').data('id');
+        var field = $(this).data('column');
+        var value = $(this).text().trim();
+
+        if(id && field){
+            $.AryaAjax({
+                url : 'cms/update-table-edit-setting',
+                data : {id,field,value}
+            }).then((re) => {
+                if(re.status)
+                    toastr.success('Setting Update Successfully..');
+                showResponseError(re);
+            });
+        }
+    })
+    $(document).on('change','[setting-table] .file-btn > input',function(event){
+        var file = event.target.files[0];
+        var id = $(this).closest('tr').data('id');
+        var field = $(this).parent().data('column');
+        var img = $(this).closest("td").find('img');
+        var data = new FormData();
+        data.append('file',file);
+        data.append('id',id);
+        data.append('field',field);
+        $.AryaAjax({
+            url: 'cms/update-table-edit-setting',
+            // file: file,
+            data: data,
+        }).then((s) => {
+            log(s);
+            showResponseError(s);
+            if (s.status){
+                img.attr('src',`${base_url}upload/${s.file}`);
+            }
+        });
+    })
 });
