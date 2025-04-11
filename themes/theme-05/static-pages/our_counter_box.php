@@ -75,7 +75,7 @@
                                         <td>
                                             <?= $index++ ?>.
                                         </td>
-                                        <td contenteditable="true" class="edit" data-column="field1">
+                                        <td class="edit editable" data-column="field1">
                                             <?= $row->field1 ?>
                                         </td>
                                         <td>
@@ -86,7 +86,7 @@
                                                 <input type="file" accept="image/*">
                                             </label>
                                         </td>
-                                        <td contenteditable="true" class="edit" data-column="field3">
+                                        <td class="edit editable" data-column="field3">
                                             <?= $row->field3 ?>
                                         </td>
                                         <td>
@@ -95,7 +95,7 @@
                                     </tr>
                                     <?php
                                 endforeach;
-                            endif;
+                            endif; 
                             ?>
                         </tbody>
                     </table>

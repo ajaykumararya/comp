@@ -269,6 +269,9 @@ document.addEventListener('DOMContentLoaded', function (e) {
             log(rr);
         });
     });
+    $(document).on('dblclick', '.editable', function () {
+        $(this).attr('contenteditable', 'true').focus();
+    });
     $(document).on('blur','[contenteditable="true"].edit',function(){
         // alert(this.value
         console.log($(this).text().trim());
