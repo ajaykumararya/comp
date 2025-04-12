@@ -50,6 +50,9 @@
         .test {
             border: 1px solid red
         }
+        table {
+            border-collapse: collapse;
+        }
     </style>
 </head>
 
@@ -73,6 +76,21 @@
 
 
     <?php
+    $sign = '';
+    if($student_docs){
+        $docs = (json_decode($student_docs,true));
+        if(isset($docs['signature'])){
+            $sign = $docs['signature'];
+            if(file_exists('upload/'.$sign.'')){
+                echo '
+                <div class="position-absolute" style="top:35%;left:74%;">
+                    <img src="upload/'.$sign.'" style="width:150px;height:80px">
+                </div>
+                
+                ';
+            }
+        }
+    }
     $where = [
         'course_id' => $course_id,
         'duration' => $admit_card_duration,

@@ -247,8 +247,6 @@ class Cms extends Ajax_Controller
     }
     function save_extra_setting()
     {
-        $this->response($_POST);
-        $this->response($_FILES);
         $data = $this->build_post_data();
         if (sizeof($data)) {
             foreach ($data as $index => $value) {

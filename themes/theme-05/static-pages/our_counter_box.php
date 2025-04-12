@@ -82,7 +82,7 @@
                                             <?= img('upload/' . $this->ki_theme->parse_string($row->field2), true, [
                                                 'style' => 'width:100px',
                                             ]) ?>
-                                            <label class="btn btn-xs btn-sm btn-info file-btn"  data-column="field2">Change
+                                            <label class="btn btn-xs btn-sm btn-info file-btn" data-column="field2">Change
                                                 <input type="file" accept="image/*">
                                             </label>
                                         </td>
@@ -95,7 +95,7 @@
                                     </tr>
                                     <?php
                                 endforeach;
-                            endif; 
+                            endif;
                             ?>
                         </tbody>
                     </table>
