@@ -46,6 +46,9 @@
             width: 600px;
             line-height: .9;
         }
+        .test{
+            border:1px solid red
+        }
     </style>
 </head>
 
@@ -59,8 +62,8 @@
     <p class="position-absolute" style="top:40%;left:40%">{father_name}</p>
     <p class="position-absolute address" style="top:44.2%;left:40%;">{address}</p>
     <p class="position-absolute " style="top:48%;left:40%">{dob}</p>
-    <p class="position-absolute " style="top:52.2%;left:40%">{course_name}</p>
-    <p class="position-absolute " style="top:56.5%;left:40%">{center_name}</p>
+    <p class="position-absolute " style="top:52.2%;left:40%;width:600px;line-height:0.8">{course_name}</p>
+    <p class="position-absolute " style="top:56.5%;left:40%;width:600px;line-height:0.8">{center_name}</p>
     <p class="position-absolute " style="top:60%;left:45%">{center_email}</p>
     <div class="position-absolute" style="top:59.5%;left:5.2%;">
         <img src="upload/images/id_card_{student_id}.png" style="width:178px;height:165px;" alt="">
