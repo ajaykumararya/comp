@@ -42,6 +42,11 @@
                                                         <th>Category</th>
                                                         <th>Course Name</th>
                                                         <th>Duration</th>
+                                                        <?php
+                                                        if(CHECK_PERMISSION('COURSE_FEE_IN_FRONT_LIST')) {
+                                                            echo '<th>Fee</th>';
+                                                        }
+                                                        ?>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -57,7 +62,8 @@
                                                                 <td>' . $cat->title . '</td>
                                                                 <td>' . $course->course_name . '</td>
                                                                 <td>' . $course->duration . ' ' . $course->duration_type . '</td>
-                                                            </tr>
+                                                                        '.(CHECK_PERMISSION('COURSE_FEE_IN_FRONT_LIST') ? '<td>'.$course->fees.' {inr}</td>' :'').'
+                                                                </tr>
                                                         ';
                                                                     endforeach;
                                                                 }
