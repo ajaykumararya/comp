@@ -18,7 +18,7 @@ if ($popupStatus):
         #ApplynowModal .notice {
             border: 1px solid #555;
             border-radius: 16px;
-            padding: 21px 19px 42px;
+            padding: 105px 20px 70px;
             position: relative;
         }
     </style>
