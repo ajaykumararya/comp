@@ -58,7 +58,7 @@ class Ebook extends Ajax_Controller
 
     function add_project()
     {
-        $this->form_validation->set_rules('slug', 'Project Name', 'required!is_unique[ebook_project.slug]', [
+        $this->form_validation->set_rules('slug', 'Project Name', 'required|is_unique[ebook_project.slug]', [
             'is_uniquue' => 'This project name is already exists..'
         ]);
         if ($this->validation()) {
@@ -246,5 +246,94 @@ class Ebook extends Ajax_Controller
             $this->response('error', $e->getMessage());
         }
     }
+    function update_cart_payment()
+    {
+        $post = $this->post();
+        $razorpay_payment_id = $post['razorpay_payment_id'];
+        $razorpay_order_id = $post['razorpay_order_id'];
+        $razorpay_signature = $post['razorpay_signature'];
+        $merchant_order_id = $post['merchant_order_id'];
+        $this->load->module('razorpay');
 
+        try {
+
+            $user_id = $this->session->userdata('ebook_user');
+            $status = $this->razorpay->fetchOrderStatus($razorpay_order_id);
+            if ($status) {
+                $items = $this->ebook_cart->get_cart();
+                $data = [];
+                foreach ($items as $item) {
+                    $data[] = [
+                        'user_id' => $user_id,
+                        'project_id' => $item['id'],
+                        'amount' => $item['price'],
+                        'payment_id' => $razorpay_payment_id,
+                        'status' => 1
+                    ];
+                }
+                $this->db->insert_batch('ebook_user_projects', $data);
+                $this->ebook_cart->clear_cart();
+                $this->response('status', true);
+            }
+        } catch (Exception $e) {
+            $this->response('error', $e->getMessage());
+        }
+    }
+    function cart_payment()
+    {
+        try {
+            if ($this->session->has_userdata('ebook_login')) {
+                $get = $this->ebook_model->get_user([
+                    'id' => $this->session->userdata('ebook_user')
+                ]);
+                if ($get->num_rows() > 0) {
+                    $row = $get->row();
+                    $items = $this->ebook_cart->get_cart();
+                    $totalPrice = 0;
+                    foreach ($items as $item) {
+                        $totalPrice += $item['price'];
+                    }
+                    if (!$totalPrice)
+                        throw new Exception('Invalid Amount.');
+                    $this->load->module('razorpay');
+                    $order_id = $this->razorpay->create_order([
+                        'receipt' => PATH . mt_rand(00000, 8999999),
+                        'amount' => $totalPrice * 100,
+                        'currency' => 'INR',
+                        'notes' => [
+                            'merchant_order_id' => time()
+                        ]
+                    ]);
+                    $name = $row->name;
+                    $mobile = $row->mobile;
+                    $email = $row->email;
+
+                    $data = [
+                        'key' => RAZORPAY_KEY_ID,
+                        'amount' => $totalPrice * 100,
+                        'name' => ES('title'),
+                        'description' => 'Computer Institute',
+                        'image' => logo(),
+                        'prefill' => [
+                            'name' => $name,
+                            'email' => $email,
+                            'contact' => $mobile
+                        ],
+                        'notes' => [
+                            'merchant_order_id' => time(),
+                        ],
+                        'order_id' => $order_id
+                    ];
+                    $this->response('status', true);
+                    $this->response('option', $data);
+                } else {
+                    $this->session->sess_destroy();
+                    $this->response('status', true);
+                }
+            } else
+                $this->response('status', 'login');
+        } catch (Exception $e) {
+            $this->response('message', $e->getMessage());
+        }
+    }
 }

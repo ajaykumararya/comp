@@ -114,17 +114,25 @@ document.addEventListener('DOMContentLoaded', function () {
     $(document).on('submit', '#ebook_userogin', function (r) {
         r.preventDefault();
         // alert(33);?
+        var form = $(this);
         $.AryaAjax({
             url: 'ebook/user-login',
             data: new FormData(this)
         }).then((res) => {
             // console.log(res);
             showResponseError(res);
-            if (res.status) {
+            if (form.find('[name="paynow"]').length) {
+                $('#loginModel').modal('hide');
+                $('.ebook-cart .paynow').trigger('click');
+            }
+            else if (res.status) {
                 location.reload();
             }
         });
     })
+    $('#loginModel,#registerModel').on('hidden.bs.modal', function () {
+        $(this).find('[name="paynow"]').remove();
+    });
     $(document).on('submit', '#ebook_userregisteration', function (r) {
         r.preventDefault();
         // alert(33);?
@@ -136,6 +144,40 @@ document.addEventListener('DOMContentLoaded', function () {
             showResponseError(res);
             if (res.status) {
                 location.reload();
+            }
+        });
+    });
+
+    $(document).on('click', '.ebook-cart .paynow', function () {
+        $.AryaAjax({
+            url: 'ebook/cart-payment',
+        }).then((res) => {
+            // log(res)
+
+            if (res.status == 'login') {
+                $('#loginModel').modal('show').find('#ebook_userogin').append('<input type="hidden" name="paynow" value="1">');
+            }
+            else if (res.status) {
+                var options = res.option;
+                options.handler = function (response) {
+                    $.AryaAjax({
+                        url: 'ebook/update-cart-payment',
+                        data: {
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_order_id: options.order_id,
+                            razorpay_signature: response.razorpay_signature,
+                            merchant_order_id: options.notes.merchant_order_id,
+                            amount: options.amount
+                        }
+                    }).then((res) => {
+                        showResponseError(res);
+                        if (res.status) {
+                            SwalSuccess('Success!', 'Fully Paid EMI');
+                            location.reload();
+                        }
+                    });
+                };
+                razorpayPOPUP(options);
             }
         });
     })

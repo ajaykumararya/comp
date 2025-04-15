@@ -61,6 +61,14 @@ if ($this->input->get('project') && $this->input->get('cat')) {
                 </div>
             </div>
         </div>
+        <script>
+            $(document).ready(function () {
+                $('html, body').animate({
+                    scrollTop: $('.ProjectReport_block__rerWI').offset().top - 100
+                }, 4000);
+                return;
+            });
+        </script>
         <?php
     } else {
         echo $this->parser->parse('default_error_404', ['page_name' => 'Project Not Found.', 'title' => 'Project Not Found..'], true);

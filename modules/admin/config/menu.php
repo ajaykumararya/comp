@@ -27,7 +27,12 @@ $config['ebook'] = array(
                 )
             )
         ),
-        array('label' => 'Users', 'icon' => ['profile', 2], 'type' => 'users', 'url' => 'ebook/users'),
+        array(
+            'label' => 'Users', 
+            'icon' => ['profile-user', 4], 
+            'type' => 'users', 
+            'url' => 'ebook/users'
+        ),
     )
 );
 $config['academic_area'] = array(
@@ -832,6 +837,12 @@ $config['cms_setting'] = array(
     )
 );
 $staticMenus = array(
+    array(
+        'label'=> 'Notice Popup',
+        'type'=> 'notice_popup',
+        'icon'=> array('abstract-9',2),
+        'url'=> 'cms/static-page/notice-popup'
+    ),
     array(
         'label' => 'Forms',
         'type' => 'static_forms',

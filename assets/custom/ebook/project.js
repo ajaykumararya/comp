@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
         });
-        validation.addField('image',{
+        validation.addField('image', {
             validators: {
                 notEmpty: {
                     message: 'Please choose a file.'
@@ -83,10 +83,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 data: new FormData(form),
             }).then((res) => {
                 // log(res);
-                toastr.success(
-                    'Project Added Successfully',
-                );
-                location.reload();
+                if (res.status) {
+                    toastr.success(
+                        'Project Added Successfully',
+                    );
+                    location.reload();
+                }
+                showResponseError(res)
             });
         });
 
@@ -131,35 +134,35 @@ document.addEventListener('DOMContentLoaded', function () {
             columnDefs: [
                 {
                     targets: 0,
-                    orderable : false,
-                    render: function (data, type, row,meta) {
+                    orderable: false,
+                    render: function (data, type, row, meta) {
                         return `${meta.row + 1}.`;
                     }
                 },
                 {
                     targets: 1,
-                    orderable : false,
-                    render: function (data, type, row,meta) {
+                    orderable: false,
+                    render: function (data, type, row, meta) {
                         return `<img style="width:50px" src="${base_url}upload/${row.image}">`;
                     }
                 },
                 {
-                    targets : 5,
-                    render: function (data, type, row,meta) {
-                        return `${data} ${inr}` ;
+                    targets: 5,
+                    render: function (data, type, row, meta) {
+                        return `${data} ${inr}`;
                     }
                 },
                 {
-                    targets:6,
-                    render:function(data,type,row){
+                    targets: 6,
+                    render: function (data, type, row) {
                         log(row)
-                        var link = (row.file_type === 'file') ? base_url + 'upload/project/'+data : `${data}`;
+                        var link = (row.file_type === 'file') ? base_url + 'upload/project/' + data : `${data}`;
                         return `<a href="${link}" target="_blank" class="btn btn-sm btn-info btn-xs btn-sm">View</a>`;
                     }
                 },
                 {
-                    targets : 7,
-                    render : function(data,type,row){
+                    targets: 7,
+                    render: function (data, type, row) {
                         return `<div class="form-check form-switch form-check-custom form-check-solid me-10">
                                     <input class="form-check-input check-status" ${data == 1 ? 'checked' : ''} type="checkbox" value="${row.id}"/>                                    
                                 </div>`;
@@ -186,14 +189,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 // console.log(e);
                 table.DataTable().ajax.reload();
             });
-            table.find('.check-status').on('change',function(){
+            table.find('.check-status').on('change', function () {
                 // alert(this.value);
                 const id = $(this).val();
                 const status = $(this).is(':checked') ? 1 : 0;
                 $.AryaAjax({
-                    url : 'ebook/update-project-status',
-                    data : {id,status},
-                    success_message : 'Status Changed Successfully..'
+                    url: 'ebook/update-project-status',
+                    data: { id, status },
+                    success_message: 'Status Changed Successfully..'
                 });
             })
         })

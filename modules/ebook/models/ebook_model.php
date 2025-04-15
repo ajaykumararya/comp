@@ -59,5 +59,13 @@ class Ebook_model extends CI_Model
     {
         return $this->db->insert('ebook_users', $data);
     }
+    function get_category_slug_via_project($project_id)
+    {
+        $get = $this->db->select('ec.slug')
+            ->from('ebook_category as ec')
+            ->join('ebook_project as ep', 'ep.category_id = ec.id')
+            ->get();
+        return $get->num_rows() ? $get->row('slug') : '';
+    }
 }
 ?>

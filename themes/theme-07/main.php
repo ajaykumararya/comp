@@ -4,7 +4,21 @@
 <script src="{theme_url}assets/js/bootstrap.min.js"></script>
 <!-- JS | jquery plugin collection for this theme -->
 <script src="{theme_url}assets/js/jquery-plugin-collection.js"></script>
-
+<style>
+    .cart-count{
+        position: ABSOLUTE;
+        border: 1px solid var(--primary-color);
+        top: 8px;
+        line-height: 1;
+        padding: 4px;
+        border-radius: 50%;
+        font-size: 16px;
+        left: 24px;
+        min-width: 25px;
+        text-align: center;
+        font-weight: 900;
+    }
+</style>
 
 <body class="">
     <div id="wrapper" class="clearfix">
@@ -150,13 +164,13 @@
                             // echo uri_string();
                             // pre($menus);
                             echo get_menu($menus, 'menuzord-menu');
-                            echo '<div class="pull-right sm-pull-none mb-sm-15">';
+                            echo '<div class="pull-right sm-pull-none mb-sm-15" style="position:relative">';
                             if (CHECK_PERMISSION('EBOOK')) {
                                 $this->load->library('ebook/ebook_cart');
                                 ?>
                                 <a href="{current_url}?ebook=cart" class="cart-btn">
                                     <i class="fa fa-shopping-cart"></i>
-                                    <span class="cart-count"><?=$this->ebook_cart->count()?></span>
+                                    <p class="cart-count"><?=$this->ebook_cart->count()?></p>
                                 </a>
 
                                 <?php

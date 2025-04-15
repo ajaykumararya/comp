@@ -1,4 +1,4 @@
-<section>
+<section class="ebook-cart">
     <div class="container">
         <div class="section-content">
             <div class="row">
@@ -22,23 +22,28 @@
                                 </thead>
                                 <tbody>
                                     <?php
+                                    $this->load->model('ebook/ebook_model');
                                     $items = $this->ebook_cart->get_cart();
                                     $totalPrice = 0;
                                     foreach ($items as $item) {
+                                        // pre($item);
+                                        $catSlug = $this->ebook_model->get_category_slug_via_project($item['id']);
                                         $totalPrice += $item['price'];
-                                        // $link = current_url();
+                                        $link = current_url() . '?cat=' . $catSlug . '&project=' . $item['slug'];
+                                        // echo $link;
                                         ?>
                                         <tr class="cart_item" data-slug="<?= $item['slug'] ?>">
                                             <td class="product-remove">
-                                                <a title="Remove this item" class="remove remove-cart-item" href="#" style="font-size: 28px;color: red;">×</a>
+                                                <a title="Remove this item" class="remove remove-cart-item" href="#"
+                                                    style="font-size: 28px;color: red;">×</a>
                                             </td>
                                             <td class="product-thumbnail">
-                                                <a href="#">
+                                                <a href="<?= $link ?>">
                                                     <img alt="member" src="{base_url}upload/<?= $item['image'] ?>">
                                                 </a>
                                             </td>
                                             <td class="product-name">
-                                                <a href="#"><?= $item['name'] ?></a>>
+                                                <a href="<?= $link ?>"><?= $item['name'] ?></a>
                                                 <ul class="variation">
                                                     <li class="variation-size">Project Value:
                                                         <span><?= $item['project_value'] ?></span>
@@ -79,7 +84,7 @@
                     <?php
                     if ($this->ebook_cart->count()) {
                         ?>
-                        <button class="btn btn-outline-success" style="width:100%">
+                        <button class="btn btn-outline-success paynow" style="width:100%">
                             <span>
                                 <i class=""></i> Pay Now
                             </span>
