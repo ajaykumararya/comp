@@ -86,7 +86,7 @@ $this->ki_theme->generate_qr($certificate_id, 'franchise_certificate', current_u
         <p class="position-absolute" style="top:49.2%;left:26%;font-size:15px">{name}</p>
         <p class="position-absolute" style="top:51.3%;left:26%;font-size:15px">{contact_number}</p>
         <p class="position-absolute" style="top:53.5%;left:26%;font-size:15px">{email}</p>
-        <p class="position-absolute" style="top:55.6%;left:26%;font-size:15px">{valid_upto}</p>
+        <p class="position-absolute" style="top:55.6%;left:26%;font-size:15px">{certificate_issue_date} to {valid_upto}</p>
 
 
 </body>

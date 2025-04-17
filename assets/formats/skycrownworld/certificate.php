@@ -123,7 +123,15 @@
     
     <p class="position-absolute text-center " style="left:38%;top:61%;width:455px">{center_name}</p>
     <p class="position-absolute text-center " style="left:38%;top:64%;width:455px">{percentage}%</p>
+    <p class="position-absolute" style="top:76.8%;left:45%">{createdOn}</p>
+    <?php
+    if(file_exists('upload/'.$center_signature)){
+        echo '<div class="position-absolute" style="top:76.8%;left:5%;width:200px;height:60px" align="center">
+            <img src="upload/{center_signature}" style="width:100%;height:100%;">
+        </div>';
+    }
 
+?>
 </body>
 
 </html>

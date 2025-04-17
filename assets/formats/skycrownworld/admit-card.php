@@ -83,8 +83,8 @@
             $sign = $docs['signature'];
             if(file_exists('upload/'.$sign.'')){
                 echo '
-                <div class="position-absolute" style="top:35%;left:74%;">
-                    <img src="upload/'.$sign.'" style="width:150px;height:80px">
+                <div class="position-absolute" style="top:36.7%;left:74%;">
+                    <img src="upload/'.$sign.'" style="width:150px;height:37px">
                 </div>
                 
                 ';

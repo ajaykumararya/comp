@@ -139,53 +139,22 @@
     <div class="position-absolute" style="top:84.8%;left:83%;">
         <img src="upload/images/marksheet_{result_id}.png" style="width: 92.3px;" alt="">
     </div>
+    <?php
+    if(file_exists('upload/'.$center_signature)){
+        echo '<div class="position-absolute" style="top:78%;left:5%;width:200px;height:60px" align="center">
+            <img src="upload/{center_signature}" style="width:100%;height:100%;">
+        </div>';
+    }
 
-    <!-- <div class="position-absolute" style="top:22.4%;left:83%;">
-        <img src="upload/{centre_logo}" style="width: 80px;height:73px;" alt="">
-    </div> -->
-    <!--
+?>
+
     <div class="position-absolute " style="top:40%;left:6%;width:88%;">
-        <table id="first" border="0" style="width:100%">
+        <table id="first" border="1" style="width:100%">
             <thead>
                 <tr>
-                    <th style="font-size:12px;" width="20%">Subject Code</th>
-                    <th class="primary lb b-tb" width="40%" style="font-size:12px;text-align:left;padding-left:35px">SUBJECTS</th>
-                    <th class="primary lb b-tb" width="20%" style="font-size:12px;padding:4px">FULL MARKS</th>
-                    <th class="primary lb b-tb" width="20%" style="font-size:12px;padding:4px">PASSING PERCENATGE</th>
-                    <th class="primary lb b-tb"  width="20%" style="font-size:12px;padding:4px">MARKS OBTAINED</th>
-                </tr>
-            </thead>
-            <tbody>
-                {marks}
-                <tr>
-                    <td>{subject_code}</td>
-                    <td class="primary lb" style="text-align:left;padding-left:2px;font-size:12.81px">{subject_name}
-                    </td>
-                    <td class="primary lb" style="font-size:12.81px">{theory_max_marks}</td>
-                    <td class="lb fw" style="font-size:12.819px">70%</td>
-                    <td class="fw lb" style="font-size:12.81px">{total}</td>
-                </tr>
-                {/marks}
-            </tbody>
-            <tfoot>
-                <tr class="fw">
-                    <td colspan="2" class="primary fw t-l" style="font-size:12.81px">Percentage of Marks: {percentage}%</td>
-                    <td colspan="3" class="primary lb fw t-l" style="font-size:12.81px">Grand Total : {obtain_total}</td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="primary fw lb t-l" style="font-size:12.81px">Date of Issue : {issue_date}</td>
-                    <td colspan="3" class="fw lb t-l" style="font-size:12.81px">Overall Grade : {grade}</td>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-    -->
-    <div class="position-absolute " style="top:40%;left:6%;width:88%;">
-        <table id="first" border="0" style="width:100%">
-            <thead>
-                <tr>
-
-                    <th class="primary" rowspan="2" width="50%" style="text-align:left;padding-left:35px">SUBJECTS</th>
+                    <th class="primary " rowspan="2" width="10%" style="text-align:center;font-size:10px">SUBJECTS CODE
+                    </th>
+                    <th class="primary rb tb" rowspan="2" width="40%" style="text-align:left;padding-left:35px">SUBJECTS</th>
                     <th class="primary" colspan="2" style="font-size:10.81px;padding:4px">MAXIMUM MARKS</th>
                     <th class="primary lb" colspan="2" style="font-size:10.81px;padding:4px">MINIMUM MARKS</th>
                     <th class="primary lb" colspan="3" style="font-size:10.81px;padding:4px">OBTAINED MARKS</th>
@@ -203,7 +172,9 @@
             <tbody>
                 {marks}
                 <tr>
-                    <td class="primary lb" style="text-align:left;padding-left:2px;font-size:10.81px">{subject_name}
+                    <td class="primary lb" style="text-align:center;padding-left:2px;font-size:10.81px">{subject_code}
+                    </td>
+                    <td class="primary lb" style="text-align:center;padding-left:2px;font-size:10.81px">{subject_name}
                     </td>
                     <td class="primary lb" style="font-size:10.81px">{theory_max_marks}</td>
                     <td class="primary lb" style="font-size:10.81px">{practical_max_marks}</td>
@@ -216,6 +187,16 @@
                 {/marks}
             </tbody>
             <tfoot>
+                <tr>
+                    <th colspan="2" style="font-size:12px">Percentage of Marks : {percentage}%</th>
+                    <th colspan="7" style="font-size:12px">Grand Total : {obtain_total}</th>
+                </tr>
+                <tr>
+                    <th colspan="2" style="font-size:12px"></th>
+                    <th colspan="7" style="font-size:12px">Overall Grade : {grade}</th>
+                </tr>
+            </tfoot>
+            <!-- <tfoot>
                 <tr class="fw">
                     <td class="primary fw" style="font-size:10.81px">TOTAL</td>
                     <td class="primary lb fw" style="font-size:10.81px">{total_max_theory}</td>
@@ -223,10 +204,10 @@
                     <td class="primary fw lb" style="font-size:10.81px">{total_min_theory}</td>
                     <td class="primary fw" style="font-size:10.81px">{total_min_practical}</td>
                     <td class="fw lb" style="font-size:10.81px"></td>
-                    <td></td>
-                    <td class="fw" style="font-size:10.81px">{obtain_total}</td>
+                   
+                    <td class="fw" colspan="2" style="font-size:10.81px">{obtain_total}</td>
                 </tr>
-            </tfoot>
+            </tfoot> -->
 
         </table>
     </div>
