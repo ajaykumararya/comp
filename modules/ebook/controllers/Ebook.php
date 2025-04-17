@@ -18,6 +18,6 @@ class Ebook extends MY_Controller
     function my_account(){
         // echo 'ddd';
         $this->load->module('site');
-        $this->site->page_view('Hellllo');
+        $this->site->content('Hellllo','ebook/index',[]);
     }
 }

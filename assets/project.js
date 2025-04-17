@@ -64,15 +64,15 @@ $(document).on('ready', function () {
             showResponseError(res)
         });
     })
-    $(document).on('submit','.submit-examination-form',function(ee){
+    $(document).on('submit', '.submit-examination-form', function (ee) {
         ee.preventDefault();
         var box = $(this).closest('section').find('.student-examination-data-response');
         $.AryaAjax({
-            url:'website/student_examination_form_submit',
-            data:new FormData(this),
+            url: 'website/student_examination_form_submit',
+            data: new FormData(this),
         }).then((res) => {
             // log(res)
-            if(res.status){
+            if (res.status) {
                 box.html(`<div class="alert alert-success">${res.html}</div>`);
             }
             showResponseError(res);
@@ -448,14 +448,32 @@ $(document).on('ready', function () {
             }
         });
     });
+    // $(document).on('submit', '.student-admit-card-form', function (e) {
+    //     e.preventDefault();
+    //     $.AryaAjax({
+    //         url: 'website/admit-card',
+    //         data: new FormData(this)
+    //     }).then((r) => {
+    //         if (r.status) {
+    //             window.open(r.url, "_blank");
+    //         }
+    //         showResponseError(r);
+    //     });
+    // })
     $(document).on('submit', '.student-admit-card-form', function (e) {
         e.preventDefault();
+
+        var box = $(this).closest('section').find('.show-student-details');
+        box.html('');
+
         $.AryaAjax({
             url: 'website/admit-card',
             data: new FormData(this)
         }).then((r) => {
             if (r.status) {
-                window.open(r.url, "_blank");
+                // window.open(r.url, "_blank");
+                box.html(r.html);
+                scrollToDiv(box);
             }
             showResponseError(r);
         });

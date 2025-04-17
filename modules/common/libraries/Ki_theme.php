@@ -1310,7 +1310,7 @@ class Ki_theme
         $adminMenu = [];
         if ($this->CI->center_model->isCoordinator())
             $adminMenu = $this->CI->load->config('coordinate/menu', true);
-        else if ($this->isAdmin() || $this->isCenter())
+        else if ($this->isAdmin() || $this->isCenter() || $this->login_type == 'role_user')
             $adminMenu = $this->CI->load->config('admin/menu', true);
         else if ($this->CI->student_model->isStudent())
             $adminMenu = $this->CI->load->config('student/menu', true);

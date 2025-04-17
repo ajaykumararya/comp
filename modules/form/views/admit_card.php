@@ -33,5 +33,6 @@
 
             </div>
         </div>
+        <div class="row show-student-details"></div>
     </div>
 </section>

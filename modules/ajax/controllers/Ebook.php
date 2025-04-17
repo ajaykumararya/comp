@@ -274,6 +274,9 @@ class Ebook extends Ajax_Controller
                 $this->db->insert_batch('ebook_user_projects', $data);
                 $this->ebook_cart->clear_cart();
                 $this->response('status', true);
+                $this->response("url", base_url('ebook/payment/' . $this->token->encode([
+                    'payment_id' => $razorpay_payment_id
+                ])));
             }
         } catch (Exception $e) {
             $this->response('error', $e->getMessage());

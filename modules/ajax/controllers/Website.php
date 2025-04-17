@@ -508,6 +508,18 @@ class Website extends Ajax_Controller
             $this->response('status', true);
         }
     }
+    // function admit_card()
+    // {
+    //     if ($this->validation('roll_no')) {
+    //         // $this->response($this->post());
+    //         $get = $this->student_model->admit_card($this->post());
+    //         if ($get->num_rows()) {
+    //             $this->response('status', true);
+    //             $this->response('url', base_url('admit-card/' . $this->encode($get->row('admit_card_id'))));
+    //         } else
+    //             $this->response('error', 'Admit Card not found..');
+    //     }
+    // }
     function admit_card()
     {
         if ($this->validation('roll_no')) {
@@ -515,7 +527,29 @@ class Website extends Ajax_Controller
             $get = $this->student_model->admit_card($this->post());
             if ($get->num_rows()) {
                 $this->response('status', true);
-                $this->response('url', base_url('admit-card/' . $this->encode($get->row('admit_card_id'))));
+                // $this->response('url', base_url('admit-card/' . $this->encode($get->row('admit_card_id'))));
+                $html = '<div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <h4>List Of Admit Card(s)</h4>
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Admit Card</th>
+                                <th>View</th>
+                            </tr>
+                        ';
+                    foreach ($get->result() as $row) {
+                        $token = $this->encode($row->admit_card_id);
+                        $url = base_url('admit-card/' . $token);
+                        $html .= '<tr>
+                                    <td><a href="' . $url . '" target="_blank">' . humnize_duration_with_ordinal($row->admit_card_duration, $row->duration_type) . ' Admit Card</a></td>
+                                    <td>
+                                        <a href="' . $url . '" target="_blank" class="btn btn-primary btn-xs btn-sm">View Result</a>
+                                    </td>
+                        </tr>';
+                    }
+                    $html .= '</table>
+                    </div>';
+                    $this->response('html', $html);
             } else
                 $this->response('error', 'Admit Card not found..');
         }

@@ -139,6 +139,7 @@
             background: transparent;
             border: 0;
             outline: 0;
+            width: 100%;
         }
 
         .br-none {

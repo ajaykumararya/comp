@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function () {
         $.AryaAjax({
             url: 'ebook/cart-payment',
         }).then((res) => {
-            // log(res)
+            log(res)
 
             if (res.status == 'login') {
                 $('#loginModel').modal('show').find('#ebook_userogin').append('<input type="hidden" name="paynow" value="1">');
@@ -172,8 +172,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     }).then((res) => {
                         showResponseError(res);
                         if (res.status) {
-                            SwalSuccess('Success!', 'Fully Paid EMI');
-                            location.reload();
+                            SwalSuccess('Success!', 'Payment Done..');
+                            // location.reload();
+                            location.href = res.url;
                         }
                     });
                 };
