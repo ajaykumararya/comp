@@ -627,6 +627,7 @@ function timeAgo($time)
 }
 function board_text($text)
 {
+    if(empty($text)) return;
     $words = explode(' ', strtolower($text));
 
     $formattedWords = array_map(function ($word) {

@@ -107,7 +107,7 @@
     <p class="position-absolute" style="top:32.9%;left:23%">{father_name}</p>
     <p class="position-absolute " style="top:35%;left:23%">{mother_name}</p>
     <p class="position-absolute " style="top:36.8%;left:23%">{dob}</p>
-    <p class="position-absolute " style="top:38.6%;left:23%">{course_name}</p>
+    <p class="position-absolute " style="top:38.7%;left:23%;width:440px;line-height:1">{course_name}</p>
     <p class="position-absolute " style="top:40.5%;left:23%">{center_name}</p>
     <p class="position-absolute " style="top:42.4%;left:23%">{duration} {duration_type}</p>
     <div class="position-absolute" style="bottom:10.4%;left:44.1%;">

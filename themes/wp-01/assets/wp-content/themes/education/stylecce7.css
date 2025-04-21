@@ -1,0 +1,29 @@
+/*
+	Theme Name: Education
+	Description: Webful Education WordPress Theme is best education WordPress theme for Universties, Colleges, Academies, and Institutions. Can be used for Schools and any other related domains.
+	Author: Webful Creations
+	Author URI: https://www.webfulcreations.com/
+	Theme URI: https://themeforest.net/user/webfulcreationsvision/portfolio
+	Version: 4.0.0
+	License: GNU General Public License v3 or later
+	License URI: http://www.gnu.org/licenses/gpl-3.0.html
+	Tags: one-column, two-columns, right-sidebar, custom-colors, custom-header, custom-menu, featured-images, post-formats, translation-ready, left-sidebar
+	Text Domain: education
+*/
+
+/*-------------------------------------------------------------------------------------------------------------  
+
+	- Main CSS file is inside 
+	- asses/css/theme-style.css
+	
+	- Table Content For CSS is also in 
+	- assets/css/theme-style.css
+	
+	- Mobile or Tablet CSS is in Folder
+	- assets/css/mobile-tab.css
+
+	- Note: Below this line you can add your CSS 
+ 	- But we strongly recommend you to add your CSS in wp-admin >> appearance >> customize >> additional CSS
+	- If you are going to do major customization kindly use child theme to avoid any future issues with updates.
+
+-------------------------------------------------------------------------------------------------------------*/

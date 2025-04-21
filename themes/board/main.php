@@ -112,7 +112,7 @@
                 <div class="col-10 col-lg-9">
                     <div class=" d-flex justify-content-evenly align-items-center text-center">
                         <div class="mx-2">
-                            <img src="{base_url}upload/{logo}" class="nceb_logo" alt="{title}">
+                            <img src="{base_url}upload/{logo}" class="" alt="{title}" style="height: 133px;">
                         </div>
                         <div class="mx-2">
                             <h4 class="nceb-title m-0 p-0 hindi tricolor" style="color:#0b0f34">
@@ -260,7 +260,7 @@
     <div class="container-fluid bg-secondary text-white">
         <div class="row g-4">
             <div class="col-md-5 ps-5 pt-2">
-                <h6 class="nceb-heading-warning"> <?= $this->ki_theme->parse_string($footer_note_title) ?></h6>
+                <h6 class="nceb-heading-warning"> <?= $this->ki_theme->parse_string(@$footer_note_title) ?></h6>
                 <p class="text-justify">{footer_note_description}</p>
                 <!-- <a href="why-nceb.html" class="text-white">Read more...</a> -->
                 <?php

@@ -1,4 +1,8 @@
 <style>
+    :root{
+        --primary-color : #468323 !important;
+        --secondary-color : #c92a2e;
+    }
         .zi-1 {
             z-index: -1;
         }
@@ -50,3 +54,13 @@
         }
     </style>
     <link href="{theme_url}assets/css/nxr.min7839.css?v=1.2" rel="stylesheet" />
+    <style>
+        .bg-secondary{
+            background-color: var(--primary-color)!important;
+        }
+        .text-primary{
+            color: var(--secondary-color)!important;
+        }.bg-primary{
+            background-color: var(--secondary-color)!important;
+        }
+    </style>

@@ -9,15 +9,17 @@ class Ebook extends MY_Controller
     {
         $this->view('category');
     }
-    function project(){
+    function project()
+    {
         $this->ki_theme->breadcrumb_action_html(
-            $this->ki_theme->drawer_button('ebook','project_system','Project System')
+            $this->ki_theme->drawer_button('ebook', 'project_system', 'Project System')
         );
         $this->view('project');
     }
-    function my_account(){
+    function my_account()
+    {
         // echo 'ddd';
-        $this->load->module('site');
-        $this->site->content('Hellllo','ebook/index',[]);
+        $this->load->module('site', ['page_name' => 'MY-Account']);
+        $this->site->content('ebook/index');
     }
 }

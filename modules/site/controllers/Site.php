@@ -111,9 +111,8 @@ class Site extends Site_Controller
         $this->render($content, 'content');
         // pre($this->public_data,true);
     }
-    function content($title = '', $file, $data)
+    function content($file, $data = [])
     {
-        $this->set_data('title', $title);
         $this->render("{$file}", $data);
     }
     function registration_certificate()

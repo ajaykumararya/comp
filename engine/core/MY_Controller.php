@@ -456,9 +456,10 @@ class Site_Controller extends MY_Controller
 {
     public $isOK = false;
     public $pageData = ['label' => '', 'id' => 0];
-    function __construct()
+    function __construct($config = [])
     {
         parent::__construct();
+        $this->set_data($config);
         $favicon = ES('favicon', false);
         if (!$favicon) {
             $favicon = ES('logo');
