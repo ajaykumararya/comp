@@ -13,9 +13,9 @@
                         <label for="" class="form-label">Header Type(s)</label>
                         <select class="form-select change-img" name="website_header_index">
                             <option value="1" <?= $index == 1 ? 'selected' : '' ?> data-title="Right Side Menu in Header"
-                                data-src="{theme_url}assets/images/header-1.jpg">Right Side Menu in Header</option>
+                                data-src="{theme_url}images/header-1.jpg">Right Side Menu in Header</option>
                             <option value="2" <?= $index == 2 ? 'selected' : '' ?> data-title="Vertical Menu Header"
-                                data-src="{theme_url}assets/images/header-2.jpg">Vertical Menu Header</option>
+                                data-src="{theme_url}images/header-2.jpg">Vertical Menu Header</option>
                         </select>
                     </div>
 
