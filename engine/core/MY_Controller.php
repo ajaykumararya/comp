@@ -133,6 +133,7 @@ class MY_Controller extends MX_Controller
         //         ]
         //     ]);
         // }
+
         $checkField = $this->build_db->field_exists('study_material', 'file_type');
         if (!$checkField) {
             $this->build_db->add_field('study_material', [
@@ -197,6 +198,18 @@ class MY_Controller extends MX_Controller
             $this->db->set('status', '1', FALSE);
             // $this->db->where('payment_date IS NOT NULL', NULL, FALSE);
             $this->db->update('student_fee_transactions');
+        }
+        if (THEME == 'wp-01') {
+            // exit('YES');
+            $checkField = $this->build_db->field_exists('content_courses','category_id');
+            if (!$checkField) {
+                $this->build_db->add_field('content_courses', [
+                    'category_id' => [
+                        'type' => 'int',
+                        'default' => 0
+                    ]
+                ]);
+            }
         }
         if (CHECK_PERMISSION('CENTRE_STUDENT_CERTIFICATE_PERMISSION')) {
             $checkField = $this->build_db->field_exists('centers', 'certificate_create_from');

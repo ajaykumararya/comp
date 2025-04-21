@@ -10,8 +10,7 @@
                     <div class="elementor-widget-container">
                         <img decoding="async" width="1024" height="692"
                             src="{base_url}upload/<?= $this->SiteModel->get_setting('about_us_image') ?>"
-                            class="attachment-large size-large wp-image-366" alt=""
-                            srcset=""
+                            class="attachment-large size-large wp-image-366" alt="" srcset=""
                             sizes="(max-width: 1024px) 100vw, 1024px" />
                     </div>
                 </div>
@@ -23,15 +22,15 @@
                 <div class="elementor-element elementor-element-5cc99c9c elementor-widget elementor-widget-text-editor"
                     data-id="5cc99c9c" data-element_type="widget" data-widget_type="text-editor.default">
                     <div class="elementor-widget-container">
-                        <h2><?=filter_title(ES('about_us_page_title'))?></h2>
-                       
+                        <h2><?= filter_title(ES('about_us_page_title')) ?></h2>
+
                         <?php
                         echo ES('about_us_content');
-                    if ($button = $this->SiteModel->get_setting('about_us_page_button_text')) {
-                        $buttonLink = $this->SiteModel->get_setting('about_us_page_button_link', '#');
-                        echo '<a href="' . $buttonLink . '" class="primary bordered-dark button">' . $button . ' <i class="ion-ios-arrow-thin-right ml-1"></i></a>';
-                    }
-                    ?>
+                        if ($button = $this->SiteModel->get_setting('about_us_page_button_text')) {
+                            $buttonLink = $this->SiteModel->get_setting('about_us_page_button_link', '#');
+                            echo '<a href="' . $buttonLink . '" class="primary bordered-dark button">' . $button . ' <i class="ion-ios-arrow-thin-right ml-1"></i></a>';
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

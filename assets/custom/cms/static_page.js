@@ -154,7 +154,11 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 data: data,
                 validation: validation,
                 url: 'cms/add-course-for-content'
-            }).then((r) => course_list.DataTable().ajax.reload());
+            }).then((r) => {
+                SwalSuccess('Success','Course added successfully');
+                location.reload()
+            });
+            //course_list.DataTable().ajax.reload()
         });
     }
 

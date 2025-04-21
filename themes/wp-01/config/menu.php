@@ -11,6 +11,12 @@ $menu = array(
             'url' => 'cms/static-page/list-all-courses',
         ),
         array(
+            'label' => 'Our Content Courses',
+            'type' => 'our_courses',
+            'icon' => array('file', 4),
+            'url' => 'cms/static-page/our_courses',
+        ),
+        array(
             'label' => 'Revolution Slider',
             'type' => 'revosultion_slider',
             'icon' => array('file', 4),
