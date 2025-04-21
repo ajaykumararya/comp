@@ -1,13 +1,13 @@
 <body
     class="home wp-singular page-template page-template-elementor_header_footer page page-id-7 page-parent wp-custom-logo wp-theme-education theme-education woocommerce-no-js  elementor-default elementor-template-full-width elementor-kit-675 elementor-page elementor-page-7">
     <!-- Page Preloader -->
-    <!-- <div id="loading">
+    <div id="loading">
         <div id="loading-center">
             <div id="loading-center-absolute">
                 <div id="object"></div>
             </div>
         </div>
-    </div> -->
+    </div>
     <!-- Page Preloader Ends /-->
     <!-- Main Container -->
     <div class="main-container">
