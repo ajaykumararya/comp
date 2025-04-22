@@ -19,7 +19,7 @@ class Course extends Ajax_Controller
             'course_name' => $this->post('course_name'),
             'fees' => $this->post('fees')
         ]);
-        $this->response('html','Course Updated Successfully..');
+        $this->response('html', 'Course Updated Successfully..');
         $this->response('status', true);
     }
     function edit_subject()
@@ -28,7 +28,7 @@ class Course extends Ajax_Controller
             'subject_code' => $this->post('subject_code'),
             'subject_name' => $this->post('subject_name')
         ]);
-        $this->response('html','Subject Updated Successfully..');
+        $this->response('html', 'Subject Updated Successfully..');
 
         $this->response('status', true);
     }
@@ -38,7 +38,7 @@ class Course extends Ajax_Controller
         $this->db->where('id', $this->post('id'))->update('course_category', [
             'title' => $this->post('title')
         ]);
-        $this->response('html','Category Updated Successfully..');
+        $this->response('html', 'Category Updated Successfully..');
 
         $this->response('status', true);
     }
@@ -123,7 +123,7 @@ class Course extends Ajax_Controller
             ]);
             $this->response('status', true);
             // $this->response('html', $this->db->last_query());
-        $this->response('html','Updated Categories Successfully..');
+            $this->response('html', 'Updated Categories Successfully..');
 
         }
     }
@@ -154,8 +154,9 @@ class Course extends Ajax_Controller
     {
         $this->response('data', $this->student_model->system_subjects()->result());
     }
-    function list_deleted_subjects(){
-        $this->response('data',$this->student_model->system_subjects(1)->result());
+    function list_deleted_subjects()
+    {
+        $this->response('data', $this->student_model->system_subjects(1)->result());
     }
     function subject_delete()
     {
@@ -190,6 +191,7 @@ class Course extends Ajax_Controller
                 'status',
                 $this->db->insert('course_category', $this->post())
             );
+            $this->response('html', 'Category Added Successfully..');
         }
     }
     function list_category()

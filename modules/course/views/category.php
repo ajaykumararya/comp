@@ -26,7 +26,7 @@
     <div class="col-md-7">
         <div class="{card_class}">
             <div class="card-header collapsible cursor-pointer rotate" data-bs-toggle="collapse" data-bs-target="#list">
-                <h3 class="card-title">List Batch</h3>
+                <h3 class="card-title">List Category(s)</h3>
                 <div class="card-toolbar rotate-180">
                     <i class="ki-duotone ki-down fs-1"></i>
                 </div>
