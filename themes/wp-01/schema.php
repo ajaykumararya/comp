@@ -44,7 +44,7 @@ if ($isPrimary) {
                                                             data-frame_0="y:20px;sX:0.9;sY:0.9;tp:600;"
                                                             data-frame_1="tp:600;e:power4.out;st:500;sp:1000;sR:500;"
                                                             data-frame_999="o:0;tp:600;e:nothing;st:w;sR:7500;"
-                                                            style="z-index:5;letter-spacing:10px;">
+                                                            style="z-index:5;font-family:'Open Sans';letter-spacing:10px;">
                                                             <?php
                                                             echo ($slider->field2);
                                                             ?>
@@ -56,7 +56,7 @@ if ($isPrimary) {
                                                             data-frame_0="y:10px;sX:0.9;sY:0.9;tp:600;"
                                                             data-frame_1="tp:600;e:power4.out;st:700;sp:1000;sR:700;"
                                                             data-frame_999="o:0;tp:600;e:nothing;st:w;sR:7300;"
-                                                            style="z-index:6;">
+                                                            style="z-index:6;font-family:'Open Sans';">
                                                             <?= $slider->field3 ?>
                                                         </rs-layer>
                                                         <?php
@@ -72,7 +72,7 @@ if ($isPrimary) {
                                                                     data-frame_1="tp:600;e:power4.out;st:900;sp:1000;sR:900;"
                                                                     data-frame_999="o:0;tp:600;e:nothing;st:w;sR:7100;"
                                                                     data-frame_hover="c:#000;bgc:#eee;boc:#000;bor:0px,0px,0px,0px;bos:solid;oX:50;oY:50;sp:0;"
-                                                                    style="z-index:7;background-color:rgba(255,255,255,1);cursor:pointer;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;">
+                                                                    style="z-index:7;background-color:rgba(255,255,255,1);font-family:'Open Sans';cursor:pointer;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;">
                                                                     <?= $slider->field4 ?>
                                                                 </rs-layer>
                                                             </a>
