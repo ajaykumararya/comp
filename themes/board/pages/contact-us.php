@@ -22,8 +22,10 @@
                                 <td>
                                     <a class="h3 text-decoration-none" href="tel:<?=add_91($number)?>">
                                     <?=board_text(remove_91($number))?>            
-                                </a> <small
-                                        class="fw-bold text-danger">(11:00am to 6:00pm IST)</small>
+                                </a> 
+                                <small class="fw-bold text-danger"><?=ES('header_open_timing')?></small>
+                                <!-- <small
+                                        class="fw-bold text-danger">(11:00am to 6:00pm IST)</small> -->
                                 </td>
                             </tr>
                             <tr>
@@ -40,8 +42,11 @@
                                 </td>
                                 <td>
                                     <a class="h3 text-decoration-none"
-                                        href="https://api.whatsapp.com/send?phone=<?=add_only_91($whatsapp_number)?>&amp;text=Hi%20"><?=add_only_91($whatsapp_number)?></a> <small
-                                        class="fw-bold text-danger">(11:00am to 6:00pm IST)</small>
+                                        href="https://api.whatsapp.com/send?phone=<?=add_only_91($whatsapp_number)?>&amp;text=Hi%20"><?=add_only_91($whatsapp_number)?></a> 
+                                        
+                                        <small class="fw-bold text-danger"><?=ES('header_open_timing')?></small>
+                                        <!-- <small
+                                        class="fw-bold text-danger">(11:00am to 6:00pm IST)</small> -->
                                 </td>
                             </tr>
                             <tr>
@@ -64,11 +69,10 @@
             <hr class="border border-primary border-1 opacity-50 d-block d-lg-none">
             <div class="card border-0 bg-white">
                 <div class="card-body">
-                    <form id="contactform" class="px-4">
+                    <form id="submitGETINTOUCH" class="px-4">
                         <h4>Write to us</h4>
-                        <input type="hidden" name="contact_nceb">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="fullname" id="name" placeholder="name"
+                            <input type="text" class="form-control" name="name" id="name" placeholder="name"
                                 required="">
                             <label for="name">Enter your fullname</label>
                         </div>
@@ -82,7 +86,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" name="phone" id="phone" placeholder="phone"
+                                    <input type="text" class="form-control" name="mobile" id="phone" placeholder="phone"
                                         pattern="\d*" maxlength="10" required="">
                                     <label for="phone">Enter your phone no.</label>
                                 </div>
@@ -98,7 +102,7 @@
 
                         <div id="contactMsg"></div>
 
-                        <button type="submit" id="contactBtn" class="btn btn-primary btn-lg col-12"
+                        <button type="submit" class="btn btn-primary btn-lg col-12"
                             >Submit</button><br><br>
                     </form>
                 </div>

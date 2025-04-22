@@ -55,7 +55,7 @@ class Student_model extends MY_Model
             ->join('district', 'district.DISTRICT_ID = s.city_id and district.STATE_ID = state.STATE_ID')
 
             ->join('batch as b', "b.id = s.batch_id", 'left');
-        if(PATH === 'skycrownworld')
+        if (PATH === 'skycrownworld')
             $this->db->select('s.category');
         if (CHECK_PERMISSION('ADMISSION_WITH_SESSION'))
             $this->db->select('s.session_id,ses.title as session')->join('session as ses', 'ses.id =  s.session_id', 'left');
@@ -175,7 +175,8 @@ class Student_model extends MY_Model
                 break;
             case 'student_verification':
                 $this->db->where('s.roll_no', $roll_no);
-                $this->db->where('s.dob', $dob);
+                if (isset($dob))
+                    $this->db->where('s.dob', $dob);
                 $this->db->where('s.status', isset($status) ? $status : 0);
                 break;
             case 'online_students':
@@ -232,7 +233,7 @@ class Student_model extends MY_Model
                 break;
             case 'fetch_fee_transactions':
                 $this->db->select('sft.*')->join('student_fee_transactions as sft', "sft.student_id = s.id");
-                $this->db->order_by('sft.timestamp','DESC');
+                $this->db->order_by('sft.timestamp', 'DESC');
                 $this->myWhere('sft', $condition);
                 break;
             case 'fetch_fee_transactions_group_by':
@@ -281,8 +282,8 @@ class Student_model extends MY_Model
             case 'student_certificates':
                 $this->db->select('sc.id as certiticate_id,ss.title as session, sc.issue_date as createdOn,sc.exam_conduct_date,ac.enrollment_no');
                 $this->db->join('student_certificates as sc', "sc.student_id = s.id");
-                $this->db->join('admit_cards as ac', "ac.student_id = sc.student_id and c.duration = ac.duration and c.duration_type = ac.duration_type",'left');
-                $this->db->join('session as ss', "ss.id = ac.session_id",'left');
+                $this->db->join('admit_cards as ac', "ac.student_id = sc.student_id and c.duration = ac.duration and c.duration_type = ac.duration_type", 'left');
+                $this->db->join('session as ss', "ss.id = ac.session_id", 'left');
 
                 if (isset($roll_no)) {
                     unset($condition['roll_no']);
@@ -295,7 +296,7 @@ class Student_model extends MY_Model
                 break;
             case 'other_certificate':
                 $this->db->select('o_cert.id as cert_id,o_cert.*');
-                $this->db->join($certificate.' as o_cert', 'o_cert.student_id = s.id');
+                $this->db->join($certificate . ' as o_cert', 'o_cert.student_id = s.id');
                 $this->db->where('s.id', $student_id);
                 break;
             case 'all_fee_transcations':
@@ -398,7 +399,7 @@ class Student_model extends MY_Model
     function get_student_via_id($id = 0)
     {
         $this->db->select('s.fee_emi,s.fee_emi_type');
-        if(CHECK_PERMISSION('CUSTOM_STUDENT_FEE'))
+        if (CHECK_PERMISSION('CUSTOM_STUDENT_FEE'))
             $this->db->select('s.custom_fee');
         return $this->get_switch('student_id', ['id' => $id]);
     }
@@ -528,10 +529,10 @@ class Student_model extends MY_Model
         extract($where);
         $ttlSubmited = $this->db->select('SUM(amount) as ttlAmount')->where('type_key', 'course_fees')->where('student_id', $student_id)->get('student_fee_transactions')->row('ttlAmount');
         // return $ttlSubmited;
-        if(CHECK_PERMISSION('CUSTOM_STUDENT_FEE')){
+        if (CHECK_PERMISSION('CUSTOM_STUDENT_FEE')) {
             $this->db->select('s.custom_fee');
             $getStudent = $this->get_student_via_id($student_id);
-            if($getStudent->num_rows()){
+            if ($getStudent->num_rows()) {
                 $studentFee = $getStudent->row('custom_fee');
                 return $studentFee - $ttlSubmited;
             }
@@ -569,7 +570,8 @@ class Student_model extends MY_Model
         return $this->db->get('study_material');
 
     }
-    function fetch_fee_transactions_group_by($where = []){
-        return $this->get_switch('fetch_fee_transactions_group_by',$where);
+    function fetch_fee_transactions_group_by($where = [])
+    {
+        return $this->get_switch('fetch_fee_transactions_group_by', $where);
     }
 }

@@ -20,6 +20,12 @@
                         <input value="<?=ES('page_title_sub_description')?>" type="text" name="page_title_sub_description" placeholder="Description"
                             class="form-control">
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="" class="form-label">Open Timing</label>
+                        <input value="<?=ES('header_open_timing')?>" type="text" name="header_open_timing" placeholder="(11:00am to 6:00pm IST)"
+                            class="form-control">
+                    </div>
                 </div>
                 <div class="card-footer">
                     {publish_button}

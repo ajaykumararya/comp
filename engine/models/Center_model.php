@@ -45,7 +45,7 @@ class Center_model extends MY_Model
             // $this->db->select('co.fees,cc.percentage,(co.fees * (cc.percentage / 100)) as commission ,(co.fees - (co.fees * (cc.percentage / 100))) as course_fee')
             $this->db->select('co.fees,cc.percentage,(co.fees * (cc.percentage / 100)) as commission ,co.fees as course_fee, (co.fees - (co.fees * (cc.percentage / 100))) as com_course_fee')
                 ->join('course as co', 'co.category_id = cc.category_id');
-            
+
             if (isset($condition['course_id'])) {
                 $this->db->where('co.id', $condition['course_id']);
                 unset($condition['course_id']);
@@ -156,6 +156,15 @@ class Center_model extends MY_Model
         $this->db->from('wallet_transcations as wt');
         $this->db->where('wt.center_id', $this->loginId());
         return $this->db->order_by('id', 'DESC')->get();
+    }
+    function get_verify_center($where, $type = 'center')
+    {
+        $this->db->where($where);
+        $this->db->where('type', $type);
+        $this->db->where('status', 1);
+        $this->db->where('certificate_issue_date!=',null);
+        $this->db->where('valid_upto!=',null);
+        return $this->db->get('centers');
     }
 }
 ?>

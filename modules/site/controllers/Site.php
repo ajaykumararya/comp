@@ -336,12 +336,11 @@ class Site extends Site_Controller
     function test()
     {
 
-
         // $url = base_url('marksheet_print/' . $this->token->encode(['id' => 2]));
         // echo $this->ki_theme->generate_qr(2, 'front_marksheet', $url);
-        redirect(base_url('en-verification/' . $this->token->encode([
-            'id' => 20
-        ])));
+        // redirect(base_url('en-verification/' . $this->token->encode([
+        //     'id' => 20
+        // ])));
 
         // $code = '1233';
         // $generator = new BarcodeGeneratorPNG();

@@ -31,7 +31,8 @@ if ($popupStatus):
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="notice mb-0 abt-box text-center">
-                                <button type="button" class="close" data-dismiss="modal">×</button>
+                            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                                <button type="button" class="close"  data-bs-dismiss="modal" aria-label="Close">×</button>
                                 <div class="title mb-3 text-center">
                                     <h2 class="text-danger text-underline"><?= $popupTitle ?></h2>
                                 </div>

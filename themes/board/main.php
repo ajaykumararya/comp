@@ -98,8 +98,7 @@
             <div class="col-12 bg-secondary text-end text-bold text-white py-1">
                 <span class="px-3 m-2"><i class="nxr-telephone"></i> : <a class="text-decoration-none text-white"
                         href="tel:{number}">{number}</a>
-                    <!-- <small class="fw-bold text-warning">(11:00am to 6:00pm
-                        IST)</small> -->
+                    <small class="fw-bold text-warning"><?=ES('header_open_timing')?></small>
                 </span>
             </div>
         </div>

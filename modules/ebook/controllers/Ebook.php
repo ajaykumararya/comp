@@ -16,6 +16,9 @@ class Ebook extends MY_Controller
         );
         $this->view('project');
     }
+    function users(){
+        $this->view('user-list');
+    }
     function my_account()
     {
         // echo 'ddd';

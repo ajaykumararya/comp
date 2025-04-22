@@ -59,6 +59,12 @@ $menu = array(
             'icon' => array('file',2),
             'url' => 'cms/static-page/our-team-list'
         ),
+        array(
+            'label' => 'Salient Features',
+            'type' => 'salient-features',
+            'icon' => array('file', 2),
+            'url' => 'cms/static-page/salient-features'
+        )
     )
 );
 //OL_fC^HODQP,

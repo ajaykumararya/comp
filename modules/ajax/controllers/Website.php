@@ -537,19 +537,19 @@ class Website extends Ajax_Controller
                                 <th>View</th>
                             </tr>
                         ';
-                    foreach ($get->result() as $row) {
-                        $token = $this->encode($row->admit_card_id);
-                        $url = base_url('admit-card/' . $token);
-                        $html .= '<tr>
+                foreach ($get->result() as $row) {
+                    $token = $this->encode($row->admit_card_id);
+                    $url = base_url('admit-card/' . $token);
+                    $html .= '<tr>
                                     <td><a href="' . $url . '" target="_blank">' . humnize_duration_with_ordinal($row->admit_card_duration, $row->duration_type) . ' Admit Card</a></td>
                                     <td>
                                         <a href="' . $url . '" target="_blank" class="btn btn-primary btn-xs btn-sm">View Result</a>
                                     </td>
                         </tr>';
-                    }
-                    $html .= '</table>
+                }
+                $html .= '</table>
                     </div>';
-                    $this->response('html', $html);
+                $this->response('html', $html);
             } else
                 $this->response('error', 'Admit Card not found..');
         }
@@ -657,8 +657,8 @@ class Website extends Ajax_Controller
     {
         $this->db->where('id', $this->post('center_id'))
             ->update('centers', [
-                    $this->post('name') => $this->file_up('file')
-                ]);
+                $this->post('name') => $this->file_up('file')
+            ]);
         // $this->response('query', $this->db->last_query());
         $this->response('status', true);
     }
@@ -721,8 +721,8 @@ class Website extends Ajax_Controller
                     $this->response([
                         'status' => 'success',
                         'url' => base_url('student/create-new-password/' . $this->token->encode([
-                                    'student_id' => $row->student_id
-                                ]))
+                            'student_id' => $row->student_id
+                        ]))
                     ]);
                 }
             }
@@ -834,9 +834,9 @@ class Website extends Ajax_Controller
     {
         $this->db->where('id', $this->post('id'))
             ->update('content', [
-                    'field2' => $this->post('title'),
-                    'field4' => $this->post('link')
-                ]);
+                'field2' => $this->post('title'),
+                'field4' => $this->post('link')
+            ]);
         $this->response('status', true);
     }
 
@@ -927,10 +927,10 @@ class Website extends Ajax_Controller
         // $this->response('data',$this->post());
         $this->db->where('id', $this->post('id'))
             ->update('admit_cards', [
-                    'enrollment_no' => $this->post('enrollment_no'),
-                    'session_id' => $this->post('session_id'),
-                    'status' => 1
-                ]);
+                'enrollment_no' => $this->post('enrollment_no'),
+                'session_id' => $this->post('session_id'),
+                'status' => 1
+            ]);
     }
     function verify_examination_data()
     {
@@ -1056,6 +1056,57 @@ class Website extends Ajax_Controller
                 $this->response('html', $this->template('student-examination-form'));
             } catch (Exception $e) {
                 $this->response('error', alert($e->getMessage(), 'danger'));
+            }
+        }
+    }
+    function center_board_verification()
+    {
+        // $this->response($this->post());
+        $this->form_validation->set_rules('center_id', 'Center ID', 'required');
+        if ($this->validation()) {
+            $center_id = $this->post('center_id');
+            $get = $this->center_model->get_verify_center([
+                'center_number' => $center_id
+            ]);
+            if ($get->num_rows()) {
+                $row = $get->row();                
+                $this->response('html', '');
+                $allLinks = $this->ki_theme->project_config('open_links');
+                if (isset($allLinks['center_certificate'])) {
+                    $this->response('link', base_url($allLinks['center_certificate'] . '/' . $this->encode($row->id)));
+                    $this->response('status', true);
+                }
+            } else
+                $this->response('html', 'Not centre Found.');
+        }
+    }
+    function certification_board_verification(){
+        $this->form_validation->set_rules('roll_no','Roll No.','required');
+        if($this->validation()){
+            
+        }
+    }
+    function student_board_verification(){
+        $this->form_validation->set_rules('roll_no','Roll No.','required');
+        if($this->validation()){
+            $roll_no = $this->post('roll_no');
+            $status = 1;
+            $get = $this->student_model->student_verification([
+                'roll_no' => $roll_no,
+                'status' => $status
+            ]);
+            if ($get->num_rows()) {
+                // $this->response("get_student",$get->num_rows());
+                $this->response('status', true);
+                $data = $get->row_array();
+                $this->set_data($data);
+                $this->set_data('contact_number', maskMobileNumber($data['contact_number']));
+
+                $this->set_data('admission_status', $data['admission_status'] ? label($this->ki_theme->keen_icon('verify text-white',2,THEME == 'board' ? 0 : 1 ) . ' Verified Student') : label('Un-verified Student', 'danger'));
+                $this->set_data('student_profile', $data['image'] ? base_url('upload/' . $data['image']) : base_url('assets/media/student.png'));
+                $this->response('html', $this->template('student-profile-card'));
+            } else {
+                $this->response('error', 'Student Not Found.');
             }
         }
     }
