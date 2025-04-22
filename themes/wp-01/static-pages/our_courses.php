@@ -38,6 +38,14 @@
                             placeholder="Enter Description"></textarea>
                     </div>
                     <div class="form-group mb-4 col-md-6">
+                        <label for="button_title" class="form-label mb-1">Price</label>
+                        <input type="text" class="form-control" name="price" placeholder="Price">
+                    </div>
+                    <div class="form-group mb-4 col-md-6">
+                        <label for="button_link" class="form-label mb-1">Eligibility</label>
+                        <input type="text" class="form-control" name="eligibilty" placeholder="Eligibility">
+                    </div>
+                    <div class="form-group mb-4 col-md-6">
                         <label for="button_title" class="form-label mb-1">Button Title</label>
                         <input type="text" class="form-control" name="button_text" placeholder="Button Title">
                     </div>
@@ -51,9 +59,6 @@
                 </div>
             </div>
         </form>
-    </div>
-    <div class="col-md-4">
-        <?= $this->ki_theme->extra_setting_title_form('Update Course Title', 'course_page_title', 'Our Popular Courses') ?>
     </div>
     <div class="col-md-4">
         <form action="" class="extra-setting">

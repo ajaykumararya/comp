@@ -1358,7 +1358,9 @@ var woocommerce_params = {"ajax_url":"\/themes\/education\/wp-admin\/admin-ajax.
     .header .logo img {
         height: 47px !important
     }
-
+    .price-tag span{
+        color:white
+    }
     /* u9ZtW+CCPR6gCQ== */
 </style>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

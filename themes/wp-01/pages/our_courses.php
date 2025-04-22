@@ -62,15 +62,21 @@
                                                                 src="{base_url}upload/<?= $row->image ?>"
                                                                 class="attachment-wc-grid-course-thumb size-wc-grid-course-thumb wp-post-image"
                                                                 alt="" style="height:284px" />
-
+                                                            
+                                                                <div class="wc-course-meta-detail">
+                                                                <div class="price-tag">
+                                                                    {inr} <?=$row->price?>
+                                                                </div>
+                                                            </div>
                                                         </div><!-- Course Thumb /-->
                                                         <div class="wc-course-details">
                                                             <h3><a href="<?= $btnLink ?>">
                                                                     <?= $row->title ?></a></h3>
                                                             <p><?= $row->description ?></p>
-                                                            <ul class="no-bullet arrow-starter">
-                                                                <li><?= $row->duration ?></li>
-                                                                <!-- <li><?= $row->description ?></li> -->
+                                                            <ul class="no-bullet">
+                                                            <!-- arrow-starter -->
+                                                                <li><i class="fa fa-clock"></i> <?= $row->duration ?></li>
+                                                                <li><i class="fa fa-graduation-cap"></i> <?= $row->eligibilty ?></li>
                                                             </ul><a href="<?= $btnLink ?>"
                                                                 class="secondary button"><?= $row->button_text ?></a>
                                                             <div class="clearfix"></div>
