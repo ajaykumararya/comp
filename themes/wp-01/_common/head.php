@@ -1341,6 +1341,13 @@ var woocommerce_params = {"ajax_url":"\/themes\/education\/wp-admin\/admin-ajax.
 .course-wrapper.row.style_one{
     display: block!important;
 }
+ul.menu.vertical.large-horizontal.float-right.dropdown li a {
+    font-size: 12px;
+    font-weight: bold;
+}
+.header .logo img {
+    height: 47px!important
+}
     /* u9ZtW+CCPR6gCQ== */
 </style>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
