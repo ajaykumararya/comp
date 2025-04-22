@@ -201,11 +201,29 @@ class MY_Controller extends MX_Controller
         }
         if (THEME == 'wp-01') {
             // exit('YES');
-            $checkField = $this->build_db->field_exists('content_courses','category_id');
+            $checkField = $this->build_db->field_exists('content_courses', 'category_id');
             if (!$checkField) {
                 $this->build_db->add_field('content_courses', [
                     'category_id' => [
                         'type' => 'int',
+                        'default' => 0
+                    ]
+                ]);
+            }
+            $checkField = $this->build_db->field_exists('content_courses', 'price');
+            if (!$checkField) {
+                $this->build_db->add_field('content_courses', [
+                    'price' => [
+                        'type' => 'VARCHAR(100)',
+                        'default' => 0
+                    ]
+                ]);
+            }
+            $checkField = $this->build_db->field_exists('content_courses', 'eligibilty');
+            if (!$checkField) {
+                $this->build_db->add_field('content_courses', [
+                    'eligibilty' => [
+                        'type' => 'VARCHAR(100)',
                         'default' => 0
                     ]
                 ]);
