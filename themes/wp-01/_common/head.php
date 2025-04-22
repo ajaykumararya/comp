@@ -757,7 +757,7 @@ var woocommerce_params = {"ajax_url":"\/themes\/education\/wp-admin\/admin-ajax.
 
 
     /* Card Styles */
-   
+
     /* Utility classes */
     .text-end {
         text-align: right;
@@ -1178,9 +1178,11 @@ var woocommerce_params = {"ajax_url":"\/themes\/education\/wp-admin\/admin-ajax.
         border: 2px dashed var(--primary-color);
         background-color: transparent;
     }
-    .btn-outline-success:hover span{
-        color:var(--primary-color)
+
+    .btn-outline-success:hover span {
+        color: var(--primary-color)
     }
+
     /* Dashed Outline */
     .btn-outline-dashed {
         border-style: dashed;
@@ -1240,124 +1242,134 @@ var woocommerce_params = {"ajax_url":"\/themes\/education\/wp-admin\/admin-ajax.
     .select2-container--default .select2-selection--single {
         height: 38px !important;
     }
+
     form .form-control {
-    box-shadow: none;
-    border-radius: 0;
-    color: #000;
-    padding: 5px 15px;
-    line-height: 25px;
-    border: 1px solid #b9b9b9;
-    background: #f5f5f5;
-    height: 45px;
-}
-#object{
-    background-color: var(--primary-color)!important;
-}
-/* Backdrop */
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1050;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  outline: 0;
-}
+        box-shadow: none;
+        border-radius: 0;
+        color: #000;
+        padding: 5px 15px;
+        line-height: 25px;
+        border: 1px solid #b9b9b9;
+        background: #f5f5f5;
+        height: 45px;
+    }
 
-.modal.show {
-  display: block;
-}
+    #object {
+        background-color: var(--primary-color) !important;
+    }
 
-.modal.fade .modal-dialog {
-  transition: transform 0.3s ease-out;
-  transform: translate(0, -50px);
-}
+    /* Backdrop */
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1050;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        outline: 0;
+    }
 
-.modal.show .modal-dialog {
-  transform: translate(0, 0);
-}
+    .modal.show {
+        display: block;
+    }
 
-/* Modal background */
-.modal-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1040;
-  width: 100vw;
-  height: 100vh;
-  background-color: #000;
-  opacity: 0.5;
-}
+    .modal.fade .modal-dialog {
+        transition: transform 0.3s ease-out;
+        transform: translate(0, -50px);
+    }
 
-/* Modal dialog */
-.modal-dialog {
-  position: relative;
-  width: auto;
-  margin: 1.75rem auto;
-  max-width: 500px;
-  pointer-events: none;
-}
+    .modal.show .modal-dialog {
+        transform: translate(0, 0);
+    }
 
-.modal-content {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  border: 1px solid rgba(0,0,0,.2);
-  border-radius: 0.3rem;
-  outline: 0;
-  pointer-events: auto;
-}
+    /* Modal background */
+    .modal-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1040;
+        width: 100vw;
+        height: 100vh;
+        background-color: #000;
+        opacity: 0.5;
+    }
 
-/* Header, body, footer */
-.modal-header,
-.modal-footer {
-  padding: 1rem;
-  border-bottom: 1px solid #dee2e6;
-}
+    /* Modal dialog */
+    .modal-dialog {
+        position: relative;
+        width: auto;
+        margin: 1.75rem auto;
+        max-width: 500px;
+        pointer-events: none;
+    }
 
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+    .modal-content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        border: 1px solid rgba(0, 0, 0, .2);
+        border-radius: 0.3rem;
+        outline: 0;
+        pointer-events: auto;
+    }
 
-.modal-body {
-  position: relative;
-  padding: 1rem;
-}
+    /* Header, body, footer */
+    .modal-header,
+    .modal-footer {
+        padding: 1rem;
+        border-bottom: 1px solid #dee2e6;
+    }
 
-.modal-footer {
-  display: flex;
-  justify-content: flex-end;
-  border-top: 1px solid #dee2e6;
-}
-.text-theme-colored2{
-    color: var(--primary-color)
-}
-.section-title-wrapper.columns.row,
-.course-wrapper.row.style_one{
-    display: block!important;
-}
-ul.menu.vertical.large-horizontal.float-right.dropdown li a {
-    font-size: 12px;
-    font-weight: bold;
-}
-.header .logo img {
-    height: 47px!important
-}
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .modal-body {
+        position: relative;
+        padding: 1rem;
+    }
+
+    .modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .text-theme-colored2 {
+        color: var(--primary-color)
+    }
+
+    .section-title-wrapper.columns.row,
+    .course-wrapper.row.style_one {
+        display: block !important;
+    }
+
+    ul.menu.vertical.large-horizontal.float-right.dropdown li a,
+    .navigation-style-two .dropdown.menu.large-horizontal>li>a {
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .header .logo img {
+        height: 47px !important
+    }
+
     /* u9ZtW+CCPR6gCQ== */
 </style>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/helvatica-neue-lt@1.0.1/index.min.css" rel="stylesheet">
 <?php
 function filter_title($title)
 {
-  return str_replace(
-    ["[", "]"],
-    ['<span class="text-theme-colored2">', '</span>'],
-    $title
-  );
+    return str_replace(
+        ["[", "]"],
+        ['<span class="text-theme-colored2">', '</span>'],
+        $title
+    );
 }
 ?>
