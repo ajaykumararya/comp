@@ -109,13 +109,13 @@
     <p class="position-absolute" style="top:23.4%;left:33.5%">{student_name}</p>
     <p class="position-absolute" style="top:25.9%;left:33.5%">{father_name}</p>
     <p class="position-absolute" style="top:28.5%;left:33.5%">{mother_name}</p>    
-    <p class="position-absolute text-capitlize" style="top:33.7%;left:33.5%">{duration} {duration_type}</p>
-    <p class="position-absolute text-capitlize" style="top:33.7%;left:63%">{adhar_card_no}</p>
+    <p class="position-absolute text-capitlize" style="top:33.7%;left:33.5%"><?=humnize_duration($duration,$duration_type)?></p>
+    <p class="position-absolute text-capitlize" style="top:33.7%;left:61.5%">{adhar_card_no}</p>
 
     <p class="position-absolute text-capitlize" style="top:36.4%;left:33.5%">{gender}</p>
-    <p class="position-absolute text-capitlize " style="top:36.4%;left:62%">{marital_status}</p>
+    <p class="position-absolute text-capitlize " style="top:36.4%;left:61.5%">{marital_status}</p>
     <p class="position-absolute" style="top:39%;left:33.5%">{dob}</p>
-    <p class="position-absolute " style="top:39%;left:62%;width:200px">{category}</p>
+    <p class="position-absolute " style="top:39%;left:61.5%;width:200px">{category}</p>
     
     <p class="position-absolute" style="top:41.6%;left:33.5%">{contact_number}</p>
     <p class="position-absolute " style="top:41.6%;left:61.5%;width:250px;">{email}</p>

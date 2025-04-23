@@ -69,6 +69,7 @@ $route['registration-form/(:any)'] = 'site/registration_certificate/$1';
 $route['provisional-certificate/(:any)'] = 'document/provisional_certificate/$1';
 $route['no-objection-certificate/(:any)'] = 'document/no_objection_certificate/$1';
 $route['migration-certificate/(:any)'] = 'document/migration_certificate/$1';
+$route['typing-certificate/(:any)'] = 'document/typing-certificate/$1';
 $route['(:any)'] = 'site/index';
 $route['co-ordinate/(:any)'] = 'Coordinate/$1';
 $route['co-ordinate/(:any)/(:any)'] = 'Coordinate/$1/$2';

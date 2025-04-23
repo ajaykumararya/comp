@@ -447,6 +447,13 @@ if (CHECK_PERMISSION('CENTRE_ONLY_ADD_STUDENT') && OnlyForCentre()) {
                 )
             ),
             array(
+                'label' => 'Typing Certificate',
+                'type' =>   'typing_certificate',
+                'icon' => array('notepad', 5),
+                'url' => 'student/typing-certificate',
+                'condition' => CHECK_PERMISSION('TYPING_CERTIFICATE')
+            ),
+            array(
                 'label' => 'Registration Form',
                 'type' => 'stduent_certificate',
                 'icon' => array('notepad', 5),

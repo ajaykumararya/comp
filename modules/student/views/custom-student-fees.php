@@ -12,7 +12,7 @@
                                 <label for="liststudent" class="form-label required">Select
                                     Student</label>
                                 <select name="student_id" data-control="select2" data-placeholder="Select Student"
-                                    class="form-select first" data-allow-clear="true">
+                                    class="form-select" data-allow-clear="true">
                                     <option></option>
                                 </select>
                             </div>

@@ -1053,4 +1053,43 @@ class Student extends Ajax_Controller
         ];
         $this->response('status', $this->db->insert('student_fee_transactions', $data));
     }
+    function delete_typing_certificate()
+    {
+        if ($id = $this->post('id')) {
+            $this->db->where('id', $id)->delete('student_typing_certicate');
+            $this->response('status', true);
+        }
+    }
+    function add_typing_certificate()
+    {
+        try {
+            if (!table_exists('student_typing_certicate'))
+                throw new Exception('Serivce Not Available..');
+            $this->form_validation->set_rules('student_id', 'Student', 'required|is_unique[student_typing_certicate.student_id]', [
+                'is_unique' => 'Certification Already Creatred for this student.'
+            ]);
+            //certification_no
+            $this->form_validation->set_rules('certification_no', 'Certificate No', 'required|is_unique[student_typing_certicate.certification_no]', [
+                'is_unique' => 'Certification no is already exists.'
+            ]);
+            $this->form_validation->set_rules('procured', 'Procured', 'required');
+            $this->form_validation->set_rules('issue_date', 'Issue Date', 'required');
+            $this->form_validation->set_rules('grade', 'Grade', 'required');
+            if ($this->validation()) {
+                $data = [
+                    'student_id' => $this->post('student_id'),
+                    'issue_date' => $this->post('issue_date'),
+                    'procured' => $this->post('procured'),
+                    'grade' => $this->post('grade'),
+                    'certification_no' => $this->post('certification_no')
+                ];
+                $this->db->insert('student_typing_certicate', $data);
+                $this->response('status', true);
+            }
+
+        } catch (Exception $e) {
+            $this->response('html', $e->getMessage());
+        }
+
+    }
 }

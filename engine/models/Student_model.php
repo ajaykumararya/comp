@@ -302,8 +302,19 @@ class Student_model extends MY_Model
             case 'all_fee_transcations':
 
                 break;
+            case 'typing_certificate':
+                $this->db->select('stc.*');
+                $this->db->join('student_typing_certicate as stc', 'stc.student_id = s.id');
+                $this->db->where('stc.id', $id);
+                break;
         }
         return $this->db->get();
+    }
+    function typing_certificate($id)
+    {
+        return $this->get_switch('typing_certificate', [
+            'id' => $id
+        ]);
     }
     private function not_passout()
     {
@@ -388,6 +399,7 @@ class Student_model extends MY_Model
 
         return $this->get_switch('all', $where)->result();
     }
+
     function get_student($where)
     {
         return $this->get_switch('all', $where);

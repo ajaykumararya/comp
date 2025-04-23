@@ -70,7 +70,7 @@
     <div class="position-absolute" style="top:6%;left:80%">{serial_no}</div>
     <img id="back-image" class="position-relative" src="{document_path}/certificate.png">
     <div class="position-absolute" id="photo">
-        <img src="upload/images/student_certificate_{certiticate_id}.png">
+        <img src="upload/images/front_student_certificate_{certiticate_id}.png">
     </div>
     <div class="position-absolute" id="photo1">
         <img src="upload/{image}" style="width:94.7px;height:113px">

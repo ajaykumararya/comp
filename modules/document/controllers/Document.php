@@ -186,8 +186,8 @@ class Document extends MY_Controller
                 $toDateString = strtotime('-1 month', $toDateString);
                 $this->set_data('to_date', date('M Y', $toDateString));
             }
-            
-            if (in_array(PATH, ['gssrcindia','iedct', 'techno', 'softworldedu', 'ncvetskill', 'iisdit'])):
+
+            if (in_array(PATH, ['gssrcindia', 'iedct', 'techno', 'softworldedu', 'ncvetskill', 'iisdit'])):
                 $admissionTime = strtotime($get->row('admission_date'));
                 // $this->set_data('from_date', date('M Y', $admissionTime));
                 $this->set_data('serial_no', date("Y", $admissionTime) . str_pad(PATH == 'techno' ? $row->student_id : $this->id, 3, '0', STR_PAD_LEFT));
@@ -453,7 +453,7 @@ class Document extends MY_Controller
                     }
                     $output = $this->parse('franchise_certificate', $data);
 
-                    if (in_array(PATH, ['gssrcindia','ncvetskill','techno', 'haptronworld', 'beautyguru', 'sewaedu', 'softworldedu', 'nbeat', 'sct', 'iisdit'])) {
+                    if (in_array(PATH, ['gssrcindia', 'ncvetskill', 'techno', 'haptronworld', 'beautyguru', 'sewaedu', 'softworldedu', 'nbeat', 'sct', 'iisdit'])) {
                         $this->mypdf->addPage('L');
                     }
                     $this->pdf($output);
@@ -557,6 +557,24 @@ class Document extends MY_Controller
             $this->pdf($output);
         } else
             $this->not_found();
+    }
+    function typing_certificate()
+    {
+        try {
+            $token = $this->uri->segment(2, 0);
+            if (!$token)
+                throw new Exception('invalid token');
+            $id = base64_decode(base64_decode($token));
+            $list = $this->student_model->typing_certificate($id);
+            if ($list->num_rows()) {
+                // pre($list->row());
+                $output = $this->parse('typing-certificate', $list->row_array());
+                $this->pdf($output);
+            } else
+                throw new Exception('Data not found...');
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
 }
 

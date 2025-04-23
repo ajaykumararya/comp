@@ -342,6 +342,12 @@ class Student extends MY_Controller
             $this->view('placements', ['isValid' => true]);
         }
     }
+    function typing_certificate()
+    {
+        if (CHECK_PERMISSION(strtoupper(__FUNCTION__))) {
+            $this->view('certificate/typing');
+        }
+    }
     function registration_certificate()
     {
         // echo 'YES';
