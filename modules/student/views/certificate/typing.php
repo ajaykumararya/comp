@@ -21,15 +21,15 @@ if (table_exists('student_typing_certicate')) {
                             <label for="" class="form-label">Procured</label>
                             <input type="text" required placeholder="Enter Procured.." name="procured" class="form-control">
                         </div>
-                        <div class="col-md-6 form-group mb-4">
+                        <div class="col-md-4 form-group mb-4">
                             <label for="grade" class="form-label required">Grade</label>
                             <input type="text" name="grade" required placeholder="Grade" class="form-control">
                         </div>
-                        <div class="col-md-6 form-group mb-4">
+                        <div class="col-md-4 form-group mb-4">
                             <label for="grade" class="form-label required">Certification No</label>
                             <input type="text" name="certification_no" required placeholder="Certificate No" class="form-control">
                         </div>
-                        <div class="col-md-6 form-group mb-4">
+                        <div class="col-md-4 form-group mb-4">
                             <label for="certificate_date" class="form-label required">Issue Date</label>
                             <input type="date" name="issue_date" required class="form-control selectdate">
                         </div>
