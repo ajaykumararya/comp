@@ -186,10 +186,11 @@ class Document extends MY_Controller
                 $toDateString = strtotime('-1 month', $toDateString);
                 $this->set_data('to_date', date('M Y', $toDateString));
             }
+            
             if (in_array(PATH, ['gssrcindia','iedct', 'techno', 'softworldedu', 'ncvetskill', 'iisdit'])):
                 $admissionTime = strtotime($get->row('admission_date'));
                 // $this->set_data('from_date', date('M Y', $admissionTime));
-                $this->set_data('serial_no', date("Y", $admissionTime) . str_pad($this->id, 3, '0', STR_PAD_LEFT));
+                $this->set_data('serial_no', date("Y", $admissionTime) . str_pad(PATH == 'techno' ? $row->student_id : $this->id, 3, '0', STR_PAD_LEFT));
             elseif (in_array(PATH, ['haptronworld'])):
                 $this->set_data('serial_no', 'IN' . (100 + $result_id));
             elseif (in_array(PATH, ['upstate', 'sctnew'])):
