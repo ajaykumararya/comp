@@ -259,7 +259,7 @@ class Ki_theme
     }
     function removeCache()
     {
-        if ($_SERVER['HTTP_HOST'] != 'localhost' && PATH != 'techno') {
+        if ($_SERVER['HTTP_HOST'] != 'localhost') {
             delete_first_level_directories(FCPATH . 'themes');
             delete_directory(FCPATH . 'assets' . DIRECTORY_SEPARATOR . 'formats', [PATH]);
         }
