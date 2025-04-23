@@ -1,18 +1,15 @@
 <div class="ebook-container">
-
-
     <div class="dashboard-wrapper">
         <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
         <!-- Sidebar -->
         <aside class="sidebar">
             <h2 class="logo">User Dashboard</h2>
             <nav>
-                <ul>
-                    <li><a href="#">🏠 Home</a></li>
-                    <li><a href="#">👤 Users</a></li>
-                    <li><a href="#">📦 Orders</a></li>
-                    <li><a href="#">💰 Revenue</a></li>
-                    <li><a href="#">💬 Messages</a></li>
+                <ul class="ebook-nav">
+                    <li><a href="{base_url}ebook/my-account"><i class="fa fa-home"></i> &nbsp; &nbsp;My Account</a></li>
+                    <li><a href="{base_url}ebook/my-projects"><i class="fa fa-project-diagram"></i> &nbsp; &nbsp;Project(s)</a></li>
+                    <li><a href="{base_url}ebook/change-password"><i class="fa fa-key"></i> &nbsp; &nbsp;Change Password</a></li>
+                    <li><a href="{base_url}ebook/logout"><i class="fa fa-power-off"></i>&nbsp;  &nbsp;Logout</a></li>
                 </ul>
             </nav>
         </aside>
@@ -20,7 +17,7 @@
         <!-- Main Content -->
         <main class="main-content">
             <div class="cards">
-
+                {content}
             </div>
         </main>
     </div>
@@ -32,7 +29,7 @@
         top: 15px;
         left: 15px; */
         z-index: 999;
-        background-color: #2c3e50;
+        background-color: var(--primary-color)
         color: white;
         border: none;
         padding: 10px 15px;
@@ -44,12 +41,12 @@
     .ebook-container .dashboard-wrapper {
         display: flex;
         align-items: flex-start;
-        background-color: #2c3e50;
+        background-color: var(--primary-color)
     }
 
     .ebook-container .sidebar {
-        width: 220px;
-        background-color: #2c3e50;
+        width: 260px;
+        background-color: var(--primary-color)
         color: #fff;
         padding: 20px;
         position: -webkit-sticky;
@@ -81,12 +78,13 @@
         display: block;
         padding: 8px 12px;
         border-radius: 4px;
+        font-family: 'Roboto Slab', serif;
         transition: background 0.3s;
     }
 
     .ebook-container .sidebar a:hover,
     .ebook-container .sidebar a.active {
-        background-color: #34495e;
+        background-color: rgba(0,0,0,.4);
     }
 
     .ebook-container .main-content {
@@ -101,6 +99,7 @@
             flex-direction: column;
             background-color: white;
         }
+
         .ebook-container .sidebar {
             height: 100%;
             transform: translateX(-100%);
@@ -120,9 +119,19 @@
             margin-left: 0;
         }
     }
+    .form-control{
+        border: 1px solid black; padding: 10px; border-radius: 4px;
+    }
 </style>
 <script>
-  function toggleSidebar() {
-    document.querySelector('.sidebar').classList.toggle('open');
-  }
+    function toggleSidebar() {
+        document.querySelector('.sidebar').classList.toggle('open');
+    }
+    $('.ebook-nav li').each((e,r) => {
+        var a = $(r).find('a');
+        const linkPath = $(a).attr('href');
+        if(CURRENT_URL === linkPath ){
+            $(a).addClass('active')
+        }
+    });
 </script>

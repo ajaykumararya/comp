@@ -16,13 +16,38 @@ class Ebook extends MY_Controller
         );
         $this->view('project');
     }
-    function users(){
+    function users()
+    {
         $this->view('user-list');
     }
     function my_account()
     {
-        // echo 'ddd';
-        $this->load->module('site', ['page_name' => 'MY-Account']);
-        $this->site->content('ebook/index');
+        $this->account_view();
+    }
+    function my_projects()
+    {
+        $this->account_view('projects', [], 'My Project(s)');
+    }
+    function change_password()
+    {
+        $this->account_view('change-password', [], 'Change Password');
+    }
+    function logout()
+    {
+        $this->session->unset_userdata('ebook_login');
+        redirect(base_url());
+    }
+
+    private function account_view($page = 'index', $data = [], $pageName = 'My Account')
+    {
+        if ($this->session->has_userdata('ebook_login')) {
+            $data['user'] = $this->db->where('id', $this->session->userdata('ebook_user'))->get('ebook_users')->row_array();
+            $this->load->module('site', ['page_name' => $pageName]);
+            $this->site->content('ebook/index', [
+                'content' => $this->parser->parse('user/' . $page, $data, true)
+            ]);
+        } else
+            redirect(base_url());
+
     }
 }

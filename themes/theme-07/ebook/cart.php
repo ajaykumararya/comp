@@ -6,6 +6,7 @@
 
                     <?php
                     $this->load->library("ebook/ebook_cart");
+                    $token = '';
                     if ($this->ebook_cart->count()) {
                         ?>
                         <div class="table-responsive">
@@ -24,6 +25,7 @@
                                     <?php
                                     $this->load->model('ebook/ebook_model');
                                     $items = $this->ebook_cart->get_cart();
+                                    $token = $this->token->encode($items);
                                     $totalPrice = 0;
                                     foreach ($items as $item) {
                                         // pre($item);
@@ -84,7 +86,7 @@
                     <?php
                     if ($this->ebook_cart->count()) {
                         ?>
-                        <button class="btn btn-outline-success paynow" style="width:100%">
+                        <button data-token="<?=$token?>" class="btn btn-outline-success paynow" style="width:100%">
                             <span>
                                 <i class=""></i> Pay Now
                             </span>

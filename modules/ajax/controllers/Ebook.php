@@ -261,6 +261,8 @@ class Ebook extends Ajax_Controller
             $status = $this->razorpay->fetchOrderStatus($razorpay_order_id);
             if ($status) {
                 $items = $this->ebook_cart->get_cart();
+                if ($post['token'] != $this->token->encode($items))
+                    throw new Exception('Something went wrong..');
                 $data = [];
                 foreach ($items as $item) {
                     $data[] = [
@@ -337,6 +339,37 @@ class Ebook extends Ajax_Controller
                 $this->response('status', 'login');
         } catch (Exception $e) {
             $this->response('message', $e->getMessage());
+        }
+    }
+    function update_user_profile()
+    {
+        $this->db->where('id', $this->session->userdata('ebook_user'))->update('ebook_users', $this->post());
+        $this->response('status', true);
+    }
+    function update_user_password()
+    {
+        $password = $this->post('current_password');
+        $new_password = $this->post('new_password');
+        $repeat_new_password = $this->post('repeat_new_password');
+        try {
+            $this->form_validation->set_rules('current_password', 'Current Password', 'required');
+            $this->form_validation->set_rules('new_password', 'Password', 'required');
+            $this->form_validation->set_rules('repeat_new_password', 'Confirm Password', 'required|matches[new_password]');
+            if ($this->validation()) {
+                $user_id = $this->session->userdata('ebook_user');
+                $get = $this->db->where('id', $user_id)->get('ebook_users');
+                if ($get->num_rows()) {
+                    $row = $get->row();
+                    if (sha1($password) == $row->password) {
+                        $this->db->where('id', $user_id)->update('ebook_users', ['password' => sha1($new_password)]);
+                        $this->response('status', true);
+                    } else
+                        throw new Exception('Current Password is wrong.');
+                } else
+                    throw new Exception('Something went wrong..');
+            }
+        } catch (Exception $e) {
+            $this->response('error', alert($e->getMessage(),'danger'));
         }
     }
 }

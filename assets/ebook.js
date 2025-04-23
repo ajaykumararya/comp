@@ -149,10 +149,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     $(document).on('click', '.ebook-cart .paynow', function () {
+        var token = $(this).data('token') ?? false;
+        if (token == '' || !token) {
+            SwalWarning('Error', 'Something went wrong.')
+            return;
+        }
         $.AryaAjax({
             url: 'ebook/cart-payment',
         }).then((res) => {
-            log(res)
 
             if (res.status == 'login') {
                 $('#loginModel').modal('show').find('#ebook_userogin').append('<input type="hidden" name="paynow" value="1">');
@@ -167,7 +171,8 @@ document.addEventListener('DOMContentLoaded', function () {
                             razorpay_order_id: options.order_id,
                             razorpay_signature: response.razorpay_signature,
                             merchant_order_id: options.notes.merchant_order_id,
-                            amount: options.amount
+                            amount: options.amount,
+                            token: token
                         }
                     }).then((res) => {
                         showResponseError(res);
@@ -180,6 +185,33 @@ document.addEventListener('DOMContentLoaded', function () {
                 };
                 razorpayPOPUP(options);
             }
+        });
+    })
+    $(document).on('submit', '.update-ebbok-user-profile', function (e) {
+        e.preventDefault();
+        // alert(4);
+        $.AryaAjax({
+            url: 'ebook/update-user-profile',
+            data: new FormData(this)
+        }).then((res) => {
+            if (res.status) {
+                SwalSuccess('Success','Profile Updated Sucessfully..')
+            }
+            showResponseError(res);
+        });
+    })
+    $(document).on('submit', '.update-ebbok-user-password', function (e) {
+        e.preventDefault();
+        // alert(4);
+        $.AryaAjax({
+            url: 'ebook/update-user-password',
+            data: new FormData(this)
+        }).then((res) => {
+            console.log(res)
+            if (res.status) {
+                SwalSuccess('Success','Profile Updated Sucessfully..')
+            }
+            showResponseError(res);
         });
     })
 })
