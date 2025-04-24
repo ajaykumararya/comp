@@ -172,6 +172,11 @@
     .theme-border {
         border: 1px solid var(--primary) !important;
     }
+    @media only screen and (max-width: 600px) {
+        .top_footer{
+            display: none;
+        }
+    }
 </style>
 <?php
 if (PATH == 'sewaedu' or PATH == 'sewaeducation') {

@@ -21,15 +21,15 @@
                     <button class="btn btn-danger delete-account">
                         <i class="fa fa-trash"></i> Click to Delete
                     </button>        
-        `).find('.delete-account').on('click',function(){            
-            SwalWarning('Confirmation!','Are You sure for delete your account..',true,'Yes Delete it.').then((res) => {
-                if(res.isConfirmed){
-                    sessionStorage.setItem("accountDeleted", "true");
-                    SwalSuccess('Success','Your request submitted Successfully...')
-                    location.reload();
-                }
-            })
-        });
+        `).find('.delete-account').on('click', function () {
+                SwalWarning('Confirmation!', 'Are You sure for delete your account..', true, 'Yes Delete it.').then((res) => {
+                    if (res.isConfirmed) {
+                        sessionStorage.setItem("accountDeleted", "true");
+                        SwalSuccess('Success', 'Your request submitted Successfully...')
+                        location.reload();
+                    }
+                })
+            });
         }
     })
     // $('.div')
