@@ -176,6 +176,9 @@
         .top_footer{
            <?=PATH == 'zcc' ?' display: none' : ''?>;
         }
+        .buttons-usefull.parent li a{
+            font-weight: 900;
+        }
     }
 </style>
 <?php
