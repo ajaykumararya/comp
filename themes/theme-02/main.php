@@ -178,6 +178,7 @@
         }
         .buttons-usefull.parent li a{
             font-weight: 900;
+            font-size: 28px;
         }
         .banner-bg-mobile img {
             height: 165px;
