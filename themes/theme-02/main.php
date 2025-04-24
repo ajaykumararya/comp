@@ -179,6 +179,9 @@
         .buttons-usefull.parent li a{
             font-weight: 900;
         }
+        .banner-bg-mobile img {
+            height: 165px;
+        }
     }
 </style>
 <?php
