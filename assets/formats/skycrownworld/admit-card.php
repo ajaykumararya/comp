@@ -72,10 +72,12 @@
     <p class="position-absolute" style="top:26.5%;left:35%">{mother_name}</p>
     <p class="position-absolute" style="top:28.6%;left:35%">{dob}</p>
     <p class="position-absolute text-capitlize" style="top:30.7%;left:35%">{gender}</p>
-    <p class="position-absolute" style="top:32.9%;left:35%;width:100px;text-align:left">{category}</p>
 
 
     <?php
+    $get = $this->student_model->get_course_category_via_course($course_id);
+    if($get->num_rows())        
+            echo '<p class="position-absolute" style="top:32.9%;left:35%;width:60%;text-align:left">'.$get->row('title').'</p>';
     $sign = '';
     if($student_docs){
         $docs = (json_decode($student_docs,true));

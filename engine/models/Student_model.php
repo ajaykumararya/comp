@@ -586,4 +586,11 @@ class Student_model extends MY_Model
     {
         return $this->get_switch('fetch_fee_transactions_group_by', $where);
     }
+    function get_course_category_via_course($course_id){
+        return $this->db->select('cc.title')
+                        ->from("course_category as cc")
+                        ->join('course as c','c.category_id = cc.id')
+                        ->where('c.id',$course_id)
+                        ->get();
+    }
 }

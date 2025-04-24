@@ -141,7 +141,7 @@
     </div>
     <?php
     if(file_exists('upload/'.$center_signature)){
-        echo '<div class="position-absolute" style="top:78%;left:5%;width:200px;height:60px" align="center">
+        echo '<div class="position-absolute" style="top:76.5%;left:8%;width:180px;height:60px" align="center">
             <img src="upload/{center_signature}" style="width:100%;height:100%;">
         </div>';
     }

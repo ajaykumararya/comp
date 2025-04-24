@@ -92,11 +92,12 @@
     </div>
 
 
-    <p class="position-absolute text-center" style="top:4.7%;left:21%;width:400px;text-align:left">UDYAM-BR-37-0039467</p>
-    
-    
-    
-    
+    <p class="position-absolute text-center" style="top:4.7%;left:21%;width:400px;text-align:left">UDYAM-BR-37-0039467
+    </p>
+
+
+
+
     <p class="position-absolute text-center " style="top:23%;left:6.3%;width:138px">{center_code}</p>
     <p class="position-absolute text-center " style="top:23%;left:24%;width:138px">{session}</p>
     <p class="position-absolute text-center " style="top:23%;left:41%;width:138px">{enrollment_no}</p>
@@ -112,26 +113,28 @@
     <p class="position-absolute text-center  " style="left:18%;top:52.3%;width:78%">{course_name}</p>
 
 
-    <p class="position-absolute text-center text-capitlize" style="left:21%;top:55.3%;width:250px">{duration} {duration_type}</p>
+    <p class="position-absolute text-center text-capitlize" style="left:21%;top:55.3%;width:250px">{duration}
+        {duration_type}</p>
     <p class="position-absolute text-center  " style="left:60%;top:55.3%;width:120px">{from_date}</p>
     <p class="position-absolute text-center  " style="left:78%;top:55.3%;width:140px">{to_date}</p>
 
 
     <!-- exam_conduct_date -->
 
-    <p class="position-absolute text-center " style="left:72%;top:58%;width:180px"><?=date('M Y',strtotime($exam_conduct_date))?></p>
-    
+    <p class="position-absolute text-center " style="left:72%;top:58%;width:180px">
+        <?= date('M Y', strtotime($exam_conduct_date)) ?></p>
+
     <p class="position-absolute text-center " style="left:38%;top:61%;width:455px">{center_name}</p>
     <p class="position-absolute text-center " style="left:38%;top:64%;width:455px">{percentage}%</p>
     <p class="position-absolute" style="top:76.8%;left:45%">{createdOn}</p>
     <?php
-    if(file_exists('upload/'.$center_signature)){
-        echo '<div class="position-absolute" style="top:76.8%;left:5%;width:200px;height:60px" align="center">
-            <img src="upload/{center_signature}" style="width:100%;height:100%;">
-        </div>';
+    if (file_exists('upload/' . $center_signature)) {
+        echo '<div class="position-absolute" style="top:75.5%;left:8%;width:180px;height:60px" align="center">
+        <img src="upload/{center_signature}" style="width:100%;height:100%;">
+    </div>';
     }
 
-?>
+    ?>
 </body>
 
 </html>
