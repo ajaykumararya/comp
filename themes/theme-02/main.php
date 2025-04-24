@@ -174,7 +174,7 @@
     }
     @media only screen and (max-width: 600px) {
         .top_footer{
-            display: none;
+           <?=PATH == 'zcc' ?' display: none' : ''?>;
         }
     }
 </style>
