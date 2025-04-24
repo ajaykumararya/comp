@@ -22,7 +22,7 @@
     }
 </style>
 <section class="sec_padd" style="padding:0">
-    <div class="">
+    <div class="container-fluid">
         <div class="row" style="flex-direction:column">
             <div class="buttons-usefull parent" align="center">
 
