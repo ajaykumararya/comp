@@ -576,6 +576,23 @@ class Document extends MY_Controller
             echo $e->getMessage();
         }
     }
+    function iso()
+    {
+        try {
+            $token = $this->uri->segment(2, 0);
+            if (!$token)
+                throw new Exception('invalid token');
+            $id = base64_decode(base64_decode($token));
+            $list = $this->db->where('id', $id)->get('iso_certificate');
+            if ($list->num_rows()) {
+                $output = $this->parse('iso', $list->row_array());
+                $this->pdf($output);
+            } else
+                throw new Exception('ISO not found...');
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
 }
 
 

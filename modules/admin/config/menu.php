@@ -28,9 +28,9 @@ $config['ebook'] = array(
             )
         ),
         array(
-            'label' => 'Users', 
-            'icon' => ['profile-user', 4], 
-            'type' => 'users', 
+            'label' => 'Users',
+            'icon' => ['profile-user', 4],
+            'type' => 'users',
             'url' => 'ebook/users'
         ),
     )
@@ -447,8 +447,15 @@ if (CHECK_PERMISSION('CENTRE_ONLY_ADD_STUDENT') && OnlyForCentre()) {
                 )
             ),
             array(
+                'label' => 'ISO Certificate',
+                'type' => 'iso_certificate',
+                'icon' => ['notepad', 5],
+                'url' => 'cms/iso-certificate',
+                'condition' => CHECK_PERMISSION('ISO_CERTIFICATE')
+            ),
+            array(
                 'label' => 'Typing Certificate',
-                'type' =>   'typing_certificate',
+                'type' => 'typing_certificate',
                 'icon' => array('notepad', 5),
                 'url' => 'student/typing-certificate',
                 'condition' => CHECK_PERMISSION('TYPING_CERTIFICATE')
@@ -845,10 +852,10 @@ $config['cms_setting'] = array(
 );
 $staticMenus = array(
     array(
-        'label'=> 'Notice Popup',
-        'type'=> 'notice_popup',
-        'icon'=> array('abstract-9',2),
-        'url'=> 'cms/static-page/notice-popup'
+        'label' => 'Notice Popup',
+        'type' => 'notice_popup',
+        'icon' => array('abstract-9', 2),
+        'url' => 'cms/static-page/notice-popup'
     ),
     array(
         'label' => 'Forms',

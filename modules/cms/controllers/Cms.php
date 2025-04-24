@@ -89,4 +89,10 @@ class Cms extends MY_Controller
             'isValid' => true
         ]);
     }
+
+    
+    function iso_certificate()
+    {
+        $this->view('certificate/iso');
+    }
 }

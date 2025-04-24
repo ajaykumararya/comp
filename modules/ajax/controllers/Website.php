@@ -1069,7 +1069,7 @@ class Website extends Ajax_Controller
                 'center_number' => $center_id
             ]);
             if ($get->num_rows()) {
-                $row = $get->row();                
+                $row = $get->row();
                 $this->response('html', '');
                 $allLinks = $this->ki_theme->project_config('open_links');
                 if (isset($allLinks['center_certificate'])) {
@@ -1080,15 +1080,17 @@ class Website extends Ajax_Controller
                 $this->response('html', 'Not centre Found.');
         }
     }
-    function certification_board_verification(){
-        $this->form_validation->set_rules('roll_no','Roll No.','required');
-        if($this->validation()){
-            
+    function certification_board_verification()
+    {
+        $this->form_validation->set_rules('roll_no', 'Roll No.', 'required');
+        if ($this->validation()) {
+
         }
     }
-    function student_board_verification(){
-        $this->form_validation->set_rules('roll_no','Roll No.','required');
-        if($this->validation()){
+    function student_board_verification()
+    {
+        $this->form_validation->set_rules('roll_no', 'Roll No.', 'required');
+        if ($this->validation()) {
             $roll_no = $this->post('roll_no');
             $status = 1;
             $get = $this->student_model->student_verification([
@@ -1102,13 +1104,38 @@ class Website extends Ajax_Controller
                 $this->set_data($data);
                 $this->set_data('contact_number', maskMobileNumber($data['contact_number']));
 
-                $this->set_data('admission_status', $data['admission_status'] ? label($this->ki_theme->keen_icon('verify text-white',2,THEME == 'board' ? 0 : 1 ) . ' Verified Student') : label('Un-verified Student', 'danger'));
+                $this->set_data('admission_status', $data['admission_status'] ? label($this->ki_theme->keen_icon('verify text-white', 2, THEME == 'board' ? 0 : 1) . ' Verified Student') : label('Un-verified Student', 'danger'));
                 $this->set_data('student_profile', $data['image'] ? base_url('upload/' . $data['image']) : base_url('assets/media/student.png'));
                 $this->response('html', $this->template('student-profile-card'));
             } else {
                 $this->response('error', 'Student Not Found.');
             }
         }
+    }
+    function add_iso()
+    {
+        $this->form_validation->set_rules('company_name', 'Company Name', 'required');
+        $this->form_validation->set_rules('company_address', 'Company Address', 'required');
+        $this->form_validation->set_rules('service', 'Service Name', 'required');
+        $this->form_validation->set_rules('certificate_no', 'Certificate No', 'required|is_unique[iso_certificate.certificate_no]', [
+            'is_unique' => 'This Certificate no is already exists..'
+        ]);
+        $this->form_validation->set_rules('org_certificate_date', 'Original Certificate Date', 'required');
+        $this->form_validation->set_rules('issue_date', 'Issue Date', 'required');
+        $this->form_validation->set_rules('expiry_date', 'Expiry Date', 'required');
+        if ($this->validation()) {
+            $this->db->insert('iso_certificate', [
+                'company_name' => $this->post('company_name'),
+                'address' => $this->post('company_address'),
+                'service' => $this->post('service'),
+                'certificate_no' => $this->post('certificate_no'),
+                'org_cert_date' => $this->post('org_certificate_date'),
+                'issue_date' => $this->post('issue_date'),
+                'expiry_date' => $this->post('expiry_date')
+            ]);
+            $this->response('status', true);
+        }
+
     }
 }
 ?>

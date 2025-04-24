@@ -42,7 +42,7 @@ if ($this->input->get('project') && $this->input->get('cat')) {
                                             <span><i class="fa fa-shopping-cart"></i>Added</span>
                                         </button>';
                                     else:
-                                        echo '<button class="btn btn btn-outline-success btn-addtocart hvr-wobble-top" data-slug="<?=$row->slug?>">
+                                        echo '<button class="btn btn btn-outline-success btn-addtocart hvr-wobble-top" data-slug="'.$row->slug.'">
                                                 <span><i class="fa fa-shopping-cart"></i> Add To Cart</span>
                                             </button>';
                                     endif;
