@@ -398,5 +398,9 @@ class Student extends MY_Controller
     {
         $this->student_view('other_documents');
     }
+    function delete_account()
+    {
+        $this->student_view(__FUNCTION__);
+    }
 }
 ?>

@@ -72,3 +72,16 @@ $config['exam_area'] = array(
         )
     )
 );
+
+$config['extra'] = array(
+    'condition' => PATH == 'zcc',
+    'menu' => [        
+        array(
+            'label' => 'Delete Account',
+            'icon' => array('trash text-danger', 5),
+            'type' => 'delete-account',
+            'url' => 'student/delete-account',
+            // 
+        )
+    ]
+);
