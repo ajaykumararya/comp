@@ -112,9 +112,9 @@ $this->ki_theme->generate_qr($id, 'registration_form', base_url('registration-fo
         <img src="upload/{sign}" style="width:127px;height:30px">
     </div>
     <div class="position-absolute" style="top:4.4%;left:7%;">
-        <img src="{base_url}site/bar/1254556556">
+        <img src="{base_url}site/bar/{cert_no}">
     </div>
-    <p class="position-absolute" style="top:2.8%;left:78.5%;width:120px">1000{serial_no}</p>
+    <p class="position-absolute" style="top:2.8%;left:78.5%;width:120px">{cert_no}</p>
 
 
     <p class="position-absolute" style="top:28.8%;left:35%;width:200px">{registration_no} &nbsp;&nbsp; <?= date('d/m/Y', strtotime($date)) ?></p>
