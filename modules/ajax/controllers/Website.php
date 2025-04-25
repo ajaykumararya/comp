@@ -842,8 +842,37 @@ class Website extends Ajax_Controller
 
     function student_registration_certificate()
     {
+        if (PATH == 'upstate') {
+            $this->form_validation->set_rules([
+                array(
+                    'field' => 'mother_name',
+                    'label' => 'Mother Name',
+                    'rules' => 'required'
+                ),
+                array(
+                    'field' => 'exam_roll_no',
+                    'label' => 'Roll No.',
+                    'rules' => 'required|is_unique[students_registeration_data.exam_roll_no]',
+                    'errors' => array(
+                        'is_unique' => 'This Student Exam Roll No already exists..'
+                    )
+                ),
+                array(
+                    'field' => 'enrollment_no',
+                    'label' => 'Enrollment No.',
+                    'rules' => 'required|is_unique[students_registeration_data.enrollment_no]',
+                    'errors' => array(
+                        'is_unique' => 'This Student Enrollment No already exists..'
+                    )
+                ),
+
+            ]);
+        }
         if ($this->validation('registration_certificate')) {
+
             $registration_no = '10' . date('Y') . mt_rand(111, 999);
+            if (PATH == 'sct_ebook')
+                $registration_no = mt_rand(111111, 999999);
             $data = [
                 'name' => $this->post('name'),
                 'father_name' => $this->post('father_name'),
@@ -864,13 +893,14 @@ class Website extends Ajax_Controller
                 'training_period' => $this->post('training_period')
             ];
             $data['photo'] = $this->file_up('file_photo');
+            $data['aadhar_card'] = $this->file_up('file_aadhar');
+            $data['diploma'] = $this->file_up('file_diploma');
+            $data['sign'] = $this->file_up('file_sign');
             $data['10th_marksheet'] = $this->file_up('file_10th');
             $data['12th_marksheet'] = $this->file_up('file_12th');
             $data['1st_year_marksheet'] = $this->file_up('file_1st_year');
             $data['2nd_year_marksheet'] = $this->file_up('file_2nd_year');
-            $data['diploma'] = $this->file_up('file_diploma');
             $data['college_no_due_slip'] = $this->file_up('file_no_due_slip');
-            $data['aadhar_card'] = $this->file_up('file_aadhar');
             $this->db->insert("students_registeration_data", $data);
             $this->response('status', true);
             $this->response('registration_no', $data['registration_no']);

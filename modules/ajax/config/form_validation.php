@@ -542,27 +542,7 @@ $config = array(
             'label' => 'Father Name',
             'rules' => 'required'
         ),
-        array(
-            'field' => 'mother_name',
-            'label' => 'Mother Name',
-            'rules' => 'required'
-        ),
-        array(
-            'field' => 'exam_roll_no',
-            'label' => 'Roll No.',
-            'rules' => 'required|is_unique[students_registeration_data.exam_roll_no]',
-            'errors' => array(
-                'is_unique' => 'This Student Exam Roll No already exists..'
-            )
-        ),
-        array(
-            'field' => 'enrollment_no',
-            'label' => 'Enrollment No.',
-            'rules' => 'required|is_unique[students_registeration_data.enrollment_no]',
-            'errors' => array(
-                'is_unique' => 'This Student Enrollment No already exists..'
-            )
-        ),
+
         array(
             'field' => 'exam_or_course',
             'label' => 'Exam/Course',
@@ -572,17 +552,17 @@ $config = array(
             'field' => 'institute_name',
             'label' => 'Institute Name',
             'rules' => 'required'
-        ),        
+        ),
         array(
             'field' => 'exam_centre',
             'label' => 'Exam Centre Name',
             'rules' => 'required'
-        ),        
+        ),
         array(
             'field' => 'year_of_passing',
             'label' => 'Passing of Year',
             'rules' => 'required'
-        ),        
+        ),
         array(
             'field' => 'pass_or_fail',
             'label' => 'Pass/Fail',
@@ -590,3 +570,4 @@ $config = array(
         )
     )
 );
+

@@ -357,6 +357,10 @@ class Student extends MY_Controller
     {
         $this->view('registration-verification');
     }
+    function registration_verifications()
+    {
+        $this->view('registration-verification');
+    }
     function add_registration_student()
     {
         $this->view('add-registration-student');
@@ -365,6 +369,14 @@ class Student extends MY_Controller
     {
         if ($post = $this->input->post()) {
             $id = base64_decode($this->uri->segment(3, 0));
+            $chk = $this->db->where('cert_no', $this->input->post('cert_no'))->get('students_registeration_data');
+            if ($chk->num_rows()) {
+                if ($chk->row('id') != $id) {
+                    $this->session->set_flashdata('error', ' Certificate no '. $chk->row('cert_no').' is already used in '.$chk->row('registration_no') .' Registation no.');
+                    redirect(current_url());
+                    exit;
+                }
+            }
             $data = [
                 'name' => $this->input->post('name'),
                 'father_name' => $this->input->post('father_name'),
@@ -385,6 +397,10 @@ class Student extends MY_Controller
                 'registration_no' => $this->input->post('registration_no'),
                 'date' => $this->input->post('date')
             ];
+            if (PATH == 'sct_ebook') {
+                $data['expiry_date'] = $this->input->post('expiry_date');
+                $data['cert_no'] = $this->input->post('cert_no');
+            }
             $this->db->where('id', $id)->update('students_registeration_data', $data);
             $this->session->set_flashdata('success', 'Data Updated Successfully..');
             redirect(current_url());

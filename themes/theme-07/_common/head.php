@@ -97,6 +97,9 @@
     font-size: 22px;
     color: var(--primary-color);
   }
+  .form-control{
+    border:1px solid black
+  }
 </style>
 <?php
 function filter_title($title)

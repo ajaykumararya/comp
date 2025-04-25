@@ -1714,7 +1714,7 @@ class Ki_theme
 
     function panel($class = 'main', $append = '')
     {
-        $type = THEME == 'theme-07' ? 'panel' : 'card';
+        $type = in_array(THEME,['theme-07','edu-01']) ? 'panel' : 'card';
         $boxs = [
             'card' => [
                 'main' => 'card ' . $append,                

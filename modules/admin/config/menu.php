@@ -476,7 +476,7 @@ if (CHECK_PERMISSION('CENTRE_ONLY_ADD_STUDENT') && OnlyForCentre()) {
                         'label' => 'Regi.. Verification',
                         'type' => 'student_registration_verification',
                         'icon' => array('add-notepad', 4),
-                        'url' => 'student/registration-verification',
+                        'url' => 'student/registration-verification'.(PATH == 'sct_ebook' ? 's' : ''),
                     ),
                     // array(
                     //     'label' => 'Regi.. Certificate',

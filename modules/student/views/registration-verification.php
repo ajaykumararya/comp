@@ -13,16 +13,22 @@
                             <th>Email</th>
                             <th>Mobile</th>
                             <th>Father Name</th>
+                            <?php
+                            if(PATH == 'upstate'):
+                            ?>
                             <th>Mother Name</th>
                             <th>Exam Roll No.</th>
                             <th>Enrollment No.</th>
+                            <?php
+                            endif;
+                            ?>
                             <th>Exam / Course</th>
                             <th>College / Institute Name</th>
                             <th>Exam Centre Name</th>
                             <th>Passing of Year</th>
                             <th>Pass / Fail</th>
                             <th>D.O.B</th>
-                            <th>Training Period</th>
+                            <th><?=(PATH == 'upstate') ? 'Training Period' : 'Expiry Date'?></th>
                             <th>Address</th>
                             <th>Status</th>
                             <th>Action</th>

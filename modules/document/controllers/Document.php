@@ -45,7 +45,16 @@ class Document extends MY_Controller
         if ($get->num_rows()) {
             $row = $get->row();
             $registration_no = $row->registration_no;
-
+            if (PATH == 'sct_ebook'):
+                
+                if (strtotime($row->expiry_date) < time()) {
+                    echo '<script>
+                        alert("Certificate Expired");
+                        window.close()
+                        </script>';
+                        exit;
+                }
+            endif;
             $this->set_data('registration_no', $registration_no);
             $this->set_data($get->row_array());
             $this->set_data('serial_no', $row->id);
@@ -585,6 +594,13 @@ class Document extends MY_Controller
             $id = base64_decode(base64_decode($token));
             $list = $this->db->where('id', $id)->get('iso_certificate');
             if ($list->num_rows()) {
+                if (strtotime($list->row('expiry_date')) < time()) {
+                    echo '<script>
+                        alert("Certificate Expired");
+                        window.close()
+                        </script>';
+                        exit;
+                }
                 $output = $this->parse('iso', $list->row_array());
                 $this->pdf($output);
             } else

@@ -143,6 +143,36 @@ class MY_Controller extends MX_Controller
                 ]
             ]);
         }
+        //sign
+        $checkField = $this->build_db->field_exists('students_registeration_data', 'sign');
+        if (!$checkField) {
+            $this->build_db->add_field('students_registeration_data', [
+                'sign' => [
+                    'type' => 'varchar(100)',
+                    'default' => null
+                ]
+            ]);
+        }
+        if (PATH == 'sct_ebook') {
+            $checkField = $this->build_db->field_exists('students_registeration_data', 'expiry_date');
+            if (!$checkField) {
+                $this->build_db->add_field('students_registeration_data', [
+                    'expiry_date' => [
+                        'type' => 'varchar(100)',
+                        'default' => null
+                    ]
+                ]);
+            }
+            $checkField = $this->build_db->field_exists('students_registeration_data', 'cert_no');
+            if (!$checkField) {
+                $this->build_db->add_field('students_registeration_data', [
+                    'cert_no' => [
+                        'type' => 'varchar(100)',
+                        'default' => null
+                    ]
+                ]);
+            }
+        }
         $fields = ['marital_status', 'category', 'medium', 'adhar_card_no', 'session_id', 'examination_body'];
         foreach ($fields as $field) {
             $checkField = $this->build_db->field_exists('students', $field);

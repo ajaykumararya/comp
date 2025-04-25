@@ -154,7 +154,7 @@ $(document).on('ready', function () {
         e.preventDefault();
         var that = this;
         $.AryaAjax({
-            url: 'website/student-registration-certificate',
+            url: $(this).attr('action'),
             data: new FormData(that),
         }).then((res) => {
             // log(res);
