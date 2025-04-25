@@ -67,8 +67,8 @@
     <div class="position-absolute" id="photo" style="">
         <img src="<?=$this->ki_theme->generate_qr(1,null,current_url(),true)?>" style="width:80px;border:2px solid black;">
     </div>
-    <p class="position-absolute "  style="top:21.5%;left:5%;width:90%;text-align:center" align="center">
-        <h1 style="font-size:3rem;line-height:1;font-weight:900">{company_name}</h1>
+    <p class="position-absolute "  style="top:21.8%;left:5%;width:90%;text-align:center" align="center">
+        <h1 style="font-size:2.7rem;line-height:1;font-weight:900">{company_name}</h1>
         <span style="font-size:1.2rem;line-height:1">{address}</span>
     </p>
     <p class="position-absolute" style="top:50%;left:20%;width:60%;text-align:center;font-size:1.2rem">
