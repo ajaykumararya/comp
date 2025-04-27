@@ -64,3 +64,7 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.title = `{field2}`;
+</script>
