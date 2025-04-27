@@ -1,52 +1,45 @@
 <?php
 if ($isPrimary) {
-    ?>
-    <!-- ==============================================
+    $sliders = $this->SiteModel->get_contents('revosultion_slider');
+    if ($sliders->num_rows()) {
+        ?>
+        <!-- ==============================================
     ** Banner Carousel **
     =================================================== -->
-    <div class="banner-outer">
-        <div class="banner-slider">
-            <div class="slide1">
-                <div class="container">
-                    <div class="content animated fadeInRight">
-                        <div class="fl-right">
-                            <h1 class="animated fadeInRight">Explore the World of <span class="animated fadeInRight">Our
-                                    Graduates</span> </h1>
-                            <p class="animated fadeInRight">Lorem Ipsum is simply dummy text of the printing and
-                                typesetting industry.</p>
-                            <a href="about.html" class="btn animated fadeInRight">Know More <span
-                                    class="icon-more-icon"></span></a>
+        <div class="banner-outer">
+            <div class="banner-slider">
+                <?php
+                $i = 1;
+                foreach ($sliders->result() as $slider) {
+                    $animateClass = $slider->field6 == 'right' ? 'fadeInRight' : 'fadeInLeft';
+                    ?>
+                    <div class="slide<?= $i++ ?>" style="background: url({base_url}upload/<?=$slider->field1?>) no-repeat center top / cover;">
+                        <div class="container">
+                            <div class="content animated <?= $animateClass ?>">
+                                <div class="fl-<?=$slider->field6 ?? 'left'?>">
+                                    <h1 class="animated <?= $animateClass ?>">
+                                        <?= $slider->field2 ?>
+                                    </h1>
+                                    <p class="animated <?= $animateClass ?>">
+                                        <?= $slider->field3 ?>
+                                    </p>
+                                    <?php
+                                    if ($slider->field5):
+                                        echo '<a href="'.$slider->field5.'" class="btn animated <?=$animateClass?>">'.$slider->field4.' <span
+                                            class="icon-more-icon"></span></a>';
+                                    endif;
+                                    ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="slide2">
-                <div class="container">
-                    <div class="content">
-                        <h1 class="animated fadeInUp">MBA Marketing</h1>
-                        <p class="animated fadeInUp">Lorem Ipsum is simply dummy text of the printing and typesetting
-                            industry.</p>
-                        <a href="about.html" class="btn animated fadeInUp">Know More <span
-                                class="icon-more-icon"></span></a>
-                        <a href="gallery.html" class="btn white animated fadeInUp hidden-xs">Take a Tour <span
-                                class="icon-more-icon"></span></a>
-                    </div>
-                </div>
-            </div>
-            <div class="slide3">
-                <div class="container">
-                    <div class="content animated fadeInLeft">
-                        <h1 class="animated fadeInLeft">Online MBA</h1>
-                        <p class="animated fadeInLeft">Lorem Ipsum is simply dummy text of the printing and typesetting
-                            industry.</p>
-                        <a href="about.html" class="btn animated fadeInLeft">Know More <span
-                                class="icon-more-icon"></span></a>
-                    </div>
-                </div>
+                    <?php
+                }
+                ?>
             </div>
         </div>
-    </div>
-    <?php
+        <?php
+    }
 } else {
     ?>
     <div class="inner-banner blog">
