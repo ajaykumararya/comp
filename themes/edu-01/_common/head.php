@@ -25,7 +25,7 @@
     }
 
     .input-group {
-        display: flex;
+        display: flex!important;
         flex-wrap: nowrap;
         align-items: stretch;
         width: 100%;
@@ -47,6 +47,7 @@
         font-size: 1rem;
         font-weight: 400;
         line-height: 1.5;
+        height: 34px!important;
         color: #495057;
         text-align: center;
         white-space: nowrap;
