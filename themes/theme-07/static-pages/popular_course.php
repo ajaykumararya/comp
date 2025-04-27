@@ -24,12 +24,12 @@
                     <input type="text" class="form-control" name="field4" placeholder="Course Duration">
                 </div>
                 <div class="form-group mb-4 col-md-4">
-                    <label for="button_link" class="form-label mb-1 required">Class Size</label>
-                    <input type="text" class="form-control" name="field5" placeholder="Class Size">
+                    <label for="button_link" class="form-label mb-1 required">Eligibility</label>
+                    <input type="text" class="form-control" name="field5" placeholder="CEligibility">
                 </div>
                 <div class="form-group mb-4 col-md-4">
-                    <label for="button_link" class="form-label mb-1 required">Class Duration</label>
-                    <input type="text" class="form-control" name="field6" placeholder="Class Duration">
+                    <label for="button_link" class="form-label mb-1 required">Price</label>
+                    <input type="text" class="form-control" name="field6" placeholder="Price">
                 </div>
             </div>
             <div class="card-footer">
@@ -54,6 +54,11 @@
                         <label for="" class="form-label">Description</label>
                         <textarea class="form-control"
                             name="popular_course_page_description"><?= ES('popular_course_page_description', 'Description') ?></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-label">Price Button Url</label>
+                        <textarea class="form-control"
+                            name="popular_course_page_btn_url"><?= ES('popular_course_page_btn_url', '') ?></textarea>
                     </div>
                 </div>
                 <div class="card-footer">

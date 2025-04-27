@@ -24,7 +24,26 @@ class Site extends Site_Controller
         ]);
         echo $this->do_email('sitejeannie@gmail.com', 'New Demo Checklist', $this->template('email/demo-query'));
     }
+    function course_details()
+    {
+        try {
+            $token = $this->uri->segment(2, 0);
+            if (!$token)
+                throw new Exception('Token not found..');
+            $get = $this->token->decode($token);
+            if (!isset($get['prod_id']))
+                throw new Exception('Product id not found..');
+            $product = $this->SiteModel->get_contents('popular_course', ['id' => $get['prod_id']]);
+            if (!$product->num_rows())
+                throw new Exception('');
+            $content = $this->parse('pages/course-details', $product->row_array(), true);
+            $this->page_view($content, ['page_name' => 'yes']);
+        } catch (Exception $r) {
+            $this->error_404();
+        }
 
+        // echo 'UES';
+    }
     function container()
     {
         $data = $this->pageData;

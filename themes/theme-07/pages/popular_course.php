@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="course-details clearfix p-20 pt-15">
                                     <div class="course-top-part pull-left mr-40">
-                                        <a href="page-course-details.html">
+                                        <a href="{base_url}course-details/<?=$this->token->encode(['prod_id' => $row->id])?>">
                                             <h4 class="mt-0 mb-5"><?= filter_title($row->field2) ?></h4>
                                         </a>
                                         <!-- <ul class="list-inline">
@@ -62,13 +62,13 @@
                                         if ($row->field5) {
                                             echo '<li>
                                                 <h6>' . $row->field5 . '</h6>
-                                                <span> Class Size</span>
+                                                <span> Eligibility</span>
                                             </li>';
                                         }
                                         if ($row->field6) {
                                             echo '<li>
                                                 <h6><span class="course-time">' . $row->field6 . '</span></h6>
-                                                <span> Class Duration</span>
+                                                <span> Price</span>
                                             </li>';
                                         }
                                         ?>
