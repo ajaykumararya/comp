@@ -13,10 +13,11 @@ if ($isPrimary) {
                 foreach ($sliders->result() as $slider) {
                     $animateClass = $slider->field6 == 'right' ? 'fadeInRight' : 'fadeInLeft';
                     ?>
-                    <div class="slide<?= $i++ ?>" style="background: url({base_url}upload/<?=$slider->field1?>) no-repeat center top / cover;">
+                    <div class="slide<?= $i++ ?>"
+                        style="background: url({base_url}upload/<?= $slider->field1 ?>) no-repeat center top / cover;">
                         <div class="container">
                             <div class="content animated <?= $animateClass ?>">
-                                <div class="fl-<?=$slider->field6 ?? 'left'?>">
+                                <div class="fl-<?= $slider->field6 ?? 'left' ?>">
                                     <h1 class="animated <?= $animateClass ?>">
                                         <?= $slider->field2 ?>
                                     </h1>
@@ -25,7 +26,7 @@ if ($isPrimary) {
                                     </p>
                                     <?php
                                     if ($slider->field5):
-                                        echo '<a href="'.$slider->field5.'" class="btn animated <?=$animateClass?>">'.$slider->field4.' <span
+                                        echo '<a href="' . $slider->field5 . '" class="btn animated <?=$animateClass?>">' . $slider->field4 . ' <span
                                             class="icon-more-icon"></span></a>';
                                     endif;
                                     ?>
@@ -39,6 +40,37 @@ if ($isPrimary) {
             </div>
         </div>
         <?php
+        if (ES('slider_bottom_activation', 'hide') == 'show'):
+            ?>
+            <section class="about" style="padding:222px 0 10px 0">
+                <div class="container">
+                    <ul class="row our-links">
+                        <?php
+                        foreach (['apply-online', 'prospects', 'certification'] as $i => $sectionClass) {
+                            $_title = ES('slider_bottom_' . ($i + 1) . '_title');
+                            $_link = ES('slider_bottom_' . ($i + 1) . '_link', '#');
+                            $_description = ES('slider_bottom_' . ($i + 1) . '_description');
+                            echo '<li class="col-sm-4 ' . $sectionClass . ' clearfix equal-hight" style="height: 194px;">
+                                <div class="icon">
+                                    <img src="{theme_url}assets/images/apply-online-ico.png" class="img-responsive" alt="">
+                                </div>
+                                <div class="detail">
+                                    <h3>' . $_title . '</h3>
+                                    <p>' . $_description . '</p>
+                                    <a href="' . $_link . '" class="more">
+                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </li>';
+                        }
+
+                        ?>
+                    </ul>
+                </div>
+
+            </section>
+            <?php
+        endif;
     }
 } else {
     ?>

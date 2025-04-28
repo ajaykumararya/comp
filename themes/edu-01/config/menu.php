@@ -35,5 +35,35 @@ $menu = array(
             'icon' => array('file', 4),
             'url' => 'cms/static-page/our_courses',
         ),
+        array(
+            'label' => 'Icon Box',
+            'type' => 'icon-box',
+            'icon' => array('file', 4),
+            'url' => 'cms/static-page/icon-box',
+        ),        
+        array(
+            'label' => 'Why Choose Us',
+            'type' => 'why-choose-us',
+            'icon' => array('file', 4),
+            'url' => 'cms/static-page/why-choose-us',
+        ),
+        array(
+            'label' => 'News & Event(s)',
+            'type' => 'news-and-events',
+            'icon' => array('file', 4),
+            'url' => 'cms/static-page/news-and-events',
+        ),
+        array(
+            'label' => 'Testimonial(s)',
+            'type' => 'testimonial',
+            'icon' => array('file', 4),
+            'url' => 'cms/static-page/testimonial',
+        ),
+        array(
+            'label' => 'Contact Us',
+            'type' => 'contact-us',
+            'icon' => array('file', 4),
+            'url' => 'cms/static-page/contact-us',
+        ),
     )
 );

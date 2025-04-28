@@ -12,7 +12,8 @@
                 </div>
                 <div class="form-group mb-4 col-md-6">
                     <label for="" class="form-label required" required>Title</label>
-                    <input type="text" required name="field2" maxlength="20" class="form-control" placeholder="Enter Title">
+                    <input type="text" required name="field2" maxlength="20" class="form-control"
+                        placeholder="Enter Title">
                 </div>
                 <div class="form-group mb-4 col-md-12">
                     <label for="" class="form-label required" required>Description</label>
@@ -91,5 +92,71 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="col-md-12 mt-4">
+        <form action="" class="extra-setting">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Slider Bottom Sections</h3>
+                </div>
+                <div class="card-body row">
+                    <div class="form-group col-md-12">
+                        <label for="" class="form-label">Hide / Show</label>
+                        <select name="slider_bottom_activation" id="" class="form-control">
+                            <option value="hide" <?= ES('slider_bottom_activation', 'hide') == 'hide' ? 'selected' : '' ?>>
+                                Hide
+                            </option>
+                            <option value="show" <?= ES('slider_bottom_activation', 'hide') == 'show' ? 'selected' : '' ?>>
+                                Show
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-boredered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Url</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    for ($i = 1; $i <= 3; $i++) {
+                                        ?>
+                                        <tr>
+                                            <td><?= $i ?>.</td>
+                                            <td>
+                                                <input type="text" name="slider_bottom_<?= $i ?>_title"
+                                                    class="custom_setting_input" placeholder="Title.." value="<?=ES('slider_bottom_'.$i.'_title')?>">
+                                            </td>
+                                            <td>
+                                                <textarea type="text" name="slider_bottom_<?= $i ?>_description"
+                                                    maxlength="150" class="custom_setting_input"
+                                                    placeholder="Description.."><?=ES('slider_bottom_'.$i.'_description')?></textarea>
+
+                                            </td>
+                                            <td>
+                                                <input type="text" name="slider_bottom_<?= $i ?>_link"
+                                                    class="custom_setting_input" placeholder="LInk.." value="<?=ES('slider_bottom_'.$i.'_link')?>">
+
+                                            </td>
+                                        </tr>
+                                        <?php
+                                    }
+
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    {save_button}
+                </div>
+            </div>
+        </form>
     </div>
 </div>

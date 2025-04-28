@@ -183,7 +183,7 @@
                     <div class="footer-logo hidden-xs">
                         <a href="{base_url}"><img src="{base_url}upload/{logo}" class="img-responsive" alt=""></a>
                     </div>
-                    <p>© {copyright}</p>
+                    {footer_about_us}
                     <!-- <ul class="terms clearfix">
                         <li><a href="terms.html">TERMS OF USE</a></li>
                         <li><a href="privacy.html">PRIVACY POLICY</a></li>
@@ -264,6 +264,9 @@
                                     </a></li>
                             </ul>
                         </div> -->
+                    </div>
+                    <div class="col-md-12">
+                        <p class="text-center"> {title} © {copyright}</p>
                     </div>
                 </div>
             </div>

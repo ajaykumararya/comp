@@ -1,4 +1,9 @@
 <style>
+    :root {
+        --primary-color: #17a43b;
+        --secondary-color: #ff9600;
+    }
+
     @media (min-width: 992px) {
         .col-md-offset-3 {
             margin-left: 0% !important;
@@ -8,10 +13,12 @@
     .inner-banner .content {
         max-width: 100% !important;
     }
-    .main-heading.center-heading{
-        margin-top:20px;
+
+    .main-heading.center-heading {
+        margin-top: 20px;
         margin-bottom: 20px;
     }
+
     .select2 {
         height: 46px !important;
     }
@@ -25,7 +32,7 @@
     }
 
     .input-group {
-        display: flex!important;
+        display: flex !important;
         flex-wrap: nowrap;
         align-items: stretch;
         width: 100%;
@@ -47,7 +54,7 @@
         font-size: 1rem;
         font-weight: 400;
         line-height: 1.5;
-        height: 34px!important;
+        height: 34px !important;
         color: #495057;
         text-align: center;
         white-space: nowrap;
@@ -58,5 +65,11 @@
 
     .select2-container--default .select2-selection--single {
         height: 38px !important;
+    }
+
+    .footer .foot-nav ul li a:hover,
+    .header-top ul.follow-us li a:hover,
+    .header-top ul.top-nav li a:hover {
+        color: var(--secondary-color) !important;
     }
 </style>

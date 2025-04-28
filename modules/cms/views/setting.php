@@ -277,7 +277,7 @@ if ($header_sections) {
 }
 ?>
 <?php
-if (THEME == 'theme-04') {
+if (in_array(THEME, ['theme-04', 'edu-01'])) {
     ?>
     <form class="extra-setting">
 
@@ -308,7 +308,7 @@ if ($footer_sections) {
             <h1 class="anchor fw-bold mb-5">Footer Section</h1>
         </div>
         <?php
-        if (in_array(THEME,['board','theme-05'])):
+        if (in_array(THEME, ['board', 'theme-05'])):
             ?>
             <div class="col-md-4">
                 <form action="" class="extra-setting" enctype="multipart/form-data" data-page_load="true">
@@ -320,12 +320,13 @@ if ($footer_sections) {
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="" class="form-label">Title</label>
-                                <input type="text" value="<?=ES('footer_note_title')?>" name="footer_note_title" required class="form-control" placeholder="Title">
+                                <input type="text" value="<?= ES('footer_note_title') ?>" name="footer_note_title" required
+                                    class="form-control" placeholder="Title">
                             </div>
                             <div class="form-group">
                                 <label for="" class="form-label">Description</label>
                                 <textarea type="text" name="footer_note_description" required class="form-control"
-                                    placeholder="Description"><?=ES('footer_note_description')?></textarea>
+                                    placeholder="Description"><?= ES('footer_note_description') ?></textarea>
                             </div>
                             <?php
                             echo $this->ki_theme->extra_setting_button_input("footer_note_button", "Footer Note Button");
