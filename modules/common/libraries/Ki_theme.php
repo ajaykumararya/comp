@@ -837,6 +837,7 @@ class Ki_theme
     }
     function radio($name = '', $value = '', $parentClass = '', $labelClass = '')
     {
+        $value = $value == 0 ? '0' : $value;
         return $this->special_input('radio', $name, $value, $parentClass, $labelClass);
     }
     function load_ckeditor()
