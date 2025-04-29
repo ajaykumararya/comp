@@ -133,7 +133,17 @@ class MY_Controller extends MX_Controller
         //         ]
         //     ]);
         // }
-
+        if(CHECK_PERMISSION('CUSTOM_STUDENT_FEE')){
+            $checkField = $this->build_db->field_exists('students', 'custom_fee');
+        if (!$checkField) {
+            $this->build_db->add_field('students', [
+                'custom_fee' => [
+                    'type' => 'varchar(100)',
+                    'default' => null
+                ]
+            ]);
+        }
+        }
         $checkField = $this->build_db->field_exists('study_material', 'file_type');
         if (!$checkField) {
             $this->build_db->add_field('study_material', [

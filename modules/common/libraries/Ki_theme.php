@@ -1715,16 +1715,16 @@ class Ki_theme
 
     function panel($class = 'main', $append = '')
     {
-        $type = in_array(THEME,['theme-07','edu-01']) ? 'panel' : 'card';
+        $type = in_array(THEME, ['theme-07', 'edu-01']) ? 'panel' : 'card';
         $boxs = [
             'card' => [
-                'main' => 'card ' . $append,                
+                'main' => 'card ' . $append,
                 'body' => 'card-body ' . $append,
                 'header' => 'card-header ' . $append,
                 'footer' => 'card-footer ' . $append
             ],
             'panel' => [
-                'main' => 'panel ' . $append,                
+                'main' => 'panel ' . $append,
                 'body' => 'panel-body ' . $append,
                 'header' => 'panel-heading ' . $append,
                 'footer' => 'panel-footer ' . $append
