@@ -57,12 +57,17 @@
                                 <th>Training Centre</th>
                                 <td colspan="2">{institute_name}</td>
                             </tr>
+                            <?php
+                            if(PATH != 'sct_ebook'){
+                                echo '
+                                    <tr>
+                                        <th>Training Period</th>
+                                        <td colspan="2">{training_period}</td>
+                                    </tr>';
+                            }
+                            ?>
                             <tr>
-                                <th>Training Period</th>
-                                <td colspan="2">{training_period}</td>
-                            </tr>
-                            <tr>
-                                <th>Examination Body</th>
+                                <th> <?=PATH != 'sct_ebook' ? 'Examination Body' : 'Medical  Field'?></th>
                                 <td colspan="2">{examination_body}</td>
                             </tr>
                         </table>
