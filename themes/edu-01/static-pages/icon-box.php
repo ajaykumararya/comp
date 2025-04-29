@@ -12,7 +12,7 @@
                 </div>
                 <div class="form-group mb-4 col-md-6">
                     <label for="" class="form-label required" required>Title</label>
-                    <input type="text" required name="field2" maxlength="20" class="form-control"
+                    <input type="text" required name="field2" class="form-control"
                         placeholder="Enter Title">
                 </div>
                 <div class="form-group mb-4 col-md-12">
