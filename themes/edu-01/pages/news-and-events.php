@@ -16,7 +16,7 @@
                     ?>
                     <li class="col-sm-4">
                         <div class="inner">
-                            <figure> <img src="{base_url}upload/<?=$row->field1?>" class="img-responsive">
+                            <figure> <img src="{base_url}upload/<?=$row->field1?>" style="height:265px" class="img-responsive">
                                 <figcaption>
                                     <div class="cnt-block"> 
                                         
