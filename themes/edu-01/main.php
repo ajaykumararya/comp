@@ -189,82 +189,30 @@
                         <li><a href="privacy.html">PRIVACY POLICY</a></li>
                         <li><a href="#">SITEMAP</a></li>
                     </ul> -->
-                </div>
-            </div>
-        </div>
-        <!-- End Footer Top -->
-        <!-- Start Footer Bottom -->
-        <div class="bottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="connect-us">
-                            <h3>Connect with Us</h3>
-                            <ul class="follow-us clearfix">
-                                <!-- <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <div class="connect-us">
+                        <h3>Connect with Us</h3>
+                        <ul class="follow-us clearfix">
+                            <!-- <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                                 <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
                                 <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
                                 <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
                                 <li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
                                 <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li> -->
-                                <li><a href="{facebook}"><i class="fab fa-facebook"></i></a></li>
-                                <li><a href="{twitter}"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="{youtube}"><i class="fab fa-youtube"></i></a></li>
-                                <li><a href="{instagram}"><i class="fab fa-instagram"></i></a></li>
-                                <li><a href="{linkedin}"><i class="fab fa-linkedin"></i></a></li>
-                            </ul>
-                        </div>
+                            <li><a href="{facebook}"><i class="fab fa-facebook"></i></a></li>
+                            <li><a href="{twitter}"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="{youtube}"><i class="fab fa-youtube"></i></a></li>
+                            <li><a href="{instagram}"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="{linkedin}"><i class="fab fa-linkedin"></i></a></li>
+                        </ul>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="subscribe">
-                            <h3>Subscribe with Us</h3>
-                            <!-- Begin MailChimp Signup Form -->
-                            <div id="mc_embed_signup">
-                                <form action="" method="post" id="mc-embedded-subscribe-form"
-                                    name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                                    <div id="mc_embed_signup_scroll">
-                                        <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL"
-                                            placeholder="enter your email address" required>
-                                        <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                                        <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                                            <input type="text" name="b_cd5f66d2922f9e808f57e7d42_ec6767feee"
-                                                tabindex="-1" value="">
-                                        </div>
-                                        <div class="clear">
-                                            <input type="submit" value="Subscribe" name="subscribe"
-                                                id="mc-embedded-subscribe" class="button">
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <!--End mc_embed_signup-->
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <!-- <div class="instagram">
-                            <h3>@INSTAGRAM</h3>
-                            <ul class="clearfix">
-                                <li><a href="#">
-                                        <figure><img src="images/insta-img1.jpg" class="img-responsive" alt=""></figure>
-                                    </a></li>
-                                <li><a href="#">
-                                        <figure><img src="images/insta-img2.jpg" class="img-responsive" alt=""></figure>
-                                    </a></li>
-                                <li><a href="#">
-                                        <figure><img src="images/insta-img3.jpg" class="img-responsive" alt=""></figure>
-                                    </a></li>
-                                <li><a href="#">
-                                        <figure><img src="images/insta-img4.jpg" class="img-responsive" alt=""></figure>
-                                    </a></li>
-                                <li><a href="#">
-                                        <figure><img src="images/insta-img5.jpg" class="img-responsive" alt=""></figure>
-                                    </a></li>
-                                <li><a href="#">
-                                        <figure><img src="images/insta-img6.jpg" class="img-responsive" alt=""></figure>
-                                    </a></li>
-                            </ul>
-                        </div> -->
-                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Footer Top -->
+        <!-- Start Footer Bottom -->
+        <div class="bottom" style="padding:12px 0">
+            <div class="container">
+                <div class="row">
                     <div class="col-md-12">
                         <p class="text-center"> {title} © {copyright}</p>
                     </div>

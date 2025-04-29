@@ -3,7 +3,9 @@
         --primary-color: #17a43b;
         --secondary-color: #ff9600;
     }
-
+    .text-white{
+        color:white;
+    }
     @media (min-width: 992px) {
         .col-md-offset-3 {
             margin-left: 0% !important;
