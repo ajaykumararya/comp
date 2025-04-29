@@ -44,28 +44,29 @@
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <link href="{base_url}/assets/animation.css" rel="stylesheet" type="text/css" />
     <script src="{base_url}assets/plugins/global/plugins.bundle.js"></script>
-<script src="{base_url}assets/js/scripts.bundle.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-<script src="https://mark-freq32.c9.io/mark3/js/jquery.ui.touch-punch.min.js"></script>
-<!--end::Global Javascript Bundle-->
-<!--begin::Vendors Javascript(used for this page only)-->
-<script src="{base_url}assets/plugins/custom/datatables/datatables.bundle.js"></script>
-<script src="{base_url}assets/plugins/custom/vis-timeline/vis-timeline.bundle.js"></script>
-<script src="{base_url}assets/lib/5/index.js"></script>
-<script src="{base_url}assets/lib/5/xy.js"></script>
-<script src="{base_url}assets/lib/5/percent.js"></script>
-<script src="{base_url}assets/lib/5/radar.js"></script>
-<script src="{base_url}assets/lib/5/themes/Animated.js"></script>
-<!--end::Vendors Javascript-->
-<script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js"></script>
-<!--begin::Custom Javascript(used for this page only)-->
-<script src="{base_url}assets/js/widgets.bundle.js"></script>
-<script src="{base_url}assets/js/custom/widgets.js"></script>
-<script src="{base_url}assets/custom/jquery.nestable.js"></script>
+    <script src="{base_url}assets/js/scripts.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script src="https://mark-freq32.c9.io/mark3/js/jquery.ui.touch-punch.min.js"></script>
+    <!--end::Global Javascript Bundle-->
+    <!--begin::Vendors Javascript(used for this page only)-->
+    <script src="{base_url}assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script src="{base_url}assets/plugins/custom/vis-timeline/vis-timeline.bundle.js"></script>
+    <script src="{base_url}assets/lib/5/index.js"></script>
+    <script src="{base_url}assets/lib/5/xy.js"></script>
+    <script src="{base_url}assets/lib/5/percent.js"></script>
+    <script src="{base_url}assets/lib/5/radar.js"></script>
+    <script src="{base_url}assets/lib/5/themes/Animated.js"></script>
+    <!--end::Vendors Javascript-->
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js"></script>
+    <!--begin::Custom Javascript(used for this page only)-->
+    <script src="{base_url}assets/js/widgets.bundle.js"></script>
+    <script src="{base_url}assets/js/custom/widgets.js"></script>
+    <script src="{base_url}assets/custom/jquery.nestable.js"></script>
     <style>
-        .file-btn input{
+        .file-btn input {
             display: none;
         }
+
         .pulse-ring {
             height: 37px !important;
             width: 37px !important
@@ -244,7 +245,7 @@
                             <?php
                             // echo ucfirst($this->session->userdata('admin_type'));
                             if ($this->center_model->isCenter()) {
-                                echo $center_data['institute_name'];
+                                echo $center_data['institute_name'] . ' ' . label('ID ' . $center_data['center_number'], 'info fs-4');
                             }
                             ?>
                         </a>
@@ -440,8 +441,20 @@
                                     </div>
                                     <!--end::Menu item-->
                                     <!--begin::Menu separator-->
-                                    <div class="separator my-2"></div>
                                     <!--end::Menu separator-->
+                                    <div class="separator my-2"></div>
+
+                                    <?php
+                                    if ($this->center_model->isCenter()) {
+                                        ?>
+                                        <div class="menu-item px-5" align="center">
+                                             <?= label('ID '.$center_data['center_number'],'info fs-4')?>
+                                        </div>
+                                        <div class="separator my-2"></div>
+
+                                        <?php
+                                    }
+                                    ?>
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-5">
                                         <a href="{base_url}admin/profile" class="menu-link px-5">
@@ -1035,7 +1048,7 @@
     const wallet_system = Boolean(`<?= CHECK_PERMISSION('WALLET_SYSTEM') or CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE') ?>`);
     const wallet_balance = <?= $this->ki_theme->wallet_balance() ?? 0 ?>;
     var DeletePermissionForCenter = true;
-    const ADMISSION_WITH_COURSE_CATEGORY = <?=CHECK_PERMISSION('ADMISSION_WITH_COURSE_CATEGORY') ? 1 : 0?>;
+    const ADMISSION_WITH_COURSE_CATEGORY = <?= CHECK_PERMISSION('ADMISSION_WITH_COURSE_CATEGORY') ? 1 : 0 ?>;
     // console.log(content_css);
     // Default vars of this project
     <?php
