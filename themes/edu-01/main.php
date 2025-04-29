@@ -156,29 +156,7 @@
         <!-- Start Footer Top -->
         <div class="container">
             <div class="row row1">
-                <div class="col-sm-9 clearfix">
-                    <?php
-                    $footer_sections = $this->ki_theme->config('footer_sections');
-                    if ($footer_sections) {
-                        foreach ($footer_sections as $index => $title) {
-                            $myTitle = $this->SiteModel->get_setting($index . '_text', $title);
-                            echo '<div class="foot-nav">
-                                    <h3>' . $myTitle . '</h3>
-                                    <ul>';
-                            $fields = $this->SiteModel->get_setting($index . '_links', '', true);
-                            if ($fields) {
-                                foreach ($fields as $value) {
-                                    $my_index = $this->ki_theme->parse_string($value->title);
-                                    $value = $value->link;
-                                    echo "<li><a href='$value'>$my_index</a></li>";
-                                }
-                            }
-                            echo '</ul>
-                            </div>';
-                        }
-                    }
-                    ?>
-                </div>
+
                 <div class="col-sm-3">
                     <div class="footer-logo hidden-xs">
                         <a href="{base_url}"><img src="{base_url}upload/{logo}" class="img-responsive" alt=""></a>
@@ -205,6 +183,29 @@
                             <li><a href="{linkedin}"><i class="fab fa-linkedin"></i></a></li>
                         </ul>
                     </div>
+                </div>
+                <div class="col-sm-9 clearfix">
+                    <?php
+                    $footer_sections = $this->ki_theme->config('footer_sections');
+                    if ($footer_sections) {
+                        foreach ($footer_sections as $index => $title) {
+                            $myTitle = $this->SiteModel->get_setting($index . '_text', $title);
+                            echo '<div class="foot-nav">
+                                    <h3>' . $myTitle . '</h3>
+                                    <ul>';
+                            $fields = $this->SiteModel->get_setting($index . '_links', '', true);
+                            if ($fields) {
+                                foreach ($fields as $value) {
+                                    $my_index = $this->ki_theme->parse_string($value->title);
+                                    $value = $value->link;
+                                    echo "<li><a href='$value'>$my_index</a></li>";
+                                }
+                            }
+                            echo '</ul>
+                            </div>';
+                        }
+                    }
+                    ?>
                 </div>
             </div>
         </div>

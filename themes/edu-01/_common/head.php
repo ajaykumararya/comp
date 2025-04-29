@@ -11,7 +11,9 @@
             margin-left: 0% !important;
         }
     }
-
+    .footer ul.follow-us li a{
+        border-color: white!important;
+    }
     .inner-banner .content {
         max-width: 100% !important;
     }
