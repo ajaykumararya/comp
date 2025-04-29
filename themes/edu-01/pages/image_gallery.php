@@ -17,7 +17,7 @@
                     <a class="galleryItem" href="<?=$imgUrl?>"><span class="icon-enlarge-icon"></span></a>
                     <!-- <a href="gallery.html" class="more"><span class="icon-gallery-more-arrow"></span></a> -->
                 </div>
-                <figure><img src="<?=$imgUrl?>" class="img-responsive" alt="" style="height:180px"></figure>
+                <figure><img src="<?=$imgUrl?>" class="img-responsive" alt="" style="height:230px"></figure>
             </li>
             <?php
         endforeach;
