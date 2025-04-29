@@ -3,17 +3,21 @@
         --primary-color: #17a43b;
         --secondary-color: #ff9600;
     }
-    .text-white{
-        color:white;
+
+    .text-white {
+        color: white;
     }
+
     @media (min-width: 992px) {
         .col-md-offset-3 {
             margin-left: 0% !important;
         }
     }
-    .footer ul.follow-us li a{
-        border-color: white!important;
+
+    .footer ul.follow-us li a {
+        border-color: white !important;
     }
+
     .inner-banner .content {
         max-width: 100% !important;
     }
@@ -76,12 +80,41 @@
     .header-top ul.top-nav li a:hover {
         color: var(--secondary-color) !important;
     }
+
+    .card {
+        margin-bottom: 20px;
+        background-color: #fff;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+        box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    }
+    .card-header {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+.card-body{
+    padding: 15px;
+}
+.border-2{
+    border-width: 2px;
+} 
+.border-primary{
+    border-color: var(--primary-color);
+}
+    html
 </style>
 <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
 <style>
-    .footer2 .foot-nav ul li a, .footer2 p, .footer2 ul.terms li:after, .footer2 ul.terms li a,p,
+    .footer2 .foot-nav ul li a,
+    .footer2 p,
+    .footer2 ul.terms li:after,
+    .footer2 ul.terms li a,
+    p,
     .dropdown ul a,
-    label{
-        font-family: 'Raleway'!important;
+    label {
+        font-family: 'Raleway' !important;
     }
 </style>

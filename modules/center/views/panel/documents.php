@@ -80,37 +80,6 @@
             </td>
         </tr>
         <tr>
-            <th class="w-50">Aadhar Card</th>
-            <td class="w-50">
-                <div class="btn-group">
-                    <label class="btn btn-active-info btn-sm border-info border border-1" for="adhar">
-                        <input type="file" name="adhar" class="d-none upload-center-docs" accept="image/*,.pdf"
-                            id="adhar">
-                        <i class="fa fa-cloud-upload"></i>
-                        Change
-                    </label>
-                    <?php
-                    if (file_exists('upload/' . $adhar) && $adhar) {
-                        ?>
-                        <a href="{base_url}upload/{adhar}" target="_blank"
-                            class="btn btn-sm btn-active-primary border-primary border border-1">
-                            <i class="fa fa-eye"></i>
-                            View
-                        </a>
-                        <button type="button" data-id="{center_id}" data-field="adhar" data-file="{adhar}"
-                            class="delete-center-doc btn btn-sm btn-active-danger border border-danger border-1">
-                            <i class="fa fa-trash"></i>
-                            Delete
-                        </button>
-                        <?php
-                    } else {
-                        echo badge('Adhar Not Found.', 'danger');
-                    }
-                    ?>
-                </div>
-            </td>
-        </tr>
-        <tr>
             <th class="w-50">Signature</th>
             <td class="w-50">
                 <div class="btn-group">
