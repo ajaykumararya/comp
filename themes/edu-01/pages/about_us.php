@@ -15,7 +15,8 @@
                 }
                 ?>
             </div>
-            <div class="col-md-5 about-right"> <img src="{base_url}upload/{about_us_image}" class="img-responsive"
+            <div class="col-md-5 about-right"> 
+                <img style="border-radius:5px" src="{base_url}upload/{about_us_image}" class="img-responsive"
                     alt="">
             </div>
         </div>
