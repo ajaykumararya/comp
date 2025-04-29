@@ -16,7 +16,7 @@
                 </div>
                 <div class="form-group mb-4 col-md-12">
                     <label for="" class="form-label required" required>Description</label>
-                    <textarea required name="field3" maxlength="150" class="form-control"
+                    <textarea required name="field3" class="form-control"
                         placeholder="Enter Description"></textarea>
                 </div>
                 <div class="form-group mb-4 col-md-4">
@@ -28,8 +28,8 @@
                     <input type="text" class="form-control" name="field5" placeholder="CEligibility">
                 </div>
                 <div class="form-group mb-4 col-md-4">
-                    <label for="button_link" class="form-label mb-1 required">Price</label>
-                    <input type="text" class="form-control" name="field6" placeholder="Price">
+                    <label for="button_link" class="form-label mb-1 required">Fee</label>
+                    <input type="text" class="form-control" name="field6" placeholder="Fee">
                 </div>
             </div>
             <div class="card-footer">

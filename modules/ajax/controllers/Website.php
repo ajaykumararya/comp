@@ -1167,5 +1167,29 @@ class Website extends Ajax_Controller
         }
 
     }
+    function iso_verification()
+    {
+        $this->form_validation->set_rules('certificate_no', 'Certificate No.', 'required');
+        try {
+            if ($this->validation()) {
+                $cert_no = $this->post('certificate_no');
+                $get = $this->db->where('certificate_no', $cert_no)->get('iso_certificate');
+                if ($get->num_rows()) {
+                    $row = $get->row();
+                    if (strtotime($row->expiry_date) < time()) {
+                        throw new Exception('This Certificate is Expired..');
+                    }
+                    $this->response([
+                        'status' => true,
+                        'url' => base_url('iso/' . base64_encode(base64_encode($get->row('id'))))
+                    ]);
+                } else {
+                    throw new Exception('Certificate Not Found..');
+                }
+            }
+        } catch (Exception $e) {
+            $this->response('html', $e->getMessage());
+        }
+    }
 }
 ?>

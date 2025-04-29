@@ -1,7 +1,7 @@
 <style>
   :root {
-    --primary-color: rgb(160, 12, 12);
-    --secondary-color: #d9a648;
+    --primary-color: rgba(255, 146, 47,1);
+    --secondary-color: black;
   }
 </style>
 <!-- Stylesheet -->

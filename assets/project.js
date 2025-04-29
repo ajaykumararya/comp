@@ -114,6 +114,23 @@ $(document).on('ready', function () {
                 SwalWarning('Notice!', res.message);
         });
     })
+    $(document).on('submit', '.iso-form-verification', function (e) {
+        e.preventDefault();
+        // alert(2);
+        var form = $(this)[0];
+        var data = new FormData(this);
+        $.AryaAjax({
+            url: 'website/iso-verification',
+            data: data
+        }).then((res) => {
+            if (res.status) {
+                form.reset();
+                window.open(res.url, '_blank');
+            }
+            else
+                SwalWarning('Notice!', res.html);
+        });
+    })
     // alert();
     $(document).on('change', '.admission-center', function () {
         var center_id = $(this).val();

@@ -17,6 +17,10 @@
         line-height: 26px;
         display: inline-block;
     }
+    .eduvibe-widget-details .widget-content ul li span  i{
+        color: var(--primary-color);
+        margin-right: 10px;
+    }
 </style>
 <div class="container mt-30 mb-30 pt-30 pb-30">
     <div class="row">
@@ -30,21 +34,22 @@
         </div>
         <div class="col-sm-12 col-md-4">
             <div class="sidebar sidebar-left mt-sm-30 ml-30 ml-sm-0">
-                <div class="widget border-1px bg-silver-deep p-15">
+                <div class="widget bg-silver-deep p-15" style="border:2px solid var(--primary-color);border-radius:6px">
                     <div class="categories">
                         <div class="eduvibe-widget-details mt--35">
                             <div class="widget-content">
                                 <ul>
-                                    <li><span><i class="icon-time-line"></i> Course Duration</span><span>{field4}</span>
+                                    <li><span><i class="fa fa-clock-o"></i> Course Duration</span><span>{field4}</span>
                                     </li>
 
-                                    <li><span><i class="icon-user-2"></i> Eligibility</span><span>{field5}</span></li>
+                                    <li><span><i class="fa fa-graduation-cap"></i> Eligibility</span><span>{field5}</span></li>
 
                                     <!-- <li><span><i class="icon-draft-line"></i> Fee Type </span><span>One Time</span></li> -->
 
 
 
-                                    <li><span><i class="icon-award-line"></i> Certificate</span><span>Yes</span></li>
+                                    <li><span><i class="fa fa-language"></i> Language</span><span>English / Hindi</span></li>
+                                    <li><span><i class="fa fa-certificate"></i> Certificate</span><span>Yes</span></li>
 
                                 </ul>
 

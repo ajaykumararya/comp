@@ -1,3 +1,8 @@
+<style>
+    .img-fullwidth{
+        border-radius: 7px 7px 0 0;
+    }
+</style>
 <!-- Section: Courses -->
 <section id="courses" class="bg-silver-deep">
     <div class="container pb-40">
@@ -49,7 +54,7 @@
                             </div> -->
                                     <div class="clearfix"></div>
                                     <p class="course-description mt-20">
-                                        <?= $row->field3 ?>
+                                        <?= shortText($row->field3) ?>
                                     </p>
                                     <ul class="list-inline course-meta mt-15">
                                         <?php
@@ -67,8 +72,8 @@
                                         }
                                         if ($row->field6) {
                                             echo '<li>
-                                                <h6><span class="course-time">' . $row->field6 . '</span></h6>
-                                                <span> Price</span>
+                                                <h6><span class="course-time">{inr} ' . $row->field6 . '</span></h6>
+                                                <span> Fee</span>
                                             </li>';
                                         }
                                         ?>

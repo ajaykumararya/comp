@@ -1,6 +1,6 @@
 <!-- Divider: Reservation Form -->
 <section id="reservation" class="parallax layer-overlay overlay-theme-colored-9"
-    data-bg-img="{base_url}upload/0526ef819355d3e2e92c27fda2942c8b.jpg" data-parallax-ratio="0.4">
+    data-bg-img="{base_url}upload/{reservation_page_bg_image}" data-parallax-ratio="0.4">
     <div class="container">
         <div class="row">
             <div class="col-md-8 sm-text-center">

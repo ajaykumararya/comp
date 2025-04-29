@@ -32,6 +32,11 @@ class MY_Controller extends MX_Controller
                 'registration_certificate_form' => 'Registration Certificate Form'
             ]);
         }
+        if (CHECK_PERMISSION('ISO_CERTIFICATE')) {
+            append_items('forms', [
+                'iso_certificate_verificate_form' => 'ISO Certificate Verification Form'
+            ]);
+        }
         if (CHECK_PERMISSION('STUDENT_EXAMINATION_FORM')) {
             append_items('forms', [
                 'examination_form' => 'Examination Form',
@@ -133,16 +138,16 @@ class MY_Controller extends MX_Controller
         //         ]
         //     ]);
         // }
-        if(CHECK_PERMISSION('CUSTOM_STUDENT_FEE')){
+        if (CHECK_PERMISSION('CUSTOM_STUDENT_FEE')) {
             $checkField = $this->build_db->field_exists('students', 'custom_fee');
-        if (!$checkField) {
-            $this->build_db->add_field('students', [
-                'custom_fee' => [
-                    'type' => 'varchar(100)',
-                    'default' => null
-                ]
-            ]);
-        }
+            if (!$checkField) {
+                $this->build_db->add_field('students', [
+                    'custom_fee' => [
+                        'type' => 'varchar(100)',
+                        'default' => null
+                    ]
+                ]);
+            }
         }
         $checkField = $this->build_db->field_exists('study_material', 'file_type');
         if (!$checkField) {

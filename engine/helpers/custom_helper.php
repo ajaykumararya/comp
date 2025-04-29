@@ -1,5 +1,5 @@
 <?php
-function themeCard( $class = 'main', $append = '')
+function themeCard($class = 'main', $append = '')
 {
     $ci = &get_instance();
     return $ci->ki_theme->panel($class, $append);
@@ -9,6 +9,10 @@ if (!function_exists('alert')) {
     {
         return "<div class='alert alert-$class'>$message</div>";
     }
+}
+function shortText($text, $limit = 150)
+{
+    return strlen($text) > $limit ? substr($text, 0, $limit) . '...' : $text;
 }
 function badge($message = '', $class = 'success')
 {
@@ -627,7 +631,8 @@ function timeAgo($time)
 }
 function board_text($text)
 {
-    if(empty($text)) return;
+    if (empty($text))
+        return;
     $words = explode(' ', strtolower($text));
 
     $formattedWords = array_map(function ($word) {

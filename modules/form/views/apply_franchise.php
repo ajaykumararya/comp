@@ -178,7 +178,7 @@
                             <div class="<?=themeCard('header')?> bg-dark">
                                 <h4 class="card-title text-white"> <i class="fa fa-file"></i> Upload Documents</h4>
                             </div>
-                            <div class="<?=themeCard('main','card-body')?>">
+                            <div class="<?=themeCard('body')?>">
                                 <div class="row">
                                     <div class="col-md-3 mb-2">
                                         <div class="form-control">
