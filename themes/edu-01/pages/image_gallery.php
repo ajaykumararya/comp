@@ -1,7 +1,7 @@
 <!-- ==============================================
     ** Campus Tour **
     =================================================== -->
-<section class="campus-tour padding-lg">
+<section class="campus-tour padding-lg" style="padding-bottom:90px">
     <!-- <div class="container">
             <h2><span>Our campus have a lot to offer for our students</span>TAKE A CAMPUS TOUR</h2>
         </div> -->
