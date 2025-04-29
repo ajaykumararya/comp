@@ -16,10 +16,19 @@
                 $title = $this->SiteModel->get_setting($index . '_text', $counter);
                 $value = $this->SiteModel->get_setting($index . '_value');
                 $icon = $this->SiteModel->get_setting($index . '_icon');
+                preg_match_all('/\d+/', $value, $matches);
+
+                $numbers = $matches[0];
+                $counter = '';
+                $plus_sign = $value;
+                if ($numbers) {
+                    $counter = $numbers[0];
+                    $plus_sign = str_replace($counter, '', $plus_sign);
+                }
                 ?>
                 <li>
                     <div class="icon"><span class="<?= $icon ?>"> </span></div>
-                    <span class="counter"><?= $value ?></span>
+                    <span><span class="counter"><?= $counter ?></span><?= $plus_sign ?></span>
                     <div class="title"><?= $title ?></div>
                 </li>
                 <?php
