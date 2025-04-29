@@ -221,6 +221,46 @@ if (CHECK_PERMISSION('CENTRE_ONLY_ADD_STUDENT') && OnlyForCentre()) {
                 )
             ),
             array(
+                'label' => 'Fees Collection',
+                'type' => 'fees_collection',
+                'icon' => array('bill', 6),
+                'condition' => (CHECK_PERMISSION('CENTRE_FEES_COLLECTION')) && !CHECK_PERMISSION('CO_ORDINATE_SYSTEM'),
+                'submenu' => array(
+                    array(
+                        'label' => 'Collect Fee',
+                        'type' => 'collect_student_fee',
+                        'icon' => array('double-check-circle', 4),
+                        'url' => 'student/' . (CHECK_PERMISSION('CUSTOM_STUDENT_FEE') ? 'custom-student-fees' : (CHECK_PERMISSION('FEES_COLLECTION_OLD') ? 'collect-fees' : 'collect-student-fees')),
+                    ),
+                    array(
+                        'label' => 'Search Fee Payment',
+                        'type' => 'search_fee_payment',
+                        'icon' => array('calendar-tick', 6),
+                        'url' => 'student/search-fees-payment',
+                    )
+                )
+            ),
+            array(
+                'label' => 'Attendance',
+                'type' => 'attendance',
+                'icon' => array('double-check', 2),
+                'condition' => (CHECK_PERMISSION('CENTRE_ATTENDATION_FUNCTION') && CHECK_PERMISSION('ATTENDANCE')), //centre_attendation_function
+                'submenu' => array(
+                    array(
+                        'label' => 'Student Attendance',
+                        'type' => 'student_attendance',
+                        'icon' => array('double-check-circle', 4),
+                        'url' => 'student/attendance',
+                    ),
+                    array(
+                        'label' => 'Attendance By Date',
+                        'type' => 'attendance_by_date',
+                        'icon' => array('calendar-tick', 6),
+                        'url' => 'student/attendance-report',
+                    )
+                )
+            ),
+            array(
                 'label' => 'List Admit Card(s)',
                 'type' => 'list_student_admit_cards',
                 'icon' => array('tablet-text-up', 3),
@@ -240,6 +280,7 @@ if (CHECK_PERMISSION('CENTRE_ONLY_ADD_STUDENT') && OnlyForCentre()) {
             )
         )
     );
+
     $config['center_exam_menu'] = array(
         'title' => 'Online Exam Area',
         'condition' => !OnlyForAdmin() && CHECK_PERMISSION("EXAM"),
@@ -476,7 +517,7 @@ if (CHECK_PERMISSION('CENTRE_ONLY_ADD_STUDENT') && OnlyForCentre()) {
                         'label' => 'Regi.. Verification',
                         'type' => 'student_registration_verification',
                         'icon' => array('add-notepad', 4),
-                        'url' => 'student/registration-verification'.(PATH == 'sct_ebook' ? 's' : ''),
+                        'url' => 'student/registration-verification' . (PATH == 'sct_ebook' ? 's' : ''),
                     ),
                     // array(
                     //     'label' => 'Regi.. Certificate',
