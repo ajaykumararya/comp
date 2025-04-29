@@ -79,7 +79,7 @@
 </style>
 <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
 <style>
-    .footer2 .foot-nav ul li a, .footer2 p, .footer2 ul.terms li:after, .footer2 ul.terms li a{
+    .footer2 .foot-nav ul li a, .footer2 p, .footer2 ul.terms li:after, .footer2 ul.terms li a,p{
         font-family: 'Raleway'!important;
     }
 </style>
