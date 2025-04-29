@@ -559,9 +559,9 @@ class Site_Controller extends MY_Controller
             $this->set_data('page_name', $this->pageData['label']);
         }
         $this->init_setting();
-
-
-        $this->set_data('head', $this->parse('head', [], true));
+        $this->set_data('head', $this->parse('head', [
+            'isPrimary' => (DefaultPage == $this->pageData['id'])
+        ], true));
     }
     function company_name()
     {
