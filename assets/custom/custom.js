@@ -2530,7 +2530,7 @@ $(document).on('click', '.advanced-set-page', function () {
                         </div>
                     </div>`);
     });
-    body.append(`<div data-kt-search-element="empty" class="text-center d-done">
+    body.append(`<div data-kt-search-element="empty" class="text-center d-none">
                     <!--begin::Message-->
                     <div class="fw-semibold py-0 mb-10">
                         <div class="text-danger fs-3 mb-2">No Page found</div>
@@ -2596,7 +2596,9 @@ $(document).on('click', '.advanced-set-page', function () {
             data: { event: type, event_id: type_id, page_id: action_page_id },
             url: 'cms/event-set-in-page'
         }).then((res) => {
-            toastr.info(message, ' Set ' + event_name);
+            toastr.info(message, ' Set ' + event_name, {
+                positionClass: 'toast-top-left'
+            });
         });
     });
 });
