@@ -303,7 +303,7 @@ class Student_model extends MY_Model
 
                 break;
             case 'typing_certificate':
-                $this->db->select('stc.*');
+                $this->db->select('stc.*,stc.id as typing_certificate_id');
                 $this->db->join('student_typing_certicate as stc', 'stc.student_id = s.id');
                 $this->db->where('stc.id', $id);
                 break;

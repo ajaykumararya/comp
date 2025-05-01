@@ -231,6 +231,31 @@ class Site extends Site_Controller
             $this->error_404();
         }
     }
+    function typing_certificate(){
+        // for verificiation..
+        $token = $this->uri->segment(2);
+        try {
+            $this->token->decode($token);
+            $id = $this->token->data('id');
+            $get = $this->student_model->typing_certificate($id);
+            if (!$get->num_rows())
+                throw new Exception('Not Found.');
+            $data = $get->row_array();
+            $this->set_data('page_name', $data['student_name'] . ' Typing Certificate');
+            $this->set_data('typing_certificate_id', $data['typing_certificate_id']);
+            $this->set_data($data);
+            $this->set_data('isPrimary', false);
+            // $this->load->module('document');
+            $html = '<div class="container pt-3" style="' . (THEME == 'theme-06' ? 'margin-top:160px' : '') . '">' . $this->template('student/verify-typing-certificate') . '</div>';
+            // $this->render($html, 'content');
+            $this->render(
+                'schema',
+                ['content' => $html]
+            );
+        } catch (Exception $e) {
+            $this->error_404();
+        }
+    }
     function marksheet_print()
     {
         $token = $this->uri->segment(2);
@@ -354,6 +379,9 @@ class Site extends Site_Controller
     }
     function test()
     {
+        echo base_url('typing-certificate/'. $this->token->encode([
+            'id' => 1
+        ]));
 
         // $url = base_url('marksheet_print/' . $this->token->encode(['id' => 2]));
         // echo $this->ki_theme->generate_qr(2, 'front_marksheet', $url);

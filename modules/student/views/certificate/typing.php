@@ -21,11 +21,15 @@ if (table_exists('student_typing_certicate')) {
                             <label for="" class="form-label">Procured</label>
                             <input type="text" required placeholder="Enter Procured.." name="procured" class="form-control">
                         </div>
-                        <div class="col-md-4 form-group mb-4">
+                        <div class="col-md-2 form-group mb-4">
                             <label for="grade" class="form-label required">Grade</label>
                             <input type="text" name="grade" required placeholder="Grade" class="form-control">
                         </div>
-                        <div class="col-md-4 form-group mb-4">
+                        <div class="col-md-3 form-group mb-4">
+                            <label for="grade" class="form-label required">Session</label>
+                            <input type="text" name="session" required placeholder="Session" class="form-control">
+                        </div>
+                        <div class="col-md-3 form-group mb-4">
                             <label for="grade" class="form-label required">Certification No</label>
                             <input type="text" name="certification_no" required placeholder="Certificate No" class="form-control">
                         </div>
@@ -64,6 +68,7 @@ if (table_exists('student_typing_certicate')) {
                                         <th>{rollno_text}</th>
                                         <th>Procured</th>
                                         <th>Grade</th>
+                                        <th>Session</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -78,6 +83,9 @@ if (table_exists('student_typing_certicate')) {
                                             <td>' . $row->roll_no . '</td>
                                             <td>' . $row->procured . '</td>
                                             <td>' . $row->grade . '</td>
+                                            <td>
+                                                '.$row->session.'
+                                            </td>
                                             <td>
                                                 <a target="_blank" href="'.base_url('typing-certificate/'.base64_encode(base64_encode($row->id))).'" class="btn btn-xs btn-sm btn-info">
                                                     <i class="fa fa-eye"></i>

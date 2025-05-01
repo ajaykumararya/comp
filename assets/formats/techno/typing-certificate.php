@@ -94,16 +94,20 @@
 
     <p class="position-absolute " style="top:48%;left:35%;width:60%;text-align:center">{student_name}</p>
     <p class="position-absolute" style="top:51.6%;left:35%;width:60%;text-align:center">{father_name}</p>
-    <p class="position-absolute" style="top:55%;left:45%;width:60%;">{roll_no}</p>
-    <p class="position-absolute" style="top:68%;left:45%;width:60%;">{grade}</p>
+    <p class="position-absolute" style="top:54.5%;left:45%;width:60%;">{roll_no}</p>
+    <p class="position-absolute" style="top:64%;left:45%;width:60%;">{grade}</p>
 
-    <p class="position-absolute" style="top:72.2%;left:8%;width:84%;text-align:center">{center_name}</p>
-    <p class="position-absolute" style="top:61.7%;left:25%;text-align:center;width:70%">{course_name}</p>
-    <p class="position-absolute text-capitlize" style="top:64.8%;left:30%"><?=humnize_duration($duration,$duration_type)?></p>
-    <p class="position-absolute text-capitlize " style="top:64.8%;left:63%;width:250px;text-align:center">{procured}</p>
+    <p class="position-absolute" style="top:67.8%;left:8%;width:84%;text-align:center">{center_name}</p>
+    <p class="position-absolute" style="top:58%;left:48%;text-align:center;width:340px;line-height:1">{course_name}</p>
+    <p class="position-absolute text-capitlize" style="top:60.7%;left:21%"><?=humnize_duration($duration,$duration_type)?></p>
+    <p class="position-absolute text-capitlize " style="top:60.9%;left:49%;width:340px;text-align:center;line-height:1">{procured}</p>
   
-   <p class="position-absolute" style="bottom:7.7%;left:20%;font-size:12px">{issue_date}</p>
-
+   <p class="position-absolute" style="bottom:7.7%;left:20%;">{issue_date}</p>
+   <div class="position-absolute" style="bottom:18.6%;right:5%">
+    <img src="<?=$this->ki_theme->generate_qr($typing_certificate_id,'typing_certificate',base_url('verify-typing-certificate/'.$this->token->encode([
+                        'id' => $typing_certificate_id
+    ])),true,10)?>" alt="" style="width:100px;border:1px solid black">
+   </div>
 </body>
 
 </html>

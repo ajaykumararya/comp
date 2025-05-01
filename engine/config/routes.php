@@ -70,6 +70,7 @@ $route['provisional-certificate/(:any)'] = 'document/provisional_certificate/$1'
 $route['no-objection-certificate/(:any)'] = 'document/no_objection_certificate/$1';
 $route['migration-certificate/(:any)'] = 'document/migration_certificate/$1';
 $route['typing-certificate/(:any)'] = 'document/typing-certificate/$1';
+$route['verify-typing-certificate/(:any)'] = 'site/typing-certificate/$1';
 $route['course-details/(:any)'] = 'site/course_details/$1';
 $route['iso/(:any)'] = 'document/iso/$1';
 $route['(:any)'] = 'site/index';
