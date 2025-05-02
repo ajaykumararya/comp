@@ -576,9 +576,10 @@ class Document extends MY_Controller
             $id = base64_decode(base64_decode($token));
             $list = $this->student_model->typing_certificate($id);
             if ($list->num_rows()) {
+                $row = $list->row();
                 // pre($list->row());
                 $output = $this->parse('typing-certificate', $list->row_array());
-                $this->pdf($output);
+                $this->pdf($output,$row->student_name .'-'.$row->roll_no.'-typing-certificate.pdf');
             } else
                 throw new Exception('Data not found...');
         } catch (Exception $e) {

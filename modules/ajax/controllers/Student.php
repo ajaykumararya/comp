@@ -1065,23 +1065,26 @@ class Student extends Ajax_Controller
         try {
             if (!table_exists('student_typing_certicate'))
                 throw new Exception('Serivce Not Available..');
+
             $this->form_validation->set_rules('student_id', 'Student', 'required|is_unique[student_typing_certicate.student_id]', [
                 'is_unique' => 'Certification Already Creatred for this student.'
             ]);
             //certification_no
-            $this->form_validation->set_rules('certification_no', 'Certificate No', 'required|is_unique[student_typing_certicate.certification_no]', [
-                'is_unique' => 'Certification no is already exists.'
-            ]);
+            // $this->form_validation->set_rules('certification_no', 'Certificate No', 'required|is_unique[student_typing_certicate.certification_no]', [
+            //     'is_unique' => 'Certification no is already exists.'
+            // ]);
             $this->form_validation->set_rules('procured', 'Procured', 'required');
             $this->form_validation->set_rules('issue_date', 'Issue Date', 'required');
             $this->form_validation->set_rules('grade', 'Grade', 'required');
+            $this->form_validation->set_rules('session','Session','required');
             if ($this->validation()) {
                 $data = [
                     'student_id' => $this->post('student_id'),
                     'issue_date' => $this->post('issue_date'),
                     'procured' => $this->post('procured'),
                     'grade' => $this->post('grade'),
-                    'certification_no' => $this->post('certification_no')
+                    'session' => $this->post('session'),
+                    // 'certification_no' => $this->post('certification_no')
                 ];
                 $this->db->insert('student_typing_certicate', $data);
                 $this->response('status', true);
