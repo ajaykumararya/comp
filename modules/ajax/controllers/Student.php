@@ -1093,6 +1093,5 @@ class Student extends Ajax_Controller
         } catch (Exception $e) {
             $this->response('html', $e->getMessage());
         }
-
     }
 }
