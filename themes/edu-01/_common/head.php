@@ -89,21 +89,39 @@
         -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
         box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
     }
+
     .card-header {
-    padding: 10px 15px;
-    border-bottom: 1px solid transparent;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-}
-.card-body{
-    padding: 15px;
-}
-.border-2{
-    border-width: 2px;
-} 
-.border-primary{
-    border-color: var(--primary-color);
-}
+        padding: 10px 15px;
+        border-bottom: 1px solid transparent;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .border-2 {
+        border-width: 2px;
+    }
+
+    .border-primary {
+        border-color: var(--primary-color);
+    }
+
+    .rebel-inner {
+        background-color: var(--primary-color) !important;
+        left: -10px !important;
+    }
+
+    .panel-heading {
+        border-radius: 0;
+    }
+
+    .panel-heading h3 {
+        margin: 0 !important;
+    }
+
     html
 </style>
 <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>

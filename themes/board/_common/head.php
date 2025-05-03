@@ -65,6 +65,19 @@
         /* Teal-ish info color */
         border-radius: 0.35rem;
     }
+
+    .rebel-inner {
+        background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+        left: -10px !important;
+    }
+
+    .panel-heading {
+        border-radius: 0;
+    }
+
+    .panel-heading h3 {
+        margin: 0 !important;
+    }
 </style>
 <link href="{theme_url}assets/css/nxr.min7839.css?v=1.2" rel="stylesheet" />
 <style>

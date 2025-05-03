@@ -89,6 +89,30 @@
     .select2 {
         width: 100% !important;
     }
+
+    .rebel {
+        position: relative
+    }
+
+    .rebel-inner {
+        position: absolute;
+        top: 0;
+        left: -11px;
+        height: 100%;
+        background-color: #343a40;
+        width: 10px;
+    }
+
+    .rebel-inner:before {
+        content: "";
+        position: absolute;
+        border-style: solid;
+        border-color: transparent;
+        bottom: -10px;
+        border-width: 0 10px 10px 0;
+        border-right-color: #343a40 ;
+        left: 0;
+    }
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -109,8 +133,8 @@
 
 <script src="{base_url}assets/custom/custom.js"></script>
 <?php
-if(CHECK_PERMISSION('EBOOK')){
+if (CHECK_PERMISSION('EBOOK')) {
     echo '<script src="https://checkout.razorpay.com/v1/checkout.js"></script>';
-   echo '<script src="{base_url}assets/ebook.js"></script>';
+    echo '<script src="{base_url}assets/ebook.js"></script>';
 }
 ?>

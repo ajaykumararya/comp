@@ -100,6 +100,19 @@
   .form-control{
     border:1px solid black
   }
+  .rebel-inner{
+    background-color: var(--primary-color)!important;
+    left: -10px !important;
+  }
+  .panel-heading{
+    border-radius: 0;
+  }
+  .panel-heading h3{
+    margin: 0 !important;
+  }
+  .input-group{
+    display: flex!important;
+  }
 </style>
 <?php
 function filter_title($title)

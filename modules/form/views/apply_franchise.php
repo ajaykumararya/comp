@@ -175,8 +175,9 @@
                                     </div> -->
                                 </div>
                             </div>
-                            <div class="<?=themeCard('header')?> bg-dark">
+                            <div class="<?=themeCard('header')?> bg-dark rebel">
                                 <h4 class="card-title text-white"> <i class="fa fa-file"></i> Upload Documents</h4>
+                                <div class="rebel-inner"></div>
                             </div>
                             <div class="<?=themeCard('body')?>">
                                 <div class="row">

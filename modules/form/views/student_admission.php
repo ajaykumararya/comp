@@ -305,8 +305,9 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                         <?php
                         if (CHECK_PERMISSION('STUDENT_EXAMINATION_FORM')):
                             ?>
-                            <div class="<?= themeCard('header') ?> bg-dark">
+                            <div class="<?= themeCard('header') ?> bg-dark rebel">
                                 <h3 class="card-title text-white">Examination Passed</h3>
+                                <div class="rebel-inner"></div>
                             </div>
                             <div class="<?= themeCard('body') ?> ">
                                 <table class="table">
@@ -348,8 +349,9 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                             <?php
                         endif;
                         ?>
-                        <div class="<?= themeCard('header') ?>  bg-dark">
+                        <div class="<?= themeCard('header') ?>  bg-dark rebel">
                             <h3 class="card-title text-white"><i class="fa fa-file"></i> Upload Documents</h3>
+                            <div class="rebel-inner"></div>
                         </div>
 
                         <div class="<?= themeCard('body') ?> ">
@@ -396,20 +398,22 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                 $uploadDocuments = $this->ki_theme->project_config('upload_ducuments');
                                 foreach ($uploadDocuments as $key => $value) {
                                     $required = '';
-                                    if(PATH == 'rivesk'){
-                                        $required = in_array($key,['tenth_plus_marksheet','tenth_marksheet']) ? 'required' : '';
+                                    if (PATH == 'rivesk') {
+                                        $required = in_array($key, ['tenth_plus_marksheet', 'tenth_marksheet']) ? 'required' : '';
                                     }
                                     ?>
                                     <div class="col-md-3 mb-4">
                                         <div class="form-group">
-                                            <label for="" class="form-label form-control <?=$required?>"><?= $value ?></label>
+                                            <label for=""
+                                                class="form-label form-control <?= $required ?>"><?= $value ?></label>
                                             <input type="hidden" name="upload_docs[title][]" class="form-control"
                                                 value="<?= $key ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-9 mb-4">
                                         <div class="form-group">
-                                            <input type="file" class="form-control" <?=$required?> name="upload_docs[file][]">
+                                            <input type="file" class="form-control" <?= $required ?>
+                                                name="upload_docs[file][]">
                                         </div>
                                     </div>
                                     <?php
