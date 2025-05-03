@@ -8,12 +8,11 @@
                 <div class="card-body row">
                     <div class="col-md-4 form-group mb-3">
                         <label for="" class="form-label required">Student</label>
-                        <select data-allow-clear="true" name="student_id" id="" class="form-control" data-control="select2" data-placeholder="Select Student">
-                            
+                        <select data-allow-clear="true" name="student_id" id="" class="form-control" data-control="select2" data-placeholder="Select Student">                            
                         </select>
                     </div>
                     <?php
-                    if(PATH != 'upstate'):
+                    if(PATH != 'upstate' && PATH != 'sct_ebook'):
                     ?>
                     <div class="col-md-4 form-group mb-3">
                         <label for="" class="form-label required">Serial No.</label>
@@ -44,7 +43,7 @@
                         <tr>
                             <th>#</th>
                             <th>Student</th>
-                            <th>Serial No</th>
+                            <th><?=(PATH != 'upstate' && PATH != 'sct_ebook') ? 'Serial No' : '' ?></th>
                             <th>Date</th>
                             <th>Action</th>
                         </tr>

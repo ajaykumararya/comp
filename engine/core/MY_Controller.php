@@ -138,6 +138,29 @@ class MY_Controller extends MX_Controller
         //         ]
         //     ]);
         // }
+        if (PATH == 'sct_ebook') {
+            $checkField = $this->build_db->field_exists('marksheets', 'marksheet_type');
+            if (!$checkField) {
+                $this->build_db->add_field('marksheets', [
+                    'marksheet_type' => [
+                        'type' => 'varchar(100)',
+                        'default' => null
+                    ]
+                ]);
+            }
+            $fields = ['hindi_name', 'hindi_father_name', 'hindi_course_name', 'hindi_center_name'];
+            foreach ($fields as $field) {
+                $checkField = $this->build_db->field_exists('student_certificates', $field);
+                if (!$checkField) {
+                    $this->build_db->add_field('student_certificates', [
+                        $field => [
+                            'type' => 'LONGTEXT',
+                            'default' => null
+                        ]
+                    ]);
+                }
+            }
+        }
         if (CHECK_PERMISSION('CUSTOM_STUDENT_FEE')) {
             $checkField = $this->build_db->field_exists('students', 'custom_fee');
             if (!$checkField) {

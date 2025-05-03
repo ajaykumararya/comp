@@ -194,12 +194,37 @@ if (!function_exists('duration_in_month')) {
         return $duration * ($duration_type == 'month' ? 1 : ($duration_type == 'semester' ? 6 : 12));
     }
 }
+function getHindiMonthFromDate($date) {
+    $months = [
+        1 => 'जनवरी', 2 => 'फ़रवरी', 3 => 'मार्च',
+        4 => 'अप्रैल', 5 => 'मई', 6 => 'जून',
+        7 => 'जुलाई', 8 => 'अगस्त', 9 => 'सितंबर',
+        10 => 'अक्टूबर', 11 => 'नवंबर', 12 => 'दिसंबर'
+    ];
+
+    $monthNumber = date('n', strtotime($date)); // 1 to 12
+    return $months[$monthNumber];
+}
 function ordinal_number($i)
 {
-    $suffixes = ['st', 'nd', 'rd'];
-    $suffix = ($i <= 3 && $i >= 1) ? $suffixes[$i - 1] : 'th';
+    $j = $i % 10;
+    $k = $i % 100;
+
+    if ($k >= 11 && $k <= 13) {
+        $suffix = 'th';
+    } elseif ($j == 1) {
+        $suffix = 'st';
+    } elseif ($j == 2) {
+        $suffix = 'nd';
+    } elseif ($j == 3) {
+        $suffix = 'rd';
+    } else {
+        $suffix = 'th';
+    }
+
     return $i . $suffix;
 }
+
 if (!function_exists('starts_with')) {
     function starts_with($haystack, $needle)
     {

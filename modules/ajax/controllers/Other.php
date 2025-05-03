@@ -44,7 +44,7 @@ class Other extends Ajax_Controller
         $this->form_validation->set_rules('student_id', 'Student', 'required|is_unique[migration_certificate.student_id]', [
             'is_unique' => 'This %s is already exists in Certificate'
         ]);
-        if (PATH != 'upstate') {
+        if(PATH != 'upstate' && PATH != 'sct_ebook'){
             $this->form_validation->set_rules('sr_no', 'Seria No', 'required|is_unique[migration_certificate.sr_no]', [
                 'is_unique' => 'This %s is already exists in Certificate'
             ]);

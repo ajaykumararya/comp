@@ -78,6 +78,38 @@
                             ?>
                             <div class="col-md-12 message mt-3"></div>
                             <?php
+                            if (PATH == 'sct_ebook') {
+                                ?>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-4">
+                                        <label for="" class="form-label required">स्टूडेंट नाम हिंदी में </label>
+                                        <input type="text" placeholder="स्टूडेंट नाम हिंदी में" name="hindi_name"
+                                            class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-4">
+                                        <label for="" class="form-label required">पिता का नाम हिंदी में </label>
+                                        <input type="text" placeholder="पिता का नाम हिंदी में " name="hindi_father_name"
+                                            class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-4">
+                                        <label for="" class="form-label required">कोर्स का नाम हिंदी में </label>
+                                        <input type="text" placeholder="कोर्स का नाम हिंदी में" name="hindi_course_name"
+                                            class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-4">
+                                        <label for="" class="form-label required">सेंटर का नाम हिंदी में </label>
+                                        <input type="text" placeholder="सेंटर का नाम हिंदी में " name="hindi_center_name"
+                                            class="form-control" required>
+                                    </div>
+                                </div>
+                                <?php
+                            }
                             if (PATH == 'sctnew') {
                                 // echo "YES";
                                 ?>

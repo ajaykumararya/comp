@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 targets: 2,
                 render : function(data,type,row){
                     if (!$('[name="sr_no"]').length) 
-                        return 1020200 + parseInt(row.id);
+                        return '';//1020200 + parseInt(row.id);
                     return data;
                 }
             },

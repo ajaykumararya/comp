@@ -164,6 +164,8 @@ class Document extends MY_Controller
     function marksheet()
     {
         $file = 'marksheet';
+        if(PATH == 'sct_ebook')
+            $this->db->select('m.marksheet_type');
         $get = $this->student_model->marksheet(['id' => $this->id]);
         if ($get->num_rows()) {
             $row = $get->row();
@@ -395,6 +397,8 @@ class Document extends MY_Controller
             $this->db->select('sc.cert_session');
         if (PATH == 'sctnew')
             $this->db->select('sc.hindi_name,sc.hindi_mother_name,sc.hindi_father_name');
+        if(PATH == 'sct_ebook')            
+            $this->db->select('sc.hindi_name,sc.hindi_course_name,sc.hindi_father_name,sc.hindi_center_name');
         $get = $this->student_model->student_certificates(['id' => $this->id]);
         if ($get->num_rows()) {
             $certificate = ($get->row_array());

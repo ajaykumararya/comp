@@ -63,6 +63,21 @@
                                 <label for="" class="form-label">Issue Date</label>
                                 <input type="text" name="date" value="<?=$this->ki_theme->date()?>" class="form-control current-date">
                             </div>
+                            <?php
+                            if(PATH == 'sct_ebook'){
+                                ?>
+                                <div class="col-md-4 form-group">
+                                    <label for="" class="form-label">Marksheet Type</label>
+                                    <select name="marksheet_type" id="" class="form-select">
+                                        <option value="Regular">Regular</option>
+                                        <option value="Part Time"> Part Time</option>
+                                        <option value="Distance">Distance</option>
+                                        <option value="Corresponding">Corresponding</option>
+                                    </select>
+                                </div>
+                                <?php
+                            }
+                            ?>
 
                         </div>
                         <div class="row marks_table"></div>
