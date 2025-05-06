@@ -1,7 +1,24 @@
 <style>
     :root {
-        --primary-color: <?=ES('primary-color','#0c54a0')?>;
-        --secondary-color: <?=ES('secondary-color','#d9a648')?>;
+        --primary-color:
+            <?= ES('primary-color', '#0c54a0') ?>
+        ;
+        --secondary-color:
+            <?= ES('secondary-color', '#d9a648') ?>
+        ;
+    }
+    
+    .rebel-inner {
+        background-color: var(--primary-color) !important;
+        left: -10px !important;
+    }
+
+    .panel-heading {
+        border-radius: 0;
+    }
+
+    .panel-heading h3 {
+        margin: 0 !important;
     }
 </style>
 <link href="{theme_url}assets/css/bootstrap.min.css" rel="stylesheet">
@@ -18,4 +35,3 @@
 <link href="{theme_url}assets/custom.css" rel="stylesheet">
 <script src="{theme_url}assets/js/jquery.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cambay:wght@400;700&display=swap" rel="stylesheet">
-

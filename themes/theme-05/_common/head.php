@@ -28,6 +28,12 @@
     .bg-dark{
         background-color: var(--primary-color)!important;
     }
+    .rebel-inner{
+        background-color: var(--primary-color)!important;
+    }
+    .rebel-inner{
+        left: -10px!important;
+    }
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css">
 <link rel="stylesheet" href="{theme_url}assets/css/font-awesome.min.css" />

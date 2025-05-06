@@ -19,4 +19,7 @@
     .select2-results__option.select2-results__option--highlighted .text-mute{
         color: white!important;
     }
+    .rebel-inner{
+        left: -10px !important;
+    }
 </style>

@@ -89,7 +89,12 @@
     .select2 {
         width: 100% !important;
     }
-
+    .card-header.rebel,.panel-heading.rebel{
+        border-radius: 0;
+    }
+    .card-header h3{
+        margin: 0 !important;
+    }
     .rebel {
         position: relative
     }
