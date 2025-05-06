@@ -90,8 +90,12 @@ document.addEventListener('DOMContentLoaded', function () {
                         ? `<div class="form-check form-switch">
                                             <input ${value == 1 ? 'checked' : ''} data-id="${id}" class="form-check-input change-status" type="checkbox" role="switch">
                                          </div>` : `
-                                <a class="btn btn-xs btn-sm btn-primary" href="${base_url}upload/${value}" target="_blank">View</a>         
-                               <button class="btn btn-xs btn-sm btn-info update-file" data-key="${mykey}" data-id="${id}"  type="button"><i class="fa fa-edit"></i></button>
+                                <a class="btn btn-xs btn-sm btn-primary target-link" href="${base_url}upload/${value}" target="_blank">View</a>         
+                               <label class="btn btn-active-info btn-sm border-info border border-1" for="adhar">
+                                    <input type="file" name="${mykey}" data-id="${id}"  class="d-none upload-reg-docs"
+                                        accept="image/*,.pdf" id="adhar">
+                                    <i class="fa fa-cloud-upload"></i>
+                                </label>
                                      
                                     `)}</td>
                         </tr>`;
@@ -109,13 +113,68 @@ document.addEventListener('DOMContentLoaded', function () {
             body.html(html);
         })
     });
-    $(document).on('click','.update-file',function(r){
-        r.preventDefault();
-        var id = $(this).data('id'),
-            key = $(this).data('key');
+    $(document).on('change', '.upload-reg-docs', function () {
+        var id = $(this).data('id');
+        var fileInput = this;
+        var file = fileInput.files[0];
+        var td = $(this).closest('td');
 
-        alert(key)
-    })
+        if (!file) {
+            SwalWarning('Please Choose a valid file.');
+            return;
+        }
+
+        var formData = new FormData();
+
+        formData.append('file', file);
+        formData.append('id', id);
+        formData.append('name', $(fileInput).attr('name'));
+
+        Swal.fire({
+            title: 'Uploading...',
+            html: '0%',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            willOpen: () => {
+                $.ajax({
+                    url: ajax_url + 'website/update-registration-docs', // Change this to your upload endpoint
+                    type: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    processData: false,
+                    contentType: false,
+                    xhr: function () {
+                        var xhr = new window.XMLHttpRequest();
+                        xhr.upload.addEventListener("progress", function (evt) {
+                            if (evt.lengthComputable) {
+                                var percentComplete = (evt.loaded / evt.total) * 100;
+                                const popup = Swal.getPopup();
+                                if (popup) {
+                                    const p = popup.querySelector('p');
+                                    if (p) p.innerHTML = percentComplete.toFixed(2) + '%';
+                                }
+                            }
+                        }, false);
+                        return xhr;
+                    },
+                    success: function (response) {
+                        // console.log(response);
+                        if (response.status) {
+                            td.find('.target-link').attr('href', response.url);
+                            SwalSuccess('Uploaded', 'File Uploaded Successfully')
+                        }
+                        // Swal.close();
+                    },
+                    error: function (xhr, status, error) {
+                        Swal.close();
+                        // Handle error
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
+        });
+    });
+    
     $(document).on('click', '.examaination-body-button', function () {
         var id = $(this).data('id');
         var examination = $(this).closest('tr').find('.examaination-body').val();

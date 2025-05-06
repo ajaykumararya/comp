@@ -89,12 +89,16 @@
     .select2 {
         width: 100% !important;
     }
-    .card-header.rebel,.panel-heading.rebel{
+
+    .card-header.rebel,
+    .panel-heading.rebel {
         border-radius: 0;
     }
-    .card-header h3{
+
+    .card-header h3 {
         margin: 0 !important;
     }
+
     .rebel {
         position: relative
     }
@@ -115,7 +119,7 @@
         border-color: transparent;
         bottom: -10px;
         border-width: 0 10px 10px 0;
-        border-right-color: #343a40 ;
+        border-right-color: #343a40;
         left: 0;
     }
 </style>
@@ -142,4 +146,6 @@ if (CHECK_PERMISSION('EBOOK')) {
     echo '<script src="https://checkout.razorpay.com/v1/checkout.js"></script>';
     echo '<script src="{base_url}assets/ebook.js"></script>';
 }
+if (file_exists(DOCUMENT_PATH . '/config.php'))
+    include DOCUMENT_PATH . '/config.php';
 ?>

@@ -925,7 +925,16 @@ class Website extends Ajax_Controller
             $this->response('message', 'This Registration No does not exists...');
     }
 
-
+    function update_registration_docs()
+    {
+        $name = $this->post('name');
+        $file = $this->file_up('file');
+        $this->db->where('id', $this->post('id'))->update('students_registeration_data', [
+            $name => $file
+        ]);
+        $this->response('status', true);
+        $this->response('url', base_url('upload/' . $file));
+    }
     /*
 
 
