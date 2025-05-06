@@ -92,7 +92,7 @@
     <div class="position-absolute" style="top:78.5%;left: 13%;"><?=date('d/m/Y',strtotime($certificate_issue_date))?></div>
     <div class="position-absolute" style="top:68%;left: 56%;width:400px">
         <?php
-        if ($valid_upto  < date('d-m-Y')) {
+        if (strtotime($valid_upto)  < time()) {
             $date1 = new DateTime($certificate_issue_date); // Start date
             $date2 = new DateTime($valid_upto); // End date
         
