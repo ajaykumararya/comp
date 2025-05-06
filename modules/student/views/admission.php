@@ -393,9 +393,15 @@
                                                 <?= CHECK_PERMISSION('STUDENT_ADHAR_BACK') ? 'Front' : '' ?></label>
                                         </div>
                                     </div>
-                                    <div class="col-md-9 mb-4">
+                                    <div class="col-md-5 mb-4">
                                         <div class="form-group">
                                             <input type="file" class="form-control" name="adhar_card" id="adhar_front">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <input type="number" name="adhar_card_no" required
+                                                placeholder="Enter Aadhar No." class="form-control">
                                         </div>
                                     </div>
                                     <?php
