@@ -80,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let body = main.find('.card-body');
             var html = `<table class="table table-bordered table-striped table-hover">`;
             $.each(data, function (key, value) {
+                var mykey = key;
                 key = key.split('_').map(function (word) {
                     return word.charAt(0).toUpperCase() + word.slice(1);
                 }).join(' ');
@@ -89,8 +90,10 @@ document.addEventListener('DOMContentLoaded', function () {
                         ? `<div class="form-check form-switch">
                                             <input ${value == 1 ? 'checked' : ''} data-id="${id}" class="form-check-input change-status" type="checkbox" role="switch">
                                          </div>` : `
-                                    <a class="btn btn-xs btn-sm btn-primary" href="${base_url}upload/${value}" target="_blank">View</a>         
-                                `)}</td>
+                                <a class="btn btn-xs btn-sm btn-primary" href="${base_url}upload/${value}" target="_blank">View</a>         
+                               <button class="btn btn-xs btn-sm btn-info update-file" data-key="${mykey}" data-id="${id}"  type="button"><i class="fa fa-edit"></i></button>
+                                     
+                                    `)}</td>
                         </tr>`;
 
             });
@@ -106,7 +109,13 @@ document.addEventListener('DOMContentLoaded', function () {
             body.html(html);
         })
     });
+    $(document).on('click','.update-file',function(r){
+        r.preventDefault();
+        var id = $(this).data('id'),
+            key = $(this).data('key');
 
+        alert(key)
+    })
     $(document).on('click', '.examaination-body-button', function () {
         var id = $(this).data('id');
         var examination = $(this).closest('tr').find('.examaination-body').val();

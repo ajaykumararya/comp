@@ -48,7 +48,7 @@
                         <div class="form-group mt-3">
                             <label for="" class="form-label">Show Passout Student(s)</label>
                             <input type="number" value="<?= ES('scroll_passout_student_number', 10) ?>"
-                                name="scroll_student_number" class="form-control">
+                                name="scroll_passout_student_number" class="form-control">
                         </div>
                         <?php
                     }
