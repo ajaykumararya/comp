@@ -563,11 +563,12 @@ class Document extends MY_Controller
     {
         $get = $this->get_other_doc($this->id, __FUNCTION__);
         if ($get->num_rows()) {
+            $row = $get->row();
             // pre($get->row(),true);
             $this->set_data($get->row_array());
             $output = $this->parse(__FUNCTION__);
             // $this->mypdf->addPage('L');
-            $this->pdf($output);
+            $this->pdf($output,$row->name.' '.$row->roll_no.'-Migration Certificate.pdf');
         } else
             $this->not_found();
     }

@@ -870,7 +870,7 @@ class Website extends Ajax_Controller
         }
         if ($this->validation('registration_certificate')) {
 
-            $registration_no = '10' . date('Y') . mt_rand(111, 999);
+            $registration_no = date('y') . mt_rand(111111, 999999);
             if (PATH == 'sct_ebook')
                 $registration_no = mt_rand(111111, 999999);
             $data = [
