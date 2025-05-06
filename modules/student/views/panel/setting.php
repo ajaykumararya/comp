@@ -111,7 +111,8 @@
                         </div>
                         <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
                             <label for="" class="form-label require">Pincode</label>
-                            <input type="number" name="pincode" min="6" class="form-control" placeholder="Pincode" value="{pincode}">
+                            <input type="number" name="pincode" min="6" class="form-control" placeholder="Pincode"
+                                value="{pincode}">
                         </div>
                         <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
                             <label for="" class="form-label required">State</label>
@@ -140,9 +141,58 @@
                                     foreach ($CITY->result() as $row)
                                         echo '<option value="' . $row->DISTRICT_ID . '" ' . ($row->DISTRICT_ID == $DISTRICT_ID ? 'selected' : '') . '>' . $row->DISTRICT_NAME . '</option>';
                                 }
+                                $get = $this->db->select('marital_status,category,medium')->where('id', $student_id)->get('students');
+                                $marital_status = $category = $medium = '';
+                                if ($get->num_rows()) {
+                                    $row = $get->row();
+                                    $marital_status = $row->marital_status;
+                                    $category = $row->category;
+                                    $medium = $row->medium;
+                                }
                                 ?>
                             </select>
                         </div>
+
+
+
+                        <!-- Marital Status -->
+                        <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
+                            <label for="marital_status" class="form-label">Marital Status:</label>
+                            <select name="marital_status" data-allow-clear="true" data-control="select2"
+                                data-placeholder="Select Marital Status" id="marital_status" class="form-control">
+                                <option value="">Select</option>
+                                <option value="Married" <?= $marital_status == 'Married' ? 'selected' : '' ?>>Married
+                                </option>
+                                <option value="Unmarried" <?= $marital_status == 'Unmarried' ? 'selected' : '' ?>>Unmarried
+                                </option>
+                            </select>
+                        </div>
+
+                        <!-- Category -->
+                        <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
+                            <label for="category" class="form-label">Category:</label>
+                            <select name="category" data-allow-clear="true" data-control="select2"
+                                data-placeholder="Select Category" id="category" class="form-control">
+                                <option value="">Select Category</option>
+                                <option <?= ($category == 'General' ? 'selected' : '') ?> value="General">General</option>
+                                <option <?= ($category == 'OBC' ? 'selected' : '') ?> value="OBC">OBC</option>
+                                <option <?= ($category == 'SC' ? 'selected' : '') ?> value="SC">SC</option>
+                                <option <?= ($category == 'ST' ? 'selected' : '') ?> value="ST">ST</option>
+                            </select>
+                        </div>
+
+                        <!-- Medium -->
+                        <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
+                            <label for="medium" class="form-label">Medium:</label>
+                            <select name="medium" data-control="select2" data-allow-clear="true"
+                                data-placeholder="Select Medium" id="medium" class="form-control">
+                                <option value="">Select</option>
+                                <option <?= $medium == 'Hindi' ? 'selected' : '' ?> value="Hindi">Hindi Medium</option>
+                                <option <?= $medium == 'English' ? 'selected' : '' ?> value="English">English Medium
+                                </option>
+                            </select>
+                        </div>
+
                     </div>
                 </div>
             </div>

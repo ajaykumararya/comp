@@ -1037,7 +1037,7 @@ class Student extends Ajax_Controller
         $data = [
             'type' => 0,
             'duration' => 0,
-            'type_key' => 'course_fee',
+            'type_key' => 'course_fees',
             'amount' => $amount,
             'discount' => $dicsount,
             'payable_amount' => ($amount - $dicsount) + $lateFee,
