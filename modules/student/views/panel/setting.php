@@ -42,7 +42,7 @@
                             <!-- <input type="date" name="dob" data-value="05-02-2004" class="form-control" placeholder="Select date of birth"> -->
                         </div>
 
-                        <div class="form-group mb-4 col-lg-6 col-xs-12 col-sm-12">
+                        <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
                             <label class="form-label required">Whatsapp Number</label>
                             <div class="input-group">
                                 <input type="text" name="contact_number" class="form-control"
@@ -61,7 +61,7 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="form-group mb-4 col-lg-6 col-xs-12 col-sm-12">
+                        <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
                             <label class="form-label">Alternative Mobile</label>
                             <div class="input-group">
                                 <input type="text" name="alternative_mobile" class="form-control" placeholder="Mobile"
@@ -79,6 +79,11 @@
                                     </select>
                                 </span>
                             </div>
+                        </div>
+                        
+                        <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
+                            <label class="form-label">Aadhar Card Number</label>
+                            <input type="number" value="{adhar_card_no}" name="adhar_card_no" placeholder="Enter Aadhar No." class="form-control">
                         </div>
                         <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
                             <label class="form-label">E-Mail ID</label>
