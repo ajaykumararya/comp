@@ -607,7 +607,7 @@ class Document extends MY_Controller
                         exit;
                 }
                 $output = $this->parse('iso', $list->row_array());
-                $this->pdf($output);
+                $this->pdf($output,$list->row('certificate_no').'.pdf');
             } else
                 throw new Exception('ISO not found...');
         } catch (Exception $e) {
