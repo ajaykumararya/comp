@@ -32,7 +32,7 @@ if ($popupStatus):
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="notice mb-0 abt-box text-center">
                             <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-                                <button type="button" class="close"  data-bs-dismiss="modal" aria-label="Close">×</button>
+                                <button type="button" class="close"  data-dismiss="modal" aria-label="Close">×</button>
                                 <div class="title mb-3 text-center">
                                     <h2 class="text-danger text-underline"><?= $popupTitle ?></h2>
                                 </div>
@@ -46,9 +46,6 @@ if ($popupStatus):
     </div>
     <script>
         $(document).ready(function () {
-            $(document).on('click','#ApplynowModal .close',function(){
-                $("#ApplynowModal2").modal('hide');
-            })
             $("#ApplynowModal").modal('show');
             $('#ApplynowModal').on('hidden.bs.modal', function () {
                 $("#ApplynowModal2").modal('show');
