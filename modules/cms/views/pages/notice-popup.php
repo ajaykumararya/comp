@@ -46,6 +46,9 @@ if ($popupStatus):
     </div>
     <script>
         $(document).ready(function () {
+            $(document).on('click','#ApplynowModal .close',function(){
+                $("#ApplynowModal2").modal('hide');
+            })
             $("#ApplynowModal").modal('show');
             $('#ApplynowModal').on('hidden.bs.modal', function () {
                 $("#ApplynowModal2").modal('show');

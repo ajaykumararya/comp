@@ -28,7 +28,7 @@
                     'is_chcked' => $ans->is_right ? 'checked' : '',
                 ];
                 $new = [
-                    $key => $ans->answer,
+                    $key => $ans->answer == 0 ? ' 0' : $ans->answer,
                     "{$key}_is_right" => $ans->is_right,
 
                 ];
@@ -72,7 +72,7 @@
                             echo isset($ans['first']) ? '<span class="fs-4 fw-bold">' . $this->ki_theme->set_class('answers')->set_attribute('data-ques', $ques_id)->set_attribute('id', 'ques_' . $i++ . '_' . $ques_id)->html($ans['first'])->radio('answer_' . $ques_id, @$ansers_id[$ans_key], '', 'text-dark') . ' </span>' : '';
                             echo '</td><td>';
                             echo isset($ans['second']) ? '<span class="fs-4 fw-bold">' . $this->ki_theme->set_class('answers')->set_attribute('data-ques', $ques_id)->set_attribute('id', 'ques_' . $i++ . '_' . $ques_id)->html($ans['second'])->radio('answer_' . $ques_id, @$ansers_id[++$ans_key], '', 'text-dark') . '</span>' : '';
-                            echo '</></tr>';
+                            echo '</td></tr>';
                             $ans_key++;
                         }
                     } else {
