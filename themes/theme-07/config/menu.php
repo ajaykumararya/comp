@@ -5,6 +5,19 @@ $menu = array(
     'icon' => array('file', 3),
     'submenu' => array(
         array(
+            'label' => 'Business Categories',
+            'type' => 'business-categories',
+            'icon' => array('file', 4),
+            'url' => 'cms/static-page/business-categories',
+        ),
+        array(
+            'label' => 'Specific Industry Categories',
+            'type' => 'specific-industry-categories',
+            'icon' => array('file', 4),
+            'url' => 'cms/static-page/specific-industry-categories',
+        ),
+
+        array(
             'label' => 'Revolution Slider',
             'type' => 'revosultion_slider',
             'icon' => array('file', 4),

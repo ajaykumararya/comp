@@ -541,6 +541,8 @@ class Student extends Ajax_Controller
                 'course_id' => $post['course_id'],
                 'date' => $post['date']
             ];
+            if (PATH == 'sct_ebook')
+                $data['marksheet_type'] = $post['marksheet_type'];
             $this->db->insert('marksheets', $data);
             $marksheet_id = $this->db->insert_id();
             $subjects = [];
@@ -1076,7 +1078,7 @@ class Student extends Ajax_Controller
             $this->form_validation->set_rules('procured', 'Procured', 'required');
             $this->form_validation->set_rules('issue_date', 'Issue Date', 'required');
             $this->form_validation->set_rules('grade', 'Grade', 'required');
-            $this->form_validation->set_rules('session','Session','required');
+            $this->form_validation->set_rules('session', 'Session', 'required');
             if ($this->validation()) {
                 $data = [
                     'student_id' => $this->post('student_id'),
