@@ -392,6 +392,42 @@ class Website extends Ajax_Controller
             ]);
         }
     }
+    function update_examination_passed_data()
+    {
+        if (CHECK_PERMISSION('STUDENT_EXAMINATION_FORM') && table_exists('student_examiniation_passed')) {
+            $examination = $this->post();
+            $student_id = $this->post('student_id');
+            if (isset($examination['passed'])) {
+                foreach ($examination['passed'] as $index => $passed) {
+                    if (
+                        !empty($passed) || !empty($examination['name_of_stream'][$index]) ||
+                        !empty($examination['board_or_university'][$index]) ||
+                        !empty($examination['year_of_passing'][$index]) ||
+                        !empty($examination['marks_obtained'][$index]) ||
+                        !empty($examination['percentage_marks'][$index])
+                    ) {
+                        $newData = [
+                            'student_id' => $student_id,
+                            'passed' => $passed,
+                            'name_of_stream' => $examination['name_of_stream'][$index],
+                            'board_or_university' => $examination['board_or_university'][$index],
+                            'year_of_passing' => $examination['year_of_passing'][$index],
+                            'marks_obtained' => $examination['marks_obtained'][$index],
+                            'percentage_marks' => $examination['percentage_marks'][$index],
+                        ];
+                        $this->db->where([
+                            'id' => $index,
+                            'student_id' => $student_id
+                        ])->update('student_examiniation_passed', $newData);
+                    }
+                }
+                $this->response('status', true);
+            }
+            else
+                $this->response('html','Something went wrong..');
+        } else
+            $this->response('html', 'Service not available..');
+    }
     function get_city($type = 'array')
     {
         $state_id = $this->input->post('state_id');

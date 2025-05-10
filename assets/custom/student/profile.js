@@ -354,7 +354,7 @@ document.addEventListener('DOMContentLoaded', function (d) {
                             razorpay_signature: response.razorpay_signature,
                             merchant_order_id: options.notes.merchant_order_id,
                             amount: options.amount,
-                            token : myToken
+                            token: myToken
                         }
                     }).then((res) => {
                         showResponseError(res);
@@ -374,4 +374,20 @@ document.addEventListener('DOMContentLoaded', function (d) {
         templateResult: optionFormatSecond
         ,
     });
+
+    $(document).on('submit', '.update-examination-form-data', function (e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        $.AryaAjax({
+            url: 'website/update-examination-passed-data',
+            data: formData
+        }).then((r) => {
+            console.log(r)
+            if (r.status) {
+                SwalSuccess('Success!', 'Examination passed data Updated Successfully');
+                location.reload();
+            }
+            showResponseError(r);
+        });
+    })
 })

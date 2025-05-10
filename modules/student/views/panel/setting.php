@@ -80,10 +80,11 @@
                                 </span>
                             </div>
                         </div>
-                        
+
                         <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
                             <label class="form-label">Aadhar Card Number</label>
-                            <input type="number" value="{adhar_card_no}" name="adhar_card_no" placeholder="Enter Aadhar No." class="form-control">
+                            <input type="number" value="{adhar_card_no}" name="adhar_card_no"
+                                placeholder="Enter Aadhar No." class="form-control">
                         </div>
                         <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
                             <label class="form-label">E-Mail ID</label>
@@ -203,4 +204,70 @@
             </div>
         </div>
     </form>
+    <?php
+    if (CHECK_PERMISSION('STUDENT_EXAMINATION_FORM') && table_exists('student_examiniation_passed')) {
+        $check = $this->db->where('student_id', $student_id)->get('student_examiniation_passed');
+        if ($check->num_rows()) {
+            $rowArray = ($check->result_array());
+            ?>
+            <form action="" class="update-examination-form-data mt-3">
+                <input type="hidden" name="student_id" value="{student_id}">
+                <div class="{card_class}">
+                    <div class="card-header">
+                        <h3 class="card-title">Examination Passed Data Update</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered border-primary">
+                            <thead>
+                                <tr>
+                                    <th class="bg-primary text-white">Examination Passed</th>
+                                    <th class="bg-primary text-white">Name of Stream</th>
+                                    <th class="bg-primary text-white">Board/University</th>
+                                    <th class="bg-primary text-white">Year of Passing</th>
+                                    <th class="bg-primary text-white">Marks Obtained</th>
+                                    <th class="bg-primary text-white">% Marks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                for ($fieldIndex = 1; $fieldIndex <= 2; $fieldIndex++) {
+                                    if (isset($rowArray[$fieldIndex - 1])) {
+                                        $fetchRow = $rowArray[$fieldIndex - 1];
+                                        extract($fetchRow);
+                                        ?>
+                                        <tr>
+                                            <td><input type="text" value="<?= isset($passed) ? $passed : '' ?>" name="passed[<?= $id ?>]"
+                                                    class="form-control" placeholder="Examination Passed"></td>
+                                            <td><input type="text" value="<?= isset($name_of_stream) ? $name_of_stream : '' ?>"
+                                                    name="name_of_stream[<?= $id ?>]" class="form-control" placeholder="Name of Stream">
+                                            </td>
+                                            <td><input type="text" value="<?= isset($board_or_university) ? $board_or_university : '' ?>"
+                                                    name="board_or_university[<?= $id ?>]" class="form-control"
+                                                    placeholder="Board/University"></td>
+                                            <td><input type="text" value="<?= isset($year_of_passing) ? $year_of_passing : '' ?>"
+                                                    name="year_of_passing[<?= $id ?>]" class="form-control" placeholder="Year of Passing">
+                                            </td>
+                                            <td><input type="text" value="<?= isset($marks_obtained) ? $marks_obtained : '' ?>"
+                                                    name="marks_obtained[<?= $id ?>]" class="form-control" placeholder="Marks Obtained">
+                                            </td>
+                                            <td><input type="text" value="<?= isset($percentage_marks) ? $percentage_marks : '' ?>"
+                                                    name="percentage_marks[<?= $id ?>]" class="form-control" placeholder="% Marks"></td>
+
+                                        </tr>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        {publish_button}
+                    </div>
+                </div>
+            </form>
+            <?php
+        }
+    }
+    ?>
 </div>
