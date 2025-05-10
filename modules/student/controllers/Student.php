@@ -369,12 +369,14 @@ class Student extends MY_Controller
     {
         if ($post = $this->input->post()) {
             $id = base64_decode($this->uri->segment(3, 0));
-            $chk = $this->db->where('cert_no', $this->input->post('cert_no'))->get('students_registeration_data');
-            if ($chk->num_rows()) {
-                if ($chk->row('id') != $id) {
-                    $this->session->set_flashdata('error', ' Certificate no '. $chk->row('cert_no').' is already used in '.$chk->row('registration_no') .' Registation no.');
-                    redirect(current_url());
-                    exit;
+            if (PATH == 'sct_ebook') {
+                $chk = $this->db->where('cert_no', $this->input->post('cert_no'))->get('students_registeration_data');
+                if ($chk->num_rows()) {
+                    if ($chk->row('id') != $id) {
+                        $this->session->set_flashdata('error', ' Certificate no ' . $chk->row('cert_no') . ' is already used in ' . $chk->row('registration_no') . ' Registation no.');
+                        redirect(current_url());
+                        exit;
+                    }
                 }
             }
             $data = [
