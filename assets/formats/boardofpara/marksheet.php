@@ -144,7 +144,7 @@
                     <th rowspan="2" width="42%">Name of Subject</th>
                     <th rowspan="2">Subject Code</th>
                     <th colspan="2">Theory Marks</th>
-                    <th colspan="2">Prac.Viva Marks</th>
+                    <th colspan="2">Practical Marks</th>
                     <th colspan="2">Total Marks</th>
                 </tr>
                 <tr>
@@ -206,10 +206,10 @@
                             echo 'Distinction';
                             break;
                         case $percentage >= 60:
-                            echo 'Fisrt Division (First Class)';
+                            echo 'Fisrt Division';
                             break;
                         case $percentage >= 50:
-                            echo 'Second Division (Second Class)';
+                            echo 'Second Division';
                             break;
                         case $percentage >= 40:
                             echo 'Pass Class / Third Division';
