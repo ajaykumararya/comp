@@ -431,7 +431,7 @@ class Document extends MY_Controller
             if (in_array(PATH, ['haptronworld', 'sewaedu', 'beautyguru', 'pces', 'ncvetskill', 'sct'])) {
                 $certificate['serial_no'] = (50000 + $this->id);
                 $this->mypdf->addPage('L');
-            } elseif (in_array(PATH, ['upstate'])) {
+            } elseif (in_array(PATH, ['upstate','boardofpara'])) {
                 $this->set_data('serial_no', '1' . date('Y', strtotime($certificate['createdOn'])) . '00' . $certificate['student_id']);
             }
             // $getLastExam = $this->student_model->last_marksheet($certificate['course_id']);

@@ -123,15 +123,14 @@
     <p class="position-absolute" style="top:37.5%;left:34%;width:200px">{student_name}</p>
     <p class="position-absolute" style="top:37.5%;left:80%;width:150px">{roll_no}</p>
 
-    <p class="position-absolute" style="top:39.35%;left:34%;width:200px">{father_name}</p>
-    <p class="position-absolute" style="top:39.35%;left:80%;width:150px">{enrollment_no}</p>
+    <p class="position-absolute" style="top:39.75%;left:34%;width:200px">{father_name}</p>
+    <p class="position-absolute" style="top:39.75%;left:80%;width:150px">{enrollment_no}</p>
 
-    <p class="position-absolute" style="top:41.3%;left:34%;width:200px">{mother_name}</p>
-    <p class="position-absolute text-capitlize" style="top:41.3%;left:80%;width:150px">{marksheet_duration}
-        {duration_type}</p>
+    <p class="position-absolute" style="top:41.7%;left:34%;width:200px">{mother_name}</p>
+    <p class="position-absolute " style="top:41.7%;left:80%;width:150px"><?=humnize_duration_with_ordinal($marksheet_duration, $duration_type)?></p>
 
-    <p class="position-absolute " style="top:43.2%;left:34%;width:63%">{course_name}</p>
-    <p class="position-absolute " style="top:45.2%;left:34%;width:63%">{center_name}</p>
+    <p class="position-absolute " style="top:43.8%;left:34%;width:63%">{course_name}</p>
+    <p class="position-absolute " style="top:45.8%;left:34%;width:63%">{center_name}</p>
 
     <div class="position-absolute" style="z-index: 999;top: 83.8%;left: 6.1%;">
         <img src="upload/images/marksheet_{result_id}.png" style="width: 70px" alt="">
