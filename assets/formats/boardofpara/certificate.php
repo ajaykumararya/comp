@@ -21,7 +21,6 @@
         .position-absolute {
             position: absolute;
             font-weight: bold;
-            border: 1px solid red;
         }
 
         .w-100 {
