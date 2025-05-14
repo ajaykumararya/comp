@@ -39,7 +39,7 @@
         #photo {
             top: 27.9%;
             left: 86.2%;
-            z-index:999
+            z-index: 999
         }
 
         /* table#first {
@@ -55,7 +55,6 @@
         table th:nth-child(1),
         table,
         tfoot tr {
-            border: 1px solid black;
             text-align: center;
             /* font-weight: bold; */
             padding: 0;
@@ -100,6 +99,8 @@
 
         table {
             border-collapse: collapse;
+            border: 1px;
+            font-size: 12px;
         }
 
         .test {
@@ -115,8 +116,8 @@
     </div>
 
 
-    
-    
+
+
     <p class="position-absolute" style="top:26.9%;left:52%;width:200px">{session}</p>
 
     <p class="position-absolute" style="top:37.5%;left:34%;width:200px">{student_name}</p>
@@ -126,8 +127,9 @@
     <p class="position-absolute" style="top:39.35%;left:80%;width:150px">{enrollment_no}</p>
 
     <p class="position-absolute" style="top:41.3%;left:34%;width:200px">{mother_name}</p>
-    <p class="position-absolute" style="top:41.3%;left:80%;width:150px">{marksheet_duration} {duration_type}</p>
-    
+    <p class="position-absolute text-capitlize" style="top:41.3%;left:80%;width:150px">{marksheet_duration}
+        {duration_type}</p>
+
     <p class="position-absolute " style="top:43.2%;left:34%;width:63%">{course_name}</p>
     <p class="position-absolute " style="top:45.2%;left:34%;width:63%">{center_name}</p>
 
@@ -135,56 +137,97 @@
         <img src="upload/images/marksheet_{result_id}.png" style="width: 70px" alt="">
     </div>
     <div class="position-absolute " style="top:50%;left:5%;width:90%">
-        <table id="first" border="0" style="width:100%">
+        <table id="first1" border="1" style="width:100%">
             <thead>
                 <tr>
-                    <th class="primary" rowspan="2" width="50%" style="text-align:left;padding-left:35px">SUBJECTS</th>
-                    <th class="primary" colspan="2" style="font-size:11px;padding:4px">MAXIMUM MARKS</th>
-                    <th class="primary lb" colspan="2" style="font-size:11px;padding:4px">MINIMUM MARKS</th>
-                    <th class="primary lb" colspan="3" style="font-size:11px;padding:4px">OBTAINED MARKS</th>
+                    <th rowspan="2">S. No.</th>
+                    <th rowspan="2" width="42%">Name of Subject</th>
+                    <th rowspan="2">Subject Code</th>
+                    <th colspan="2">Theory Marks</th>
+                    <th colspan="2">Prac.Viva Marks</th>
+                    <th colspan="2">Total Marks</th>
                 </tr>
                 <tr>
-                    <th class="primary b-tb" style="font-size:11px">THEORY</th>
-                    <th class="primary b-tb" style="font-size:11px">PRACTICAL</th>
-                    <th class="primary b-tb lb" style="font-size:11px">THEORY</th>
-                    <th class="primary b-tb" style="font-size:11px">PRACTICAL</th>
-                    <th class="primary b-tb lb" style="font-size:11px">TH.</th>
-                    <th class="primary b-tb" style="font-size:11px">PR.</th>
-                    <th class="primary b-tb" style="font-size:11px">TOTAL</th>
+                    <th class="text-center">Maxi.</th>
+                    <th class="text-center">Obt.</th>
+                    <th class="text-center">Maxi.</th>
+                    <th class="text-center">Obt.</th>
+                    <th class="text-center">Maxi.</th>
+                    <th class="text-center">Obt.</th>
                 </tr>
             </thead>
             <tbody>
-                {marks}
-                <tr>
-                    <td class="primary lb" style="text-align:left;padding-left:2px;font-size:12.81px">{subject_name}
-                    </td>
-                    <td class="primary lb" style="font-size:12.81px">{theory_max_marks}</td>
-                    <td class="primary lb" style="font-size:12.81px">{practical_max_marks}</td>
-                    <td class="primary lb" style="font-size:12.81px">{theory_min_marks}</td>
-                    <td class="primary lb" style="font-size:12.81px">{practical_min_marks}</td>
-                    <td class="lb fw" style="font-size:12.819px">{theory_total}</td>
-                    <td class="fw" style="font-size:12.81px">{practical_total}</td>
-                    <td class="fw" style="font-size:12.81px">{total}</td>
-                </tr>
-                {/marks}
+                <?php
+                $i = 1;
+                $theoryMaxtotal = $practicalMaxTotal = $theoryTotal = $practicalTotal = 0;
+                foreach ($marks as $mark) {
+                    $theoryMaxtotal += $mark['theory_max_marks'];
+                    $practicalMaxTotal += $mark['practical_max_marks'];
+                    $theoryTotal += $mark['theory_total'];
+                    $practicalTotal += $mark['practical_total'];
+                    echo '<tr>
+                        <td>' . $i++ . '.</td>
+                        <td style="text-align:left">' . $mark['subject_name'] . '</td>
+                        <td>' . $mark['subject_code'] . '</td>
+                        <td>' . $mark['theory_max_marks'] . '</td>
+                        <td>' . $mark['theory_total'] . '</td>
+                        <td>' . $mark['practical_max_marks'] . '</td>
+                        <td>' . $mark['practical_total'] . '</td>
+                        <td>' . ($mark['theory_max_marks'] + $mark['practical_max_marks']) . '</td>
+                        <td>' . ($mark['theory_total'] + $mark['practical_total']) . '</td>
+                    </tr>';
+                }
+                $chart = [
+                    'A+' => 'Outstanding',
+                    'A' => 'Excellent',
+                    'B+' => 'Very Good',
+                    'B' => 'Good',
+                    'C' => 'Average/Satisfactory',
+                    'D' => 'Pass',
+                    'F' => 'Fail',
+                ];
+                ?>
             </tbody>
             <tfoot>
-                <tr class="fw">
-                    <td class="primary fw" style="font-size:12.81px">TOTAL</td>
-                    <td class="primary lb fw" style="font-size:12.81px">{total_max_theory}</td>
-                    <td class="primary fw" style="font-size:12.81px">{total_max_practical}</td>
-                    <td class="primary fw lb" style="font-size:12.81px">{total_min_theory}</td>
-                    <td class="primary fw" style="font-size:12.81px">{total_min_practical}</td>
-                    <td class="fw lb" style="font-size:12.81px"></td>
-                    <td></td>
-                    <td class="fw" style="font-size:12.81px">{obtain_total}</td>
+                <tr>
+                    <th colspan="3">Total</th>
+                    <th><?= $theoryMaxtotal ?></th>
+                    <th><?= $theoryTotal ?></th>
+                    <th><?= $practicalMaxTotal ?></th>
+                    <th><?= $practicalTotal ?></th>
+                    <th><?= ($theoryMaxtotal + $practicalMaxTotal) ?></th>
+                    <th><?= ($theoryTotal + $practicalTotal) ?></th>
                 </tr>
+                <tr>
+                    <th colspan="3">Result : <?= $chart[$grade] ?></th>
+                    <th colspan="6">Division : <?php
+                    switch ($percentage) {
+                        case $percentage >= 75:
+                            echo 'Distinction';
+                            break;
+                        case $percentage >= 60:
+                            echo 'Fisrt Division (First Class)';
+                            break;
+                        case $percentage >= 50:
+                            echo 'Second Division (Second Class)';
+                            break;
+                        case $percentage >= 40:
+                            echo 'Pass Class / Third Division';
+                            break;
+                        default:
+                            echo 'Fail';
+                            break;
+                    }
+
+                    ?></th>
+                </tr>
+
             </tfoot>
         </table>
     </div>
-    <p class="position-absolute" style="top:-0.2%;left:12%;">{result_id}</p>
+    <p class="position-absolute" style="top:-0.2%;left:12%;width:200px">{serial_no}</p>
     <p class="position-absolute" style="bottom:5.3%;left:19%;font-size:13px">{issue_date}</p>
-    <p class="position-absolute" style="bottom:3.6%;left:15%;font-size:13px">Place</p>
+    <p class="position-absolute" style="bottom:3.6%;left:15%;font-size:13px">New Delhi</p>
 </body>
 
 </html>

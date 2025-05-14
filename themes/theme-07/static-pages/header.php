@@ -12,7 +12,7 @@
                     <table class="table table-bordered table-striped w-100" style="width: 100%;">
                         <thead>
                             <tr>
-                                <th class="w-50 fs-1">Icon</th>
+                                <th class="fs-1" style="width:17%">Icon</th>
                                 <th class="w-50 fs-1">Title</th>
                                 <th class="w-50 fs-1">Value</th>
                             </tr>
