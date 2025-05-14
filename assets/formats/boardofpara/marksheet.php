@@ -177,15 +177,6 @@
                         <td>' . ($mark['theory_total'] + $mark['practical_total']) . '</td>
                     </tr>';
                 }
-                $chart = [
-                    'A+' => 'Outstanding',
-                    'A' => 'Excellent',
-                    'B+' => 'Very Good',
-                    'B' => 'Good',
-                    'C' => 'Average/Satisfactory',
-                    'D' => 'Pass',
-                    'F' => 'Fail',
-                ];
                 ?>
             </tbody>
             <tfoot>
@@ -199,7 +190,7 @@
                     <th><?= ($theoryTotal + $practicalTotal) ?></th>
                 </tr>
                 <tr>
-                    <th colspan="3">Result : <?= $chart[$grade] ?></th>
+                    <th colspan="3">Result : <?=$percentage > 40 ? 'PASS' : 'FAIL' ?></th>
                     <th colspan="6">Division : <?php
                     switch ($percentage) {
                         case $percentage >= 75:
