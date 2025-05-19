@@ -70,13 +70,13 @@
         <!-- Start Header Middle -->
         <div class="container header-middle">
             <div class="row">
-                <div class="col-xs-6 col-sm-3">
+                <div class="col-xs-6 col-sm-4">
                     <a href="{base_url}">
                         <img src="{base_url}upload/{logo}" class="img-responsive" alt="">
                     </a>
                 </div>
-                <div class="col-xs-6 col-sm-3"></div>
-                <div class="col-xs-6 col-sm-9">
+                <!-- <div class="col-xs-6 col-sm-3"></div> -->
+                <div class="col-xs-6 col-sm-8">
                     <div class="contact clearfix">
                         <ul class="hidden-xs">
                             <li> <span>Email</span> <a href="mailto:{email}">{email}</a> </li>
