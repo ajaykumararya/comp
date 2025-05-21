@@ -130,7 +130,8 @@
         background-color: var(--primary-color)!important;
     }
     .our-cources ul.course-list li .inner,
-    .header-top{
+    .header-top,
+    .testimonial:after{
         background-color: var(--secondary-color)!important;
     }
     .header-middle a.login{
@@ -139,7 +140,10 @@
 
     .header-top ul.follow-us li a,
     .header-top ul.top-nav li a,
-    .header-middle a.login:hover span{
+    .header-middle a.login:hover span,
+    .testimonial ul li p,
+    .testimonial ul li span,
+    .testimonial ul li span span{
         color: white!important;
     }
     .header-top ul.follow-us li a:hover,
@@ -147,7 +151,9 @@
     .header-middle a.login span{
         color:var(--primary-color)!important;
     }
-    
+    .testimonial:after {
+        opacity: 0.6!important;
+    }
 </style>
 <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
 <style>
