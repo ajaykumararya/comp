@@ -1,6 +1,7 @@
 <style>
+    /* #dd0a7c */
     :root {
-        --primary-color: #17a43b;
+        --primary-color: <?= ES('theme_color_value', '#17a43b') ?>;
         --secondary-color: #ff9600;
     }
 
@@ -121,7 +122,11 @@
     .panel-heading h3 {
         margin: 0 !important;
     }
-
+    .our-cources ul.course-list li .bottom-txt,
+    .why-choose:after,
+    .navbar-inverse{
+        background-color: var(--primary-color)!important;
+    }
     html
 </style>
 <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
