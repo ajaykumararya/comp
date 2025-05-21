@@ -124,30 +124,29 @@
     }
     .our-cources ul.course-list li .bottom-txt,
     .why-choose:after,
-    .navbar-inverse{
+    .navbar-inverse,
+    .header-middle a.login:hover,
+    a.scroll-top{
         background-color: var(--primary-color)!important;
     }
-    .our-cources ul.course-list li .inner{
+    .our-cources ul.course-list li .inner,
+    .header-top{
         background-color: var(--secondary-color)!important;
     }
     .header-middle a.login{
         border-color:var(--primary-color)!important;
     }
-    .header-middle a.login:hover{
-        background-color: var(--primary-color)!important;
-    }
-    .header-top{ 
-        background-color: var(--secondary-color)!important;
-    }
+
     .header-top ul.follow-us li a,
     .header-top ul.top-nav li a{
         color: white!important;
     }
     .header-top ul.follow-us li a:hover,
-    .header-top ul.top-nav li a:hover{
+    .header-top ul.top-nav li a:hover,
+    .header-middle a.login span{
         color:var(--primary-color)!important;
     }
-    html
+    
 </style>
 <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
 <style>
