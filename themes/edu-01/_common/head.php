@@ -136,7 +136,7 @@
     .header-middle a.login:hover{
         background-color: var(--primary-color)!important;
     }
-    .header-top{
+    .header-top{ 
         background-color: var(--secondary-color)!important;
     }
     .header-top ul.follow-us li a,
