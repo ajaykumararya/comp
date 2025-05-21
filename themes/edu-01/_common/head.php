@@ -145,7 +145,7 @@
     }
     .header-top ul.follow-us li a:hover,
     .header-top ul.top-nav li a:hover{
-        color:var(--primary-color);
+        color:var(--primary-color)!important;
     }
     html
 </style>
