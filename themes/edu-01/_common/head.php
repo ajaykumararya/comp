@@ -141,7 +141,7 @@
     }
     .header-top ul.follow-us li a,
     .header-top ul.top-nav li a{
-        color: white, imp !important;
+        color: white!important;
     }
     .header-top ul.follow-us li a:hover,
     .header-top ul.top-nav li a:hover{
