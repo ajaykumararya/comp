@@ -126,7 +126,8 @@
     .why-choose:after,
     .navbar-inverse,
     .header-middle a.login:hover,
-    a.scroll-top{
+    a.scroll-top,
+    .footer ul.follow-us li a:hover{
         background-color: var(--primary-color)!important;
     }
     .our-cources ul.course-list li .inner,
@@ -143,16 +144,21 @@
     .header-middle a.login:hover span,
     .testimonial ul li p,
     .testimonial ul li span,
-    .testimonial ul li span span{
+    .testimonial ul li span span,
+    .navbar-inverse .navbar-nav>li>a i{
         color: white!important;
     }
     .header-top ul.follow-us li a:hover,
     .header-top ul.top-nav li a:hover,
-    .header-middle a.login span{
+    .header-middle a.login span,
+    .about a.know-more:hover span{
         color:var(--primary-color)!important;
     }
     .testimonial:after {
         opacity: 0.6!important;
+    }
+    .navbar-nav>li{
+        border-right:1px solid white!important
     }
 </style>
 <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
