@@ -127,6 +127,9 @@
     .navbar-inverse{
         background-color: var(--primary-color)!important;
     }
+    .our-cources ul.course-list li .inner{
+        background-color: var(--secondary-color)!important;
+    }
     html
 </style>
 <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
