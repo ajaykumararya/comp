@@ -266,6 +266,12 @@ class Ki_theme
     }
     function grade($score, $type = 'en')
     {
+        if (file_exists(DOCUMENT_PATH . '/function.php')) {
+            require DOCUMENT_PATH . '/function.php';
+            if (function_exists('my_grade')) {
+                return my_grade($score);
+            }
+        }
         if (PATH == 'svatii') {
             if ($score >= 90)
                 return 'A+';
