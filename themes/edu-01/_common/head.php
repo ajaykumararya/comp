@@ -130,6 +130,23 @@
     .our-cources ul.course-list li .inner{
         background-color: var(--secondary-color)!important;
     }
+    .header-middle a.login{
+        border-color:var(--primary-color)!important;
+    }
+    .header-middle a.login:hover{
+        background-color: var(--primary-color)!important;
+    }
+    .header-top{
+        background-color: var(--secondary-color)!important;
+    }
+    .header-top ul.follow-us li a,
+    .header-top ul.top-nav li a{
+        color: white, imp !important;
+    }
+    .header-top ul.follow-us li a:hover,
+    .header-top ul.top-nav li a:hover{
+        color:var(--primary-color);
+    }
     html
 </style>
 <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
