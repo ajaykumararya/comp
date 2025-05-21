@@ -1,7 +1,9 @@
 <style>
     /* #dd0a7c */
     :root {
-        --primary-color: <?= ES('theme_color_value', '#17a43b') ?>;
+        --primary-color:
+            <?= ES('theme_color_value', '#17a43b') ?>
+        ;
         --secondary-color: #ff9600;
     }
 
@@ -122,21 +124,24 @@
     .panel-heading h3 {
         margin: 0 !important;
     }
+
     .our-cources ul.course-list li .bottom-txt,
     .why-choose:after,
     .navbar-inverse,
     .header-middle a.login:hover,
     a.scroll-top,
-    .footer ul.follow-us li a:hover{
-        background-color: var(--primary-color)!important;
+    .footer ul.follow-us li a:hover {
+        background-color: var(--primary-color) !important;
     }
+
     .our-cources ul.course-list li .inner,
     .header-top,
-    .testimonial:after{
-        background-color: var(--secondary-color)!important;
+    .testimonial:after {
+        background-color: var(--secondary-color) !important;
     }
-    .header-middle a.login{
-        border-color:var(--primary-color)!important;
+
+    .header-middle a.login {
+        border-color: var(--primary-color) !important;
     }
 
     .header-top ul.follow-us li a,
@@ -145,20 +150,30 @@
     .testimonial ul li p,
     .testimonial ul li span,
     .testimonial ul li span span,
-    .navbar-inverse .navbar-nav>li>a i{
-        color: white!important;
+    .navbar-inverse .navbar-nav>li>a i {
+        color: white !important;
     }
+
     .header-top ul.follow-us li a:hover,
     .header-top ul.top-nav li a:hover,
     .header-middle a.login span,
-    .about a.know-more:hover span{
-        color:var(--primary-color)!important;
+    .about a.know-more:hover span {
+        color: var(--primary-color) !important;
     }
+
     .testimonial:after {
-        opacity: 0.6!important;
+        opacity: 0.6 !important;
     }
-    .navbar-nav>li{
-        border-right:1px solid white!important
+
+    .navbar-nav>li {
+        border-right: 1px solid white !important
+    }
+
+    .navbar-inverse .navbar-nav>.active>a,
+    .navbar-inverse .navbar-nav>.active>a:focus,
+    .navbar-inverse .navbar-nav>.active>a:hover {
+        color: #fff;
+        background-color: rgba(0, 0, 0, .3);
     }
 </style>
 <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
