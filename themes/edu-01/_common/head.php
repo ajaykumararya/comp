@@ -138,7 +138,8 @@
     }
 
     .header-top ul.follow-us li a,
-    .header-top ul.top-nav li a{
+    .header-top ul.top-nav li a,
+    .header-middle a.login:hover span{
         color: white!important;
     }
     .header-top ul.follow-us li a:hover,
