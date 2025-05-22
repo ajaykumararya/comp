@@ -175,6 +175,16 @@
         color: #fff;
         background-color: rgba(0, 0, 0, .3);
     }
+    <?php
+    if(PATH == 'gcti'){
+        ?>
+        .banner-outer .content h1,
+        .banner-outer .content p{
+            color: white !important;
+        }
+        <?php
+    }
+    ?>
 </style>
 <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
 <style>
