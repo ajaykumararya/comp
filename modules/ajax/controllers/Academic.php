@@ -8,6 +8,10 @@ class Academic extends Ajax_Controller
                 'status',
                 $this->db->insert('batch', $this->post())
             );
+             $this->response(
+                'html',
+                'Btach added Successfully..'
+            );
         }
     }
     function edit_batch()
