@@ -130,7 +130,8 @@
     .navbar-inverse,
     .header-middle a.login:hover,
     a.scroll-top,
-    .footer ul.follow-us li a:hover {
+    .footer ul.follow-us li a:hover,
+    .news-events ul li .cnt-block .plus-icon {
         background-color: var(--primary-color) !important;
     }
 
