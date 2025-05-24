@@ -29,8 +29,9 @@ document.addEventListener('DOMContentLoaded',function(e){
                 targets : -1,
                 orderable : false,
                 render : function(data,type,row){
-                    // log(row);
+
                     return `<div class="btn-group">
+                            <button class="btn btn-info edit-record" ><i class="fa fa-edit"></i>Edit</button>
                             ${generate_link_btn(row.result_id,'marksheet')}
                             ${deleteBtnRender(1,row.result_id,'Marksheet')}
                     </div>`;
@@ -39,5 +40,11 @@ document.addEventListener('DOMContentLoaded',function(e){
         ]
     }).on('draw',function(){
         handleDeleteRows('student/delete-marksheet');
+        table.EditForm('student/update-marksheet-issue-date','Update Marksheet');
+        // $('.edit-createdDate').on('click',function(){
+        //     var result_id = $(this).data('id');
+        //     var date = $(this).data('date');
+        //     alert(result_id + date)
+        // });
     });
 });

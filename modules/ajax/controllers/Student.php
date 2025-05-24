@@ -589,6 +589,13 @@ class Student extends Ajax_Controller
             $this->response('status', true);
         }
     }
+    function update_marksheet_issue_date(){
+        $this->db->where('id',$this->post('id'))->update('marksheets',[
+            'date' => $this->post('date')
+        ]);
+        $this->response('status',true);
+        $this->response('html','Update issue date of marksheet successfully..');
+    }
     function print_mark_table()
     {
         $where = $this->post();

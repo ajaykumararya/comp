@@ -61,7 +61,7 @@
 
                             <div class="col-md-4 form-group mb-5">
                                 <label for="" class="form-label">Issue Date</label>
-                                <input type="text" name="date" value="<?=$this->ki_theme->date()?>" class="form-control current-date">
+                                <input type="text" name="date" value="<?=$this->ki_theme->date()?>" class="form-control selectdate">
                             </div>
                             <?php
                             if(PATH == 'sct_ebook'){

@@ -18,6 +18,24 @@
                 <form action="" class="student-result-verification-form animation animated fadeInLeft">
                     <div class="<?= themeCard('main', 'panel-primary') ?>">
                         <div class="<?= themeCard('body') ?>">
+                            <?php
+                            if (CHECK_PERMISSION('RESULT_VERIFICATION_WITH_SESSION')) {
+                                ?>
+                                <div class="form-group">
+                                    <label for="" class="form-label mt-2 required">Session</label>
+                                    <select required name="session" class="form-control" data-control="select2" data-placeholder="Session">
+                                        <option value=""></option>
+                                        <?php
+                                        $sessions = $this->SiteModel->get_session();
+                                        foreach ($sessions->result() as $session) {
+                                            echo '<option value="' . $session->id . '">' . $session->title . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <?php
+                            }
+                            ?>
                             <div class="form-group">
                                 <label for="" class="form-label mt-2">{rollno_text}</label>
                                 <input type="text" placeholder="Enter {rollno_text}." name="roll_no"

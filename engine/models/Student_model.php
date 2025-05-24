@@ -161,6 +161,9 @@ class Student_model extends MY_Model
                 $this->db->where('s.status', isset($status) ? $status : 0);
                 $this->db->join('marksheets as m', 'm.student_id = s.id');
                 $this->db->join('admit_cards as ac', 'ac.id = m.admit_card_id and ac.student_id = s.id');
+                if (CHECK_PERMISSION('RESULT_VERIFICATION_WITH_SESSION')) {
+                    $this->db->where('ac.session_id', $_POST['session']);
+                }
                 break;
             case 'search_student_for_select2':
                 $this->db->select('s.id');
@@ -203,7 +206,7 @@ class Student_model extends MY_Model
                 $this->db->join('student_certificates as sce', 'sce.student_id = s.id AND sce.course_id = s.course_id');
                 $this->db->group_by('sce.student_id');
                 $this->db->order_by('sce.id', 'DESC');
-                if(isset($limit)){
+                if (isset($limit)) {
                     $this->db->limit($limit);
                 }
                 break;
@@ -588,11 +591,12 @@ class Student_model extends MY_Model
     {
         return $this->get_switch('fetch_fee_transactions_group_by', $where);
     }
-    function get_course_category_via_course($course_id){
+    function get_course_category_via_course($course_id)
+    {
         return $this->db->select('cc.title')
-                        ->from("course_category as cc")
-                        ->join('course as c','c.category_id = cc.id')
-                        ->where('c.id',$course_id)
-                        ->get();
+            ->from("course_category as cc")
+            ->join('course as c', 'c.category_id = cc.id')
+            ->where('c.id', $course_id)
+            ->get();
     }
 }
