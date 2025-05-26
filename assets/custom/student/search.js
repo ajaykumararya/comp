@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                     if (status == 'Valid') {
                         $(submitButton).attr('data-kt-indicator', 'on').prop('disabled', true);
                         result_box.addClass('fade').html('');
-                        SwalShowloading();
+                        SwalShowloading('fetching student profile..');
                         axios
                             .post(
                                 ajax_url + 'student/get-via-id',

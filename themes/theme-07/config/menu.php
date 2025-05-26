@@ -5,6 +5,12 @@ $menu = array(
     'icon' => array('file', 3),
     'submenu' => array(
         array(
+            'label' => 'Our Counter',
+            'type' => 'our_counter',
+            'icon' => array('file', 4),
+            'url' => 'cms/static-page/our_counter',
+        ),
+        array(
             'label' => 'Business Categories',
             'type' => 'business-categories',
             'icon' => array('file', 4),
@@ -46,6 +52,12 @@ $menu = array(
             'type' => 'popular_course',
             'icon' => array('file', 4),
             'url' => 'cms/static-page/popular_course',
+        ),
+        array(
+            'label' => 'Search Course & Type',
+            'type' => 'search_course',
+            'icon' => array('file', 4),
+            'url' => 'cms/static-page/search_course',
         ),
         array(
             'label' => 'Our Team(s)',

@@ -422,9 +422,8 @@ class Website extends Ajax_Controller
                     }
                 }
                 $this->response('status', true);
-            }
-            else
-                $this->response('html','Something went wrong..');
+            } else
+                $this->response('html', 'Something went wrong..');
         } else
             $this->response('html', 'Service not available..');
     }
@@ -1234,6 +1233,33 @@ class Website extends Ajax_Controller
             }
         } catch (Exception $e) {
             $this->response('html', $e->getMessage());
+        }
+    }
+    function sct_ebook_method()
+    {
+        $type = $this->post("type");
+        switch ($type) {
+            case 'fetch-course':
+                $data = $this->db->where([
+                    'field7' => $this->post('cat_id'),
+                    'field8' => $this->post('type_id')
+                ])->get('content');
+                $courses = [];
+                $html = '<option value="">----Select Courses--</option>';
+                foreach ($data->result() as $row) {
+                    $id = $this->token->encode(['prod_id' => $row->id]);
+                    $courses[] = [
+                        'id' => $id,
+                        'title' => $row->field2
+                    ];
+                    $html .= '<option value="' . $id . '">' . $row->field2 . '</option>';
+                }
+                $this->response([
+                    'status' => $data->num_rows() > 0,
+                    'data' => $courses,
+                    'html' => $html
+                ]);
+                break;
         }
     }
 }

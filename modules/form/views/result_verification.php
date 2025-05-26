@@ -23,7 +23,8 @@
                                 ?>
                                 <div class="form-group">
                                     <label for="" class="form-label mt-2 required">Session</label>
-                                    <select required name="session" class="form-control" data-control="select2" data-placeholder="Session">
+                                    <select required name="session" class="form-control" data-control="select2"
+                                        data-placeholder="Session">
                                         <option value=""></option>
                                         <?php
                                         $sessions = $this->SiteModel->get_session();

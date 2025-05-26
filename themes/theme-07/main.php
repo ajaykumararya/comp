@@ -8,12 +8,12 @@
     .cart-count{
         position: ABSOLUTE;
         border: 1px solid var(--primary-color);
-        top: 8px;
+        top: -14px;
         line-height: 1;
         padding: 4px;
         border-radius: 50%;
         font-size: 16px;
-        left: 24px;
+        left: 25px;
         min-width: 25px;
         text-align: center;
         font-weight: 900;
@@ -23,12 +23,12 @@
 <body class="">
     <div id="wrapper" class="clearfix">
         <!-- preloader -->
-        <!-- <div id="preloader">
+        <div id="preloader">
             <div id="spinner">
-                <img alt="" src="images/preloaders/5.gif">
+                <img alt="" src="{theme_url}/assets/5.gif">
             </div>
             <div id="disable-preloader" class="btn btn-default btn-sm">Disable Preloader</div>
-        </div> -->
+        </div>
 
         <!-- Header -->
         <header id="header" class="header">
@@ -164,11 +164,17 @@
                             // echo uri_string();
                             // pre($menus);
                             echo get_menu($menus, 'menuzord-menu');
-                            echo '<div class="pull-right sm-pull-none mb-sm-15" style="position:relative">';
+                            echo '<div class="pull-right sm-pull-none mb-sm-15" style="position:relative">
+                            
+                            <a href="javascript:void()" data-target="#popupcp2016" data-toggle="modal" class="cart-btn">
+                                <i class="fab fa-wpforms"></i>
+                            </a>
+                            
+                            ';
                             if (CHECK_PERMISSION('EBOOK')) {
                                 $this->load->library('ebook/ebook_cart');
                                 ?>
-                                <a href="{current_url}?ebook=cart" class="cart-btn">
+                                <a href="{current_url}?ebook=cart" class="cart-btn" style="position:relative;">
                                     <i class="fa fa-shopping-cart"></i>
                                     <p class="cart-count"><?=$this->ebook_cart->count()?></p>
                                 </a>
@@ -188,7 +194,6 @@
                         </nav>
                     </div>
                 </div>
-            </div>
         </header>
 
         <!-- Start main-content -->
@@ -339,6 +344,72 @@
             </div>
         </footer>
         <a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
+
+
+        <!-- Modal 3 -->
+        <div id="popupcp2016" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: var(--primary-color); color: #fff;">
+                        <a href="#" class="fancybox-item fancybox-close" data-dismiss="modal"></a>
+                        <h2 class="modal-title">
+                            <strong>Enquiry Form</strong>
+                        </h2>
+
+                    </div>
+                    <div class="modal-body">
+                        <form id="submitGETINTOUCH">
+                            <div class="form-group">
+                                <label>Are You a</label>
+                                <select class="form-control" name="subject" id="areYouA" required>
+                                    <option value="">Select Are you a</option>
+                                    <option value="Training Center">
+                                        Training Center</option>
+                                    <option value="Student">
+                                        Student
+                                    </option>
+                                    <option value="Employer">Employer</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input class="form-control" required type="text" placeholder="Full Name" name="name" id="fullName" />
+                            </div>
+                            <div class="form-group">
+                                <label>Mobile Number</label>
+                                <input class="form-control" required type="text" placeholder="97XXXXXXXX" name="mobile"
+                                    id="mobileNumber" />
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input class="form-control" required type="email" placeholder="example@gsidc.org.in"
+                                    name="email" id="email" />
+                            </div>
+                            <div class="form-group">
+                                <label>State</label>
+                                <input class="form-control" required type="text" placeholder="State" name="state" id="state" />
+                            </div>
+                            <div class="form-group">
+                                <label>District</label>
+                                <input class="form-control" required type="text" placeholder="District" name="city" id="district" />
+                            </div>
+                            <div class="form-group">
+                                <label>Message</label>
+                                <textarea class="form-control" required id="message" name="message"></textarea>
+
+                            </div>
+                            <div class="form-group text-center">
+                                <button class="btn btn-primary" type="submit">Submit</button>
+
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Modal 3 -->
     </div>
     <!-- end wrapper -->
 

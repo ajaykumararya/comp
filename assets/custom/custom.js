@@ -292,7 +292,22 @@ const select2Student = (element) => {
             minimumInputLength: 3, // Set the minimum number of characters before making a request
             placeholder: 'Search for Students...',
             escapeMarkup: function (markup) { return markup; } // Allows markup for formatting results
-        }
+        },
+        language: {
+            inputTooShort: function () {
+                return "Search by name...";
+            },
+            loadingMore: function () {
+                return "Loading more results...";
+            },
+            noResults: function () {
+                return "No Student found.";
+            },
+            searching: function () {
+                return "Loading...";
+            }
+        },
+        escapeMarkup: function (markup) { return markup; }
     });
 }
 const passoutStudentSelect2 = (element) => {
@@ -643,6 +658,9 @@ const scrollToDiv = (targetDiv) => {
     }, 1000); // Adjust the duration as needed
 }
 var optionFormat = function (item) {
+    if (item.loading) {
+        return '<span class="text-warning">Loading...</span>';
+    }
     if (!item.id) {
         return item.text;
     }
@@ -656,6 +674,9 @@ var optionFormat = function (item) {
     return $(span);
 }
 const frontCourseOptions = (item) => {
+    if (item.loading) {
+        return '<span class="text-warning">Loading...</span>';
+    }
     if (!item.id) {
         return item.text;
     }
@@ -687,6 +708,9 @@ const frontCourseOptions = (item) => {
 }
 // Format options
 const optionFormatSecond = (item) => {
+    if (item.loading) {
+        return '<span class="text-warning">Loading...</span>';
+    }
     if (!item.id) {
         return item.text;
     }
@@ -720,6 +744,9 @@ const optionFormatSecond = (item) => {
     return $(span);
 }
 const optionsAjaxStudents = (item) => {
+    if (item.loading) {
+        return '<span class="text-warning">Loading...</span>';
+    }
     if (!item.id) {
         return item.student_name;
     }
