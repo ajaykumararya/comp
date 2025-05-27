@@ -54,6 +54,8 @@
             if ($data->num_rows()):
                 $index = 1;
                 foreach ($data->result() as $row):
+                    if($index % 4 == 0)
+                        echo '</div><div class="row">';
                     ?>
                     <div class="col-6 col-md-3 col-xs-3">
                         <div class="circle-card">
