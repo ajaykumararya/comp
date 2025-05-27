@@ -55,7 +55,7 @@
                 $index = 1;
                 foreach ($data->result() as $row):
                     ?>
-                    <div class="col-6 col-md-3 col-lg-2">
+                    <div class="col-6 col-md-3 col-xs-3">
                         <div class="circle-card">
                             <img src="<?= base_url('upload/' . $row->field1) ?>" alt="<?= $row->field2 ?>">
                         </div>
