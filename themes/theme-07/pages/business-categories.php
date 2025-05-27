@@ -5,6 +5,12 @@
         border-radius: 4px;
     }
 
+    @media only screen and (max-width: 600px) {
+        .industry-card1 img {
+            height: 155px;
+        }
+    }
+
     .industry-title1 {
         text-align: center;
         font-weight: 500;
@@ -30,7 +36,7 @@
                 $index = 1;
                 foreach ($data->result() as $row):
                     ?>
-                    <div class="col-6 col-md-3">
+                    <div class="col-6 col-md-3 col-xs-6">
                         <div class="industry-card1">
                             <img src="<?= base_url('upload/' . $row->field1) ?>" alt="<?= $row->field2 ?>">
                             <div class="industry-title1"><?= $row->field2 ?></div>

@@ -1,8 +1,6 @@
-
-
 <style>
     .circle-card {
-        width: 160px;
+        width: 100%;
         height: 160px;
         border-radius: 50%;
         overflow: hidden;
@@ -14,6 +12,12 @@
         background: #fff;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .circle-card {
+            height: 72px;
+        }
     }
 
     .circle-card:hover {
