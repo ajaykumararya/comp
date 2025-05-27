@@ -52,7 +52,7 @@
             <?php
             $data = $this->SiteModel->get_contents($type);
             if ($data->num_rows()):
-                $index = 1;
+                $index = 0;
                 foreach ($data->result() as $row):
                     if($index++ % 4 == 0)
                         echo '</div><div class="row">';
