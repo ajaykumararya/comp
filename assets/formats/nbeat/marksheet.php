@@ -21,7 +21,7 @@
         }
 
         .position-absolute {
-            position: absolute;
+            position: absolute; 
             text-align: center;
         }
 
