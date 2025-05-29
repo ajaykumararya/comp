@@ -40,7 +40,7 @@
     #photo {
         z-index: 999;
         top: 16.05%;
-        left: 22px;
+        left: 29px;
     }
 
     .test {
@@ -53,7 +53,7 @@
 <body class="position-relative">
     <img id="back-image" class="position-relative" src="{document_path}/id-card.jpg">
     <div class="position-absolute" id="photo">
-        <img src="upload/{image}" style="width:115px;height:150px">
+        <img src="upload/{image}" style="width:118px;height:150px">
     </div>
     <p class="position-absolute" style="top:14%;left:20rem;">{roll_no}</p>
     <p class="position-absolute" style="top:16.2%;left:36.5%">{student_name}</p>
