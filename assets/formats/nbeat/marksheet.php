@@ -101,11 +101,11 @@
     <div class="position-absolute" id="photo">
         <img src="upload/{image}" style="width:96px;border:1px solid #014f85">
     </div>
-    <div class="position-absolute" style="top:21.68%;left:10%;">
+    <div class="position-absolute" style="top:22.68%;left:10%;">
         <img src="upload/images/marksheet_{result_id}.png" style="width:90px;border:1px solid #014f85" alt="">
     </div>
-    <p class="position-absolute" style="top:16.4%;left:76.4%;width:120px">{enrollment_no}</p>
-    <p class="position-absolute " style="top:16.4%;left:21.9%;width:120px">{roll_no}</p>
+    <p class="position-absolute" style="top:17.5%;left:76.4%;width:120px">{enrollment_no}</p>
+    <p class="position-absolute " style="top:17.5%;left:21.9%;width:120px">{roll_no}</p>
     <p class="position-absolute" style="top:30.4%;left:45%;width:240px">{student_name}</p>
     <p class="position-absolute" style="top:33.4%;left:34.9%;width:238px">{father_name}</p>
     <p class="position-absolute" style="top:36.5%;left:15%;width:77%;line-height:1">{course_name}</p>

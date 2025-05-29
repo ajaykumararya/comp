@@ -50,8 +50,8 @@
         }
 
         #photo1 {
-            top: 33%;
-            left: 74.8%;
+            top: 31.7%;
+            left: 73.5%;
         }
 
         p {
@@ -98,16 +98,16 @@
         <img src="upload/images/student_certificate_{certiticate_id}.png" style="width: 80px">
     </div>
     <div class="position-absolute" id="photo1">
-        <img src="upload/{image}" style="width:91px;height:106px">
+        <img src="upload/{image}" style="width:111px;height:127px">
     </div>
 
 
-    <p class="position-absolute " style="top:18%;left:24.4%;width:120px">{roll_no}</p>
-    <p class="position-absolute" style="top:18%;left:76.8%;width:122px">{enrollment_no}</p>
+    <p class="position-absolute text-center" style="top:18%;left:22%;width:140px">{roll_no}</p>
+    <p class="position-absolute text-center" style="top:18%;left:74.3%;width:132px">{enrollment_no}</p>
 
     <div class="position-absolute " style="left:48%;top:44.5%;">{student_name}</div>
     <div class="position-absolute " style="width:340px;top:48.3%;left:40%;">{father_name}</div>
-    <div class="position-absolute " style="top:52%;left:30%">{dob}</div>
+    <div class="position-absolute " style="top:52%;left:30%"><?=date('d M Y',strtotime($dob))?></div>
 
     <!-- <div class="position-absolute text-center" style="width:450px;left:20%;top:56.5%;">{enrollment_no}</div> -->
     <div class="position-absolute" style="width:680px;left:15%;top:55.4%;">{course_name}</div>

@@ -40,8 +40,8 @@
 
         #photo1 {
             z-index: 999;
-            top: 23rem;
-            left: 81.2%;
+            top: 30.2%;
+            left: 81.5%;
             width: 120px !important;
             height: 95px;
         }
@@ -79,18 +79,18 @@
         <img src="upload/images/franchise_certificate_{id}.png">
     </div>
     <div class="position-absolute" id="photo1">
-        <img src="upload/{image}" class="" style="width:110px;height:130px">
+        <img src="upload/{image}" class="" style="width:107px;height:123px">
     </div>
     <div class="position-absolute" style="top:47%;left:10%;width:76%;text-align:center;text-transform:uppercase">{institute_name}</div>
 
-    <div class="position-absolute" style="top:27.6%;left:83%;">{center_number}</div>
+    <div class="position-absolute" style="top:25.5%;left:82%;">{center_number}</div>
     <!-- <div class="position-absolute" style="top:57.7%;left:27%;">{city}, &nbsp;{state}</div> -->
-    <div class="position-absolute" style="top:57.7%;left:27%;">{center_full_address}</div>
-    <div class="position-absolute " style="top:62.5%;left:27%;width:570px">{authorized_courses}</div>
+    <div class="position-absolute " style="top:57%;left:27%;width:700px;line-height:2">{center_full_address}</div>
     <div class="position-absolute" style="top:52.4%;left:27%;">{name}</div>
     
-    <div class="position-absolute" style="top:67.3%;left: 27%">{certificate_issue_date}</div>
-    <div class="position-absolute" style="top:73%;left:27%">{valid_upto}</div>
+    <div class="position-absolute" style="top:67.3%;left: 27%">{authorized_courses}</div>
+    <div class="position-absolute" style="top:73%;left:27%">{certificate_issue_date}</div>
+    <div class="position-absolute" style="top:77.7%;left:27%">{valid_upto}</div>
     <!-- <div class="position-absolute" id="center_signature">
         <img src="upload/{signature}" style="width:200px;height:80px">
     </div> -->
