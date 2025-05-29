@@ -53,15 +53,15 @@
 <body class="position-relative">
     <img id="back-image" class="position-relative" src="{document_path}/id-card.jpg">
     <div class="position-absolute" id="photo">
-        <img src="upload/{image}" style="width:118px;height:150px">
+        <img src="upload/{image}" style="width:117px;height:153px">
     </div>
-    <p class="position-absolute" style="top:14%;left:20rem;">{roll_no}</p>
-    <p class="position-absolute" style="top:16.2%;left:36.5%">{student_name}</p>
-    <p class="position-absolute" style="top:18.3%;left:36.5%">{father_name}</p>
-    <p class="position-absolute" style="top:20.4%;left:36.5%;width:63%;">{address}</p>
-    <p class="position-absolute " style="top:22.6%;left:36.5%">{dob}</p>
-    <p class="position-absolute" style="top:24.7%;left:36.5%;width:63%">{course_name}</p>
-    <p class="position-absolute" style="top:26.7%;left:36.5%;width:63%">{center_name}</p>
+    <p class="position-absolute" style="top:14%;left:35.5%;">{roll_no}</p>
+    <p class="position-absolute" style="top:16.2%;left:35.5%">{student_name}</p>
+    <p class="position-absolute" style="top:18.3%;left:35.5%">{father_name}</p>
+    <p class="position-absolute" style="top:20.4%;left:35.5%;width:63%;">{address}</p>
+    <p class="position-absolute " style="top:22.6%;left:35.5%">{dob}</p>
+    <p class="position-absolute" style="top:24.7%;left:35.5%;width:63%">{course_name}</p>
+    <p class="position-absolute" style="top:26.7%;left:35.5%;width:63%">{center_name}</p>
     <div class="position-absolute" style="top:24.1rem;left:45%;">
         <img src="upload/images/id_card_{student_id}.png" style="width:110px;height:110px;" alt="">
     </div>
