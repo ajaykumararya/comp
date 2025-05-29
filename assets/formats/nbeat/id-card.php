@@ -15,7 +15,7 @@
     .text-capitlize {
         text-transform: uppercase;
     }
-
+ 
     .position-relative {
         position: relative;
     }
