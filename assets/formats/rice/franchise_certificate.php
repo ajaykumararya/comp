@@ -60,7 +60,7 @@
         .test {
             border: 1px solid red
         }
-        #center_signature{
+        #center_signature{ 
             z-index: 999;
             top: 33.7rem;
             left: 12rem;
