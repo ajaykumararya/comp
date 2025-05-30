@@ -106,13 +106,13 @@ $this->mypdf->addPage('L');
 
     <p class="position-absolute tc" style="width:295px;top:44%;left:32%">{student_name}</p>
     <p class="position-absolute tc" style="width:315px;top:44%;left:67%">{father_name}</p>
-    <p class="position-absolute tc" style="width:385px;top:48.5%;left:32.5%;line-height:1">asdsad asd </p>
+    <p class="position-absolute tc" style="width:385px;top:48.5%;left:32.5%;line-height:1">{course_name}</p>
     <p class="position-absolute tc" style="width:100px;top:48.1%;left:79%"><?=humnize_duration($duration,$duration_type)?></p>
    
     <p class="position-absolute tc" style="width:400px;top:52.3%;left:26%">{center_name}</p>
    
    <p class="position-absolute" style="top:56.8%;left:34%">{to_date}</p>
-   <p class="position-absolute" style="top:56.8%;left:56%">{grade}</p>
+   <p class="position-absolute" style="top:56.8%;left:56%">{percentage} %</p>
    <p class="position-absolute text-center" style="top:61%;left:56%;width:90px">{obtain_total}</p>
    <p class="position-absolute text-center" style="top:64%;left:50%;width:100px">{createdOn}</p>
     <!-- <p class="position-absolute " style="width:340px;top:45.3%;left:40%">{father_name}</p> -->
