@@ -1093,11 +1093,12 @@ jQuery.ucfirst = function (str) {
     return;
 };
 const course_duration_humnize = (duration, duration_type, flag = true) => {
-    duration_type = (duration_type + (flag ? (duration > 1 ? 's' : '') : ''));
-    return (ordinal_number(duration) + ` ` + $.ucfirst(duration_type));
+    var isMonth = duration_type === 'month';
+    duration_type = (duration_type + (flag ? ( duration  > 1 ? 's' : '') : ''));
+    return ( (isMonth ? duration : ordinal_number(duration)) + ` ` + $.ucfirst(duration_type));
 }
 const course_duration_humnize_without_ordinal = (duration, duration_type, flag = true) => {
-    duration_type = (duration_type + (flag ? (duration > 1 ? 's' : '') : ''));
+    duration_type = (duration_type + (flag ? ( duration  > 1 ? 's' : '') : ''));
     return (duration + ` ` + $.ucfirst(duration_type));
 }
 const SwalHideLoading = () => {
