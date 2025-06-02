@@ -112,18 +112,19 @@
     <!-- <p class="position-absolute" style="top:1%;left:80%">{createdOn}</p>
     <p class="position-absolute" style="top:1%;left:16%">{admit_card_id}</p> -->
 
-    <p class="position-absolute " style="top:26.2%;left:62%;width:230px">{roll_no}</p>
-    <p class="position-absolute  " style="top:26.2%;left:17%;width:230px">{enrollment_no}</p>
+    <p class="position-absolute " style="top:26.2%;left:62%;width:230px">{enrollment_no}</p>
+    <p class="position-absolute  " style="top:26.2%;left:17%;width:230px">{roll_no}</p>
     <p class="position-absolute" style="top:28.2%;left:22%">{student_name}</p>
     <p class="position-absolute" style="top:28.2%;left:62%">{father_name}</p>
     <!-- <p class="position-absolute" style="top:20.5%;left:25.5%">{mother_name}</p> -->
     <p class="position-absolute text-capitlize" style="top:30%;left:25.5%">{gender}</p>
     <p class="position-absolute" style="top:24.2%;left:16%">{course_name}</p>
+    <p class="position-absolute" style="top:24.2%;left:63%;width:100px"><?=ordinal_number($admit_card_duration)?></p>
     <p class="position-absolute" style="top:18.9%;left:48%">{session}</p>
     <!-- <p class="position-absolute text-capitlize" style="top:30.5%;left:64%">{gender}</p>
     <p class="position-absolute" style="top:32.8%;left:24.4%">{center_name}</p> -->
 
-    <p class="position-absolute text-capitlize" style="top:33.8%;left:17%">{center_name}</p>
+    <p class="position-absolute text-capitlize" style="top:33.9%;left:17%">{center_name}</p>
     <p class="position-absolute text-capitlize" style="top:29.5%;left:25.5%">{exam_date}</p>
 
     <?php
@@ -144,7 +145,7 @@
             ->join('admit_cards_subjects as acs', 'acs.subject_id = s.id AND acs.admit_session_id = ' . $row->admit_session_id)
             ->get();
         ?>
-        <p class="position-absolute text-capitlize" style="top:31.8%;left:25.5%"><?= $row->centre_name ?></p>
+        <p class="position-absolute text-capitlize" style="top:32%;left:25.5%"><?= $row->centre_name ?></p>
 
         <div class="position-absolute " style="top:43.5%;left:6.5%;width:87%">
             <table id="first" border="1" style="width:100%">

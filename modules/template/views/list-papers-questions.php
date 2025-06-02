@@ -28,7 +28,7 @@
                     'is_chcked' => $ans->is_right ? 'checked' : '',
                 ];
                 $new = [
-                    $key => $ans->answer == 0 ? ' 0' : $ans->answer,
+                    $key => $ans->answer === 0 ? ' 0' : $ans->answer,
                     "{$key}_is_right" => $ans->is_right,
 
                 ];

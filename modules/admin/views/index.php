@@ -227,9 +227,9 @@ if ($this->center_model->isAdminOrCenter()) {
                     'color2' => '#4286f4',
                     'title' => 'Admission(S)',
                     'count' => $allStudents,
-                    'url' => 'student/search',
-                    'url_icon' => 'search',
-                    'url_title' => 'Search Student',
+                    'url' => 'student/admission',
+                    'url_icon' => 'plus',
+                    'url_title' => 'Admission Student',
                     'icon' => 'users'
                 ]) ?>
             </div>
@@ -366,7 +366,7 @@ if ($this->center_model->isAdminOrCenter()) {
                     ]) ?>
                 </div>
 
-                <div class="col-xl-3 col-md-6 mb-4">
+                <!-- <div class="col-xl-3 col-md-6 mb-4">
                     <?= dash_box([
                         'color1' => '#ff1515',
                         'color2' => '#240d0d',
@@ -377,25 +377,39 @@ if ($this->center_model->isAdminOrCenter()) {
                         'url_title' => 'View',
                         'icon' => 'users'
                     ]) ?>
+                </div> -->
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <?php
+                    $ttl_Exams = $this->db->count_all('exams');
+                    echo dash_box([
+                        'color1' => '#ff1515',
+                        'color2' => '#240d0d',
+                        'title' => 'Total Exam(S)',
+                        'count' => $ttl_Exams,
+                        'url' => 'exam/add',
+                        'url_icon' => 'plus',
+                        'url_title' => 'Create Exam',
+                        'icon' => 'users'
+                    ]); ?>
                 </div>
                 <?php
             }
-            if($this->ki_theme->isValidMenu('fees_collection')){
-            ?>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <?= dash_box([
-                    'color1' => '#050746',
-                    'color2' => '#2027e4',
-                    'title' => 'Fee Collection(S)',
-                    'count_icon' => true,
-                    'count' => $ttlFees,
-                    'url' => 'student/collect-student-fees',
-                    'url_icon' => 'bank',
-                    'url_title' => 'Collect Fee',
-                    'icon' => 'bank'
-                ]) ?>
-            </div>
-            <?php
+            if ($this->ki_theme->isValidMenu('fees_collection')) {
+                ?>
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <?= dash_box([
+                        'color1' => '#050746',
+                        'color2' => '#2027e4',
+                        'title' => 'Fee Collection(S)',
+                        'count_icon' => true,
+                        'count' => $ttlFees,
+                        'url' => 'student/collect-student-fees',
+                        'url_icon' => 'bank',
+                        'url_title' => 'Collect Fee',
+                        'icon' => 'bank'
+                    ]) ?>
+                </div>
+                <?php
             }
             ?>
         </div>

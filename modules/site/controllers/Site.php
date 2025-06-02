@@ -93,7 +93,10 @@ class Site extends Site_Controller
                         }
                         break;
                     case 'form':
-                        if (!(CHECK_PERMISSION('CO_ORDINATE_SYSTEM') && $page->event_id == 'student_admission'))
+                        if(file_exists(DOCUMENT_PATH.'/forms/'.$page->event_id.EXT)){
+                            $html .= $this->parse('forms/'.$page->event_id,[],true);
+                        }
+                        else if (!(CHECK_PERMISSION('CO_ORDINATE_SYSTEM') && $page->event_id == 'student_admission'))
                             $html .= $this->parse('form/' . $page->event_id, [], true);
                         break;
                     case 'ebook':

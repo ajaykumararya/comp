@@ -1108,7 +1108,7 @@ var THEMEMASCOT = {};
         /* --------------------------- Menuzord - Responsive Megamenu ------------------ */
         /* ----------------------------------------------------------------------------- */
         TM_menuzord: function () {
-            alert(8)
+            //alert(8)
             var $menuzord = $("#menuzord");
             // console.log($menuzord.menuzord);
             if ($menuzord.length > 0 && !$menuzord.hasClass("menuzord-loaded")) {
