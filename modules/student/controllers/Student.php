@@ -58,7 +58,10 @@ class Student extends MY_Controller
     function admission()
     {
         $this->ki_theme->get_wallet_amount('student_admission_fees');
-        $this->view('admission');
+        if (file_exists(DOCUMENT_PATH . '/forms/admin_student_admission' . EXT))
+            $this->view('forms/admin_student_admission');
+        else
+            $this->view('admission');
     }
     function online_admission()
     {

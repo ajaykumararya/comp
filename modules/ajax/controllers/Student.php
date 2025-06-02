@@ -159,7 +159,7 @@ class Student extends Ajax_Controller
         if ($this->form_validation->run()) {
             $this->db->insert('students', $data);
             $student_id = $this->db->insert_id();
-            if (CHECK_PERMISSION('STUDENT_EXAMINATION_FORM') && table_exists('student_examiniation_passed')) {
+            if (CHECK_PERMISSION('STUDENT_EXAMINATION_FORM') && table_exists('student_examiniation_passed') && isset($examination['passed'])) {
                 foreach ($examination['passed'] as $index => $passed) {
                     if (
                         !empty($passed) || !empty($examination['name_of_stream'][$index]) ||
