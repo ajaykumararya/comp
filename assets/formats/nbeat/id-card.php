@@ -63,7 +63,7 @@
     <p class="position-absolute" style="top:24.7%;left:35.5%;width:63%">{course_name}</p>
     <p class="position-absolute" style="top:26.7%;left:35.5%;width:63%">{center_name}</p>
     <div class="position-absolute" style="top:24.1rem;left:45%;">
-        <img src="upload/images/id_card_{student_id}.png" style="width:90px" alt="">
+        <img src="upload/images/id_card_{student_id}.png" style="width:80px;border:1px solid black" alt="">
     </div>
 </body>
 
