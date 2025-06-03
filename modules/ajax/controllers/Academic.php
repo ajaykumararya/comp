@@ -174,7 +174,7 @@ class Academic extends Ajax_Controller
                 $html .= '<tr>
                         <td>' . $row->subject_name . '  ' . label(humnize_duration_with_ordinal($row->duration, $row->duration_type)) . '</td>
                         <td>
-                            <input type="text" value="' . $date . '" required name="date[' . $row->id . ']" class="future-date form-control">
+                            <input type="text" value="' . $date . '" required name="date[' . $row->id . ']" class="selectdate form-control">
                         </td>
                         <td>
                             <input type="text" value="' . $time . '" required name="time[' . $row->id . ']" class="timer form-control">
