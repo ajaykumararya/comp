@@ -9,7 +9,7 @@
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
-            text-transform: capitalize;
+            /* text-transform: capitalize; */
         }
 
         .text-capitlize {
@@ -99,16 +99,16 @@
 <body class="position-relative">
     <img id="back-image" class="position-relative" src="{document_path}/marksheet.jpg">
     <div class="position-absolute" id="photo">
-        <img src="upload/{image}" style="width:96px;border:1px solid #014f85">
+        <img src="upload/images/marksheet_{result_id}.png" style="width:80px">
     </div>
-    <div class="position-absolute" style="top:22.68%;left:10%;">
+    <!-- <div class="position-absolute" style="top:22.68%;left:10%;">
         <img src="upload/images/marksheet_{result_id}.png" style="width:90px;border:1px solid #014f85" alt="">
-    </div>
+    </div> -->
     <p class="position-absolute" style="top:17.5%;left:76.4%;width:120px">{enrollment_no}</p>
     <p class="position-absolute " style="top:17.5%;left:21.9%;width:120px">{roll_no}</p>
-    <p class="position-absolute" style="top:30.4%;left:45%;width:240px">{student_name}</p>
+    <p class="position-absolute text-capitlize " style="top:30.4%;left:45%;width:240px">{student_name}</p>
     <p class="position-absolute text-capitlize " style="top:33.4%;left:34.9%;width:238px">{father_name}</p>
-    <p class="position-absolute text-capitlize " style="top:36.5%;left:15%;width:77%;line-height:1">{course_name}</p>
+    <p class="position-absolute " style="top:36.5%;left:15%;width:77%;line-height:1">{course_name}</p>
 
     <p class="position-absolute" style="top:39.4%;left:50%;width:100px"><?=date('M Y',strtotime($issue_date))?></p>
     <p class="position-absolute" style="top:42.5%;left:14%">{center_name}</p>
