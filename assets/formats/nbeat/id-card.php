@@ -9,7 +9,7 @@
     <style>
     body {
         font-family: Arial, Helvetica, sans-serif;
-        text-transform: capitalize;
+        
     }
 
     .text-capitlize {
