@@ -111,7 +111,7 @@
     <p class="position-absolute " style="top:36.5%;left:15%;width:77%;line-height:1">{course_name}</p>
 
     <p class="position-absolute" style="top:39.4%;left:50%;width:100px"><?=date('M Y',strtotime($issue_date))?></p>
-    <p class="position-absolute" style="top:42.2%;left:14%">{center_name}</p>
+    <p class="position-absolute" style="top:42%;left:14%">{center_name}</p>
     <!-- <p class="position-absolute " style="top:31.1%;left:36.5%">{mother_name}</p> -->
     <!-- <p class="position-absolute " style="top:35.3%;left:36.5%">{center_name}</p> -->
     <!-- <p class="position-absolute text-capitlize" style="top:68.5%;left: 51.3%;width:140px">{marksheet_duration} {duration_type}</p> -->
