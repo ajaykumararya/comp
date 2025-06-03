@@ -84,7 +84,7 @@
             left: 65%;
         } */
         #center_signature{
-            bottom:8.7%;
+            bottom:7.2%;
             left:67%;
             padding:0;
             width:210px
@@ -110,8 +110,8 @@
     <div class="position-absolute " style="top:52%;left:30%"><?=date('d M Y',strtotime($dob))?></div>
 
     <!-- <div class="position-absolute text-center" style="width:450px;left:20%;top:56.5%;">{enrollment_no}</div> -->
-    <div class="position-absolute" style="width:680px;left:15%;top:55.4%;">{course_name}</div>
-    <div class="position-absolute text-center t-c" style="left:18%;top:62.6%;">{duration} {duration_type}</div>
+    <div class="position-absolute text-center" style="width:680px;left:15%;top:55.4%;">{course_name}</div>
+    <div class="position-absolute text-center t-c" style="left:18%;top:62.6%;"><?=humnize_duration($duration,$duration_type)?></div>
 
     <div class="position-absolute text-center" style="width:160px;left:38%;top:62.6%;">{from_date}</div>
     <div class="position-absolute text-center" style="width:140px;left:64%;top:62.6%;">{to_date}</div>

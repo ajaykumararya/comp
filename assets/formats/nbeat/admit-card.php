@@ -11,7 +11,7 @@
     <style>
         body{
             font-family: Arial, Helvetica, sans-serif;        
-            text-transform: uppercase;
+            text-transform: capitalize;
             font-weight: bold;
         }
         .text-capitlize{
@@ -55,10 +55,10 @@
     <!-- <p class="position-absolute" style="top:1%;left:16%">{admit_card_id}</p> -->
 
     <!-- <p class="position-absolute" style="top:1%;left:80%">{createdOn}</p> -->
-    <p class="position-absolute" style="top:19.2%;left:15%">{student_name}</p>
-    <p class="position-absolute" style="top:21.5%;left:22%">{father_name}</p>
+    <p class="position-absolute text-capitlize" style="top:19.2%;left:15%">{student_name}</p>
+    <p class="position-absolute text-capitlize" style="top:21.5%;left:22%">{father_name}</p>
     <p class="position-absolute " style="top:23.5%;left:20%;width:280px">{roll_no}</p>
-    <p class="position-absolute" style="top:25.7%;left:15%"><?=date('d M Y',strtotime($dob))?></p>
+    <p class="position-absolute" style="top:25.7%;left:15%"><?=date('d/m/Y',strtotime($dob))?></p>
     <p class="position-absolute" style="top:32.3%;left:15%;width:180px">{enrollment_no}</p>
 
     <p class="position-absolute" style="top:34.4%;left:15%">{course_name}</p>

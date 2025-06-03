@@ -9,11 +9,11 @@
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
-            text-transform: uppercase;
+            text-transform: capitalize;
         }
 
         .text-capitlize {
-            text-transform: uppercase;
+            text-transform: uppercase!important;
         }
 
         .position-relative {
@@ -88,7 +88,7 @@
             border: 1px solid red
         }
         #center_signature{
-            bottom:8.7%;
+            bottom:7.1%;
             left:67%;
             padding:0;
             width:210px
@@ -107,8 +107,8 @@
     <p class="position-absolute" style="top:17.5%;left:76.4%;width:120px">{enrollment_no}</p>
     <p class="position-absolute " style="top:17.5%;left:21.9%;width:120px">{roll_no}</p>
     <p class="position-absolute" style="top:30.4%;left:45%;width:240px">{student_name}</p>
-    <p class="position-absolute" style="top:33.4%;left:34.9%;width:238px">{father_name}</p>
-    <p class="position-absolute" style="top:36.5%;left:15%;width:77%;line-height:1">{course_name}</p>
+    <p class="position-absolute text-capitlize " style="top:33.4%;left:34.9%;width:238px">{father_name}</p>
+    <p class="position-absolute text-capitlize " style="top:36.5%;left:15%;width:77%;line-height:1">{course_name}</p>
 
     <p class="position-absolute" style="top:39.4%;left:50%;width:100px"><?=date('M Y',strtotime($issue_date))?></p>
     <p class="position-absolute" style="top:42.5%;left:14%">{center_name}</p>

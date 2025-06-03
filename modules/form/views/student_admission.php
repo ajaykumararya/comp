@@ -370,7 +370,7 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <div class="form-group">
-                                        <input type="number" name="adhar_card_no" required
+                                        <input type="number" name="adhar_card_no" <?=THEME == 'nbeat' ? '' : 'required'?>
                                             placeholder="Enter Aadhar No." class="form-control">
                                     </div>
                                 </div>
