@@ -104,17 +104,21 @@
     <!-- <div class="position-absolute" id="photo">
         <img src="upload/images/marksheet_{result_id}.png" style="width:75px;height:75px">
     </div> -->
-    
-    <!-- <p class="position-absolute" style="top:2.6%;left:11%;width:120px">{serial_no}</p> -->
-    <p class="position-absolute" style="top:16.5%;left:76%;width:120px;text-align:left">{enrollment_no}</p>
-    <p class="position-absolute " style="top:16.5%;left:30%;width:120px;text-align:left">{roll_no}</p>
-    <p class="position-absolute" style="top:33%;left:30%;width:255px;text-align:left">{student_name}</p>
-    <p class="position-absolute" style="top:34.7%;left:30%;width:255px;text-align:left">{father_name}</p>
-    <p class="position-absolute" style="top:36.3%;left:30%;width:255px;text-align:left">{mother_name}</p>
-    <p class="position-absolute" style="top:18.5%;left:28%;width:260px;line-height:1;">{course_name}</p>
     <?php
     $myduration = humnize_duration_with_ordinal($marksheet_duration, $duration_type);
     ?>
+    <!-- <p class="position-absolute" style="top:2.6%;left:11%;width:120px">{serial_no}</p> -->
+    <p class="position-absolute" style="top:16.5%;left:76%;width:120px;text-align:left">{enrollment_no}</p>
+    <p class="position-absolute " style="top:16.5%;left:28%;width:120px;text-align:left">{roll_no}</p>
+    <p class="position-absolute" style="top:18.2%;left:28%;width:260px;text-align:left">{student_name}</p>
+    <p class="position-absolute" style="top:18.2%;left:76%;text-align:left">{session}</p>
+    <p class="position-absolute" style="top:19.6%;left:28%;width:255px;text-align:left">{father_name}</p>
+    <p class="position-absolute" style="top:19.6%;left:76%;text-align:left"> <?= $myduration ?></p>
+    <p class="position-absolute" style="top:21%;left:28%;width:255px;text-align:left">{mother_name}</p>
+    <p class="position-absolute" style="top:21%;left:76%;text-align:left">Regular</p>
+    <p class="position-absolute " style="top:22.7%;left:28%;width:460px;line-height:1;text-align:left">{course_name}</p>
+    <?php
+    /*
     <p class="position-absolute " style="text-align:left;top:31.3%;left:53%;width:500px;line-height:1;font-size:14px">
         <?= $myduration ?> - {session}</p>
 
@@ -127,7 +131,9 @@
     <!-- <div class="position-absolute" style="top:25.96%;left:86.1%;">
         <img src="upload/{image}" style="width:48.1px;height:57px;" alt="">
     </div> -->
-    <div class="position-absolute " style="top:42%;left:8%;width:84%">
+    */
+    ?>
+    <div class="position-absolute " style="top:28%;left:8%;width:84%">
         <table id="first" border="0" style="width:100%">
             <thead>
                 <tr>
@@ -189,7 +195,7 @@
     }
     ?>
     
-    <p class="position-absolute" style="bottom:22.2%;left:20%;width:138px;text-align:left">{issue_date}</p>
+    <p class="position-absolute" style="bottom:15.3%;left:22%;width:138px;text-align:left">{issue_date}</p>
 
 </body>
 

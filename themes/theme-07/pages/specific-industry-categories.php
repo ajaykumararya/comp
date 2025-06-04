@@ -1,22 +1,22 @@
 <style>
     .circle-card {
         width: 100%;
-        height: 160px;
+        height: 261px;
         border-radius: 50%;
         overflow: hidden;
-        border: 3px solid #ccc;
+        border: 3px solid white;
         display: flex;
         align-items: center;
         justify-content: center;
         margin: auto;
         background: #fff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 1);
         transition: transform 0.3s ease;
     }
 
     @media only screen and (max-width: 600px) {
         .circle-card {
-            height: 72px;
+            height: 72px!important;
         }
     }
 
@@ -54,9 +54,9 @@
             if ($data->num_rows()):
                 $index = 0;
                 foreach ($data->result() as $row):
-                    if($index++ % 4 == 0)
+                    if ($index++ % 4 == 0)
                         echo '</div><div class="row">';
-                    
+
                     ?>
                     <div class="col-6 col-md-3 col-xs-3">
                         <div class="circle-card">
