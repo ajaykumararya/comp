@@ -108,8 +108,8 @@
     $myduration = humnize_duration_with_ordinal($marksheet_duration, $duration_type);
     ?>
     <!-- <p class="position-absolute" style="top:2.6%;left:11%;width:120px">{serial_no}</p> -->
-    <p class="position-absolute" style="top:16.5%;left:76%;width:120px;text-align:left">{enrollment_no}</p>
-    <p class="position-absolute " style="top:16.5%;left:28%;width:120px;text-align:left">{roll_no}</p>
+    <p class="position-absolute" style="top:16.5%;left:76%;width:220px;text-align:left">{enrollment_no}</p>
+    <p class="position-absolute " style="top:16.5%;left:28%;width:220px;text-align:left">{roll_no}</p>
     <p class="position-absolute" style="top:18.2%;left:28%;width:260px;text-align:left">{student_name}</p>
     <p class="position-absolute" style="top:18.2%;left:76%;text-align:left">{session}</p>
     <p class="position-absolute" style="top:19.6%;left:28%;width:255px;text-align:left">{father_name}</p>
