@@ -202,6 +202,15 @@
                                 <label class="form-label required">Upload Photo</label>
                                 <input type="file" name="image" class="form-control">
                             </div>
+
+                            <?php
+                            echo form_hidden([
+                                'pincode' => 'Pincode',
+                                'state_id' => 0,
+                                'city_id' => 0
+                            ]);
+                            /*
+                            ?>
                             <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
                                 <label class="form-label required">Pincode</label>
                                 <input class="form-control" name="pincode" placeholder="Enter Pincode">
@@ -228,6 +237,9 @@
                                     <option></option>
                                 </select>
                             </div>
+                            <?ph
+                            */
+                            ?>
                             <!-- <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
                                 <label class="form-label required">Username</label>
                                 <input type="text" name="username" class="form-control" placeholder="Enter">

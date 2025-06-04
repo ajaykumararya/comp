@@ -202,42 +202,53 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                     <label for="adhar_card" class="form-label required">Aadhar Card
 
                                     </label>
-                                    <input type="file" class="form-control" name="adhar_card" id="adhar_card" style="margin-bottom:15px">
+                                    <input type="file" class="form-control" name="adhar_card" id="adhar_card"
+                                        style="margin-bottom:15px">
                                 </div>
                                 <!-- <div class="form-group mb-4 col-lg-12 col-xs-12 col-sm-12">
                                     <label class="form-label required">Address</label>
                                     <textarea class="form-control" name="address" placeholder="Address"></textarea>
-                                </div> -->
-                                <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
-                                    <label class="form-label required">Upload Photo</label>
-                                    <input type="file" name="image" class="form-control">
-                                </div>
-                                <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
-                                    <label class="form-label required">Pincode</label>
-                                    <input class="form-control" name="pincode" placeholder="Enter Pincode">
-                                </div>
-                                <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
-                                    <label class="form-label required">Select State </label>
-                                    <select class="form-control get_city" name="state_id" data-control="select2"
-                                        data-placeholder="Select a State">
-                                        <option value="">--Select--</option>
-                                        <option></option>
-                                        <?php
-                                        $state = $this->db->order_by('STATE_NAME', 'ASC')->get('state');
-                                        if ($state->num_rows()) {
-                                            foreach ($state->result() as $row)
-                                                echo '<option value="' . $row->STATE_ID . '">' . $row->STATE_NAME . '</option>';
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12 form-group-city">
-                                    <label class="form-label required">Select District <span id="load"></span></label>
-                                    <select class="form-control list-cities" name="city_id" data-control="select2"
-                                        data-placeholder="Select a District">
-                                        <option></option>
-                                    </select>
-                                </div>
+                                </div> --><div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                        <label class="form-label required">Upload Photo</label>
+                                        <input type="file" name="image" class="form-control">
+                                    </div>
+                                <?php
+                                echo form_hidden([
+                                    'pincode' => 'Pincode',
+                                    'state_id' => 0,
+                                    'city_id' => 0
+                                ]);
+                                /*
+                                    
+                                    <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                        <label class="form-label required">Pincode</label>
+                                        <input class="form-control" name="pincode" placeholder="Enter Pincode">
+                                    </div>
+                                    <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                        <label class="form-label required">Select State </label>
+                                        <select class="form-control get_city" name="state_id" data-control="select2"
+                                            data-placeholder="Select a State">
+                                            <option value="">--Select--</option>
+                                            <option></option>
+                                            <?php
+                                            $state = $this->db->order_by('STATE_NAME', 'ASC')->get('state');
+                                            if ($state->num_rows()) {
+                                                foreach ($state->result() as $row)
+                                                    echo '<option value="' . $row->STATE_ID . '">' . $row->STATE_NAME . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <?php
+                                    
+                                    <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12 form-group-city">
+                                        <label class="form-label required">Select District <span id="load"></span></label>
+                                        <select class="form-control list-cities" name="city_id" data-control="select2"
+                                            data-placeholder="Select a District">
+                                            <option></option>
+                                        </select>
+                                    </div>*/
+                                ?>
                             </div>
 
                         </div>
