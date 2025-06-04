@@ -188,7 +188,7 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
 
 
                                 <!-- Medium -->
-                                <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                <!-- <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
                                     <label for="medium" class="form-label">Medium:</label>
                                     <select name="medium" data-control="select2" data-allow-clear="true"
                                         data-placeholder="Select Medium" id="medium" class="form-control">
@@ -196,7 +196,7 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                         <option value="Hindi">Hindi Medium</option>
                                         <option value="English">English Medium</option>
                                     </select>
-                                </div>
+                                </div> -->
 
                                 <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
                                     <label for="adhar_card" class="form-label required">Aadhar Card
