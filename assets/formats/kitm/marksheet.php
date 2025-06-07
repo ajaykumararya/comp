@@ -107,16 +107,18 @@
     <?php
     $myduration = humnize_duration_with_ordinal($marksheet_duration, $duration_type);
     ?>
-    <!-- <p class="position-absolute" style="top:2.6%;left:11%;width:120px">{serial_no}</p> -->
-    <p class="position-absolute" style="top:16.5%;left:76%;width:220px;text-align:left">{enrollment_no}</p>
-    <p class="position-absolute " style="top:16.5%;left:28%;width:220px;text-align:left">{roll_no}</p>
-    <p class="position-absolute" style="top:18.2%;left:28%;width:260px;text-align:left">{student_name}</p>
-    <p class="position-absolute" style="top:18.2%;left:76%;text-align:left">{session}</p>
-    <p class="position-absolute" style="top:19.6%;left:28%;width:255px;text-align:left">{father_name}</p>
-    <p class="position-absolute" style="top:19.6%;left:76%;text-align:left"> <?= $myduration ?></p>
-    <p class="position-absolute" style="top:21%;left:28%;width:255px;text-align:left">{mother_name}</p>
-    <p class="position-absolute" style="top:21%;left:76%;text-align:left">Regular</p>
-    <p class="position-absolute " style="top:22.7%;left:28%;width:460px;line-height:1;text-align:left">{course_name}</p>
+    <p class="position-absolute" style="top:3.8%;left:76.5%;width:120px"><?php
+    echo '100' . date('Y', strtotime($issue_date)) . $result_id;
+    ?></p>
+    <p class="position-absolute" style="top:24.2%;left:78%;width:220px;text-align:left">{enrollment_no}</p>
+    <p class="position-absolute" style="top:24.2%;left:30%;width:220px;text-align:left">{roll_no}</p>
+    <p class="position-absolute" style="top:25.7%;left:30%;width:260px;text-align:left">{student_name}</p>
+    <p class="position-absolute" style="top:25.7%;left:78%;text-align:left">{session}</p>
+    <p class="position-absolute" style="top:27.4%;left:30%;width:255px;text-align:left">{father_name}</p>
+    <p class="position-absolute" style="top:27.4%;left:78%;text-align:left"> <?= $myduration ?></p>
+    <p class="position-absolute" style="top:29%;left:30%;width:255px;text-align:left">{mother_name}</p>
+    <p class="position-absolute" style="top:29%;left:78%;text-align:left">Regular</p>
+    <p class="position-absolute " style="top:30.8%;left:30%;width:460px;line-height:1;text-align:left">{course_name}</p>
     <?php
     /*
     <p class="position-absolute " style="text-align:left;top:31.3%;left:53%;width:500px;line-height:1;font-size:14px">
@@ -126,14 +128,14 @@
     <p class="position-absolute" style="top:37.9%;left:30%;width:60%;line-height:1;text-align:left">{center_name}</p>
     <!-- <p class="position-absolute " style="top:31.1%;left:36.5%">{mother_name}</p> -->
     <!-- <p class="position-absolute " style="top:35.3%;left:36.5%">{center_name}</p> -->
-    <p class="position-absolute" style="top:36%;left:76%;width:120px;text-align:left"><?= $myduration ?></p>
+    <p class="position-absolute" style="top:36%;left:78%;width:120px;text-align:left"><?= $myduration ?></p>
     <!-- <p class="position-absolute " style="top:39.6%;left:36.5%">{dob}</p> -->
     <!-- <div class="position-absolute" style="top:25.96%;left:86.1%;">
         <img src="upload/{image}" style="width:48.1px;height:57px;" alt="">
     </div> -->
     */
     ?>
-    <div class="position-absolute " style="top:28%;left:8%;width:84%">
+    <div class="position-absolute " style="top:34%;left:8%;width:84%">
         <table id="first" border="0" style="width:100%">
             <thead>
                 <tr>
@@ -154,20 +156,21 @@
             <tbody>
                 <?php
                 // pre(getMark($marks);
-                foreach($marks as $mark):
+                foreach ($marks as $mark):
 
-                ?>
-                <tr>
-                    <td class="primary lb"><?=getMark($mark['subject_code'])?></td>
-                    <td class="primary lb" style="text-align:left;padding-left:6px;font-size:12.81px"><?=getMark($mark['subject_name'])?>
-                    </td>
-                    <td class="primary lb" style="font-size:12.81px"><?=getMark($mark['theory_max_marks'])?></td>
-                    <td class="primary lb" style="font-size:12.81px"><?=getMark($mark['practical_max_marks'])?></td>
-                    <td class="primary lb" style="font-size:12.81px"><?=getMark($mark['theory_total'])?></td>
-                    <td class="primary lb" style="font-size:12.81px"><?=getMark($mark['practical_total'])?></td>
-                    <td class="fw lb" style="font-size:12.81px"><?=getMark($mark['total'])?></td>
-                </tr>
-                <?php
+                    ?>
+                    <tr>
+                        <td class="primary lb"><?= getMark($mark['subject_code']) ?></td>
+                        <td class="primary lb" style="text-align:left;padding-left:6px;font-size:12.81px">
+                            <?= getMark($mark['subject_name']) ?>
+                        </td>
+                        <td class="primary lb" style="font-size:12.81px"><?= getMark($mark['theory_max_marks']) ?></td>
+                        <td class="primary lb" style="font-size:12.81px"><?= getMark($mark['practical_max_marks']) ?></td>
+                        <td class="primary lb" style="font-size:12.81px"><?= getMark($mark['theory_total']) ?></td>
+                        <td class="primary lb" style="font-size:12.81px"><?= getMark($mark['practical_total']) ?></td>
+                        <td class="fw lb" style="font-size:12.81px"><?= getMark($mark['total']) ?></td>
+                    </tr>
+                    <?php
                 endforeach;
                 ?>
             </tbody>
@@ -194,8 +197,22 @@
         return $num;
     }
     ?>
-    
-    <p class="position-absolute" style="bottom:15.3%;left:22%;width:138px;text-align:left">{issue_date}</p>
+    <p class="position-absolute" style="top:70%;left:18%;font-weight:600;font-size:17px">
+        Result: {division}
+    </p>
+    <p class="position-absolute" style="top:70%;left:40%;font-weight:600;font-size:17px">
+        Max Total: {max_total}
+    </p>
+    <p class="position-absolute" style="top:70%;left:60%;font-weight:600;font-size:17px">
+        Max Obt: {obtain_total}
+    </p>
+    <p class="position-absolute text-center" style="top:74%;left:10%;width:80%">
+        Candidate should pass seprately in each paper(Theory/Practical and Extarnal/Internal) with 40% marks.
+    </p>
+    <div class="position-absolute" style="left:45%;top:87%">
+        <img src="upload/images/front_marksheet_{result_id}.png" style="width:75px;border:1px solid black">
+    </div>
+    <p class="position-absolute" style="bottom:14.2%;left:21%;width:138px;text-align:left">{issue_date}</p>
 
 </body>
 
