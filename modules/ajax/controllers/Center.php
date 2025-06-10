@@ -10,12 +10,13 @@ class Center extends Ajax_Controller
             ->update('centers');
         $this->response('status', true);
     }
-    function update_centre_setting(){
+    function update_centre_setting()
+    {
         $data = $this->post();
         $id = $data['center_id'];
         unset($data['center_id']);
         $this->db->where('id', $id)->update('centers', $data);
-        $this->response('status',true);
+        $this->response('status', true);
     }
     function add()
     {
@@ -475,21 +476,43 @@ class Center extends Ajax_Controller
     function add_exam_centre()
     {
         if ($this->validation('centre_exam')) {
-            $this->response('status', $this->db->insert('exam_centres',$this->post()));
+            $this->response('status', $this->db->insert('exam_centres', $this->post()));
         }
     }
     function list_exam_centre()
     {
         $this->response('data', $this->db->get('exam_centres')->result_array());
     }
-    function delete_exam_centre($id){
-        $this->response('status',$this->db->where('id',$id)->delete('exam_centres'));
+    function delete_exam_centre($id)
+    {
+        $this->response('status', $this->db->where('id', $id)->delete('exam_centres'));
     }
-    function update_centre_exam(){
-        $this->response('status',$this->db->where('id',$this->post('id'))->update('exam_centres',[
+    function update_centre_exam()
+    {
+        $this->response('status', $this->db->where('id', $this->post('id'))->update('exam_centres', [
             'centre_name' => $this->post('centre_name'),
             'centre_code' => $this->post('centre_code'),
             'centre_address' => $this->post('centre_address'),
         ]));
+    }
+
+    function generate_id_card()
+    {
+        // $this->response('data' ,$this->post());
+        $issue_date = $this->post('issue_date');
+        $this->db->where('id', $this->post('center_id'))->update('centers', [
+            'id_card_issue_date' => $issue_date == null ? NULL : $issue_date
+        ]);
+        $this->response('status', true);
+        // $this->response('query',$this->db->last_query());
+        $this->response('message', $issue_date == null ? 'ID Card removed Successfully..' : 'ID Card Issued Successfully');
+    }
+    function id_cards()
+    {
+        $get = $this->db->where('id_card_issue_date!=','null')->where('type','center')->order_by('id_card_issue_date', 'ASC')->get('centers');
+        $this->response([
+            'status' => $get->num_rows(),
+            'data' => $get->result_array()
+        ]);
     }
 }

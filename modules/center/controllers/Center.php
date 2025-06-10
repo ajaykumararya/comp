@@ -109,4 +109,11 @@ class Center extends MY_Controller
     function exam_centre(){
         $this->view('exam_centre');
     }
+    function id_card(){
+        if(CHECK_PERMISSION('FRANCHISE_ID_CARD')){
+            $this->view('id-cards');
+        }
+        else
+            show_404();
+    }
 }

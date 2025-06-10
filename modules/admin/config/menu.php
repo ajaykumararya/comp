@@ -738,6 +738,13 @@ $config['center_area'] = array(
             )
         ),
         array(
+            'label' => 'Center ID Card',
+            'type' => 'id_card',
+            'icon' => array('notepad', 5),
+            'condition' => CHECK_PERMISSION('FRANCHISE_ID_CARD'),
+            'url' => 'center/id-card'
+        ),
+        array(
             'label' => 'Center Certificate',
             'type' => 'center_certificate',
             'icon' => array('notepad', 5),

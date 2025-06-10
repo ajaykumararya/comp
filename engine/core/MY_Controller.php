@@ -138,6 +138,17 @@ class MY_Controller extends MX_Controller
         //         ]
         //     ]);
         // }
+        if(CHECK_PERMISSION('FRANCHISE_ID_CARD')){
+            $checkField = $this->build_db->field_exists('centers', 'id_card_issue_date');
+            if (!$checkField) {
+                $this->build_db->add_field('centers', [
+                    'id_card_issue_date' => [
+                        'type' => 'varchar(100)',
+                        'default' => null
+                    ]
+                ]);
+            }
+        }
         if (PATH == 'sct_ebook') {
             $checkField = $this->build_db->field_exists('marksheets', 'marksheet_type');
             if (!$checkField) {

@@ -1,0 +1,14 @@
+<?php
+
+function my_grade($score)
+{
+    if ($score >= 75)
+        return 'A';
+    elseif ($score >= 60)
+        return 'B';
+    elseif ($score >= 50)
+        return 'C';
+    else if ($score >= 40)
+        return 'D';
+}
+?>

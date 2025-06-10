@@ -477,6 +477,16 @@ class Document extends MY_Controller
         } else
             $this->not_found("Certificate Not Found..");
     }
+    function franchise_id_card(){
+        $get = $this->center_model->get_center($this->id);
+        if($get->num_rows() && CHECK_PERMISSION('FRANCHISE_ID_CARD')){
+            $row = $get->row_array();
+            // pre($row);
+            $output = $this->parse('franchise-id-card',$row);
+            $this->pdf($output);
+        }else
+            $this->not_found("Franchise ID Card Not Found..");
+    }
     function pdf($pdfContent, $filename = 'my-pdf.pdf')
     {
         header('Content-Type: text/html; charset=utf-8');

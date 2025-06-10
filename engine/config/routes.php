@@ -62,6 +62,7 @@ $route['id-card/(:any)'] = 'document/id_card';
 $route['registration/(:any)'] = 'document/registration';
 
 $route['franchise-certificate/(:any)'] = 'document/franchise_certificate';
+$route['franchise-id-card/(:any)'] = 'document/franchise_id_card/$1';
 $route['marksheet-verification/(:any)'] = 'site/marksheet_print/$1';
 $route['en-verification/(:any)'] = 'site/student_varify/$1';
 $route['student-details/(:any)'] = 'site/student_details/$1';

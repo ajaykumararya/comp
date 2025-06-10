@@ -474,6 +474,7 @@ class Ki_theme
             'eccLevel' => QRCode::ECC_L,
             'imageBase64' => $return,
             'margin' => 0,
+            'padding' => 0,
             'imageTransparent' => true
         ]);
         // Create QR code

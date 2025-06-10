@@ -194,12 +194,21 @@ if (!function_exists('duration_in_month')) {
         return $duration * ($duration_type == 'month' ? 1 : ($duration_type == 'semester' ? 6 : 12));
     }
 }
-function getHindiMonthFromDate($date) {
+function getHindiMonthFromDate($date)
+{
     $months = [
-        1 => 'जनवरी', 2 => 'फ़रवरी', 3 => 'मार्च',
-        4 => 'अप्रैल', 5 => 'मई', 6 => 'जून',
-        7 => 'जुलाई', 8 => 'अगस्त', 9 => 'सितंबर',
-        10 => 'अक्टूबर', 11 => 'नवंबर', 12 => 'दिसंबर'
+        1 => 'जनवरी',
+        2 => 'फ़रवरी',
+        3 => 'मार्च',
+        4 => 'अप्रैल',
+        5 => 'मई',
+        6 => 'जून',
+        7 => 'जुलाई',
+        8 => 'अगस्त',
+        9 => 'सितंबर',
+        10 => 'अक्टूबर',
+        11 => 'नवंबर',
+        12 => 'दिसंबर'
     ];
 
     $monthNumber = date('n', strtotime($date)); // 1 to 12
@@ -725,4 +734,31 @@ function getYouTubeThumbnail($videoID, $quality = 'maxresdefault')
         // Fallback to a lower resolution if maxresdefault is not available
         return $baseUrl . $videoID . "/hqdefault.jpg";
     }
+}
+function detect_course_type($course_id, $duration)
+{
+    $ci = &get_instance();
+
+    $ci->db->from('subjects');
+    $ci->db->where('course_id', $course_id);
+    $ci->db->where('duration', $duration);
+    $query = $ci->db->get();
+
+    $isTheory = false;
+    $isPractical = false;
+    if ($query->num_rows()) {
+        foreach ($query->result() as $row) {
+            if ($row->subject_type == 'theory' && !$isTheory)
+                $isTheory = true;
+            if ($row->subject_type == 'practical' && !$isPractical)
+                $isPractical = true;
+            if ($row->subject_type == 'both') {
+                $isTheory = $isPractical = true;
+                break;
+            }
+        }
+    }
+
+
+    return ($isTheory && $isPractical) ? 'Theory & Practical' : ($isTheory ? 'Theory' : 'Practical');
 }
