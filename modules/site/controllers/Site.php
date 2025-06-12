@@ -93,10 +93,9 @@ class Site extends Site_Controller
                         }
                         break;
                     case 'form':
-                        if(file_exists(DOCUMENT_PATH.'/forms/'.$page->event_id.EXT)){
-                            $html .= $this->parse('forms/'.$page->event_id,[],true);
-                        }
-                        else if (!(CHECK_PERMISSION('CO_ORDINATE_SYSTEM') && $page->event_id == 'student_admission'))
+                        if (file_exists(DOCUMENT_PATH . '/forms/' . $page->event_id . EXT)) {
+                            $html .= $this->parse('forms/' . $page->event_id, [], true);
+                        } else if (!(CHECK_PERMISSION('CO_ORDINATE_SYSTEM') && $page->event_id == 'student_admission'))
                             $html .= $this->parse('form/' . $page->event_id, [], true);
                         break;
                     case 'ebook':
@@ -234,7 +233,8 @@ class Site extends Site_Controller
             $this->error_404();
         }
     }
-    function typing_certificate(){
+    function typing_certificate()
+    {
         // for verificiation..
         $token = $this->uri->segment(2);
         try {
@@ -298,12 +298,17 @@ class Site extends Site_Controller
             $data = $get->row_array();
             // pre($data,true)  ;
             $this->set_data('page_name', $data['student_name'] . ' Details');
-            $this->set_data($data);
+            $this->set_data('student_data',$data);
             $this->set_data('student_address', $data['address']);
             $this->set_data('isPrimary', false);
             if (PATH != 'upstate') {
+                
+                if (file_exists(DOCUMENT_PATH .'/student-details' . EXT))
+                    $content = $this->parse('student-details');
+                else
+                    $content = $this->template('student-details');
                 $this->render('schema', [
-                    'content' => $this->template('student-details')
+                    'content' => $content
                 ]);
             } else {
                 $this->load->module('document');
@@ -382,7 +387,7 @@ class Site extends Site_Controller
     }
     function test()
     {
-        echo base_url('typing-certificate/'. $this->token->encode([
+        echo base_url('typing-certificate/' . $this->token->encode([
             'id' => 1
         ]));
 

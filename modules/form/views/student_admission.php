@@ -190,47 +190,59 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                     <input type="text" name="mother_name" id="aadhar_number" class="form-control"
                                         placeholder="Enter Mothe Name">
                                 </div>
-                                <div
-                                    class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12 <?= ($isFamilyId ? '' : 'd-none') ?>">
-                                    <label class="form-label">Family ID</label>
-                                    <input type="email" name="family_id" class="form-control"
-                                        placeholder="Enter family ID">
-                                </div>
-                                <!-- Marital Status -->
-                                <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
-                                    <label for="marital_status" class="form-label">Marital Status:</label>
-                                    <select name="marital_status" data-control="select2" data-allow-clear="true"
-                                        data-placeholder="Select Marital Status" id="marital_status"
-                                        class="form-control">
-                                        <option value="">Select</option>
-                                        <option value="Married">Married</option>
-                                        <option value="Unmarried">Unmarried</option>
-                                    </select>
-                                </div>
+                                <?php
+                                if ($isFamilyId):
+                                    ?>
+                                    <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12 ">
+                                        <label class="form-label">Family ID</label>
+                                        <input type="email" name="family_id" class="form-control"
+                                            placeholder="Enter family ID">
+                                    </div>
+                                    <?php
+                                else:
+                                    echo form_hidden('family_id', '');
+                                endif;
+                                // echo PATH;
+                                if (!in_array(PATH, ['abc'])) {
+                                    ?>
+                                    <!-- Marital Status -->
+                                    <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
+                                        <label for="marital_status" class="form-label">Marital Status:</label>
+                                        <select name="marital_status" data-control="select2" data-allow-clear="true"
+                                            data-placeholder="Select Marital Status" id="marital_status"
+                                            class="form-control">
+                                            <option value="">Select</option>
+                                            <option value="Married">Married</option>
+                                            <option value="Unmarried">Unmarried</option>
+                                        </select>
+                                    </div>
 
-                                <!-- Category -->
-                                <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
-                                    <label for="category" class="form-label">Category:</label>
-                                    <select name="category" data-control="select2" data-allow-clear="true"
-                                        data-placeholder="Select Category" id="category" class="form-control">
-                                        <option value="">Select Category</option>
-                                        <option value="General">General</option>
-                                        <option value="OBC">OBC</option>
-                                        <option value="SC">SC</option>
-                                        <option value="ST">ST</option>
-                                    </select>
-                                </div>
+                                    <!-- Category -->
+                                    <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
+                                        <label for="category" class="form-label">Category:</label>
+                                        <select name="category" data-control="select2" data-allow-clear="true"
+                                            data-placeholder="Select Category" id="category" class="form-control">
+                                            <option value="">Select Category</option>
+                                            <option value="General">General</option>
+                                            <option value="OBC">OBC</option>
+                                            <option value="SC">SC</option>
+                                            <option value="ST">ST</option>
+                                        </select>
+                                    </div>
 
-                                <!-- Medium -->
-                                <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
-                                    <label for="medium" class="form-label">Medium:</label>
-                                    <select name="medium" data-control="select2" data-allow-clear="true"
-                                        data-placeholder="Select Medium" id="medium" class="form-control">
-                                        <option value="">Select</option>
-                                        <option value="Hindi">Hindi Medium</option>
-                                        <option value="English">English Medium</option>
-                                    </select>
-                                </div>
+                                    <!-- Medium -->
+                                    <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
+                                        <label for="medium" class="form-label">Medium:</label>
+                                        <select name="medium" data-control="select2" data-allow-clear="true"
+                                            data-placeholder="Select Medium" id="medium" class="form-control">
+                                            <option value="">Select</option>
+                                            <option value="Hindi">Hindi Medium</option>
+                                            <option value="English">English Medium</option>
+                                        </select>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
                                 <div class="form-group mb-4 col-lg-12 col-xs-12 col-sm-12">
                                     <label class="form-label required">Address</label>
                                     <textarea class="form-control" name="address" placeholder="Address"></textarea>
@@ -370,7 +382,7 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <div class="form-group">
-                                        <input type="number" name="adhar_card_no" <?=THEME == 'nbeat' ? '' : 'required'?>
+                                        <input type="number" name="adhar_card_no" <?= THEME == 'nbeat' ? '' : 'required' ?>
                                             placeholder="Enter Aadhar No." class="form-control">
                                     </div>
                                 </div>
