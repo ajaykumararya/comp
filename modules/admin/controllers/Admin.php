@@ -2,14 +2,15 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 class Admin extends MY_Controller
 {
-    function upload_editor_file() {
+    function upload_editor_file()
+    {
         header("Content-Type: application/json");
 
         if (isset($_FILES['file']['name'])) {
-            $config['upload_path']   = './upload/';
+            $config['upload_path'] = './upload/';
             $config['allowed_types'] = 'jpg|jpeg|png|gif';
-            $config['max_size']      = 2048; // 2MB
-            $config['encrypt_name']  = TRUE;
+            $config['max_size'] = 2048; // 2MB
+            $config['encrypt_name'] = TRUE;
 
             $this->load->library('upload', $config);
 
@@ -26,12 +27,17 @@ class Admin extends MY_Controller
     }
     function index()
     {
-        if($this->center_model->isCenter()){
+        if ($this->center_model->isCenter()) {
             // pre($this->public_data,true);
-            if(isset($this->public_data['center_data']['valid_upto']) && isset($this->public_data['center_data']['certificate_issue_date'])){
+            if (isset($this->public_data['center_data']['valid_upto']) && isset($this->public_data['center_data']['certificate_issue_date'])) {
                 // pre($this->public_data['center_data'],true);
+                if (CHECK_PERMISSION('FRANCHISE_ID_CARD')) {
+                    $this->ki_theme->breadcrumb_action_html(
+                        $this->ki_theme->set_attribute('target', '_blank')->with_icon('tablet-text-down text-primary', 4)->with_pulse('primary')->outline_dashed_style('primary')->set_class('text-primary')->add_action('View ID Card', ('franchise-id-card/' . $this->encode($this->public_data['center_data']['id'])))
+                    );
+                }
                 $this->ki_theme->breadcrumb_action_html(
-                    $this->ki_theme->set_attribute('target','_blank')->with_icon('tablet-text-down text-warning', 4)->with_pulse('warning')->outline_dashed_style('warning')->set_class('text-warning')->add_action('View Certificate', ('franchise-certificate/'.$this->encode($this->public_data['center_data']['id'])))
+                    $this->ki_theme->set_attribute('target', '_blank')->with_icon('tablet-text-down text-warning', 4)->with_pulse('warning')->outline_dashed_style('warning')->set_class('text-warning')->add_action('View Certificate', ('franchise-certificate/' . $this->encode($this->public_data['center_data']['id'])))
                 );
             }
         }
@@ -80,7 +86,7 @@ class Admin extends MY_Controller
         // $order = $this->razorpay->fetchOrder('order_Ox2Pf0s7PibuEo');
         // pre($order,true);
         $this->load->module('razorpay');
-        $this->view('wallet-load',['isValid' => true]);
+        $this->view('wallet-load', ['isValid' => true]);
 
         /*
         try {
@@ -94,7 +100,8 @@ class Admin extends MY_Controller
     {
         $this->view('manage-role-category');
     }
-    function manage_role_account(){
+    function manage_role_account()
+    {
         $this->view('manage-role-account');
     }
     function test()

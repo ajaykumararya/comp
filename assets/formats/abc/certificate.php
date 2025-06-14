@@ -94,7 +94,7 @@
     
     <!-- <p class="position-absolute" style="top:48%;left:16%;">{createdOn}</p> -->
 
-    <p class="position-absolute text-center" style="width:84%;left:8%;top:34%;">{student_name}</p>
+    <p class="position-absolute text-center" style="width:84%;left:8%;top:34%;text-transform:upparcase">{student_name}</p>
     <p class="position-absolute text-center " style="width:84%;top:40.2%;left:8%">{father_name}</p>
 
     <p class="position-absolute text-center" style="width:70%;left:21%;top:46.2%;">{course_name}</p>

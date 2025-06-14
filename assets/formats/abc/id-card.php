@@ -102,6 +102,7 @@
         </table>
     </div>
     <p class="position-absolute text-center" style="top:55%;;width:400px">{center_full_address}</p>
+    <p class="position-absolute text-center " style="top:1%;;width:400px">{center_name}</p>
     <div class="position-absolute" style="width: 70px;top:15%;left:37%;">
         <img src="<?=$this->ki_theme->generate_qr($student_id,'id-card',current_url(),true)?>" style="padding:0;width: 100%;height:100%" />
     </div>

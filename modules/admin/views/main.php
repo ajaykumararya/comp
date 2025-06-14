@@ -246,6 +246,9 @@
                             // echo ucfirst($this->session->userdata('admin_type'));
                             if ($this->center_model->isCenter()) {
                                 echo $center_data['institute_name'] . ' ' . label('ID ' . $center_data['center_number'], 'info fs-4');
+                                echo label('Valid Upto : '.$center_data['valid_upto'],'primary fs-4');
+                                echo "\t";
+                                echo $center_data['status'] ? label('Active','success fs-4') : label('In-Active','danger fs-4');
                             }
                             ?>
                         </a>
