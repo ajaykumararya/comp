@@ -6,5 +6,8 @@ class Event extends Admin_Controller{
     function users(){
         $this->view('users');
     }
+    function setting(){
+        $this->view('setting');
+    }
 }
 

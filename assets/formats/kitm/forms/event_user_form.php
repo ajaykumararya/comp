@@ -5,9 +5,10 @@
                 <div class="text-center animation animated fadeInUp" data-aos="fade-up" data-animation="fadeInUp"
                     data-animation-delay="0.01s" style="animation-delay: 0.01s; opacity: 1;">
                     <div class="heading_s1 text-center">
-                        <h2 class="main-heading center-heading"><i class="fa fa-plus"></i> प्रतिभा विद्यार्थी सम्मान
-                            समारोह
+                        <h2 class="main-heading center-heading">
+                            <?= ES('event_form_page_title', 'प्रतिभा विद्यार्थी सम्मान समारोह') ?>
                         </h2>
+                        <p><?= ES('event_form_page_description', '') ?></p>
                     </div>
                 </div>
             </div>
@@ -28,29 +29,30 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="" class="form-label">Father's Name (पिता का नाम):</label>
-                                        <input type="text" name="father_name"  required
+                                        <input type="text" name="father_name" required
                                             placeholder="Enter Father's Name (पिता का नाम):" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="" class="form-label">Course (पाठ्यक्रम):</label>
-                                        <input type="text" name="course"  required placeholder="Enter Course (पाठ्यक्रम):"
-                                            class="form-control">
+                                        <input type="text" name="course" required
+                                            placeholder="Enter Course (पाठ्यक्रम):" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="" class="form-label">Year / Semester (वर्ष / सेमेस्टर):</label>
                                         <input type="text" name="duration"
-                                            placeholder="Enter Year / Semester (वर्ष / सेमेस्टर):"  required class="form-control">
+                                            placeholder="Enter Year / Semester (वर्ष / सेमेस्टर):" required
+                                            class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="" class="form-label">Roll Number / Enrollment Number (रोल नंबर /
                                             नामांकन संख्या):</label>
-                                        <input type="text" name="roll_no"  required
+                                        <input type="text" name="roll_no" required
                                             placeholder="Enter Roll Number / Enrollment Number (रोल नंबर / नामांकन संख्या):"
                                             class="form-control">
                                     </div>
@@ -58,28 +60,42 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="" class="form-label">Contact Number (संपर्क नंबर):</label>
-                                        <input name="mobile" type="number"  required
+                                        <input name="mobile" type="number" required
                                             placeholder="Enter Contact Number (संपर्क नंबर):" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="" class="form-label">Email ID (ईमेल आईडी):</label>
-                                        <input type="email" name="email" required  placeholder="Enter Email ID (ईमेल आईडी):"
-                                            class="form-control">
+                                        <input type="email" name="email" required
+                                            placeholder="Enter Email ID (ईमेल आईडी):" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="" class="form-label">Dob</label>
+                                        <label for="" class="form-label">D.O.B</label>
                                         <input type="date" name="dob" class="form-control"
-                                            placeholder="Select date of birth"  required name="dob">
+                                            placeholder="Select date of birth" required name="dob">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="" class="form-label">Image (परोफ़ील इमेज ):</label>
+                                        <input type="file" name="image" required class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="" class="form-label">Educational Document (एजुकेशनल डाक्यमेन्ट
+                                            )</label>
+                                        <input type="file" name="educational_doc" class="form-control" required
+                                            name="dob">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="" class="form-label">Other Information (अन्य विवरण):</label>
-                                        <input type="text" name="other_information"  required
+                                        <input type="text" name="other_information" required
                                             placeholder="Enter Other Information (अन्य विवरण):" class="form-control">
                                     </div>
                                 </div>
@@ -99,14 +115,14 @@
 </section>
 
 <script>
-    $(document).on('submit','.event-data-send',function(e){
+    $(document).on('submit', '.event-data-send', function (e) {
         e.preventDefault();
         $.AryaAjax({
             url: 'event/add-user',
-            data : new FormData(this),
-            success_message : 'User Added Successfully...'
+            data: new FormData(this),
+            success_message: 'User Added Successfully...'
         }).then((res) => {
-            if(res.status){
+            if (res.status) {
                 $('.event-data-send')[0].reset();
             }
             showResponseError(res);

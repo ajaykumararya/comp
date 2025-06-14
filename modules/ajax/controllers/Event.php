@@ -11,6 +11,9 @@ class Event extends Ajax_Controller
         $this->form_validation->set_rules('email', 'Email', 'required|is_unique[event_users.email]');
         $this->form_validation->set_rules('mobile', 'Mobile', 'required|is_unique[event_users.mobile]');
         if ($this->validation()) {
+            $data = $this->post();
+            $data['image'] = $this->file_up('image');
+            $data['educational_doc'] = $this->file_up('educational_doc');
             $this->db->insert('event_users', $this->post());
             $this->response([
                 'status' => true

@@ -20,6 +20,7 @@
                                 <th>Email</th>
                                 <th>Dob</th>
                                 <th>Other Information</th>
+                                <th style="width:150px">Files</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
