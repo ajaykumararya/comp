@@ -26,6 +26,11 @@ class MY_Controller extends MX_Controller
         $this->load->library('common/database_manager', '', 'build_db');
         $this->load->library('common/ki_theme');
         $this->load->config('form/forms');
+        if (CHECK_PERMISSION('EVENT_AREA')) {
+            append_items('forms', [
+                'event_user_form' => 'Event User Registration Form'
+            ]);
+        }
         if (CHECK_PERMISSION('REGISTRATION_CERTIFICATE')) {
             append_items('forms', [
                 'registration_form' => 'Registration Verification Form',
@@ -138,7 +143,7 @@ class MY_Controller extends MX_Controller
         //         ]
         //     ]);
         // }
-        if(CHECK_PERMISSION('FRANCHISE_ID_CARD')){
+        if (CHECK_PERMISSION('FRANCHISE_ID_CARD')) {
             $checkField = $this->build_db->field_exists('centers', 'id_card_issue_date');
             if (!$checkField) {
                 $this->build_db->add_field('centers', [

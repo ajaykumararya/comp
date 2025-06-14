@@ -4,6 +4,31 @@ $config['dashboard'] = array(
         array('label' => 'Dashboard', 'type' => 'dashboard', 'url' => 'admin')
     )
 );
+$config['event_area'] = array(
+    'title' => 'EVENT section',
+    'condition' => (OnlyForAdmin() && CHECK_PERMISSION('EVENT_AREA')),
+    'menu' => array(
+        // array(
+        //     'label' => 'Event Area',
+        //     'type' => 'event_area',
+        //     'icon' => array('book', 2),
+        //     'submenu' => array(
+        //         array(
+        //             'label' => 'Setting',
+        //             'type' => 'setting',
+        //             'icon' => array('note-2', 4),
+        //             'url' => 'event/setting',
+        //         ),
+        //     )
+        // ),
+        array(
+            'label' => 'Users',
+            'icon' => ['profile-user', 4],
+            'type' => 'users',
+            'url' => 'event/users'
+        ),
+    )
+);
 $config['ebook'] = array(
     'title' => 'EBOOK section',
     'condition' => (OnlyForAdmin() && CHECK_PERMISSION('EBOOK')),
