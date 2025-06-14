@@ -37,9 +37,8 @@
         }
 
         #photo {
-            top: 27.9%;
-            left: 86.2%;
-            z-index: 999
+            top: 16%;
+            left: 80%;
         }
 
         /* table#first {
@@ -106,20 +105,23 @@
         .test {
             border: 1px solid red
         }
+        .up {
+            text-transform: uppercase;
+        }
     </style>
 </head>
 
 <body class="position-relative">
     <img id="back-image" class="position-relative" src="{document_path}/marksheet.jpg">
-    <!-- <div class="position-absolute" id="photo">
-        <img src="upload/{image}" style="width:76px;height:95px">
-    </div> -->
+    <div class="position-absolute" id="photo">
+        <img src="upload/{image}" style="width:100px;height:120px">
+    </div>
 
 
 
 
 
-    <p class="position-absolute" style="top:19.2%;left:32%;width:200px">{student_name}</p>
+    <p class="position-absolute up" style="top:19.2%;left:32%;width:200px">{student_name}</p>
     <p class="position-absolute " style="top:21.6%;left:32%;width:63%">{course_name}</p>
     <p class="position-absolute" style="top:24.2%;left:32%;width:150px"><?= humnize_duration($duration, $duration_type) ?>
     </p>
@@ -131,11 +133,12 @@
     <!-- <p class="position-absolute" style="top:41.7%;left:34%;width:200px">{mother_name}</p> -->
     <!-- <p class="position-absolute " style="top:41.7%;left:80%;width:150px"><?= humnize_duration_with_ordinal($marksheet_duration, $duration_type) ?></p> -->
 
-    <p class="position-absolute " style="top:34.5%;left:32%;width:63%">{center_name}</p>
+    <p class="position-absolute " style="top:34.5%;left:32%;width:62%">{center_name}</p>
+    <p class="position-absolute " style="top:37%;left:32%;width:62%">{center_code}, {center_full_address}</p>
 
-    <!-- <div class="position-absolute" style="z-index: 999;top: 83.8%;left: 6.1%;">
-        <img src="upload/images/marksheet_{result_id}.png" style="width: 70px" alt="">
-    </div> -->
+    <div class="position-absolute" style="z-index: 999;top: 85%;left: 35%;">
+        <img src="upload/images/marksheet_{result_id}.png" style="width: 100px" alt="">
+    </div>
     <div class="position-absolute " style="top:55%;left:7.5%;width:85%;">
         <table id="first1" style="width:100%">
 
@@ -167,6 +170,10 @@
     <p class="position-absolute" style="top:71.7%;left:85%">{grade}</p>
     <!-- <p class="position-absolute" style="top:-0.2%;left:12%;width:200px">{serial_no}</p> -->
     <p class="position-absolute" style="top:75%;left:21%;">{issue_date}</p>
+
+     <div class="position-absolute" style="top:86.5%;left:68%">
+        <img src="upload/{center_signature}" style="width:180px;height:50px">
+    </div>
 </body>
 
 </html>

@@ -37,14 +37,13 @@
 
         #photo {
             z-index: 999;
-            bottom: 6.8%;
-            left: 16.8%;
-            padding: 2px;   
+            top: 78%;
+            left: 36%; 
         }
         #photo1
         {
-            top: 16.2%;
-            left: 79.8%;
+            top: 23%;
+            left: 75%;
         }
        
         p{
@@ -75,18 +74,21 @@
             width: 30%;
             text-align: center;
         }
+        .up {
+            text-transform: uppercase;
+        }
     </style>
 </head>
 
 <body class="position-relative">
     <img id="back-image" class="position-relative" src="{document_path}/certificate.jpg">
-    <!-- <div class="position-absolute" id="photo">
-        <img src="upload/images/student_certificate_{certiticate_id}.png" style="width: 37%;height:37%
+    <div class="position-absolute" id="photo">
+        <img src="upload/images/student_certificate_{certiticate_id}.png" style="width: 100px
           ">
-    </div> -->
-    <!-- <div class="position-absolute" id="photo1">
-        <img src="upload/{image}" style="width:90px;height:120px">
-    </div> -->
+    </div>
+    <div class="position-absolute" id="photo1">
+        <img src="upload/{image}" style="width:110px;height:120px">
+    </div>
     <!-- <p class="position-absolute" style="top:40.3%;left:25%;width:600px;text-align:center">{course_name}</p> -->
 
     <p class="position-absolute" style="top:3.7%;left:25%;font-size:15px">{serial_no}</p>
@@ -94,7 +96,7 @@
     
     <!-- <p class="position-absolute" style="top:48%;left:16%;">{createdOn}</p> -->
 
-    <p class="position-absolute text-center" style="width:84%;left:8%;top:34%;text-transform:upparcase">{student_name}</p>
+    <p class="position-absolute text-center up" style="width:84%;left:8%;top:34%;text-transform:upparcase">{student_name}</p>
     <p class="position-absolute text-center " style="width:84%;top:40.2%;left:8%">{father_name}</p>
 
     <p class="position-absolute text-center" style="width:70%;left:21%;top:46.2%;">{course_name}</p>
@@ -104,19 +106,12 @@
     <p class="position-absolute text-center" style="width:100px;left:59%;top:58.8%;">{grade}</p>
 
     <p class="position-absolute text-center" style="width:70%;left:21%;top:65%;">{center_name}</p>
+    <p class="position-absolute text-center" style="width:70%;left:21%;top:68%;line-height:1">{center_full_address}</p>
 
-    <!-- <p class="position-absolute text-center" style="width:370px;left:15%;top:61%;">{enrollment_no}</p> -->
-    <!-- 
-    
-    <p class="position-absolute text-center text-capitlize" style="left:5%;top:40.8%;width:90%">{from_date} - {to_date}</p> -->
-    <!-- <p class="position-absolute text-center" style="left:76%;top:67.1%;">{from_date}</p>
-    <p class="position-absolute text-center" style="left:86%;top:67.1%;">{to_date}</p> -->
-    <!-- <p class="position-absolute text-center text-capitlize" style="left:5%;top:49.6%;width:90%">INDIAN EDUCATION DEGREE COLLEGE TRAINING</p>
-    <p class="position-absolute text-center " style="left:5%;top:58.1%;width:90%">{grade}</p> -->
-    
-    <!-- <div class="position-absolute text-center" style="left:40%;top:69.5%;width:150px">{obtain_total}</div> -->
-    <!-- <p class="position-absolute text-capitlize text-center" style="left:27%;top:65%;width:68%;line-height:1">{center_name}, <?=get_route($center_city,'city')?>,<?=get_route($center_state,'state')?></p>
-    <p class="position-absolute" style="top:72.4%;left:29%;">{dob}</p>     -->
+    <div class="position-absolute" style="top:82%;left:8%">
+        <img src="upload/{center_signature}" style="width:180px;height:50px">
+    </div>
+
     <p class="position-absolute text-center" style="left:47%;top:73.7%;font-size:14px">{createdOn}</p>
 
     

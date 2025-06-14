@@ -17,6 +17,9 @@
         .text-capitlize {
             text-transform: capitalize;
         }
+        .up {
+            text-transform: uppercase;
+        }
 
         .position-relative {
             position: relative;
@@ -62,10 +65,10 @@
     <!-- <p class="position-absolute" style="top:1%;left:16%">{admit_card_id}</p> -->
 
     <!-- <p class="position-absolute" style="top:1%;left:80%">{createdOn}</p> -->
-    <p class="position-absolute" style="top: 18.5%;left:15%">{student_name}</p>
+    <p class="position-absolute up" style="top: 18.5%;left:15%">{student_name}</p>
     <p class="position-absolute" style="top:20.8%;left:20%">{father_name}</p>
-    <p class="position-absolute" style="top:22.8%;left:60%">{enrollment_no}</p>
-    <p class="position-absolute" style="top:22.8%;left:21%;width:150px">{roll_no}</p>
+    <p class="position-absolute" style="top:22.8%;left:60%">{roll_no}</p>
+    <p class="position-absolute" style="top:22.8%;left:21%;width:150px">{enrollment_no}</p>
     <p class="position-absolute" style="top:24.9%;left:20%">{dob}</p>
     <p class="position-absolute text-capitlize" style="top:24.9%;left:43%">{gender}</p>
 
@@ -75,13 +78,28 @@
 
     <p class="position-absolute" style="top:33.3%;left:21%">{date} & <?= date('l', strtotime($date)) ?></p>
     <p class="position-absolute" style="top:33.3%;left:68%">{time}</p>
-    <p class="position-absolute" style="top:35.3%;left:18%">{center_name}</p>
+    <p class="position-absolute" style="top:35.3%;left:18%">{center_name} {}</p>
     <?php
-    //$this->ki_theme->generate_qr($admit_card_id, 'admit_card', current_url());
+    $this->ki_theme->generate_qr($admit_card_id, 'admit_card', current_url());
+    $sign = '';
+    if($student_docs){
+        $docs = (json_decode($student_docs,true));
+        if(isset($docs['signature'])){
+            $sign = $docs['signature'];
+            if(file_exists('upload/'.$sign.'')){
+                echo '
+                <div class="position-absolute" style="top:32.3%;left:79.8%;">
+                    <img src="upload/'.$sign.'" style="width:125.3px;height:46.5px">
+                </div>
+                
+                ';
+            }
+        }
+    }
     ?>
-    <!-- <div class="position-absolute" style="top:74.5%;left:33.7rem">
-        <img style="width:128px;height:128px" src="upload/images/admit_card_{admit_card_id}.png" alt="">
-    </div> -->
+    <div class="position-absolute" style="top:39.5%;left:31rem">
+        <img style="width:80px" src="upload/images/admit_card_{admit_card_id}.png" alt="">
+    </div>
 </body>
 
 </html>
