@@ -386,9 +386,13 @@ class Website extends Ajax_Controller
             $this->response('url', base_url('student-details/') . $this->token->encode([
                 'student_id' => $student_id
             ]));
+            $message = 'Your Registration No. is <b>'.$roll_no.'</b>';
+            if(PATH == 'abc')
+                $message = 'Your Roll No is <b>'.$roll_no.'</b>';
+            $this->response('message',$message);
             $this->session->set_userdata([
                 'student_login' => true,
-                'student_id' => $student_id
+                'student_id' => $student_id,
             ]);
         }
     }

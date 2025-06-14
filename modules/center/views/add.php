@@ -204,12 +204,12 @@
                                 ?>
                                 <div class="col-md-3 mb-2">
                                     <div class="form-control">
-                                        <label for="centre_logo" class="form-label required">Centre <?=PATH == 'nbeat' ? 'Photo' : 'Logo'?></label>
+                                        <label for="centre_logo" class="form-label <?=PATH == 'abc' ? '' : 'required'?>">Centre <?=PATH == 'nbeat' ? 'Photo' : 'Logo'?></label>
                                     </div>
                                 </div>
                                 <div class="col-md-9 mb-2">
                                     <div class="form-group">
-                                        <input type="file" required class="form-control" required name="logo"
+                                        <input type="file" class="form-control" <?=PATH == 'abc' ? '' : 'required'?> name="logo"
                                             id="centre_logo">
                                     </div>
                                 </div>

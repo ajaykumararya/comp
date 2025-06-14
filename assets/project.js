@@ -191,9 +191,7 @@ $(document).on('ready', function () {
         }).then((r) => {
             // log(r);
             if (r.status) {
-                mySwal('Admission Successfully..', `
-                    Your Registration No. is <b>${r.roll_no}</b>
-                `).then((res) => {
+                mySwal('Admission Successfully..', res.message).then((res) => {
                     // log(res);
                     if (res.isConfirmed) {
                         // location.reload();
