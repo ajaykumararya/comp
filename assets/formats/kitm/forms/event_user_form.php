@@ -35,16 +35,16 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="" class="form-label">Course (पाठ्यक्रम):</label>
+                                        <label for="" class="form-label">Current Education (वर्तमान एजुकेशन ):</label>
                                         <input type="text" name="course" required
-                                            placeholder="Enter Course (पाठ्यक्रम):" class="form-control">
+                                            placeholder="Enter Current Education (वर्तमान एजुकेशन ):" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="" class="form-label">Year / Semester (वर्ष / सेमेस्टर):</label>
+                                        <label for="" class="form-label">Passing Year (पासींग एयर ): </label>
                                         <input type="text" name="duration"
-                                            placeholder="Enter Year / Semester (वर्ष / सेमेस्टर):" required
+                                            placeholder="Enter Passing Year (पासींग एयर ):" required
                                             class="form-control">
                                     </div>
                                 </div>

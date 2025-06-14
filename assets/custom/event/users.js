@@ -41,13 +41,19 @@ document.addEventListener('DOMContentLoaded', function (e) {
             columnDefs: [
                 {
                     targets: 0,
-                    render : function(data,type,row,meta){
+                    render: function (data, type, row, meta) {
                         return `${meta.row + 1}.`;
                     }
                 },
                 {
-                    targets : -2,
-                    render : function(data,type,row){
+                    targets: 3,
+                    render: function (data, type, row, meta) {
+                        return `${row.course} (${row.duration})`;
+                    }
+                },
+                {
+                    targets: -2,
+                    render: function (data, type, row) {
                         return `
                   
                             <a href="${row.image == '' ? '#' : row.image}" target="_blank" class="btn btn-xs btn-sm btn-primary p-1 my-2" title="Image (परोफ़ील इमेज )"><i class="fa fa-file"></i> Image</i>
@@ -80,5 +86,5 @@ document.addEventListener('DOMContentLoaded', function (e) {
 
 
     }
-    
+
 });

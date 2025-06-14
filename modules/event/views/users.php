@@ -14,7 +14,7 @@
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Father Name</th>
-                                <th>Course</th>
+                                <th>Current Edication</th>
                                 <th>Roll No</th>
                                 <th>Mobile</th>
                                 <th>Email</th>
