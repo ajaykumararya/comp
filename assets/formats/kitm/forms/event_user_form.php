@@ -21,28 +21,28 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="" class="form-label">Full Name (पूरा नाम):</label>
+                                        <label for="" class="form-label required">Full Name (पूरा नाम):</label>
                                         <input type="text" name="name" placeholder="Enter Full Name (पूरा नाम):"
                                             class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="" class="form-label">Father's Name (पिता का नाम):</label>
+                                        <label for="" class="form-label required">Father's Name (पिता का नाम):</label>
                                         <input type="text" name="father_name" required
                                             placeholder="Enter Father's Name (पिता का नाम):" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="" class="form-label">Current Education (वर्तमान एजुकेशन ):</label>
+                                        <label for="" class="form-label required">Current Education (वर्तमान एजुकेशन ):</label>
                                         <input type="text" name="course" required
                                             placeholder="Enter Current Education (वर्तमान एजुकेशन ):" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="" class="form-label">Passing Year (पासींग एयर ): </label>
+                                        <label for="" class="form-label required">Passing Year (पासींग एयर ): </label>
                                         <input type="text" name="duration"
                                             placeholder="Enter Passing Year (पासींग एयर ):" required
                                             class="form-control">
@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="" class="form-label">Roll Number / Enrollment Number (रोल नंबर /
+                                        <label for="" class="form-label required">Roll Number / Enrollment Number (रोल नंबर /
                                             नामांकन संख्या):</label>
                                         <input type="text" name="roll_no" required
                                             placeholder="Enter Roll Number / Enrollment Number (रोल नंबर / नामांकन संख्या):"
@@ -59,34 +59,34 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="" class="form-label">Contact Number (संपर्क नंबर):</label>
+                                        <label for="" class="form-label required">Contact Number (संपर्क नंबर):</label>
                                         <input name="mobile" type="number" required
                                             placeholder="Enter Contact Number (संपर्क नंबर):" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="" class="form-label">Email ID (ईमेल आईडी):</label>
+                                        <label for="" class="form-label required">Email ID (ईमेल आईडी):</label>
                                         <input type="email" name="email" required
                                             placeholder="Enter Email ID (ईमेल आईडी):" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="" class="form-label">D.O.B</label>
+                                        <label for="" class="form-label required">D.O.B</label>
                                         <input type="date" name="dob" class="form-control"
                                             placeholder="Select date of birth" required name="dob">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="" class="form-label">Image (परोफ़ील इमेज ):</label>
+                                        <label for="" class="form-label required">Image (परोफ़ील इमेज ):</label>
                                         <input type="file" name="image" required class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="" class="form-label">Educational Document (एजुकेशनल डाक्यमेन्ट
+                                        <label for="" class="form-label required">Educational Document (एजुकेशनल डाक्यमेन्ट
                                             )</label>
                                         <input type="file" name="educational_doc" class="form-control" required
                                             name="dob">
@@ -95,7 +95,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="" class="form-label">Other Information (अन्य विवरण):</label>
-                                        <input type="text" name="other_information" required
+                                        <input type="text" name="other_information"
                                             placeholder="Enter Other Information (अन्य विवरण):" class="form-control">
                                     </div>
                                 </div>

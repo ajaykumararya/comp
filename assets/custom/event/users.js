@@ -56,8 +56,8 @@ document.addEventListener('DOMContentLoaded', function (e) {
                     render: function (data, type, row) {
                         return `
                   
-                            <a href="${row.image == '' ? '#' : row.image}" target="_blank" class="btn btn-xs btn-sm btn-primary p-1 my-2" title="Image (परोफ़ील इमेज )"><i class="fa fa-file"></i> Image</i>
-                            <a href="${row.educational_doc == '' ? '#' : row.educational_doc}" target="_blank" class="btn btn-xs btn-sm btn-primary p-1" title="Educational Document (एजुकेशनल डाक्यमेन्ट )"><i class="fa fa-file"></i> Edu Doc</i>
+                            <a href="${row.image == '' ? '#' : base_url+'upload/'+row.image}" target="_blank" class="btn btn-xs btn-sm btn-primary p-1 my-2" title="Image (परोफ़ील इमेज )"><i class="fa fa-file"></i> Image</i>
+                            <a href="${row.educational_doc == '' ? '#' : base_url+'upload/'+row.educational_doc}" target="_blank" class="btn btn-xs btn-sm btn-primary p-1" title="Educational Document (एजुकेशनल डाक्यमेन्ट )"><i class="fa fa-file"></i> Edu Doc</i>
                         `;
                     }
                 },

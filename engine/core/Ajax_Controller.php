@@ -10,6 +10,7 @@ class Ajax_Controller extends MY_Controller
         if (
                 !$this->center_model->isLogin() and 
                 $this->router->fetch_method() != 'admin_login' and 
+                $this->router->fetch_class() != 'event' and
                 $this->router->fetch_class() != 'website' and
                 $this->uri->segment(1,0) != 'api' and
                 $this->uri->segment(2,0) != 'ebook' and

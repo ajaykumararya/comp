@@ -89,41 +89,57 @@
         <div class="container">
             <div class="row">
                 <div id="header" class="clearfix" style="padding: 15px 0px;">
-                    <div class="col-md-<?=PATH == 'boardofpara' ? 4 : 3?>">
-                        <a href="">
-                            <center>
-                                <img style="<?=PATH == 'boardofpara' ? '' : 'height:89px;width:283px'?>" src="{base_url}upload/{logo}" alt="{title}"
-                                    class="img-responsive" />
-                            </center>
-                        </a>
-                    </div>
+
                     <?php
-                    $logoData = [];
-                    for ($i = 1; $i <= 3; $i++) {
-                        $name = 'header_logo_' . $i;
-                        $file = ES($name, '');
-                        $logoData[] = $file;
-                    }
+                    if (PATH != 'sivtpune') {
+                        ?>
+                        <div class="col-md-<?= PATH == 'boardofpara' ? 4 : 3 ?>">
+                            <a href="">
+                                <center>
+                                    <img style="<?= PATH == 'boardofpara' ? '' : 'height:89px;width:283px' ?>"
+                                        src="{base_url}upload/{logo}" alt="{title}" class="img-responsive" />
+                                </center>
+                            </a>
+                        </div>
+                        <?php
+                        $logoData = [];
+                        for ($i = 1; $i <= 3; $i++) {
+                            $name = 'header_logo_' . $i;
+                            $file = ES($name, '');
+                            $logoData[] = $file;
+                        }
 
-                    $fressLogoData = sortEmptyLast($logoData);
-                    // pre($fressLogoData);
-                    foreach ($fressLogoData as $logo) {
-                        $isExist = file_exists(('upload/' . $logo));
-                        // echo $logo;
-                        echo '<div class="col-md-1"><center>';
+                        $fressLogoData = sortEmptyLast($logoData);
+                        // pre($fressLogoData);
+                        foreach ($fressLogoData as $logo) {
+                            $isExist = file_exists(('upload/' . $logo));
+                            // echo $logo;
+                            echo '<div class="col-md-1"><center>';
 
-                        echo '
+                            echo '
                                 ' . img(base_url('upload/' . $logo), false, [
-                                'class' => 'img-responsive img_size'
-                            ]) . '
+                                    'class' => 'img-responsive img_size'
+                                ]) . '
                             ';
 
 
-                        echo '</center></div>';
+                            echo '</center></div>';
+                        }
                     }
-
+                    else{
+                        ?>
+                        <div class="col-md-6">
+                            <a href="">
+                                <center>
+                                    <img
+                                        src="{base_url}upload/{logo}" alt="{title}" class="img-responsive" />
+                                </center>
+                            </a>
+                        </div>
+                        <?php
+                    }
                     ?>
-                    <div class="col-md-<?=PATH == 'boardofpara' ? 5 : 6?>">
+                    <div class="col-md-<?= PATH == 'boardofpara' ? 5 : 6 ?>">
                         <div class="row- header-top text-right">
                             <?php
                             $fields = $this->SiteModel->get_setting('header_hightlight_btn_links', [], true);
@@ -390,7 +406,7 @@
     ============================================= -->
     <div class="footer-divider">
         <div class="container">
-            <a href="#" <?=PATH == 'boardofpara' ? 'style="color:white!important"' : ''?>>CONTACT INFO</a>
+            <a href="#" <?= PATH == 'boardofpara' ? 'style="color:white!important"' : '' ?>>CONTACT INFO</a>
         </div>
     </div>
 
@@ -398,7 +414,7 @@
     ============================================
     FOOTER
     ============================================= -->
-    <footer id="footer" <?=PATH == 'boardofpara' ? 'style="background:white!important"' : ''?>>
+    <footer id="footer" <?= PATH == 'boardofpara' ? 'style="background:white!important"' : '' ?>>
         <div class="container">
             <div class="row">
                 <div class="col-sm-3">
@@ -409,8 +425,8 @@
                                 +91-<?= remove_91($whatsapp_number) ?></strong> <br>
                             <strong class="flex"> <i class="fa fa-phone-square"></i> +91-{number} </strong>
                         </h3> -->
-                        <img style="height: 72px;<?=PATH == 'boardofpara' ? '' : 'width: 225px;'?>" src="{base_url}upload/{logo}" alt="{title}"
-                            class="img-responsive" />
+                        <img style="height: 72px;<?= PATH == 'boardofpara' ? '' : 'width: 225px;' ?>"
+                            src="{base_url}upload/{logo}" alt="{title}" class="img-responsive" />
                         <p class="margin-tp-30"><strong><?= ES('footer_note_title', '') ?></strong></p>
                         <p style="text-align:justify; margin-right:5px; font-size:11px;">
                             <?= ES('footer_note_description') ?>
