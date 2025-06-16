@@ -1,7 +1,7 @@
 <section class="section-counter portfolio" style="background:white">
 <style>
     .portfolio .thumbnail{
-        height:100px!important
+        height:<?=PATH == 'sivtpune' ? '163px' : '100px'?>!important
     }
 </style>
 
