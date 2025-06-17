@@ -128,7 +128,7 @@
     <div class="position-absolute" style="width:580px;left:38%;top:62.3%">{center_name}</div>
     <!-- createdOn -->
     <div class="position-absolute text-center" style="width:140px;left:44%;top:65.3%;">{percentage}%</div>
-    <div class="position-absolute text-center" style="width:140px;left:80%;top:65.3%;">{grade}A</div>
+    <div class="position-absolute text-center" style="width:140px;left:80%;top:65.3%;">{grade}</div>
 
 
 </body>
