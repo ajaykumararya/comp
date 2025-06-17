@@ -222,8 +222,8 @@ class Website extends Ajax_Controller
                 'dob' => date('d-m-Y', strtotime($dob)),
                 'status' => $status
             ]);
-            if ($get->num_rows()) {
                 $this->response("query ",$this->db->last_query());
+            if ($get->num_rows()) {
                 $this->response('status', true);
                 $data = $get->row_array();
                 $this->set_data($data);
