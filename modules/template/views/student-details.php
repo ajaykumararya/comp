@@ -46,7 +46,7 @@
                                 <td><?= $student_data['dob'] ?> & <?= ucfirst($student_data['gender']) ?></td>
                             </tr>
                             <?php
-                            if (PATH != 'abc'):
+                            if (PATH != 'gcti'):
                                 ?>
                                 <tr>
                                     <th>District</th>
