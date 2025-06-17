@@ -187,6 +187,15 @@
     .modal,.modal-content{
         max-width: 100%!important;
     }
+    <?php
+    if(PATH == 'abc'){
+        echo '.dark_skin .logo_dark, .light_skin .logo_light
+            {
+                display: block;
+                width: 34%!important;
+            }';
+    }
+    ?>
 </style>
 <?php
 if (PATH == 'sewaedu' or PATH == 'sewaeducation') {
