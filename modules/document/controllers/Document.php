@@ -286,7 +286,8 @@ class Document extends MY_Controller
             // pre($get->row(),true);
             $this->set_data($main);
             $rowArray = $get->row_array();
-            $rowArray['duration_type'] = (humnize($rowArray['marksheet_duration'], $rowArray['duration_type']));
+            if ($rowArray['duration_type'] != 'semester')
+                $rowArray['duration_type'] = (humnize($rowArray['marksheet_duration'], $rowArray['duration_type']));
             // $rowArray['marksheet_duration_type'] = $rowArray['duration_type'];
             $pdfContent = $this->parse($file, $rowArray);
             // echo $pdfContent;
