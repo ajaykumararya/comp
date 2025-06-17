@@ -112,8 +112,8 @@
     <!-- <p class="position-absolute" style="top:1%;left:80%">{createdOn}</p>
     <p class="position-absolute" style="top:1%;left:16%">{admit_card_id}</p> -->
 
-    <p class="position-absolute " style="top:1.7%;left:79.7%;width:130px">{roll_no}</p>
-    <p class="position-absolute " style="top:1.7%;left:20%;width:130px">{enrollment_no}</p>
+    <p class="position-absolute " style="top:1.7%;left:79.9%;width:130px">{roll_no}</p>
+    <p class="position-absolute " style="top:1.7%;left:20.2%;width:130px">{enrollment_no}</p>
 
     <p class="position-absolute" style="top:21.9%;left:23%">{student_name}</p>
     <p class="position-absolute" style="top:23.8%;left:23%">{father_name}</p>
