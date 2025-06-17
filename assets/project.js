@@ -36,7 +36,7 @@ $(document).on('ready', function () {
             url: 'website/student-verification',
             data: new FormData(this)
         }).then((r) => {
-            // log(r);
+            log(r);
             if (r.status) {
                 // var box = $('.show-student-details');
                 box.html(r.html);
