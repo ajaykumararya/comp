@@ -31,13 +31,13 @@
         }
         #photo {
             z-index: 999;
-            top: 16.05%;
+            top: 16.34%;
             left: 22px;
         }
     </style>
 </head>
 <body class="position-relative">
-    <img id="back-image" class="position-relative" src="{document_path}/Id-card.jpg">
+    <img id="back-image" class="position-relative" src="{document_path}/id-card.jpg">
     <div class="position-absolute" id="photo">
         <img src="upload/{image}" style="width:115px;height:150px">
     </div>
