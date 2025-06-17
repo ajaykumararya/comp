@@ -84,7 +84,7 @@
                         <div class="col-md-6 mt-4">
                             <div class="form-group">
                                 <label for="" class="foem-label">Admission Date</label>
-                                <input type="text" name="admission_date" class="form-control current-date flatpickr-input" value="{admission_date}">
+                                <input type="text" name="admission_date" class="form-control selectdate flatpickr-input" value="{admission_date}">
                             </div>
                         </div>
                     </div>
