@@ -51,7 +51,7 @@
         }
 
         <?php
-    } else if (in_array(PATH, ['zcc', 'skycrownworld'])) {
+    } else if (in_array(PATH, ['zcc', 'skycrownworld','abc'])) {
         // $primaryC = PATH == 'skycrownworld' ? '002448' :'E22B2B';
         $primaryC = 'E22B2B';
         ?>
