@@ -111,6 +111,8 @@
                             <input type="text" name="family_id" class="form-control" placeholder="Enter family ID"
                                 value="{family_id}">
                         </div>
+
+
                         <div class="form-group mb-4 col-lg-12 col-xs-12 col-sm-12">
                             <label class="form-label required">Address</label>
                             <textarea class="form-control" name="address" placeholder="Address">{address}</textarea>
@@ -120,6 +122,9 @@
                             <input type="number" name="pincode" min="6" class="form-control" placeholder="Pincode"
                                 value="{pincode}">
                         </div>
+                        <?php
+                        if(PATH != 'gcti'):
+                            ?>
                         <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
                             <label for="" class="form-label required">State</label>
                             <select class="form-select get_city" name="state_id" data-control="select2"
@@ -199,6 +204,9 @@
                             </select>
                         </div>
 
+                        <?php
+                        endif;
+                        ?>
                     </div>
                 </div>
             </div>
