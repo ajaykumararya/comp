@@ -2,6 +2,42 @@
 // 9996763445
 class Website extends Ajax_Controller
 {
+    function staff_center_login()
+    {
+        try {
+            $email = $this->input->post('email');
+            $password = sha1($this->input->post('password'));
+            $table = $this->db->where('email', $email)->where('type', $this->post('type'))->get('centers');
+            if ($table->num_rows()) {
+                $row = $table->row();
+                if (($row->status)) {
+                    if ($row->password == $password) {
+                        $this->load->library('session');
+                        $sessionData = [
+                            'admin_login' => true,
+                            'admin_type' => $row->type,
+                            'admin_id' => $row->id
+                        ];
+                        if ($row->type == 'role_user') {
+                            $sessionData['role_id'] = $row->role_id;
+                        }
+                        $this->session->set_userdata($sessionData);
+                        $this->response('status', 1);
+                        $this->response('name',$row->name);
+                    } else
+                        $this->response('error', alert('Sorry, the email or password is incorrect, please try again.', 'danger'));
+                } else
+                    $this->response('error', alert('Your Account is In-active. Please Contact Your Admin', 'danger'));
+            } else
+                $this->response('error', alert('Sorry, this email  is not found..', 'danger'));
+
+        } catch (Exception $e) {
+            $this->response([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
     function init_emi_payment()
     {
         try {
@@ -386,10 +422,10 @@ class Website extends Ajax_Controller
             $this->response('url', base_url('student-details/') . $this->token->encode([
                 'student_id' => $student_id
             ]));
-            $message = 'Your Registration No. is <b>'.$roll_no.'</b>';
-            if(in_array(PATH,['abc','gcti']))
-                $message = 'Your Roll No is <b>'.$roll_no.'</b>';
-            $this->response('message',$message);
+            $message = 'Your Registration No. is <b>' . $roll_no . '</b>';
+            if (in_array(PATH, ['abc', 'gcti']))
+                $message = 'Your Roll No is <b>' . $roll_no . '</b>';
+            $this->response('message', $message);
             $this->session->set_userdata([
                 'student_login' => true,
                 'student_id' => $student_id,

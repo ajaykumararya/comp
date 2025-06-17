@@ -463,6 +463,27 @@ $(document).on('ready', function () {
             }
         });
     });
+    $(document).on('submit', '.staff-login-form,.franchise-login-form', function (r) {
+        r.preventDefault();
+        var data = new FormData(this);
+        var type = $(this).hasClass('staff-login-form') ? 'role_user' : 'center';
+        data.append('type',type);
+        
+        $.AryaAjax({
+            url: 'website/staff-center-login',
+            data: data
+        }).then((res) => {
+            showResponseError(res);
+            // log(res)
+            if (res.status) {
+                mySwal(`Welcome <b>${res.name}</b>`, `Login Successfully.`).then((r) => {
+                    if (r.isConfirmed) {
+                        location.href = `${base_url}admin`;
+                    }
+                })
+            }
+        });
+    });
     // $(document).on('submit', '.student-admit-card-form', function (e) {
     //     e.preventDefault();
     //     $.AryaAjax({

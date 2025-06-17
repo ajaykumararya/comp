@@ -56,19 +56,6 @@
             border-radius: 2.475rem !important;
         }
 
-        .btn,
-        .btn-primary{
-            border : 2px solid #3b291f!important;
-            border-radius: 2.475rem!important;
-            background-color: #3b291f !important;
-        }
-        .btn-primary:hover,
-        .btn:hover {
-            
-            background-color: #9d5b14  !important;
-            color: #fff !important;
-        }
-
         .input-group-icon .input-group-addon {
             position: relative;
             margin-top: 12px;
@@ -91,6 +78,16 @@
         }
         .invalid-feedback {
             color: white!important;
+        }
+        .btn, .btn-primary {
+            border: 2px solid rgb(255, 255, 255) !important;
+            border-radius: 2.475rem !important;
+            background-color: rgb(255, 255, 255) !important;
+        }
+        .btn-primary:hover, .btn:hover {
+            background-color: #00231a !important;
+            color: #fff !important;
+            border: 2px solid #00231a !important;
         }
     </style>
 </head>
@@ -132,7 +129,7 @@
         <!--end::Page bg image-->
 
         <!--begin::Authentication - Sign-in -->
-        <div class="d-flex flex-column flex-lg-row flex-column-fluid" style="background: linear-gradient(45deg, #b06412f7, black)!important">
+        <div class="d-flex flex-column flex-lg-row flex-column-fluid" style="background: linear-gradient(45deg, #00231a, #00231a)!important">
             <!--begin::Aside-->
             <!--<div class="d-flex flex-lg-row-fluid">
                 <div class="d-flex flex-column flex-center pb-0 pb-lg-10 p-10 w-100">
@@ -154,7 +151,7 @@
                 class="d-flex flex-column-fluid flex-lg-row-auto justify-content-center justify-content-lg-end login-page">
                 <!--begin::Wrapper-->
                 <div class="animation animation-slide-in-down card bg-body d-flex flex-column flex-center w-md-600px p-10 login-page-c1"
-                    style="background: #9d5b14 !important;box-shadow: inset 0 0 14px 0 black, -6px 6px 0px 0 #3b291f;border:none">
+                    style="background: #144438 !important;box-shadow: inset 0 0 5px 0 #000000, -6px 6px 0px 0 #00241b;border:none">
                     <!--begin::Content-->
                     <div class="d-flex flex-center flex-column align-items-stretch w-md-400px"
                         style="margin-bottom: -50px;margin-top: 15px;">
@@ -231,10 +228,9 @@
                                 </div>
                                 <!--end::Wrapper-->
 
-                                <!--begin::Submit button-->
-                                <div class="d-grid mb-10 animation animation-slide-in-up">
-                                    <button type="submit" style="color:white" id="kt_sign_in_submit" class="btn">
-                                        <i class="fas fa-sign-in-alt" style="color:white;"></i>
+                                <div class="d-grid mb-10 ">
+                                    <button type="submit" style="color: #00241b;box-shadow: inset 0 0 5px 0 #ffffff, 3px 4px 6px 0px #00241b;" id="kt_sign_in_submit" class="btn">
+                                        <i class="fas fa-sign-in-alt" style=""></i>
                                         <!--begin::Indicator label-->
                                         <span class="indicator-label">
                                             Sign In</span>
@@ -242,12 +238,10 @@
 
                                         <!--begin::Indicator progress-->
                                         <span class="indicator-progress">
-                                            Please wait... <span
-                                                class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                            Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                         </span>
                                         <!--end::Indicator progress--> </button>
                                 </div>
-                                <!--end::Submit button-->
                                 <?php
                                 if (isDemo()):
                                     ?>

@@ -2,6 +2,8 @@
 $config['forms'] = [
     'student_admission' => 'Student Admission Form',
     'student_login' => 'Student Login Form',
+    'staff_login' => 'Staff Login Form',
+    'franchise_login' => 'Franchise Login Form',
     'student_verification' => 'Student Verification Form',
     'result_verification' => 'Result Verification Form',
     'admit_card' => 'Admit Card Form',
