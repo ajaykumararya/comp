@@ -223,7 +223,7 @@ class Website extends Ajax_Controller
                 'status' => $status
             ]);
             if ($get->num_rows()) {
-                // $this->response("get_student",$get->num_rows());
+                $this->response("query ",$this->db->last_query());
                 $this->response('status', true);
                 $data = $get->row_array();
                 $this->set_data($data);
