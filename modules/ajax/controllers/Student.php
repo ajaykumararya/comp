@@ -695,6 +695,8 @@ class Student extends Ajax_Controller
         $course_name = $this->post('course_name');
         unset($where['course_name']);
         $certificateWhere = $where;
+        $duration = $where['duration'];
+        $duration_type = $where['duration_type'];
         unset($where['duration'], $where['duration_type']);
         $this->response('where', $where);
         $checkCertificate = $this->student_model->student_certificates($where);
@@ -702,7 +704,10 @@ class Student extends Ajax_Controller
             if (isset($where['exam_conduct_date'])) {
                 $where['exam_conduct_date'] = $exam_conduct_date;
             }
-            $get = $this->student_model->marksheet($where);
+            $get = $this->student_model->marksheet($where + [
+                'duration' => $duration,
+                'duration_type' => $duration_type
+            ]);
             if (CHECK_PERMISSION('GENERATE_CERTIFICATE_WITHOUT_MARKSHEET')) {
                 $this->response('html', '<div class="alert alert-success">' . (
                     $get->num_rows() ? 'The course <b>' . $course_name . '</b> has been completed, you can generate the certificate.' : 'You can Generate Certificate But Marksheet Not Generated of This Student.') .
