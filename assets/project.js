@@ -191,7 +191,7 @@ $(document).on('ready', function () {
         }).then((r) => {
             // log(r);
             if (r.status) {
-                mySwal('Admission Successfully..', res.message).then((res) => {
+                mySwal('Admission Successfully..', r.message).then((res) => {
                     // log(res);
                     if (res.isConfirmed) {
                         // location.reload();

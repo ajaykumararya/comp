@@ -51,8 +51,8 @@ class Student_model extends MY_Model
             ->from('students as s')
             // ->where('s.status',1)
             ->join("course as c", "s.course_id = c.id ", 'left')
-            ->join('state', 'state.STATE_ID = s.state_id')
-            ->join('district', 'district.DISTRICT_ID = s.city_id and district.STATE_ID = state.STATE_ID')
+            ->join('state', 'state.STATE_ID = s.state_id','left')
+            ->join('district', 'district.DISTRICT_ID = s.city_id and district.STATE_ID = state.STATE_ID','left')
 
             ->join('batch as b', "b.id = s.batch_id", 'left');
         if (PATH === 'skycrownworld')

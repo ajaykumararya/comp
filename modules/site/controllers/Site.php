@@ -291,8 +291,11 @@ class Site extends Site_Controller
         try {
             $this->token->decode($token);
             // echo $this->token->data('student_id');
+            // exit;
             $this->db->select('category');
             $get = $this->student_model->get_switch('all', ['id' => $this->token->data('student_id'), 'without_admission_status' => true]);
+        //    echo $this->db->last_query();
+        //     exit;
             if (!$get->num_rows())
                 throw new Exception('Not Found.');
             $data = $get->row_array();

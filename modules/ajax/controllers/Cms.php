@@ -55,15 +55,15 @@ class Cms extends Ajax_Controller
                         <input type="text" value="' . $row->link . '" readonly class="form-control" required placeholder="Enter Slug Here.." name="link">
                     </div>
                     <div class="form-check form-check-custom form-check-solid form-check-success form-switch mt-5 ml-6">
-                        <input class="form-check-input w-45px h-30px" type="checkbox" name="isMenu" id="kt_builder_sidebar_fixed_desktop1" ' . ($row->isMenu ? 'checked' : '') . '>
+                        <input class="form-check-input w-30px  h-20px" type="checkbox" name="isMenu" id="kt_builder_sidebar_fixed_desktop1" ' . ($row->isMenu ? 'checked' : '') . '>
                         <!--begin::Label-->
-                        <label class="form-check-label text-gray-700 fw-bold fs-1" for="kt_builder_sidebar_fixed_desktop1">List in Menu</label>
+                        <label class="form-check-label text-gray-700 fw-bold fs-3" for="kt_builder_sidebar_fixed_desktop1">List in Menu</label>
                         <!--end::Label-->
                     </div>
                     <div class="form-check form-check-custom form-check-solid form-check-success form-switch mt-5 ml-6">
-                        <input class="form-check-input w-45px h-30px" type="checkbox" name="redirection" id="kt_builder_sidebar_fixed_desktop" ' . ($row->redirection ? 'checked' : '') . '> 
+                        <input class="form-check-input w-30px h-20px" type="checkbox" name="redirection" id="kt_builder_sidebar_fixed_desktop" ' . ($row->redirection ? 'checked' : '') . '> 
                         <!--begin::Label-->
-                        <label class="form-check-label text-gray-700 fw-bold fs-1" for="kt_builder_sidebar_fixed_desktop">Redirect A
+                        <label class="form-check-label text-gray-700 fw-bold fs-3" for="kt_builder_sidebar_fixed_desktop">Redirect A
                             New Page</label>
                         <!--end::Label-->
                     </div>

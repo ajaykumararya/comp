@@ -202,12 +202,33 @@
                                 <label class="form-label required">Upload Photo</label>
                                 <input type="file" name="image" class="form-control">
                             </div>
+                            <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                <label for="adhar_card" class="form-label">Aadhar Card
 
+                                </label>
+                                <input type="file" class="form-control" name="adhar_card" id="adhar_card"
+                                    style="margin-bottom:15px">
+                            </div>
                             <?php
+                            $uploadDocuments = $this->ki_theme->project_config('upload_ducuments');
+                            foreach ($uploadDocuments as $key => $value) {
+                                ?>
+                                <div class="col-md-3 mb-4">
+                                    <div class="form-group">
+                                        <label for="<?= $key ?>" class="form-label"><?= $value ?></label>
+                                        <input type="hidden" name="upload_docs[title][]" class="form-control"
+                                            value="<?= $key ?>">
+
+                                        <input type="file" class="form-control" id="<?= $key ?>" name="upload_docs[file][]">
+                                    </div>
+                                </div>
+                                <?php
+                            }
                             echo form_hidden([
                                 'pincode' => 'Pincode',
                                 'state_id' => 0,
-                                'city_id' => 0
+                                'city_id' => 0,
+                                'address' => ' Address'
                             ]);
                             /*
                             ?>
@@ -248,23 +269,8 @@
                                 <label class="form-label required">Password</label>
                                 <input type="text" name="password" class="form-control" placeholder="Enter">
                             </div> -->
-                           
-                            <div class="card card-body">
-                                <h4>Upload Documents</h4>
-                                <div class="row">
-                                    <div class="col-md-3 mb-4">
-                                        <div class="form-control">
-                                            <label for="adhar_front" class="form-label required">Aadhar Card</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-9 mb-4">
-                                        <div class="form-group">
-                                            <input type="file" class="form-control" name="adhar_card" id="adhar_front">
-                                        </div>
-                                    </div>
 
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                     <div class="card-footer">

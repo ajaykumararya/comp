@@ -170,7 +170,7 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                     <input type="email" name="email" class="form-control" placeholder="Enter E-Mail ID">
                                 </div>
 
-                                <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
                                     <label class="form-label required">Father Name</label>
                                     <input type="text" name="father_name" class="form-control"
                                         placeholder="Enter Father Name">
@@ -180,7 +180,7 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                 <input type="text" name="father_mobile" class="form-control"
                                     placeholder="Enter Father MObile">
                             </div> -->
-                                <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
+                                <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
                                     <label class="form-label required">Mother Name</label>
                                     <input type="text" name="mother_name" id="aadhar_number" class="form-control"
                                         placeholder="Enter Mothe Name">
@@ -198,28 +198,47 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                     </select>
                                 </div> -->
 
+
+                                <!-- <div class="form-group mb-4 col-lg-12 col-xs-12 col-sm-12">
+                                    <label class="form-label required">Address</label>
+                                    <textarea class="form-control" name="address" placeholder="Address"></textarea>
+                                </div> -->
+                                <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
+                                    <label class="form-label required">Upload Photo</label>
+                                    <input type="file" name="image" class="form-control">
+                                </div>
+
                                 <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
-                                    <label for="adhar_card" class="form-label required">Aadhar Card
+                                    <label for="adhar_card" class="form-label">Aadhar Card
 
                                     </label>
                                     <input type="file" class="form-control" name="adhar_card" id="adhar_card"
                                         style="margin-bottom:15px">
                                 </div>
-                                <!-- <div class="form-group mb-4 col-lg-12 col-xs-12 col-sm-12">
-                                    <label class="form-label required">Address</label>
-                                    <textarea class="form-control" name="address" placeholder="Address"></textarea>
-                                </div> --><div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
-                                        <label class="form-label required">Upload Photo</label>
-                                        <input type="file" name="image" class="form-control">
-                                    </div>
                                 <?php
+                                $uploadDocuments = $this->ki_theme->project_config('upload_ducuments');
+                                foreach ($uploadDocuments as $key => $value) {
+                                    ?>
+                                    <div class="col-md-3 mb-4">
+                                        <div class="form-group">
+                                            <label for="<?= $key ?>" class="form-label"><?= $value ?></label>
+                                            <input type="hidden" name="upload_docs[title][]" class="form-control"
+                                                value="<?= $key ?>">
+
+                                            <input type="file" class="form-control" id="<?= $key ?>"
+                                                name="upload_docs[file][]">
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
                                 echo form_hidden([
                                     'pincode' => 'Pincode',
                                     'state_id' => 0,
-                                    'city_id' => 0
+                                    'city_id' => 0,
+                                    'address' => ' Address'
                                 ]);
                                 /*
-                                    
+
                                     <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
                                         <label class="form-label required">Pincode</label>
                                         <input class="form-control" name="pincode" placeholder="Enter Pincode">
@@ -240,7 +259,7 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                         </select>
                                     </div>
                                     <?php
-                                    
+
                                     <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12 form-group-city">
                                         <label class="form-label required">Select District <span id="load"></span></label>
                                         <select class="form-control list-cities" name="city_id" data-control="select2"

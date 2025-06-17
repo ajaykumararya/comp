@@ -76,20 +76,20 @@
                 <!--end::Options-->
                 <!--begin::Check-->
                 <div class="form-check form-check-custom form-check-solid form-check-success form-switch mt-5 ml-6">
-                    <input class="form-check-input w-45px h-30px" type="checkbox" name="isMenu"
+                    <input class="form-check-input w-30px h-20px" type="checkbox" name="isMenu"
                         id="kt_builder_sidebar_fixed_desktop1" checked>
                     <!--begin::Label-->
-                    <label class="form-check-label text-gray-700 fw-bold fs-1"
+                    <label class="form-check-label text-gray-700 fw-bold fs-3"
                         for="kt_builder_sidebar_fixed_desktop1">List in Menu</label>
                     <!--end::Label-->
                 </div>
                 <!--end::Check-->
                 <!--begin::Check-->
                 <div class="form-check form-check-custom form-check-solid form-check-success form-switch mt-5 ml-6">
-                    <input class="form-check-input w-45px h-30px" type="checkbox" name="redirection"
+                    <input class="form-check-input w-30px h-20px" type="checkbox" name="redirection"
                         id="kt_builder_sidebar_fixed_desktop">
                     <!--begin::Label-->
-                    <label class="form-check-label text-gray-700 fw-bold fs-1"
+                    <label class="form-check-label text-gray-700 fw-bold fs-3"
                         for="kt_builder_sidebar_fixed_desktop">Redirect A
                         New Page</label>
                     <!--end::Label-->
