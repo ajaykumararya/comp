@@ -184,6 +184,9 @@
             height: 165px;
         }
     }
+    .modal,.modal-content{
+        max-width: 100%!important;
+    }
 </style>
 <?php
 if (PATH == 'sewaedu' or PATH == 'sewaeducation') {
