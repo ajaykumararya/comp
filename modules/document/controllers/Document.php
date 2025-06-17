@@ -46,13 +46,13 @@ class Document extends MY_Controller
             $row = $get->row();
             $registration_no = $row->registration_no;
             if (PATH == 'sct_ebook'):
-                
+
                 if (strtotime($row->expiry_date) < time()) {
                     echo '<script>
                         alert("Certificate Expired");
                         window.close()
                         </script>';
-                        exit;
+                    exit;
                 }
             endif;
             $this->set_data('registration_no', $registration_no);
@@ -164,7 +164,7 @@ class Document extends MY_Controller
     function marksheet()
     {
         $file = 'marksheet';
-        if(PATH == 'sct_ebook')
+        if (PATH == 'sct_ebook')
             $this->db->select('m.marksheet_type');
         $get = $this->student_model->marksheet(['id' => $this->id]);
         if ($get->num_rows()) {
@@ -204,7 +204,7 @@ class Document extends MY_Controller
                 $this->set_data('serial_no', date("Y", $admissionTime) . str_pad(PATH == 'techno' ? $row->student_id : $this->id, 3, '0', STR_PAD_LEFT));
             elseif (in_array(PATH, ['haptronworld'])):
                 $this->set_data('serial_no', 'IN' . (100 + $result_id));
-            elseif (in_array(PATH, ['upstate', 'sctnew','boardofpara'])):
+            elseif (in_array(PATH, ['upstate', 'sctnew', 'boardofpara'])):
                 $this->set_data('serial_no', '100' . date('Y', strtotime($row->issue_date)) . $this->id);
             endif;
             // echo $get->row('result_id');
@@ -397,7 +397,7 @@ class Document extends MY_Controller
             $this->db->select('sc.cert_session');
         if (PATH == 'sctnew')
             $this->db->select('sc.hindi_name,sc.hindi_mother_name,sc.hindi_father_name');
-        if(PATH == 'sct_ebook')            
+        if (PATH == 'sct_ebook')
             $this->db->select('sc.hindi_name,sc.hindi_course_name,sc.hindi_father_name,sc.hindi_center_name');
         $get = $this->student_model->student_certificates(['id' => $this->id]);
         if ($get->num_rows()) {
@@ -409,6 +409,9 @@ class Document extends MY_Controller
             $duration = $certificate['duration'];
             if ($certificate['duration_type'] == 'month') {
                 $toDateString = strtotime("+$duration months", $admissionTime);
+            } else if ($certificate['duration_type'] == 'semester') {
+                $months = $duration * 6;
+                $toDateString = strtotime("+$months months", $admissionTime);
             } else if ($certificate['duration_type'] == 'year') {
                 $toDateString = strtotime("+$duration years", $admissionTime);
             }
@@ -431,7 +434,7 @@ class Document extends MY_Controller
             if (in_array(PATH, ['haptronworld', 'sewaedu', 'beautyguru', 'pces', 'ncvetskill', 'sct'])) {
                 $certificate['serial_no'] = (50000 + $this->id);
                 $this->mypdf->addPage('L');
-            } elseif (in_array(PATH, ['upstate','boardofpara'])) {
+            } elseif (in_array(PATH, ['upstate', 'boardofpara'])) {
                 $this->set_data('serial_no', '1' . date('Y', strtotime($certificate['createdOn'])) . '00' . $certificate['student_id']);
             }
             // $getLastExam = $this->student_model->last_marksheet($certificate['course_id']);
@@ -477,14 +480,15 @@ class Document extends MY_Controller
         } else
             $this->not_found("Certificate Not Found..");
     }
-    function franchise_id_card(){
+    function franchise_id_card()
+    {
         $get = $this->center_model->get_center($this->id);
-        if($get->num_rows() && CHECK_PERMISSION('FRANCHISE_ID_CARD')){
+        if ($get->num_rows() && CHECK_PERMISSION('FRANCHISE_ID_CARD')) {
             $row = $get->row_array();
             // pre($row);
-            $output = $this->parse('franchise-id-card',$row);
+            $output = $this->parse('franchise-id-card', $row);
             $this->pdf($output);
-        }else
+        } else
             $this->not_found("Franchise ID Card Not Found..");
     }
     function pdf($pdfContent, $filename = 'my-pdf.pdf')
@@ -578,7 +582,7 @@ class Document extends MY_Controller
             $this->set_data($get->row_array());
             $output = $this->parse(__FUNCTION__);
             // $this->mypdf->addPage('L');
-            $this->pdf($output,$row->name.' '.$row->roll_no.'-Migration Certificate.pdf');
+            $this->pdf($output, $row->name . ' ' . $row->roll_no . '-Migration Certificate.pdf');
         } else
             $this->not_found();
     }
@@ -594,7 +598,7 @@ class Document extends MY_Controller
                 $row = $list->row();
                 // pre($list->row());
                 $output = $this->parse('typing-certificate', $list->row_array());
-                $this->pdf($output,$row->student_name .'-'.$row->roll_no.'-typing-certificate.pdf');
+                $this->pdf($output, $row->student_name . '-' . $row->roll_no . '-typing-certificate.pdf');
             } else
                 throw new Exception('Data not found...');
         } catch (Exception $e) {
@@ -615,10 +619,10 @@ class Document extends MY_Controller
                         alert("Certificate Expired");
                         window.close()
                         </script>';
-                        exit;
+                    exit;
                 }
                 $output = $this->parse('iso', $list->row_array());
-                $this->pdf($output,$list->row('certificate_no').'.pdf');
+                $this->pdf($output, $list->row('certificate_no') . '.pdf');
             } else
                 throw new Exception('ISO not found...');
         } catch (Exception $e) {

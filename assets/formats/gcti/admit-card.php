@@ -124,38 +124,60 @@
     <!-- <p class="position-absolute text-capitlize" style="top:30.5%;left:64%">{gender}</p>
     <p class="position-absolute" style="top:32.8%;left:24.4%">{center_name}</p> -->
     <?php
-    $subjects = $this->db->where([
+    $where = [
         'course_id' => $course_id,
         'duration' => $admit_card_duration,
-        'duration_type' => $duration_type
-    ])->get('subjects');
-    ?>
-    <p class="position-absolute text-capitlize" style="top:34.3%;left:25.5%">{center_name}</p>
-    <!-- <p class="position-absolute text-capitlize" style="top:29.5%;left:25.5%">{exam_date}</p> -->
-    <div class="position-absolute " style="top:42%;left:6.5%;width:87%">
-        <table id="first" border="1" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Sr. No.</th>
-                    <th>Subject Code</th>
-                    <th>Subject</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $i = 1;
-                foreach ($subjects->result() as $subject) {
-                    echo '<tr>
-                            <td>' . $i++ . '.</td>
-                            <td>' . $subject->subject_code . '</td>
-                            <td>' . $subject->subject_name . '</td>
-                        </tr>';
-                }
-                ?>
-            </tbody>
-        </table>
-    </div>
-    <?php
+        'duration_type' => $duration_type,
+        'student_id' => $student_id
+        // 'center_id' => $center_id
+    ];
+    $get = $this->student_model->get_switch('admit_card_schedule', $where);
+    // echo $this->db->last_query();
+    // pre($where);
+    if ($get->num_rows()) {
+        $row = $get->row();
+        // pre($row);
+        $subjects = $this->db->select('s.*,acs.date,acs.time')
+                ->from('subjects as s')
+                ->join('admit_cards_subjects as acs','acs.subject_id = s.id AND acs.admit_session_id = '.$row->admit_session_id)
+                ->get();
+        ?>
+        <p class="position-absolute text-capitlize" style="top:34.2%;left:25.5%"><?= $row->centre_name ?></p>
+        <!-- <p class="position-absolute" style="top:37.7%;left:24.4%"><?= $row->centre_code ?></p> -->
+        <!-- <p class="position-absolute" style="top:40%;left:24.4%"><?= $row->centre_address ?></p> -->
+        <div class="position-absolute " style="top:42%;left:6.5%;width:87%">
+            <table id="first" border="1" style="width:100%">
+                <thead>
+                    <tr>
+                        <th width="10%">Sr. No.</th>
+                        <th>Subject</th>
+                        <th>Subject Code</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $i = 1;
+                    if($subjects->num_rows()){
+                        foreach($subjects->result() as $srow){
+                            // pre($srow);
+                            echo '<tr>
+                                    <td>'.$i++.'.</td>
+                                    <td>'.$srow->subject_name.'</td>
+                                    <td>'.$srow->subject_code.'</td>
+                                    <td>'.$srow->date.'</td>
+                                    <td>'.date('h:i A',strtotime($srow->time)).'</td>
+                                </tr>';
+                        }
+                    }
+                    ?>
+                    
+                </tbody>
+            </table>
+        </div>
+        <?php
+    }
 
     $this->ki_theme->generate_qr($admit_card_id, 'admit_card', current_url());
     ?>
