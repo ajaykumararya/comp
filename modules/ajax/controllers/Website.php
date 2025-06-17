@@ -387,7 +387,7 @@ class Website extends Ajax_Controller
                 'student_id' => $student_id
             ]));
             $message = 'Your Registration No. is <b>'.$roll_no.'</b>';
-            if(PATH == 'abc')
+            if(in_array(PATH,['abc','gcti']))
                 $message = 'Your Roll No is <b>'.$roll_no.'</b>';
             $this->response('message',$message);
             $this->session->set_userdata([
