@@ -61,6 +61,6 @@
         </div>
     </div>
 </div>
-<script>
+<script> 
     document.title = "<?=$student_data['student_name']?> - Student Profile";
 </script>
