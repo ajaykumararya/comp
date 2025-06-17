@@ -120,7 +120,7 @@
     <p class="position-absolute" style="top:25.8%;left:23%">{mother_name}</p>
     <p class="position-absolute" style="top:27.7%;left:23%">{dob}</p>
     <p class="position-absolute" style="top:29.5%;left:23%">{course_name}</p>
-    <p class="position-absolute" style="top:31.3%;left:23%">{marksheet_duration} {duration_type}</p>
+    <p class="position-absolute text-capitlize" style="top:31.3%;left:23%">{marksheet_duration} {duration_type}</p>
     <p class="position-absolute" style="top:33%;left:23%">{session}</p>
 
 
