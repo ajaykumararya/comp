@@ -33,7 +33,7 @@
             /* Unicode for FontAwesome Bars (☰) */
             font-family: "Font Awesome 5 Free";
             font-weight: 900;
-            /* position: absolute; */
+            /* position: absolute; */ 
             /* right: 10px; */
             /* top: 50%; */
             transform: translateY(-50%);
