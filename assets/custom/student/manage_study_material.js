@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                         }
                     }
                     else
-                        return `<a href="${base_url}assets/student-study/${row.file}/preview" target="_blank" class="btn btn-info btn-xs btn-sm"><i class="fa fa-eye"></i> File</a>`;
+                        return `<a href="${base_url}assets/student-study/${row.material_id}/preview" target="_blank" class="btn btn-info btn-xs btn-sm"><i class="fa fa-eye"></i> File</a>`;
                 }
             },
             {

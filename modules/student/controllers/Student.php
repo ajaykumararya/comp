@@ -293,7 +293,7 @@ class Student extends MY_Controller
                     $row = $get->row();
                     if ($row->file_type == 'file') {
                         $file = $row->file;
-                        $this->load->view('panel/study', ['url' => base_url('assets/student-study/' . $file)]);
+                        $this->load->view('panel/study', ['url' => base_url('assets/student-study/' . $row->material_id)]);
                     } else if ($row->file_type == 'youtube') {
                         if ($videoId = getYouTubeId($row->file)) {
                             // echo $videoId;

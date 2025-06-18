@@ -87,27 +87,24 @@
     <p class="position-absolute" style="bottom:5%;left:19%;font-size:13px">{createdOn}</p>
     <p class="position-absolute" style="bottom:3.2%;left:15%;font-size:13px">New Delhi</p>
 
-    <p class="position-absolute text-center " style="width:190px;left:23%;top:42.2%;">{roll_no}</p>
-    <p class="position-absolute text-center " style="width:200px;left:73%;top:42.2%;">{enrollment_no}</p>
+    <p class="position-absolute text-center" style="width:155px;left:35%;top:42.2%;">{student_name}</p>
+    <p class="position-absolute text-center" style="width:190px;left:75%;top:42.2%;">{father_name}</p>
 
-    <p class="position-absolute text-center " style="width:230px;left:29%;top:47.9%;">{student_name}</p>
-    <p class="position-absolute text-center " style="width:120px;left:78%;top:47.9%;">{dob}</p>
+    <p class="position-absolute text-center " style="width: 65.5%;left:33%;top:47.9%;">{course_name}</p>
 
-    <p class="position-absolute text-center " style="width:270px;left:20%;top:53.5%;">{father_name}</p>
-    <p class="position-absolute text-center " style="width:197px;left:74%;top:53.5%;">{mother_name}</p>
+    <p class="position-absolute text-center text-capitlize" style="width:75px;left:11.5%;top:53.8%;"><?=humnize_duration($duration,$duration_type)?></p>
+
+    <p class="position-absolute text-center" style="width:145px;left:39%;top:53.8%;">{roll_no}</p>
+    <p class="position-absolute text-center" style="width:50px;left:62%;top:53.8%;font-size:10px">{from_date}</p>
+    <p class="position-absolute text-center" style="width:50px;left:70%;top:53.8%;font-size:10px">{to_date}</p>
     
-    <p class="position-absolute text-center " style="width:80%;left:19%;top:59.5%;">{course_name}</p>
     
-    <p class="position-absolute text-center text-capitlize" style="width:150px;left:20%;top:65.1%;"><?=humnize_duration($duration,$duration_type)?></p>
-    <p class="position-absolute text-center " style="width:100px;left:45%;top:65.1%;">{from_date}</p>
-    <p class="position-absolute text-center " style="width:130px;left:65%;top:65.1%;">{to_date}</p>
-    
-    <p class="position-absolute text-center " style="width:60%;left:38%;top:71%;">{center_name}</p>
+    <p class="position-absolute text-center " style="width:80%;left:18%;top:59.4%;">{center_name}</p>
     
     <!-- <p class="position-absolute text-center " style="width:180px;left:42%;top:69.7%;">{to_date}</p> -->
-    <p class="position-absolute text-center " style="width:50px;left:72%;top:76.5%;">{grade}</p>
+    <!-- <p class="position-absolute text-center " style="width:50px;left:72%;top:76.5%;">{grade}</p> -->
     
-    <p class="position-absolute text-center " style="width:50px;left:41.8%;top:76.5%;">{percentage}%</p>
+    <p class="position-absolute text-center " style="width:105px;left:46%;top:65%;">{percentage}%</p>
 
 </body>
 
