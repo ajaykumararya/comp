@@ -12,7 +12,7 @@
         </div>
         <style>
             .certificates_size {
-                width: 200px;
+                width: 300px;
             }
             .associated_size {
                 width: 150px;
