@@ -143,6 +143,20 @@ class MY_Controller extends MX_Controller
         //         ]
         //     ]);
         // }
+        if(CHECK_PERMISSION(strtoupper('centre_fun_marksheet_certificate_fee'))){
+            $fields = ['marksheet', 'certificate'];
+            foreach ($fields as $field) {
+                $checkField = $this->build_db->field_exists('center_courses', $field);
+                if (!$checkField) {
+                    $this->build_db->add_field('center_courses', [
+                        $field => [
+                            'type' => 'LONGTEXT',
+                            'default' => 0
+                        ]
+                    ]);
+                }
+            }
+        }
         if (CHECK_PERMISSION('FRANCHISE_ID_CARD')) {
             $checkField = $this->build_db->field_exists('centers', 'id_card_issue_date');
             if (!$checkField) {

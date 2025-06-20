@@ -204,7 +204,7 @@ class Document extends MY_Controller
                 $this->set_data('serial_no', date("Y", $admissionTime) . str_pad(PATH == 'techno' ? $row->student_id : $this->id, 3, '0', STR_PAD_LEFT));
             elseif (in_array(PATH, ['haptronworld'])):
                 $this->set_data('serial_no', 'IN' . (100 + $result_id));
-            elseif (in_array(PATH, ['upstate', 'sctnew', 'boardofpara'])):
+            elseif (in_array(PATH, ['upstate', 'sctnew', 'boardofpara','dbisdi'])):
                 $this->set_data('serial_no', '100' . date('Y', strtotime($row->issue_date)) . $this->id);
             endif;
             // echo $get->row('result_id');
