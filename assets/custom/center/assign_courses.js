@@ -115,4 +115,21 @@ document.addEventListener('DOMContentLoaded', function (e) {
             });
         });
     });
+
+    $(document).on('change','.update-course-marksheet-nd-cert-fee',function(){
+        var center_course_id = $(this).data('id');
+        var name = $(this).attr('name');
+        var value = $(this).val();
+        var formData = new FormData();
+        formData.append('center_course_id', center_course_id);
+        formData.append('field',name);
+        formData.append('value',value);
+        $.AryaAjax({
+            data: formData,
+            url: 'center/update-marksheet-nd-cert-fee',
+            success_message : 'Fee Updated Successfully',
+        }).then((res) => {
+            showResponseError(res);
+        });
+    })
 });

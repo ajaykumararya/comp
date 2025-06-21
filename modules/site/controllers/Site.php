@@ -390,9 +390,14 @@ class Site extends Site_Controller
     }
     function test()
     {
-        echo base_url('typing-certificate/' . $this->token->encode([
-            'id' => 1
-        ]));
+        // $get = $this->center_model->get_assign_courses(3,[
+        //             'course_id' => 44
+        //         ]);
+        // $r = $get->num_rows() ? ($get->row()) : [];
+        // pre($r);
+        // echo base_url('typing-certificate/' . $this->token->encode([
+        //     'id' => 1
+        // ]));
 
         // $url = base_url('marksheet_print/' . $this->token->encode(['id' => 2]));
         // echo $this->ki_theme->generate_qr(2, 'front_marksheet', $url);

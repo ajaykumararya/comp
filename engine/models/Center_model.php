@@ -31,6 +31,8 @@ class Center_model extends MY_Model
     }
     function get_assign_courses($id, $condition = false, $userType = 'center')
     {
+        if(CHECK_PERMISSION(strtoupper('centre_fun_marksheet_certificate_fee')))
+            $this->db->select('cc.marksheet,cc.certificate,cc.id as center_course_id');
         $this->db->select('c.*,co.course_name,co.id as course_id,co.fees,co.duration,co.duration_type')
             ->from('centers as c');
         if (CHECK_PERMISSION('CO_ORDINATE_SYSTEM')) {

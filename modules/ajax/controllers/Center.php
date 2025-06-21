@@ -97,6 +97,21 @@ class Center extends Ajax_Controller
         $this->set_data("all_courses", $this->db->where('status', '1')->where('isDeleted', '0')->get('course')->result_array());
         $this->response('html', $this->template('assign-course-center'));
     }
+    function update_marksheet_nd_cert_fee()
+    {
+        // $this->response('data',$this->post());
+        if (CHECK_PERMISSION(strtoupper('centre_fun_marksheet_certificate_fee'))) {
+            $this->response(
+                'status',
+                $this->db->where('id', $this->post('center_course_id'))
+                    ->update('center_courses', [
+                        $this->post('field') => $this->post('value')
+                    ])
+            );
+        } else {
+            $this->response('html', 'Service Not Available');
+        }
+    }
     function assign_course()
     {
         $where = $data = $this->post();
@@ -509,7 +524,7 @@ class Center extends Ajax_Controller
     }
     function id_cards()
     {
-        $get = $this->db->where('id_card_issue_date!=','null')->where('type','center')->order_by('id_card_issue_date', 'ASC')->get('centers');
+        $get = $this->db->where('id_card_issue_date!=', 'null')->where('type', 'center')->order_by('id_card_issue_date', 'ASC')->get('centers');
         $this->response([
             'status' => $get->num_rows(),
             'data' => $get->result_array()

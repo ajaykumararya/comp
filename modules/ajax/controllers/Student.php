@@ -522,11 +522,28 @@ class Student extends Ajax_Controller
     {
         // $this->response($this->post());
         if ($walletSystem = (CHECK_PERMISSION('WALLET_SYSTEM') && $this->center_model->isCenter())) {
-            $deduction_amount = $this->ki_theme->get_wallet_amount('student_marksheet_fees');
-            $close_balance = $this->ki_theme->wallet_balance();
-            if ($close_balance < 0) {
-                $this->response('html', 'Your Wallet Balance is Low..');
-                exit;
+            if (CHECK_PERMISSION(strtoupper('centre_fun_marksheet_certificate_fee'))) {
+                $loginId = $this->center_model->loginId();
+                $get = $this->center_model->get_assign_courses($loginId, [
+                    'course_id' => $this->post('course_id')
+                ]);
+                $deduction_amount = 0;
+                if ($get->num_rows())
+                    $deduction_amount = $get->row('marksheet');
+                $close_balance = $this->ki_theme->wallet_balance();
+                $close_balance = $close_balance - $deduction_amount;
+                if ($close_balance < 0) {
+                    $this->response('html', 'Your Wallet Balance is Low..');
+                    exit;
+                }
+
+            } else {
+                $deduction_amount = $this->ki_theme->get_wallet_amount('student_marksheet_fees');
+                $close_balance = $this->ki_theme->wallet_balance();
+                if ($close_balance < 0) {
+                    $this->response('html', 'Your Wallet Balance is Low..');
+                    exit;
+                }
             }
         }
 
@@ -743,11 +760,28 @@ class Student extends Ajax_Controller
             }
         }
         if ($walletSystem = (CHECK_PERMISSION('WALLET_SYSTEM') && $this->center_model->isCenter())) {
-            $deduction_amount = $this->ki_theme->get_wallet_amount('student_certificate_fees');
-            $close_balance = $this->ki_theme->wallet_balance();
-            if ($close_balance < 0) {
-                $this->response('html', 'Your Wallet Balance is Low..');
-                exit;
+            if (CHECK_PERMISSION(strtoupper('centre_fun_marksheet_certificate_fee'))) {
+                $loginId = $this->center_model->loginId();
+                $get = $this->center_model->get_assign_courses($loginId, [
+                    'course_id' => $this->post('course_id')
+                ]);
+                $deduction_amount = 0;
+                if ($get->num_rows())
+                    $deduction_amount = $get->row('certiifcate');
+                $close_balance = $this->ki_theme->wallet_balance();
+                $close_balance = $close_balance - $deduction_amount;
+                if ($close_balance < 0) {
+                    $this->response('html', 'Your Wallet Balance is Low..');
+                    exit;
+                }
+
+            } else {
+                $deduction_amount = $this->ki_theme->get_wallet_amount('student_certificate_fees');
+                $close_balance = $this->ki_theme->wallet_balance();
+                if ($close_balance < 0) {
+                    $this->response('html', 'Your Wallet Balance is Low..');
+                    exit;
+                }
             }
         }
         $where = array_diff_key($data, array_flip(preg_grep('/^hindi/', array_keys($data))));

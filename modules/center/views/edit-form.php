@@ -29,7 +29,7 @@ if($valid_upto){
         </div>
         <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
             <label class="form-label required required">Date of birth</label>
-            <input type="text" name="dob" value="<?=date('Y-m-d',strtotime($dob))?>" class="form-control" placeholder="Select date of birth">
+            <input type="text" name="dob" value="<?=date('d-m-Y',strtotime($dob))?>" class="form-control" placeholder="Select date of birth">
         </div>
         <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
             <label class="form-label required">Pan Number</label>

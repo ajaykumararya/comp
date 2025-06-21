@@ -12,7 +12,7 @@
                 <div id="kt_docs_card_collapsible" class="collapse show">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="course" class="form-label required">Course</label>
                                     <select name="course_id" data-control="select2" data-placeholder="Select Course"
@@ -26,7 +26,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group set-duration">
                                     <input type="hidden" name="duration_type">
                                     <label for="course_duration" class="form-label required">Select Duration in
@@ -38,18 +38,18 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="subject_name" class="form-label required">Subject Name</label>
-                                    <input type="text" class="form-control" name="subject_name"
-                                        placeholder="Enter Subject Name">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="" class="form-label required">Subject Code</label>
                                     <input type="text" class="form-control" placeholder="Enter Subject Code"
                                         name="subject_code">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="subject_name" class="form-label required">Subject Name</label>
+                                    <textarea type="text" class="form-control" name="subject_name"
+                                        placeholder="Enter Subject Name" data-kt-autosize="true"></textarea>
                                 </div>
                             </div>
                             <!--begin::Input group-->
