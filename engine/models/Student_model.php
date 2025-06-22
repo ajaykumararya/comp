@@ -265,6 +265,7 @@ class Student_model extends MY_Model
                             ');
                 $this->db->join("admit_cards as ac", "ac.student_id = s.id");
                 $this->db->join('session as ss', 'ss.id = ac.session_id');
+                $this->db->order_by('ac.duration','ASC');
                 if (isset($roll_no)) {
                     unset($condition['roll_no']);
                     $this->myWhere('s', ['roll_no' => $roll_no]);

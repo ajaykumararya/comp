@@ -618,7 +618,8 @@ class Website extends Ajax_Controller
                     $html .= '<tr>
                                     <td><a href="' . $url . '" target="_blank">' . humnize_duration_with_ordinal($row->admit_card_duration, $row->duration_type) . ' Admit Card</a></td>
                                     <td>
-                                        <a href="' . $url . '" target="_blank" class="btn btn-primary btn-xs btn-sm">View Result</a>
+                                        <a href="' . $url . '" target="_blank" class="btn btn-primary btn-xs btn-sm"><i class="fa fa-eye"></i></a>
+                                        <a href="' . $url . '" target="_blank" download class="btn btn-success btn-xs btn-sm"><i class="fa fa-download"></i></a>
                                     </td>
                         </tr>';
                 }

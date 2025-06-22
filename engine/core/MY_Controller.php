@@ -151,7 +151,7 @@ class MY_Controller extends MX_Controller
                     $this->build_db->add_field('center_courses', [
                         $field => [
                             'type' => 'LONGTEXT',
-                            'default' => 0
+                            'default' => '0'
                         ]
                     ]);
                 }
