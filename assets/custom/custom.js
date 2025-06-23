@@ -734,7 +734,7 @@ const optionFormatSecond = (item) => {
     if (item.element.hasAttribute('data-price_show')) {
         var priceShow = item.element.getAttribute('data-price_show');
         var price = item.element.getAttribute('data-course_fee');
-        if (priceShow) {
+        if (priceShow != 0) {
             template += ` <span class="fs-5 text-success">${inr} ${price}</span>`;
         }
     }
