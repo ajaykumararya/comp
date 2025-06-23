@@ -27,7 +27,9 @@
                         <th>Course Name</th>
                         <td>{course_name}</td>
                         <th>Duration</th>
-                        <td>{duration} {duration_type}</td>
+                        <td>
+                            <?=humnize_duration($duration,$duration_type)?>
+                        </td>
                     </tr>
                     <tr>
                         <th>Mobile</th>

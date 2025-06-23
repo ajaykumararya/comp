@@ -79,7 +79,7 @@ if (!CHECK_PERMISSION('CO_ORDINATE_SYSTEM')) {
                         <!--end::Options-->
                     </div>
                     <div class="d-flex justify-content-end">
-                        <div class="form-check form-check-custom form-check-solid me-6">
+                        <div class="form-check form-check-custom form-check-solid me-2">
                             <input class="form-check-input" type="checkbox" value="1" id="openNEwTab" />
                             <label class="form-check-label text-dark" for="openNEwTab">
                                 Open New Tab
@@ -225,7 +225,7 @@ if (!CHECK_PERMISSION('CO_ORDINATE_SYSTEM')) {
                             <div class="d-flex flex-wrap">
                                 <!--begin::Stat-->
                                 <div
-                                    class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                    class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-2 mb-3">
                                     <!--begin::Number-->
                                     <div class="d-flex align-items-center flex-wrap">
                                         <div class="fs-2 fw-bold me-5" id="roll_no">{roll_no}</div>
@@ -245,7 +245,7 @@ if (!CHECK_PERMISSION('CO_ORDINATE_SYSTEM')) {
                                 <!--end::Stat-->
                                 <!--begin::Stat-->
                                 <div
-                                    class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                    class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-2 mb-3">
                                     <!--begin::Number-->
                                     <div class="d-flex align-items-center">
                                         <div class="fs-2 fw-bold student-dob">{dob} </div>
@@ -259,7 +259,7 @@ if (!CHECK_PERMISSION('CO_ORDINATE_SYSTEM')) {
 
                                 <!--begin::Stat-->
                                 <div
-                                    class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                    class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-2 mb-3">
                                     <!--begin::Number-->
                                     <div class="d-flex align-items-center">
                                         <div class="fs-2 fw-bold text-capitalize student-gender">{gender} </div>
@@ -275,7 +275,7 @@ if (!CHECK_PERMISSION('CO_ORDINATE_SYSTEM')) {
                                     ?>
                                     <!--begin::Stat-->
                                     <div
-                                        class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                        class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-2 mb-3">
                                         <!--begin::Number-->
                                         <div class="d-flex align-items-center flex-wrap">
                                             <?= $this->ki_theme->keen_icon('people', 5, 1, 'outline text-success') ?>
@@ -294,14 +294,10 @@ if (!CHECK_PERMISSION('CO_ORDINATE_SYSTEM')) {
                                     <?php
                                 }
 
-                                ?>
-
-
-                                <?php
                                 if (!CHECK_PERMISSION('CO_ORDINATE_SYSTEM')) {
                                     ?>
                                     <!--begin::Stat-->
-                                    <div class="border border-danger border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                    <div class="border border-danger border-dashed rounded min-w-125px py-3 px-4 me-2 mb-3">
                                         <!--begin::Number-->
                                         <div class="d-flex align-items-center flex-wrap">
                                             <?= $this->ki_theme->keen_icon('bank', 5, 1, 'outline text-danger') ?>
@@ -320,6 +316,28 @@ if (!CHECK_PERMISSION('CO_ORDINATE_SYSTEM')) {
                                     <?php
                                 }
 
+                                if (CHECK_PERMISSION('CUSTOM_STUDENT_FEE')) {
+                                    ?>
+                                    <!--begin::Stat-->
+                                    <div
+                                        class="border border-success border-dashed rounded min-w-125px py-3 px-4 me-2 mb-3">
+                                        <!--begin::Number-->
+                                        <div class="d-flex align-items-center flex-wrap">
+                                            <?= $this->ki_theme->keen_icon('bank', 5, 1, 'outline text-success') ?>
+                                            <div class="fs-2 fw-bold me-5" data-kt-countup="true"
+                                                data-kt-countup-value="<?= $custom_fee ?>">
+                                                0</div>
+                                        </div>
+                                        <!--end::Number-->
+                                        <!--begin::Label-->
+                                        <div class="fw-semibold fs-6 text-success align-items-center flex-wrap w-100">
+                                            Total Course Fee
+                                        </div>
+                                        <!--end::Label-->
+                                    </div>
+                                    <!--end::Stat-->
+                                    <?php
+                                }
                                 ?>
 
 

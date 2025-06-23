@@ -51,10 +51,13 @@ class Student_model extends MY_Model
             ->from('students as s')
             // ->where('s.status',1)
             ->join("course as c", "s.course_id = c.id ", 'left')
-            ->join('state', 'state.STATE_ID = s.state_id','left')
-            ->join('district', 'district.DISTRICT_ID = s.city_id and district.STATE_ID = state.STATE_ID','left')
+            ->join('state', 'state.STATE_ID = s.state_id', 'left')
+            ->join('district', 'district.DISTRICT_ID = s.city_id and district.STATE_ID = state.STATE_ID', 'left')
 
             ->join('batch as b', "b.id = s.batch_id", 'left');
+
+        if (CHECK_PERMISSION('CUSTOM_STUDENT_FEE'))
+            $this->db->select('s.custom_fee');
         if (PATH === 'skycrownworld')
             $this->db->select('s.category');
         if (CHECK_PERMISSION('ADMISSION_WITH_SESSION'))
@@ -265,7 +268,7 @@ class Student_model extends MY_Model
                             ');
                 $this->db->join("admit_cards as ac", "ac.student_id = s.id");
                 $this->db->join('session as ss', 'ss.id = ac.session_id');
-                $this->db->order_by('ac.duration','ASC');
+                $this->db->order_by('ac.duration', 'ASC');
                 if (isset($roll_no)) {
                     unset($condition['roll_no']);
                     $this->myWhere('s', ['roll_no' => $roll_no]);
@@ -417,8 +420,6 @@ class Student_model extends MY_Model
     function get_student_via_id($id = 0)
     {
         $this->db->select('s.fee_emi,s.fee_emi_type');
-        if (CHECK_PERMISSION('CUSTOM_STUDENT_FEE'))
-            $this->db->select('s.custom_fee');
         return $this->get_switch('student_id', ['id' => $id]);
     }
     function id_card($id)

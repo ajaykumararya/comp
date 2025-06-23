@@ -58,8 +58,9 @@
         .text-center {
             text-align: center;
         }
+
         table tr th,
-        table tr td{
+        table tr td {
             font-size: 16px;
             text-align: left;
         }
@@ -102,10 +103,33 @@
         </table>
     </div>
     <p class="position-absolute text-center" style="top:55%;;width:400px">{center_full_address}</p>
-    <p class="position-absolute text-center " style="top:1%;;width:400px">{center_name}</p>
-    <div class="position-absolute" style="width: 70px;top:15%;left:37%;">
-        <img src="<?=$this->ki_theme->generate_qr($student_id,'id-card',current_url(),true)?>" style="padding:0;width: 100%;height:100%" />
+    <p class="position-absolute text-center " style="top:1%;;width:400px;font-size:20px">{center_name}</p>
+    <div class="position-absolute" style="width: 80px;top:15%;left:37%;">
+        <img src="<?= $this->ki_theme->generate_qr($student_id, 'id-card', current_url(), true) ?>"
+            style="padding:0;width: 100%;height:100%" />
     </div>
+    <?php
+    if (file_exists('upload/' . $center_signature)) {
+        echo '<div class="position-absolute test" style="top:50.5%;left:34.5%;z-index:888" align="center">
+        <img src="upload/{center_signature}" style="width:100px;height:27px;">
+    </div>';
+    }
+    $sign = '';
+    if ($student_docs) {
+        $docs = (json_decode($student_docs, true));
+        if (isset($docs['signature'])) {
+            $sign = $docs['signature'];
+            if (file_exists('upload/' . $sign . '')) {
+                echo '
+                <div class="position-absolute test" style="top:50.5%;left:2.5%;z-index:888">
+                    <img src="upload/' . $sign . '" style="width:100px;height:27px">
+                </div>
+                
+                ';
+            }
+        }
+    }
+    ?>
     <!-- <p class="position-absolute" style="top:15.2%;left:20rem;">{roll_no}</p>
         <p class="position-absolute" style="top:19.3%;left:36.5%">{father_name}</p>
         <p class="position-absolute " style="top:21.5%;left:36.5%">{address}</p>

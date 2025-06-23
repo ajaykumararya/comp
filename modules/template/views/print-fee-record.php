@@ -69,12 +69,22 @@
                         <!--end::Label-->
 
                         <!--end::Text-->
-                        <div class="fw-bold fs-6 text-gray-800">{student_name}</div>
+                        <div class="fw-bold fs-6 text-gray-800">{student_name} - {roll_no}</div>
                         <!--end::Text-->
 
                         <!--end::Description-->
                         <div class="fw-semibold fs-7 text-gray-600">
                             {address}
+                        </div>
+                        <!--end::Description-->
+                        <!--end::Description-->
+                        <div class="fw-semibold fs-7 text-gray-600">
+                            Address : {address}
+                        </div>
+                        <!--end::Description-->
+                        <!--end::Description-->
+                        <div class="fw-semibold fs-7 text-gray-600">
+                            Note : {description}
                         </div>
                         <!--end::Description-->
                     </div>
@@ -88,6 +98,7 @@
 
                         <!--end::Text-->
                         <div class="fw-bold fs-6 text-gray-800">{center_name}</div>
+                        <div class="fw-bold fs-6 text-gray-800">Centre Code : {center_code}</div>
                         <!--end::Text-->
 
                         <!--end::Description-->
@@ -120,11 +131,12 @@
                                 $discount = 0;
                                 $ttl = 0;
                                 $subttl = 0;
+                                $custom = CHECK_PERMISSION('CUSTOM_STUDENT_FEE');
                                 foreach ($record as $row) {
 
                                     echo '<tr class="fw-bold text-gray-700 fs-5 text-end">
                                     
-                                            <td class="pt-6">' . ucwords(str_replace('_', ' ', $row['type'])) . '</td>
+                                            <td class="pt-6">' . ($custom ? date('d-M-Y', strtotime($row['payment_date'])) : ucwords(str_replace('_', ' ', $row['type']))) . '</td>
                                             <td class="text-capitalize pt-6">' . $row['payment_type'] . '</td>
                                             <td class="pt-6">{inr} ' . $row['amount'] . '
                                             ';
@@ -147,10 +159,31 @@
                     </div>
                     <!--end::Table-->
 
-                    <!--begin::Container-->
-                    <div class="d-flex justify-content-end">
+                    <!--begin::Container  justify-content-end-->
+                    <div class="d-flex ">
                         <!--begin::Section-->
-                        <div class="mw-600px">
+                        <div class="w-50 me-20">
+                            <?php
+                            if (CHECK_PERMISSION(('CUSTOM_STUDENT_FEE'))) {
+                                ?>
+                                <!--begin::Item-->
+                                <div class="d-flex flex-stack mb-3">
+                                    <!--begin::Accountname-->
+                                    <div class="fw-semibold pe-10 text-gray-600 fs-7">Total Course Fee</div>
+                                    <!--end::Accountname-->
+
+                                    <!--begin::Label-->
+                                    <div class="text-end fw-bold fs-6 text-gray-800">{inr}
+                                        {custom_fee}
+                                    </div>
+                                    <!--end::Label-->
+                                </div>
+                                <!--end::Item-->
+                                <?php
+                            }
+                            ?>
+                        </div>
+                        <div class="w-50 justify-content-end">
                             <?php
                             /*
                             <!--begin::Item-->
@@ -162,7 +195,7 @@
                                 <!--begin::Label-->
                                 <div class="text-end fw-bold fs-6 text-gray-800">{inr}
                                     <?php
-                                   
+
                                     $ttlOutStandingAmount = $this->student_model->total_course_fee($institute_id,$course_id);
                                     echo $ttlOutStandingAmount ;
                                     ?>
@@ -246,7 +279,7 @@
                                         'student_id' => $student_id,
                                         'course_id' => $course_id
                                     ]);
-                                    
+
                                     $ttlOutStandingAmount = $ttlOutStandingAmount - ($dataAmount['ttl_fee'] + $dataAmount['ttl_discount']);
                                     echo $ttlOutStandingAmount;
                                     ?>
