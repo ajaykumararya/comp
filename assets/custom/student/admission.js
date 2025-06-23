@@ -339,7 +339,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             roll_no_box.val('');
             var show = $('#wallet_system_course_wise').length ?? 0;
             // alert(show);
-            console,log('course  fee sow',show)
+            console.log('course  fee sow',show)
             $.AryaAjax({
                 url: 'student/genrate-a-new-rollno-with-center-courses',
                 data: { center_id },
