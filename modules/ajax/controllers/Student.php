@@ -615,6 +615,46 @@ class Student extends Ajax_Controller
         $this->response('status', true);
         $this->response('html', 'Update issue date of marksheet successfully..');
     }
+    function marksheet_edit_form()
+    {
+        // $this->db->where('id', $this->post('id'))->update('marksheets', [
+        //     'date' => $this->post('date')
+        // ]);
+        // $this->response('data',$this->post());
+        $this->response('url', 'student/update-marksheet');
+        $this->response('status', true);
+        $this->response('form', $this->template('student/edit-marksheet'));
+    }
+    function update_marksheet()
+    {
+        $marksheet_id = $this->post('id');
+        $this->db->update('marksheets', [
+            'date' => $this->post('date')
+        ], [
+            'id' => $marksheet_id
+        ]);
+        $subjects = [];
+        $k = 0;
+        foreach ($this->post('marks') as $mark_id => $numbers) {
+            $ttl = 0;
+            $theory_marks = (isset($numbers['theory_marks'])) ?
+                $numbers['theory_marks'] : 0;
+            $practical = (isset($numbers['practical'])) ?
+                $numbers['practical'] : 0;
+            $num = [
+                'theory_marks' => $theory_marks,
+                'practical' => $practical
+            ];
+            $num['ttl'] = $theory_marks + $practical;
+            $num['id'] = $mark_id;
+            $subjects[] = $num;
+            $k++;
+        }
+        if ($k) {
+            $this->db->update_batch('marks_table', $subjects, 'id');
+        }
+        $this->response('status', true);
+    }
     function print_mark_table()
     {
         $where = $this->post();
@@ -768,7 +808,7 @@ class Student extends Ajax_Controller
                 ]);
                 $deduction_amount = 0;
                 if ($get->num_rows())
-                    $deduction_amount = $get->row('certiifcate');                
+                    $deduction_amount = $get->row('certiifcate');
                 $deduction_amount = (empty($deduction_amount) || $deduction_amount == null) ? 0 : $deduction_amount;
                 $close_balance = $this->ki_theme->wallet_balance();
                 $close_balance = $close_balance - $deduction_amount;

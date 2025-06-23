@@ -174,7 +174,7 @@ class Student extends MY_Controller
                     'url' => 'other'
                 ];
             }
-            $get = $this->student_model->get_student_via_id($stdId);
+            $get = $this->student_model->skip_admission_status()->get_student_via_id($stdId);
             if ($get->num_rows()) {
                 if (isset($tabs[$tab]))
                     $this->ki_theme->set_breadcrumb($tabs[$tab]);

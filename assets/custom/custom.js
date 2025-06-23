@@ -467,6 +467,7 @@ $.fn.EditAjax = function (url, title = 'Form', model_Class = 'fullscreen') {
     this.find('.edit-form-btn').on('click', function (r) {
         r.preventDefault();
         var id = $(this).data('id');
+        // alert(id)
         $.AryaAjax({
             url: url,
             data: { id },
@@ -1094,11 +1095,11 @@ jQuery.ucfirst = function (str) {
 };
 const course_duration_humnize = (duration, duration_type, flag = true) => {
     var isMonth = duration_type === 'month';
-    duration_type = (duration_type + (flag ? ( duration  > 1 ? 's' : '') : ''));
-    return ( (isMonth ? duration : ordinal_number(duration)) + ` ` + $.ucfirst(duration_type));
+    duration_type = (duration_type + (flag ? (duration > 1 ? 's' : '') : ''));
+    return ((isMonth ? duration : ordinal_number(duration)) + ` ` + $.ucfirst(duration_type));
 }
 const course_duration_humnize_without_ordinal = (duration, duration_type, flag = true) => {
-    duration_type = (duration_type + (flag ? ( duration  > 1 ? 's' : '') : ''));
+    duration_type = (duration_type + (flag ? (duration > 1 ? 's' : '') : ''));
     return (duration + ` ` + $.ucfirst(duration_type));
 }
 const SwalHideLoading = () => {

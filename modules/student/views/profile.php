@@ -26,9 +26,17 @@ if (!CHECK_PERMISSION('CO_ORDINATE_SYSTEM')) {
     ]);
 }
 
+        switch($admission_status_value){
+            case 0:
+                echo alert('This account is on pending list.','warning');
+            break;
+            case 2:
+                echo alert('This account is on cancel list.','danger');
+            break;
+        }
 ?>
 <!--begin::Navbar-->
-<div class="overflow-hidden position-relative card-rounded">
+<div class="overflow-hidden  position-relative card-rounded">
     <?php
     if ($this->center_model->isAdminOrCenter()) {
         ?>

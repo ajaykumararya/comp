@@ -1,12 +1,19 @@
 <?php
 class Student_model extends MY_Model
 {
+    private $skip_admission_status = false;
+    function skip_admission_status()
+    {
+        $this->skip_admission_status = true;
+        return $this;
+    }
     function get_switch($case = 'all', $condition = [], $withCenter = true)
     {
         extract($condition);
         $this->db->select('        
                 b.batch_name,
                 s.status as admission_status,
+                s.admission_status as admission_status_value,
                 s.image,
                 s.dob,
                 s.adhar_card_no,
@@ -62,7 +69,7 @@ class Student_model extends MY_Model
             $this->db->select('s.category');
         if (CHECK_PERMISSION('ADMISSION_WITH_SESSION'))
             $this->db->select('s.session_id,ses.title as session')->join('session as ses', 'ses.id =  s.session_id', 'left');
-        if (!isset($without_admission_status))
+        if (!isset($without_admission_status) && !$this->skip_admission_status)
             $this->db->where('s.admission_status', isset($admission_status) ? $admission_status : 1);
         if (($this->isCenter() and $withCenter) or ($case == 'center' and isset($center_id)))
             $this->db->join('centers as ce', 'ce.id = s.center_id AND s.center_id = ' . (isset($center_id) ? $center_id : $this->loginId()));
@@ -447,6 +454,14 @@ class Student_model extends MY_Model
         return $this->db->where($where)
             ->order_by('seq', 'ASC')
             ->get('subjects');
+    }
+    function results_marks($marksheet_id){
+        $this->db->select('m.id as marksheet_id,m.date as issue_date,mt.id as mark_id,mt.practical as practical_marks,mt.theory_marks,sub.subject_name,sub.subject_type,sub.theory_max_marks,sub.theory_min_marks,sub.practical_max_marks,sub.practical_min_marks,sub.subject_code');
+        $this->db->from('marksheets as m');
+        $this->db->join('marks_table as mt','mt.marksheet_id = m.id');
+        $this->db->join('subjects as sub','sub.id = mt.subject_id');
+        $this->db->where('m.id',$marksheet_id);
+        return $this->db->get();
     }
     function check_admit_card($where)
     {
