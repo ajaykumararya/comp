@@ -1,6 +1,18 @@
 <section class="sec_padd" >
     <div class="" style="    padding: 0 20px;">
         <div class="row">
+            
+
+            <div class="col-md-6 mb-3">
+                <div class="card theme-border radius_all_10 box_shadow1 animation animated fadeInUp"
+                    data-animation="fadeInUp" data-animation-delay="0.02s" style="animation-delay: 0.02s; opacity: 1;">
+                    <div class="card-body">
+                        <?= ES('scroll_middle_content') ?>
+                    </div>
+                </div>
+            </div>
+
+
             <div class="col-md-3 mb-3">
                 <div class="card theme-border radius_all_10 box_shadow1 animation animated fadeInUp"
                     data-animation="fadeInUp" data-animation-delay="0.02s" style="animation-delay: 0.02s; opacity: 1;">
@@ -16,6 +28,8 @@
                                 $get = $this->student_model->get_switch('limit', [
                                     'limit' => $limit
                                 ]);
+                                if(PATH == 'abc')
+                                    echo $this->db->last_query();
                                 if ($get->num_rows()) {
                                     foreach ($get->result() as $row) {
                                         $name = $row->student_name;
@@ -44,14 +58,8 @@
                 </div>
             </div>
 
-            <div class="col-md-6 mb-3">
-                <div class="card theme-border radius_all_10 box_shadow1 animation animated fadeInUp"
-                    data-animation="fadeInUp" data-animation-delay="0.02s" style="animation-delay: 0.02s; opacity: 1;">
-                    <div class="card-body">
-                        <?= ES('scroll_middle_content') ?>
-                    </div>
-                </div>
-            </div>
+
+
             <?php
             if (ES('scroll_right_box', 'passout_students') == 'passout_students') {
                 ?>

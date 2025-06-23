@@ -92,7 +92,11 @@
 </head>
 
 <body class="position-relative">
-    <img id="back-image" class="position-relative" src="{document_path}/certificate.jpg">
+    <?php
+    if($this->student_model->isAdminOrCenter())
+        echo'<img id="back-image" class="position-relative" src="{document_path}/certificate.jpg">';
+    ?>
+    <!-- <img id="back-image" class="position-relative" src="{document_path}/certificate.jpg"> -->
     <div class="position-absolute" id="photo">
         <img src="upload/images/student_certificate_{certiticate_id}.png" style="width: 90px">
     </div>
