@@ -84,7 +84,7 @@
                         <!--end::Description-->
                         <!--end::Description-->
                         <div class="fw-semibold fs-7 text-gray-600">
-                            Note : {description}
+                            Course : {course_name} <?=humnize_duration($duration,$duration_type)?>
                         </div>
                         <!--end::Description-->
                     </div>
