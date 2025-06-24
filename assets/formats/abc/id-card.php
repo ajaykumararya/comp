@@ -96,7 +96,7 @@
                 <td>{course_name}</td>
             </tr>
             <tr>
-                <th>Roll Number</th>
+                <th>Enrollment No.</th>
                 <th>:</th>
                 <td>{roll_no}</td>
             </tr>

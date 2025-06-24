@@ -126,8 +126,8 @@
     <p class="position-absolute" style="top:24.2%;left:32%;width:150px"><?= humnize_duration($duration, $duration_type) ?>
     </p>
 
-    <p class="position-absolute" style="top:26.8%;left:32%;width:200px">{roll_no}</p>
-    <p class="position-absolute" style="top:29.5%;left:32%;width:150px">{enrollment_no}</p>
+    <p class="position-absolute" style="top:26.8%;left:32%;width:200px">{enrollment_no}</p>
+    <p class="position-absolute" style="top:29.5%;left:32%;width:150px">{roll_no}</p>
 
     <p class="position-absolute" style="top:31.9%;left:32%;width:200px">{session}</p>
     <!-- <p class="position-absolute" style="top:41.7%;left:34%;width:200px">{mother_name}</p> -->

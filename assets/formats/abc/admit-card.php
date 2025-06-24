@@ -17,6 +17,7 @@
         .text-capitlize {
             text-transform: capitalize;
         }
+
         .up {
             text-transform: uppercase;
         }
@@ -74,27 +75,33 @@
 
     <p class="position-absolute" style="top:29%;left:18%">{course_name}</p>
     <p class="position-absolute" style="top:31.3%;left:22%"><?= humnize_duration($duration, $duration_type) ?></p>
-    <p class="position-absolute" style="top:31.3%;left:52%"><?= detect_course_type($course_id,$admit_card_duration) ?></p>
+    <p class="position-absolute" style="top:31.3%;left:52%"><?= detect_course_type($course_id, $admit_card_duration) ?>
+    </p>
 
     <p class="position-absolute" style="top:33.3%;left:21%">{date} & <?= date('l', strtotime($date)) ?></p>
     <p class="position-absolute" style="top:33.3%;left:68%">{time}</p>
-    <p class="position-absolute" style="top:35.3%;left:18%">{center_name} {}</p>
+    <p class="position-absolute" style="top:35.3%;left:18%">{center_name}</p>
     <?php
     $this->ki_theme->generate_qr($admit_card_id, 'admit_card', current_url());
     $sign = '';
-    if($student_docs){
-        $docs = (json_decode($student_docs,true));
-        if(isset($docs['signature'])){
+    if ($student_docs) {
+        $docs = (json_decode($student_docs, true));
+        if (isset($docs['signature'])) {
             $sign = $docs['signature'];
-            if(file_exists('upload/'.$sign.'')){
+            if (file_exists('upload/' . $sign . '')) {
                 echo '
                 <div class="position-absolute" style="top:32.3%;left:79.8%;">
-                    <img src="upload/'.$sign.'" style="width:125.3px;height:46.5px">
+                    <img src="upload/' . $sign . '" style="width:125.3px;height:46.5px">
                 </div>
                 
                 ';
             }
         }
+    }
+    if (file_exists('upload/' . $center_signature)) {
+        echo '<div class="position-absolute" style="top:40.5%;left:72%">
+                <img src="upload/{center_signature}" style="width:180px;height:50px">
+            </div>';
     }
     ?>
     <div class="position-absolute" style="top:39.5%;left:31rem">

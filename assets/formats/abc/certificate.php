@@ -92,7 +92,8 @@
     <!-- <p class="position-absolute" style="top:40.3%;left:25%;width:600px;text-align:center">{course_name}</p> -->
 
     <p class="position-absolute" style="top:3.7%;left:25%;font-size:15px">{serial_no}</p>
-    <p class="position-absolute" style="top:3.7%;left:71%;font-size:15px">{roll_no}</p>
+    <!-- <p class="position-absolute" style="top:3.7%;left:71%;font-size:15px">{roll_no}</p> -->
+    <p class="position-absolute" style="top:3.7%;left:71%;font-size:15px">{enrollment_no}</p>
     
     <!-- <p class="position-absolute" style="top:48%;left:16%;">{createdOn}</p> -->
 
