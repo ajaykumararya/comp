@@ -110,7 +110,7 @@
     </div>
     <?php
     if (file_exists('upload/' . $center_signature)) {
-        echo '<div class="position-absolute test" style="top:50.5%;left:34.5%;z-index:888" align="center">
+        echo '<div class="position-absolute " style="top:50.5%;left:34.5%;z-index:888" align="center">
         <img src="upload/{center_signature}" style="width:100px;height:27px;">
     </div>';
     }
@@ -121,7 +121,7 @@
             $sign = $docs['signature'];
             if (file_exists('upload/' . $sign . '')) {
                 echo '
-                <div class="position-absolute test" style="top:50.5%;left:2.5%;z-index:888">
+                <div class="position-absolute " style="top:50.5%;left:2.5%;z-index:888">
                     <img src="upload/' . $sign . '" style="width:100px;height:27px">
                 </div>
                 
