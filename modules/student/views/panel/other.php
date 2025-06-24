@@ -64,6 +64,8 @@
                         </div>
                         <?php
                     }
+
+                    if($this->center_model->isAdmin()):
                     ?>
                         <div class="col-md-6 mt-4">
                             <div class="form-group">
@@ -80,7 +82,9 @@
                                 </select>
                             </div>
                         </div>
-
+                    <?php
+                    endif;
+                    ?>
                         <div class="col-md-6 mt-4">
                             <div class="form-group">
                                 <label for="" class="foem-label">Admission Date</label>
