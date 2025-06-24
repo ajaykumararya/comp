@@ -28,8 +28,6 @@
                                 $get = $this->student_model->get_switch('limit', [
                                     'limit' => $limit
                                 ]);
-                                if(PATH == 'abc')
-                                    echo $this->db->last_query();
                                 if ($get->num_rows()) {
                                     foreach ($get->result() as $row) {
                                         $name = $row->student_name;
