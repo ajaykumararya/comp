@@ -152,7 +152,8 @@ class Student_model extends MY_Model
                 break;
             case 'limit':
                 // $this->not_passout();
-                $this->db->join('student_certificates as sce', 'sce.student_id != s.id');
+                $this->db->join('student_certificates as sce', 'sce.student_id = s.id','left');
+                $this->db->where('sce.student_id IS NULL');
                 $this->db->group_by('s.id');
                 $this->db->order_by('s.id', 'DESC');
                 if (isset($limit))

@@ -19,8 +19,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="roll_no" class="form-label required">Roll Number</label>
-                                <input type="text" name="roll_no" class="form-control" placeholder="Enter Roll Number"
+                                <label for="roll_no" class="form-label required">{rollno_text}</label>
+                                <input type="text" name="roll_no" class="form-control" placeholder="Enter {rollno_text}"
                                     value="{roll_no}">
                             </div>
                         </div>
