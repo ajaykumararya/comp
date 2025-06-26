@@ -79,7 +79,7 @@ class Student extends Ajax_Controller
             $deduction_amount = $this->ki_theme->get_wallet_amount('student_admission_fees');
             $close_balance = $this->ki_theme->wallet_balance();
             if ($close_balance < 0) {
-                $this->response('html', 'Your Wallet Balance is Low..' . $close_balance);
+                $this->response('html', 'Your Wallet Balance is Low..');
                 exit;
             }
         }

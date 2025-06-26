@@ -68,7 +68,7 @@
 
                         <div class="row">
 
-                            <div class="large-4 medium-6 small-12 columns">
+                            <div class="large-<?= (PATH == 'kvboard' ? 8 : 4) ?> medium-6 small-12 columns">
                                 <div class="logo">
                                     <a href="{base_url}" class="custom-logo-link" rel="home" aria-current="page">
                                         <img fetchpriority="high" width="790" height="117" src="{base_url}upload/{logo}"
@@ -76,7 +76,7 @@
                                 </div><!-- logo /-->
                             </div><!-- left Ends /-->
 
-                            <div class="large-8 medium-6 small-12 columns nav-wrap">
+                            <div class="large-<?= (PATH == 'kvboard' ? 4 : 8) ?> medium-6 small-12 columns nav-wrap">
                                 <!-- navigation Code STarts here.. -->
                                 <div class="top-bar yespadd">
                                     <div class="top-bar-title">
