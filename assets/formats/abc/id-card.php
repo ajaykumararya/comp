@@ -73,10 +73,10 @@
         <img src="upload/{image}" style="width: 100%; height: 100%;" />
     </div>
     <p class="position-absolute text-center" style="top:24.3%;width:400px;font-size:20px">{student_name}</p>
-    <div class="position-absolute" style="top:34%;left:10px;width:380px">
+    <div class="position-absolute" style="top:32%;left:10px;width:380px">
         <table style="text-align:left;width:100%">
             <tr>
-                <th>Father's Name</th>
+                <th style="width:126px">Father's Name</th>
                 <th>:</th>
                 <td>{father_name}</td>
             </tr>
@@ -96,7 +96,7 @@
                 <td>{course_name}</td>
             </tr>
             <tr>
-                <th>Enrollment No.</th>
+                <th>Roll No.</th>
                 <th>:</th>
                 <td>{roll_no}</td>
             </tr>
