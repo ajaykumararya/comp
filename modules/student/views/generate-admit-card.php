@@ -78,7 +78,7 @@
                                 <input type="text" name="enrollment_no" placeholder="Enter <?=CHECK_PERMISSION('ROLLNO_AS_ENROLLMENT') ? 'Roll No.' : 'Enrollment No.'?>" class="form-control">
                             </div>
                             <?php
-                            if(!CHECK_PERMISSION('EXAM_SLOT_SYSTEM') || PATH != 'gcti'):
+                            if(!CHECK_PERMISSION('EXAM_SLOT_SYSTEM') && PATH != 'gcti'):
                                 ?>
                             <div class="form-group col-md-4">
                                 <label for="" class="form-label required">Exam Date & Time</label>
