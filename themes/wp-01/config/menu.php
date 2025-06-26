@@ -71,5 +71,11 @@ $menu = array(
             'icon' => array('file', 4),
             'url' => 'cms/static-page/news',
         ),
+        array(
+            'label' => 'Our Syllabus',
+            'type' => 'our_syllabus',
+            'icon' => array('file', 4),
+            'url' => 'cms/static-page/our_syllabus',
+        ),
     )
 );
