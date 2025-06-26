@@ -106,14 +106,14 @@
 
     <!-- <p class="position-absolute " style="top:30.4%;left:8%;width:130px;text-align:center">{center_code}</p>
     <p class="position-absolute " style="top:30.4%;left:25%;width:130px;text-align:center">{session}</p> -->
-    <p class="position-absolute" style="top:2.3%;left:79.5%;width:130px;text-align:center;font-size:12px">{roll_no}</p>
-    <p class="position-absolute" style="top:2.3%;left:20%;width:130px;text-align:center;font-size:12px">{enrollment_no}</p>
+    <p class="position-absolute" style="top:2.3%;left:79.7%;width:130px;font-size:12px">{roll_no}</p>
+    <p class="position-absolute" style="top:2.3%;left:20.2;width:130px;font-size:12px">{enrollment_no}</p>
     <!-- <p class="position-absolute " style="top:30.4%;left:75%;width:130px;text-align:center">{serial_no}</p> -->
 
 
     <div class="position-absolute " style="left:40%;top:47.3%;">{student_name}</div>
-    <div class="position-absolute " style="width:340px;top:50.2%;left:20%;">{father_name}</div>
-    <div class="position-absolute " style="width:340px;top:50.2%;left:64%;">{mother_name}</div>
+    <div class="position-absolute" style="width:246px;top:50.2%;left:16.5%;">{father_name}</div>
+    <div class="position-absolute" style="width:240px;top:50.2%;left:64%;">{mother_name}</div>
     <div class="position-absolute " style="top:47.3%;left:80.6%">{dob}</div>
 
     <!-- <div class="position-absolute text-center" style="width:450px;left:20%;top:56.5%;">{enrollment_no}</div> -->
