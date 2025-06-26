@@ -1358,16 +1358,24 @@ var woocommerce_params = {"ajax_url":"\/themes\/education\/wp-admin\/admin-ajax.
     .header .logo img {
         height: 47px !important
     }
+
     <?php
-    if(PATH =='kvboard'){
+    if (PATH == 'kvboard') {
         ?>
-        .header .logo img{
+        .header .logo img {
             height: 125px !important;
-            width:100%
+            width: 100%
         }
+
         <?php
     }
     ?>
+    .bg-dark {
+        background-color: #343a40 !important;
+    }
+    .bg-dark .text-white{
+        color: white!important;
+    }
     .price-tag span {
         color: white
     }

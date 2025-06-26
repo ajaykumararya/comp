@@ -596,7 +596,7 @@ class Site_Controller extends MY_Controller
         $this->set_data('favicon_file', $favicon);
         $this->set_data('link_css', $this->parse('_common/head', [], true));
         $this->set_data('YEAR', date('Y'));
-        $this->set_data('copyright', ' All right reserved designed by
+        $this->set_data('copyright', ' All right reserved. Designed By
         ' . $this->company_name());
         $items = $this->SiteModel->print_menu_items([], true);
         $this->set_data('menus', $items['menus']);

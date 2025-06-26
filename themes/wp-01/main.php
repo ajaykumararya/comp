@@ -347,7 +347,7 @@
 
                         <div class="copyrightinfo"><?= date('Y') ?> &copy;
 
-                            {title} All Rights Reserved. Desgined by {copyright}</div>
+                            {title} {copyright}</div>
                     </div><!-- left side /-->
 
                     <div class="medium-6 small-12 columns hide-for-small-only right-side" style="display: none;">

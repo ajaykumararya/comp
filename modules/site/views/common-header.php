@@ -106,10 +106,12 @@
     .rebel-inner {
         position: absolute;
         top: 0;
-        left: -11px;
+        left: -10px;
         height: 100%;
         background-color: #343a40;
         width: 10px;
+        z-index: 999;
+        border-radius: 28px 0 0;
     }
 
     .rebel-inner:before {
