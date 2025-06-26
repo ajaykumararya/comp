@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', function (e) {
     // $('input[name="passing_year"]').flatpickr();
     const form = document.getElementById('form');
-    const institue_box = $('select[name="center_id"]');
-    const roll_no_box = $('input[name="roll_no"]');
-    const course_box = $('select[name="course_id"]');
+    const institue_box = $(document).find('select[name="center_id"]');
+    const roll_no_box = $(document).find('input[name="roll_no"]');
+    const course_box = $(document).find('select[name="course_id"]');
     const course_category_idBox = $('#course_category_id');
     // const input_center = $('input[name="center_id"]');
-    const referral_id = $('[name="referral_id"]');
+    const referral_id = $(document).find('[name="referral_id"]');
     if (referral_id)
         select2Student(referral_id);
     // console.log(institue_box);
@@ -337,7 +337,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             var center_id = $(this).val();
             course_box.html('');
             roll_no_box.val('');
-            var show = $('#wallet_system_course_wise').length ?? 0;
+            var show = $(document).find('#wallet_system_course_wise').length ?? 0;
             // alert(show);
             console.log('course  fee sow',show)
             $.AryaAjax({
