@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             { 'data': 'course_name' },
             { 'data': 'marksheet_duration' },
             { 'data': 'center_name' },
+            { 'data': 'issue_date' },
             { 'data': null }
         ],
         columnDefs: [

@@ -20,6 +20,7 @@
                                 <th>Course</th>
                                 <th>Duration</th>
                                 <th>Institute</th>
+                                <th>Issue Date</th>
                                 <th class="text-end">Actions</th>
                             </tr>
                         </thead>
