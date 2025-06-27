@@ -625,6 +625,18 @@ class Student extends Ajax_Controller
         $this->response('status', true);
         $this->response('form', $this->template('student/edit-marksheet'));
     }
+    function certificate_edit_form()
+    {
+        $this->response('url', 'student/update-certificate');
+        $this->response('status', true);
+        $this->response('form', $this->template('student/edit-certificate'));
+    }
+    function update_certificate(){
+        $this->db->where('id', $this->post('id'))->update('student_certificates', [
+            'issue_date' => $this->post('date')
+        ]);
+        $this->response('status',true);
+    }
     function update_marksheet()
     {
         $marksheet_id = $this->post('id');

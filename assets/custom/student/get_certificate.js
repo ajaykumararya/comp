@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded',function(){
-    const table = $("#list-certificates").DataTable({
+    const table = $("#list-certificates");
+    var dt = table.DataTable({
         dom: small_dom,
         'ajax': {
             'url': ajax_url + 'student/list-certificate',
@@ -7,12 +8,12 @@ document.addEventListener('DOMContentLoaded',function(){
             success: function (d) {
                 console.log(d);
                 if (d.data && d.data.length) {
-                    table.clear();
-                    table.rows.add(d.data).draw();
+                    dt.clear();
+                    dt.rows.add(d.data).draw();
                 }
                 else {
                     toastr.error('Table Data Not Found.');
-                    DataTableEmptyMessage(table);
+                    DataTableEmptyMessage(dt);
                 }
             },
             'error': function (xhr, error, thrown) {
@@ -48,7 +49,7 @@ document.addEventListener('DOMContentLoaded',function(){
                 render: function (data, type, row) {
                     // generateSHA1Hash(row.admit_card_id).then( (admit_card_id) => {
                     return `<div class="btn-group">
-                    
+                            <buttons class="btn btn-primary btn-xs btn-sm edit-record"><i class="ki-outline ki-pencil"></i> Edit</buttons>
                             ${ generate_link_btn(row.certiticate_id, 'certificate') } 
                             ${deleteBtnRender(1,row.certiticate_id,'Certificate')}
                             `;
@@ -59,5 +60,10 @@ document.addEventListener('DOMContentLoaded',function(){
         ]
     }).on('draw',function(){
         handleDeleteRows('student/delete-certificate').then( (r) => log(r));
+        // table.EditAjax('student/certificate-edit-form', 'Update Certificate');
+        EditForm(table,'student/update-certificate', 'Update Certificate');
+        // ki_modal.on('show.bs.modal', function () {
+        //     loadResultFuncations();
+        // });
     });
 })
