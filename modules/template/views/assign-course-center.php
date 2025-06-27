@@ -71,8 +71,10 @@
                                 <th>Course Name</th>
                                 <th>Course Fee</th>
                                 <?php
-                                if($condition = CHECK_PERMISSION(strtoupper('centre_fun_marksheet_certificate_fee'))){
-                                    echo '<th>Marksheet Fee</th><th>Certificate Fee</th>';
+                                if ($condition = CHECK_PERMISSION(strtoupper('centre_fun_marksheet_certificate_fee'))) {
+                                    if (PATH != 'gcti')
+                                        echo '<th>Marksheet Fee</th>';
+                                    echo '<th>Certificate Fee</th>';
                                 }
                                 ?>
                                 <th>Status</th>
@@ -91,11 +93,12 @@
                                         </td>
                                         <td>{$row['course_fee']} {inr}</td>
                                         ";
-                                    if($condition){
-                                        echo "<td><input type='number' style='font-size:17px;width:50px' data-id='{$row['center_course_id']}' name='marksheet' class='custom_setting_input update-course-marksheet-nd-cert-fee' placeholder='Fee' value='{$row['marksheet']}'></td>
-                                        <td><input type='number' style='font-size:17px;width:50px' data-id='{$row['center_course_id']}' name='certificate' class='custom_setting_input update-course-marksheet-nd-cert-fee' placeholder='Fee' value='{$row['certificate']}'></td>";
-                                    }
-                                        echo "
+                                if ($condition) {
+                                    if (PATH != 'gcti')
+                                        echo "<td><input type='number' style='font-size:17px;width:50px' data-id='{$row['center_course_id']}' name='marksheet' class='custom_setting_input update-course-marksheet-nd-cert-fee' placeholder='Fee' value='{$row['marksheet']}'></td>";
+                                    echo "<td><input type='number' style='font-size:17px;width:50px' data-id='{$row['center_course_id']}' name='certificate' class='custom_setting_input update-course-marksheet-nd-cert-fee' placeholder='Fee' value='{$row['certificate']}'></td>";
+                                }
+                                echo "
                                         <td>" . get_status($row['status']) . "</td>
                                      </tr>";
                                 $index++;
