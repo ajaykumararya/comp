@@ -825,7 +825,7 @@ class Student extends Ajax_Controller
                 $close_balance = $this->ki_theme->wallet_balance();
                 $close_balance = $close_balance - $deduction_amount;
                 if ($close_balance < 0) {
-                    $this->response('html', 'Your Wallet Balance is Low..');
+                    $this->response('html', 'Your Wallet Balance is Low, To generate this certificate you need '.$deduction_amount.' rupees.., Please recharge your wallet.');
                     exit;
                 }
 
