@@ -795,7 +795,7 @@ $config['center_area'] = array(
 );
 $config['payment_setting'] = array(
     'title' => 'Payment Area',
-    'condition' => OnlyForAdmin(),
+    'condition' => OnlyForAdmin() && PATH != 'gcti',
     'menu' => array(
         array(
             'label' => 'Payment Setting',
