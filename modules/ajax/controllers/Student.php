@@ -820,7 +820,7 @@ class Student extends Ajax_Controller
                 ]);
                 $deduction_amount = 0;
                 if ($get->num_rows())
-                    $deduction_amount = $get->row('certiifcate');
+                    $deduction_amount = $get->row('certificate');
                 $deduction_amount = (empty($deduction_amount) || $deduction_amount == null) ? 0 : $deduction_amount;
                 $close_balance = $this->ki_theme->wallet_balance();
                 $close_balance = $close_balance - $deduction_amount;
