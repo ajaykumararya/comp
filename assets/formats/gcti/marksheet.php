@@ -124,7 +124,7 @@
     <p class="position-absolute" style="top:33%;left:23%">{session}</p>
 
 
-    <div class="position-absolute " style="top:40%;left:5%;width:90%">
+    <div class="position-absolute " style="top:38%;left:5%;width:90%">
         <table id="first" border="1" style="width:100%">
             <thead>
                 <tr>
