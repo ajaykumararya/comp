@@ -23,9 +23,10 @@ document.addEventListener('DOMContentLoaded', function (e) {
             var center_name = $('#select-center option:selected').data('kt-rich-content-subcontent');
             // genral_details.html(rr.genral_html);
             center_profile_box.html(rr.profile_html);
-            assign_form_and_display_box.html(rr.html).find('#list-center-courses').DataTable({
-                dom: ''
-            });
+            assign_form_and_display_box.html(rr.html);
+            // .find('#list-center-courses').DataTable({
+            //     dom: ''
+            // });
             scrollToDiv(assign_form_and_display_box);
             assign_form_and_display_box.find(".assign-to-center").change(function () {
                 var that = this,
