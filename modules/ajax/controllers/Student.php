@@ -623,7 +623,7 @@ class Student extends Ajax_Controller
         // $this->response('data',$this->post());
         $this->response('url', 'student/update-marksheet');
         $this->response('status', true);
-        $this->response('form', $this->template('student/edit-marksheet'));
+        $this->response('form', CHECK_PERMISSION('MARKSHEET_MAX_FIX_100') ?  $this->template('student/edit-system-marksheet') : $this->template('student/edit-marksheet'));
     }
     function certificate_edit_form()
     {
@@ -674,7 +674,7 @@ class Student extends Ajax_Controller
         $subjects = $this->student_model->course_subject($where);
         $this->response('status', true);
         $this->set_data('subjects', $subjects->result_array());
-        $this->response('marks_table', $this->template('marks-table'));
+        $this->response('marks_table', CHECK_PERMISSION('MARKSHEET_MAX_FIX_100') ? $this->template('student/marks-table') : $this->template('marks-table'));
     }
     function list_admit_cards()
     {

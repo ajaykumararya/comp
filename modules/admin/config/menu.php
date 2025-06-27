@@ -85,7 +85,7 @@ $config['academic_area'] = array(
                     'label' => 'Manage Subject(s)',
                     'type' => 'manage_subject',
                     'icon' => array('book-open', 4),
-                    'url' => 'course/manage-subjects'
+                    'url' => CHECK_PERMISSION('MARKSHEET_MAX_FIX_100') ? 'course/manage-system-subjects' : 'course/manage-subjects'
                 ),
                 array(
                     'label' => 'Arrange Subjects',

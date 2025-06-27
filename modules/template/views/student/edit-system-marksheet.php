@@ -26,14 +26,9 @@ if ($result_id) {
                     <table class="table table-bordered border-primary">
                         <thead class="bg-light-primary text-white">
                             <tr>
-                                <th class="text-center fs-4" rowspan="2">Subject Code</th>
-                                <th class="text-center fs-4" rowspan="2">Subject Name</th>
-                                <th class="text-center fs-4" colspan="4">Marks</th>
-                            </tr>
-                            <tr>
-                                <th class="text-center fs-4">Subject Type</th>
-                                <th class="text-center fs-4">Min Marks</th>
-                                <th class="text-center fs-4">Max Marks</th>
+                                <th class="text-center fs-4">Subject Code</th>
+                                <th class="text-center fs-4">Subject Name</th>
+                                <th class="text-center fs-4">Max. Marks</th>
                                 <th class="text-center fs-4">Obtain</th>
                             </tr>
                         </thead>
@@ -42,8 +37,6 @@ if ($result_id) {
                             $ttl = 0;
                             $totalObtained = 0;
                             $template = '
-                                        <td class="text-center fs-4">{title}</td>
-                                         <td class="text-center fs-4">{min_marks}</td>
                                          <td class="text-center fs-4">{max_marks}</td>
                                          <td>
                                             <div class="form-group">
@@ -52,6 +45,7 @@ if ($result_id) {
                                          </td>';
 
                             foreach ($subjects as $subject) {
+                                $subject['theory_max_marks'] = 100;
                                 $rowspan = $subject['subject_type'] == 'both' ? 2 : 1;
                                 ?>
                                 <tr>
@@ -62,53 +56,23 @@ if ($result_id) {
                                         <?= $subject['subject_name'] ?>
                                     </td>
                                     <?php
-                                    if ($subject['subject_type'] == 'both' or $subject['subject_type'] == 'theory') {
-                                        $ttl += $subject['theory_max_marks'];
-                                        $totalObtained += $subject['theory_marks'];
-                                        echo $this->parser->parse_string($template, [
-                                            'id' => $subject['mark_id'],
-                                            'title' => 'Theory',
-                                            'name' => 'theory_marks',
-                                            'max_marks' => $subject['theory_max_marks'],
-                                            'min_marks' => $subject['theory_min_marks'],
-                                            'value' => $subject['theory_marks']
-                                        ], true);
-                                    }
-                                    if ($subject['subject_type'] == 'practical') {
-                                        $ttl += $subject['practical_max_marks'];
-                                        $totalObtained += $subject['practical_marks'];
-                                        echo $this->parser->parse_string($template, [
-                                            'id' => $subject['mark_id'],
-                                            'title' => 'Practical',
-                                            'name' => 'practical',
-                                            'max_marks' => $subject['practical_max_marks'],
-                                            'min_marks' => $subject['practical_min_marks'],
-                                            'value' => $subject['practical_marks']
-                                        ], true);
-                                    }
-                                    ?>
-                                </tr>
-
-                                <?php
-                                
-                                if ($subject['subject_type'] == 'both') {
-                                    $ttl += $subject['practical_max_marks'];
-                                    $totalObtained += $subject['practical_marks'];
-                                    echo '<tr>';
+                                    $ttl += $subject['theory_max_marks'];
+                                    $totalObtained += $subject['theory_marks'];
                                     echo $this->parser->parse_string($template, [
                                         'id' => $subject['mark_id'],
-                                        'title' => 'Practical',
-                                        'name' => 'practical',
-                                        'max_marks' => $subject['practical_max_marks'],
-                                        'min_marks' => $subject['practical_min_marks'],
-                                        'value' => $subject['practical_marks']
+                                        'title' => 'Marks',
+                                        'name' => 'theory_marks',
+                                        'max_marks' => $subject['theory_max_marks'],
+                                        'value' => $subject['theory_marks']
                                     ], true);
-                                    echo '</tr>';
-                                }
+
+                                    ?>
+                                </tr>
+                                <?php
                             }
                             ?>
                             <tr class="bg-light-success text-white">
-                                <td class="text-center fs-4" colspan="4">
+                                <td class="text-center fs-4" colspan="2">
                                     Total Marks
                                 </td>
                                 <td class="text-center fs-4">

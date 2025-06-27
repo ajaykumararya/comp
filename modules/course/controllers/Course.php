@@ -22,6 +22,10 @@ class Course extends MY_Controller
     {
         $this->view('manage-subjects');
     }
+    function manage_system_subjects()
+    {
+        $this->view('manage-system-subjects');
+    }
     function arrange_subjects(){
         $this->view('arrange-subjects');
 

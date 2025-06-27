@@ -3,11 +3,13 @@ class Document extends MY_Controller
 {
     private $id;
     private $return = false;
+    private $Max100Only = false;
     function __construct()
     {
         parent::__construct();
         $this->load->library('common/mypdf');
         $this->id = $this->decode($this->uri->segment(2, '0'));
+        $this->Max100Only = CHECK_PERMISSION('MARKSHEET_MAX_FIX_100');
     }
     function percentage($ob_ttl, $ttl)
     {
@@ -204,7 +206,7 @@ class Document extends MY_Controller
                 $this->set_data('serial_no', date("Y", $admissionTime) . str_pad(PATH == 'techno' ? $row->student_id : $this->id, 3, '0', STR_PAD_LEFT));
             elseif (in_array(PATH, ['haptronworld'])):
                 $this->set_data('serial_no', 'IN' . (100 + $result_id));
-            elseif (in_array(PATH, ['upstate', 'sctnew', 'boardofpara','dbisdi'])):
+            elseif (in_array(PATH, ['upstate', 'sctnew', 'boardofpara', 'dbisdi'])):
                 $this->set_data('serial_no', '100' . date('Y', strtotime($row->issue_date)) . $this->id);
             endif;
             // echo $get->row('result_id');
@@ -220,10 +222,17 @@ class Document extends MY_Controller
             if ($ttl_subject = $get_subect_numers->num_rows()) {
                 foreach ($get_subect_numers->result() as $mark) {
                     // pre($mark,true);
-                    $tmm = $this->isMark($mark->theory_max_marks);
-                    $pmm = $this->isMark($mark->practical_max_marks);
-                    $tmim = $this->isMark($mark->theory_min_marks);
-                    $pmim = $this->isMark($mark->practical_min_marks);
+                    if ($this->Max100Only) {
+                        $tmm = 100;
+                        $pmm = 0;
+                        $tmim = 0;
+                        $pmim = 0;
+                    } else {
+                        $tmm = $this->isMark($mark->theory_max_marks);
+                        $pmm = $this->isMark($mark->practical_max_marks);
+                        $tmim = $this->isMark($mark->theory_min_marks);
+                        $pmim = $this->isMark($mark->practical_min_marks);
+                    }
                     $ttl += $this->mark_total($tmm, 0) + $this->mark_total($pmm, 0);
                     $ttltminm += $tmim;
                     $ttltmaxm += $tmm;
@@ -341,10 +350,18 @@ class Document extends MY_Controller
                     if ($ttl_subject = $get_subect_numers->num_rows()) {
                         foreach ($get_subect_numers->result() as $mark) {
                             $subjects[] = $mark->subject_name;
-                            $tmm = $this->isMark($mark->theory_max_marks);
-                            $pmm = $this->isMark($mark->practical_max_marks);
-                            $tmim = $this->isMark($mark->theory_min_marks);
-                            $pmim = $this->isMark($mark->practical_min_marks);
+                            if ($this->Max100Only) {
+                                $tmm = 100;
+                                $pmm = 0;
+                                $tmim = 0;
+                                $pmim = 0;
+                            } else {
+                                $tmm = $this->isMark($mark->theory_max_marks);
+                                $pmm = $this->isMark($mark->practical_max_marks);
+                                $tmim = $this->isMark($mark->theory_min_marks);
+                                $pmim = $this->isMark($mark->practical_min_marks);
+                            }
+
                             $ttl += $this->mark_total($tmm, 0) + $this->mark_total($pmm, 0);
                             $ttltminm += $tmim;
                             $ttltmaxm += $tmm;

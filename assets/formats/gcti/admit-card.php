@@ -128,7 +128,7 @@
         'course_id' => $course_id,
         'duration' => $admit_card_duration,
         'duration_type' => $duration_type
-    ])->get('subjects');
+    ])->order_by('seq','ASC')->get('subjects');
     ?>
     <p class="position-absolute text-capitlize" style="top:34.3%;left:25.5%">{center_name}</p>
     <!-- <p class="position-absolute text-capitlize" style="top:29.5%;left:25.5%">{exam_date}</p> -->

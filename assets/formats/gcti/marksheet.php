@@ -128,13 +128,13 @@
         <table id="first" border="1" style="width:100%">
             <thead>
                 <tr>
-                    <th rowspan="2" style="width:70px">Code</th>
-                    <th class="primary" rowspan="2" width="45%" style="text-align:left;padding-left:35px">SUBJECTS</th>
-                    <th class="primary" colspan="2" style="font-size:10.81px;padding:4px">MAXIMUM MARKS</th>
-                    <th class="primary lb" colspan="2" style="font-size:10.81px;padding:4px">MINIMUM MARKS</th>
-                    <th class="primary lb" colspan="3" style="font-size:10.81px;padding:4px">OBTAINED MARKS</th>
+                    <th style="width:70px">Code</th>
+                    <th class="primary"  width="45%" style="text-align:left;padding-left:35px">SUBJECTS</th>
+                    <th class="primary" style="padding:4px">MAX. MARKS</th>
+                    <!-- <th class="primary lb" colspan="2" style="font-size:10.81px;padding:4px">MINIMUM MARKS</th> -->
+                    <th class="primary lb" style="padding:4px">MARKS OBTAINED</th>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <th class="primary b-tb" style="font-size:10px">THEORY</th>
                     <th class="primary b-tb" style="font-size:10px">PRACTICAL</th>
                     <th class="primary b-tb lb" style="font-size:10px">THEORY</th>
@@ -142,34 +142,29 @@
                     <th class="primary b-tb lb" style="font-size:10px">TH.</th>
                     <th class="primary b-tb" style="font-size:10px">PR.</th>
                     <th class="primary b-tb" style="font-size:10px">TOTAL</th>
-                </tr>
+                </tr> -->
             </thead>
             <tbody>
                 {marks}
                 <tr>
-                    <td  style="font-size:10.81px">{subject_code}</td>
-                    <td class="primary lb" style="text-align:left;padding-left:2px;font-size:10.81px">{subject_name}
+                    <td  >{subject_code}</td>
+                    <td class="primary lb" style="text-align:left;padding-left:2px;">{subject_name}
                     </td>
-                    <td class="primary lb" style="font-size:10.81px">{theory_max_marks}</td>
-                    <td class="primary lb" style="font-size:10.81px">{practical_max_marks}</td>
-                    <td class="primary lb" style="font-size:10.81px">{theory_min_marks}</td>
-                    <td class="primary lb" style="font-size:10.81px">{practical_min_marks}</td>
-                    <td class="lb fw" style="font-size:10.819px">{theory_total}</td>
-                    <td class="fw" style="font-size:10.81px">{practical_total}</td>
-                    <td class="fw" style="font-size:10.81px">{total}</td>
+                    <td class="primary lb" >{theory_max_marks}</td>
+                    <!-- <td class="primary lb" >{practical_max_marks}</td>
+                    <td class="primary lb" >{theory_min_marks}</td>
+                    <td class="primary lb" >{practical_min_marks}</td> -->
+                    <!-- <td class="lb fw" style="font-size:10.819px">{theory_total}</td> -->
+                    <!-- <td class="fw" >{practical_total}</td> -->
+                    <td class="fw" >{total}</td>
                 </tr>
                 {/marks}
             </tbody>
             <tfoot>
                 <tr class="fw">
-                    <td class="primary fw" colspan="2" style="font-size:10.81px">TOTAL</td>
-                    <td class="primary lb fw" style="font-size:10.81px">{total_max_theory}</td>
-                    <td class="primary fw" style="font-size:10.81px">{total_max_practical}</td>
-                    <td class="primary fw lb" style="font-size:10.81px">{total_min_theory}</td>
-                    <td class="primary fw" style="font-size:10.81px">{total_min_practical}</td>
-                    <td class="fw lb" style="font-size:10.81px"></td>
-                    <td></td>
-                    <td class="fw" style="font-size:10.81px">{obtain_total}</td>
+                    <td class="primary fw" colspan="2" >TOTAL</td>
+                    <td class="primary lb fw" >{total_max_theory}</td>
+                    <td class="fw" >{obtain_total}</td>
                 </tr>
             </tfoot>
 
