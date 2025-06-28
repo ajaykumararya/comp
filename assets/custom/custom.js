@@ -1545,9 +1545,9 @@ $(document).keydown(function (e) { if ((e.ctrlKey && e.key === "u") || (e.ctrlKe
 
 $(document).ready(function () {
 
-    $(document).on("contextmenu", function (e) {
-        e.preventDefault(); // Prevent the default right-click context menu from appearing
-    });
+    // $(document).on("contextmenu", function (e) {
+    //     e.preventDefault(); // Prevent the default right-click context menu from appearing
+    // });
     if (localStorage.getItem('cardAnimation')) {
         $(".animation-enabler").trigger('change');
         $('.card.shadow-sm').removeClass('border-2 border-primary');
