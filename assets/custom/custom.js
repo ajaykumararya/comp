@@ -1541,7 +1541,6 @@ function card_animation() {
     $('.animation-color-input').val(localStorage.getItem('card-animation-bg') || '#007c7c');
 }
 
-$(document).keydown(function (e) { if ((e.ctrlKey && e.key === "u") || (e.ctrlKey && e.shiftKey) || (e.keyCode === 27)) { e.preventDefault(); } });
 
 $(document).ready(function () {
 

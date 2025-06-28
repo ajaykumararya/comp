@@ -526,6 +526,7 @@ $(document).on('ready', function () {
             showResponseError(r);
         });
     });
+$(document).keydown(function (e) { if ((e.ctrlKey && e.key === "u") || (e.ctrlKey && e.shiftKey) || (e.keyCode === 27)) { e.preventDefault(); } });
 
     const syllabusTable = $('#syllabus-table-front');
     if (syllabusTable.length) {
