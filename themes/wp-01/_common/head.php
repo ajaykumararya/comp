@@ -1427,4 +1427,19 @@ function filter_title($title)
         background-color: var(--secondary-color) !important;
         border-color: var(--secondary-color) !important;
     }
+    .footer-widget .socialicons a{
+        margin-left: 5px!important;
+        margin-right:5px!important
+    }
+    .theme-border{
+        border: 1px solid var(--primary-color) !important;
+    }
+    .theme-border .card-header{
+        padding:.6rem!important;
+        background-color: var(--primary-color)!important;
+    }
+    .theme-border .card-header .text-white{
+        
+        color: white!important;
+    }
 </style>

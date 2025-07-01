@@ -23,10 +23,10 @@ $menu = array(
             'url' => 'cms/static-page/revosultion_slider',
         ),
         array(
-            'label'=> 'Academic Guide',
-            'type'=> 'academic-guide',
-            'icon'=> array('file', 4),
-            'url'=> 'cms/static-page/academic-guide',
+            'label' => 'Academic Guide',
+            'type' => 'academic-guide',
+            'icon' => array('file', 4),
+            'url' => 'cms/static-page/academic-guide',
         ),
         array(
             'label' => 'Header',
@@ -76,6 +76,13 @@ $menu = array(
             'type' => 'our_syllabus',
             'icon' => array('file', 4),
             'url' => 'cms/static-page/our_syllabus',
+        ),
+
+        array(
+            'label' => 'Scroll Section',
+            'type' => 'scroll_section_area',
+            'icon' => array('file', 4),
+            'url' => 'cms/static-page/scroll_section_area'
         ),
     )
 );
