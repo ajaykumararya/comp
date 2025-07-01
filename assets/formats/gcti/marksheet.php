@@ -121,7 +121,7 @@
     <p class="position-absolute" style="top:27.7%;left:23%">{dob}</p>
     <p class="position-absolute" style="top:29.5%;left:23%">{course_name}</p>
     <p class="position-absolute text-capitlize" style="top:31.3%;left:23%">{marksheet_duration} {duration_type}</p>
-    <p class="position-absolute" style="top:33%;left:23%">{session}</p>
+    <p class="position-absolute" style="top:33.2%;left:23%">{session}</p>
 
 
     <div class="position-absolute " style="top:38%;left:5%;width:90%">
