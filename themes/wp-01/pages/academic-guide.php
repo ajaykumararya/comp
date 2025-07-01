@@ -1,13 +1,4 @@
-<style>
-    .elementor-7 .elementor-element.elementor-element-172289f3>.elementor-element-populated>.elementor-background-overlay {
-        background-color: #e77a31ba !important;
-    }
 
-    .elementor-7 .elementor-element.elementor-element-1b0f9eea>.elementor-element-populated>.elementor-background-overlay,
-    .elementor-7 .elementor-element.elementor-element-46bfa6cb>.elementor-element-populated>.elementor-background-overlay {
-        background-color: #9b0404b8!important;
-    }
-</style>
 <section
     class="elementor-section elementor-top-section elementor-element elementor-element-4aa2b141 elementor-section-full_width information-boxes elementor-section-height-default elementor-section-height-default"
     data-id="4aa2b141" data-element_type="section">
