@@ -1,7 +1,11 @@
 <style>
     :root {
-        --primary-color: blue;
-        --secondary-color: yellow;
+        --primary-color:
+            <?= ES('--primary-color', 'blue') ?>
+        ;
+        --secondary-color:
+            <?= ES('--secondary-color', 'yellow') ?>
+        ;
     }
 </style>
 <style>
@@ -1373,9 +1377,11 @@ var woocommerce_params = {"ajax_url":"\/themes\/education\/wp-admin\/admin-ajax.
     .bg-dark {
         background-color: #343a40 !important;
     }
-    .bg-dark .text-white{
-        color: white!important;
+
+    .bg-dark .text-white {
+        color: white !important;
     }
+
     .price-tag span {
         color: white
     }
@@ -1394,3 +1400,31 @@ function filter_title($title)
     );
 }
 ?>
+<style>
+    .navigation-style-two,
+    .navigation-style-two .top-bar ul,
+    .top-bar ul .submenu li a,
+    .top-bar .is-active ul li a,
+    .course-wrapper .tabs-content .tabs-panel .columns:nth-child(1)>.course a.button,
+    .course-wrapper .tabs-content .tabs-panel .columns:nth-child(3)>.course a.button,
+    .topBar {
+        background-color: var(--primary-color) !important;
+    }
+
+    .menu .active>a,
+    .course-wrapper .tabs-content .tabs-panel .columns:nth-child(1)>.course a.button:hover,
+    .course-wrapper .tabs-content .tabs-panel .columns:nth-child(3)>.course a.button:hover {
+        background-color: var(--secondary-color) !important;
+    }
+
+    .section-title-wrapper::after,
+    .header-new .text-right p,
+    li.active>a {
+        clear: var(--secondary-color) !important;
+    }
+
+    .bordered-light:hover {
+        background-color: var(--secondary-color) !important;
+        border-color: var(--secondary-color) !important;
+    }
+</style>
