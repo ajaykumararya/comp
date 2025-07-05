@@ -2,6 +2,14 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 class Admin extends MY_Controller
 {
+    function manage_states()
+    {
+        $this->view('locations/manage-states');
+    }
+    function manage_city()
+    {
+        $this->view('locations/manage-city');
+    }
     function upload_editor_file()
     {
         header("Content-Type: application/json");

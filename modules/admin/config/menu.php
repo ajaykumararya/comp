@@ -844,6 +844,24 @@ $config['cms_setting'] = array(
             )
         ),
         array(
+            'label' => 'Locations',
+            'icon' => array('route', 5),
+            'type' => 'locations',
+            'submenu' => array(
+                array(
+                    'label' => 'Manage State(s)',
+                    'type' => 'location_states',
+                    'url' => 'admin/manage-states',
+                ),
+                array(
+                    'label' => 'Manage District(s)',
+                    'type' => 'location_city',
+                    'url' => 'admin/manage-city'
+                )
+
+            )
+        ),
+        array(
             'label' => 'Setting',
             'type' => 'cms_setting',
             'icon' => array('setting-2', 4),

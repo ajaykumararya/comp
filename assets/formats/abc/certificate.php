@@ -107,7 +107,8 @@
     <p class="position-absolute text-center" style="width:100px;left:59%;top:58.8%;">{grade}</p>
 
     <p class="position-absolute text-center" style="width:70%;left:21%;top:65%;">{center_name}</p>
-    <p class="position-absolute text-center" style="width:70%;left:21%;top:68%;line-height:1">{center_full_address}</p>
+    <p class="position-absolute text-center" style="width:70%;left:21%;top:66.7%;">{center_code}</p>
+    <p class="position-absolute text-center" style="width:70%;left:21%;top:68.7%;line-height:1">{center_full_address}</p>
 
     <div class="position-absolute" style="top:82%;left:8%">
         <img src="upload/{center_signature}" style="width:180px;height:50px">

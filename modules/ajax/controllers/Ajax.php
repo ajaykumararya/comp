@@ -1,6 +1,37 @@
 <?php
 class Ajax extends Ajax_Controller
 {
+    function fetch_states()
+    {
+        $this->response([
+            'status' => true,
+            'data' => $this->db->order_by('STATE_NAME', 'ASC')->get('state')->result_array()
+        ]);
+    }
+    function edit_state()
+    {
+        $this->response([
+            'status' => $this->db->where('STATE_ID', $this->post('id'))->update('state', ['STATE_NAME' => $this->post('state_name')])
+        ]);
+    }
+    function fetch_city()
+    {
+        $this->response([
+            'status' => true,
+            'data' => $this->db
+                            ->select('d.DISTRICT_NAME,d.DISTRICT_ID,s.STATE_NAME')
+                            ->from('district as d')
+                            ->join('state as s','s.STATE_ID = d.STATE_ID')
+                            ->order_by('d.DISTRICT_NAME', 'ASC')
+                            ->get()->result_array()
+        ]);
+    }
+    function edit_city()
+    {
+        $this->response([
+            'status' => $this->db->where('DISTRICT_ID', $this->post('id'))->update('district', ['DISTRICT_NAME' => $this->post('district_name')])
+        ]);
+    }
     function change_password()
     {
         //f865b53623b121fd34ee5426c792e5c33af8c227

@@ -1463,7 +1463,4 @@ function filter_title($title)
         color: #FFF;
         background: none 0px 0px repeat scroll !important;
     }
-    .footer{
-        background-color:#2fc2dd94!important
-    }
 </style>
