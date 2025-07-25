@@ -18,28 +18,48 @@ document.addEventListener('DOMContentLoaded', async function () {
                     data: { amount }
                 }).then((R) => {
                     showResponseError(R);
-                    // log(R);
+                    
                     if (R.status) {
-                        var options = R.option;
-                        options.handler = function (response) {
-                            $.AryaAjax({
-                                url: 'center/wallet-update',
-                                data: {
-                                    razorpay_payment_id: response.razorpay_payment_id,
-                                    razorpay_order_id: options.order_id,
-                                    razorpay_signature: response.razorpay_signature,
-                                    merchant_order_id: options.notes.merchant_order_id,
-                                    amount: amount
-                                }
-                            }).then((res) => {
-                                showResponseError(res);
-                                if (res.status) {
-                                    SwalSuccess('Success!', 'Wallet Updated');
-                                    location.reload();
-                                }
-                            });
-                        };
-                        razorpayPOPUP(options);
+                        if (R.getway == 'razorpay') {
+                            var options = R.option;
+                            options.handler = function (response) {
+                                $.AryaAjax({
+                                    url: 'center/wallet-update',
+                                    data: {
+                                        razorpay_payment_id: response.razorpay_payment_id,
+                                        razorpay_order_id: options.order_id,
+                                        razorpay_signature: response.razorpay_signature,
+                                        merchant_order_id: options.notes.merchant_order_id,
+                                        amount: amount
+                                    }
+                                }).then((res) => {
+                                    showResponseError(res);
+                                    if (res.status) {
+                                        SwalSuccess('Success!', 'Wallet Updated');
+                                        location.reload();
+                                    }
+                                });
+                            };
+                            razorpayPOPUP(options);
+                        }
+                        if (R.getway == 'payu') {
+                            var inputs = R.inputs;
+                            let form = document.createElement("form");
+                            form.method = "POST";
+                            form.action = inputs.action;
+                            for (let name in inputs) {
+                                if(name === 'action')
+                                    continue;
+                                let input = document.createElement("input");
+                                input.type = "hidden";
+                                input.name = name;
+                                input.value = inputs[name];
+                                form.appendChild(input);
+                            }
+
+                            document.body.appendChild(form);
+                            form.submit();
+                        }
                     }
                 });
             }

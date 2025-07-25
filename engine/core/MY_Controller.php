@@ -143,7 +143,7 @@ class MY_Controller extends MX_Controller
         //         ]
         //     ]);
         // }
-        if(CHECK_PERMISSION(strtoupper('centre_fun_marksheet_certificate_fee'))){
+        if (CHECK_PERMISSION(strtoupper('centre_fun_marksheet_certificate_fee'))) {
             $fields = ['marksheet', 'certificate'];
             foreach ($fields as $field) {
                 $checkField = $this->build_db->field_exists('center_courses', $field);
@@ -536,12 +536,19 @@ class MY_Controller extends MX_Controller
         if ($this->session->has_userdata('admin_login') == true) {
             $data['menu_item'] = $this->ki_theme->get_menu();
             $this->set_data($data);
-            $this->__common_view($view, $data);
+            if (!isset($data['not_common_view']) && $view !== '')
+                $this->__common_view($view, $data);
             // pre($this->public_data,true);
             return $this->parse('admin/main', $this->public_data, $return);
         } else {
             $this->parser->parse('login/admin_login', $this->public_data);
         }
+    }
+    function crud_view($output)
+    {
+        $data['not_common_view'] = true;
+        $this->public_data['page_output'] = $output;
+        $this->view('', $data);
     }
     function do_email($to, $subject, $message)
     {
@@ -579,6 +586,25 @@ class MY_Controller extends MX_Controller
             }
         }
         return $this;
+    }
+    function __init_session($id)
+    {
+        $table = $this->db->where('id', $id)->get('centers');
+        if ($table->num_rows()) {
+            $row = $table->row();
+            if (($row->status)) {
+                $this->load->library('session');
+                $sessionData = [
+                    'admin_login' => true,
+                    'admin_type' => $row->type,
+                    'admin_id' => $row->id
+                ];
+                if ($row->type == 'role_user') {
+                    $sessionData['role_id'] = $row->role_id;
+                }
+                $this->session->set_userdata($sessionData);
+            }
+        }
     }
 }
 class Site_Controller extends MY_Controller

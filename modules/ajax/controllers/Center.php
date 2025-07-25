@@ -1,4 +1,6 @@
 <?php
+
+use Mpdf\PsrHttpMessageShim\Response;
 class Center extends Ajax_Controller
 {
     function delete_docs()
@@ -288,59 +290,87 @@ class Center extends Ajax_Controller
         $center_id = $this->center_model->loginId();
 
         $amount = $this->post('amount');
-
-        $data = [
-            'amount' => $amount * 100,
-            'receipt' => PROJECT_RAND_NUM,
-            'currency' => 'INR',
-            'notes' => [
-                'center_id' => $this->center_model->loginId(),
-                'message' => $this->post('note')
-            ]
-        ];
-        $this->load->module('razorpay');
         try {
-            $order_id = $this->razorpay->create_order($data);
-            // $order_id = $order['id'];
-            // pre($data);
-            $trans = [
-                'trans_for' => 'wallet_load',
-                'amount' => $amount,
-                'payment_id' => PROJECT_RAND_NUM,
-                'order_id' => $order_id,
-                'user_id' => $center_id,
-                'user_type' => 'center'
-            ];
-            $this->db->insert('transactions', $trans);
-            $trans_id = $this->db->insert_id();
-            $this->response('data', $trans);
+            if (CHECK_PERMISSION('RAZORPAY_GETWAY')):
+                $data = [
+                    'amount' => $amount * 100,
+                    'receipt' => PROJECT_RAND_NUM,
+                    'currency' => 'INR',
+                    'notes' => [
+                        'center_id' => $this->center_model->loginId(),
+                        'message' => $this->post('note')
+                    ]
+                ];
+                $this->load->module('razorpay');
+
+                $order_id = $this->razorpay->create_order($data);
+                // $order_id = $order['id'];
+                // pre($data);
+                $trans = [
+                    'trans_for' => 'wallet_load',
+                    'amount' => $amount,
+                    'payment_id' => PROJECT_RAND_NUM,
+                    'order_id' => $order_id,
+                    'user_id' => $center_id,
+                    'user_type' => 'center'
+                ];
+                $this->db->insert('transactions', $trans);
+                $trans_id = $this->db->insert_id();
+                $this->response('data', $trans);
 
 
-            // $order_id = "order_Ox2Pf0s7PibuEo";
-            // $payment_id = "942SEWAEDU938";
-            // $trans_id = 2;
+                // $order_id = "order_Ox2Pf0s7PibuEo";
+                // $payment_id = "942SEWAEDU938";
+                // $trans_id = 2;
 
-            $data = [
-                'key' => RAZORPAY_KEY_ID,
-                'amount' => $amount * 100,
-                'name' => ES('title'),
-                'description' => 'Computer Institute',
-                'image' => logo(),
-                'prefill' => [
-                    'name' => $this->get_data('owner_name'),
+                $data = [
+                    'key' => RAZORPAY_KEY_ID,
+                    'amount' => $amount * 100,
+                    'name' => ES('title'),
+                    'description' => 'Computer Institute',
+                    'image' => logo(),
+                    'prefill' => [
+                        'name' => $this->get_data('owner_name'),
+                        'email' => $this->get_data('owner_email'),
+                        'contact' => $this->get_data('owner_phone')
+                    ],
+                    'notes' => [
+                        'merchant_order_id' => $trans_id,
+                        'center_id' => $center_id
+                    ],
+                    'order_id' => $order_id
+                ];
+                $this->response('status', true);
+                $this->response('getway', 'razorpay');
+                $this->response('option', $data);
+            elseif (CHECK_PERMISSION('PAYU_GETWAY')):
+                $this->load->library('payment/payu');
+                $formData = [
+                    'amount' => $amount,
+                    'firstname' => $this->get_data('owner_name'),
                     'email' => $this->get_data('owner_email'),
-                    'contact' => $this->get_data('owner_phone')
-                ],
-                'notes' => [
-                    'merchant_order_id' => $trans_id,
-                    'center_id' => $center_id
-                ],
-                'order_id' => $order_id
-            ];
-            $this->response('status', true);
-            $this->response('option', $data);
+                    'phone' => $this->get_data('owner_phone'),
+                    'productinfo' => 'wallet recharge',
+                    'surl' => base_url('payment/payu-success/'.$this->encode($center_id)),
+                    'furl' => base_url('payment/payu-failure/'.$this->encode($center_id))
+                ];
+
+                $paymentData = $this->payu->createPaymentData($formData);
+
+                $this->response([
+                    'status' => true,
+                    'inputs' => $paymentData,
+                    'form' => $this->load->view('payment/payu/checkout', $paymentData, true)
+                ]);
+                $this->response('getway', 'payu');
+
+            else:
+                throw new Exception('Any Getway not found for Payment..');
+            endif;
         } catch (Exception $e) {
             $this->response('error', $e->getMessage());
+            $this->response('getway', 'UNKNOWN GETWAY');
+
         }
     }
     function wallet_update()

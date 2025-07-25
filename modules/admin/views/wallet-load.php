@@ -106,7 +106,7 @@
                                         <div class="fs-6 text-gray-700 pe-7">
                                             <i class="fa fa-clock"></i> <?= timeAgo($row->update_time) ?>
                                             <?php
-                                            if (!$row->payment_status) {
+                                            if ($condition = (!$row->payment_status && CHECK_PERMISSION('RAZORPAY_GETWAY'))) {
                                                 try {
                                                     $this->razorpay->fetchOrderStatus($row->order_id);
                                                 } catch (Exception $e) {
@@ -118,7 +118,7 @@
                                     </div>
                                     <div>
                                         <?php
-                                        if (!$row->payment_status) {
+                                        if ($condition) {
                                             echo '<button type="button" data-id="' . $row->id . '"
                                     class="btn btn-active-danger px-6 align-self-center text-nowrap try-again-payment border-dashed border-2 border-danger">
                                     Try Again</button>';

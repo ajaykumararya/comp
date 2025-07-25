@@ -762,3 +762,10 @@ function detect_course_type($course_id, $duration)
 
     return ($isTheory && $isPractical) ? 'Theory & Practical' : ($isTheory ? 'Theory' : 'Practical');
 }
+
+function isPremiumExamPortal(){
+    if(defined('EXAM_DB')){
+        
+    }
+    return false;
+}

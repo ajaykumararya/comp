@@ -23,7 +23,7 @@ class Website extends Ajax_Controller
                         }
                         $this->session->set_userdata($sessionData);
                         $this->response('status', 1);
-                        $this->response('name',$row->name);
+                        $this->response('name', $row->name);
                     } else
                         $this->response('error', alert('Sorry, the email or password is incorrect, please try again.', 'danger'));
                 } else
@@ -44,42 +44,74 @@ class Website extends Ajax_Controller
             $token = $this->post('token');
             $this->token->decode($token);
             $payable_amount = $this->token->data('payable_amount');
-            $this->load->module('razorpay');
-            $order_id = $this->razorpay->create_order([
-                'receipt' => PATH . mt_rand(00000, 8999999),
-                'amount' => $payable_amount * 100,
-                'currency' => 'INR',
-                'notes' => [
-                    'token' => $token,
-                    'merchant_order_id' => time()
-                ]
-            ]);
-            $studentDetails = $this->db->select('name,contact_number,email')->where('id', $this->token->data('student_id'))->get('students');
-            $name = $mobile = $email = '';
-            if ($studentDetails->num_rows()) {
-                $studentDetails = $studentDetails->row();
-                $name = $studentDetails->name;
-                $mobile = $studentDetails->contact_number;
-                $email = $studentDetails->email;
-            }
-            $data = [
-                'key' => RAZORPAY_KEY_ID,
-                'amount' => $payable_amount * 100,
-                'name' => ES('title'),
-                'description' => 'Computer Institute',
-                'image' => logo(),
-                'prefill' => [
-                    'name' => $name,
+            if (CHECK_PERMISSION('RAZORPAY_GETWAY')) {
+
+                $this->load->module('razorpay');
+                $order_id = $this->razorpay->create_order([
+                    'receipt' => PATH . mt_rand(00000, 8999999),
+                    'amount' => $payable_amount * 100,
+                    'currency' => 'INR',
+                    'notes' => [
+                        'token' => $token,
+                        'merchant_order_id' => time()
+                    ]
+                ]);
+                $studentDetails = $this->db->select('name,contact_number,email')->where('id', $this->token->data('student_id'))->get('students');
+                $name = $mobile = $email = '';
+                if ($studentDetails->num_rows()) {
+                    $studentDetails = $studentDetails->row();
+                    $name = $studentDetails->name;
+                    $mobile = $studentDetails->contact_number;
+                    $email = $studentDetails->email;
+                }
+                $data = [
+                    'key' => RAZORPAY_KEY_ID,
+                    'amount' => $payable_amount * 100,
+                    'name' => ES('title'),
+                    'description' => 'Computer Institute',
+                    'image' => logo(),
+                    'prefill' => [
+                        'name' => $name,
+                        'email' => $email,
+                        'contact' => $mobile
+                    ],
+                    'notes' => [
+                        'merchant_order_id' => time(),
+                    ],
+                    'order_id' => $order_id
+                ];
+                $this->response('status', true);
+                $this->response('getway', 'razorpay');
+                $this->response('option', $data);
+            } else if (CHECK_PERMISSION('PAYU_GETWAY')) {
+                $this->response('getway', 'payu');
+                $this->load->library('payment/payu');
+                $studentDetails = $this->db->select('name,contact_number,email,id')->where('id', $this->token->data('student_id'))->get('students');
+                $name = $mobile = $email = '';
+                if ($studentDetails->num_rows()) {
+                    $studentDetails = $studentDetails->row();
+                    $name = $studentDetails->name;
+                    $mobile = $studentDetails->contact_number;
+                    $email = $studentDetails->email;
+                }
+                $formData = [
+                    'amount' => $payable_amount,
+                    'firstname' => $name,
                     'email' => $email,
-                    'contact' => $mobile
-                ],
-                'notes' => [
-                    'merchant_order_id' => time(),
-                ],
-                'order_id' => $order_id
-            ];
-            $this->response('status', true);
-            $this->response('option', $data);
+                    'phone' => $mobile,
+                    'productinfo' => 'student Emi Fee',
+                    'surl' => base_url('payment/student-fee-success/' . $token),
+                    'furl' => base_url('payment/student-fee-failure/' . $token)
+                ];
+
+                $paymentData = $this->payu->createPaymentData($formData);
+
+                $this->response([
+                    'status' => true,
+                    'inputs' => $paymentData
+                ]);
+            } else
+                throw new Exception('Getway not found.');
 
         } catch (Exception $e) {
             $this->response('html', $e->getMessage());
@@ -222,7 +254,7 @@ class Website extends Ajax_Controller
                 'dob' => date('d-m-Y', strtotime($dob)),
                 'status' => $status
             ]);
-                // $this->response("query ",$this->db->last_query());
+            // $this->response("query ",$this->db->last_query());
             if ($get->num_rows()) {
                 $this->response('status', true);
                 $data = $get->row_array();

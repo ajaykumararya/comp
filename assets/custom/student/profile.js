@@ -344,27 +344,48 @@ document.addEventListener('DOMContentLoaded', function (d) {
         }).then((r) => {
             // console.log(r);
             if (r.status) {
-                var options = r.option;
-                options.handler = function (response) {
-                    $.AryaAjax({
-                        url: 'website/update-emi-payment',
-                        data: {
-                            razorpay_payment_id: response.razorpay_payment_id,
-                            razorpay_order_id: options.order_id,
-                            razorpay_signature: response.razorpay_signature,
-                            merchant_order_id: options.notes.merchant_order_id,
-                            amount: options.amount,
-                            token: myToken
-                        }
-                    }).then((res) => {
-                        showResponseError(res);
-                        if (res.status) {
-                            SwalSuccess('Success!', 'Fully Paid EMI');
-                            location.reload();
-                        }
-                    });
-                };
-                razorpayPOPUP(options);
+                if (r.getway == 'razorpay') {
+                    var options = r.option;
+                    options.handler = function (response) {
+                        $.AryaAjax({
+                            url: 'website/update-emi-payment',
+                            data: {
+                                razorpay_payment_id: response.razorpay_payment_id,
+                                razorpay_order_id: options.order_id,
+                                razorpay_signature: response.razorpay_signature,
+                                merchant_order_id: options.notes.merchant_order_id,
+                                amount: options.amount,
+                                token: myToken
+                            }
+                        }).then((res) => {
+                            showResponseError(res);
+                            if (res.status) {
+                                SwalSuccess('Success!', 'Fully Paid EMI');
+                                location.reload();
+                            }
+                        });
+                    };
+                    razorpayPOPUP(options);
+                }
+                else if (r.getway == 'payu') {
+                    var inputs = r.inputs;
+                    let form = document.createElement("form");
+                    form.method = "POST";
+                    form.action = inputs.action;
+                    for (let name in inputs) {
+                        if (name === 'action')
+                            continue;
+                        let input = document.createElement("input");
+                        input.type = "hidden";
+                        input.name = name;
+                        input.value = inputs[name];
+                        form.appendChild(input);
+                    }
+
+                    document.body.appendChild(form);
+                    form.submit();
+
+                }
             }
         });
     })

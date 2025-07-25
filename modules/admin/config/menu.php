@@ -632,7 +632,7 @@ if (CHECK_PERMISSION('CENTRE_ONLY_ADD_STUDENT') && OnlyForCentre()) {
 
 $config['exam_menu'] = array(
     'title' => 'Online Exam Section',
-    'condition' => OnlyForAdmin() && CHECK_PERMISSION('EXAM'),
+    'condition' => OnlyForAdmin() && CHECK_PERMISSION('EXAM') && !defined('DB_EXAM'),
     'menu' => array(
         array(
             'label' => 'Exam(S)',
@@ -682,6 +682,37 @@ $config['exam_menu'] = array(
     )
 );
 
+$config['exam_menu'] = array(
+    'title' => 'Online Exam Section',
+    'condition' => OnlyForAdmin() && defined('DB_EXAM'),
+    'menu' => array(
+        array(
+            'url' => 'exam/main/course-setting',
+            'label' => 'Course Setting',
+            'type' => 'course_setting',
+            'icon' => array('plus', 2)
+        ),
+        array(
+            'label' => 'Exam(S)',
+            'type' => 'exams',
+            'icon' => array('note-2', 4),
+            'submenu' => array(
+                array(
+                    'url' => 'exam/add1',
+                    'label' => 'Create',
+                    'type' => 'create_online_exam',
+                    'icon' => array('plus', 2)
+                ),
+                array(
+                    'url' => 'exam/list1',
+                    'label' => 'List',
+                    'icon' => array('tablet-text-up', 2),
+                    'type' => 'list_online_exam'
+                )
+            )
+        )
+    )
+);
 $config['co_ordinator'] = array(
     'title' => 'Co-Ordinate User',
     'condition' => OnlyForAdmin() && CHECK_PERMISSION("CO_ORDINATE_SYSTEM"),
