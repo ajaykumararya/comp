@@ -682,7 +682,7 @@ $config['exam_menu'] = array(
     )
 );
 
-$config['exam_menu'] = array(
+$config['exam_menu_online'] = array(
     'title' => 'Online Exam Section',
     'condition' => OnlyForAdmin() && defined('DB_EXAM'),
     'menu' => array(
