@@ -1,7 +1,7 @@
 <?php
 class MY_Model extends CI_Model
 {
-    public $login_type, $login_id;
+    public $login_type, $login_id, $examdb;
     function __construct()
     {
         parent::__construct();
@@ -10,6 +10,9 @@ class MY_Model extends CI_Model
             $this->login_type = $this->session->userdata('admin_type');
             $this->login_id = $this->session->userdata('admin_id');
         }
+
+        if (defined('DB_EXAM'))
+            $this->examdb = $this->load->database('exam', true);
     }
     function select($select)
     {
@@ -40,14 +43,16 @@ class MY_Model extends CI_Model
     {
         return $this->login_type == 'admin';
     }
-    function isRole(){
+    function isRole()
+    {
         return $this->login_type == 'role_user';
     }
-    function permissions(){
-        if($this->isRole()){
-            $chk = $this->db->where('id',$this->session->userdata('role_id'))->get('role_categories');
-            if($chk->num_rows()){
-                return json_decode($chk->row('permissions'),true);
+    function permissions()
+    {
+        if ($this->isRole()) {
+            $chk = $this->db->where('id', $this->session->userdata('role_id'))->get('role_categories');
+            if ($chk->num_rows()) {
+                return json_decode($chk->row('permissions'), true);
             }
         }
         return [];
@@ -56,7 +61,8 @@ class MY_Model extends CI_Model
     // {
     //     return $this->login_type == $type;
     // }
-    function isCoordinator(){
+    function isCoordinator()
+    {
         return (CHECK_PERMISSION('CO_ORDINATE_SYSTEM') && $this->login_type == 'co_ordinator');
     }
     function isCenter()
@@ -65,7 +71,7 @@ class MY_Model extends CI_Model
     }
     function isAdminOrCenter()
     {
-        return $this->isAdmin() or $this->isCenter() ;
+        return $this->isAdmin() or $this->isCenter();
     }
     function isStudent()
     {

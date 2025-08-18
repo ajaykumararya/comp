@@ -390,9 +390,9 @@ class Site extends Site_Controller
     }
     function test()
     {
-        $get = $this->student_model->results_marks(22);
-        if($get->num_rows())
-            pre($get->result());
+        $this->load->model('exam/Exam_model');
+        // pre($this->Exam_model,true);
+        echo $this->Exam_model->get_course()->num_rows();
         // $get = $this->center_model->get_assign_courses(3,[
         //             'course_id' => 44
         //         ]);

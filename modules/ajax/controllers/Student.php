@@ -948,7 +948,7 @@ class Student extends Ajax_Controller
             if (file_exists($file)) {
                 @unlink($file);
             }
-            $this->db->where('id', $material_id)->delete('study_material');
+            $this->db->where('material_id', $material_id)->delete('study_material');
             $this->response('status', true);
         }
     }

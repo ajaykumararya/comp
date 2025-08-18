@@ -690,7 +690,7 @@ $config['exam_menu_online'] = array(
             'url' => 'exam/main/course-setting',
             'label' => 'Course Setting',
             'type' => 'course_setting',
-            'icon' => array('plus', 2)
+            'icon' => array('setting-2', 2)
         ),
         array(
             'label' => 'Exam(S)',
@@ -698,16 +698,22 @@ $config['exam_menu_online'] = array(
             'icon' => array('note-2', 4),
             'submenu' => array(
                 array(
-                    'url' => 'exam/add1',
-                    'label' => 'Create',
-                    'type' => 'create_online_exam',
-                    'icon' => array('plus', 2)
+                    'url' => 'exam/main/manage-topics',
+                    'label' => 'Manage Topic',
+                    'type' => 'manage_topic',
+                    'icon' => array('abstract-36', 2)
                 ),
                 array(
-                    'url' => 'exam/list1',
-                    'label' => 'List',
-                    'icon' => array('tablet-text-up', 2),
-                    'type' => 'list_online_exam'
+                    'url' => 'exam/main/manage-questions',
+                    'label' => 'Manage Question(s)',
+                    'icon' => array('questionnaire-tablet', 2),
+                    'type' => 'manage_questions'
+                ),
+                array(
+                    'url' => 'exam/main/manage-papers',
+                    'label' => 'Manage Paper(s)',
+                    'icon' => array('tablet-text-up', 3),
+                    'type' => 'manage_papers'
                 )
             )
         )

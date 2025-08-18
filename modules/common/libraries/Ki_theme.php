@@ -124,6 +124,14 @@ class Ki_theme
         }
         return false;
     }
+    function get_ajax_module(){
+        $module_name = $this->CI->load->get_module();
+        $path = FCPATH . "modules/{$module_name}/controllers/Ajax.php";
+        if(file_exists($path)){
+            return $module_name.'/';
+        }
+        return;
+    }
     function filterByAllowedTypes($array, $allowedTypes)
     {
         $result = [];
@@ -914,6 +922,9 @@ class Ki_theme
     {
         return $this->CI->uri->segment($arg1, $arg2);
     }
+    function last_segment(){
+        return $this->CI->uri->segment($this->CI->uri->total_segments());
+    }
     function breadcrummb_icon($clss = '', $path = 2, $fs = 1, $type = 'solid')
     {
         $this->breadcrumb_data['title_icon'] = $this->keen_icon($clss, $path, $fs, $type);
@@ -932,8 +943,10 @@ class Ki_theme
     }
     function set_breadcrumb($props = array())
     {
+        
         $this->breadcrumb_data = array_merge($this->breadcrumb_data, $props);
-        $this->set_title(humanize(str_replace('-', ' ', $this->segment(2, 'Dashboard'))));
+        // pre($this->breadcrumb_data);
+        $this->set_title(humanize(str_replace('-', ' ', $this->last_segment())));
         $chk = $this->segment(2, 'Dashboard');
         $chk = strtolower($chk) == 'v1' ? $this->segment(3) : $chk;
         if (isset($props['icon'])) {
@@ -941,7 +954,7 @@ class Ki_theme
             $this->breadcrummb_icon($clss, $path, $fs = 1, $type = 'solid');
         }
         if (!isset($props['page_name']))
-            $this->breadcrumb_data['page_name'] = humanize($chk);
+            $this->breadcrumb_data['page_name'] = humanize($this->last_segment());
         if (!isset($props['actions_buttons'])) {
             $this->breadcrumb_data['actions_buttons'] = '';
         }

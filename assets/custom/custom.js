@@ -1844,7 +1844,8 @@ $.AryaAjax = async function (options) {
             // Make the Ajax request using $.ajax
             AryaAjaxXhr = $.ajax({
                 type: settings.type,
-                url: ajax_url + settings.url,
+                // url: ajax_url + settings.url,
+                url: /^https?:\/\//.test(settings.url) ? settings.url : ajax_url + settings.url,
                 data: settings.data,
                 dataType: settings.dataType,
                 contentType: settings.contentType,
@@ -2101,6 +2102,14 @@ main_extra_setting_form.on('submit', (e) => {
     else
         SwalWarning("Which type of form's data are you saving?");
 });
+const _tables = $('[data-table]');
+if (_tables.length) {
+    _tables.each(function () {
+        $(this).DataTable({
+            dom: small_dom,
+        })
+    })
+}
 const setting_table = $('[setting-table]');
 if (setting_table.length) {
     setting_table.each(function () {

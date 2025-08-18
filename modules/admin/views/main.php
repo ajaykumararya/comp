@@ -1044,7 +1044,8 @@
 <!--begin::Javascript-->
 <script>
     var base_url = "<?= base_url() ?>",
-        ajax_url = base_url + 'ajax/';
+        module_name = "<?=$this->ki_theme->get_ajax_module()?>",
+        ajax_url = base_url + module_name + 'ajax/';
     const login_type = '<?= $this->center_model->login_type() ?>';
     const isDemo = Boolean(<?= isDemo() ?>);
     const all_templates = '';

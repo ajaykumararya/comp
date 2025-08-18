@@ -96,25 +96,25 @@ $db['default'] = array(
 	'save_queries' => TRUE
 );
 if (defined('DB_EXAM')) {
-	// $db['exam'] = array(
-	// 	'dsn' => '',
-	// 	'hostname' => DB_HOSTNAME,
-	// 	'username' => DB_USERNAME,
-	// 	'password' => DB_PASSWORD,
-	// 	'database' => DB_EXAM,
-	// 	'dbdriver' => DB_DBDRIVER,
-	// 	'dbprefix' => 'exam_',
-	// 	'pconnect' => FALSE,
-	// 	'db_debug' => (ENVIRONMENT !== 'production'),
-	// 	'cache_on' => FALSE,
-	// 	'cachedir' => '',
-	// 	'char_set' => 'utf8',
-	// 	'dbcollat' => 'utf8_general_ci',
-	// 	'swap_pre' => '',
-	// 	'encrypt' => FALSE,
-	// 	'compress' => FALSE,
-	// 	'stricton' => FALSE,
-	// 	'failover' => array(),
-	// 	'save_queries' => TRUE
-	// );
+	$db['exam'] = array(
+		'dsn' => '',
+		'hostname' => DB_HOSTNAME,
+		'username' => DB_USERNAME,
+		'password' => DB_PASSWORD,
+		'database' => DB_EXAM,
+		'dbdriver' => DB_DBDRIVER,
+		'dbprefix' => 'exam_',
+		'pconnect' => FALSE,
+		'db_debug' => (ENVIRONMENT !== 'production'),
+		'cache_on' => FALSE,
+		'cachedir' => '',
+		'char_set' => 'utf8',
+		'dbcollat' => 'utf8_general_ci',
+		'swap_pre' => '',
+		'encrypt' => FALSE,
+		'compress' => FALSE,
+		'stricton' => FALSE,
+		'failover' => array(),
+		'save_queries' => TRUE
+	);
 }
