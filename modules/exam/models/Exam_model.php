@@ -168,4 +168,9 @@ class Exam_model extends MY_Model
         return $ques;
     }
 
+    function paper_questions($paper_id)
+    {
+        return $paper_id;
+    }
+
 }

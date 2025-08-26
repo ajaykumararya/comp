@@ -1,6 +1,11 @@
+<style>
+    .list-group {
+        --bs-list-group-bg: transparent;
+    }
+</style>
 <div class="row">
-    <div class="col-md-12">
-        <form action="">
+    <div class="col-md-12" id="examApp">
+        <form action="" id="questionForm">
             <div class="{card_class}">
                 <div class="card-header justify-content-between ">
                     <h3 class="card-title">Add a Question</h3>
@@ -42,8 +47,8 @@
                                     $myCount = isset($allQuestions[$topic->id]) ? count($allQuestions[$topic->id]) : 0;
                                     $class = $myCount ? 'info' : 'danger';
                                     ?>
-                                    <li class="nav-item ms-3 ">
-                                        <a class="nav-link <?= $i == '1' ? 'active' : '' ?> btn btn-active-light btn-color-gray-600 btn-active-color-primary rounded-bottom-0"
+                                    <li class="nav-item ms-3 border-dark">
+                                        <a class="nav-link <?= $i == '1' ? 'active' : '' ?> btn btn-active-primary rounded-bottom-0"
                                             data-bs-toggle="tab" href="#kt_tab_pane_<?= $i ?>"><?= $topic->title ?>
                                             <?= label($myCount, $class) ?></a>
                                     </li>
@@ -65,18 +70,20 @@
                                 <?php
                                 if (isset($allQuestions[$topic->id])) {
                                     ?>
-                                    <ul class="list-group">
+                                    <ol class="">
                                         <?php
+                                        $j = 0;
                                         foreach ($allQuestions[$topic->id] as $ques_id => $ques):
                                             // pre($ques)
+                                            $j++;
                                             ?>
-                                            <li class="list-group-item">
+                                            <li class="p-1 text-danger fw-bold" type="1">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <!-- Collapse Toggle -->
                                                     <a class="text-primary fw-bold text-decoration-none d-flex align-items-center"
-                                                        data-bs-toggle="collapse" href="#q2" role="button" aria-expanded="false"
-                                                        aria-controls="q2">
-                                                        <span><?=$ques['question']?></span>
+                                                        data-bs-toggle="collapse" href="#demo_q<?= $j ?>" role="button"
+                                                        aria-expanded="false" aria-controls="demo_q<?= $j ?>">
+                                                        <span><?= $ques['question'] ?></span>
                                                         <i class="fas fa-eye toggle-icon ms-2"></i>
                                                     </a>
 
@@ -87,15 +94,17 @@
                                                 </div>
 
                                                 <!-- Collapse Content -->
-                                                <div class="collapse mt-2" id="q2">
+                                                <div class="collapse mt-2" id="demo_q<?= $j ?>" data-bs-parent="#kt_tab_pane_<?= $i ?>">
                                                     <div class="text-muted">
                                                         <?php
-                                                        if(isset($ques['options'])){
-                                                            echo '<ul>';
+                                                        // htmlentities()
+                                                        if (isset($ques['options'])) {
+                                                            echo '<ol type="A">';
                                                             foreach ($ques['options'] as $option):
-                                                                echo '<li>'.$option['text'].'</li>';
+                                                                // print_r($option);
+                                                                echo '<li class="text-' . ($option['is_correct'] ? 'success' : 'danger') . '">' . htmlentities($option['text']) . '</li>';
                                                             endforeach;
-                                                            echo '</ul>';
+                                                            echo '</ol>';
                                                         }
                                                         ?>
                                                     </div>
@@ -126,132 +135,158 @@
     </div>
 </div>
 <script>
-    let topicIndex = 0;
+    (function ($) {
+        $.fn.examBuilder = function (options) {
+            const settings = $.extend({
+                availableTopics: [],
+                saveUrl: '',
+                onSaveSuccess: function () { },
+                onSaveError: function () { }
+            }, options);
 
-    const availableTopics = <?= $this->exam_model->json_topic() ?>
+            let topicIndex = 0;
+            const container = this;
 
+            function topicDropdown(index) {
+                let options = `<option value="">Select Topic</option>`;
+                settings.availableTopics.forEach(t => {
+                    options += `<option value="${t.id}">${t.title}</option>`;
+                });
+                return `
+                <select class="form-select mb-2 w-50" name="topics[${index}][topicId]" required>
+                    ${options}
+                </select>`;
+            }
 
-    function topicDropdown(index) {
-        let options = `<option value="">Select Topic</option>`;
-        availableTopics.forEach(t => {
-            options += `<option value="${t.id}">${t.title}</option>`;
-        });
-        return `
-        <select class="form-select mb-2 w-50" name="topics[${index}][topicId]" required>
-            ${options}
-        </select>`;
-    }
+            function addTopic() {
+                const index = topicIndex++;
+                const topicHtml = `
+            <div class="border p-3 mb-3 topic-block" data-index="${index}">
+                <div class="d-flex justify-content-between align-items-center">
+                    ${topicDropdown(index)}
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-success addQuestion">Add Question</button>
+                        <button type="button" class="btn btn-sm btn-danger removeTopic">Remove Topic</button>
+                    </div>
+                </div>
+                <div class="questionsContainer mt-3"></div>
+            </div>
+        `;
+                container.find('#topicsContainer').append(topicHtml);
+            }
 
-    function addTopic() {
-        const index = topicIndex++;
-        const topicHtml = `
-        <div class="border p-3 mb-3 topic-block" data-index="${index}">
-            <div class="d-flex justify-content-between align-items-center">
-                ${topicDropdown(index)}
-                <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-success addQuestion">Add Question</button>
-                    <button type="button" class="btn btn-sm btn-danger removeTopic">Remove Topic</button>
+            function addQuestion(topicBlock) {
+                const topicIdx = topicBlock.data('index');
+                const qIndex = topicBlock.find('.question-block').length;
+
+                const questionHtml = `
+            <div class="card p-3 mb-3 question-block border border-success">
+                <textarea class="form-control mb-2" 
+                    name="topics[${topicIdx}][questions][${qIndex}][question]" 
+                    placeholder="Enter Question" required></textarea>
+                <div class="optionsContainer"></div>
+                <div class="mb-2 text-end">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-info addOption">Add Option</button>
+                        <button type="button" class="btn btn-sm btn-danger removeQuestion">Remove Question</button>
+                    </div>
                 </div>
             </div>
-            <div class="questionsContainer mt-3"></div>
-        </div>
-    `;
-        $('#topicsContainer').append(topicHtml);
-    }
+        `;
+                topicBlock.find('.questionsContainer').append(questionHtml);
+            }
 
-    function addQuestion(topicBlock) {
-        const topicIdx = topicBlock.data('index');
-        const qIndex = topicBlock.find('.question-block').length;
-
-        const questionHtml = `
-        <div class="card p-3 mb-3 question-block border border-success">
-            <textarea class="form-control mb-2" name="topics[${topicIdx}][questions][${qIndex}][question]" placeholder="Enter Question" required></textarea>
-            <div class="optionsContainer"></div>
-            <div class="mb-2 text-end">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-info addOption">Add Option</button>
-                    <button type="button" class="btn btn-sm btn-danger removeQuestion">Remove Question</button>
-                </div>
+            function addOption(questionBlock, topicIdx, qIndex) {
+                const oIndex = questionBlock.find('.option-block').length;
+                const optionHtml = `
+            <div class="d-flex align-items-center mb-2 option-block">
+                <input type="radio" name="topics[${topicIdx}][questions][${qIndex}][correctAnswer]" 
+                    value="${oIndex}" class="form-check-input me-2">
+                <input type="text" class="form-control me-2" 
+                    name="topics[${topicIdx}][questions][${qIndex}][options][]" 
+                    placeholder="Option ${oIndex + 1}" required>
+                <button type="button" class="btn btn-sm btn-danger removeOption">
+                    <i class="fa fa-times"></i>
+                </button>
             </div>
-        </div>
-    `;
-        topicBlock.find('.questionsContainer').append(questionHtml);
-    }
+        `;
+                questionBlock.find('.optionsContainer').append(optionHtml);
+            }
+            function reindexOptions(questionBlock, topicIdx, qIndex) {
+                questionBlock.find('.option-block').each(function (i) {
+                    // Update radio
+                    $(this).find('input[type="radio"]').attr('value', i);
 
-    function addOption(questionBlock, topicIdx, qIndex) {
-        const oIndex = questionBlock.find('.option-block').length;
-        const optionHtml = `
-        <div class="d-flex align-items-center mb-2 option-block">
-            <input type="radio" name="topics[${topicIdx}][questions][${qIndex}][correctAnswer]" value="${oIndex}" class="form-check-input me-2">
-            <input type="text" class="form-control me-2" name="topics[${topicIdx}][questions][${qIndex}][options][]" placeholder="Option ${oIndex + 1}" required>
-            <button type="button" class="btn btn-sm btn-danger removeOption"><i class="fa fa-times8"></i></button>
-        </div>
-    `;
-        questionBlock.find('.optionsContainer').append(optionHtml);
-    }
+                    // Update placeholder & name
+                    $(this).find('input[type="text"]')
+                        .attr('placeholder', 'Option ' + (i + 1));
+                });
+            }
+            // Bind actions
+            container.on('click', '#addTopicBtn', function () {
+                addTopic();
+            });
 
-    // Add Topic
-    $('#addTopicBtn').on('click', function () {
-        addTopic();
+            container.on('click', '.removeTopic', function () {
+                $(this).closest('.topic-block').remove();
+            });
+
+            container.on('click', '.addQuestion', function () {
+                const topicBlock = $(this).closest('.topic-block');
+                addQuestion(topicBlock);
+            });
+
+            container.on('click', '.removeQuestion', function () {
+                $(this).closest('.question-block').remove();
+            });
+
+            container.on('click', '.addOption', function () {
+                const questionBlock = $(this).closest('.question-block');
+                const topicBlock = questionBlock.closest('.topic-block');
+                const topicIdx = topicBlock.data('index');
+                const qIndex = topicBlock.find('.question-block').index(questionBlock);
+                addOption(questionBlock, topicIdx, qIndex);
+                reindexOptions(questionBlock, topicIdx, qIndex);
+            });
+
+            container.on('click', '.removeOption', function () {
+                const questionBlock = $(this).closest('.question-block');
+                const topicBlock = questionBlock.closest('.topic-block');
+                const topicIdx = topicBlock.data('index');
+                const qIndex = topicBlock.find('.question-block').index(questionBlock);
+
+                $(this).closest('.option-block').remove();
+
+                reindexOptions(questionBlock, topicIdx, qIndex);
+            });
+
+            // Submit
+            container.on('submit', '#questionForm', function (e) {
+                e.preventDefault();
+                const formData = $(this).serialize();
+
+                $.post(settings.saveUrl, formData, function (res) {
+                    // alert('Saved Successfully!');
+                    settings.onSaveSuccess(res);
+                }).fail(function () {
+                    alert('Failed to save.');
+                    settings.onSaveError();
+                });
+            });
+
+            return this;
+        };
+    })(jQuery);
+    $('#examApp').examBuilder({
+        availableTopics: <?= $this->exam_model->json_topic() ?>,
+        saveUrl: '<?= base_url("exam/ajax/add_question") ?>',
+        onSaveSuccess: function (res) {
+            var d = (JSON.parse(res));
+            // location.reload();
+            SwalSuccess('Response', d.html, false, 'Reload').then((r) => {
+                if (r.isConfimed)
+                    location.reload();
+            })
+        }
     });
-
-    // Remove Topic
-    $('#topicsContainer').on('click', '.removeTopic', function () {
-        $(this).closest('.topic-block').remove();
-    });
-
-    // Add Question
-    $('#topicsContainer').on('click', '.addQuestion', function () {
-        const topicBlock = $(this).closest('.topic-block');
-        addQuestion(topicBlock);
-    });
-
-    // Remove Question
-    $('#topicsContainer').on('click', '.removeQuestion', function () {
-        $(this).closest('.question-block').remove();
-    });
-
-    // Add Option
-    $('#topicsContainer').on('click', '.addOption', function () {
-        const questionBlock = $(this).closest('.question-block');
-        const topicBlock = questionBlock.closest('.topic-block');
-        const topicIdx = topicBlock.data('index');
-        const qIndex = topicBlock.find('.question-block').index(questionBlock);
-        addOption(questionBlock, topicIdx, qIndex);
-    });
-
-    // Remove Option
-    $('#topicsContainer').on('click', '.removeOption', function () {
-        $(this).closest('.option-block').remove();
-    });
-
-    // Submit
-    $('#questionForm').on('submit', function (e) {
-        e.preventDefault();
-        const formData = $(this).serialize();
-
-        $.post('<?= base_url("questions-bank/add-question") ?>', formData, function (res) {
-            alert('Saved Successfully!');
-            location.reload();
-        }).fail(function () {
-            alert('Failed to save.');
-        });
-    });
-    document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(function (el) {
-        const target = document.querySelector(el.getAttribute('href'));
-
-        el.addEventListener('click', function () {
-            setTimeout(() => {
-                const icon = el.querySelector('.toggle-icon');
-                if (icon.classList.contains('fa-eye')) {
-                    icon.classList.remove('fa-eye-slash');
-                    icon.classList.add('fa-eye');
-                } else {
-                    icon.classList.remove('fa-eye');
-                    icon.classList.add('fa-eye-slash');
-                }
-            }, 300);
-        });
-    });
-
 </script>

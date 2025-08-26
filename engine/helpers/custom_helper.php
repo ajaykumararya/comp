@@ -267,7 +267,8 @@ function sidebar_toggle($true, $false = '')
 function OnlyForAdmin()
 {
     $ci = &get_instance();
-    return $ci->session->userdata('admin_type') == 'admin';
+    $userType = $ci->session->userdata('admin_type');
+    return  $userType == 'admin' && $userType != 'student';
 }
 function OnlyForCentre()
 {

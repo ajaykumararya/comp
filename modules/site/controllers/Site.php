@@ -390,17 +390,8 @@ class Site extends Site_Controller
     }
     function test()
     {
-        $this->load->model('exam/Exam_model');
-        // pre($this->Exam_model,true);
-        echo $this->Exam_model->get_course()->num_rows();
-        // $get = $this->center_model->get_assign_courses(3,[
-        //             'course_id' => 44
-        //         ]);
-        // $r = $get->num_rows() ? ($get->row()) : [];
-        // pre($r);
-        // echo base_url('typing-certificate/' . $this->token->encode([
-        //     'id' => 1
-        // ]));
+        // pre($this->load->config('student/menu',true));
+        pre($this->ki_theme->get_student_menu());
 
         // $url = base_url('marksheet_print/' . $this->token->encode(['id' => 2]));
         // echo $this->ki_theme->generate_qr(2, 'front_marksheet', $url);

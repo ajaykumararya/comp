@@ -42,13 +42,63 @@ class Ajax extends Ajax_Controller
         ], $id);
         $this->response('status', true);
     }
+    function add_question()
+    {
+        $html = '';
+        // $this->response($_POST);
+        if (isset($_POST['topics'])) {
+            foreach ($_POST['topics'] as $topic) {
+                $topic_id = $topic['topicId'];
+                if ($topic_id && isset($topic['questions'])) {
+                    foreach ($topic['questions'] as $question) {
+                        $exists = $this->exam_model->question_exists([
+                            'question' => $question['question'],
+                            'topic_id' => $topic_id
+                        ]);
+
+                        if ($exists > 0) {
+                            $html .= "<b class='text-warning'>⚠️ {$question['question']}: Question already exists. Skipped.</b>";
+                            continue;
+                        }
+
+                        $insert_id = $this->exam_model->add_question([
+                            'question' => $question['question'],
+                            'topic_id' => $topic_id
+                        ]);
+                        // $insert_id = rand(0,100);
+                        $answerList = [];
+                        if (isset($question['options'])) {
+                            foreach ($question['options'] as $index => $option) {
+                                $answerList[] = [
+                                    'ques_id' => $insert_id,
+                                    'choice' => $option,
+                                    'isRight' => $index == $question['correctAnswer'] ? 1 : 0
+                                ];
+                            }
+                            if (count($answerList)) {
+                                $this->exam_model->add_answer_list($answerList);
+                            }
+
+                            if ($insert_id) {
+                                $html .= "<b class='text-success'>✅{$question['question']}: Inserted successfully.</b>";
+                            } else {
+                                $html .= "<b class='text-danger'>❌{$question['question']}: Failed to insert.</b>";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        $this->response('html', $html);
+        $this->response('status', true);
+    }
     public function question_import()
     {
         // $json = file_get_contents('php://input');
         $questions = $this->input->post('data');
 
         $responses = [];
-        
+
         foreach ($questions as $index => $q) {
             $row_num = $index + 2;
 
@@ -96,7 +146,7 @@ class Ajax extends Ajax_Controller
                 $responses[] = "<b class='text-danger'>❌ Row $row_num: Failed to insert.</b>";
             }
         }
-        $this->response('html', implode('<br>',$responses ));
+        $this->response('html', implode('<br>', $responses));
         $this->response('status', true);
     }
 

@@ -6,13 +6,27 @@ class MY_Model extends CI_Model
     {
         parent::__construct();
         // $this->load->library('session');
-        if ($this->isLogin()) {
-            $this->login_type = $this->session->userdata('admin_type');
-            $this->login_id = $this->session->userdata('admin_id');
-        }
+        // if ($this->isLogin()) {
+        $this->login_type = $this->session->userdata('admin_type');
+        $this->login_id = $this->session->userdata('admin_id');
+        // }
 
         if (defined('DB_EXAM'))
             $this->examdb = $this->load->database('exam', true);
+    }
+    function verifyData($data = [])
+    {
+        return array_merge($data, [
+            'login_type' => $this->login_type,
+            'login_id' => $this->login_id
+        ]);
+    }
+    function verify($where)
+    {
+        if ($this->isCenter()) {
+            $this->db->where($this->verifyData($where));
+        }
+        return $this;
     }
     function select($select)
     {

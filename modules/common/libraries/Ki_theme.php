@@ -1326,7 +1326,10 @@ class Ki_theme
     }
     function get_student_menu()
     {
-        $adminMenu = $this->adminMenu;// $this->CI->load->config('student/menu', true);
+        include(FCPATH . 'modules/student/config/menu.php');
+        $adminMenu = $config;
+        // $adminMenu = $this->CI->load->config('student/menu', true);
+        // pre($config,true);
         // $this->adminMenu = $adminMenu;
         // $this->current_method = recursiveArraySearchReturnValue($this->uri_string(),$adminMenu['ui_setting']['menu'],'type');
         $html = '';

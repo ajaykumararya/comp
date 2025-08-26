@@ -257,7 +257,7 @@
                                             class="demoLogin btn btn-light-danger fw-bolder w-50"> Centre login</button>
                                     </div>
                                     <a href="{base_url}student"
-                                        class="mt-3 btn btn-light-info text-white fw-bolder w-100">Student Login</a>
+                                        class="mt-3 btn btn-light-info fw-bolder w-100">Student Login</a>
 
                                     <?php
                                 endif;
