@@ -10,7 +10,7 @@ class Website extends Ajax_Controller
             $table = $this->db->where('email', $email)->where('type', $this->post('type'))->get('centers');
             if ($table->num_rows()) {
                 $row = $table->row();
-                if (($row->status)) {
+                if (($row->status) or $row->type == 'role_user') {
                     if ($row->password == $password) {
                         $this->load->library('session');
                         $sessionData = [
