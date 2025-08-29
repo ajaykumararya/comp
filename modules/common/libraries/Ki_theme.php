@@ -124,11 +124,14 @@ class Ki_theme
         }
         return false;
     }
-    function get_ajax_module(){
+    function get_ajax_module()
+    {
         $module_name = $this->CI->load->get_module();
         $path = FCPATH . "modules/{$module_name}/controllers/Ajax.php";
-        if(file_exists($path)){
-            return $module_name.'/';
+        if (($module_name == 'exam' && defined('DB_EXAM')))
+            return;
+        if (file_exists($path)) {
+            return $module_name . '/';
         }
         return;
     }
@@ -922,7 +925,8 @@ class Ki_theme
     {
         return $this->CI->uri->segment($arg1, $arg2);
     }
-    function last_segment(){
+    function last_segment()
+    {
         return $this->CI->uri->segment($this->CI->uri->total_segments());
     }
     function breadcrummb_icon($clss = '', $path = 2, $fs = 1, $type = 'solid')
@@ -943,7 +947,7 @@ class Ki_theme
     }
     function set_breadcrumb($props = array())
     {
-        
+
         $this->breadcrumb_data = array_merge($this->breadcrumb_data, $props);
         // pre($this->breadcrumb_data);
         $this->set_title(humanize(str_replace('-', ' ', $this->last_segment())));

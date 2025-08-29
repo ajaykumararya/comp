@@ -92,50 +92,58 @@ class Exam extends Ajax_Controller
     }
     function manage_question_with_answers()
     {
-        $isEdit = isset($_POST['question_id']);
-        if (!$isEdit) {
-            $this->form_validation->set_rules('question', 'Question', 'required|is_unique[exam_questions.question]');
-        }
-        if ($this->validation('question_add')) {
-            // $this->response($this->post());
-            $ansIDs = $this->post("ans_id");
-            $answers = json_decode($this->post('answer_list'));
+        try {
+            $isEdit = isset($_POST['question_id']);
             $data = [
                 'exam_id' => $this->post('exam_id'),
-                'question' => $this->post('question')
+                'question' => trim($this->post('question'))
             ];
-            if ($isEdit) {
-                $ques_id = $this->post("question_id");
-                $this->db->where('id', $ques_id)->update('exam_questions', $data);
-            } else {
-                $this->db->insert('exam_questions', $data);
-                $ques_id = $this->db->insert_id();
+            if (!$isEdit) {
+                $this->form_validation->set_rules('question', 'Question', 'required'); // |is_unique[exam_questions.question]
+                $get = $this->db->where($data)->get('exam_questions');
+                if ($get->num_rows())
+                    throw new Exception('This Question is already exists on this paper..');
             }
-            $saveAns = [];
-            $updateAns = [];
-            foreach ($answers as $i => $ans) {
-                $tempAns = [
-                    'answer' => $ans->answer,
-                    'is_right' => $ans->is_right,
-                    'ques_id' => $ques_id
-                ];
+            if ($this->validation('question_add')) {
+                // $this->response($this->post());
+                $ansIDs = $this->post("ans_id");
+                $answers = json_decode($this->post('answer_list'));
 
-                if (isset($ansIDs[$i]) and $ansIDs[$i]) {
-                    $tempAns['id'] = $ansIDs[$i];
-                    $updateAns[] = $tempAns;
+                if ($isEdit) {
+                    $ques_id = $this->post("question_id");
+                    $this->db->where('id', $ques_id)->update('exam_questions', $data);
                 } else {
-                    $saveAns[] = $tempAns;
+                    $this->db->insert('exam_questions', $data);
+                    $ques_id = $this->db->insert_id();
+                }
+                $saveAns = [];
+                $updateAns = [];
+                foreach ($answers as $i => $ans) {
+                    $tempAns = [
+                        'answer' => $ans->answer,
+                        'is_right' => $ans->is_right,
+                        'ques_id' => $ques_id
+                    ];
+
+                    if (isset($ansIDs[$i]) and $ansIDs[$i]) {
+                        $tempAns['id'] = $ansIDs[$i];
+                        $updateAns[] = $tempAns;
+                    } else {
+                        $saveAns[] = $tempAns;
+                    }
+                }
+                if ($ques_id) {
+                    if (count($saveAns) > 0) {
+                        $this->db->insert_batch('exam_ques_answers', $saveAns);
+                    }
+                    if (count($updateAns) > 0) {
+                        $this->db->update_batch('exam_ques_answers', $updateAns, 'id');
+                    }
+                    $this->response('status', true);
                 }
             }
-            if ($ques_id) {
-                if (count($saveAns) > 0) {
-                    $this->db->insert_batch('exam_ques_answers', $saveAns);
-                }
-                if (count($updateAns) > 0) {
-                    $this->db->update_batch('exam_ques_answers', $updateAns, 'id');
-                }
-                $this->response('status', true);
-            }
+        } catch (Exception $e) {
+            $this->response('html', $e->getMessage());
         }
     }
     function delete_question()
