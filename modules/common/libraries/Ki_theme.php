@@ -128,7 +128,7 @@ class Ki_theme
     {
         $module_name = $this->CI->load->get_module();
         $path = FCPATH . "modules/{$module_name}/controllers/Ajax.php";
-        if (($module_name == 'exam' && defined('DB_EXAM')))
+        if (($module_name == 'exam' && !defined('DB_EXAM')))
             return;
         if (file_exists($path)) {
             return $module_name . '/';
