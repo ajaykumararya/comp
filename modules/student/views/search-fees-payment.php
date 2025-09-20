@@ -47,8 +47,10 @@
 
             <?php
     } else {
-        $this->db->select('c.duration as course_duration')->order_by('sft.id', 'DESC');
+        $this->db->select('c.duration as course_duration,s.fee_emi,s.fee_emi_type')->order_by('sft.id', 'DESC');
         $get = $this->student_model->fetch_fee_transactions_group_by();
+        
+        $isCenterOrAdmin = $this->student_model->isAdminOrCenter();
         if ($get->num_rows()) {
             ?>
                 <div class="card">
@@ -64,6 +66,7 @@
                                     <th>Transaction Date</th>
                                     <th>Payment ID</th>
                                     <th>Amount</th>
+                                    <th>Action</th>
 
                                 </tr>
                             </thead>
@@ -96,6 +99,48 @@
                                     echo '<td>' . $row->payment_date . '</td>';
                                     echo '<td>' . $row->payment_id . '</td>';
                                     echo '<td>{inr} ' . $row->ttl_amount . '</td>';
+                                    echo  '<td>';
+                                    if($row->fee_emi == 0 || $row->fee_emi == null){
+                                        echo '<div class="btn-group">
+                                                ';
+                                              if ($isCenterOrAdmin) {
+                                                echo $this->ki_theme
+                                                    ->with_icon('pencil')
+                                                    ->with_pulse('primary')
+                                                    ->outline_dashed_style('primary')
+                                                    ->set_attribute([
+                                                        'data-fee_id' => $row->id,
+                                                        'class' => 'edit-fee-record'
+                                                    ])
+                                                    ->button('Edit');
+                                            }
+                                            // generate receipt
+                                            echo $this->ki_theme
+                                                ->with_icon('file')
+                                                ->with_pulse('success')
+                                                ->outline_dashed_style('success')
+                                                ->set_attribute([
+                                                    'data-fee_id' => $row->payment_id,
+                                                    'class' => 'print-receipt'
+                                                ])
+                                                ->button('Receipt');
+                                            if ($isCenterOrAdmin) {
+                                                echo $this->ki_theme
+                                                    ->with_icon('trash')
+                                                    ->with_pulse('danger')
+                                                    ->outline_dashed_style('danger')
+                                                    ->set_attribute([
+                                                        'data-fee_id' => $row->id,
+                                                        'class' => 'delete-fee-record'
+                                                    ])
+                                                    ->button('Delete');
+                                            }  
+                                        echo '
+                                              </div>';
+                                    }
+                                    else
+                                        echo label(' EMI Payment, Can\'t edit or delete.','danger');
+                                    echo '</td>';
                                     echo '</tr>';
                                 }
                                 ?>
@@ -112,3 +157,24 @@
     ?>
     </div>
 </div>
+
+<?php
+if ($isCenterOrAdmin) {
+    // 
+    ?>
+    <script id="formTemplate" type="text/x-handlebars-template">
+                        <input type="hidden" name="id" value="{{id}}">
+    
+                        <div class="form-group mb-4">
+                            <label class="form-label">Date</label>
+                            <input type="text" name="date" class="form-control" placeholder="Enter Roll Number Prefix" value="{{date}}">
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="form-label">Date</label>
+                            <input type="text" name="date" class="form-control" placeholder="Enter Roll Number Prefix" value="{{date}}">
+                        </div>
+                    </script>
+    <?php
+}
+
+?>

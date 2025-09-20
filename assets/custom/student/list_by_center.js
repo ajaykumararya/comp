@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
         // session_id.html(emptyOption);
         
         if (center_id) {
-            if ( $.fn.dataTable.isDataTable('#list-students') ) {
+            if ( $.fn.dataTable.isDataTable('#list-students') && table) {
                 // console.log(table);
                 table.destroy();
             }

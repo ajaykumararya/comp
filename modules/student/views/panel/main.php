@@ -4,7 +4,7 @@
 
 <head>
     <title>
-        <?= $this->ki_theme->get_title() ?> - Stduent Panel
+        <?= $this->ki_theme->get_title() ?> - Student Panel
     </title>
     <meta charset="utf-8" />
     <meta name="description" content="

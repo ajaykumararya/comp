@@ -34,7 +34,7 @@ class Exam_model extends MY_Model
                     $ttlPapers = $this->get_papers_via_course($row->course_id)->num_rows();
                     $data[$row->course_id] = [
                         'button' => $ttlPapers ?
-                            "<b class='text-danger'>{$ttlPapers} Paper(s) Exists.." : '<button class="btn btn-danger delete-exam-course-setting btn-xs btn-sm" data-token="' . base64_encode(base64_encode($row->id)) . '"><i class="fa fa-trash"></i></button>',
+                            "<b class='text-danger'>{$ttlPapers} Paper(s) Exists..</b>" : '<button class="btn btn-danger delete-exam-course-setting btn-xs btn-sm" data-token="' . base64_encode(base64_encode($row->id)) . '"><i class="fa fa-trash"></i></button>',
                         'id' => $row->id,
                         'course_name' => $courseRow->course_name,
                         'type_text' => $row->type == 'duration_wise' ? label('Duration Wise Paper', 'info') : label('Duration with Subject Wise Paper', 'primary'),

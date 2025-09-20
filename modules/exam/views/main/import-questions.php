@@ -58,6 +58,7 @@
         Papa.parse(file, {
             header: false,
             skipEmptyLines: true,
+            encoding: "UTF-8", 
             complete: function (results) {
                 // log(results);
                 const rows = results.data;

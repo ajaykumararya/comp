@@ -70,7 +70,7 @@ if ($get->num_rows()) {
                             <div class="fs-6 text-gray-800 fw-bold">
                                 <?= $row->enrollment_no ?>
                             </div>
-                            <div class="fw-semibold text-gray-500">Enrollment No</div>
+                            <div class="fw-semibold text-gray-500">{enrollment_text}</div>
                         </div>
                         <!--end::Budget-->
                         <!--begin::Budget-->

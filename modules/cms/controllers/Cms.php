@@ -8,89 +8,98 @@ class Cms extends MY_Controller
         );
         $this->view('add-page');
     }
-    function list_pages(){
+    function list_pages()
+    {
         $this->view('list-pages');
     }
-    function menu_section(){
+    function menu_section()
+    {
         $this->view('menu-section');
     }
-    function manage_page_content(){
-        $link = $this->uri->segment(3,0);
+    function manage_page_content()
+    {
+        $link = $this->uri->segment(3, 0);
         // exit($link); 
         $get = $this->SiteModel->get_page_content($link);
-        if($get->num_rows()){
+        if ($get->num_rows()) {
             $this->set_data($get->row_array());
-            $this->view('manage-page-content',['isValid' => true]);
-        }
-        else
-            $this->view('template/not-found',['isValid' => true]);
+            $this->view('manage-page-content', ['isValid' => true]);
+        } else
+            $this->view('template/not-found', ['isValid' => true]);
     }
-    function manage_page_schema(){
-        $link = $this->uri->segment(3,0);
+    function manage_page_schema()
+    {
+        $link = $this->uri->segment(3, 0);
         // exit($link); 
         $get = $this->SiteModel->get_page_content($link);
-        if($get->num_rows()){
-            $this->set_data('schema',$this->SiteModel->get_page_schema($get->row('page_id'))->result_array());
-            $this->view('manage-page-schema',['isValid' => true,'page-id' => $get->row('page_id')]);
-        }
-        else
-            $this->view('template/not-found',['isValid' => true]);
+        if ($get->num_rows()) {
+            $this->set_data('schema', $this->SiteModel->get_page_schema($get->row('page_id'))->result_array());
+            $this->view('manage-page-schema', ['isValid' => true, 'page-id' => $get->row('page_id')]);
+        } else
+            $this->view('template/not-found', ['isValid' => true]);
     }
-    function setting(){
-        $this->view('setting');    
+    function setting()
+    {
+        $this->view('setting');
     }
-    function seo_setting(){
+    function seo_setting()
+    {
         $this->view('seo_setting');
     }
-    function slider(){
+    function slider()
+    {
         $this->view('slider');
     }
-    function forms(){
+    function forms()
+    {
         $this->view('forms');
     }
-    function static_page(){
-        $id = $this->uri->segment(3,0);       
-        $this->set_data('type',$id);
-        $this->set_data('form',cms_content_form($id));
-        if(THEME != 'theme=03' AND !in_array($id,['faculty','header','revosultion_slider'])){
+    function static_page()
+    {
+        $id = $this->uri->segment(3, 0);
+        $this->set_data('type', $id);
+        $this->set_data('form', cms_content_form($id));
+        if (THEME != 'theme=03' and !in_array($id, ['faculty', 'header', 'revosultion_slider']) && $this->ki_theme->isSetInPage($id)) {
             $this->ki_theme->breadcrumb_action_html(
-                $this->ki_theme->drawer_button('page',$id,humanize($id))
+                $this->ki_theme->drawer_button('page', $id, humanize($id))
             );
         }
         // echo $id;
         // echo THEME_PATH;
-        if(file_exists(THEME_PATH.'static-pages/'.$id.EXT)){
-            $this->view('static-pages/'.$id);
-        }
-        else
-            $this->view('static/'.$id);
-        
+        if (file_exists(THEME_PATH . 'static-pages/' . $id . EXT)) {
+            $this->view('static-pages/' . $id);
+        } else
+            $this->view('static/' . $id);
+
         // $this->view('static-pages/'.$id);
     }
-    function gallery_images(){
+    function gallery_images()
+    {
         $this->ki_theme->breadcrumb_action_html(
-            $this->ki_theme->drawer_button('image_gallery','0','Image Gallery')
+            $this->ki_theme->drawer_button('image_gallery', '0', 'Image Gallery')
         );
         $this->view('gallery-images');
     }
-    function enquiry_data(){
+    function enquiry_data()
+    {
         // (THEME == 'theme-02' ? 'get_in_touch' : 'enquiry')
-        $this->set_data('list',$this->SiteModel->list_enquiries()->result_array());
+        $this->set_data('list', $this->SiteModel->list_enquiries()->result_array());
         $this->view('enquiry-data');
     }
-    function manage_page(){
-        $link = $this->uri->segment(3,0);
+    function manage_page()
+    {
+        $link = $this->uri->segment(3, 0);
         // exit($link); 
         $get = $this->SiteModel->get_page(['id' => $link]);
-        if($get->num_rows()){
-            pre($get->row(),true);
+        if ($get->num_rows()) {
+            pre($get->row(), true);
         }
-        $this->view('manage-page',[
+        $this->view('manage-page', [
             'isValid' => true
         ]);
     }
 
-    
+
     function iso_certificate()
     {
         $this->view('certificate/iso');

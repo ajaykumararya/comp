@@ -13,7 +13,7 @@
                         $list = $this->exam_model->list_setting_courses();
                         if(count($list)){
                             foreach($list as $course){
-                                echo '<option value="'.$course['course_id'].'" data-subcontent="'.$course['course_duration'].'" data-type="'.$course['type'].'">'.$course['course_name'].'</option>';
+                                echo "<option value='".$course['course_id']."' data-subcontent='".$course['course_duration']."' data-type='".$course['type']."'>".$course['course_name']."</option>";
                             }
                         }
                         ?>

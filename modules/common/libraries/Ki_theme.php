@@ -1536,6 +1536,15 @@ class Ki_theme
         $this->findAndReturn($this->adminMenu, $index, $menu);
         return $menu;
     }
+    function isSetInPage($index)
+    {
+        $record = $this->findMenu($index);
+        if (sizeof($record)) {
+            if (isset($record['setINpage']))
+                return $record['setINpage'];
+        }
+        return true;
+    }
     function content_area_label($data, $index_val = 0)
     {
         $html = '';

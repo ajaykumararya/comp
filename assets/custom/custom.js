@@ -2102,6 +2102,34 @@ main_extra_setting_form.on('submit', (e) => {
     else
         SwalWarning("Which type of form's data are you saving?");
 });
+const update_main_extra_setting_form = $('.update-type-setting-form'); 
+update_main_extra_setting_form.on('submit', (e) => {
+    e.preventDefault();
+    let that = e.target;
+    let type = $(that).data('type') ?? false;
+    let data = new FormData(that);
+    data.append('type', type);
+    $(that).find("textarea.aryaeditor").each(function() {
+        var editorId = $(this).attr("id");   
+        var fieldName = $(this).attr("name"); 
+        // console.log(fieldName)
+        var ed = tinymce.get(editorId);  
+        if (ed) {
+            var content = ed.getContent();
+            data.set(fieldName, content);
+        }
+    });
+    if (type) {
+        $.AryaAjax({
+            url: 'cms/update-content',
+            data,
+            page_reload: true,
+            success_message: 'Content Update Successfull.'
+        }).then((r) => showResponseError(r));
+    }
+    else
+        SwalWarning("Which type of form's data are you saving?");
+});
 const _tables = $('[data-table]');
 if (_tables.length) {
     _tables.each(function () {
@@ -2497,7 +2525,7 @@ const list_students = (admission_status = 0, center_id = 0) => {
                     },
                     success_message: `Student Admission Status is changed Succssfully..`,
                     page_reload: true
-                });
+                }).then((res) => showResponseError(res));
             }
         });
     });
@@ -2771,3 +2799,58 @@ if (typeof Handlebars !== 'undefined') {
     });
 }
 //timeStringToTime
+
+$(document).on('click','.share-url',function() {
+    const currentUrl = $(this).data('url') || window.location.href;
+
+    Swal.fire({
+        title: 'Share',
+        html: `
+            <div style="margin-bottom: 15px; font-size:14px;">Share this post with others</div>
+            
+            <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:15px;">
+                <input type="text" value="${currentUrl}" id="shareUrl" readonly 
+                       style="width:70%; padding:8px; border:1px solid #ccc; border-radius:5px;">
+                <button onclick="copyLink()" style="background:#28a745; color:#fff; border:none; padding:8px 12px; border-radius:5px; cursor:pointer;">Copy</button>
+            </div>
+
+            <div style="display:flex; justify-content:space-around; margin-top:15px;">
+                <a href="https://t.me/share/url?url=${encodeURIComponent(currentUrl)}" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" width="40"><br>
+                    Telegram
+                </a>
+                <a href="https://api.whatsapp.com/send?text=${encodeURIComponent(currentUrl)}" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="40"><br>
+                    Whatsapp
+                </a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" width="40"><br>
+                    Facebook
+                </a>
+                <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" width="40"><br>
+                    Twitter
+                </a>
+            </div>
+        `,
+        showConfirmButton: false,
+        showCancelButton: true,
+        cancelButtonText: 'Close',
+        cancelButtonColor: '#d33',
+        width: 600
+    });
+});
+
+function copyLink() {
+    const copyText = document.getElementById("shareUrl");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); // for mobile
+    document.execCommand("copy");
+    Swal.fire({
+        icon: 'success',
+        title: 'Copied!',
+        text: 'Link copied to clipboard.',
+        timer: 1500,
+        showConfirmButton: false
+    });
+}

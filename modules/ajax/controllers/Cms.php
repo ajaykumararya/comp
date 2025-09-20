@@ -264,6 +264,22 @@ class Cms extends Ajax_Controller
         $this->db->insert('content', $data);
         $this->response('status', true);
     }
+    function update_content()
+    {
+        try {
+            $id = $this->post('id', false);
+            if (!$id)
+                throw new Exception('Update ID missing..');
+            $type = $this->post('type');
+            unset($_POST['type'], $_POST['id']);
+            $data = $this->build_post_data();
+            $data['type'] = $type;
+            $this->db->update('content', $data, ['id' => $id]);
+            $this->response('status', true);
+        } catch (Exception $e) {
+            $this->response('html', $e->getMessage());
+        }
+    }
     function form_setting()
     {
         $this->response('results', $this->center_model->get_center()->result());
@@ -413,10 +429,12 @@ class Cms extends Ajax_Controller
         if ($value) {
             $chk = $this->db->where('id', $id)->update('content', [$column => $value]);
             if ($chk) {
-                $this->response(["status" => true, 'html' => 'Updated Successfully..','file' => $value]);
+                $this->response(["status" => true, 'html' => 'Updated Successfully..', 'file' => $value]);
             } else {
                 $this->response(["html" => "Something went Wrong"]);
             }
         }
     }
+
+
 }

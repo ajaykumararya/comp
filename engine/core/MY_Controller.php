@@ -102,7 +102,6 @@ class MY_Controller extends MX_Controller
                 'type' => $type,
                 'wallet' => @$centreRow->wallet
             ]);
-            // pre($centreRow,true);
             $this->ki_theme->set_wallet(@$centreRow->wallet);
         }
         $get = $this->db->select('active_page')->where('type', 'admin')->get('centers');
@@ -112,6 +111,7 @@ class MY_Controller extends MX_Controller
         defined('PROJECT_RAND_NUM') or define('PROJECT_RAND_NUM', mt_rand(0, 999) . strtoupper(PATH) . mt_rand(0, 999));
         // if(PATH == 'iedct')
         //     exit;
+        $this->set_data('enrollment_text', CHECK_PERMISSION('ROLLNO_AS_ENROLLMENT') ? 'Roll No' : 'Enrollment No');
         $this->set_data('rollno_text', CHECK_PERMISSION('ROLLNO_AS_ENROLLMENT') ? 'Enrollment No' : 'Roll No');
     }
     public function percentage_check($value)

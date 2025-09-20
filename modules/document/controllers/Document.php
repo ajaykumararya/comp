@@ -312,6 +312,44 @@ class Document extends MY_Controller
         // $reversedKeysArray = array_reverse(array_keys($reversedArray));
         // return array_combine($reversedKeysArray, $reversedArray);
     }
+    function aggrate_marks($student_id, $course_id, $duration, $duration_type)
+    {
+        $i = 1;
+        $items = [];
+        do {
+            $where = [
+                'student_id' => $student_id,
+                'duration' => $i,
+                'duration_type' => $duration_type,
+                'course_id' => $course_id
+            ];
+            $final_marksheet = $this->student_model->marksheet($where);
+            if ($final_marksheet->num_rows()) {
+                $row = $final_marksheet->row();
+                $this->set_data('enrollment_no', $row->enrollment_no);
+                $subject_marks = [];
+                $get_subect_numers = $this->student_model->marksheet_marks($final_marksheet->row("result_id"));
+
+                $ttl = $ob_ttl = 0;
+                if ($ttl_subject = $get_subect_numers->num_rows()) {
+                    foreach ($get_subect_numers->result() as $mark) {
+                        $tmm = $this->isMark($mark->theory_max_marks);
+                        $pmm = $this->isMark($mark->practical_max_marks);
+                        $ttl += $this->mark_total($tmm, 0) + $this->mark_total($pmm, 0);
+                        $ob_ttl += $mark->ttl;
+
+                    }
+                }
+                $items[$i] = [
+                    'title' => humnize_duration_with_ordinal($i, $duration_type),
+                    'max_marks' => $ttl,
+                    'total' => $ob_ttl
+                ];
+            }
+            $i++;
+        } while ($duration >= $i);
+        return $items;
+    }
     private function calculateCertificate($data)
     {
         extract($data);

@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 render: function (data, type, row) {
                     // generateSHA1Hash(row.admit_card_id).then( (admit_card_id) => {
                     return `<div class="btn-group">
-                    
+                            
                             ${ generate_link_btn(row.certiticate_id, 'certificate') } 
                             ${deleteBtnRender(1,row.certiticate_id,'Certificate')}
                             `;

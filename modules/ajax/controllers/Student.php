@@ -10,10 +10,60 @@ class Student extends Ajax_Controller
     function change_admission_status()
     {
         // $this->response($this->post());
-        $stuent_id = $this->post('student_id');
-        $status = $this->post('type');
-        $this->student_model->update_admission_status($stuent_id, $status);
-        $this->response('status', true);
+        try {
+            $student_id = $this->post('student_id');
+            $status = $this->post('type');
+            if ($status == '1' && $this->center_model->isCenter()) {
+                $typeMsg = '';
+                if (CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE')) {
+                    $get = $this->db
+                        ->select('center_id,course_id')
+                        ->where('id', $student_id)
+                        ->where('center_id', $this->center_model->loginId())
+                        ->get('students');
+                    if (!$get->num_rows())
+                        throw new Exception('Invalid Selected Student..');
+
+                    $row = $get->row();
+                    $deduction_amount = $this->center_model->get_assign_courses(
+                        $row->center_id,
+                        ['course_id' => $row->course_id]
+                    );
+                    $deduction_amount = $deduction_amount->row('course_fee') ?? 0;
+                    $typeMsg = 'course-wise';
+                } else if (CHECK_PERMISSION('WALLET_SYSTEM')) {
+                    $deduction_amount = $this->ki_theme->get_wallet_amount('student_admission_fees');
+                    $typeMsg = 'fix-admission-fees';
+                }
+
+                $close_balance = $this->ki_theme->wallet_balance();
+                $close_balance = $close_balance - $deduction_amount;
+                if ($close_balance < 0)
+                    throw new Exception('Wallet Balance is Low..');
+
+                $data = [
+                    'center_id' => $row->center_id,
+                    'amount' => $deduction_amount,
+                    'o_balance' => ($close_balance + $deduction_amount),
+                    'c_balance' => $close_balance,
+                    'type' => 'admission',
+                    'description' => 'Student Addmission '.$typeMsg,
+                    'type_id' => $student_id,
+                    'added_by' => 'center',
+                    'order_id' => strtolower(generateCouponCode(12)),
+                    'status' => 1,
+                    'wallet_status' => 'debit'
+                ];
+                $this->response('dd', $data);
+                $this->db->insert('wallet_transcations', $data);
+                // $this->response('res', $this->db->insert_id());
+                $this->center_model->update_wallet($data['center_id'], $close_balance);
+            }
+            $this->student_model->update_admission_status($student_id, $status);
+            $this->response('status', true);
+        } catch (Exception $e) {
+            $this->response('error', $e->getMessage());
+        }
     }
     function search_by_roll_no()
     {
@@ -623,7 +673,7 @@ class Student extends Ajax_Controller
         // $this->response('data',$this->post());
         $this->response('url', 'student/update-marksheet');
         $this->response('status', true);
-        $this->response('form', CHECK_PERMISSION('MARKSHEET_MAX_FIX_100') ?  $this->template('student/edit-system-marksheet') : $this->template('student/edit-marksheet'));
+        $this->response('form', CHECK_PERMISSION('MARKSHEET_MAX_FIX_100') ? $this->template('student/edit-system-marksheet') : $this->template('student/edit-marksheet'));
     }
     function certificate_edit_form()
     {
@@ -631,11 +681,12 @@ class Student extends Ajax_Controller
         $this->response('status', true);
         $this->response('form', $this->template('student/edit-certificate'));
     }
-    function update_certificate(){
+    function update_certificate()
+    {
         $this->db->where('id', $this->post('id'))->update('student_certificates', [
             'issue_date' => $this->post('date')
         ]);
-        $this->response('status',true);
+        $this->response('status', true);
     }
     function update_marksheet()
     {
@@ -825,7 +876,7 @@ class Student extends Ajax_Controller
                 $close_balance = $this->ki_theme->wallet_balance();
                 $close_balance = $close_balance - $deduction_amount;
                 if ($close_balance < 0) {
-                    $this->response('html', 'Your Wallet Balance is Low, To generate this certificate you need '.$deduction_amount.' rupees.., Please recharge your wallet.');
+                    $this->response('html', 'Your Wallet Balance is Low, To generate this certificate you need ' . $deduction_amount . ' rupees.., Please recharge your wallet.');
                     exit;
                 }
 
@@ -833,7 +884,7 @@ class Student extends Ajax_Controller
                 $deduction_amount = $this->ki_theme->get_wallet_amount('student_certificate_fees');
                 $close_balance = $this->ki_theme->wallet_balance();
                 if ($close_balance < 0) {
-                    $this->response('html', 'Your Wallet Balance is Low, To generate this certificate you need '.$deduction_amount.' rupees.., Please recharge your wallet.');
+                    $this->response('html', 'Your Wallet Balance is Low, To generate this certificate you need ' . $deduction_amount . ' rupees.., Please recharge your wallet.');
                     exit;
                 }
             }
@@ -1152,7 +1203,8 @@ class Student extends Ajax_Controller
             'student_id' => $_POST['student_id'],
             'course_id' => $_POST['course_id'],
             'roll_no' => $_POST['roll_no'],
-            'center_id' => $_POST['center_id']
+            'center_id' => $_POST['center_id'],
+            'added_by' => $this->student_model->login_type()
         ];
         $this->response('status', $this->db->insert('student_fee_transactions', $data));
     }

@@ -99,7 +99,7 @@ $col = CHECK_PERMISSION('ADMISSION_WITH_SESSION') ? 4 : $col;
                                     <div class="form-group mb-4 col-lg-4 col-xs-12 col-sm-12">
                                         <label class="form-label required">Time Table</label>
                                         <select class="form-control" name="batch_id" data-control="select2"
-                                            data-placeholder="Select a TimeTable">
+                                            data-placeholder="Select a Batch">
                                             <option></option>
                                             <?php
                                             $listBatch = $this->db->get('batch');

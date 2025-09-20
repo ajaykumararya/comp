@@ -74,10 +74,14 @@ $route['typing-certificate/(:any)'] = 'document/typing-certificate/$1';
 $route['verify-typing-certificate/(:any)'] = 'site/typing-certificate/$1';
 $route['course-details/(:any)'] = 'site/course_details/$1';
 $route['iso/(:any)'] = 'document/iso/$1';
-$route['(:any)'] = 'site/index';
+
 $route['co-ordinate/(:any)'] = 'Coordinate/$1';
 $route['co-ordinate/(:any)/(:any)'] = 'Coordinate/$1/$2';
-
+//blog 
+$route['blog'] = 'site/blog';
+$route['blog/(:any)'] = 'site/blog/$1';
+$route['blog/categories/(:num)'] = 'site/blog/$1/$2';
+$route['(:any)'] = 'site/index';
 $route['404_override'] = 'site/error_404';
 $route['translate_uri_dashes'] = TRUE;
 $route['default_controller'] = 'site';

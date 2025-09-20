@@ -1058,7 +1058,7 @@
     <?php
     if (CHECK_PERMISSION('CENTRE_ONLY_ADD_STUDENT') && OnlyForCentre()) {
         ?>
-        DeletePermissionForCenter = false;
+        // DeletePermissionForCenter = false;
         <?php
     }
     foreach ($this->ki_theme->default_vars() as $var => $var_value) {

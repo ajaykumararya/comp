@@ -24,6 +24,38 @@ class Site extends Site_Controller
         ]);
         echo $this->do_email('sitejeannie@gmail.com', 'New Demo Checklist', $this->template('email/demo-query'));
     }
+    function blog()
+    {
+        // pre($this->uri->segment_array(),true);
+        try {
+            $firstSag = $this->uri->segment(2, 0);
+            if ($firstSag == '0') {
+                $content = $this->parse('pages/manage-blog', [], true);
+                $this->page_view($content, ['page_name' => 'Blogs']);
+            } elseif ($firstSag == 'categories') {
+                $cat_id = $this->uri->segment(3, 0);
+                $get = $this->db->where('id', $cat_id)->where('type', 'blog_category')->get('content');
+                if (!$get->num_rows())
+                    throw new Exception('');
+
+                $row = $get->row();
+                $content = $this->parse('pages/manage-blog', ['category_id' => $row->id], true);
+                $this->page_view($content, ['page_name' => $row->field1]);
+            } else {
+                $get = $this->db->select('*,id as blog_id')->where('field7', $firstSag)->where('type', 'manage-blog')->get('content');
+                if (!$get->num_rows())
+                    throw new Exception('');
+
+                $row = $get->row_array();
+                $this->set_data('favicon_file', $row['field1']);
+                $this->set_data('page_name', $row['field2']);
+                $content = $this->parse('pages/manage-blog', $row, true);
+                $this->page_view($content, ['page_name' => $row['field2']]);
+            }
+        } catch (Exception $e) {
+            $this->error_404();
+        }
+    }
     function course_details()
     {
         try {
@@ -294,19 +326,19 @@ class Site extends Site_Controller
             // exit;
             $this->db->select('category');
             $get = $this->student_model->get_switch('all', ['id' => $this->token->data('student_id'), 'without_admission_status' => true]);
-        //    echo $this->db->last_query();
-        //     exit;
+            //    echo $this->db->last_query();
+            //     exit;
             if (!$get->num_rows())
                 throw new Exception('Not Found.');
             $data = $get->row_array();
             // pre($data,true)  ;
             $this->set_data('page_name', $data['student_name'] . ' Details');
-            $this->set_data('student_data',$data);
+            $this->set_data('student_data', $data);
             $this->set_data('student_address', $data['address']);
             $this->set_data('isPrimary', false);
             if (PATH != 'upstate') {
-                
-                if (file_exists(DOCUMENT_PATH .'/student-details' . EXT))
+
+                if (file_exists(DOCUMENT_PATH . '/student-details' . EXT))
                     $content = $this->parse('student-details');
                 else
                     $content = $this->template('student-details');

@@ -132,7 +132,7 @@
                                 <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">
                                     <label class="form-label required">Time Table</label>
                                     <select class="form-select" name="batch_id" data-control="select2"
-                                        data-placeholder="Select a Course">
+                                        data-placeholder="Select a Batch">
                                         <option></option>
                                         <?php
                                         $listBatch = $this->db->get('batch');

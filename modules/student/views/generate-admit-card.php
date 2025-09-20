@@ -22,7 +22,7 @@
                             }
 
                             ?>
-                            <div class="form-group mb-4 col-md-4 col-xs-12 col-sm-12 <?=$boxClass?>">
+                            <div class="form-group mb-4 col-md-4 col-xs-12 col-sm-12 <?= $boxClass ?>">
                                 <label class="form-label required">Center</label>
 
                                 <select class="form-select" name="center_id" data-control="select2"
@@ -30,7 +30,7 @@
                                     data-allow-clear="<?= $this->center_model->isAdmin() ?>">
                                     <option></option>
                                     <?php
-                                    $list = $this->center_model->get_center(0,'center')->result();
+                                    $list = $this->center_model->get_center(0, 'center')->result();
                                     foreach ($list as $row) {
                                         $selected = $center_id == $row->id ? 'selected' : '';
                                         echo '<option value="' . $row->id . '" ' . $selected . ' data-kt-rich-content-subcontent="' . $row->institute_name . '"
@@ -41,8 +41,8 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="form-label required">Select Student</label>
-                                <select name="student_id" id="" data-control="select2"
-                                    data-placeholder="Select Stduent" class="form-select">
+                                <select name="student_id" id="" data-control="select2" data-placeholder="Select Stduent"
+                                    class="form-select">
                                     <option></option>
                                     ?>
                                 </select>
@@ -67,27 +67,31 @@
                                     <option></option>
                                     <?php
                                     $getSession = $this->db->get('session');
-                                    foreach($getSession->result() as $session)
-                                        echo '<option value="'.$session->id.'">'.$session->title.'</option>';
+                                    foreach ($getSession->result() as $session)
+                                        echo '<option value="' . $session->id . '">' . $session->title . '</option>';
                                     ?>
                                 </select>
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label for="" class="form-label required"><?=CHECK_PERMISSION('ROLLNO_AS_ENROLLMENT') ? 'Roll No.' : 'Enrollment No.'?></label>
-                                <input type="text" name="enrollment_no" placeholder="Enter <?=CHECK_PERMISSION('ROLLNO_AS_ENROLLMENT') ? 'Roll No.' : 'Enrollment No.'?>" class="form-control">
+                                <label for=""
+                                    class="form-label required"><?= CHECK_PERMISSION('ROLLNO_AS_ENROLLMENT') ? 'Roll No.' : 'Enrollment No.' ?></label>
+                                <input type="text" name="enrollment_no"
+                                    placeholder="Enter <?= CHECK_PERMISSION('ROLLNO_AS_ENROLLMENT') ? 'Roll No.' : 'Enrollment No.' ?>"
+                                    class="form-control">
                             </div>
                             <?php
-                            if(!CHECK_PERMISSION('EXAM_SLOT_SYSTEM') && PATH != 'gcti'):
+                            if (!CHECK_PERMISSION('EXAM_SLOT_SYSTEM') && PATH != 'gcti'):
                                 ?>
-                            <div class="form-group col-md-4">
-                                <label for="" class="form-label required">Exam Date & Time</label>
-                                <input name="exam_date" class="form-control date-with-time" placeholder="Select Exam Date & Time">
-                            </div>
-                            <?php
+                                <div class="form-group col-md-4">
+                                    <label for="" class="form-label required">Exam Date & Time</label>
+                                    <input name="exam_date" class="form-control date-with-time"
+                                        placeholder="Select Exam Date & Time">
+                                </div>
+                                <?php
                             endif;
                             ?>
-                        </div> 
+                        </div>
 
                     </div>
                     <div class="card-footer">
