@@ -1,5 +1,5 @@
 <?php
-class Exam_model extends MY_Model
+class Exam_model2 extends MY_Model
 {
     function check()
     {
