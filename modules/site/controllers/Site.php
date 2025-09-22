@@ -29,8 +29,11 @@ class Site extends Site_Controller
         // pre($this->uri->segment_array(),true);
         try {
             $firstSag = $this->uri->segment(2, 0);
+            $firstSag = urlencode($firstSag);
             if ($firstSag == '0') {
                 $content = $this->parse('pages/manage-blog', [], true);
+                if (file_exists(THEME_PATH . 'wrapper-content' . EXT))
+                    $content = '<br/>' . $this->parse('wrapper-content', ['content' => $content], true);
                 $this->page_view($content, ['page_name' => 'Blogs']);
             } elseif ($firstSag == 'categories') {
                 $cat_id = $this->uri->segment(3, 0);
@@ -40,6 +43,8 @@ class Site extends Site_Controller
 
                 $row = $get->row();
                 $content = $this->parse('pages/manage-blog', ['category_id' => $row->id], true);
+                if (file_exists(THEME_PATH . 'wrapper-content' . EXT))
+                    $content = '<br/>' . $this->parse('wrapper-content', ['content' => $content], true);
                 $this->page_view($content, ['page_name' => $row->field1]);
             } else {
                 $get = $this->db->select('*,id as blog_id')->where('field7', $firstSag)->where('type', 'manage-blog')->get('content');
@@ -50,6 +55,8 @@ class Site extends Site_Controller
                 $this->set_data('favicon_file', $row['field1']);
                 $this->set_data('page_name', $row['field2']);
                 $content = $this->parse('pages/manage-blog', $row, true);
+                if (file_exists(THEME_PATH . 'wrapper-content' . EXT))
+                    $content = '<br/>' . $this->parse('wrapper-content', ['content' => $content], true);
                 $this->page_view($content, ['page_name' => $row['field2']]);
             }
         } catch (Exception $e) {

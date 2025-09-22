@@ -2091,6 +2091,16 @@ main_extra_setting_form.on('submit', (e) => {
     let type = $(that).data('type') ?? false;
     let data = new FormData(that);
     data.append('type', type);
+    $(that).find("textarea.aryaeditor").each(function () {
+        var editorId = $(this).attr("id");
+        var fieldName = $(this).attr("name");
+        // console.log(fieldName)
+        var ed = tinymce.get(editorId);
+        if (ed) {
+            var content = ed.getContent();
+            data.set(fieldName, content);
+        }
+    });
     if (type) {
         $.AryaAjax({
             url: 'cms/insert-content',
@@ -2102,18 +2112,18 @@ main_extra_setting_form.on('submit', (e) => {
     else
         SwalWarning("Which type of form's data are you saving?");
 });
-const update_main_extra_setting_form = $('.update-type-setting-form'); 
+const update_main_extra_setting_form = $('.update-type-setting-form');
 update_main_extra_setting_form.on('submit', (e) => {
     e.preventDefault();
     let that = e.target;
     let type = $(that).data('type') ?? false;
     let data = new FormData(that);
     data.append('type', type);
-    $(that).find("textarea.aryaeditor").each(function() {
-        var editorId = $(this).attr("id");   
-        var fieldName = $(this).attr("name"); 
+    $(that).find("textarea.aryaeditor").each(function () {
+        var editorId = $(this).attr("id");
+        var fieldName = $(this).attr("name");
         // console.log(fieldName)
-        var ed = tinymce.get(editorId);  
+        var ed = tinymce.get(editorId);
         if (ed) {
             var content = ed.getContent();
             data.set(fieldName, content);
@@ -2800,7 +2810,7 @@ if (typeof Handlebars !== 'undefined') {
 }
 //timeStringToTime
 
-$(document).on('click','.share-url',function() {
+$(document).on('click', '.share-url', function () {
     const currentUrl = $(this).data('url') || window.location.href;
 
     Swal.fire({

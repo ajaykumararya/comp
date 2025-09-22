@@ -12,6 +12,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th></th>
                                 <th>Name</th>
                                 <th>Father Name</th>
                                 <th>Current Edication</th>
@@ -21,7 +22,7 @@
                                 <th>Dob</th>
                                 <th>Other Information</th>
                                 <th style="width:150px">Files</th>
-                                <th>Action</th>
+                                <!-- <th>Action</th> -->
                             </tr>
                         </thead>
                     </table>

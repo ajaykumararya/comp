@@ -202,84 +202,50 @@
                     <div class="footer-widgets-inner">
                         <div class="footer-widget-col">
                             <div id="block-14" class="widget widget_block widget_media_image">
-
+                                <img src="{base_url}assets/file/{logo}" style="height: 115px;">
                             </div>
                             <div id="block-15" class="widget widget_block widget_text">
-                                <p>We named our theme Studiare because to us,<br>the best brands are simple ones. Brands
-                                    thrive<br>on their ability to be understood.</p>
+                                {footer_about_us}
                             </div>
                             <div id="contacts-3" class="widget widget_contacts">
                                 <ul>
                                     <li>
                                         <div class="contact-info-icon"><i class="material-icons">location_on</i></div>
-                                        <div class="contact-info-value">127 Elizabeth Street, NY New York</div>
+                                        <div class="contact-info-value">{address}</div>
                                     </li>
                                     <li>
                                         <div class="contact-info-icon"><i class="material-icons">phone_android</i></div>
-                                        <div class="contact-info-value">+55-11-3097-0508</div>
+                                        <div class="contact-info-value">{number}</div>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="footer-widget-col">
-                            <div id="nav_menu-2" class="widget widget_nav_menu">
-                                <h5 class="widget-title">Quick Links</h5>
-                                <div class="menu-footer-menu-container">
-                                    <ul id="menu-footer-menu" class="menu">
-                                        <li id="menu-item-381"
-                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-381">
-                                            <a href="contact/index.html">Contact</a>
-                                        </li>
-                                        <li id="menu-item-382"
-                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-382">
-                                            <a href="pricing-packages/index.html">Pricing Packages</a>
-                                        </li>
-                                        <li id="menu-item-383"
-                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-383">
-                                            <a href="about-us/index.html">About Us</a>
-                                        </li>
-                                        <li id="menu-item-384"
-                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-384">
-                                            <a href="courses/index.html">Courses</a>
-                                        </li>
-                                        <li id="menu-item-385"
-                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-385">
-                                            <a href="news/index.html">News</a>
-                                        </li>
-                                        <li id="menu-item-386"
-                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-17 current_page_item menu-item-386">
-                                            <a href="index.html" aria-current="page">Home</a>
-                                        </li>
-                                        <li id="menu-item-387"
-                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-387">
-                                            <a href="sample-page/index.html">Sample Page</a>
-                                        </li>
-                                    </ul>
+                        <?php
+                        $footer_sections = $this->ki_theme->config('footer_sections');
+                        if ($footer_sections) {
+                            $ii = 1;
+                            foreach ($footer_sections as $index => $title) {
+                                $myTitle = $this->SiteModel->get_setting($index . '_text', $title);
+                                echo '<div class="footer-widget-col">
+                                        <div id="mc4wp_form_widget-2" class="widget widget_nav_menu">
+                                            <h5 class="widget-title">' . $myTitle . '</h5>
+                                            <div class="menu-footer-menu-container">
+                                                <ul id="menu-footer-menu" class="menu">';
+                                $fields = $this->SiteModel->get_setting($index . '_links', '', true);
+                                if ($fields) {
+                                    foreach ($fields as $value) {
+                                        $my_index = $this->ki_theme->parse_string($value->title);
+                                        $value = $value->link;
+                                        echo "<li><a href='$value'  class='menu-item menu-item-type-post_type menu-item-object-page menu-item-38{$ii}'>$my_index</a></li>";
+                                        $ii++;
+                                    }
+                                }
+                                echo '</ul></div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="footer-widget-col">
-                            <div id="mc4wp_form_widget-2" class="widget widget_mc4wp_form_widget">
-                                <h5 class="widget-title">Newsletter</h5>
-
-                                <!-- Mailchimp for WordPress v4.10.5 - https://wordpress.org/plugins/mailchimp-for-wp/ -->
-                                <form id="mc4wp-form-1" class="mc4wp-form mc4wp-form-380" method="post" data-id="380"
-                                    data-name="Newsletter">
-                                    <div class="mc4wp-form-fields">
-                                        <p>Don’t miss anything, sign up now and keep informed about our company.</p>
-                                        <div class="newsletter-form"> <input class="form-control" type="email"
-                                                name="EMAIL" placeholder="Enter Your E-mail" required=""> <input
-                                                type="submit" value="Subscribe" /></div>
-                                    </div><label style="display: none !important;">Leave this field empty if you're
-                                        human: <input type="text" name="_mc4wp_honeypot" value="" tabindex="-1"
-                                            autocomplete="off" /></label><input type="hidden" name="_mc4wp_timestamp"
-                                        value="1756545767" /><input type="hidden" name="_mc4wp_form_id"
-                                        value="380" /><input type="hidden" name="_mc4wp_form_element_id"
-                                        value="mc4wp-form-1" />
-                                    <div class="mc4wp-response"></div>
-                                </form><!-- / Mailchimp for WordPress Plugin -->
-                            </div>
-                        </div>
+                                </div>';
+                            }
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
@@ -287,7 +253,7 @@
                 <div class="container">
                     <div class="copyright-inner">
                         <div class="copyright-cell">
-                            <div class="site-info">&copy; 2025 Studiare. All rights reserved</div>
+                            <div class="site-info">&copy; 2025 {title} {copyright}</div>
                         </div>
                     </div>
                 </div>
@@ -326,8 +292,8 @@
                 content: iframe,
                 boxWidth: "80%",
                 useBootstrap: false,
-                backgroundDismiss: true,  
-                buttons: false,             
+                backgroundDismiss: true,
+                buttons: false,
                 onOpenBefore: function () {
                     this.$el.find('.jconfirm-box').css({
                         "background": "transparent",

@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', function (e) {
-    const delete_url = 'event/delete-user';
+    const delete_url = 'event/delete_users';
     const list_url = 'event/list-users';
     const table = $('#table');
     const columns = [
-        { 'data': null },
+        { 'data': null },   // row number
+        { 'data': null },   // checkbox
         { 'data': 'name' },
         { 'data': 'father_name' },
         { 'data': 'course' },
@@ -13,17 +14,57 @@ document.addEventListener('DOMContentLoaded', function (e) {
         { 'data': 'dob' },
         { 'data': 'other_information' },
         { 'data': null },
-        { 'data': null }
+        // { 'data': null }
     ];
-    // var dt = '';
+
     if (table.length) {
+        $.extend(true, $.fn.dataTable.Buttons.defaults, {
+        dom: {
+                button: {
+                    className: 'btn' // ab koi default class nahi lagegi
+                }
+            }
+        });
         const dt = table.DataTable({
-            // dom: small_dom,
-            buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print',
+                {
+                    text: 'Delete Selected',
+                    className: 'btn btn-danger delete-selected-btn d-none', // hidden by default
+                    action: function () {
+                        const ids = [];
+                        table.find('input.user-select:checked').each(function () {
+                            ids.push($(this).val());
+                        });
+
+                        if (ids.length === 0) {
+                            toastr.warning('Please select at least one user to delete.');
+                            return;
+                        }
+
+                        if (!confirm("Are you sure to delete selected users?")) {
+                            return;
+                        }
+
+                        $.ajax({
+                            url: ajax_url + delete_url,
+                            type: 'POST',
+                            data: { ids: ids },
+                            success: function (resp) {
+                                toastr.success('Selected users deleted successfully.');
+                                dt.ajax.reload();
+                            },
+                            error: function (xhr) {
+                                toastr.error('Error deleting users.');
+                            }
+                        });
+                    }
+                }
+            ],
             ajax: {
                 url: ajax_url + list_url,
                 success: function (d) {
-                    // console.log(d);
                     if (d.data && d.data.length) {
                         dt.clear();
                         dt.rows.add(d.data).draw();
@@ -46,45 +87,78 @@ document.addEventListener('DOMContentLoaded', function (e) {
                     }
                 },
                 {
-                    targets: 3,
+                    targets: 1,
+                    orderable: false,
+                    className: 'text-center',
+                    title: `<input type="checkbox" id="select-all">`, // header checkbox
+                    render: function (data, type, row, meta) {
+                        return `<input type="checkbox" class="user-select" value="${row.id}">`;
+                    }
+                },
+                {
+                    targets: 4,
                     render: function (data, type, row, meta) {
                         return `${row.course} (${row.duration})`;
                     }
                 },
                 {
-                    targets: -2,
+                    targets: -1,
                     render: function (data, type, row) {
                         return `
-                  
-                            <a href="${row.image == '' ? '#' : base_url+'upload/'+row.image}" target="_blank" class="btn btn-xs btn-sm btn-primary p-1 my-2" title="Image (परोफ़ील इमेज )"><i class="fa fa-file"></i> Image</i>
-                            <a href="${row.educational_doc == '' ? '#' : base_url+'upload/'+row.educational_doc}" target="_blank" class="btn btn-xs btn-sm btn-primary p-1" title="Educational Document (एजुकेशनल डाक्यमेन्ट )"><i class="fa fa-file"></i> Edu Doc</i>
+                            <a href="${row.image == '' ? '#' : base_url + 'upload/' + row.image}" 
+                               target="_blank" 
+                               class="btn btn-xs btn-sm btn-primary p-1 my-2" 
+                               title="Image (परोफ़ील इमेज )">
+                               <i class="fa fa-file"></i> Image</a>
+                            <a href="${row.educational_doc == '' ? '#' : base_url + 'upload/' + row.educational_doc}" 
+                               target="_blank" 
+                               class="btn btn-xs btn-sm btn-primary p-1" 
+                               title="Educational Document (एजुकेशनल डाक्यमेन्ट )">
+                               <i class="fa fa-file"></i> Edu Doc</a>
                         `;
                     }
                 },
-                {
-                    targets: -1,
-                    data: null,
-                    orderable: false,
-                    className: 'text-end',
-                    render: function (data, type, row) {
-                        // console.log(data);
-                        return `<div class="btn-group">
-                                    ${deleteBtnRender(1, row.id)}
-                                </div>
-                                `;
-                    }
-                }
+                // {
+                //     targets: -1,
+                //     data: null,
+                //     orderable: false,
+                //     className: 'text-end',
+                //     render: function (data, type, row) {
+                //         return `<div class="btn-group">
+                //                     ${deleteBtnRender(1, row.id)}
+                //                 </div>`;
+                //     }
+                // }
             ]
         });
-        dt.on('draw', function (e) {
-            const handle = handleDeleteRows(delete_url);
-            handle.done(function (e) {
-                console.log(e);
-                table.DataTable().ajax.reload();
-            });
+
+        // Checkbox change event
+        table.on('change', '.user-select', function () {
+            toggleDeleteButton();
+            updateSelectAllCheckbox();
         });
 
+        // Header select all
+        table.on('change', '#select-all', function () {
+            const checked = $(this).prop('checked');
+            table.find('.user-select').prop('checked', checked);
+            toggleDeleteButton();
+        });
 
+        function toggleDeleteButton() {
+            const anyChecked = table.find('.user-select:checked').length > 0;
+            const btn = $('.delete-selected-btn');
+            if (anyChecked) {
+                btn.removeClass('d-none');
+            } else {
+                btn.addClass('d-none');
+            }
+        }
+
+        function updateSelectAllCheckbox() {
+            const allCheckboxes = table.find('.user-select');
+            const checkedCheckboxes = table.find('.user-select:checked');
+            $('#select-all').prop('checked', allCheckboxes.length === checkedCheckboxes.length && allCheckboxes.length > 0);
+        }
     }
-
 });

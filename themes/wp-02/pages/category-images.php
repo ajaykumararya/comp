@@ -24,9 +24,9 @@
     </div>
 </div>
 <style>
-    .course-categories .course-grid-box {
+    /* .course-categories .course-grid-box {
         width: 25% !important
-    }
+    } */
 </style>
 <div class="vc_row wpb_row vc_row-fluid vc_custom_1528900654922">
     <div class="wpb_column vc_column_container vc_col-sm-12">
@@ -34,12 +34,15 @@
             <div class="wpb_wrapper">
                 <div class="course-categories">
                     <?php
+                    $this->db->limit(5);
                     $data = $this->SiteModel->get_contents($type);
                     if ($data->num_rows()) {
+                        $u = 1;
                         foreach ($data->result() as $row) {
                             $link = $row->field3 ? $row->field3 : "#";
+                            $class = $isPrimary ? 'course_cat_' . $u++ : '';
                             ?>
-                            <div class="course-grid-box ">
+                            <div class="course-grid-box <?= $class ?>">
                                 <div class="category-holder">
                                     <div class="category-holder-inner">
                                         <a href="<?= $link ?>" class="category_link"></a>

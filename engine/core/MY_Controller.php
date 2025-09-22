@@ -364,7 +364,7 @@ class MY_Controller extends MX_Controller
             $ext = pathinfo($filename, PATHINFO_EXTENSION);
             $x = getRadomNumber(10) . '.' . $ext;
             // $saveName = UPLOAD.$x;
-            $config['upload_path'] = UPLOAD;
+            $config['upload_path'] = './'.UPLOAD;
             $config['allowed_types'] = 'jpg|jpeg|png|gif|pdf';
             $config['max_size'] = ($this->ki_theme->default_vars('max_upload_size') / 1024); // max_size in kb
             $config['file_name'] = $x;

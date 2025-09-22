@@ -277,7 +277,7 @@ if ($header_sections) {
 }
 ?>
 <?php
-if (in_array(THEME, ['theme-04', 'edu-01'])) {
+if (in_array(THEME, ['theme-04', 'edu-01','wp-02'])) {
     ?>
     <form class="extra-setting">
 

@@ -59,4 +59,45 @@
             </div>
         </div>
     </div>
+    <?php
+    $type = 'manage-blog';
+    ?>
+    <div class="col-md-6 mb-5">
+        <form action="" class="extra-setting" enctype="multipart/form-data" data-page_load="true">
+            <div class="{card_class}">
+                <div class="card-header">
+                    <h3 class="card-title">Setting</h3>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="title" class="form-label">Section Tag Name</label>
+                        <input type="text" name="<?= $type ?>_title" class="form-control"
+                            value="<?= ES("{$type}_tag", 'Categories') ?>"
+                            placeholder="Enter Tag">
+                    </div>
+                    <div class="form-group">
+                        <label for="title" class="form-label">Section Title</label>
+                        <input type="text" name="<?= $type ?>_title" class="form-control"
+                            value="<?= ES("{$type}_title", '') ?>"
+                            placeholder="Enter Title">
+                    </div>
+                    <div class="form-group">
+                        <label for="title" class="form-label">Section Button Title</label>
+                        <input type="text" name="<?= $type ?>_btn_title" class="form-control"
+                            value="<?= ES("{$type}_btn_title", '') ?>"
+                            placeholder="Enter Title">
+                    </div>
+                    <div class="form-group">
+                        <label for="title" class="form-label">Section Button Link</label>
+                        <input type="text" name="<?= $type ?>_btn_link" class="form-control"
+                            value="<?= ES("{$type}_btn_link", '#') ?>"
+                            placeholder="Enter Title">
+                    </div>
+                </div>
+                <div class="card-footer">
+                    {save_button}
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
