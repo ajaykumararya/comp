@@ -66,7 +66,7 @@
 
                             <span><?= $pass ? 'PASS' : 'FAIL' ?></span>
                             <span style="font-weight:600;font-size:20px">with</span>
-                            <span>{percentage} %</span>
+                            <span><?=number_format($percentage,2)?> %</span>
                         </center>
                         <?php
                         if ($this->student_model->isAdminOrCenter()) {
