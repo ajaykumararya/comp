@@ -264,6 +264,8 @@ class Student extends MY_Controller
             // echo $view;
             try {
                 $this->token->decode($view);
+                // $this->set_data('page_name', 'Course Study Material');
+                $this->ki_theme->set_breadcrumb(['title' => 'Course Study Material','page_name' => ucfirst($this->token->data('file_type')), 'icon' => ['book', 3], 'url' => '']);
                 // pre($this->token->data(),true);
                 $this->student_view('course-study-material', [
                     'isValid' => true,

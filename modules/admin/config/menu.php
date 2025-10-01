@@ -805,6 +805,13 @@ $config['center_area'] = array(
             'icon' => array('notepad', 5),
             'condition' => CHECK_PERMISSION('FRANCHISE_ID_CARD'),
             'url' => 'center/id-card'
+        ),        
+        array(
+            'label'=> 'Wallet Recharge & History',
+            'type'=> 'wallet_recharge_and_history',
+            'icon'=> array('arrow-circle-right',2),
+            'url'=> 'center/wallet-recharge-and-history',
+            'condition' => CHECK_PERMISSION('WALLET_HISTORY') && CHECK_PERMISSION('WALLET_SYSTEM')
         ),
         array(
             'label' => 'Center Certificate',

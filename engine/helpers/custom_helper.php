@@ -268,7 +268,7 @@ function OnlyForAdmin()
 {
     $ci = &get_instance();
     $userType = $ci->session->userdata('admin_type');
-    return  $userType == 'admin' && $userType != 'student';
+    return $userType == 'admin' && $userType != 'student';
 }
 function OnlyForCentre()
 {
@@ -429,16 +429,46 @@ function convertThreeDigits($number, $words)
 
     return trim($result);
 }
-function dayToOrdinal($day) {
+function dayToOrdinal($day)
+{
     $ordinals = [
-        1=>"First",2=>"Second",3=>"Third",4=>"Fourth",5=>"Fifth",6=>"Sixth",7=>"Seventh",8=>"Eighth",9=>"Ninth",10=>"Tenth",
-        11=>"Eleventh",12=>"Twelfth",13=>"Thirteenth",14=>"Fourteenth",15=>"Fifteenth",16=>"Sixteenth",17=>"Seventeenth",18=>"Eighteenth",19=>"Nineteenth",20=>"Twentieth",
-        21=>"Twenty First",22=>"Twenty Second",23=>"Twenty Third",24=>"Twenty Fourth",25=>"Twenty Fifth",26=>"Twenty Sixth",27=>"Twenty Seventh",28=>"Twenty Eighth",29=>"Twenty Ninth",30=>"Thirtieth",31=>"Thirty First"
+        1 => "First",
+        2 => "Second",
+        3 => "Third",
+        4 => "Fourth",
+        5 => "Fifth",
+        6 => "Sixth",
+        7 => "Seventh",
+        8 => "Eighth",
+        9 => "Ninth",
+        10 => "Tenth",
+        11 => "Eleventh",
+        12 => "Twelfth",
+        13 => "Thirteenth",
+        14 => "Fourteenth",
+        15 => "Fifteenth",
+        16 => "Sixteenth",
+        17 => "Seventeenth",
+        18 => "Eighteenth",
+        19 => "Nineteenth",
+        20 => "Twentieth",
+        21 => "Twenty First",
+        22 => "Twenty Second",
+        23 => "Twenty Third",
+        24 => "Twenty Fourth",
+        25 => "Twenty Fifth",
+        26 => "Twenty Sixth",
+        27 => "Twenty Seventh",
+        28 => "Twenty Eighth",
+        29 => "Twenty Ninth",
+        30 => "Thirtieth",
+        31 => "Thirty First"
     ];
     return $ordinals[intval($day)];
 }
 
-function dateToWords($dateStr) {
+function dateToWords($dateStr)
+{
     $timestamp = strtotime($dateStr);
     $day = date("j", $timestamp);
     $month = date("F", $timestamp);
@@ -721,6 +751,11 @@ function add_only_91($whatsappNumber)
     // Step 3: Remove any extra spaces
     return preg_replace('/\s+/', '', $cleanedNumber);
 }
+function isLocalhost()
+{
+    $host = $_SERVER['HTTP_HOST'];
+    return (strpos($host, 'localhost') !== false || strpos($host, '127.0.0.1') !== false);
+}
 function getYouTubeId($url)
 {
     // Regular expression for YouTube URL
@@ -781,9 +816,10 @@ function detect_course_type($course_id, $duration)
     return ($isTheory && $isPractical) ? 'Theory & Practical' : ($isTheory ? 'Theory' : 'Practical');
 }
 
-function isPremiumExamPortal(){
-    if(defined('EXAM_DB')){
-        
+function isPremiumExamPortal()
+{
+    if (defined('EXAM_DB')) {
+
     }
     return false;
 }

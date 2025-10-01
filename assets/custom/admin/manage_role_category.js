@@ -65,7 +65,12 @@ document.addEventListener('DOMContentLoaded', async function () {
       {
         targets: -1,
         render: function (data, type, row, meta) {
-          return deleteBtnRender(1, row.id);
+          return `
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <a href="${base_url}admin/manage-role-category/${btoa(row.id)}" class="btn btn-sm btn-info" title="Edit"><i class="fa fa-edit"></i></a>
+              ${deleteBtnRender(1, row.id)}
+            </div>
+          `;
         }
       }
     ]

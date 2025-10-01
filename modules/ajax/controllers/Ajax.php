@@ -1,6 +1,66 @@
 <?php
 class Ajax extends Ajax_Controller
 {
+
+    public function question_import()
+    {
+        // $json = file_get_contents('php://input');
+        $questions = json_decode($this->input->post('data'), true);
+
+        $responses = [];
+
+        foreach ($questions as $index => $q) {
+            $row_num = $index + 2;
+
+            if (
+                empty($q['question']) || empty($q['correct_ans']) ||
+                !isset($q['option_a'], $q['option_b'], $q['option_c'], $q['option_d'], $q['exam_id'])
+            ) {
+                $responses[] = "<b class='text-danger'>❌ Row $row_num: Missing required fields.</b>";
+                continue;
+            }
+            $options = ['option_a', 'option_b', 'option_c', 'option_d'];
+            if (!in_array(strtolower($q['correct_ans']), $options)) {
+                $responses[] = "<b class='text-danger'>❌ Row $row_num: Invalid correct_ans.</b>";
+                continue;
+            }
+            $question = trim($q['question']);
+            $exists = $this->db->get_where('exam_questions', [
+                'question' => $question,
+                'exam_id' => $q['exam_id']
+            ])->num_rows();
+
+            if ($exists > 0) {
+                $responses[] = "<b class='text-warning'>⚠️ Row $row_num: Question already exists. Skipped.</b>";
+                continue;
+            }
+
+
+            $this->db->insert('exam_questions', [
+                'question' => $question,
+                'exam_id' => $q['exam_id']
+            ]);
+            $insert_id = $this->db->insert_id();
+            $answerList = [];
+            foreach ($options as $option) {
+                $answerList[] = [
+                    'ques_id' => $insert_id,
+                    'answer' => $q[$option],
+                    'is_right' => $option == $q['correct_ans'] ? 1 : 0
+                ];
+            }
+            if (count($answerList))
+                $this->db->insert_batch('exam_ques_answers', $answerList);
+            if ($insert_id) {
+                $responses[] = "<b class='text-success'>✅ Row $row_num: Inserted successfully.</b>";
+            } else {
+                $responses[] = "<b class='text-danger'>❌ Row $row_num: Failed to insert.</b>";
+            }
+        }
+        $this->response('html', implode('<br>', $responses));
+        $this->response('status', true);
+        $this->response('data', $questions);
+    }
     function fetch_states()
     {
         $this->response([
@@ -19,11 +79,11 @@ class Ajax extends Ajax_Controller
         $this->response([
             'status' => true,
             'data' => $this->db
-                            ->select('d.DISTRICT_NAME,d.DISTRICT_ID,s.STATE_NAME')
-                            ->from('district as d')
-                            ->join('state as s','s.STATE_ID = d.STATE_ID')
-                            ->order_by('d.DISTRICT_NAME', 'ASC')
-                            ->get()->result_array()
+                ->select('d.DISTRICT_NAME,d.DISTRICT_ID,s.STATE_NAME')
+                ->from('district as d')
+                ->join('state as s', 's.STATE_ID = d.STATE_ID')
+                ->order_by('d.DISTRICT_NAME', 'ASC')
+                ->get()->result_array()
         ]);
     }
     function edit_city()

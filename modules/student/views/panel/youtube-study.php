@@ -6,90 +6,92 @@
     <title><?= $title ?></title>
 
     <link href='https://fonts.googleapis.com/css?family=Lekton|Lobster' rel='stylesheet' type='text/css'>
-    <link href="<?= base_url('assets/youtube/') ?>jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet"
-        type="text/css">
+    type="text/css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="<?= base_url('assets/youtube/') ?>jquery.mb.YTPlayer.js"></script>
+    <!-- Plyr CSS -->
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+
+    <!-- Plyr JS -->
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+
     <style>
         body {
-            border: none;
-            margin: 0;
-            padding: 0;
-            background: #000000;
-            font: normal 16px/20px Lekton, sans-serif;
+            background: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
-        #customElement {
+        #player {
             width: 100%;
-            height: 400px;
-            background: rgba(81, 150, 191, 0.60);
-            position: relative;
-            top: 0;
-            left: 0;
-            z-index: 0;
-            background: url("assets/ytplayer_img.jpg") no-repeat center center;
-            background-size: cover;
+            width: 800px;
+            height: 800px;
+            /* aspect-ratio: 16 / 9; */
         }
 
-        #testText {
+        .plyr .plyr__video-embed iframe,
+        .plyr__tooltip {
+            pointer-events: none;
+        }
+
+        #watermark {
             position: absolute;
-            font-family: 'Lobster', cursive;
-            font-size: 40px;
-            text-align: center;
-            line-height: 80px;
-            color: #000;
-            width: 100%;
-            margin-top: 0;
-            text-shadow: 10px 10px 20px rgba(248, 248, 248, 0.60);
+            z-index: 49;
         }
-
-        button {
-            padding: 10px;
-            font-size: 16px;
-            display: inline-block;
-            background: rgba(0, 0, 0.2);
-            color: #ffffff;
-            margin: 3px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            box-shadow: 0 0 10px 0 black;
-            border: 1px solid white;
-            text-shadow: 0 0 2px white;
-        }
-
-            .mb_YTPUrl.ytpicon {
-                /* display: none!important; */
-            }
     </style>
-
-    <script>
-        var myPlayer;
-        jQuery(function () {
-
-            var options = {
-                mobileFallbackImage: "http://www.hdwallpapers.in/walls/pink_cosmos_flowers-wide.jpg",
-                playOnlyIfVisible: false
-            };
-
-            myPlayer = jQuery(".player").YTPlayer(options);
-        });
-    </script>
 </head>
 
 <body>
     <div id="wrapper">
-        <!-- <div id="hyper" style="background: #000; height: 500px; width: 600px; position: relative; "></div> -->
-        <div id="ES" class="player"
-            data-property="{showYTLogo:false,videoURL:'<?= $id ?>',containment:'self',optimizeDisplay:false, showControls:true,mute:false, autoPlay:false, loop:false, unmute:true, startAt:0, opacity:1,ratio:'4/3',addRaster:true}">
+        <div id="player" data-plyr-provider="youtube" data-plyr-embed-id="<?= $id ?>"></div>
 
-        </div>
-        <div style="padding: 20px; text-align: center">
-            <button onclick="jQuery('.player').YTPFullscreen()">Fullscreen</button>
-            <button onclick="jQuery('.player').YTPTogglePlay()">Play/Pause</button>
-            <button onclick="window.close()">Close</button>
-        </div>
+        <script>
+            const player = new Plyr('#player', {
+                // fullscreen: {
+                //     enabled: false
+                // },
+                controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'settings', 'pip', 'airplay',
+                    'fullscreen'
+                ]
+            });
+
+            const overlay = document.getElementById("watermark");
+            document.querySelector(".plyr").append(overlay);
+
+            document.addEventListener('contextmenu', event => event.preventDefault());
+
+            // Disable double-click on player
+            const playerElement = document.getElementById('player');
+            playerElement.addEventListener('dblclick', event => {
+                event.preventDefault();
+                event.stopPropagation();
+            });
+            playerElement.addEventListener('click', event => {
+                event.preventDefault();
+                event.stopPropagation();
+            });
+
+            console.log(document.querySelector("iframe"));
+            let firstPlay = true;
+
+            player.on('play', () => {
+                if (firstPlay) {
+                    firstPlay = false;
+
+                    // Try to request fullscreen
+                    const container = player.elements.container;
+                    if (container.requestFullscreen) {
+                        container.requestFullscreen().catch(err => {
+                            console.warn('Fullscreen request failed:', err);
+                        });
+                    } else {
+                        console.warn('Fullscreen API not supported');
+                    }
+                }
+            });
+        </script>
 
 
     </div>

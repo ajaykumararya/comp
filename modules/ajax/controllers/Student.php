@@ -353,7 +353,7 @@ class Student extends Ajax_Controller
                         if ($type->id == 1)
                             $this->ki_theme->checked(true);
                     }
-                    $html .= $this->ki_theme->html("$type->type &nbsp;&nbsp;")->radio('attendance_type_id[' . $std->roll_no . ']', $type->id, 'd-inline-block');
+                    $html .= $this->ki_theme->html("$type->type &nbsp;&nbsp;")->radio('attendance_type_id[' . $std->roll_no . ']', $type->id, 'd-inline-block allTypes type-'.$type->id);
                 }
                 $html .= '</td>    
                        <td>
@@ -362,6 +362,7 @@ class Student extends Ajax_Controller
                           </tr>';
             }
             $this->response('status', true);
+            $this->set_data('attendance_types', $attendanceTypes->result_array());
             $this->set_data('tbody', $html);
             $this->response('html', $this->parser->parse('student/submit-attendance', $this->public_data, true));
         } else {

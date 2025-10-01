@@ -67,7 +67,7 @@ $config['exam_area'] = array(
         array(
             'label' => 'Exam Area',
             'icon' => array('notepad', 5),
-            'type' => 'exam_area',
+            'type' => 'my-exam',
             'url' => 'student/my-exam'
         )
     )

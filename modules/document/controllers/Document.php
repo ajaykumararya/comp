@@ -208,6 +208,8 @@ class Document extends MY_Controller
                 $this->set_data('serial_no', 'IN' . (100 + $result_id));
             elseif (in_array(PATH, ['upstate', 'sctnew', 'boardofpara', 'dbisdi'])):
                 $this->set_data('serial_no', '100' . date('Y', strtotime($row->issue_date)) . $this->id);
+            else:
+                $this->set_data('serial_no', date('Y',strtotime($row->issue_date)));
             endif;
             // echo $get->row('result_id');
             // pre($get_subect_numers->result_array(),true);

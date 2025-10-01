@@ -116,6 +116,7 @@ document.addEventListener('DOMContentLoaded', function (r) {
             drawerEl.setAttribute('data-kt-drawer-width', "{default:'300px', 'md': '900px'}");
             var footer = `<div class="card-footer">
                             <button class="btn btn-primary"><i class="fa fa-plus"></i> Add Question</button>
+                            <a href="${base_url}exam/question-import/${btoa(rowData.exam_id)}" class="btn btn-info"><i class="fa fa-file-import"></i> Import</a>
                         </div>`;
             var main = mydrawer(`${rowData.exam_title}'s Questions list`);
             if (e.status) {

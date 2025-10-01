@@ -87,6 +87,11 @@ document.addEventListener('DOMContentLoaded', function (e) {
             }
         });
     }
+    $(document).on('change', '.select-chhoose-att-types', function () {
+        var type = $(this).val();
+        $('.allTypes').find('input').prop('checked', false);
+        $('.type-'+type).find('input').prop('checked', true);
+    });
     $(document).on('submit', '#submit-attendance-form', function (r) {
         r.preventDefault();
         $.AryaAjax({

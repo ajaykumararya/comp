@@ -106,6 +106,20 @@ class Admin extends MY_Controller
     }
     function manage_role_category()
     {
+        if($this->uri->segment(3)){
+            
+            $this->access_method();
+            $id = base64_decode($this->uri->segment(3));
+            // echo $id;
+            $data = $this->db->get_where('role_categories',['id'=>$id])->row_array() ?? [];
+
+            if(!$data){
+                redirect('admin/manage-role-category');
+            }
+            $data['is_edit'] = true;
+            $this->public_data = array_merge($this->public_data,$data);
+        }
+
         $this->view('manage-role-category');
     }
     function manage_role_account()

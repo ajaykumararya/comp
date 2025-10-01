@@ -1,6 +1,16 @@
 <?php
 class Exam extends MY_Controller
 {
+    function question_import(){
+        $id = $this->uri->segment(3,0);
+        if($id){
+            $id = base64_decode($id);
+            $this->ki_theme->set_title('Import Exams',true);
+            $this->access_method()->view('import',[
+                'exam_id' => $id
+            ]);
+        }
+    }
     function list()
     {
         $this->ki_theme->set_title('List Exams', true);

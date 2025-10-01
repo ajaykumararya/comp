@@ -17,7 +17,7 @@ class Center extends MY_Controller
     }
     function pending_list()
     {
-        $this->ki_theme->set_title('List Pedning Center(s)', true);
+        $this->ki_theme->set_title('List Pending Center(s)', true);
         $this->view('pending-list');
     }
     function generate_certificate()
@@ -112,6 +112,13 @@ class Center extends MY_Controller
     function id_card(){
         if(CHECK_PERMISSION('FRANCHISE_ID_CARD')){
             $this->view('id-cards');
+        }
+        else
+            show_404();
+    }
+    function wallet_recharge_and_history(){
+        if(CHECK_PERMISSION('WALLET_HISTORY') && CHECK_PERMISSION('WALLET_SYSTEM')){
+            $this->view('wallet-recharge-and-history');
         }
         else
             show_404();

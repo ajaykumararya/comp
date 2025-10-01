@@ -1,21 +1,82 @@
 <div class="row">
-<?php
-$row = $this->student_model->get_student_via_id($this->student_model->studentId())->row();
-// pre($row);
-              try {
-                $pdfToken = $this->token->encode([
-                  'student_id' => $row->student_id,
-                  'course_id' => $row->course_id,
-                  'file_type' => 'file'
-                ]);
-                
-                $videoToken = $this->token->encode([
-                  'student_id' => $row->student_id,
-                  'course_id' => $row->course_id,
-                  'file_type' => 'youtube'
-                ]);
-                echo '
+    <?php
+    $row = $this->student_model->get_student_via_id($this->student_model->studentId())->row();
+    // pre($row);
+    try {
+        $pdfToken = $this->token->encode([
+            'student_id' => $row->student_id,
+            'course_id' => $row->course_id,
+            'file_type' => 'file'
+        ]);
+
+        $videoToken = $this->token->encode([
+            'student_id' => $row->student_id,
+            'course_id' => $row->course_id,
+            'file_type' => 'youtube'
+        ]);
+        echo '
             <div class="col-md-5">
+
+            ';
+
+        ?>
+        <div class="card card-image border-hover-primary mb-4">
+            <!--begin::Card header-->
+            <div class="card-header border-0 pt-9 ">
+                <!--begin::Card Title-->
+                <div class="card-title m-0">
+                    <!--begin::Avatar-->
+                    <div class="symbol symbol-50px w-50px bg-light me-7">
+                        <img src="{base_url}upload/{image}" alt="image" class="p-3">
+                    </div>
+                    <!--end::Avatar-->
+                    <h1>Study Material</h1>
+                </div>
+                <!--end::Car Title-->
+            </div>
+            <!--end:: Card header-->
+            <!--begin:: Card body-->
+            <div class="card-body p-9 ribbon ribbon-end ribbon-clip">
+
+                <div class="fs-1 fw-bolder text-primary">
+                    {student_name}
+                </div>
+                <!--begin::Name-->
+                <div class="fs-3 fw-bold text-gray-900">
+                    {course_name} </div>
+                <!--end::Name-->
+                <!--begin::Description-->
+                <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7">
+                    {duration} {duration_type} </p>
+                <!--end::Description-->
+                <!--begin::Info-->
+                <div class="d-flex flex-wrap mb-5">
+                    <!--begin::Budget-->
+                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3 me-7">
+                        <div class="fs-6 text-gray-800 fw-bold">
+                            {roll_no}
+                        </div>
+                        <div class="fw-semibold text-gray-500">Enrollment No</div>
+                    </div>
+                    <!--end::Budget-->
+                </div>
+                <!--end::Info-->
+            </div>
+            <div class="card-footer p-3" align="center">
+                <?php
+                        echo '
+                    <a href="{base_url}student/course-study-material/' . $pdfToken . '" class="btn me-2 publish-btn btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary  pulse pulse-primary rounded hover-elevate-uppublish-btn btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary  pulse pulse-primary rounded hover-elevate-up "><i class="fa text-danger fa-file-pdf me-2"></i> PDF File(s)</a>
+                    <a href="{base_url}student/course-study-material/' . $videoToken . '" class="btn publish-btn btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary  pulse pulse-primary rounded hover-elevate-uppublish-btn btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary  pulse pulse-primary rounded hover-elevate-up "><i class="fab text-danger fa-youtube me-2"></i> Video Lecture(s)</a>
+                        ';
+                ?>
+            </div>
+        </div>
+        <?php
+/*
+        echo
+            '
+
+
             <div class="card border-success">
                     <div class="card-header border-success">
                           <div class="card-title">' . $row->course_name . '</div>
@@ -24,21 +85,25 @@ $row = $this->student_model->get_student_via_id($this->student_model->studentId(
                   </div>
                   <div class="card-footer d-flex ">
                     ';
-                        echo '
-                    <a href="{base_url}student/course-study-material/'.$pdfToken.'" class="btn me-2 btn-success "><i class="fa text-danger fa-file-pdf me-2"></i> PDF File(s)</a>
-                    <a href="{base_url}student/course-study-material/'.$videoToken.'" class="btn btn-success "><i class="fab text-danger fa-youtube me-2"></i> Video Lecture(s)</a>
+        echo '
+                    <a href="{base_url}student/course-study-material/' . $pdfToken . '" class="btn me-2 publish-btn btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary  pulse pulse-primary rounded hover-elevate-uppublish-btn btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary  pulse pulse-primary rounded hover-elevate-up "><i class="fa text-danger fa-file-pdf me-2"></i> PDF File(s)</a>
+                    <a href="{base_url}student/course-study-material/' . $videoToken . '" class="btn publish-btn btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary  pulse pulse-primary rounded hover-elevate-uppublish-btn btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary  pulse pulse-primary rounded hover-elevate-up "><i class="fab text-danger fa-youtube me-2"></i> Video Lecture(s)</a>
                         ';
-                    echo '
+        echo '
                   </div>
-                </div>
+                </div>';
+                */
+                echo '
             </div>
             ';
-              } catch (Exception $e) {
-              }
+    } catch (Exception $e) {
+    }
 
     echo '</div>';
 
+    ?>
 
+    <?php
 
 
     /*

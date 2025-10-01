@@ -5,11 +5,21 @@
                 <div class="card-header">
                     <h3 class="card-title">Select Criteria</h3>
                     <div class="card-toolbar rotate-180">
-                        {save_button}
+                        <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base" style="align-items:center">
+                            <select class="form-select form-select-sm me-2 select-chhoose-att-types" data-control="select2"
+                                 data-placeholder="Select">
+                                <?php
+                                foreach ($attendance_types as $type) {
+                                    echo '<option value="' . $type['id'] . '">' . $type['type'] . '</option>';
+                                }
+                                ?>
+                            </select>
+                            {save_button}
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
-                <div class="table-responsive">
+                    <div class="table-responsive">
                         <!--begin::Datatable-->
                         <table id="list_attendance" class="table align-middle table-row-dashed fs-6 gy-5">
                             <thead>
@@ -23,12 +33,12 @@
                                 </tr>
                             </thead>
                             <tbody class="text-gray-600 fw-semibold">
-                            {tbody}
+                                {tbody}
                             </tbody>
                         </table>
                         <!--end::Datatable-->
                     </div>
-                   
+
                 </div>
             </div>
         </form>
