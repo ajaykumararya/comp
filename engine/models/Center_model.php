@@ -84,7 +84,7 @@ class Center_model extends MY_Model
     }
     function roleUsers()
     {
-        return $this->db->select('c.*,rc.role_category_title,rc.permissions,rc.note')
+        return $this->db->select('c.*,rc.role_category_title,rc.permissions')
             ->from('centers as c')
             ->join('role_categories as rc', 'rc.id = c.role_id')
             ->get();

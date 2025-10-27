@@ -383,85 +383,106 @@ class Website extends Ajax_Controller
     }
     function student_admission()
     {
-        if ($this->validation('student_admission')) {
-            // $this->response('status', true);
-            $roll_no = $this->genrate_a_new_rollno();
-            $this->response('roll_no', $roll_no);
-            // $this->response($this->post());
-            $data = $this->post();
-            $examination = [];
-            if (isset($data['examination'])) {
-                $examination = $data['examination'];
-                unset($data['examination']);
+        try {
+            $checkCondiation = CHECK_PERMISSION('ENROLLMENT_USING_COURSE_CODE');
+            if ($checkCondiation) {
+                $roll_no = $this->gen_roll_no_using_course_code($_POST['course_id']);//mt_rand(111111, 999999);
+                $this->config->load('form_validation', TRUE);
+                $rules = $this->config->item('student_admission', 'form_validation');
+                $this->response('rules', $rules);
+                foreach ($rules as $key => $rule) {
+                    if ($rule['field'] == 'roll_no') {
+                        unset($rules[$key]);
+                        break;
+                    }
+                }
+                $this->form_validation->set_rules($rules);
             }
-            $data['status'] = 0;
-            $data['roll_no'] = $roll_no;
-            $data['added_by'] = isset($data['added_by']) ? $data['added_by'] : 'web';
-            $data['admission_type'] = isset($data['admission_type']) ? $data['admission_type'] : 'offline';
-            // $data['type'] = 'center';
-            unset($data['upload_docs']);
-            $upload_docs_data = [];
-            $upload_docs = $this->post('upload_docs');
-            if (isset($upload_docs['title'])) {
-                foreach ($upload_docs['title'] as $index => $file_index_name) {
-                    if (!empty($_FILES['upload_docs']['name']['file'][$index])) {
-                        $file = $_FILES['upload_docs']; //['file'][$index];
-                        if ($file['error']['file'][$index] == UPLOAD_ERR_OK) {
-                            $encryptedFileName = substr(hash('sha256', uniqid(mt_rand(), true)), 0, 10) . '_' . basename($file['name']['file'][$index]);
-                            // Build the full destination path, including the encrypted file name
-                            $destination = UPLOAD . $encryptedFileName;
-                            move_uploaded_file($file['tmp_name']['file'][$index], $destination);
-                            $upload_docs_data[$file_index_name] = $encryptedFileName;
+            if ($this->validation('student_admission')) {
+                // $this->response('status', true);
+                if (!$checkCondiation) {
+                    $roll_no = $this->genrate_a_new_rollno();
+                }
+
+                $this->response('roll_no', $roll_no);
+                // $this->response($this->post());
+                $data = $this->post();
+                $examination = [];
+                if (isset($data['examination'])) {
+                    $examination = $data['examination'];
+                    unset($data['examination']);
+                }
+                $data['status'] = 0;
+                $data['roll_no'] = $roll_no;
+                $data['added_by'] = isset($data['added_by']) ? $data['added_by'] : 'web';
+                $data['admission_type'] = isset($data['admission_type']) ? $data['admission_type'] : 'offline';
+                // $data['type'] = 'center';
+                unset($data['upload_docs']);
+                $upload_docs_data = [];
+                $upload_docs = $this->post('upload_docs');
+                if (isset($upload_docs['title'])) {
+                    foreach ($upload_docs['title'] as $index => $file_index_name) {
+                        if (!empty($_FILES['upload_docs']['name']['file'][$index])) {
+                            $file = $_FILES['upload_docs']; //['file'][$index];
+                            if ($file['error']['file'][$index] == UPLOAD_ERR_OK) {
+                                $encryptedFileName = substr(hash('sha256', uniqid(mt_rand(), true)), 0, 10) . '_' . basename($file['name']['file'][$index]);
+                                // Build the full destination path, including the encrypted file name
+                                $destination = UPLOAD . $encryptedFileName;
+                                move_uploaded_file($file['tmp_name']['file'][$index], $destination);
+                                $upload_docs_data[$file_index_name] = $encryptedFileName;
+                            }
                         }
                     }
                 }
-            }
-            $data['adhar_front'] = $this->file_up('adhar_card');
-            if (CHECK_PERMISSION('STUDENT_ADHAR_BACK'))
-                $data['adhar_back'] = $this->file_up('adhar_back');
-            $data['image'] = $this->file_up('image');
-            $data['upload_docs'] = json_encode($upload_docs_data);
+                $data['adhar_front'] = $this->file_up('adhar_card');
+                if (CHECK_PERMISSION('STUDENT_ADHAR_BACK'))
+                    $data['adhar_back'] = $this->file_up('adhar_back');
+                $data['image'] = $this->file_up('image');
+                $data['upload_docs'] = json_encode($upload_docs_data);
 
-            $data['marital_status'] = $this->post('marital_status');
-            $data['medium'] = $this->post('medium');
-            $data['category'] = $this->post('category');
-            $chk = $this->db->insert('students', $data);
-            $this->response('status', $chk);
-            $this->response('message', json_encode($examination));
-            $student_id = $this->db->insert_id();
-            if (CHECK_PERMISSION('STUDENT_EXAMINATION_FORM') && table_exists('student_examiniation_passed')) {
-                foreach ($examination['passed'] as $index => $passed) {
-                    if (
-                        !empty($passed) || !empty($examination['name_of_stream'][$index]) ||
-                        !empty($examination['board_or_university'][$index]) ||
-                        !empty($examination['year_of_passing'][$index]) ||
-                        !empty($examination['marks_obtained'][$index]) ||
-                        !empty($examination['percentage_marks'][$index])
-                    ) {
-                        $newData = [
-                            'student_id' => $student_id,
-                            'passed' => $passed,
-                            'name_of_stream' => $examination['name_of_stream'][$index],
-                            'board_or_university' => $examination['board_or_university'][$index],
-                            'year_of_passing' => $examination['year_of_passing'][$index],
-                            'marks_obtained' => $examination['marks_obtained'][$index],
-                            'percentage_marks' => $examination['percentage_marks'][$index],
-                        ];
-                        $this->db->insert('student_examiniation_passed', $newData);
+                $data['marital_status'] = $this->post('marital_status');
+                $data['medium'] = $this->post('medium');
+                $data['category'] = $this->post('category');
+                $chk = $this->db->insert('students', $data);
+                $this->response('status', $chk);
+                $this->response('message', json_encode($examination));
+                $student_id = $this->db->insert_id();
+                if (CHECK_PERMISSION('STUDENT_EXAMINATION_FORM') && table_exists('student_examiniation_passed')) {
+                    foreach ($examination['passed'] as $index => $passed) {
+                        if (
+                            !empty($passed) || !empty($examination['name_of_stream'][$index]) ||
+                            !empty($examination['board_or_university'][$index]) ||
+                            !empty($examination['year_of_passing'][$index]) ||
+                            !empty($examination['marks_obtained'][$index]) ||
+                            !empty($examination['percentage_marks'][$index])
+                        ) {
+                            $newData = [
+                                'student_id' => $student_id,
+                                'passed' => $passed,
+                                'name_of_stream' => $examination['name_of_stream'][$index],
+                                'board_or_university' => $examination['board_or_university'][$index],
+                                'year_of_passing' => $examination['year_of_passing'][$index],
+                                'marks_obtained' => $examination['marks_obtained'][$index],
+                                'percentage_marks' => $examination['percentage_marks'][$index],
+                            ];
+                            $this->db->insert('student_examiniation_passed', $newData);
+                        }
                     }
                 }
+                $this->response('url', base_url('student-details/') . $this->token->encode([
+                    'student_id' => $student_id
+                ]));
+                $message = 'Your Registration No. is <b>' . $roll_no . '</b>';
+                if (in_array(PATH, ['abc', 'gcti']))
+                    $message = 'Your Roll No is <b>' . $roll_no . '</b>';
+                $this->response('message', $message);
+                $this->session->set_userdata([
+                    'student_login' => true,
+                    'student_id' => $student_id,
+                ]);
             }
-            $this->response('url', base_url('student-details/') . $this->token->encode([
-                'student_id' => $student_id
-            ]));
-            $message = 'Your Registration No. is <b>' . $roll_no . '</b>';
-            if (in_array(PATH, ['abc', 'gcti']))
-                $message = 'Your Roll No is <b>' . $roll_no . '</b>';
-            $this->response('message', $message);
-            $this->session->set_userdata([
-                'student_login' => true,
-                'student_id' => $student_id,
-            ]);
+        } catch (Exception $e) {
+            $this->response('message', $e->getMessage());
         }
     }
     function update_examination_passed_data()
@@ -765,8 +786,8 @@ class Website extends Ajax_Controller
     {
         $this->db->where('id', $this->post('center_id'))
             ->update('centers', [
-                $this->post('name') => $this->file_up('file')
-            ]);
+                    $this->post('name') => $this->file_up('file')
+                ]);
         // $this->response('query', $this->db->last_query());
         $this->response('status', true);
     }
@@ -829,8 +850,8 @@ class Website extends Ajax_Controller
                     $this->response([
                         'status' => 'success',
                         'url' => base_url('student/create-new-password/' . $this->token->encode([
-                            'student_id' => $row->student_id
-                        ]))
+                                    'student_id' => $row->student_id
+                                ]))
                     ]);
                 }
             }
@@ -942,9 +963,9 @@ class Website extends Ajax_Controller
     {
         $this->db->where('id', $this->post('id'))
             ->update('content', [
-                'field2' => $this->post('title'),
-                'field4' => $this->post('link')
-            ]);
+                    'field2' => $this->post('title'),
+                    'field4' => $this->post('link')
+                ]);
         $this->response('status', true);
     }
 
@@ -962,16 +983,16 @@ class Website extends Ajax_Controller
                     'label' => 'Roll No.',
                     'rules' => 'required|is_unique[students_registeration_data.exam_roll_no]',
                     'errors' => array(
-                        'is_unique' => 'This Student Exam Roll No already exists..'
-                    )
+                            'is_unique' => 'This Student Exam Roll No already exists..'
+                        )
                 ),
                 array(
                     'field' => 'enrollment_no',
                     'label' => 'Enrollment No.',
                     'rules' => 'required|is_unique[students_registeration_data.enrollment_no]',
                     'errors' => array(
-                        'is_unique' => 'This Student Enrollment No already exists..'
-                    )
+                            'is_unique' => 'This Student Enrollment No already exists..'
+                        )
                 ),
 
             ]);
@@ -1074,10 +1095,10 @@ class Website extends Ajax_Controller
         // $this->response('data',$this->post());
         $this->db->where('id', $this->post('id'))
             ->update('admit_cards', [
-                'enrollment_no' => $this->post('enrollment_no'),
-                'session_id' => $this->post('session_id'),
-                'status' => 1
-            ]);
+                    'enrollment_no' => $this->post('enrollment_no'),
+                    'session_id' => $this->post('session_id'),
+                    'status' => 1
+                ]);
     }
     function verify_examination_data()
     {

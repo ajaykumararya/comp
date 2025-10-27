@@ -220,14 +220,25 @@ class Ajax extends Ajax_Controller
 
     function add_role_category()
     {
-        if ($this->validation('add_role_category')) {
+        $validation_type = isset($_POST['id']) && !empty($_POST['id']) ? 'update_role_category' : 'add_role_category';
+        if ($this->validation($validation_type)) {
             $perimissions = json_encode($_POST['permission']);
             $title = $_POST['title'];
-            $this->db->insert('role_categories', [
-                'role_category_title' => $title,
-                'permissions' => $perimissions,
-                'note' => $_POST['note']
-            ]);
+            if (isset($_POST['id']) && !empty($_POST['id'])) {
+                $this->db->where('id', $_POST['id'])->update('role_categories', [
+                    'role_category_title' => $title,
+                    'permissions' => $perimissions,
+                    'note' => $_POST['note']
+                ]);
+                $this->response('status', true);
+                return;
+            } else {
+                $this->db->insert('role_categories', [
+                    'role_category_title' => $title,
+                    'permissions' => $perimissions,
+                    'note' => $_POST['note']
+                ]);
+            }
             $this->response('status', true);
         }
     }
@@ -243,13 +254,14 @@ class Ajax extends Ajax_Controller
     {
         $this->response('status', $this->db->where('id', $id)->where('type', 'role_user')->delete('centers'));
     }
-    function delete_role_cat($id)
+    function delete_role_category()
     {
+        $id = $_POST['id'];
         $chk = $this->db->where('role_id', $id)->get('centers')->num_rows();
         if ($chk) {
             $this->response('html', $chk . ' account(s) are/is opened through it, either update its role or delete that account,then this category will be removed.');
         } else {
-            $this->db->where('role_id', $id)->delete('role_categories');
+            $this->db->where('id', $id)->delete('role_categories');
             $this->response('status', true);
         }
     }
@@ -259,12 +271,72 @@ class Ajax extends Ajax_Controller
             $this->db->insert('centers', [
                 'role_id' => $_POST['role_id'],
                 'name' => $_POST['name'],
+                'contact_number' => $_POST['mobile'],
                 'email' => $_POST['email'],
                 'password' => sha1($_POST['password']),
                 'type' => 'role_user',
+                'status' => 1,
                 'added_by' => $this->center_model->isAdmin() ? 'admin' : 'center',
                 'added_by_id' => $this->center_model->loginId()
             ]);
+            $this->response('status', true);
+        }
+    }
+    function update_role_user_password()
+    {
+        $id = $_POST['id'];
+        $role_id = $_POST['role_id'];
+        $password = sha1($_POST['password']);
+        $this->db->where('id', $id)->update('centers', [
+            'role_id' => $role_id,
+            'password' => $password
+        ]);
+        $this->response('status', true);
+    }
+    function update_role_user_password_form()
+    {
+        $id = $_POST['id'];
+        $chk = $this->db->where('id', $id)->get('centers');
+        if ($chk->num_rows()) {
+            $html = '
+                    <div class="form-group mb-4">
+                        <label for="" class="form-label required">Role Category</label>
+                        <select data-allow-clear="true" class="form-select" data-placeholder="Select Role Category"
+                            id="role_category" name="role_id" data-control="select2" required>
+                            <option></option>';
+            $get = $this->db->get('role_categories');
+            foreach ($get->result() as $row) {
+                $html .= '<option value="' . $row->id . '" ' . ($chk->row()->role_id == $row->id ? 'selected' : '') . '>' . $row->role_category_title . '</option>';
+            }
+            $html .= '</select></div>            
+                    <div class="form-group mb-4">
+                        <label for="" class="form-label required">New Password</label>
+                        <input type="text" name="password" placeholder="Enter New Password" class="form-control" required>
+                    </div>
+                    <input type="hidden" name="id" value="' . $id . '">';
+            $this->response('html', $html);
+            $this->response('status', true);
+        }
+    }
+    function update_role_user()
+    {
+        $id = $_POST['id'];
+        // $this->form_validation->set_rules('role_id', 'Role Category', 'required');
+        $this->form_validation->set_rules('name', 'Name', 'required');
+        $this->form_validation->set_rules('email', 'email', 'required');
+        $this->form_validation->set_rules('mobile', 'Mobile', 'required');
+
+        if ($this->validation()) {
+            $updateData = [
+                // 'role_id' => $_POST['role_id'],
+                'name' => $_POST['name'],
+                'contact_number' => $_POST['mobile'],
+                'email' => $_POST['email']
+            ];
+            // if (!empty($_POST['password'])) {
+            //     $updateData['password'] = sha1($_POST['password']);
+            // }
+            $this->db->where('id', $id)->where('type', 'role_user')->update('centers', $updateData);
             $this->response('status', true);
         }
     }

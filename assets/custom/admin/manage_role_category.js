@@ -21,11 +21,12 @@ document.addEventListener('DOMContentLoaded', async function () {
     e.preventDefault();
     var length = $('input[name="permission[]"]:checked').length;
     if (length) {
+      var message = $('[name="id"]').length ? 'Category Updated Successfully' : 'Category Added Successfully';
       // console.log($(this).serialize());
       $.AryaAjax({
         url: 'add_role_category',
         data: new FormData(this),
-        success_message: 'Category Added Successfully',
+        success_message: message,
         page_reload: true
       }).then((r) => {
         if (!r.status) {
@@ -57,7 +58,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
       },
       {
-        targets : 2,
+        targets: 2,
         render: function (data, type, row, meta) {
           return `<button class="btn btn-sm btn-warning view-permssions" data-name="${row.role_category_title}" data-id="${row.role_category_id}" data-permissions='${data}'><i class="fa fa-eye"></i></button>`;
         }
@@ -68,24 +69,36 @@ document.addEventListener('DOMContentLoaded', async function () {
           return `
             <div class="btn-group" role="group" aria-label="Basic example">
               <a href="${base_url}admin/manage-role-category/${btoa(row.id)}" class="btn btn-sm btn-info" title="Edit"><i class="fa fa-edit"></i></a>
-              ${deleteBtnRender(1, row.id)}
+              <button class="btn btn-sm btn-danger delete-role-cat" data-id="${row.id}" title="Delete"><i class="fa fa-trash"></i></button>
             </div>
           `;
         }
       }
     ]
   }).on('draw', function () {
-    handleDeleteRows('delete-role-cat').then((e) => {
-      log(e)
+    $(document).find('.delete-role-cat').off('click').on('click', function () {
+      var id = $(this).data('id');
+      SwalWarning('Confirmation!', 'Are you sure you want to delete it.', true, 'delete it').then((r) => {
+        if (r.isConfirmed) {
+          $.AryaAjax({
+            url: 'delete-role-category',
+            data: { id },
+            success_message: 'Role Category Deleted Successfully',
+            page_reload: true
+          }).then((res) => {
+            showResponseError(res);
+          });
+        }
+      });
     });
-    $('.view-permssions').on('click',function(){
+    $('.view-permssions').on('click', function () {
       var permissions = $(this).attr('data-permissions');
       var role_category_id = $(this).data('id');
       var name = $(this).data('name');
       $.AryaAjax({
-        url : 'view-permissions',
-        data : {permissions,role_category_id}
-      }).then( (html) => {
+        url: 'view-permissions',
+        data: { permissions, role_category_id }
+      }).then((html) => {
         var box = mydrawer(`${name} Permissions`);
         box.find('.card-body').html(html.html);
       });

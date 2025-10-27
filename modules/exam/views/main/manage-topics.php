@@ -46,7 +46,7 @@
                             </thead>
                             <tbody class="text-gray-600 fw-semibold">
                                 <?php
-                                $list = $this->exam_model->list_topics();
+                                $list = $this->exam_model2->list_topics();
                                 if ($list->num_rows()) {
                                     foreach ($list->result() as $row) {
                                         echo '<tr>
@@ -87,8 +87,7 @@
             data: { title: form.find('input[name="title"]').val() },
             success_message: 'Added Successfully.',
             page_reload: true
-        }).then((r) => {
-            fform.trigger('reset');
+        }).then((r) => {    
             showResponseError(r)
         });
         // $('#list').append(html);

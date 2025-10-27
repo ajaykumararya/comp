@@ -442,6 +442,16 @@ $config = array(
             )
         )
     ),
+    'update_role_category' => array(
+        array(
+            'field' => 'title',
+            'label' => 'Category Name',
+            'rules' => 'required',
+            'errors' => array(
+                'required' => 'Please enter category name',
+            )
+        )
+    ),
     'centre_exam' => array(
         array(
             'field' => 'centre_name',

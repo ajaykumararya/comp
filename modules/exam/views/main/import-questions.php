@@ -15,7 +15,7 @@
                         <select class="form-control" name="topic_id" required>
                             <option value="">-- Select Topic --</option>
                             <?php
-                            $list = $this->exam_model->list_topics();
+                            $list = $this->exam_model2->list_topics();
                             if ($list->num_rows()) {
                                 foreach ($list->result() as $row) {
                                     echo '<option value="' . $row->id . '">' . $row->title . '</option>';

@@ -10,7 +10,7 @@
                     <select name="course_id" data-control="select2" class="form-select" data-placeholder="Select Course">
                         <option value=""></option>
                         <?php
-                        $list = $this->exam_model->list_setting_courses();
+                        $list = $this->exam_model2->list_setting_courses();
                         if(count($list)){
                             foreach($list as $course){
                                 echo "<option value='".$course['course_id']."' data-subcontent='".$course['course_duration']."' data-type='".$course['type']."'>".$course['course_name']."</option>";

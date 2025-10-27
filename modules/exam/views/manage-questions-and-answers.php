@@ -26,7 +26,7 @@ foreach ($questions as $ques) {
         else
             $data[$i] = $new;
         if ($key == 'second') {
-            $key = 'first';
+            $key = 'first'; // first 
             $i++;
         } else {
             if ($key == 'first') {

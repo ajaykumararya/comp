@@ -143,6 +143,20 @@ class MY_Controller extends MX_Controller
         //         ]
         //     ]);
         // }
+        if (CHECK_PERMISSION(strtoupper('ENROLLMENT_USING_COURSE_CODE'))) {
+            $fields = ['course_code'];
+            foreach ($fields as $field) {
+                $checkField = $this->build_db->field_exists('course', $field);
+                if (!$checkField) {
+                    $this->build_db->add_field('course', [
+                        $field => [
+                            'type' => 'LONGTEXT',
+                            'default' => null
+                        ]
+                    ]);
+                }
+            }
+        }
         if (CHECK_PERMISSION(strtoupper('centre_fun_marksheet_certificate_fee'))) {
             $fields = ['marksheet', 'certificate'];
             foreach ($fields as $field) {
@@ -364,7 +378,7 @@ class MY_Controller extends MX_Controller
             $ext = pathinfo($filename, PATHINFO_EXTENSION);
             $x = getRadomNumber(10) . '.' . $ext;
             // $saveName = UPLOAD.$x;
-            $config['upload_path'] = './'.UPLOAD;
+            $config['upload_path'] = './' . UPLOAD;
             $config['allowed_types'] = 'jpg|jpeg|png|gif|pdf';
             $config['max_size'] = ($this->ki_theme->default_vars('max_upload_size') / 1024); // max_size in kb
             $config['file_name'] = $x;
@@ -429,6 +443,34 @@ class MY_Controller extends MX_Controller
     {
         return $this->parser->parse("template/$file", $this->public_data, true);
     }
+    function gen_roll_no_using_course_code($course_id = 0)
+    {
+        if (!defined('PROJECT_PREFIX')) {
+            throw new Exception('PROJECT_PREFIX is not defined.');
+        }
+        // sleep(1);
+        if ($course_id) {
+            $getPreFix = $this->db->select('course_code')->where('id', $course_id)->get('course');
+            $start = mt_rand(111111, 999999);
+            if ($getPreFix->num_rows()) {
+                if(!$getPreFix->row("course_code")){
+                    throw new Exception('Course Code is not defined for this course.');
+                }
+                $preFixRoll = PROJECT_PREFIX . '/' . $getPreFix->row("course_code") . '/';
+                if ($preFixRoll) {
+                    $lastRollNO = $this->db->select('roll_no')->like('roll_no', $preFixRoll, 'after')->order_by('id', 'DESC')->limit(1)->get('students');
+                    if ($lastRollNO->num_rows()) {
+                        $lastNumber = $lastRollNO->row('roll_no');
+                        $filterRoll = substr($lastNumber, strlen($preFixRoll));
+                        if ($filterRoll)
+                            $start = mt_rand(111111, 999999);
+                    }
+                    return $this->check_roll_exists_or_not($preFixRoll, $preFixRoll . $start, true);
+                }
+            }
+        }
+        return false;
+    }
     public function gen_roll_no($center_id = 0)
     {
         // sleep(1);
@@ -452,15 +494,21 @@ class MY_Controller extends MX_Controller
         return false;
     }
     //this is a recursion function for check existing...
-    function check_roll_exists_or_not($preFixRoll, $rollNo)
+    function check_roll_exists_or_not($preFixRoll, $rollNo, $isCourseCode = false)
     {
         $check = $this->db->select('roll_no')->where('roll_no', $rollNo)->get('students');
         if ($check->num_rows()) {
             $lastNumber = $check->row('roll_no');
-            $filterRoll = substr($lastNumber, strlen($preFixRoll));
-            if ($filterRoll)
-                $start = ($filterRoll + 1);
-            return $this->check_roll_exists_or_not($preFixRoll, $preFixRoll . $start);
+            if ($isCourseCode) {
+                $filterRoll = substr($lastNumber, strlen($preFixRoll));
+                if ($filterRoll)
+                    $start = mt_rand(111111, 999999);
+            } else {
+                $filterRoll = substr($lastNumber, strlen($preFixRoll));
+                if ($filterRoll)
+                    $start = ($filterRoll + 1);
+            }
+            return $this->check_roll_exists_or_not($preFixRoll, $preFixRoll . $start, $isCourseCode);
         }
         return $rollNo;
     }

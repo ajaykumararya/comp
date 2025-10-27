@@ -78,3 +78,20 @@
           </div>          
     </div>
 </div>
+
+
+<script id="formTemplate" type="text/x-handlebars-template">
+    <input type="hidden" name="id" value="{{id}}">
+    <div class="form-group">
+        <label class="form-label required">Enter Name</label>
+        <input type="text" name="name" value="{{name}}" class="form-control" placeholder="Enter Name">
+    </div>
+    <div class="form-group mb-4">
+        <label for="" class="form-label required">Mobile</label>
+        <input type="text" class="form-control" placeholder="Enter Mobile" value="{{contact_number}}" name="mobile">
+    </div>
+    <div class="form-group mb-4">
+        <label for="" class="form-label required">Email</label>
+        <input type="email" name="email" placeholder="Enter Email" value="{{email}}" class="form-control">
+    </div>
+</script>

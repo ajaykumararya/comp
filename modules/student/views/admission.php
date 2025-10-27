@@ -92,13 +92,16 @@
                                     ?>
                                 </select>
                             </div>
-
-                            <div class="form-group mb-4 col-lg-<?= $rolCol ?> col-xs-12 col-sm-12">
-                                <label class="form-label required">{rollno_text}.</label>
-                                <input type="text" name="roll_no" class="form-control"
-                                    placeholder="Enter {rollno_text}.">
-                            </div>
                             <?php
+                            if (!CHECK_PERMISSION('ENROLLMENT_USING_COURSE_CODE')) {
+                                ?>
+                                <div class="form-group mb-4 col-lg-<?= $rolCol ?> col-xs-12 col-sm-12">
+                                    <label class="form-label required">{rollno_text}.</label>
+                                    <input type="text" name="roll_no" class="form-control"
+                                        placeholder="Enter {rollno_text}.">
+                                </div>
+                                <?php
+                            }
                             if (CHECK_PERMISSION('ADMISSION_WITH_COURSE_CATEGORY')) {
                                 ?>
                                 <div class="form-group mb-4 col-lg-3 col-xs-12 col-sm-12">

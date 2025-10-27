@@ -32,7 +32,8 @@ class Ki_theme
     $config = [],
     $encryptionKey = 'ARYA8533',
     $wallet_message_type = '',
-    $festivals = [];
+    $festivals = [],
+    $editPermissions = [];
     protected $login_type = '', $login_id = 0;
     function __construct($chk = false)
     {
@@ -1460,7 +1461,10 @@ class Ki_theme
         }
         return $html;
     }
-
+    function setPermissions($permissions = [])
+    {
+        $this->editPermissions = $permissions;
+    }
     function generate_permission($menuItems, $type = 'menu', $menuType = '')
     {
         $html = '';
@@ -1472,14 +1476,14 @@ class Ki_theme
                 }
             }
             // pre($menuItem);
-
-            $disabled = $type == 'menu' ? '' : 'disabled';
+            $checked = $this->recursiveArraySearch($menuItem['type'], $this->editPermissions) ? 'checked' : '';
+            $disabled = $type == 'menu' ? '' : ($checked == 'checked' ? '' : 'disabled');
             if (isset($menuItem['submenu'])) {
                 $html .= '  
                     <div class="arya-menu">
 	                    <div class="col-md-12">
     	                    <label style="margin-bottom:3px" class="form-check form-switch form-check-custom form-check-solid pulse pulse-success" for="d-' . $menuItem['type'] . '">
-    							<input ' . $disabled . ' data-parent="' . $menuType . '" class="form-check-input w-30px h-20px parent-input ' . ($type == 'menu' ? '' : 'check-input-' . $menuItem['type']) . '" type="checkbox" value="' . $menuItem['type'] . '" name="permission[]" id="d-' . $menuItem['type'] . '">
+    							<input ' . $disabled . ' '.$checked.' data-parent="' . $menuType . '" class="form-check-input w-30px h-20px parent-input ' . ($type == 'menu' ? '' : 'check-input-' . $menuItem['type']) . '" type="checkbox" value="' . $menuItem['type'] . '" name="permission[]" id="d-' . $menuItem['type'] . '">
     							<span class="pulse-ring ms-n1"></span>
     							<span class="form-check-label text-gray-600 fs-7">' . $menuItem['label'] . '</span>
     						</label>
@@ -1493,7 +1497,7 @@ class Ki_theme
                 $html .= '
     					                <div class="col-md-4">
     					                    <label style="margin-bottom:3px" class="form-check form-switch form-check-custom form-check-solid pulse pulse-success" for="d-' . $menuItem['type'] . '">
-                    							<input ' . $disabled . '  data-parent="' . $menuType . '" class="form-check-input w-30px h-20px child-input check-input-' . $menuItem['type'] . '"  type="checkbox" value="' . $menuItem['type'] . '"  name="permission[]" id="d-' . $menuItem['type'] . '">
+                    							<input ' . $disabled . ' '.$checked.'  data-parent="' . $menuType . '" class="form-check-input w-30px h-20px child-input check-input-' . $menuItem['type'] . '"  type="checkbox" value="' . $menuItem['type'] . '"  name="permission[]" id="d-' . $menuItem['type'] . '">
                     							<span class="pulse-ring ms-n1"></span>
                     							<span class="form-check-label text-gray-600 fs-7">' . $menuItem['label'] . '</span>
                     						</label>

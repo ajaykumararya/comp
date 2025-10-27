@@ -1,3 +1,51 @@
+<style>
+    .btn-container {
+        font-family: 'Segoe UI', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .action-btn {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 20px;
+        padding: 20px 40px;
+        width: 320px;
+        font-size: 22px;
+        font-weight: 600;
+        text-decoration: none;
+        color: #fff;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .action-btn i {
+        font-size: 40px;
+    }
+
+    .btn-pdf {
+        background: #e74c3c;
+    }
+
+    .btn-pdf:hover {
+        background: #c0392b;
+        transform: translateY(-2px);
+    }
+
+    .btn-video {
+        background: #2980b9;
+    }
+
+    .btn-video:hover {
+        background: #1f6391;
+        transform: translateY(-2px);
+    }
+</style>
 <div class="row">
     <?php
     $row = $this->student_model->get_student_via_id($this->student_model->studentId())->row();
@@ -63,37 +111,45 @@
                 <!--end::Info-->
             </div>
             <div class="card-footer p-3" align="center">
-                <?php
-                        echo '
-                    <a href="{base_url}student/course-study-material/' . $pdfToken . '" class="btn me-2 publish-btn btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary  pulse pulse-primary rounded hover-elevate-uppublish-btn btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary  pulse pulse-primary rounded hover-elevate-up "><i class="fa text-danger fa-file-pdf me-2"></i> PDF File(s)</a>
-                    <a href="{base_url}student/course-study-material/' . $videoToken . '" class="btn publish-btn btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary  pulse pulse-primary rounded hover-elevate-uppublish-btn btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary  pulse pulse-primary rounded hover-elevate-up "><i class="fab text-danger fa-youtube me-2"></i> Video Lecture(s)</a>
-                        ';
-                ?>
+
+                <div class="btn-container">
+                    <!-- PDF Button -->
+                    <a href="{base_url}student/course-study-material/<?=$pdfToken?>" target="_blank" class="action-btn btn-pdf">
+                        <i class="fas fa-file-pdf text-white"></i>
+                        <span>Read PDF</span>
+                    </a>
+
+                    <!-- Video Button -->
+                    <a href="{base_url}student/course-study-material/<?=$videoToken?>" class="action-btn btn-video">
+                        <i class="fas fa-play-circle text-white"></i>
+                        <span>Watch Video</span>
+                    </a>
+                </div>
             </div>
         </div>
         <?php
-/*
-        echo
-            '
+        /*
+                echo
+                    '
 
 
-            <div class="card border-success">
-                    <div class="card-header border-success">
-                          <div class="card-title">' . $row->course_name . '</div>
-                          <div class="card-toolbar">' . humnize_duration($row->duration, $row->duration_type) . '</div>
-                        
-                  </div>
-                  <div class="card-footer d-flex ">
-                    ';
-        echo '
-                    <a href="{base_url}student/course-study-material/' . $pdfToken . '" class="btn me-2 publish-btn btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary  pulse pulse-primary rounded hover-elevate-uppublish-btn btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary  pulse pulse-primary rounded hover-elevate-up "><i class="fa text-danger fa-file-pdf me-2"></i> PDF File(s)</a>
-                    <a href="{base_url}student/course-study-material/' . $videoToken . '" class="btn publish-btn btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary  pulse pulse-primary rounded hover-elevate-uppublish-btn btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary  pulse pulse-primary rounded hover-elevate-up "><i class="fab text-danger fa-youtube me-2"></i> Video Lecture(s)</a>
-                        ';
-        echo '
-                  </div>
-                </div>';
-                */
+                    <div class="card border-success">
+                            <div class="card-header border-success">
+                                  <div class="card-title">' . $row->course_name . '</div>
+                                  <div class="card-toolbar">' . humnize_duration($row->duration, $row->duration_type) . '</div>
+
+                          </div>
+                          <div class="card-footer d-flex ">
+                            ';
                 echo '
+                            <a href="{base_url}student/course-study-material/' . $pdfToken . '" class="btn me-2 publish-btn btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary  pulse pulse-primary rounded hover-elevate-uppublish-btn btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary  pulse pulse-primary rounded hover-elevate-up "><i class="fa text-danger fa-file-pdf me-2"></i> PDF File(s)</a>
+                            <a href="{base_url}student/course-study-material/' . $videoToken . '" class="btn publish-btn btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary  pulse pulse-primary rounded hover-elevate-uppublish-btn btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary  pulse pulse-primary rounded hover-elevate-up "><i class="fab text-danger fa-youtube me-2"></i> Video Lecture(s)</a>
+                                ';
+                echo '
+                          </div>
+                        </div>';
+                        */
+        echo '
             </div>
             ';
     } catch (Exception $e) {

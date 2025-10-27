@@ -15,12 +15,12 @@ $data = $this->db->select('c.duration,c.duration_type,sm.*')
 if ($file_type == 'youtube') {
     // pre($this->token->data());
     $material_id = $this->token->data('id');
+    $material_id = $material_id ? $material_id : ($data->row() ? $data->row()->material_id : null);
     ?>
     <!-- Plyr CSS -->
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 
     <style>
-
         .video-title {
             margin-top: 10px;
             font-size: 18px;
@@ -113,7 +113,7 @@ if ($file_type == 'youtube') {
                 <div class="card-header">
                     <h3 class="card-title">{course_name}</h3>
                 </div>
-                <div class="card-body <?=$material_id ? 'p-0' : ''?>">
+                <div class="card-body <?= $material_id ? 'p-0' : '' ?>">
 
                     <div class="video-box">
                         <?php
@@ -132,7 +132,7 @@ if ($file_type == 'youtube') {
                             ">
                                 </div>
                             </div>
-                            
+
                         <?php } else {
                             echo alert('Please select a video from the right side list.', 'info');
                         }
@@ -141,13 +141,13 @@ if ($file_type == 'youtube') {
                 </div>
                 <div class="card-header">
                     <?php
-                    if ($material_id) 
-                        echo '<h1 class="card-title">'.$videoRow->title.'</h1>';
+                    if ($material_id)
+                        echo '<h1 class="card-title">' . $videoRow->title . '</h1>';
                     ?>
                 </div>
                 <div class="card-body">
                     <?php
-                    if ($material_id) 
+                    if ($material_id)
                         echo $videoRow->description;
                     ?>
                 </div>
@@ -259,22 +259,38 @@ if ($file_type == 'youtube') {
                     </h3>
                     <div class="ms-auto">
                         <div class="input-icon mt-3">
-                            <input type="text" id="search-study" class="form-control" placeholder="Search…"
-                                autocomplete="off">
+                            <!-- <input type="text" id="search-study" class="form-control" placeholder="Search…"
+                                autocomplete="off"> -->
 
                         </div>
                     </div>
                 </div>
-                <div class="card-body row">
+                <div class="card-body p-0">
                     <?php
 
                     // echo $this->db->last_query();
                     if ($data->num_rows() > 0) {
+                        echo '<div class="table-responsive">';
+                        echo '<table class="table table-bordered table-striped">';
+                        echo '<thead><tr><th>#</th><th>Title</th><th>Description</th><th>Action</th></tr></thead>';
+                        echo '<tbody>';
+                         $i = 1;
                         foreach ($data->result() as $row) {
                             $token = $this->token->encode([
                                 'id' => $row->material_id,
                                 'student_id' => $student_id
                             ]);
+                            echo '<tr>';
+                            echo '<td>' . $i . '.</td>';
+                            echo '<td>' . $row->title . '</td>
+                                  <td>' . $row->description . '</td>
+                                  <td>
+                                    <a href="{base_url}student/study-material/' . $token . '" target="_blank" class="btn btn-success btn-sm"><i class="fa fa-eye me-2"></i><i>Read Now</i></a>
+                                  </td>';
+                            echo '</tr>';
+                                    $i++;
+
+                            /*
                             echo '<div class="col-md-4">
                                 <div class="card" data-text="' . strip_tags($row->title) . ' ' . strip_tags($row->description) . '">';
                             if ($file_type == 'youtube') {
@@ -297,7 +313,11 @@ if ($file_type == 'youtube') {
                             echo '</div>
                                 </div>
                             </div>';
+                            */
                         }
+                        echo '</tbody>';
+                        echo '</table>';
+                        echo '</div>';
                     } else {
                         $message = $file_type == 'file' ? '<i class="fa text-danger fa-file-pdf me-2"></i> PDF File' : '<i class="fab text-danger fa-youtube me-2"></i> Video Lecture';
                         echo alert("$message(s) not found..", 'danger');

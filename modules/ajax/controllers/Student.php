@@ -47,7 +47,7 @@ class Student extends Ajax_Controller
                     'o_balance' => ($close_balance + $deduction_amount),
                     'c_balance' => $close_balance,
                     'type' => 'admission',
-                    'description' => 'Student Addmission '.$typeMsg,
+                    'description' => 'Student Addmission ' . $typeMsg,
                     'type_id' => $student_id,
                     'added_by' => 'center',
                     'order_id' => strtolower(generateCouponCode(12)),
@@ -109,165 +109,181 @@ class Student extends Ajax_Controller
     }
     function add()
     {
-        $owner_id = $this->get_data('owner_id');
-        if ($walletSystem = (CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE') && $this->center_model->isCenter())) {
-            $deduction_amount = $this->center_model->get_assign_courses(
-                $this->post('center_id'),
-                ['course_id' => $this->post('course_id')]
-            );
-            if (PATH == 'sewaedu')
-                $deduction_amount = $deduction_amount->row('com_course_fee');
-            else
-                $deduction_amount = $deduction_amount->row('course_fee');
-            $close_balance = $this->ki_theme->wallet_balance();
-            $close_balance = $close_balance - $deduction_amount;
-            if ($close_balance < 0 or $close_balance < 0) {
-                $this->response('html', 'Wallet Balance is Low..');
-                exit;
+        try {
+
+            $data = $this->post();
+            if (CHECK_PERMISSION('ENROLLMENT_USING_COURSE_CODE')) {
+                $data['roll_no'] = $this->gen_roll_no_using_course_code($_POST['course_id']);//mt_rand(111111, 999999);
+                $this->config->load('form_validation', TRUE);
+                $rules = $this->config->item('student/add', 'form_validation');
+                $this->response('rules', $rules);
+                foreach ($rules as $key => $rule) {
+                    if ($rule['field'] == 'roll_no') {
+                        unset($rules[$key]);
+                        break;
+                    }
+                }
+                $this->form_validation->set_rules($rules);
+                // $this->response('roll_no', $data['roll_no']);
+                // throw new Exception('');
             }
-        } elseif ($walletSystem = ((CHECK_PERMISSION('WALLET_SYSTEM') && $this->center_model->isCenter()))) {
-            $deduction_amount = $this->ki_theme->get_wallet_amount('student_admission_fees');
-            $close_balance = $this->ki_theme->wallet_balance();
-            if ($close_balance < 0) {
-                $this->response('html', 'Your Wallet Balance is Low..');
-                exit;
-            }
-        }
-        $cordinateArray = [];
-        if (CHECK_PERMISSION('CO_ORDINATE_SYSTEM') && $this->center_model->isCenter()) {
-            $get = $this->center_model->get_assign_courses($owner_id, ['course_id' => $this->post('course_id')], 'center');
-            if ($get->num_rows()) {
-                $getROw = $get->row();
-                $cordinateArray = [
-                    'user_id' => $getROw->added_by_id,
-                    'commission' => $getROw->commission,
-                    'course_id' => $this->post('course_id'),
-                    'center_id' => $owner_id,
-                    'course_fee' => $getROw->course_fee,
-                    'percentage' => $getROw->percentage
-                ];
-                $courseFees = $getROw->course_fee;
+            $owner_id = $this->get_data('owner_id');
+            if ($walletSystem = (CHECK_PERMISSION('WALLET_SYSTEM_COURSE_WISE') && $this->center_model->isCenter())) {
+                $deduction_amount = $this->center_model->get_assign_courses(
+                    $this->post('center_id'),
+                    ['course_id' => $this->post('course_id')]
+                );
+                if (PATH == 'sewaedu')
+                    $deduction_amount = $deduction_amount->row('com_course_fee');
+                else
+                    $deduction_amount = $deduction_amount->row('course_fee');
                 $close_balance = $this->ki_theme->wallet_balance();
-                $close_balance = $close_balance - $courseFees;
+                $close_balance = $close_balance - $deduction_amount;
+                if ($close_balance < 0 or $close_balance < 0) {
+                    throw new Exception('Wallet Balance is Low..');
+                }
+            } elseif ($walletSystem = ((CHECK_PERMISSION('WALLET_SYSTEM') && $this->center_model->isCenter()))) {
+                $deduction_amount = $this->ki_theme->get_wallet_amount('student_admission_fees');
+                $close_balance = $this->ki_theme->wallet_balance();
                 if ($close_balance < 0) {
-                    $this->response('html', 'Wallet Balance is Low..' . $courseFees);
-                    exit;
-                }
-            } else {
-                $this->response('html', 'Course not Found.');
-                exit;
-            }
-        }
-
-        $data = $this->post();
-        $examination = [];
-        if (isset($data['examination'])) {
-            $examination = $data['examination'];
-            unset($data['examination']);
-        }
-        if (isset($data['referral_id'])) {
-            $referral_id = $data['referral_id'];
-            unset($data['referral_id']);
-        }
-
-        $data['status'] = 0;
-        $data['added_by'] = isset($data['added_by']) ? $data['added_by'] : 'admin';
-        $data['admission_type'] = isset($data['admission_type']) ? $data['admission_type'] : 'offline';
-        // $data['type'] = 'center';
-        $email = $data['email_id'];
-        unset($data['email_id'], $data['upload_docs']);
-        $data['email'] = $email;
-        $upload_docs_data = [];
-        $upload_docs = $this->post('upload_docs');
-        if (isset($upload_docs['title'])) {
-            foreach ($upload_docs['title'] as $index => $file_index_name) {
-                if (!empty($_FILES['upload_docs']['name']['file'][$index])) {
-                    $file = $_FILES['upload_docs']; //['file'][$index];
-                    if ($file['error']['file'][$index] == UPLOAD_ERR_OK) {
-                        $encryptedFileName = substr(hash('sha256', uniqid(mt_rand(), true)), 0, 10) . '_' . basename($file['name']['file'][$index]);
-                        // Build the full destination path, including the encrypted file name
-                        $destination = UPLOAD . $encryptedFileName;
-                        move_uploaded_file($file['tmp_name']['file'][$index], $destination);
-                        $upload_docs_data[$file_index_name] = $encryptedFileName;
-                    }
+                    throw new Exception('Your Wallet Balance is Low..');
                 }
             }
-        }
-        if (isset($_POST['session_id']))
-            $data['session_id'] = $_POST['session_id'];
-        $data['adhar_front'] = $this->file_up('adhar_card');
-        if (CHECK_PERMISSION('STUDENT_ADHAR_BACK'))
-            $data['adhar_back'] = $this->file_up('adhar_back');
-        // $data['adhar_back'] = $this->file_up('adhar_back');
-        $data['image'] = $this->file_up('image');
-        $data['upload_docs'] = json_encode($upload_docs_data);
-        $data['status'] = true;
-        $data['marital_status'] = $this->post('marital_status');
-        $data['medium'] = $this->post('medium');
-        $data['category'] = $this->post('category');
-        $data['admission_status'] = true;
-        if ($this->form_validation->run()) {
-            $this->db->insert('students', $data);
-            $student_id = $this->db->insert_id();
-            if (CHECK_PERMISSION('STUDENT_EXAMINATION_FORM') && table_exists('student_examiniation_passed') && isset($examination['passed'])) {
-                foreach ($examination['passed'] as $index => $passed) {
-                    if (
-                        !empty($passed) || !empty($examination['name_of_stream'][$index]) ||
-                        !empty($examination['board_or_university'][$index]) ||
-                        !empty($examination['year_of_passing'][$index]) ||
-                        !empty($examination['marks_obtained'][$index]) ||
-                        !empty($examination['percentage_marks'][$index])
-                    ) {
-                        $newData = [
-                            'student_id' => $student_id,
-                            'passed' => $passed,
-                            'name_of_stream' => $examination['name_of_stream'][$index],
-                            'board_or_university' => $examination['board_or_university'][$index],
-                            'year_of_passing' => $examination['year_of_passing'][$index],
-                            'marks_obtained' => $examination['marks_obtained'][$index],
-                            'percentage_marks' => $examination['percentage_marks'][$index],
-                        ];
-                        $this->db->insert('student_examiniation_passed', $newData);
-                    }
-                }
-            }
-            if ($walletSystem) {
-                $data = [
-                    'center_id' => $this->center_model->loginId(),
-                    'amount' => $deduction_amount,
-                    'o_balance' => ($close_balance + $deduction_amount),
-                    'c_balance' => $close_balance,
-                    'type' => 'admission',
-                    'description' => 'Student Addmission',
-                    'type_id' => $student_id,
-                    'added_by' => 'center',
-                    'order_id' => strtolower(generateCouponCode(12)),
-                    'status' => 1,
-                    'wallet_status' => 'debit'
-                ];
-                $this->db->insert('wallet_transcations', $data);
-                $this->response('res', $this->db->insert_id());
-                $this->center_model->update_wallet($data['center_id'], $close_balance);
-            }
+            $cordinateArray = [];
             if (CHECK_PERMISSION('CO_ORDINATE_SYSTEM') && $this->center_model->isCenter()) {
-                $cordinateArray['type_id'] = $student_id;
-                $this->db->insert('commissions', $cordinateArray);
+                $get = $this->center_model->get_assign_courses($owner_id, ['course_id' => $this->post('course_id')], 'center');
+                if ($get->num_rows()) {
+                    $getROw = $get->row();
+                    $cordinateArray = [
+                        'user_id' => $getROw->added_by_id,
+                        'commission' => $getROw->commission,
+                        'course_id' => $this->post('course_id'),
+                        'center_id' => $owner_id,
+                        'course_fee' => $getROw->course_fee,
+                        'percentage' => $getROw->percentage
+                    ];
+                    $courseFees = $getROw->course_fee;
+                    $close_balance = $this->ki_theme->wallet_balance();
+                    $close_balance = $close_balance - $courseFees;
+                    if ($close_balance < 0) {
+                        throw new Exception('Wallet Balance is Low..' . $courseFees);
+                    }
+                } else {
+                    throw new Exception('Course not Found.');
+                }
             }
-            if (CHECK_PERMISSION('REFERRAL_ADMISSION') && $this->center_model->isAdmin() && isset($_POST['referral_id'])) {
-                $this->db->insert('referral_coupons', [
-                    'student_id' => $student_id,
-                    'coupon_code' => generateCouponCode(),
-                    'coupon_by' => $referral_id,
-                    'amount' => 500
-                ]);
-            }
-            $this->response(
-                'status',
-                true
-            );
-        } else
-            $this->response('html', $this->errors());
 
+            $examination = [];
+            if (isset($data['examination'])) {
+                $examination = $data['examination'];
+                unset($data['examination']);
+            }
+            if (isset($data['referral_id'])) {
+                $referral_id = $data['referral_id'];
+                unset($data['referral_id']);
+            }
+
+            $data['status'] = 0;
+            $data['added_by'] = isset($data['added_by']) ? $data['added_by'] : 'admin';
+            $data['admission_type'] = isset($data['admission_type']) ? $data['admission_type'] : 'offline';
+            // $data['type'] = 'center';
+            $email = $data['email_id'];
+            unset($data['email_id'], $data['upload_docs']);
+            $data['email'] = $email;
+            $upload_docs_data = [];
+            $upload_docs = $this->post('upload_docs');
+            if (isset($upload_docs['title'])) {
+                foreach ($upload_docs['title'] as $index => $file_index_name) {
+                    if (!empty($_FILES['upload_docs']['name']['file'][$index])) {
+                        $file = $_FILES['upload_docs']; //['file'][$index];
+                        if ($file['error']['file'][$index] == UPLOAD_ERR_OK) {
+                            $encryptedFileName = substr(hash('sha256', uniqid(mt_rand(), true)), 0, 10) . '_' . basename($file['name']['file'][$index]);
+                            // Build the full destination path, including the encrypted file name
+                            $destination = UPLOAD . $encryptedFileName;
+                            move_uploaded_file($file['tmp_name']['file'][$index], $destination);
+                            $upload_docs_data[$file_index_name] = $encryptedFileName;
+                        }
+                    }
+                }
+            }
+            if (isset($_POST['session_id']))
+                $data['session_id'] = $_POST['session_id'];
+            $data['adhar_front'] = $this->file_up('adhar_card');
+            if (CHECK_PERMISSION('STUDENT_ADHAR_BACK'))
+                $data['adhar_back'] = $this->file_up('adhar_back');
+            // $data['adhar_back'] = $this->file_up('adhar_back');
+            $data['image'] = $this->file_up('image');
+            $data['upload_docs'] = json_encode($upload_docs_data);
+            $data['status'] = true;
+            $data['marital_status'] = $this->post('marital_status');
+            $data['medium'] = $this->post('medium');
+            $data['category'] = $this->post('category');
+            $data['admission_status'] = true;
+
+            if ($this->form_validation->run()) {
+                $this->db->insert('students', $data);
+                $student_id = $this->db->insert_id();
+                if (CHECK_PERMISSION('STUDENT_EXAMINATION_FORM') && table_exists('student_examiniation_passed') && isset($examination['passed'])) {
+                    foreach ($examination['passed'] as $index => $passed) {
+                        if (
+                            !empty($passed) || !empty($examination['name_of_stream'][$index]) ||
+                            !empty($examination['board_or_university'][$index]) ||
+                            !empty($examination['year_of_passing'][$index]) ||
+                            !empty($examination['marks_obtained'][$index]) ||
+                            !empty($examination['percentage_marks'][$index])
+                        ) {
+                            $newData = [
+                                'student_id' => $student_id,
+                                'passed' => $passed,
+                                'name_of_stream' => $examination['name_of_stream'][$index],
+                                'board_or_university' => $examination['board_or_university'][$index],
+                                'year_of_passing' => $examination['year_of_passing'][$index],
+                                'marks_obtained' => $examination['marks_obtained'][$index],
+                                'percentage_marks' => $examination['percentage_marks'][$index],
+                            ];
+                            $this->db->insert('student_examiniation_passed', $newData);
+                        }
+                    }
+                }
+                if ($walletSystem) {
+                    $data = [
+                        'center_id' => $this->center_model->loginId(),
+                        'amount' => $deduction_amount,
+                        'o_balance' => ($close_balance + $deduction_amount),
+                        'c_balance' => $close_balance,
+                        'type' => 'admission',
+                        'description' => 'Student Addmission',
+                        'type_id' => $student_id,
+                        'added_by' => 'center',
+                        'order_id' => strtolower(generateCouponCode(12)),
+                        'status' => 1,
+                        'wallet_status' => 'debit'
+                    ];
+                    $this->db->insert('wallet_transcations', $data);
+                    $this->response('res', $this->db->insert_id());
+                    $this->center_model->update_wallet($data['center_id'], $close_balance);
+                }
+                if (CHECK_PERMISSION('CO_ORDINATE_SYSTEM') && $this->center_model->isCenter()) {
+                    $cordinateArray['type_id'] = $student_id;
+                    $this->db->insert('commissions', $cordinateArray);
+                }
+                if (CHECK_PERMISSION('REFERRAL_ADMISSION') && $this->center_model->isAdmin() && isset($_POST['referral_id'])) {
+                    $this->db->insert('referral_coupons', [
+                        'student_id' => $student_id,
+                        'coupon_code' => generateCouponCode(),
+                        'coupon_by' => $referral_id,
+                        'amount' => 500
+                    ]);
+                }
+                $this->response(
+                    'status',
+                    true
+                );
+            } else
+                throw new Exception($this->errors());
+        } catch (Exception $e) {
+            $this->response('html', $e->getMessage());
+        }
     }
     function genrate_a_new_rollno()
     {
@@ -353,7 +369,7 @@ class Student extends Ajax_Controller
                         if ($type->id == 1)
                             $this->ki_theme->checked(true);
                     }
-                    $html .= $this->ki_theme->html("$type->type &nbsp;&nbsp;")->radio('attendance_type_id[' . $std->roll_no . ']', $type->id, 'd-inline-block allTypes type-'.$type->id);
+                    $html .= $this->ki_theme->html("$type->type &nbsp;&nbsp;")->radio('attendance_type_id[' . $std->roll_no . ']', $type->id, 'd-inline-block allTypes type-' . $type->id);
                 }
                 $html .= '</td>    
                        <td>

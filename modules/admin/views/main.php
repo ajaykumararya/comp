@@ -62,6 +62,8 @@
     <script src="{base_url}assets/js/widgets.bundle.js"></script>
     <script src="{base_url}assets/js/custom/widgets.js"></script>
     <script src="{base_url}assets/custom/jquery.nestable.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootbox@5.5.2/bootbox.min.js"></script>
+
     <style>
         .file-btn input {
             display: none;

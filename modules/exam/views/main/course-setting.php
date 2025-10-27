@@ -1,6 +1,6 @@
 <?php
-$exams = $this->exam_model->list_setting_courses();
-$courses = $this->exam_model->get_course();
+$exams = $this->exam_model2->list_setting_courses();
+$courses = $this->exam_model2->get_course();
 // pre($exams);
 ?>
 <div class="row">
