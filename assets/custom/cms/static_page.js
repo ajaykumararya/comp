@@ -282,12 +282,14 @@ document.addEventListener('DOMContentLoaded', function (e) {
         var id = $(this).closest('tr').data('id');
         var field = $(this).data('column');
         var value = $(this).text().trim();
+        var fieldinput  = this;
 
         if(id && field){
             $.AryaAjax({
                 url : 'cms/update-table-edit-setting',
                 data : {id,field,value}
             }).then((re) => {
+                $(fieldinput).removeAttr('contenteditable');
                 if(re.status)
                     toastr.success('Setting Update Successfully..');
                 showResponseError(re);

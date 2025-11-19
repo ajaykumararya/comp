@@ -460,7 +460,9 @@ class Document extends MY_Controller
         $get = $this->student_model->student_certificates(['id' => $this->id]);
         if ($get->num_rows()) {
             $certificate = ($get->row_array());
-            $admissionTime = strtotime($certificate['admission_date']);
+            $admission = new DateTime($certificate['admission_date']);
+            $admission->modify('first day of this month');
+            $admissionTime = strtotime($admission->format('d-m-Y'));
             $this->set_data('from_date', date('M Y', $admissionTime));
             $this->set_data('serial_no', date("Y", $admissionTime) . str_pad($certificate['student_id'], 3, '0', STR_PAD_LEFT));
             $toDateString = strtotime($certificate['createdOn']);
@@ -474,6 +476,7 @@ class Document extends MY_Controller
                 $toDateString = strtotime("+$duration years", $admissionTime);
             }
             $toDateString = strtotime('-1 month', $toDateString);
+
             $this->set_data('to_date', date('M Y', $toDateString));
             $this->set_data('exam_conduct_date', '');
             if (isset($certificate['exam_conduct_date']))

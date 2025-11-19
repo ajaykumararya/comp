@@ -100,7 +100,8 @@ class MY_Controller extends MX_Controller
                 'owner_id' => $centreRow->id,
                 'owner_type' => $type,
                 'type' => $type,
-                'wallet' => @$centreRow->wallet
+                'wallet' => @$centreRow->wallet,
+                'exam_2_type' => @$centreRow->exam_2_type ?? 0
             ]);
             $this->ki_theme->set_wallet(@$centreRow->wallet);
         }
@@ -143,6 +144,19 @@ class MY_Controller extends MX_Controller
         //         ]
         //     ]);
         // }
+        
+        if (defined('DB_EXAM')) {
+            $field = 'exam_2_type';
+            $checkField = $this->build_db->field_exists('centers', $field);
+            if (!$checkField) {
+                $this->build_db->add_field('centers', [
+                    $field => [
+                        'type' => 'INT',
+                        'default' => 0
+                    ]
+                ]);
+            }
+        }
         if (CHECK_PERMISSION(strtoupper('ENROLLMENT_USING_COURSE_CODE'))) {
             $fields = ['course_code'];
             foreach ($fields as $field) {
@@ -545,6 +559,8 @@ class MY_Controller extends MX_Controller
     function student_view($view, $data = [])
     {
         if ($this->student_model->isStudent()) {
+            if(defined('DB_EXAM'))
+                    $this->db->select('ce.exam_2_type');
             $this->set_data($this->student_model->get_student_via_id($this->student_model->studentId())->row_array());
             $data['menu_item'] = $this->ki_theme->get_student_menu();
             $this->set_data($data);
@@ -706,7 +722,7 @@ class Site_Controller extends MY_Controller
             $this->set_data($data);
         if (isset($this->public_data['title'])) {
             $this->ki_theme->set_title($this->public_data['title'], true);
-            // $this->set_data('head', $this->parse('head', [], true));
+            $this->set_data('head', $this->parse('head', [], true));
         }
         // pre($this->public_data,true);
         $this->public_data['output'] = is_string($data) ? $view : ($this->parse($view, $this->public_data, true));

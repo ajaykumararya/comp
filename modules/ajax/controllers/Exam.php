@@ -151,6 +151,7 @@ class Exam extends Ajax_Controller
         $this->db->where('id', $this->post('ques_id'))->delete('exam_questions');
         $this->db->where($this->post())->delete('exam_ques_answers');
         $this->response('status', true);
+        $this->response('html', 'Exam Delete successfully.');
     }
     function remove_answer()
     {

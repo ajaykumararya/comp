@@ -1,6 +1,25 @@
 <?php
 class Exam_model2 extends MY_Model
 {
+    function last_query(){
+        return $this->examdb->last_query();
+    }
+    function get_sub_papers($where){
+        $this->examdb->order_by('start_time','ASC');
+        return $this->examdb->where($where)->get('paper_subjects');
+    }
+    function list_exams($where)
+    {
+        return $this->examdb->where($where)->get('papers');
+    }
+    function update_exam_setting_type($setting_type, $center_id)
+    {
+        return $this->db->update('centers', [
+            'exam_2_type' => $setting_type
+        ], [
+            'id' => $center_id
+        ]);
+    }
     function check()
     {
         $num = $this->examdb->get('courses');
@@ -15,8 +34,10 @@ class Exam_model2 extends MY_Model
     {
         return $this->examdb->get_where('courses', array('course_id' => $course_id));
     }
-    function get_course()
+    function get_course($id = 0)
     {
+        if ($id)
+            $this->db->where('id', $id);
         return $this->db->where([
             'status' => 1,
             'isDeleted' => 0
@@ -64,6 +85,8 @@ class Exam_model2 extends MY_Model
     }
     function add_topic($title)
     {
+        $data = ['title' => $title];
+        // if (CHECK_PERMISSION(''))
         return $this->examdb->insert('topics', ['title' => $title]);
     }
     function update_topic($data, $id)
@@ -171,6 +194,36 @@ class Exam_model2 extends MY_Model
     function paper_questions($paper_id)
     {
         return $paper_id;
+    }
+    function save_exam_subjects($allSubjectData)
+    {
+        return $this->examdb->insert_batch('paper_subjects', $allSubjectData);
+    }
+    function udpate_exam_subjects($allSubjectData)
+    {
+        return $this->examdb->update_batch('paper_subjects', $allSubjectData, 'id');
+    }
+    function get_exam_subjects($condition)
+    {
+        return $this->examdb->where($condition)->get('paper_subjects');
+    }
+    function save_exam($data)
+    {
+        $this->examdb->insert('papers', $data);
+        return $this->examdb->insert_id();
+    }
+    function update_exam($data, $paper_id)
+    {
+        return $this->examdb->update('papers', $data, ['id' => $paper_id]);
+    }
+    function get_exam_papers($condition)
+    {
+        $this->db->order_by('id', 'DESC');
+        return $this->examdb->where($condition)->get('papers');
+    }
+    function update_exam_subjects($data)
+    {
+        return $this->examdb->update_batch('paper_subjects', $data, 'id');
     }
 
 }

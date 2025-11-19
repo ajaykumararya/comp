@@ -10,12 +10,24 @@ const myeditor = $(".aryaeditor");
 const ki_modal = $('#mymodal');
 const defaultStudent = base_url + 'assets/media/student.png';
 const CURRENT_URL = window.location.protocol + "//" + window.location.host + window.location.pathname;
+document.querySelectorAll('[required][required-message]').forEach(function (select) {
+    let msg = $(select).attr('required-message');
+    if (msg) {
+        select.oninvalid = function (e) {
+            e.target.setCustomValidity(msg);
+        };
+        select.oninput = function (e) {
+            e.target.setCustomValidity('');
+        };
+    }
+});
 /*
 Handlebars.registerHelper('stripHTML', function(text) {
     const div = document.createElement("div");
     div.innerHTML = text;
     return div.textContent || div.innerText || "";
 });
+
 */
 // console.log(typeof content_css);
 var MYEditorCss = [];
@@ -868,6 +880,10 @@ const loadSomeFuncation = () => {
             maxDate: "today"  // Set a maximum date if needed
             // Additional options can be set as needed
         });
+        $(".date-and-time-picker").flatpickr({
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+        });
     }
     $('input[type="number"]').on('keydown', function (e) {
         // Get the key code of the pressed key
@@ -1289,6 +1305,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 html += `<option value="${i}">${course_duration_humnize(i, durationType, false)}</option>`;
             }
         }
+        // alert(durationType);
         $('.set-duration > select').html(html);
         $('.set-duration > input').val(durationType);
     });

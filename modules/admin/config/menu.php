@@ -302,7 +302,14 @@ if (CHECK_PERMISSION('CENTRE_ONLY_ADD_STUDENT') && OnlyForCentre()) {
                 'type' => 'get_student_certificate',
                 'icon' => array('tablet-text-up', 3),
                 'url' => 'student/get-certificate',
-            )
+            ),
+            array(
+                'label' => 'Student Notification',
+                'type' => 'notifications',
+                'icon' => array('tablet-text-up', 3),
+                'url' => 'student/notifications',
+                'condition' => table_exists('manual_notifications')
+            ),
         )
     );
 
@@ -513,6 +520,13 @@ if (CHECK_PERMISSION('CENTRE_ONLY_ADD_STUDENT') && OnlyForCentre()) {
                 )
             ),
             array(
+                'label' => 'Student Notification',
+                'type' => 'notifications',
+                'icon' => array('tablet-text-up', 3),
+                'url' => 'student/notifications',
+                'condition' => table_exists('manual_notifications')
+            ),
+            array(
                 'label' => 'ISO Certificate',
                 'type' => 'iso_certificate',
                 'icon' => ['notepad', 5],
@@ -684,14 +698,14 @@ $config['exam_menu'] = array(
 
 $config['exam_menu_online'] = array(
     'title' => 'Online Exam Section',
-    'condition' => OnlyForAdmin() && defined('DB_EXAM'),
+    'condition' => defined('DB_EXAM'),
     'menu' => array(
-        array(
-            'url' => 'exam/main/course-setting',
-            'label' => 'Course Setting',
-            'type' => 'course_setting',
-            'icon' => array('setting-2', 2)
-        ),
+        // array(
+        //     'url' => 'exam/main/course-setting',
+        //     'label' => 'Course Setting',
+        //     'type' => 'course_setting',
+        //     'icon' => array('setting-2', 2)
+        // ),
         array(
             'label' => 'Exam(S)',
             'type' => 'exams',
@@ -701,13 +715,15 @@ $config['exam_menu_online'] = array(
                     'url' => 'exam/main/manage-topics',
                     'label' => 'Manage Topic',
                     'type' => 'manage_topic',
-                    'icon' => array('abstract-36', 2)
+                    'icon' => array('abstract-36', 2),
+                    'condition' => OnlyForAdmin()
                 ),
                 array(
                     'url' => 'exam/main/manage-questions',
                     'label' => 'Manage Question(s)',
                     'icon' => array('questionnaire-tablet', 2),
-                    'type' => 'manage_questions'
+                    'type' => 'manage_questions',
+                    'condition' => OnlyForAdmin()
                 ),
                 array(
                     'url' => 'exam/main/manage-papers',

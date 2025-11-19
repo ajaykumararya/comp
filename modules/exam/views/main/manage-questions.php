@@ -2,6 +2,23 @@
     .list-group {
         --bs-list-group-bg: transparent;
     }
+    .hover-scroll-x {
+  overflow-x: auto !important;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin; /* Firefox ke liye */
+}
+
+.hover-scroll-x::-webkit-scrollbar {
+  height: 6px; /* Scrollbar visible bana do */
+}
+
+.hover-scroll-x::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
 </style>
 <div class="row">
     <div class="col-md-12" id="examApp">
@@ -38,8 +55,22 @@
                 // pre($allQuestions);
                 if ($listTopics->num_rows()) {
                     ?>
-                    <div class="mb-5 hover-scroll-x pt-5">
+                    <div class="hover-scroll-x p-5" >
                         <div class="d-grid">
+                            <select class="form-select search-topic mb-3 w-25">
+                                <?php
+                                $i = 1;
+                                foreach ($listTopics->result() as $topic) {
+                                     $myCount = isset($allQuestions[$topic->id]) ? count($allQuestions[$topic->id]) : 0;
+                                    ?>
+                                    <option value="<?= $topic->id ?>" <?=$i == 1 ? 'selected' : ''?>><?= $topic->title ?> (<?=$myCount?>)</option>
+                                    <?php
+                                    $i++;
+                                }
+                                ?>
+                            </select>
+                            <?php
+                            /*
                             <ul class="nav nav-tabs flex-nowrap text-nowrap">
                                 <?php
                                 $i = 1;
@@ -56,7 +87,10 @@
                                     $i++;
                                 }
                                 ?>
-                            </ul>
+                            </ul> 
+                            <?php
+                            */
+                            ?>
                         </div>
                     </div>
 
@@ -169,6 +203,16 @@
     </label>
 </script>
 <script>
+    $(document).on('change','.search-topic',function(){
+        var topic_id = $(this).val();
+        $('.nav-tabs .nav-link').removeClass('active');
+        $('.tab-content .tab-pane').removeClass('show active');
+        if(topic_id){
+            var index = $(this).find('option:selected').index();
+            $('.nav-tabs .nav-link').eq(index).addClass('active');
+            $('.tab-content .tab-pane').eq(index).addClass('show active');
+        }
+    });
     (function ($) {
         $.fn.examBuilder = function (options) {
             const settings = $.extend({
@@ -327,6 +371,7 @@
         // if($(this).hasClass())
         e.preventDefault();
         var quesData = ($(this).closest('li').data('param'));
+        // alert(33)
         // log(quesData);
         if ($(this).hasClass('edit')) {
             ki_modal.find('.add-answer').remove();

@@ -64,8 +64,8 @@
                 <?php
                 if ($this->center_model->isCenter())
                     $this->db->where(['sender_id' => $this->center_model->loginId(), 'send_by' => 'center']);
-
-                $this->db->where('receiver_id', $student_id);
+                if ($student_id)
+                    $this->db->where('(receiver_id = ' . $student_id . ' or receiver_id = 0)');
                 $this->db->where('receiver_user', 'student');
                 $get = $this->db->order_by('id', 'DESC')->get('manual_notifications');
                 if ($get->num_rows()) {
@@ -112,10 +112,10 @@
                                                     </div>
                                                     <div class="d-flex align-items-center me-3">
                                                         ' .
-                                                        ($isAdminorCenter ?
-                                                            ($row->seen ? label($row->seen . ' Times Seen', 'primary') : label('Unseen', 'danger'))
-                                                            : ''
-                                                        ) . '
+                                        ($isAdminorCenter ?
+                                            ($row->seen ? label($row->seen . ' Times Seen', 'primary') : label('Unseen', 'danger'))
+                                            : ''
+                                        ) . '
 
                                                     </div>
                                                 </div>

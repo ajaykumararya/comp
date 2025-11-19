@@ -237,7 +237,9 @@ if (isset($blog_id)) {
                     <div class="blog-loop-inner blog-loop-view-grid four-columns" id="blog-list">
 
                     </div>
-                    <center><div class="pagination" id="pagination"></div></center>
+                    <center>
+                        <div class="pagination" id="pagination"></div>
+                    </center>
                 </div>
             </div>
         </div>
@@ -367,9 +369,11 @@ if (isset($blog_id)) {
             });
         }
 
-        // init
-        renderPosts();
-        renderLatestPosts();
+        window.onload = function () {
+            renderPosts();
+            renderLatestPosts();
+            document.title = 'Blogs | {title}';
+        };
     </script>
     <br>
     <?php

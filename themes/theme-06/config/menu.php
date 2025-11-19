@@ -3,7 +3,27 @@ $menu = array(
     'label' => 'Static Pages',
     'type' => 'static_page_area',
     'icon' => array('file', 3),
-    'submenu' => array(
+    'submenu' => array(        
+         array(
+            'label' => 'Blog System',
+            'type' => 'blog_system',
+            'icon' => ['file', 4],
+            'submenu' => [
+                [
+                    'label' => 'Properties',
+                    'type' => 'blog-properties',
+                    'icon' => ['file', 4],
+                    'url' => 'cms/static-page/blog-properties',
+                    'setINpage' => false
+                ],
+                [
+                    'label' => 'Manage Blog',
+                    'type' => 'manage-blog',
+                    'icon' => ['file', 4],
+                    'url' => 'cms/static-page/manage-blog'
+                ]
+            ]
+        ),
         array(
             'label' => 'List All Course(S) ',
             'type' => 'list-all-courses',

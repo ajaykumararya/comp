@@ -91,6 +91,13 @@ class Center extends MY_Controller
                 ];
             }
         }
+        if(defined('DB_EXAM')){
+            $tabs['exam-setting'] = [
+                'title' => 'Exam Setting',
+                'icon' => array('setting-2', 5),
+                'url' => 'exam-setting'
+            ];
+        }
         if (isset($tabs[$tab])) {
             // $this->ki_theme->set_title($tabs[$tab]['title']);
             $this->ki_theme->set_breadcrumb($tabs[$tab]);

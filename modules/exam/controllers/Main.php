@@ -32,10 +32,10 @@ class Main extends MY_Controller
     }
     function import_questions()
     {
-        if(file_exists(FCPATH.'assets/dammy-MCQ.csv')){
+        if (file_exists(FCPATH . 'assets/dammy-MCQ.csv')) {
             $this->ki_theme->breadcrumb_action_html(
-            $this->ki_theme->set_class('btn btn-info btn-sm')->set_attribute('download')->add_action('Download Dammy CSV File', base_url('assets/dammy-MCQ.csv'))
-        );
+                $this->ki_theme->set_class('btn btn-info btn-sm')->set_attribute('download')->add_action('Download Dammy CSV File', base_url('assets/dammy-MCQ.csv'))
+            );
         }
         // if ($this->input->post()) {
         //     if (isset($_FILES['file']['name']) && $_FILES['file']['name'] != '') {
@@ -78,9 +78,29 @@ class Main extends MY_Controller
         //         echo "No file selected!";
         //     }
         // } else
-            $this->access_method()->e_view('import-questions');
+        $this->access_method()->e_view('import-questions');
     }
-    function manage_papers(){
+    function manage_papers()
+    {
+        if ($this->uri->segment(4)) {
+            $this->set_data(
+                'indata',
+                $this->token->decode($this->uri->segment(4))
+            );
+            $this->access_method();
+            $this->ki_theme->set_title('Manage Exam Paper',true);
+            $this->ki_theme->set_breadcrumb([
+                'page_name' => 'Manage Exam Paper',
+                'icon' => ['file',2],
+            ]);
+        }
+        if ($this->input->post()) {
+            $this->set_data(
+                'indata',
+                $this->input->post()
+            );
+        }
+
         $this->e_view('manage-papers');
     }
 

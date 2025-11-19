@@ -16,13 +16,16 @@
                     <tbody>
                         <?php
                         $i = 1;
+                        $settingButtons  = ['student_admission','paid_registration_form'];
                         foreach (config_item('forms') as $index => $form) {
                             echo '<tr>
                                     <td>' . $i++ . '.</td>
                                     <td>' . $form . '</td>
-                                    <td class="p-4">'.$this->ki_theme->drawer_button('form',$index,$form);
-                                    if($index == 'student_admission'){
-                                        echo '<button class="btn btn-primary m-2 student-admission-setting"><i class="fa fa-cog"></i></button>';
+                                    <td class="p-4">'.
+                                    
+                                    $this->ki_theme->drawer_button('form',$index,$form);
+                                    if(in_array($index,$settingButtons)){
+                                        echo '<button class="btn btn-primary m-2 form-setting" data-type="'.$index.'"><i class="fa fa-cog"></i></button>';
                                     }
                                     echo '</td>
                                 </tr>';

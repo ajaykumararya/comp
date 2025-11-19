@@ -114,7 +114,7 @@ class Ajax extends Ajax_Controller
                     } else
                         throw new Exception('Current Password is not matched.');
                 } else
-                    throw new Exception('');
+                    throw new Exception('User not found..');
             }
         } catch (Exception $e) {
             $this->response('html', $e->getMessage());

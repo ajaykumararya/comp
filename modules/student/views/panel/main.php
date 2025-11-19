@@ -46,10 +46,12 @@
         tr .eye-btn {
             display: none;
         }
-        .click-to-copy{
+
+        .click-to-copy {
             user-select: none;
             cursor: pointer;
         }
+
         tr:hover .eye-btn {
             display: inline-block;
         }
@@ -279,74 +281,97 @@
                             <!--end::Theme mode-->
                             <!--begin::User-->
                             <div class="d-flex align-items-center me-lg-n2 ms-1 ms-lg-3"
-                                    id="kt_header_user_menu_toggle">
-                                    <!--begin::Menu wrapper-->
-                                    <div class="btn btn-icon btn-active-light-primary btn-custom w-30px h-30px w-md-40px h-md-40px"
-                                        data-kt-menu-trigger="click" data-kt-menu-attach="parent"
-                                        data-kt-menu-placement="bottom-end">
-                                        <img class="h-30px w-30px rounded" src="{base_url}upload/{image}" alt="" />
-                                    </div>
+                                id="kt_header_user_menu_toggle">
+                                <!--begin::Menu wrapper-->
+                                <div class="btn btn-icon btn-active-light-primary btn-custom w-30px h-30px w-md-40px h-md-40px position-relative"
+                                    data-kt-menu-trigger="click" data-kt-menu-attach="parent"
+                                    data-kt-menu-placement="bottom-end">
+                                    <img class="h-30px w-30px rounded" src="{base_url}upload/{image}" alt="" />
+                                    <?php
+                                    $notificationCount = 0;
+                                    if ($isNotify = ($this->center_model->isStudent() && table_exists('manual_notifications'))) {
 
-                                    <!--begin::User account menu-->
-                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px"
-                                        data-kt-menu="true">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <div class="menu-content d-flex align-items-center px-3">
-                                                <!--begin::Avatar-->
-                                                <div class="symbol symbol-50px me-5">
-                                                    <img alt="Logo" src="{base_url}upload/{image}" />
-                                                </div>
-                                                <!--end::Avatar-->
+                                        $notificationCount = $this->ki_theme->count_manual_notification(
+                                            "(receiver_id = " . $this->student_model->studentId() . " OR receiver_id = 0) AND receiver_user = 'student'");
+                                        if ($notificationCount)
+                                            echo '<span class="badge badge-info animation-blink position-absolute translate-middle top-10 start-80">' . $notificationCount . '</span>';
+                                    }
 
-                                                <!--begin::Username-->
-                                                <div class="d-flex flex-column">
-                                                    <div class="fw-bold d-flex align-items-center fs-5">
-                                                        {student_name}
-                                                    </div>
-
-                                                    <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">
-                                                        {roll_no} </a>
-                                                </div>
-                                                <!--end::Username-->
-                                            </div>
-                                        </div>
-                                        <!--end::Menu item-->
-
-                                        <!--begin::Menu separator-->
-                                        <div class="separator my-2"></div>
-                                        <!--end::Menu separator-->
-
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-5">
-                                            <a href="{base_url}student/profile" class="menu-link px-5">
-                                                My Profile
-                                            </a>
-                                        </div>
-                                        <!--end::Menu item-->
-
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-5">
-                                            <a href="{base_url}student/change-password" class="menu-link px-5">
-                                                <span class="menu-text">Change Password</span>
-
-                                            </a>
-                                        </div>
-                                        <!--end::Menu item-->
-
-
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-5">
-                                            <a href="{base_url}student/sign-out" class="menu-link px-5">
-                                                Sign Out
-                                            </a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::User account menu-->
-                                    <!--end::Menu wrapper-->
+                                    ?>
                                 </div>
-                                <!--end::User -->
+
+                                <!--begin::User account menu-->
+                                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px"
+                                    data-kt-menu="true">
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-3">
+                                        <div class="menu-content d-flex align-items-center px-3">
+                                            <!--begin::Avatar-->
+                                            <div class="symbol symbol-50px me-5">
+                                                <img alt="Logo" src="{base_url}upload/{image}" />
+                                            </div>
+                                            <!--end::Avatar-->
+
+                                            <!--begin::Username-->
+                                            <div class="d-flex flex-column">
+                                                <div class="fw-bold d-flex align-items-center fs-5">
+                                                    {student_name}
+                                                </div>
+
+                                                <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">
+                                                    {roll_no} </a>
+                                            </div>
+                                            <!--end::Username-->
+                                        </div>
+                                    </div>
+                                    <!--end::Menu item-->
+
+                                    <!--begin::Menu separator-->
+                                    <div class="separator my-2"></div>
+                                    <!--end::Menu separator-->
+                                    <?php
+                                    if($isNotify){
+                                        ?>
+                                        <!--begin::Menu item-->
+                                        <div class="menu-item px-5">
+                                            <a href="{base_url}student/profile/notification" class="menu-link px-5">
+                                                Notifications &nbsp;<?=$notificationCount ? label($notificationCount) : ''?>
+                                            </a>
+                                        </div>
+                                        <!--end::Menu item-->
+                                        <?php
+                                    }
+                                    ?>
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-5">
+                                        <a href="{base_url}student/profile" class="menu-link px-5">
+                                            My Profile
+                                        </a>
+                                    </div>
+                                    <!--end::Menu item-->
+
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-5">
+                                        <a href="{base_url}student/change-password" class="menu-link px-5">
+                                            <span class="menu-text">Change Password</span>
+
+                                        </a>
+                                    </div>
+                                    <!--end::Menu item-->
+
+
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-5">
+                                        <a href="{base_url}student/sign-out" class="menu-link px-5">
+                                            Sign Out
+                                        </a>
+                                    </div>
+                                    <!--end::Menu item-->
+                                </div>
+                                <!--end::User account menu-->
+                                <!--end::Menu wrapper-->
+                            </div>
+                            <!--end::User -->
                             <!--begin::Header menu toggle-->
                             <div class="app-navbar-item d-lg-none ms-2 me-n2" title="Show header menu">
                                 <div class="btn btn-flex btn-icon btn-active-color-primary w-30px h-30px"
@@ -384,14 +409,16 @@
 
 
                             </div>
-                            <a href="{base_url}student" style="line-height:1" class="text-white text-hover-primary fs-4 fw-bold ms-3 app-sidebar-minimize-d-none profile-title">
-                                {student_name} <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Student</span>
+                            <a href="{base_url}student" style="line-height:1"
+                                class="text-white text-hover-primary fs-4 fw-bold ms-3 app-sidebar-minimize-d-none profile-title">
+                                {student_name} <span
+                                    class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Student</span>
                             </a>
                             <!--end::User account menu-->
                         </div>
                         <!-- <a href="{base_url}student" class="fs-1"> -->
-                            <!-- Stduent Panel -->
-                            <!-- <img alt="Logo" src="{base_url}assets/media/logos/default-dark.svg"
+                        <!-- Stduent Panel -->
+                        <!-- <img alt="Logo" src="{base_url}assets/media/logos/default-dark.svg"
                                 class="h-25px app-sidebar-logo-default" />
                             <img alt="Logo" src="{base_url}assets/media/logos/default-small.svg"
                                 class="h-20px app-sidebar-logo-minimize" /> -->

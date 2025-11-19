@@ -40,6 +40,7 @@
                         <table class="table align-middle table-row-dashed fs-6 gy-5" data-table>
                             <thead>
                                 <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+                                    <th>Active</th>
                                     <th>Topic</th>
                                     <th class="text-end min-w-100px">Actions</th>
                                 </tr>
@@ -50,6 +51,11 @@
                                 if ($list->num_rows()) {
                                     foreach ($list->result() as $row) {
                                         echo '<tr>
+                                            <td>
+                                                <div class="form-check form-check-solid form-switch">
+                                                    <input class="form-check-input toggle-topic-status" type="checkbox" data-id="' . $row->id . '" ' . ($row->status ? 'checked' : '') . ' />
+                                                </div>
+                                            </td>
                                             <td>' . $row->title . '</td>
                                             <td>
                                                 <div class="btn-group"  data-id="' . $row->id . '">
@@ -79,6 +85,20 @@
     </div>
 </script>
 <script>
+    $(document).on('change', '.toggle-topic-status', function () {
+        var topic_id = $(this).data('id');
+        var status = $(this).is(':checked') ? 1 : 0;
+        $.AryaAjax({
+            url: 'update-topic-status',
+            data: {
+                topic_id: topic_id,
+                status: status
+            },
+            success_message: 'Status Updated Successfully..',
+        }).then((res) => {
+            showResponseError(res)
+        });
+    });
     $(document).on('submit', '#add_topic', function (e) {
         e.preventDefault();
         var form = $(this);
@@ -87,7 +107,7 @@
             data: { title: form.find('input[name="title"]').val() },
             success_message: 'Added Successfully.',
             page_reload: true
-        }).then((r) => {    
+        }).then((r) => {
             showResponseError(r)
         });
         // $('#list').append(html);

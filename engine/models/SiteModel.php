@@ -70,13 +70,13 @@ class SiteModel extends MY_Model
             }
         }
         if ($withPagesArray)
-            return ['menus' => $items, 'all_pages_link' => $allPages, 'breadcrumb' => $this->getBreadcrumb($items,current_url())];
+            return ['menus' => $items, 'all_pages_link' => $allPages, 'breadcrumb' => $this->getBreadcrumb($items, current_url())];
         return $items;
     }
     function getBreadcrumb($menu, $targetUrl, $path = [])
     {
         foreach ($menu as $item) {
-            $newPath = array_merge($path, [$item['label']]); 
+            $newPath = array_merge($path, [$item['label']]);
 
             if ($item['link'] === $targetUrl) {
                 return $newPath;
@@ -194,8 +194,10 @@ class SiteModel extends MY_Model
         }
         return $return;
     }
-    function get_session()
+    function get_session($id = 0)
     {
+        if ($id)
+            $this->db->where('id', $id);
         return $this->db->where('status', 1)->get('session');
     }
     function get_theme_templates()

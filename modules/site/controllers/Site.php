@@ -63,6 +63,39 @@ class Site extends Site_Controller
             $this->error_404();
         }
     }
+    // function blog()
+    // {
+    //     // pre($this->uri->segment_array(),true);
+    //     try {
+    //         $firstSag = $this->uri->segment(2, 0);
+    //         $firstSag = (urldecode($firstSag));
+    //         if ($firstSag == '0') {
+    //             $content = $this->parse('pages/manage-blog', [], true);
+    //             $this->page_view($content, ['page_name' => 'Blogs']);
+    //         } elseif ($firstSag == 'categories') {
+    //             $cat_id = $this->uri->segment(3, 0);
+    //             $get = $this->db->where('id', $cat_id)->where('type', 'blog_category')->get('content');
+    //             if (!$get->num_rows())
+    //                 throw new Exception('');
+
+    //             $row = $get->row();
+    //             $content = $this->parse('pages/manage-blog', ['category_id' => $row->id], true);
+    //             $this->page_view($content, ['page_name' => $row->field1]);
+    //         } else {
+    //             $get = $this->db->select('*,id as blog_id')->where('field7', $firstSag)->where('type', 'manage-blog')->get('content');
+    //             if (!$get->num_rows())
+    //                 throw new Exception('');
+
+    //             $row = $get->row_array();
+    //             $this->set_data('favicon_file', $row['field1']);
+    //             $this->set_data('page_name', $row['field2']);
+    //             $content = $this->parse('pages/manage-blog', $row, true);
+    //             $this->page_view($content, ['page_name' => $row['field2']]);
+    //         }
+    //     } catch (Exception $e) {
+    //         $this->error_404();
+    //     }
+    // }
     function course_details()
     {
         try {

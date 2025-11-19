@@ -282,7 +282,14 @@ class Cms extends Ajax_Controller
     }
     function form_setting()
     {
-        $this->response('results', $this->center_model->get_center()->result());
+        switch ($this->post("type")) {
+            case 'student_admission':
+                $this->response('results', $this->center_model->get_center()->result());
+                break;
+            // case 'paid_registration_form':
+            //     $this->response('useDrawer', true);
+            //     break;
+        }
         $this->response('status', true);
     }
     function center_show_in_front()
