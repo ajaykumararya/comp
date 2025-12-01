@@ -72,7 +72,7 @@
                             id="email" placeholder="Enter Email" class="form-control">
                     </div>
                     <?php
-                    $sewEdu = PATH == 'sewaedu' ? 'required' : '';
+                    $sewEdu = PATH == 'sewaedu' ? '' : 'required';
                     ?>
                     <div class="form-group mb-4">
                         <label for="number" class="form-label <?=$sewEdu?>">Enter Mobile</label>
