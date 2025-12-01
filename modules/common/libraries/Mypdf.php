@@ -20,6 +20,7 @@ class Mypdf extends Mpdf
             $config['tempDir'] = FCPATH . '/tmp';
         }
         parent::__construct($config);
+        $this->img_dpi = 300;
         /*
         $defaultConfig = (new ConfigVariables())->getDefaults();
         $fontDirs = $defaultConfig['fontDir'];

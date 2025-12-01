@@ -1,0 +1,284 @@
+/*----*****---- << Blog Carousel >> ----*****----*/
+
+.tpl-blog-holder.swiper-wrapper {
+    float: left;
+    margin: 0;
+    width: 100%;
+}
+
+.wdt-posts-list-wrapper[class*="swiper"] {
+    margin: 0 -15px;
+}
+
+.tpl-blog-holder.swiper-wrapper .column {
+    clear: none !important;
+}
+
+/* Carousel ScrollBar */
+
+.wdt-posts-list-wrapper.swiper-container div[class*="pagination-holder"]>div[class*="scrollbar"] {
+    float: left;
+    height: 8px;
+    position: absolute;
+    width: 100%;
+    border-radius: 10px;
+    background-image: linear-gradient(to right, transparent 0%, rgba(var(--wdtHeadAltColorRgb), 0.08) 17%, rgba(var(--wdtHeadAltColorRgb), 0.08) 83%, transparent 100%);
+}
+
+.wdt-posts-list-wrapper.swiper-container.swiper-container-vertical div[class*="pagination-holder"]>div[class*="scrollbar"] {
+    height: 100%;
+    margin: 0;
+    right: 0;
+    top: 0;
+    width: 8px;
+    background-image: linear-gradient(to bottom, transparent 0%, rgba(var(--wdtHeadAltColorRgb), 0.08) 17%, rgba(var(--wdtHeadAltColorRgb), 0.08) 83%, transparent 100%);
+}
+
+.wdt-posts-list-wrapper.swiper-container div[class*="pagination-holder"]>div[class*="scrollbar"]:before,
+.wdt-posts-list-wrapper.swiper-container div[class*="pagination-holder"]>div[class*="scrollbar"]:after {
+    content: "";
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(to right, transparent 0%, rgba(var(--wdtHeadAltColorRgb), 0.15) 17%, rgba(var(--wdtHeadAltColorRgb), 0.15) 83%, transparent 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#00000000', GradientType=1);
+}
+
+.wdt-posts-list-wrapper.swiper-container.swiper-container-horizontal div[class*="pagination-holder"]>div[class*="scrollbar"]:before {
+    top: -1px;
+}
+
+.wdt-posts-list-wrapper.swiper-container.swiper-container-horizontal div[class*="pagination-holder"]>div[class*="scrollbar"]:after {
+    bottom: -1px;
+}
+
+.wdt-posts-list-wrapper.swiper-container.swiper-container-vertical div[class*="pagination-holder"]>div[class*="scrollbar"]:before {
+    left: -1px;
+}
+
+.wdt-posts-list-wrapper.swiper-container.swiper-container-vertical div[class*="pagination-holder"]>div[class*="scrollbar"]:after {
+    right: -1px;
+}
+
+.wdt-posts-list-wrapper.swiper-container.swiper-container-vertical div[class*="pagination-holder"]>div[class*="scrollbar"]:before,
+.wdt-posts-list-wrapper.swiper-container.swiper-container-vertical div[class*="pagination-holder"]>div[class*="scrollbar"]:after {
+    height: 100%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent 0%, rgba(var(--wdtHeadAltColorRgb), 0.15) 17%, rgba(var(--wdtHeadAltColorRgb), 0.15) 83%, transparent 100%);
+}
+
+.wdt-posts-list-wrapper.swiper-container div[class$="scrollbar"] .swiper-scrollbar-drag {
+    background-color: var(--wdtBodyTxtColor);
+    border-radius: inherit;
+}
+
+.wdt-posts-list-wrapper.swiper-container.swiper-container-horizontal[data-carouselscrollbar="true"] {
+    padding-bottom: 30px;
+}
+
+.wdt-posts-list-wrapper.swiper-container.swiper-container-horizontal div[class*="scrollbar"] {
+    bottom: 0;
+}
+
+.wdt-posts-list-wrapper.swiper-container.swiper-container-horizontal[data-carouselbulletpagination="true"][data-carouselscrollbar="true"] div[class*="scrollbar"] {
+    bottom: 0;
+}
+
+.wdt-posts-list-wrapper.swiper-container.swiper-container-vertical[data-carouselscrollbar="true"] {
+    padding-right: 30px;
+}
+
+.wdt-posts-list-wrapper.swiper-container.swiper-container-vertical div[class*="scrollbar"] {
+    right: 0;
+}
+
+.wdt-posts-list-wrapper.swiper-container.swiper-container-vertical[data-carouselbulletpagination="true"][data-carouselscrollbar="true"] div[class*="scrollbar"] {
+    right: 0;
+}
+
+/* Carousel Bullets */
+
+.wdt-posts-list-wrapper.swiper-container div[class*="bullet-pagination"] {
+    float: left;
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+
+.wdt-posts-list-wrapper.swiper-container div[class*="bullet-pagination"] .swiper-pagination-bullet {
+    background: none;
+    height: 10px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 10px;
+}
+
+.wdt-posts-list-wrapper.swiper-container div[class*="bullet-pagination"] .swiper-pagination-bullet:before {
+    background-color: var(--wdtHeadAltColor);
+    content: "";
+    height: auto;
+    margin: auto;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: auto;
+    -webkit-border-radius: inherit;
+    border-radius: inherit;
+    -webkit-transition: var(--wdtBaseTransition);
+    transition: var(--wdtBaseTransition);
+}
+
+.wdt-dark-bg .wdt-posts-list-wrapper.swiper-container div[class*="bullet-pagination"] .swiper-pagination-bullet:before {
+    background-color: var(--wdtAccentTxtColor);
+}
+
+.wdt-posts-list-wrapper.swiper-container div[class*="bullet-pagination"] .swiper-pagination-bullet-active:before {
+    background-color: var(--wdtBodyTxtColor);
+}
+
+.wdt-posts-list-wrapper.swiper-container.swiper-container-vertical div[class*="bullet-pagination"] {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    right: 32px;
+    width: 16px;
+    z-index: 10;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.wdt-posts-list-wrapper.swiper-container.swiper-container-vertical div[class*="bullet-pagination"] .swiper-pagination-bullet {
+    display: block;
+}
+
+.wdt-posts-list-wrapper.swiper-container.swiper-container-horizontal[data-carouselbulletpagination="true"] {
+    padding-bottom: 30px;
+}
+
+.wdt-posts-list-wrapper.swiper-container.swiper-container-horizontal div[class*="bullet-pagination"] {
+    bottom: 0;
+}
+
+.wdt-posts-list-wrapper.swiper-container.swiper-container-horizontal[data-carouselbulletpagination="true"][data-carouselscrollbar="true"] {
+    padding-bottom: 60px;
+}
+
+.wdt-posts-list-wrapper.swiper-container.swiper-container-horizontal[data-carouselbulletpagination="true"][data-carouselscrollbar="true"] div[class*="bullet-pagination"] {
+    bottom: 25px;
+}
+
+.wdt-posts-list-wrapper.swiper-container.swiper-container-vertical[data-carouselbulletpagination="true"] {
+    padding-right: 30px;
+}
+
+.wdt-posts-list-wrapper.swiper-container.swiper-container-vertical div[class*="bullet-pagination"] {
+    right: 0;
+}
+
+.wdt-posts-list-wrapper.swiper-container.swiper-container-vertical[data-carouselbulletpagination="true"][data-carouselscrollbar="true"] {
+    padding-right: 60px;
+}
+
+.wdt-posts-list-wrapper.swiper-container.swiper-container-vertical[data-carouselbulletpagination="true"][data-carouselscrollbar="true"] div[class*="bullet-pagination"] {
+    right: 25px;
+}
+
+/* Carousel Arrows */
+
+.wdt-posts-list-wrapper.swiper-container div[class*="arrow-pagination"]>a[class*="arrow"] {
+    font-size: 0;
+    height: 80px;
+    line-height: 80px;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    text-align: center;
+    visibility: hidden;
+    width: 40px;
+    z-index: 2;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.wdt-posts-list-wrapper.swiper-container div[class*="arrow-pagination"]>a[class*="arrow"] {
+    background-color: rgba(var(--wdtHeadAltColorRgb), 0.15);
+    color: var(--wdtAccentTxtColor);
+}
+
+.wdt-posts-list-wrapper.swiper-container div[class*="arrow-pagination"]>a[class*="arrow"]:hover {
+    background-color: rgba(var(--wdtHeadAltColorRgb), 0.35);
+}
+
+.wdt-posts-list-wrapper.swiper-container div[class*="arrow-pagination"]>a[class$="arrow-prev"] {
+    margin-left: -40px;
+    left: 0;
+}
+
+.wdt-posts-list-wrapper.swiper-container div[class*="arrow-pagination"]>a[class$="arrow-next"] {
+    margin-right: -40px;
+    right: 0;
+}
+
+.wdt-posts-list-wrapper.swiper-container:hover div[class*="arrow-pagination"]>a[class*="arrow"] {
+    opacity: 1;
+    visibility: visible;
+}
+
+.wdt-posts-list-wrapper.swiper-container:hover div[class*="arrow-pagination"]>a[class$="arrow-prev"] {
+    margin-left: 0;
+}
+
+.wdt-posts-list-wrapper.swiper-container:hover div[class*="arrow-pagination"]>a[class$="arrow-next"] {
+    margin-right: 0;
+}
+
+.wdt-posts-list-wrapper.swiper-container div[class*="arrow-pagination"]>a[class*="arrow"]:before {
+    display: block;
+    font-family: "Livi Icons";
+    font-size: 24px;
+    line-height: inherit;
+}
+
+.wdt-posts-list-wrapper.swiper-container div[class*="arrow-pagination"]>a[class$="arrow-prev"]:before {
+    content: "\f104";
+}
+
+.wdt-posts-list-wrapper.swiper-container div[class*="arrow-pagination"]>a[class$="arrow-next"]:before {
+    content: "\f105";
+}
+
+.wdt-posts-list-wrapper.swiper-container div[class*="arrow-pagination"].type2 {
+    float: left;
+    margin: 25px auto 0;
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+
+.wdt-posts-list-wrapper.swiper-container div[class*="arrow-pagination"].type2>a[class*="arrow"] {
+    display: inline-block;
+    font-size: 0;
+    height: 50px;
+    line-height: 0;
+    margin: 0 1px;
+    opacity: 1;
+    position: static;
+    visibility: visible;
+    width: 35px;
+    transform: none;
+}
+
+.wdt-posts-list-wrapper.swiper-container div[class*="arrow-pagination"].type2>a[class*="arrow"]:before {
+    font-size: 18px;
+    line-height: 50px;
+}

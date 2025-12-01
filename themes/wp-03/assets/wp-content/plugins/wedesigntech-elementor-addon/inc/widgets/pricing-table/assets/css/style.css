@@ -1,0 +1,1155 @@
+/***<<--- Pricing Table Transition --->>***/
+
+.wdt-pricing-table-holder,
+.wdt-pricing-table-holder>div,
+.wdt-pricing-table-holder div[class*='-table-header'] .wdt-content-title h5,
+.wdt-pricing-table-holder div[class*='-table-header'] .wdt-content-title h5 a,
+.wdt-pricing-table-holder div[class*='-table-header'] .wdt-content-subtitle,
+.wdt-pricing-table-holder div[class*='-table-features'] .wdt-pricing-table-features-list li .wdt-pricing-table-features-list-icon,
+.wdt-pricing-table-holder div[class*='-table-features'] .wdt-pricing-table-features-list li .wdt-pricing-table-features-list-text,
+.wdt-pricing-table-holder div[class*='-table-features'] .wdt-pricing-table-features-list li:not(:last-child):after,
+.wdt-pricing-table-holder div[class*='-table-media'] .wdt-content-image span,
+.wdt-pricing-table-holder .wdt-content-image a,
+.wdt-pricing-table-holder div[class*='-table-media'] .wdt-content-icon-wrapper .wdt-content-icon span,
+.wdt-pricing-table-holder div[class*='-table-footer'] .wdt-content-button,
+.wdt-pricing-table-holder div[class*='-table-footer'] .wdt-content-button>a,
+.wdt-pricing-table-holder div[class*='-table-footer'] .wdt-pricing-table-footer-description,
+.wdt-pricing-table-holder[class*='-template-classic'] div[class*='-table-header']:before,
+.wdt-pricing-table-holder[class*='-template-list'],
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-header,
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-features,
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-footer {
+    -webkit-transition: var(--wdt-elementor-base-transition);
+    transition: var(--wdt-elementor-base-transition);
+}
+
+/***<<--- Pricing Table Common --->>***/
+
+.wdt-pricing-table-holder {
+    position: relative;
+    z-index: 0;
+    border-width: 0;
+    border-style: solid;
+    border-color: transparent;
+}
+
+.wdt-pricing-table-holder>div:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+/***<<--- Pricing Table Media - Image & Icon Element --->>***/
+
+.wdt-pricing-table-holder div[class*='-table-media'] {
+    position: relative;
+}
+
+/* Pricing Table Media - Image Element */
+
+.wdt-pricing-table-holder div[class*='-table-media'] .wdt-content-image-wrapper,
+.wdt-pricing-table-holder .wdt-content-image-wrapper .wdt-content-image,
+.wdt-pricing-table-holder div[class*='-table-media'] .wdt-content-image>span,
+.wdt-pricing-table-holder .wdt-content-image>a {
+    display: inline-flex;
+}
+
+.wdt-pricing-table-holder div[class*='-table-media'] .wdt-content-image>span>img,
+.wdt-pricing-table-holder div[class*='-table-media'] .wdt-content-image>a>img {
+    -webkit-border-radius: inherit;
+    border-radius: inherit;
+    width: 100%;
+    height: 100%;
+}
+
+.wdt-pricing-table-holder div[class*='-table-media'] .wdt-content-image span {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    background-position: center;
+    background-size: cover;
+}
+
+.wdt-pricing-table-holder div[class*='-table-media'] .wdt-content-image span:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    content: '';
+    -webkit-border-radius: inherit;
+    border-radius: inherit;
+}
+
+.wdt-pricing-table-holder div[class*='-table-media'] .wdt-content-image span:before {
+    background-color: rgba(0, 0, 0, .2);
+}
+
+/* Pricing Table Media - Icon Element */
+
+.wdt-pricing-table-holder div[class*='-table-media'] .wdt-content-icon-wrapper .wdt-content-icon {
+    display: inline-block;
+}
+
+.wdt-pricing-table-holder div[class*='-table-media'] .wdt-content-icon-wrapper .wdt-content-icon span {
+    font-size: 1.125rem;
+    position: relative;
+    z-index: 0;
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+}
+
+.wdt-pricing-table-holder div[class*='-table-media'] .wdt-content-icon-wrapper .wdt-content-icon span i {
+    position: relative;
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 5px;
+    place-content: center;
+    place-items: center;
+}
+
+.wdt-pricing-table-holder div[class*='-table-media'] .wdt-content-icon-wrapper .wdt-content-icon span svg {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+}
+
+.wdt-pricing-table-holder div[class*='-table-media'] .wdt-content-icon-wrapper .wdt-content-icon span:before {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    content: '';
+    -webkit-border-radius: inherit;
+    border-radius: inherit;
+}
+
+.wdt-pricing-table-holder div[class*='-table-media'] .wdt-content-icon-wrapper .wdt-content-icon span {
+    color: var(--wdtHeadAltColor);
+}
+
+.wdt-pricing-table-holder div[class*='-table-media'] .wdt-content-icon-wrapper .wdt-content-icon span:before {
+    background-color: var(--wdt-elementor-color-secondary);
+}
+
+/***<<--- Pricing Table Header - Title & Subtitle Element --->>***/
+
+.wdt-pricing-table-holder div[class*='-table-header'] {
+    position: relative;
+}
+
+.wdt-pricing-table-holder div[class*='-table-header']>div:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.wdt-pricing-table-holder div[class*='-table-header'] .wdt-content-title h5 {
+    font-size: 1.25em;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-transform: none;
+}
+
+.wdt-pricing-table-holder div[class*='-table-header'] .wdt-content-title h5 a {
+    -webkit-transition: inherit;
+    transition: inherit;
+}
+
+.wdt-pricing-table-holder div[class*='-table-header'] .wdt-content-title h5,
+.wdt-pricing-table-holder div[class*='-table-header'] .wdt-content-title h5 a {
+    color: var(--wdt-elementor-color-primary);
+}
+
+.wdt-pricing-table-holder div[class*='-table-header'] .wdt-content-title h5 a:hover {
+    color: var(--wdt-elementor-color-accent);
+}
+
+.wdt-pricing-table-holder div[class*='-table-header'] .wdt-content-subtitle {
+    font-size: 1rem;
+    letter-spacing: .05em;
+    color: var(--wdt-elementor-color-secondary);
+}
+
+/***<<--- Pricing Table Footer - Description & Button Element --->>***/
+
+.wdt-pricing-table-holder div[class*='-table-footer'] {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.wdt-pricing-table-holder div[class*='-table-footer']>div:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+/* Pricing Table Footer - Button Element */
+
+.wdt-pricing-table-holder div[class*='-table-footer'] .wdt-content-button {
+    position: relative;
+    z-index: 0;
+}
+
+.wdt-pricing-table-holder div[class*='-table-footer'] .wdt-content-button>a {
+    font-size: 1em;
+    line-height: 1;
+    display: inline-block;
+    padding: .75em 1.5em;
+    text-align: center;
+    color: var(--wdt-elementor-color-white);
+    border: 1px solid transparent;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    background-color: var(--wdt-elementor-color-accent);
+    fill: var(--wdt-elementor-color-white);
+    font-weight: var(--wdtFontWeight_Ext);
+}
+
+.wdt-pricing-table-holder div[class*='-table-footer'] .wdt-content-button.fullwidth {
+    display: inline-flex;
+    width: 100%;
+}
+
+.wdt-pricing-table-holder div[class*='-table-footer'] .wdt-content-button.fullwidth>a {
+    width: 100%;
+}
+
+.wdt-pricing-table-holder div[class*='-table-footer'] .wdt-content-button:not(.fullwidth) {
+    margin-bottom: 20px;
+}
+
+.wdt-pricing-table-holder div[class*='-table-footer'] .wdt-content-button>a:hover {
+    background-color: var(--wdt-elementor-color-primary);
+}
+
+/* Pricing Table Footer - Description Element */
+
+.wdt-pricing-table-holder div[class*='-table-footer'] .wdt-pricing-table-footer-description {
+    position: relative;
+    z-index: 0;
+    padding: 0 10px;
+}
+
+/***<<--- Pricing Table Pricing - Original & Sales Price --->>***/
+
+.wdt-pricing-table-holder .wdt-pricing-table-pricing {
+    font-size: 1em;
+    line-height: 1em;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.wdt-pricing-table-holder .wdt-pricing-table-pricing .wdt-pricing-table-pricing-original {
+    font-size: .8em;
+    font-weight: 400;
+    line-height: 1;
+    display: inline-flex;
+    -ms-flex-item-align: center;
+    flex-wrap: wrap;
+    margin-right: 15px;
+    text-decoration: line-through;
+}
+
+.wdt-pricing-table-holder .wdt-pricing-table-pricing .wdt-pricing-table-pricing-sale {
+    line-height: 1;
+    display: inline-table;
+}
+
+.wdt-pricing-table-holder .wdt-pricing-table-pricing .wdt-pricing-table-pricing-sale>span {
+    display: table-cell;
+}
+
+.wdt-pricing-table-holder .wdt-pricing-table-pricing .wdt-pricing-table-pricing-suffix.below {
+    display: block;
+    width: 100%;
+    padding-top: 5px;
+}
+
+.wdt-pricing-table-holder .wdt-pricing-table-pricing div[class*='-table-pricing-sale'] .wdt-pricing-table-pricing-sale-fraction {
+    padding-left: 5px;
+}
+
+.wdt-pricing-table-holder .wdt-pricing-table-pricing div[class*='-table-pricing-sale'] .wdt-pricing-table-pricing-prefix {
+    padding-right: 5px;
+}
+
+.wdt-pricing-table-holder .wdt-pricing-table-pricing div[class*='-table-pricing-sale'] .wdt-pricing-table-pricing-suffix {
+    padding-left: 5px;
+}
+
+.wdt-pricing-table-holder .wdt-pricing-table-pricing div[class*='-table-pricing-sale'] .wdt-pricing-table-pricing-prefix:last-child,
+.wdt-pricing-table-holder .wdt-pricing-table-pricing div[class*='-table-pricing-sale'] .wdt-pricing-table-pricing-sale-price+.wdt-pricing-table-pricing-prefix,
+.wdt-pricing-table-holder .wdt-pricing-table-pricing div[class*='-table-pricing-sale'] .wdt-pricing-table-pricing-sale-fraction+.wdt-pricing-table-pricing-prefix {
+    padding-right: 0;
+    padding-left: 5px;
+}
+
+.wdt-pricing-table-holder .wdt-pricing-table-pricing div[class*='-table-pricing-sale'] .wdt-pricing-table-pricing-prefix,
+.wdt-pricing-table-holder .wdt-pricing-table-pricing div[class*='-table-pricing-sale'] .wdt-pricing-table-pricing-sale-fraction {
+    line-height: 1;
+}
+
+.wdt-pricing-table-holder .wdt-pricing-table-pricing {
+    color: var(--wdt-elementor-color-secondary);
+}
+
+/***<<--- Pricing Table features - Features --->>***/
+
+.wdt-pricing-table-holder div[class*='-table-features'] .wdt-pricing-table-features-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.wdt-pricing-table-holder div[class*='-table-features'] .wdt-pricing-table-features-list li {
+    font-size: inherit;
+    line-height: 1;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.wdt-pricing-table-holder div[class*='-table-features'] .wdt-pricing-table-features-list li:not(:last-child):after {
+    display: inline-block;
+    clear: both;
+    width: 100%;
+    content: '';
+}
+
+.wdt-pricing-table-holder div[class*='-table-features'] .wdt-pricing-table-features-list li .wdt-pricing-table-features-list-icon {
+    display: inline-block;
+}
+
+.wdt-pricing-table-holder div[class*='-table-features'] .wdt-pricing-table-features-list li .wdt-pricing-table-features-list-text {
+    clear: both;
+}
+
+.wdt-pricing-table-holder div[class*='-table-features'] .wdt-pricing-table-features-list li .wdt-pricing-table-features-list-text:not(:only-child) {
+    padding-left: 10px;
+}
+
+.wdt-pricing-table-holder div[class*='-table-features'] .wdt-pricing-table-features-list li[class*='-feature-excluded'] {
+    opacity: .5;
+}
+
+.wdt-pricing-table-holder div[class*='-table-features'] .wdt-pricing-table-features-list li .wdt-pricing-table-features-list-icon:empty {
+    display: none;
+}
+
+.wdt-pricing-table-holder div[class*='-table-features'] .wdt-pricing-table-features-list li.wdt-pricing-table-feature-included .wdt-pricing-table-features-list-icon {
+    color: #b4d856;
+}
+
+.wdt-pricing-table-holder div[class*='-table-features'] .wdt-pricing-table-features-list li.wdt-pricing-table-feature-excluded .wdt-pricing-table-features-list-icon {
+    color: #d85656;
+}
+
+.wdt-pricing-table-holder div[class*='-table-features'] .wdt-pricing-table-features-list li .wdt-pricing-table-features-list-text {
+    color: var(--wdt-elementor-color-text);
+}
+
+/***<<--- Pricing Table Badges - Badges Types --->>***/
+
+.wdt-pricing-table-holder div[class*='-table-badge']:not(.type4) {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1;
+    position: absolute;
+    margin: 0;
+    color: var(--wdt-elementor-color-white);
+    background-color: var(--wdt-elementor-color-secondary);
+}
+
+.wdt-pricing-table-holder div[class*='-table-badge'] {
+    z-index: 1;
+}
+
+.wdt-pricing-table-holder div[class*='-table-badge'].left {
+    right: auto;
+    left: 15px;
+}
+
+.wdt-pricing-table-holder div[class*='-table-badge'].right {
+    right: 15px;
+    left: auto;
+}
+
+.wdt-pricing-table-holder div[class*='-table-badge'].type1 {
+    top: 15px;
+    padding: 8px 15px;
+}
+
+.wdt-pricing-table-holder div[class*='-table-badge'].type2 {
+    top: 30px;
+    padding: 8px 15px;
+}
+
+.wdt-pricing-table-holder div[class*='-table-badge'].type2:after {
+    position: absolute;
+    z-index: 9;
+    top: -15px;
+    width: 0;
+    height: 0;
+    content: '';
+    opacity: .9;
+    border-bottom: 15px solid var(--wdt-elementor-color-secondary);
+}
+
+.wdt-pricing-table-holder div[class*='-table-badge'].type2.left {
+    right: auto;
+    left: -15px;
+}
+
+.wdt-pricing-table-holder div[class*='-table-badge'].type2.right {
+    right: -15px;
+    left: auto;
+}
+
+.wdt-pricing-table-holder div[class*='-table-badge'].type2.left:after {
+    right: auto;
+    left: 0;
+    border-left: 15px solid transparent;
+}
+
+.wdt-pricing-table-holder div[class*='-table-badge'].type2.right:after {
+    right: 0;
+    left: auto;
+    border-right: 15px solid transparent;
+}
+
+.wdt-pricing-table-holder div[class*='-table-badge'].type3 {
+    font-weight: 500;
+    top: -1px;
+    width: auto;
+    padding: 20px 12px;
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    transform: rotate(180deg);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-radius: 50px 50px 0 0;
+    writing-mode: vertical-rl;
+    -webkit-writing-mode: vertical-rl;
+}
+
+.wdt-pricing-table-holder div[class*='-table-badge'].type4 {
+    position: absolute;
+    top: 0;
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    margin: 0;
+}
+
+.wdt-pricing-table-holder div[class*='-table-badge'].type4.left {
+    right: auto;
+    left: 0;
+    -webkit-transform: rotate(0);
+    -ms-transform: rotate(0);
+    transform: rotate(0);
+}
+
+.wdt-pricing-table-holder div[class*='-table-badge'].type4.right {
+    right: 0;
+    left: auto;
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.wdt-pricing-table-holder div[class*='-table-badge'].type4 .wdt-pricing-table-badge-inner {
+    font-size: .6em;
+    font-weight: 700;
+    display: inline-block;
+    width: 150%;
+    margin-top: 35px;
+    padding: 10px 15px;
+    -webkit-transform: translateY(-50%) translateX(-50%) translateX(35px) rotate(-45deg);
+    -ms-transform: rotate(45deg);
+    transform: translateY(-50%) translateX(-50%) translateX(35px) rotate(-45deg);
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--wdt-elementor-color-white);
+    background: var(--wdt-elementor-color-secondary);
+}
+
+/***<<--- Pricing Table Type - Default Template --->>***/
+
+.wdt-pricing-table-holder[class*='-template-default'] {
+    padding: 0;
+    text-align: center;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.wdt-pricing-table-holder[class*='-template-default']>div:not(.wdt-pricing-table-badge):first-child,
+.wdt-pricing-table-holder[class*='-template-default']>.wdt-pricing-table-badge+div {
+    padding: 30px 20px 0 20px;
+}
+
+.wdt-pricing-table-holder[class*='-template-default'] div[class*='-table-media'] .wdt-content-icon-wrapper .wdt-content-icon span {
+    width: 50px;
+    height: 50px;
+}
+
+.wdt-pricing-table-holder[class*='-template-default'] div[class*='-table-header'] .wdt-content-title h5 {
+    font-size: 25px;
+    text-transform: uppercase;
+}
+
+.wdt-pricing-table-holder[class*='-template-default'] .wdt-pricing-table-pricing {
+    font-size: 60px;
+    font-weight: 700;
+}
+
+.wdt-pricing-table-holder[class*='-template-default'] .wdt-pricing-table-pricing+.wdt-pricing-table-features {
+    margin-top: 50px;
+    padding: 20px 0 0;
+    border-top: 1px solid;
+}
+
+.wdt-pricing-table-holder[class*='-template-default'] div[class*='-table-features'] .wdt-pricing-table-features-list li:not(:last-child):after {
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+
+.wdt-pricing-table-holder[class*='-template-default'] div[class*='-table-features'] .wdt-pricing-table-features-list li .wdt-pricing-table-features-list-icon {
+    font-size: 14px;
+}
+
+.wdt-pricing-table-holder[class*='-template-default'] div[class*='-table-features'] .wdt-pricing-table-features-list li .wdt-pricing-table-features-list-text {
+    font-size: 16px;
+    letter-spacing: .5px;
+}
+
+.wdt-pricing-table-holder[class*='-template-default'] .wdt-pricing-table-pricing-original,
+.wdt-pricing-table-holder[class*='-template-default'] .wdt-pricing-table-pricing div[class*='-table-pricing-sale'] .wdt-pricing-table-pricing-prefix,
+.wdt-pricing-table-holder[class*='-template-default'] .wdt-pricing-table-pricing div[class*='-table-pricing-sale'] .wdt-pricing-table-pricing-sale-fraction,
+.wdt-pricing-table-holder[class*='-template-default'] .wdt-pricing-table-pricing div[class*='-table-pricing-sale'] .wdt-pricing-table-pricing-suffix {
+    font-size: 25px;
+}
+
+.wdt-pricing-table-holder[class*='-template-default'] .wdt-pricing-table-pricing .wdt-pricing-table-pricing-original {
+    vertical-align: top;
+}
+
+.wdt-pricing-table-holder[class*='-template-default'] .wdt-pricing-table-pricing .wdt-pricing-table-pricing-sale .wdt-pricing-table-pricing-prefix {
+    vertical-align: top;
+}
+
+.wdt-pricing-table-holder[class*='-template-default'] .wdt-pricing-table-pricing .wdt-pricing-table-pricing-sale .wdt-pricing-table-pricing-sale-fraction {
+    vertical-align: baseline;
+}
+
+.wdt-pricing-table-holder[class*='-template-default'] .wdt-pricing-table-footer:last-child {
+    margin-top: 10px;
+}
+
+.wdt-pricing-table-holder[class*='-template-default'] .wdt-pricing-table-footer:last-child .fullwidth {
+    border-top-width: 1px;
+    border-top-style: solid;
+}
+
+.wdt-pricing-table-holder[class*='-template-default'] .wdt-pricing-table-footer .wdt-content-button>a {
+    font-size: 20px;
+    font-weight: 700;
+    padding: 25px 40px;
+    color: var(--wdt-elementor-color-secondary);
+    background-color: #f9f9f9;
+}
+
+.wdt-pricing-table-holder[class*='-template-default'] {
+    background-color: var(--wdt-elementor-color-white);
+}
+
+.wdt-pricing-table-holder[class*='-template-default'],
+.wdt-pricing-table-holder[class*='-template-default'] .wdt-pricing-table-pricing+.wdt-pricing-table-features,
+.wdt-pricing-table-holder[class*='-template-default'] .wdt-pricing-table-pricing .wdt-pricing-table-features .wdt-pricing-table-features-list li:after,
+.wdt-pricing-table-holder[class*='-template-default'] div[class*='-table-features'] .wdt-pricing-table-features-list li:not(:last-child):after,
+.wdt-pricing-table-holder[class*='-template-default'] .wdt-pricing-table-footer:last-child .fullwidth {
+    border-color: #e1e1e1;
+}
+
+.wdt-pricing-table-holder[class*='-template-default'] div[class*='-table-header'] .wdt-content-title h5,
+.wdt-pricing-table-holder[class*='-template-default'] div[class*='-table-header'] .wdt-content-title h5 a {
+    color: var(--wdt-elementor-color-secondary);
+}
+
+.wdt-pricing-table-holder[class*='-template-default']:hover {
+    background-color: #f9f9f9;
+}
+
+.wdt-pricing-table-holder[class*='-template-default']:hover .wdt-pricing-table-footer .wdt-content-button>a {
+    color: var(--wdt-elementor-color-white);
+    background-color: var(--wdt-elementor-color-secondary);
+}
+
+.wdt-pricing-table-holder[class*='-template-default']:hover,
+.wdt-pricing-table-holder[class*='-template-default']:hover .wdt-pricing-table-pricing+.wdt-pricing-table-features,
+.wdt-pricing-table-holder[class*='-template-default']:hover .wdt-pricing-table-pricing .wdt-pricing-table-features .wdt-pricing-table-features-list li:after,
+.wdt-pricing-table-holder[class*='-template-default']:hover div[class*='-table-features'] .wdt-pricing-table-features-list li:not(:last-child):after,
+.wdt-pricing-table-holder[class*='-template-default']:hover .wdt-pricing-table-footer:last-child .fullwidth {
+    border-color: var(--wdt-elementor-color-secondary);
+}
+
+/***<<--- Pricing Table Type - Classic Template --->>***/
+
+.wdt-pricing-table-holder[class*='-template-classic'] {
+    padding: 0;
+    text-align: center;
+    border: 1px solid;
+}
+
+.wdt-pricing-table-holder[class*='-template-classic'] div[class*='-table-badge'] {
+    z-index: 2;
+}
+
+.wdt-pricing-table-holder[class*='-template-classic'] div[class*='-table-badge'].type2:after {
+    opacity: .7;
+}
+
+.wdt-pricing-table-holder[class*='-template-classic'] div[class*='-table-header'] {
+    z-index: 1;
+    padding: 50px 20px;
+    background-color: #f9f9f9;
+}
+
+.wdt-pricing-table-holder[class*='-template-classic'] .wdt-pricing-table-media {
+    padding: 0 0 20px;
+}
+
+.wdt-pricing-table-holder[class*='-template-classic'] div[class*='-table-media'] .wdt-content-icon-wrapper .wdt-content-icon span {
+    font-size: 50px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+.wdt-pricing-table-holder[class*='-template-classic'] div[class*='-table-header'] .wdt-content-title h5 {
+    font-size: 25px;
+    text-transform: uppercase;
+}
+
+.wdt-pricing-table-holder[class*='-template-classic'] div[class*='-table-header']:before {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 5px;
+    content: '';
+}
+
+.wdt-pricing-table-holder[class*='-template-classic']:hover div[class*='-table-header']:before {
+    height: 100%;
+}
+
+.wdt-pricing-table-holder[class*='-template-classic'] .wdt-pricing-table-pricing {
+    padding: 30px 0;
+}
+
+.wdt-pricing-table-holder[class*='-template-classic'] .wdt-pricing-table-pricing {
+    font-size: 60px;
+    font-weight: 700;
+}
+
+.wdt-pricing-table-holder[class*='-template-classic'] .wdt-pricing-table-footer .wdt-content-button>a {
+    font-size: 20px;
+    font-weight: 700;
+    padding: 25px 40px;
+    color: var(--wdt-elementor-color-secondary);
+    background-color: #f9f9f9;
+}
+
+.wdt-pricing-table-holder[class*='-template-classic'] {
+    background-color: var(--wdt-elementor-color-white);
+}
+
+.wdt-pricing-table-holder[class*='-template-classic'] div[class*='-table-badge']:not(.type4),
+.wdt-pricing-table-holder[class*='-template-classic'] div[class*='-table-badge'].type4 .wdt-pricing-table-badge-inner {
+    background-color: var(--wdt-elementor-color-primary);
+}
+
+.wdt-pricing-table-holder[class*='-template-classic'] div[class*='-table-badge'].type2:after {
+    border-bottom-color: var(--wdt-elementor-color-primary);
+}
+
+.wdt-pricing-table-holder[class*='-template-classic'] div[class*='-table-header']:before {
+    background-color: var(--wdt-elementor-color-secondary);
+}
+
+.wdt-pricing-table-holder[class*='-template-classic'],
+.wdt-pricing-table-holder[class*='-template-classic'] .wdt-pricing-table-pricing,
+.wdt-pricing-table-holder[class*='-template-classic'] .wdt-pricing-table-pricing .wdt-pricing-table-features .wdt-pricing-table-features-list li:after,
+.wdt-pricing-table-holder[class*='-template-classic'] div[class*='-table-features'] .wdt-pricing-table-features-list li:not(:last-child):after,
+.wdt-pricing-table-holder[class*='-template-classic'] .wdt-pricing-table-footer:last-child .fullwidth {
+    border-color: #e1e1e1;
+}
+
+.wdt-pricing-table-holder[class*='-template-classic'] div[class*='-table-header'] .wdt-content-title h5,
+.wdt-pricing-table-holder[class*='-template-classic'] div[class*='-table-header'] .wdt-content-title h5 a {
+    color: var(--wdt-elementor-color-secondary);
+}
+
+.wdt-pricing-table-holder[class*='-template-classic']:hover div[class*='-table-header'] .wdt-content-title h5,
+.wdt-pricing-table-holder[class*='-template-classic']:hover div[class*='-table-header'] .wdt-content-title h5 a,
+.wdt-pricing-table-holder[class*='-template-classic']:hover div[class*='-table-header'] .wdt-content-subtitle {
+    color: var(--wdt-elementor-color-white);
+}
+
+.wdt-pricing-table-holder[class*='-template-classic']:hover .wdt-pricing-table-footer .wdt-content-button>a {
+    color: var(--wdt-elementor-color-white);
+    background-color: var(--wdt-elementor-color-secondary);
+}
+
+.wdt-pricing-table-holder[class*='-template-classic']:hover,
+.wdt-pricing-table-holder[class*='-template-classic']:hover .wdt-pricing-table-pricing,
+.wdt-pricing-table-holder[class*='-template-classic']:hover .wdt-pricing-table-pricing .wdt-pricing-table-features .wdt-pricing-table-features-list li:after,
+.wdt-pricing-table-holder[class*='-template-classic']:hover div[class*='-table-features'] .wdt-pricing-table-features-list li:not(:last-child):after,
+.wdt-pricing-table-holder[class*='-template-classic']:hover .wdt-pricing-table-footer:last-child .fullwidth {
+    border-color: var(--wdt-elementor-color-secondary);
+}
+
+/***<<--- Pricing Table Type - List Template --->>***/
+
+.wdt-pricing-table-holder[class*='-template-list'] {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0;
+    border: 1px solid;
+}
+
+.wdt-pricing-table-holder[class*='-template-list']>* {
+    padding: 25px;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-header,
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-footer {
+    min-width: 20%;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-header {
+    display: inline-flex;
+    align-content: center;
+    align-items: center;
+    align-self: stretch;
+    flex: 0 1 30%;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+    border-right: 1px solid;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-header>div {
+    width: 100%;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-features {
+    display: inline-flex;
+    align-content: center;
+    align-items: center;
+    align-self: stretch;
+    flex: 0 1 50%;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-footer {
+    display: inline-flex;
+    align-items: center;
+    align-self: stretch;
+    flex: 0 1 20%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] {
+    border-color: var(--wdt-elementor-color-primary);
+    background-color: var(--wdt-elementor-color-white);
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-header {
+    border-color: var(--wdt-elementor-color-primary);
+    background: rgba(110, 193, 228, .1);
+}
+
+.wdt-pricing-table-holder[class*='-template-list']:hover {
+    background-color: rgba(110, 193, 228, .1);
+}
+
+.wdt-pricing-table-holder[class*='-template-list']:hover .wdt-pricing-table-header {
+    background-color: var(--wdt-elementor-color-white);
+}
+
+/***<<--- List Template - Original & Sales Price --->>***/
+
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-pricing-inner {
+    font-size: 22px;
+    line-height: 1em;
+    position: relative;
+    margin: 10px 0 0;
+    padding: 0;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-pricing-inner .wdt-pricing-table-pricing-original {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1;
+    display: inline-flex;
+    -ms-flex-item-align: center;
+    flex-wrap: wrap;
+    margin-right: 15px;
+    text-decoration: line-through;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-pricing-inner .wdt-pricing-table-pricing-sale {
+    line-height: 1;
+    display: inline-table;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-pricing-inner .wdt-pricing-table-pricing-sale>span {
+    display: table-cell;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-pricing-inner .wdt-pricing-table-pricing-suffix.below {
+    display: block;
+    width: 100%;
+    padding-top: 5px;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-pricing-inner div[class*='-table-pricing-sale'] .wdt-pricing-table-pricing-sale-fraction {
+    padding-left: 5px;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-pricing-inner div[class*='-table-pricing-sale'] .wdt-pricing-table-pricing-prefix {
+    padding-right: 5px;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-pricing-inner div[class*='-table-pricing-sale'] .wdt-pricing-table-pricing-suffix {
+    padding-left: 5px;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-pricing-inner div[class*='-table-pricing-sale'] .wdt-pricing-table-pricing-prefix:last-child,
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-pricing-inner div[class*='-table-pricing-sale'] .wdt-pricing-table-pricing-sale-price+.wdt-pricing-table-pricing-prefix,
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-pricing-inner div[class*='-table-pricing-sale'] .wdt-pricing-table-pricing-sale-fraction+.wdt-pricing-table-pricing-prefix {
+    padding-right: 0;
+    padding-left: 5px;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-pricing-inner div[class*='-table-pricing-sale'] .wdt-pricing-table-pricing-prefix,
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-pricing-inner div[class*='-table-pricing-sale'] .wdt-pricing-table-pricing-sale-fraction {
+    line-height: 1;
+}
+
+/***<<--- List Template - Features --->>***/
+
+.wdt-pricing-table-holder[class*='-template-list'] div[class*='-table-features'] .wdt-pricing-table-features-list {
+    display: inline-flex;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] div[class*='-table-features'] .wdt-pricing-table-features-list li {
+    display: inline-flex;
+    flex-wrap: wrap;
+    min-width: 30%;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] div[class*='-table-features'] .wdt-pricing-table-features-list li .wdt-pricing-table-features-list-inner {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] div[class*='-table-features'] .wdt-pricing-table-features-list li .wdt-pricing-table-features-list-icon {
+    font-size: 10px;
+    line-height: 25px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    color: #ffffff;
+    border: 1px solid rgba(110, 193, 228, .1);
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] div[class*='-table-features'] .wdt-pricing-table-features-list li.wdt-pricing-table-feature-included .wdt-pricing-table-features-list-icon {
+    background: #b4d856;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] div[class*='-table-features'] .wdt-pricing-table-features-list li.wdt-pricing-table-feature-excluded .wdt-pricing-table-features-list-icon {
+    background: #d85656;
+}
+
+/***<<--- List Template - Badges Types --->>***/
+
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-header div[class*='-table-badge']:not(.type4) {
+    width: auto;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-header div[class*='-table-badge'].type1 {
+    top: 25px;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-header div[class*='-table-badge'].left {
+    right: auto;
+    left: 25px;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-header div[class*='-table-badge'].right {
+    right: 25px;
+    left: auto;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-header div[class*='-table-badge'].type2.left {
+    right: auto;
+    left: -15px;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-header div[class*='-table-badge'].type2.right {
+    right: -15px;
+    left: auto;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-header div[class*='-table-badge'].type4 {
+    width: 100px;
+    height: 100px;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-header div[class*='-table-badge'].type4.left {
+    right: auto;
+    left: 0;
+}
+
+.wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-header div[class*='-table-badge'].type4.right {
+    right: 0;
+    left: auto;
+}
+
+/* New Custom Pricing table */
+
+.wdt-pricing-table-holder>div:not(:last-child) {
+    margin-bottom: 0;
+}
+
+.wdt-cus-pricing-table .wdt-pricing-table-holder {
+    position: relative;
+    background-color: var(--wdtAccentTxtColor);
+    padding: clamp(1.875rem, 1.6526rem + 1.227vw, 3.125rem);
+    border: 1px solid var(--wdtBorderColor);
+    transition: var(--wdtBaseTransition);
+    -webkit-border-radius: var(--wdtRadius_3X);
+    border-radius: var(--wdtRadius_3X);
+}
+
+.wdt-cus-pricing-table.active .wdt-pricing-table-holder,
+.wdt-cus-pricing-table .wdt-pricing-table-holder:hover {
+    border-color: var(--wdtPrimaryColor);
+    box-shadow: 0 5px 0px 0 rgba(var(--wdtPrimaryColorRgb), 1);
+}
+
+.wdt-cus-pricing-table .wdt-pricing-table-holder div {
+    width: 100%;
+    max-width: 100%;
+}
+
+.wdt-cus-pricing-table .wdt-pricing-table-holder div[class*='-table-header'] {
+    margin-top: 15px;
+    margin-bottom: clamp(1.875rem, 1.6661rem + 0.6949vw, 2.5rem);
+    /*Min-30 Max-40*/
+}
+
+.wdt-cus-pricing-table .wdt-pricing-table-holder .wdt-pricing-table-pricing {
+    color: var(--wdtHeadAltColor);
+    padding: clamp(1.875rem, 1.6661rem + 0.6949vw, 2.5rem) 0;
+    /*Min-30 Max-40*/
+    margin-bottom: clamp(1.875rem, 1.6661rem + 0.6949vw, 2.5rem);
+    /*Min-30 Max-40*/
+}
+
+.wdt-cus-pricing-table .wdt-pricing-table-holder .wdt-pricing-table-pricing .wdt-pricing-table-pricing-original {
+    font-size: var(--wdtFontSize_H5);
+    font-family: var(--wdtFontTypo_H5);
+    margin-bottom: 20px;
+    margin-right: 0;
+}
+
+.wdt-cus-pricing-table .wdt-pricing-table-holder .wdt-pricing-table-pricing .wdt-pricing-table-pricing-sale {
+    font-size: var(--wdtFontSize_H2);
+    font-weight: var(--wdtFontWeight_Alt);
+    font-family: var(--wdtFontTypo_H2);
+    display: grid;
+}
+
+.wdt-cus-pricing-table .wdt-pricing-table-holder .wdt-pricing-table-pricing .wdt-pricing-table-pricing-sale .wdt-pricing-table-pricing-suffix {
+    font-size: var(--wdtFontSize_Base);
+    font-weight: var(--wdtFontWeight_Base);
+    font-family: var(--wdtFontTypo_Base);
+    grid-column: 1 / 3;
+    margin-top: 20px;
+    padding: 0;
+}
+
+.wdt-cus-pricing-table .wdt-pricing-table-holder .wdt-pricing-table-pricing .wdt-pricing-table-pricing-sale .wdt-pricing-table-pricing-prefix {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.wdt-cus-pricing-table .wdt-pricing-table-holder .wdt-pricing-table-pricing .wdt-pricing-table-pricing-sale .wdt-pricing-table-pricing-sale-price {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.wdt-cus-pricing-table .wdt-pricing-table-holder .wdt-pricing-table-pricing:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--wdtBorderColor);
+    -webkit-transition: var(--wdt-Livi-Transition);
+    transition: var(--wdt-Livi-Transition);
+}
+
+.wdt-cus-pricing-table .wdt-pricing-table-holder .wdt-pricing-table-pricing:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--wdtBorderColor);
+    -webkit-transition: var(--wdt-Livi-Transition);
+    transition: var(--wdt-Livi-Transition);
+}
+
+.wdt-cus-pricing-table .wdt-pricing-table-holder div[class*='-table-footer'] .wdt-content-button.fullwidth>a {
+    font-family: var(--wdtFontTypo_Alt);
+    font-size: clamp(0.875rem, 0.85rem + 0.125vw, 1rem);
+    font-weight: var(--wdtFontWeight_Ext);
+    line-height: var(--wdtLineHeight_Alt);
+    text-transform: capitalize;
+    padding: var(--wdtPadding_Btn);
+    color: var(--wdtAccentTxtColor);
+    background-color: unset;
+    background-image: linear-gradient(to bottom, var(--wdtPrimaryColor) 0%, var(--wdtSecondaryColor) 51%, var(--wdtPrimaryColor) 100%);
+    background-repeat: repeat;
+    background-size: cover;
+    background-position: 100% 10px;
+    transition: all .3s ease;
+    -webkit-border-radius: var(--wdtRadius_2X);
+    border-radius: var(--wdtRadius_2X);
+    z-index: 1;
+}
+
+/* .wdt-cus-pricing-table .wdt-pricing-table-holder div[class*='-table-footer'] .wdt-content-button.fullwidth a:after{content: "";display: inline !important;height: auto;pointer-events: none;position: absolute;bottom: 0;left: 0;right: 0;top: 0;background:linear-gradient(130.86deg, var(--wdtHeadAltColor) 10%, var(--wdtPrimaryColor) 20%, var(--wdtSecondaryColor) 55%, var(--wdtPrimaryColor), var(--wdtHeadAltColor));z-index:-1;transition: var(--wdt-Livi-Transition);background-size: 300% 100%;}  */
+
+.wdt-cus-pricing-table .wdt-pricing-table-holder div[class*='-table-footer'] .wdt-content-button.fullwidth a:hover:before {
+    width: 0;
+}
+
+.wdt-cus-pricing-table .wdt-pricing-table-holder div[class*='-table-footer'] .wdt-content-button.fullwidth {
+    justify-content: center;
+    position: relative;
+}
+
+.wdt-cus-pricing-table .wdt-pricing-table-holder div[class*='-table-footer'] {
+    margin-top: 50px;
+}
+
+.wdt-cus-pricing-table .wdt-pricing-table-holder div[class*='-table-features'] .wdt-pricing-table-features-list li .wdt-pricing-table-features-list-text {
+    color: var(--wdtHeadAltColor);
+}
+
+.wdt-cus-pricing-table .wdt-pricing-table-holder div[class*='-table-features'] .wdt-pricing-table-features-list li.wdt-pricing-table-feature-included .wdt-pricing-table-features-list-icon {
+    color: inherit;
+    vertical-align: top;
+}
+
+.wdt-cus-pricing-table .wdt-pricing-table-holder div[class*='-table-features'] .wdt-pricing-table-features-list li.wdt-pricing-table-feature-included .wdt-pricing-table-features-list-icon span,
+.wdt-cus-pricing-table .wdt-pricing-table-holder div[class*='-table-features'] .wdt-pricing-table-features-list li.wdt-pricing-table-feature-excluded .wdt-pricing-table-features-list-icon span {
+    color: var(--wdtHeadAltColor);
+    display: flex;
+    align-items: center;
+    -webkit-transition: var(--wdt-Livi-Transition);
+    transition: var(--wdt-Livi-Transition);
+}
+
+.wdt-cus-pricing-table .wdt-pricing-table-holder div[class*='-table-header'] .wdt-content-title h5 {
+    font-size: clamp(1.5rem, 1.3269rem + 0.7692vw, 2.25rem);
+    text-transform: capitalize;
+}
+
+/* Hover active color */
+
+.wdt-cus-pricing-table.active .wdt-pricing-table-holder div[class*='-table-footer'] .wdt-content-button.fullwidth>a .wdt-cus-pricing-table .wdt-pricing-table-holder:hover div[class*='-table-footer'] .wdt-content-button.fullwidth>a {
+    color: var(--wdtAccentTxtColor);
+    background-position: 100% -10px;
+}
+
+.wdt-cus-pricing-table.active .wdt-pricing-table-holder div[class*='-table-footer'] .wdt-content-button.fullwidth a:before,
+.wdt-cus-pricing-table.active .wdt-pricing-table-holder div[class*='-table-footer'] .wdt-content-button.fullwidth a:after,
+.wdt-cus-pricing-table .wdt-pricing-table-holder:hover div[class*='-table-footer'] .wdt-content-button.fullwidth a:before,
+.wdt-cus-pricing-table .wdt-pricing-table-holder:hover div[class*='-table-footer'] .wdt-content-button.fullwidth a:after {
+    opacity: 0;
+}
+
+.wdt-cus-pricing-table.active .wdt-pricing-table-holder div[class*='-table-footer'] .wdt-content-button.fullwidth>a,
+.wdt-cus-pricing-table .wdt-pricing-table-holder:hover div[class*='-table-footer'] .wdt-content-button.fullwidth>a {
+    color: var(--wdtAccentTxtColor);
+    background-position: 100% -10px;
+}
+
+.wdt-cus-pricing-table.active .wdt-pricing-table-holder div[class*='-table-header'] .wdt-content-title h5 a:hover {
+    color: var(--wdtTertiaryColor);
+}
+
+/* Responsive */
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .wdt-pricing-table-holder[class*='-template-list'] {
+        justify-content: space-between;
+    }
+    .wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-header {
+        flex: 0 1 100%;
+        border-width: 0 0 1px 0;
+        border-style: solid;
+    }
+    .wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-footer {
+        flex: 0 1 50%;
+    }
+    .wdt-pricing-table-holder[class*='-template-list'] div[class*='-table-features'] .wdt-pricing-table-features-list li {
+        min-width: 100%;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .wdt-pricing-table-holder[class*='-template-list'] {
+        justify-content: space-between;
+    }
+    .wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-header {
+        flex: 0 1 100%;
+        border-width: 0 0 1px 0;
+        border-style: solid;
+    }
+    .wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-features {
+        flex: 0 1 100%;
+    }
+    .wdt-pricing-table-holder[class*='-template-list'] .wdt-pricing-table-footer {
+        flex: 0 1 100%;
+    }
+    .wdt-pricing-table-holder[class*='-template-list'] div[class*='-table-features'] .wdt-pricing-table-features-list li {
+        min-width: 100%;
+    }
+}

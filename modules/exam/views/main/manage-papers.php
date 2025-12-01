@@ -38,8 +38,8 @@ $setting = '<code>Centre Profile > Exam Setting</code>';
                             <?= humnize_duration($course->duration, $course->duration_type, true); ?>
                         </div>
 
-                        <a href="{base_url}exam/main/manage-papers" class="btn btn-sm btn-xs btn-info"><i
-                                class="fa fa-edit"></i>&nbsp;Edit
+                        <a href="{base_url}exam/main/manage-papers" class="btn btn-sm btn-xs btn-info">
+                            <i class="fa fa-edit"></i>&nbsp;Edit
                             Selected Details</a>
                     </div>
                     <?php
@@ -267,26 +267,7 @@ $setting = '<code>Centre Profile > Exam Setting</code>';
         </div>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                $('.edit-exam-paper').on('click', function () {
-                    var row = $(this).closest('tr');
-                    var exam_id = row.data('exam-id');
-                    var exam_type = row.data('type');
-                    $.AryaAjax({
-                        url: '{base_url}exam/ajax/view-exam-paper-details',
-                        data: {
-                            exam_id: exam_id,
-                            exam_type: exam_type
-                        },
-                    }).then(function (res) {
-                        log(res)
-                        // if (res.status) {
-                        //     const box = mydrawer('Exam Paper Details', 'lg');
-                        //     box.find('.body').html(res.html);
-                        // }
-                    }).catch(function (a) {
-                        console.log(a);
-                    });
-                });
+                
                 $('.delete-exam-paper').on('click', function () {
                     var row = $(this).closest('tr');
                     var message = row.data('type') == '2' ?

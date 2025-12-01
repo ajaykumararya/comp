@@ -35,6 +35,7 @@ class Ki_theme
     $festivals = [],
     $editPermissions = [];
     protected $login_type = '', $login_id = 0;
+    private $footer_data = [];
     function __construct($chk = false)
     {
         $this->CI = &get_instance();
@@ -117,6 +118,14 @@ class Ki_theme
         }
         $this->process_menu();
         $this->breadcrumb_data['controller'] = ucfirst($this->CI->router->fetch_class());
+    }
+    function setFooterData($data)
+    {
+        $this->footer_data[] = $data;
+        return $this;
+    }
+    function footerData(){
+        return implode("\n",$this->footer_data);
     }
     function isValidForPermission($type)
     {

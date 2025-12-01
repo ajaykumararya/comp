@@ -42,6 +42,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" rel="stylesheet">
 
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    
     <style>
         tr .eye-btn {
             display: none;
@@ -292,7 +293,8 @@
                                     if ($isNotify = ($this->center_model->isStudent() && table_exists('manual_notifications'))) {
 
                                         $notificationCount = $this->ki_theme->count_manual_notification(
-                                            "(receiver_id = " . $this->student_model->studentId() . " OR receiver_id = 0) AND receiver_user = 'student'");
+                                            "(receiver_id = " . $this->student_model->studentId() . " OR receiver_id = 0) AND receiver_user = 'student'"
+                                        );
                                         if ($notificationCount)
                                             echo '<span class="badge badge-info animation-blink position-absolute translate-middle top-10 start-80">' . $notificationCount . '</span>';
                                     }
@@ -330,12 +332,12 @@
                                     <div class="separator my-2"></div>
                                     <!--end::Menu separator-->
                                     <?php
-                                    if($isNotify){
+                                    if ($isNotify) {
                                         ?>
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-5">
                                             <a href="{base_url}student/profile/notification" class="menu-link px-5">
-                                                Notifications &nbsp;<?=$notificationCount ? label($notificationCount) : ''?>
+                                                Notifications &nbsp;<?= $notificationCount ? label($notificationCount) : '' ?>
                                             </a>
                                         </div>
                                         <!--end::Menu item-->
@@ -699,9 +701,11 @@
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootbox@5.5.2/bootbox.min.js"></script>
 <script src="{base_url}assets/custom/custom.js"></script>
 <!--end::Custom Javascript-->
 <!--end::Javascript-->
 {js_file}
+<?= $this->ki_theme->footerData() ?>
 
 </html>

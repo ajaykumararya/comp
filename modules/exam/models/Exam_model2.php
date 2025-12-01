@@ -1,11 +1,13 @@
 <?php
 class Exam_model2 extends MY_Model
 {
-    function last_query(){
+    function last_query()
+    {
         return $this->examdb->last_query();
     }
-    function get_sub_papers($where){
-        $this->examdb->order_by('start_time','ASC');
+    function get_sub_papers($where)
+    {
+        $this->examdb->order_by('start_time', 'ASC');
         return $this->examdb->where($where)->get('paper_subjects');
     }
     function list_exams($where)
@@ -225,5 +227,54 @@ class Exam_model2 extends MY_Model
     {
         return $this->examdb->update_batch('paper_subjects', $data, 'id');
     }
+    function get_subject_or_topic($paper_id = 0, $subject_id = 0)
+    {
+        if ($subject_id)
+            $this->examdb->where(['subject_id' => $subject_id]);
+        return $this->examdb->where([
+            'paper_id' => $paper_id,
+            // 'subject_id' => $subject_id
+        ])->get('paper_subjects');
+    }
+    // limit ke base par questions fetch karne ke liye wo. bhi suffle me
+    function get_questions_via_topic_limit($topic_id = 0, $limit = 0)
+    {
+        if ($limit)
+            $this->examdb->limit($limit);
+        $get = $this->examdb->where([
+            'topic_id' => $topic_id
+        ])->order_by('RAND()')->get('questions_bank');
+        $questions = [];
+        if ($get->num_rows()) {
+            foreach ($get->result() as $row) {
+                $question = [
+                    'id' => $row->id,
+                    'q' => $row->question,
+                    'options' => [],
+                    'answer' => 0
+                ];
+                $gett = $this->examdb->select('id,choice,isRight')->where(['ques_id' => $row->id])->order_by('RAND()')->get('ques_answers');
+                // $question['dd'] = $this->db->last_query();
+                if ($gett->num_rows()) {
+                    $isRight = 0;
+                    foreach ($gett->result_array() as $row1) {
+                        if ($isRight == 0) {
+                            if ($row1['isRight'] == 1) {
+                                $isRight = $row1['id'];
+                            }
+                        }
+                        unset($row1['isRight']);
+                        $question['options'][] = $row1;
+                    }
+                    $question['answer'] = $isRight;
+                }
+                $questions[] = $question;
+            }
+        }
+        return $questions;
+    }
+
+
+
 
 }

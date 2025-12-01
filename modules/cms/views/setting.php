@@ -71,14 +71,17 @@
                         <input value="<?= $this->SiteModel->get_setting('email') ?>" type="email" required name="email"
                             id="email" placeholder="Enter Email" class="form-control">
                     </div>
+                    <?php
+                    $sewEdu = PATH == 'sewaedu' ? 'required' : '';
+                    ?>
                     <div class="form-group mb-4">
-                        <label for="number" class="form-label required">Enter Mobile</label>
-                        <input value="<?= $this->SiteModel->get_setting('number') ?>" type="text" required name="number"
+                        <label for="number" class="form-label <?=$sewEdu?>">Enter Mobile</label>
+                        <input value="<?= $this->SiteModel->get_setting('number') ?>" type="text" <?=$sewEdu?> name="number"
                             id="number" placeholder="Enter Mobile" class="form-control">
                     </div>
                     <div class="form-group mb-4">
-                        <label for="wnumber" class="form-label required">Enter Whatsapp No.</label>
-                        <input value="<?= $this->SiteModel->get_setting('whatsapp_number') ?>" type="text" required
+                        <label for="wnumber" class="form-label <?=$sewEdu?>">Enter Whatsapp No.</label>
+                        <input value="<?= $this->SiteModel->get_setting('whatsapp_number') ?>" type="text" <?=$sewEdu?>
                             name="whatsapp_number" id="wnumber" placeholder="Enter Whatsapp Number"
                             class="form-control">
                     </div>

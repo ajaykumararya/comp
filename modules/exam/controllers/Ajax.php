@@ -269,6 +269,40 @@ class Ajax extends Ajax_Controller
         $this->response('data', $data);
         */
     }
-    
+
+    function get_paper_via_token()
+    {
+        try {
+            $token = $this->post('token', null);
+            if ($token == null)
+                throw new Exception('Paper-token not found.');
+            $tokenData = $this->token->decode($token);
+            if (isset($tokenData['paper_id']) && $this->student_model->isStudent()) {
+                // $this->response('data', $tokenData);
+                $getPaper = $this->exam_model2->get_exam_papers(['id' => $tokenData['paper_id']]);
+                if (!$getPaper->num_rows())
+                    throw new Exception('Invalid Paper..');
+                $rowPaper = $getPaper->row();
+                $this->response('PaperData', (array) $rowPaper);
+                if ($rowPaper->paper_type == 2) {
+                    if (!isset($tokenData['subject_id']))
+                        throw new Exception('Subject Missing...');
+                    $subject_id = $tokenData['subject_id'];
+                    $getSubject = $this->exam_model2->get_subject_or_topic($rowPaper->id, $subject_id);
+                    if(!$getSubject->num_rows())
+                        throw new Exception('Invalid Subject for this paper..');
+                    $row = $getSubject->row();
+                    $questios = $this->exam_model2->get_questions_via_topic_limit($row->topic_id, $row->question);
+                    $this->response('questions', $questios);
+                } else {
+
+                }
+                $this->response('status', true);
+            } else
+                throw new Exception('Invalid Paper Token.');
+        } catch (Exception $e) {
+            $this->response('error', $e->getMessage());
+        }
+    }
 
 }

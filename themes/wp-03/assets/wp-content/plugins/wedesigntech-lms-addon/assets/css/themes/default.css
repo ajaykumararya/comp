@@ -1,0 +1,77 @@
+/* Alignment Classes ------------------------- */
+
+.theme-twentytwenty .entry-content>*:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.is-style-wide) {
+    margin: auto;
+}
+
+.theme-twentytwenty section.elementor-section {
+    padding: 0;
+}
+
+.theme-twentytwenty label {
+    display: inline-block;
+}
+
+.theme-twentytwenty *,
+.theme-twentytwenty :before,
+.theme-twentytwenty :after {
+    word-wrap: initial;
+    word-break: initial;
+}
+
+.dtlms-class-onsite-map *[role="button"] {
+    background: transparent;
+}
+
+.vc_toggle_title>h4 {
+    font-size: 20px;
+}
+
+/* .single-dtlms_courses #header-wrapper, .single-dtlms_classes #header-wrapper { margin: 0; } */
+
+/* .single-dtlms_courses #header-wrapper .main-title-section-wrapper, .single-dtlms_classes #header-wrapper .main-title-section-wrapper { display: none; } */
+
+/* Course List Types ------------------------- */
+
+.theme-twentytwenty .type4.dtlms-courselist-item-wrapper .dtlms-courselist-details .dtlms-courselist-meta ul li {
+    width: 100%;
+    border-width: 0 0 1px 0;
+    margin-left: 0;
+    padding-right: 0;
+}
+
+.theme-twentytwenty .type4.dtlms-courselist-item-wrapper .dtlms-courselist-details .dtlms-courselist-meta ul li:nth-child(3n),
+.theme-twentytwenty .type4.dtlms-courselist-item-wrapper .dtlms-courselist-details .dtlms-courselist-meta ul li:nth-child(4n) {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #efefef;
+}
+
+.theme-twentytwenty .type4.dtlms-courselist-item-wrapper .dtlms-courselist-details .dtlms-courselist-meta ul li label {
+    display: inline-block;
+}
+
+.theme-twentytwenty .type4.dtlms-courselist-item-wrapper .dtlms-courselist-details .dtlms-courselist-meta ul li:nth-child(even) {
+    padding-left: 0;
+}
+
+.theme-twentytwenty .type10.dtlms-courselist-item-wrapper .dtlms-coursedetail-cart-details a i {
+    display: inline-block;
+    margin-right: 8px;
+    line-height: normal;
+}
+
+.theme-twentytwenty .type5.dtlms-courselist-item-wrapper .dtlms-coursedetail-cart-details a,
+.theme-twentytwenty .type6.dtlms-courselist-item-wrapper .dtlms-coursedetail-cart-details a .theme-twentytwenty .type8.dtlms-courselist-item-wrapper .dtlms-coursedetail-cart-details a {
+    margin: 0 0 10px;
+}
+
+/* Form ------------------------- */
+
+.theme-twentytwenty .comment-respond p:not(.comment-notes) {
+    max-width: 100%;
+}
+
+body[class*="single-dtlms"].theme-twentytwenty #respond .comment-form #wp-comment-cookies-consent {
+    margin: 0 10px 0 2px;
+}

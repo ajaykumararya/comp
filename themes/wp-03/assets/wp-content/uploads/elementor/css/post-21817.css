@@ -1,0 +1,48 @@
+.elementor-21817 .elementor-element.elementor-element-bd19db6>.elementor-container>.elementor-column>.elementor-widget-wrap {
+    align-content: center;
+    align-items: center;
+}
+
+.elementor-21817 .elementor-element.elementor-element-2af2d67>.elementor-widget-wrap>.elementor-widget:not(.elementor-widget__width-auto):not(.elementor-widget__width-initial):not(:last-child):not(.elementor-absolute) {
+    margin-bottom: 0px;
+}
+
+.elementor-21817 .elementor-element.elementor-element-d35fa81 .wdt-column-gap-custom {
+    margin: -10px;
+}
+
+.elementor-21817 .elementor-element.elementor-element-d35fa81 .wdt-column-gap-custom .wdt-column {
+    padding: 10px;
+}
+
+.elementor-21817 .elementor-element.elementor-element-d35fa81 .wdt-content-item {
+    text-align: center;
+    justify-content: center;
+    justify-items: center;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.elementor-21817 .elementor-element.elementor-element-d35fa81 .wdt-content-item .wdt-content-title h5,
+.elementor-21817 .elementor-element.elementor-element-d35fa81 .wdt-content-item .wdt-content-title h5>a {
+    color: var( --e-global-color-primary);
+}
+
+.elementor-21817 .elementor-element.elementor-element-d35fa81 .wdt-content-item:hover .wdt-content-title h5,
+.elementor-21817 .elementor-element.elementor-element-d35fa81 .wdt-content-item:hover .wdt-content-title h5>a:hover,
+.elementor-21817 .elementor-element.elementor-element-d35fa81 .wdt-content-item:hover .wdt-content-elements-group:hover .wdt-content-title h5>a:hover,
+.wdt-content-item:hover .wdt-content-elements-group.wdt-media-image-cover>.wdt-media-image-cover-container>div h5>a:hover,
+.wdt-content-item:hover .wdt-content-elements-group.wdt-media-image-overlay>.wdt-media-image-overlay-container>div h5>a:hover {
+    color: var( --e-global-color-accent);
+}
+
+@media(max-width:1280px) and (min-width:481px) {
+    .elementor-21817 .elementor-element.elementor-element-2af2d67 {
+        width: 100%;
+    }
+}
+
+@media(max-width:1280px) {
+    .elementor-21817 .elementor-element.elementor-element-e37a66d {
+        padding: 0px 15px 0px 15px;
+    }
+}
